@@ -1,0 +1,25 @@
+2026-07-29 11:46:33,038 [INFO] === Experiment run: algo=sac env=Pendulum-v1 seed=0 ===
+2026-07-29 11:46:33,039 [INFO] Run directory: results_smoketest_gpu\sac\Pendulum-v1\seed_0\20260729_114633
+2026-07-29 11:46:33,074 [INFO] Using device: cuda
+2026-07-29 11:46:33,290 [INFO] Waiting for thermal baseline before starting...
+2026-07-29 11:46:33,300 [INFO] Thermal gate result: {'gated': True, 'reason': 'reached_reference', 'waited_seconds': 1.7881393432617188e-05, 'final_temp_c': 49.0, 'final_power_w': 32.746}
+2026-07-29 11:46:33,301 [INFO] Settling for 2s (unmeasured)...
+2026-07-29 11:46:39,371 [INFO] Recording idle baseline for 3s...
+2026-07-29 11:46:46,935 [INFO] Starting warmup: 500 steps
+2026-07-29 11:46:46,947 [INFO] Starting measured training: 4 epochs x 500 steps = 2000 env steps
+2026-07-29 11:46:50,460 [INFO] Epoch 1/4 done (buffer size=1000)
+2026-07-29 11:46:53,667 [INFO] Epoch 2/4 done (buffer size=1500)
+2026-07-29 11:46:56,901 [INFO] Epoch 3/4 done (buffer size=2000)
+2026-07-29 11:47:00,099 [INFO] Epoch 4/4 done (buffer size=2500)
+2026-07-29 11:47:00,099 [INFO] Recording idle tail for 3s...
+2026-07-29 11:47:03,163 [INFO] Run complete. Segment energy summary (kWh unless noted):
+2026-07-29 11:47:03,163 [INFO]   idle_baseline_head: 0.00011869914996944941
+2026-07-29 11:47:03,163 [INFO]   warmup: 1.8727155833550611e-06
+2026-07-29 11:47:03,163 [INFO]   rollout: 3.8226406582563295e-05
+2026-07-29 11:47:03,163 [INFO]   buffer_sample: 1.1807223214994118e-05
+2026-07-29 11:47:03,163 [INFO]   critic_update: 0.00020848025185999828
+2026-07-29 11:47:03,163 [INFO]   actor_update: 0.0002380315048747234
+2026-07-29 11:47:03,163 [INFO]   target_update: 2.8964705555997276e-05
+2026-07-29 11:47:03,163 [INFO]   _sub_segment_wall_time_seconds: {'buffer_sample': 0.279290199994648, 'critic_update': 4.931429699996784, 'actor_update': 5.630440399997269, 'target_update': 0.6851364000002604}
+2026-07-29 11:47:03,163 [INFO]   idle_baseline_tail: 6.541770574117276e-05
+2026-07-29 11:47:03,163 [INFO]   _total_kg_co2eq: 0.00027151380280177246
