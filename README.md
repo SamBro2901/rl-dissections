@@ -136,13 +136,17 @@ just an instrumentation change. Worth a footnote if you go that route.
   `cpupower`; the closest equivalent is the active power plan, so
   `gpu_control.py` switches to the built-in "High performance" plan via
   `powercfg /setactive` for the duration of the run.
-- **Thermal gating** (`utils/thermal_gate.py`): before starting a run
-  (after the first), polls GPU temp/power via NVML and blocks until they're
-  within tolerance of a persisted reference "cold" state
-  (`results/_thermal_reference.json`, created from the very first run of your
-  whole campaign). This adapts to thermal drift over a multi-hour session
-  better than a fixed cooldown sleep would. Falls back to a flat 30s sleep if
-  NVML is unavailable. Disable with `--no-thermal-gate`.
+- **Thermal gating** (`utils/thermal_gate.py`): before starting a run,
+  polls GPU temp/power via NVML and blocks until they're within tolerance
+  of a reference "cold" state. The reference is captured fresh at the
+  start of every process (not reused from a previous script invocation),
+  after a short stabilization poll so it doesn't lock in a still-hot
+  reading left over from the prior run. It's written to
+  `results/_thermal_reference.json` for audit purposes only (each run
+  overwrites it; it's never read back). This adapts to thermal drift over
+  a multi-hour session better than a fixed cooldown sleep would. Falls
+  back to a flat 30s sleep if NVML is unavailable. Disable with
+  `--no-thermal-gate`.
 - **Fresh process per run**: `run_experiment.py` is meant to be invoked once
   per run (e.g. from a shell loop over seeds/algorithms), not looped inside
   one long-lived Python process, to avoid memory/cache/CUDA-context carryover

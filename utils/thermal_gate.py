@@ -6,6 +6,15 @@ constant across a multi-hour session (it gets slower as the room/heatsink
 soaks), so a fixed cooldown timer under-cools later runs and over-cools
 early ones.
 
+The reference is captured fresh at the start of every process (not
+reused from a previous script invocation's saved file), since a "cold"
+baseline from a run several hours ago is not a meaningful target for a
+run starting now. Because two runs are often launched back-to-back, the
+capture first polls until the reading stabilizes -- this stops a run
+from locking in a still-cooling-down reading (left over from the
+*previous* run's workload) as its own baseline, which would silently
+defeat the gate by making it pass immediately.
+
 Falls back to a fixed sleep if pynvml/NVML is unavailable (e.g. no GPU
 present, or you're doing a CPU-only reference run).
 """
@@ -25,6 +34,13 @@ try:
     _NVML_AVAILABLE = True
 except ImportError:
     _NVML_AVAILABLE = False
+
+# Cached per-process so repeated calls within the same run (e.g. gating
+# before each of several episodes) reuse the same captured reference
+# instead of re-running the stabilization poll every time. A new script
+# invocation is a new process, so this is naturally empty again on
+# every run -- nothing to reset by hand.
+_RUN_REFERENCE: Optional["GpuState"] = None
 
 
 @dataclass
@@ -52,26 +68,84 @@ def _read_gpu_state(gpu_index: int = 0) -> Optional[GpuState]:
             pass
 
 
+def _capture_stable_reference(
+    gpu_index: int = 0,
+    stabilize_window: int = 3,
+    stabilize_tolerance_c: float = 0.5,
+    stabilize_poll_interval_seconds: float = 5.0,
+    stabilize_max_wait_seconds: float = 120.0,
+) -> Optional[GpuState]:
+    """
+    Polls the GPU until its temperature stops moving (stabilize_window
+    consecutive readings all within stabilize_tolerance_c of each other),
+    then returns that reading. This avoids capturing a reference mid-way
+    through a cooldown (e.g. right after a prior run's workload ended),
+    which would lock in a still-hot value as the "reference" and make the
+    gate a no-op.
+
+    Gives up after stabilize_max_wait_seconds and returns the last reading
+    with a warning, rather than blocking forever.
+    """
+    start = time.time()
+    recent: list[float] = []
+    last_state: Optional[GpuState] = None
+    while True:
+        state = _read_gpu_state(gpu_index)
+        if state is None:
+            return None
+        last_state = state
+        recent.append(state.temp_c)
+        recent = recent[-stabilize_window:]
+        if len(recent) == stabilize_window and (max(recent) - min(recent)) <= stabilize_tolerance_c:
+            return state
+        if time.time() - start >= stabilize_max_wait_seconds:
+            logger.warning(
+                "Thermal reference did not stabilize within %.0fs (recent temps: %s); "
+                "using last reading anyway.",
+                stabilize_max_wait_seconds, recent,
+            )
+            return last_state
+        time.sleep(stabilize_poll_interval_seconds)
+
+
 def load_or_init_reference(reference_file: str, gpu_index: int = 0) -> Optional[GpuState]:
     """
-    On the very first run of a session, there is no prior reference state,
-    so we read the current (assumed-cold) GPU state and persist it to disk.
-    Subsequent runs (even from a fresh process) load this same reference,
-    so every run in a multi-day experiment campaign is gated against the
-    *same* original cold baseline, not against a drifting a-la-carte state.
-    """
-    os.makedirs(os.path.dirname(reference_file) or ".", exist_ok=True)
-    if os.path.exists(reference_file):
-        with open(reference_file) as f:
-            data = json.load(f)
-        return GpuState(**data)
+    Captures this process's own thermal reference. Never reused from a
+    previous script invocation's saved file -- each new run gets a fresh
+    baseline, since GPU/room conditions drift across a multi-hour session.
 
-    state = _read_gpu_state(gpu_index)
+    Within a single run, repeated calls reuse the same in-process reading
+    rather than re-polling every time.
+
+    The reference file is still written for audit purposes (so you can see
+    what each run was gated against after the fact), but it is always
+    overwritten, never read back.
+    """
+    global _RUN_REFERENCE
+    if _RUN_REFERENCE is not None:
+        return _RUN_REFERENCE
+
+    state = _capture_stable_reference(gpu_index)
     if state is None:
         return None
+
+    os.makedirs(os.path.dirname(reference_file) or ".", exist_ok=True)
     with open(reference_file, "w") as f:
-        json.dump({"temp_c": state.temp_c, "power_w": state.power_w}, f)
-    logger.info("Initialized thermal reference: %.1f C, %.1f W", state.temp_c, state.power_w)
+        json.dump(
+            {
+                "temp_c": state.temp_c,
+                "power_w": state.power_w,
+                "pid": os.getpid(),
+                "captured_at": time.time(),
+            },
+            f,
+        )
+    logger.info(
+        "Captured thermal reference for this run (pid=%d): %.1f C, %.1f W",
+        os.getpid(), state.temp_c, state.power_w,
+    )
+
+    _RUN_REFERENCE = state
     return state
 
 
