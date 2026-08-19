@@ -151,6 +151,7 @@ def run_experiment(exp_cfg: ExperimentConfig, algo_cfg, seed_everything: bool = 
             save_to_file=True,
             log_level="warning",
             allow_multiple_runs=True,
+            force_cpu_power=exp_cfg.force_cpu_power_w,
         )
         tracker.start()
 

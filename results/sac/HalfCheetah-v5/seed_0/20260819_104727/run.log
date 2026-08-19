@@ -1,0 +1,31 @@
+2026-08-19 10:47:27,964 [INFO] === Experiment run: algo=sac env=HalfCheetah-v5 seed=0 ===
+2026-08-19 10:47:27,965 [INFO] Run directory: results\sac\HalfCheetah-v5\seed_0\20260819_104727
+2026-08-19 10:47:28,025 [INFO] Using device: cuda
+2026-08-19 10:47:28,329 [INFO] Waiting for thermal baseline before starting...
+2026-08-19 10:47:38,347 [INFO] Thermal gate result: {'gated': True, 'reason': 'reached_reference', 'waited_seconds': 1.52587890625e-05, 'final_temp_c': 35.0, 'final_power_w': 19.224}
+2026-08-19 10:47:38,347 [INFO] Settling for 30s (unmeasured)...
+2026-08-19 10:48:12,355 [INFO] Recording idle baseline for 90s...
+2026-08-19 10:49:46,812 [INFO] Starting warmup: 5000 steps
+2026-08-19 10:49:46,982 [INFO] Starting measured training: 100 epochs x 1000 steps = 100000 env steps
+2026-08-19 10:51:47,544 [INFO] Epoch 10/100 done (buffer size=15000)
+2026-08-19 10:53:47,434 [INFO] Epoch 20/100 done (buffer size=25000)
+2026-08-19 10:55:47,123 [INFO] Epoch 30/100 done (buffer size=35000)
+2026-08-19 10:57:47,695 [INFO] Epoch 40/100 done (buffer size=45000)
+2026-08-19 10:59:49,021 [INFO] Epoch 50/100 done (buffer size=55000)
+2026-08-19 11:01:48,351 [INFO] Epoch 60/100 done (buffer size=65000)
+2026-08-19 11:03:50,603 [INFO] Epoch 70/100 done (buffer size=75000)
+2026-08-19 11:05:53,403 [INFO] Epoch 80/100 done (buffer size=85000)
+2026-08-19 11:07:55,071 [INFO] Epoch 90/100 done (buffer size=95000)
+2026-08-19 11:10:02,929 [INFO] Epoch 100/100 done (buffer size=105000)
+2026-08-19 11:10:02,930 [INFO] Recording idle tail for 90s...
+2026-08-19 11:11:33,001 [INFO] Run complete. Segment energy summary (kWh unless noted):
+2026-08-19 11:11:33,002 [INFO]   idle_baseline_head: 0.0012508703591677683
+2026-08-19 11:11:33,002 [INFO]   warmup: 2.51589288973288e-06
+2026-08-19 11:11:33,002 [INFO]   rollout: 0.00101815977125863
+2026-08-19 11:11:33,002 [INFO]   buffer_sample: 0.0008542227655416152
+2026-08-19 11:11:33,002 [INFO]   critic_update: 0.007048759893674686
+2026-08-19 11:11:33,002 [INFO]   actor_update: 0.008356843129982775
+2026-08-19 11:11:33,003 [INFO]   target_update: 0.0009566617566058966
+2026-08-19 11:11:33,003 [INFO]   _sub_segment_wall_time_seconds: {'buffer_sample': 33.22723379999394, 'critic_update': 274.1799943000222, 'actor_update': 325.06132090000284, 'target_update': 37.211866899967845}
+2026-08-19 11:11:33,003 [INFO]   idle_baseline_tail: 0.0012521118838144628
+2026-08-19 11:11:33,003 [INFO]   _total_kg_co2eq: 0.007901120662039404

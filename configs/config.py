@@ -46,6 +46,7 @@ class ExperimentConfig:
     tracking_mode: str = "machine"  # "machine" recommended for dedicated single-purpose PC
     output_dir: str = "results"
     country_iso_code: str = "DEU"  # adjust to your grid region; affects CO2e conversion, not energy (kWh)
+    force_cpu_power_w: Optional[float] = 125.0  # Core Ultra 9 285K base TDP; codecarbon's table doesn't know this CPU yet
 
     # --- misc ---
     device: str = "cuda"  # falls back to cpu automatically if unavailable
