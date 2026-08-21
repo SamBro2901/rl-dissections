@@ -6,10 +6,11 @@ Orchestrates one full, documented experiment run:
 Produces, per run, a self-contained directory:
 
     results/{algo}/{env}/seed_{n}/{timestamp}/
-        emissions.csv       <- CodeCarbon's native per-task log
-        segment_energy.json <- reconciled per-segment energy breakdown (kWh)
-        metadata.json        <- full run provenance (git hash, versions, config, thermal gate info)
-        run.log               <- this run's log output
+        emissions.csv          <- CodeCarbon's native per-task log
+        segment_energy.json    <- reconciled per-segment energy breakdown (kWh)
+        training_metrics.json  <- per-episode returns and per-epoch RL performance metrics
+        metadata.json           <- full run provenance (git hash, versions, config, thermal gate info)
+        run.log                  <- this run's log output
 
 Run via:
     python run_experiment.py --algo sac --env HalfCheetah-v5 --seed 0
@@ -156,6 +157,7 @@ def run_experiment(exp_cfg: ExperimentConfig, algo_cfg, seed_everything: bool = 
         tracker.start()
 
         energy_log = {}
+        training_metrics = {}
         try:
             # ---------------- idle baseline (head) ----------------
             logger.info("Recording idle baseline for %.0fs...", exp_cfg.idle_baseline_seconds)
@@ -166,7 +168,7 @@ def run_experiment(exp_cfg: ExperimentConfig, algo_cfg, seed_everything: bool = 
 
             # ---------------- warmup + measured training ----------------
             env = _make_env(exp_cfg.env_id, exp_cfg.seed)
-            agent, algo_energy_log = _dispatch_train(exp_cfg, algo_cfg, env, tracker, device, logger)
+            agent, algo_energy_log, training_metrics = _dispatch_train(exp_cfg, algo_cfg, env, tracker, device, logger)
             energy_log.update(algo_energy_log)
             env.close()
 
@@ -188,6 +190,9 @@ def run_experiment(exp_cfg: ExperimentConfig, algo_cfg, seed_everything: bool = 
     with open(run_dir / "segment_energy.json", "w") as f:
         json.dump(energy_log_serializable, f, indent=2)
 
+    with open(run_dir / "training_metrics.json", "w") as f:
+        json.dump(training_metrics, f, indent=2)
+
     metadata["end_time_utc"] = datetime.utcnow().isoformat()
     with open(run_dir / "metadata.json", "w") as f:
         json.dump(metadata, f, indent=2, default=str)
@@ -195,6 +200,14 @@ def run_experiment(exp_cfg: ExperimentConfig, algo_cfg, seed_everything: bool = 
     logger.info("Run complete. Segment energy summary (kWh unless noted):")
     for k, v in energy_log.items():
         logger.info("  %s: %s", k, v)
+
+    epochs = training_metrics.get("epochs") or []
+    if epochs:
+        logger.info(
+            "Training summary: %d epochs, final cumulative_reward=%.2f, final mean_episode_return=%s, episodes completed=%d",
+            len(epochs), epochs[-1]["cumulative_reward"], epochs[-1]["mean_episode_return"],
+            len(training_metrics.get("episodes") or []),
+        )
 
     return run_dir, energy_log
 
@@ -216,6 +229,8 @@ def _make_env(env_id: str, seed: int):
 
 
 def _dispatch_train(exp_cfg: ExperimentConfig, algo_cfg, env, tracker, device, logger):
+    """Returns (agent, energy_log, training_metrics). Add elif branches here
+    as new algorithms are supported; each train() must return this 3-tuple."""
     if exp_cfg.algo_name == "sac":
         from algorithms.sac import train as sac_train
         return sac_train(env, algo_cfg, exp_cfg, tracker, device, logger,

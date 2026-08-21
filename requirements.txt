@@ -3,6 +3,8 @@ gymnasium
 codecarbon>=3.0
 nvidia-ml-py  # replaces the deprecated pynvml; codecarbon and our thermal_gate.py both use the pynvml import name, which this package still provides
 pandas
+plotly
+dash
 
 # For actual MuJoCo continuous-control tasks (HalfCheetah, Hopper, Walker2d, Ant):
 gymnasium[mujoco]

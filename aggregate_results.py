@@ -47,6 +47,24 @@ def main():
             if k.startswith("_") and not k.startswith("_total"):
                 continue  # skip internal debug fields like _sub_segment_wall_time_seconds
             row[f"energy_kwh__{k}".replace("_total_kg_co2eq", "total_kg_co2eq")] = v
+
+        metrics_path = os.path.join(run_dir, "training_metrics.json")
+        if os.path.exists(metrics_path):
+            with open(metrics_path) as f:
+                metrics = json.load(f)
+            epochs = metrics.get("epochs") or []
+            episodes = metrics.get("episodes") or []
+            episode_returns = [e["return"] for e in episodes if e["phase"] == "train"]
+            row["reward__final_cumulative_reward"] = epochs[-1]["cumulative_reward"] if epochs else None
+            row["reward__num_episodes_completed"] = len(episode_returns)
+            row["reward__final_epoch_mean_episode_return"] = epochs[-1]["mean_episode_return"] if epochs else None
+            row["reward__max_episode_return"] = max(episode_returns) if episode_returns else None
+            row["reward__last_10pct_mean_episode_return"] = (
+                sum(episode_returns[-max(1, len(episode_returns) // 10):])
+                / len(episode_returns[-max(1, len(episode_returns) // 10):])
+                if episode_returns else None
+            )
+
         rows.append(row)
 
     if not rows:

@@ -1,0 +1,3 @@
+cd "C:\Users\IAAS-SC Workstation\Desktop\rl_energy_experiments"
+.\rl-exp\Scripts\python.exe run_experiment.py --algo sac --env HalfCheetah-v5 --seed 0
+

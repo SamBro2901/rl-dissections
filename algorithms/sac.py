@@ -271,9 +271,23 @@ def train(
     steps_per_epoch: int = 1000,
 ):
     """
-    Runs SAC warmup + measured training. Returns a dict of energy_consumed
-    (kWh) per segment: rollout, buffer_sample, critic_update, actor_update,
-    target_update, plus 'warmup' (kept separate from the measured segments).
+    Runs SAC warmup + measured training. Returns:
+      - agent: the trained SACAgent
+      - energy_log: dict of energy_consumed (kWh) per segment: rollout,
+        buffer_sample, critic_update, actor_update, target_update, plus
+        'warmup' (kept separate from the measured segments).
+      - metrics: dict with two lists for RL-performance analysis (separate
+        from the energy accounting above):
+          "episodes": one row per completed episode -- episode_idx, phase
+            ("warmup"/"train"/"train_incomplete"), epoch (None during
+            warmup), env_step (cumulative measured-training step at which
+            the episode ended), return, length.
+          "epochs": one row per training epoch -- epoch, env_step,
+            cumulative_reward (running sum of reward since the start of
+            measured training), epoch_reward_sum, epoch_reward_mean_per_step,
+            num_episodes_completed, mean_episode_return (None if no episode
+            finished within the epoch), critic_loss_mean, actor_loss_mean,
+            alpha_end, buffer_size.
 
     `rollout` and the combined `gradient_updates` bucket are real CodeCarbon
     measurements (one task per epoch, unique-named). `buffer_sample`,
@@ -293,17 +307,39 @@ def train(
     energy_log: Dict[str, float] = {}
     sub_time_totals = {"buffer_sample": 0.0, "critic_update": 0.0, "actor_update": 0.0, "target_update": 0.0}
 
+    episodes_log = []
+    episode_idx = 0
+    episode_return = 0.0
+    episode_length = 0
+
+    def _record_episode(phase, epoch, env_step):
+        nonlocal episode_idx, episode_return, episode_length
+        episodes_log.append({
+            "episode_idx": episode_idx,
+            "phase": phase,
+            "epoch": epoch,
+            "env_step": env_step,
+            "return": episode_return,
+            "length": episode_length,
+        })
+        episode_idx += 1
+        episode_return = 0.0
+        episode_length = 0
+
     obs, _ = env.reset(seed=exp_cfg.seed)
 
     # ---------------- warmup (random policy, fills buffer; excluded from analysis segments) ----------------
     logger.info("Starting warmup: %d steps", exp_cfg.warmup_steps)
     with _TrackerTask(tracker, "warmup", 0, energy_log):
-        for _ in range(exp_cfg.warmup_steps):
+        for warmup_step in range(exp_cfg.warmup_steps):
             action = env.action_space.sample()
             next_obs, reward, terminated, truncated, _ = env.step(action)
             buffer.add(obs, action, reward, next_obs, terminated)
+            episode_return += reward
+            episode_length += 1
             obs = next_obs
             if terminated or truncated:
+                _record_episode("warmup", None, warmup_step + 1)
                 obs, _ = env.reset()
 
     # ---------------- measured training ----------------
@@ -311,19 +347,33 @@ def train(
     logger.info("Starting measured training: %d epochs x %d steps = %d env steps",
                 n_epochs, steps_per_epoch, n_epochs * steps_per_epoch)
 
+    epochs_log = []
+    cumulative_reward = 0.0
+    global_step = 0
+
     for epoch in range(n_epochs):
         # --- rollout block ---
+        epoch_reward_sum = 0.0
+        epoch_episode_returns = []
         with _TrackerTask(tracker, "rollout", epoch, energy_log):
             for _ in range(steps_per_epoch):
                 action = agent.select_action(obs, deterministic=False)
                 next_obs, reward, terminated, truncated, _ = env.step(action)
                 buffer.add(obs, action, reward, next_obs, terminated)
+                episode_return += reward
+                episode_length += 1
+                cumulative_reward += reward
+                epoch_reward_sum += reward
+                global_step += 1
                 obs = next_obs
                 if terminated or truncated:
+                    epoch_episode_returns.append(episode_return)
+                    _record_episode("train", epoch, global_step)
                     obs, _ = env.reset()
 
         # --- gradient update block ---
         epoch_sub_times = {"buffer_sample": 0.0, "critic_update": 0.0, "actor_update": 0.0, "target_update": 0.0}
+        critic_losses, actor_losses, alphas = [], [], []
         n_updates = steps_per_epoch * sac_cfg.updates_per_env_step
         with _TrackerTask(tracker, "gradient_updates", epoch, energy_log):
             for _ in range(n_updates):
@@ -334,6 +384,12 @@ def train(
                 epoch_sub_times["critic_update"] += info.critic_update_s
                 epoch_sub_times["actor_update"] += info.actor_update_s
                 epoch_sub_times["target_update"] += info.target_update_s
+                if info.critic_loss is not None:
+                    critic_losses.append(info.critic_loss)
+                if info.actor_loss is not None:
+                    actor_losses.append(info.actor_loss)
+                if info.alpha is not None:
+                    alphas.append(info.alpha)
 
         # Sub-segment times accumulate across all epochs and are reconciled against the
         # total measured "gradient_updates" energy once, after the loop (see below) --
@@ -342,8 +398,33 @@ def train(
         for k in sub_time_totals:
             sub_time_totals[k] += epoch_sub_times[k]
 
+        epochs_log.append({
+            "epoch": epoch,
+            "env_step": global_step,
+            "cumulative_reward": cumulative_reward,
+            "epoch_reward_sum": epoch_reward_sum,
+            "epoch_reward_mean_per_step": epoch_reward_sum / steps_per_epoch,
+            "num_episodes_completed": len(epoch_episode_returns),
+            "mean_episode_return": (
+                sum(epoch_episode_returns) / len(epoch_episode_returns)
+                if epoch_episode_returns else None
+            ),
+            "critic_loss_mean": (sum(critic_losses) / len(critic_losses)) if critic_losses else None,
+            "actor_loss_mean": (sum(actor_losses) / len(actor_losses)) if actor_losses else None,
+            "alpha_end": alphas[-1] if alphas else None,
+            "buffer_size": len(buffer),
+        })
+
         if (epoch + 1) % max(1, n_epochs // 10) == 0 or epoch == n_epochs - 1:
-            logger.info("Epoch %d/%d done (buffer size=%d)", epoch + 1, n_epochs, len(buffer))
+            logger.info(
+                "Epoch %d/%d done (buffer size=%d, cumulative_reward=%.2f, mean_episode_return=%s)",
+                epoch + 1, n_epochs, len(buffer), cumulative_reward,
+                epochs_log[-1]["mean_episode_return"],
+            )
+
+    # record a trailing partial episode (if training ended mid-episode) so no reward is lost
+    if episode_length > 0:
+        _record_episode("train_incomplete", n_epochs - 1, global_step)
 
     # ---------------- reconcile: split total gradient_updates energy by aggregate time share ----------------
     total_gradient_energy = energy_log.pop("gradient_updates", 0.0)
@@ -353,4 +434,5 @@ def train(
         energy_log[k] = total_gradient_energy * share
 
     energy_log["_sub_segment_wall_time_seconds"] = sub_time_totals
-    return agent, energy_log
+    metrics = {"episodes": episodes_log, "epochs": epochs_log}
+    return agent, energy_log, metrics

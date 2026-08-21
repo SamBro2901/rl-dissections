@@ -1,28 +1,28 @@
 {
   "algo_name": "sac",
-  "env_id": "Pendulum-v1",
+  "env_id": "HalfCheetah-v5",
   "seed": 0,
-  "git_commit": "unknown (not a git repo or git unavailable)",
-  "torch_version": "2.13.0+cpu",
-  "device": "cpu",
-  "cuda_device_name": null,
-  "start_time_utc": "2026-07-29T09:36:26.946448",
+  "git_commit": "20b4d4fe6e2c586f10e6655249e02ca416ec7b2c",
+  "torch_version": "2.11.0+cu128",
+  "device": "cuda",
+  "cuda_device_name": "NVIDIA GeForce RTX 5090",
+  "start_time_utc": "2026-08-21T08:55:06.350958",
   "experiment_config": {
     "algo_name": "sac",
-    "env_id": "Pendulum-v1",
+    "env_id": "HalfCheetah-v5",
     "seed": 0,
-    "settle_seconds": 2.0,
-    "idle_baseline_seconds": 3.0,
-    "idle_tail_seconds": 3.0,
-    "warmup_steps": 500,
-    "train_steps": 2000,
-    "steps_per_epoch": 500,
-    "lock_gpu_clocks": false,
+    "settle_seconds": 30.0,
+    "idle_baseline_seconds": 90.0,
+    "idle_tail_seconds": 90.0,
+    "warmup_steps": 5000,
+    "train_steps": 100000,
+    "steps_per_epoch": 1000,
+    "lock_gpu_clocks": true,
     "gpu_min_clock_mhz": null,
     "gpu_max_clock_mhz": null,
     "set_persistence_mode": true,
     "set_cpu_performance_governor": true,
-    "thermal_gate_enabled": false,
+    "thermal_gate_enabled": true,
     "thermal_gate_temp_tolerance_c": 2.0,
     "thermal_gate_power_tolerance_w": 5.0,
     "thermal_gate_max_wait_seconds": 600.0,
@@ -30,9 +30,10 @@
     "thermal_gate_reference_file": "results/_thermal_reference.json",
     "measure_power_secs": 1.0,
     "tracking_mode": "machine",
-    "output_dir": "results_smoketest",
+    "output_dir": "results",
     "country_iso_code": "DEU",
-    "device": "cpu"
+    "force_cpu_power_w": 125.0,
+    "device": "cuda"
   },
   "algo_config": {
     "hidden_sizes": [
@@ -53,5 +54,12 @@
     "policy_update_delay": 1
   },
   "codecarbon_version": "3.2.9",
-  "end_time_utc": "2026-07-29T09:37:16.189602"
+  "thermal_gate": {
+    "gated": true,
+    "reason": "reached_reference",
+    "waited_seconds": 1.5020370483398438e-05,
+    "final_temp_c": 40.0,
+    "final_power_w": 20.236
+  },
+  "end_time_utc": "2026-08-21T09:19:37.383022"
 }
