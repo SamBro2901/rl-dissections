@@ -9,16 +9,27 @@ Example (quick smoke test on a cheap env, short run):
 
 Example (real MuJoCo run, full protocol):
     python run_experiment.py --algo sac --env HalfCheetah-v5 --seed 0
+
+Algorithm hyperparameters are NOT set via CLI flags here -- they live in each
+algorithm's config dataclass in configs/config.py (see ALGO_CONFIGS), keyed by
+--algo. To deviate from an algorithm's defaults for a single run, pass a JSON
+file of overrides:
+
+    python run_experiment.py --algo sac --env HalfCheetah-v5 \
+        --algo-config-overrides configs/overrides/sac_lowlr.json
+
+where sac_lowlr.json contains e.g. {"actor_lr": 1e-4, "critic_lr": 1e-4}.
 """
 import argparse
+import json
 
-from configs.config import ExperimentConfig, SACConfig
+from configs.config import ALGO_CONFIGS, ExperimentConfig
 from experiment_runner import run_experiment
 
 
 def parse_args():
     p = argparse.ArgumentParser(description="Run one energy-profiled RL training experiment.")
-    p.add_argument("--algo", default="sac", choices=["sac"], help="Algorithm to run.")
+    p.add_argument("--algo", default="sac", choices=sorted(ALGO_CONFIGS), help="Algorithm to run.")
     p.add_argument("--env", default="HalfCheetah-v5", help="Gymnasium environment id.")
     p.add_argument("--seed", type=int, default=0)
     p.add_argument("--device", default="cuda")
@@ -38,15 +49,34 @@ def parse_args():
     p.add_argument("--output-dir", default="results")
     p.add_argument("--country-iso-code", default="DEU")
 
-    # SAC hyperparameters (defaults match standard SAC continuous-control settings)
-    p.add_argument("--batch-size", type=int, default=256)
-    p.add_argument("--actor-lr", type=float, default=3e-4)
-    p.add_argument("--critic-lr", type=float, default=3e-4)
-    p.add_argument("--gamma", type=float, default=0.99)
-    p.add_argument("--tau", type=float, default=0.005)
-    p.add_argument("--updates-per-env-step", type=int, default=1)
+    p.add_argument("--algo-config-overrides", default=None,
+                    help="Optional path to a JSON file of field overrides for the "
+                         "selected algorithm's config dataclass (see ALGO_CONFIGS "
+                         "in configs/config.py). Unset fields keep their dataclass defaults.")
 
     return p.parse_args()
+
+
+def build_algo_config(algo_name: str, overrides_path: str | None):
+    """Look up the algorithm's config dataclass from the registry and apply
+    any JSON overrides for this run. This is how each algorithm's config
+    file (its dataclass in configs/config.py) gets picked, instead of the
+    runner hardcoding one algorithm's hyperparameters as CLI flags."""
+    config_cls = ALGO_CONFIGS[algo_name]
+
+    overrides = {}
+    if overrides_path:
+        with open(overrides_path) as f:
+            overrides = json.load(f)
+        valid_fields = {f.name for f in __import__("dataclasses").fields(config_cls)}
+        unknown = set(overrides) - valid_fields
+        if unknown:
+            raise ValueError(
+                f"Unknown field(s) {sorted(unknown)} in {overrides_path} "
+                f"for {config_cls.__name__}; valid fields: {sorted(valid_fields)}"
+            )
+
+    return config_cls(**overrides)
 
 
 def main():
@@ -70,14 +100,7 @@ def main():
         country_iso_code=args.country_iso_code,
     )
 
-    algo_cfg = SACConfig(
-        batch_size=args.batch_size,
-        actor_lr=args.actor_lr,
-        critic_lr=args.critic_lr,
-        gamma=args.gamma,
-        tau=args.tau,
-        updates_per_env_step=args.updates_per_env_step,
-    )
+    algo_cfg = build_algo_config(args.algo, args.algo_config_overrides)
 
     run_dir, energy_log = run_experiment(exp_cfg, algo_cfg)
     print(f"\nRun artifacts written to: {run_dir}")

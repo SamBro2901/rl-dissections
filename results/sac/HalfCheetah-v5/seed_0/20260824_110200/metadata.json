@@ -2,11 +2,11 @@
   "algo_name": "sac",
   "env_id": "HalfCheetah-v5",
   "seed": 0,
-  "git_commit": "97eb7a70403343474aa619d9c8da1022a434f0e9",
+  "git_commit": "4b9f11a766375db5ba0358d61b5c1f11c710565f",
   "torch_version": "2.11.0+cu128",
   "device": "cuda",
   "cuda_device_name": "NVIDIA GeForce RTX 5090",
-  "start_time_utc": "2026-08-13T08:37:36.262702",
+  "start_time_utc": "2026-08-24T09:02:00.698886",
   "experiment_config": {
     "algo_name": "sac",
     "env_id": "HalfCheetah-v5",
@@ -32,12 +32,13 @@
     "tracking_mode": "machine",
     "output_dir": "results",
     "country_iso_code": "DEU",
+    "force_cpu_power_w": 125.0,
     "device": "cuda"
   },
   "algo_config": {
     "hidden_sizes": [
-      256,
-      256
+      512,
+      512
     ],
     "actor_lr": 0.0003,
     "critic_lr": 0.0003,
@@ -52,13 +53,13 @@
     "updates_per_env_step": 1,
     "policy_update_delay": 1
   },
-  "codecarbon_version": "3.2.9",
+  "codecarbon_version": "3.3.0",
   "thermal_gate": {
-    "gated": false,
-    "reason": "timeout",
-    "waited_seconds": 600.0643808841705,
-    "final_temp_c": 46.0,
-    "final_power_w": 31.053
+    "gated": true,
+    "reason": "reached_reference",
+    "waited_seconds": 2.002716064453125e-05,
+    "final_temp_c": 42.0,
+    "final_power_w": 21.044
   },
-  "end_time_utc": "2026-08-13T09:04:33.280106"
+  "end_time_utc": "2026-08-24T09:28:34.442905"
 }
