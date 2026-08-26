@@ -62,12 +62,12 @@ class SACConfig:
     alpha_lr: float = 3e-4
     gamma: float = 0.99
     tau: float = 0.005            # target network Polyak averaging coefficient
-    batch_size: int = 1024
+    batch_size: int = 256
     buffer_capacity: int = 1_000_000
     target_entropy: Optional[float] = None  # None => -action_dim (standard heuristic)
     autotune_alpha: bool = True
     init_alpha: float = 0.2
-    updates_per_env_step: int = 4  # gradient steps per environment step, after warmup
+    updates_per_env_step: int = 1  # gradient steps per environment step, after warmup
     policy_update_delay: int = 1   # e.g. set to 2 for TD3-style delayed actor updates (kept at 1 for vanilla SAC)
 
 

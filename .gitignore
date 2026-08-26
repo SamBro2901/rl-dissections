@@ -1,1 +1,22 @@
-rl-exp
+# Virtual environment
+rl-exp/
+
+# Python bytecode / cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment / secrets
+.env
+.env.*
+
+# Editor / OS cruft
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Model checkpoints / large binary artifacts
+*.pt
+*.pth
+*.ckpt
