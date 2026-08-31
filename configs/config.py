@@ -63,7 +63,7 @@ class SACConfig:
     alpha_lr: float = 3e-4
     gamma: float = 0.99
     tau: float = 0.005            # target network Polyak averaging coefficient
-    batch_size: int = 256
+    batch_size: int = 1024
     buffer_capacity: int = 1_000_000
     target_entropy: Optional[float] = None  # None => -action_dim (standard heuristic)
     autotune_alpha: bool = True

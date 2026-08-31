@@ -281,7 +281,7 @@ def build_run_info(run_dir):
         info_card("Train steps", cfg.get("train_steps", "-")),
         info_card("Start (UTC)", meta.get("start_time_utc", "-")),
         info_card("End (UTC)", meta.get("end_time_utc", "-")),
-        info_card("Session duration (s)", f"{duration_s:.1f}" if duration_s is not None else "-"),
+        info_card("Session duration (min)", f"{duration_s / 60:.1f}" if duration_s is not None else "-"),
     ]
     if train_df is not None and not train_df.empty:
         cards += [
