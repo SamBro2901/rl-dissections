@@ -1,12 +1,14 @@
 """
 Utilities to reduce clock/frequency-scaling confounds between runs.
 
-These wrap nvidia-smi / powercfg calls (Windows). All functions fail *soft*:
+These wrap nvidia-smi / cpupower calls (Linux). All functions fail *soft*:
 if a command isn't available (e.g. testing on a machine without an NVIDIA
-GPU) or isn't permitted (e.g. nvidia-smi clock changes need an elevated/
-Administrator shell), we log a warning and continue rather than crash the
-experiment. Every "set" function has a matching "reset" function that MUST
-be called at teardown, even on error paths (the runner does this in a
+GPU) or isn't permitted (e.g. nvidia-smi clock changes and cpupower governor
+changes both need root), we log a warning and continue rather than crash the
+experiment. Run the whole experiment under `sudo` if you want these confound
+controls actually applied; otherwise they no-op with a warning and the run
+proceeds unlocked. Every "set" function has a matching "reset" function that
+MUST be called at teardown, even on error paths (the runner does this in a
 try/finally).
 """
 from __future__ import annotations
@@ -17,10 +19,6 @@ from dataclasses import dataclass
 from typing import Optional, Tuple
 
 logger = logging.getLogger("gpu_control")
-
-# Built-in Windows power scheme GUID for "High performance" -- fixed/well-known,
-# not locale-dependent (the display name is localized, the GUID isn't).
-_HIGH_PERFORMANCE_GUID = "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"
 
 
 def _run(cmd: list[str]) -> Tuple[bool, str]:
@@ -89,26 +87,28 @@ def reset_gpu_clocks(gpu_index: int = 0) -> bool:
 
 def set_cpu_governor(governor: str = "performance") -> bool:
     """
-    Windows has no per-core frequency governor like Linux's cpupower; the
-    closest equivalent lever is the active power plan, which controls the
-    same idle/parking/boost behavior at the OS level. "performance" switches
-    to the built-in "High performance" plan; any other value is a no-op
-    (kept for interface parity with callers that pass a governor name).
+    Sets the scaling governor on every CPU core via `cpupower frequency-set -g`
+    (cpupower applies to all cores in one call). "performance" pins each core
+    to its max frequency, suppressing the idle/boost frequency-scaling
+    variance that would otherwise confound the idle-baseline and per-segment
+    measurements. Writing to the governor sysfs node needs root -- run under
+    sudo, or this fails soft with a warning and the run proceeds unlocked.
     """
-    if governor != "performance":
-        logger.warning("Unsupported governor '%s' on Windows; skipping.", governor)
-        return False
-    ok, _ = _run(["powercfg", "/setactive", _HIGH_PERFORMANCE_GUID])
+    ok, _ = _run(["cpupower", "frequency-set", "-g", governor])
     if ok:
-        logger.info("Set Windows power plan to 'High performance'")
+        logger.info("Set CPU governor to '%s'", governor)
     return ok
 
 
 def get_cpu_governor() -> Optional[str]:
-    ok, out = _run(["powercfg", "/getactivescheme"])
-    if not ok:
+    """Reads the current governor from cpu0's sysfs node. set_cpu_governor
+    sets all cores in lockstep, so cpu0 is representative of the rest."""
+    try:
+        with open("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor") as f:
+            return f.read().strip()
+    except OSError as e:
+        logger.warning("Could not read current CPU governor: %s", e)
         return None
-    return out.strip()
 
 
 @dataclass
@@ -143,8 +143,5 @@ class GpuCpuGuard:
         # long-term on a dedicated experiment box; not resetting it here.
         # Restore whatever governor was active before, if we changed it.
         if self.set_governor and self._prior_governor:
-            # get_cpu_governor() returns powercfg's descriptive scheme line
-            # (name + GUID), not a bare name; if you need exact restoration,
-            # parse the GUID out and pass it to `powercfg /setactive`.
-            logger.info("Prior CPU governor info was: %s", self._prior_governor)
+            set_cpu_governor(self._prior_governor)
         return False  # do not suppress exceptions

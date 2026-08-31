@@ -1,3 +1,9 @@
-cd "C:\Users\IAAS-SC Workstation\Desktop\rl_energy_experiments"
-.\rl-exp\Scripts\python.exe run_experiment.py --algo sac --env HalfCheetah-v5 --seed 0
+cd /home/samanth/rl-dissection-linux
+source rl-exp/bin/activate
+python run_experiment.py --algo sac --env HalfCheetah-v5 --seed 0
+sudo /home/samanth/rl-dissection-linux/rl-exp/bin/python run_experiment.py --algo sac --env HalfCheetah-v5 --seed 56
 
+# Run with sudo instead if you want GPU clock locking + CPU governor pinning
+# actually applied (both need root on Linux); otherwise they fail soft and
+# the run proceeds unlocked:
+sudo rl-exp/bin/python run_experiment.py --algo sac --env HalfCheetah-v5 --seed 0

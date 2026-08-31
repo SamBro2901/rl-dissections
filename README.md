@@ -123,19 +123,25 @@ just an instrumentation change. Worth a footnote if you go that route.
 ## Confound controls
 
 - **GPU clock locking** (`utils/gpu_control.py`, `GpuCpuGuard`): calls
-  `nvidia-smi -pm 1` (persistence mode -- reports `N/A`/no-op on Windows,
-  where the driver is always resident regardless) and
-  `nvidia-smi -lgc <min>,<max>` to lock the graphics clock to a fixed
-  low-variance value, resetting with `-rgc` on exit (even on exception, via
-  try/finally in the context manager). On Windows, `-lgc`/`-rgc` require an
-  elevated (Administrator) shell -- without it they fail soft and log a
-  permission warning, but the clock lock silently isn't applied. Disable
-  clock locking with `--no-gpu-lock` (e.g. if you deliberately want to study
+  `nvidia-smi -pm 1` (persistence mode) and `nvidia-smi -lgc <min>,<max>` to
+  lock the graphics clock to a fixed low-variance value, resetting with
+  `-rgc` on exit (even on exception, via try/finally in the context
+  manager). Both clock-lock calls require root -- without it they fail soft
+  and log a permission warning, but the clock lock silently isn't applied.
+  (Persistence mode itself doesn't need root if `nvidia-persistenced` is
+  running, since the daemon applies it on your behalf.) Disable clock
+  locking with `--no-gpu-lock` (e.g. if you deliberately want to study
   boost-clock behavior later, or you're on a machine without an NVIDIA GPU).
-- **CPU governor**: Windows has no per-core governor like Linux's
-  `cpupower`; the closest equivalent is the active power plan, so
-  `gpu_control.py` switches to the built-in "High performance" plan via
-  `powercfg /setactive` for the duration of the run.
+- **CPU governor**: `gpu_control.py` pins every core to the `performance`
+  governor via `cpupower frequency-set -g performance` for the duration of
+  the run, restoring whatever governor was active before on exit. Writing
+  the governor sysfs node also requires root, so like GPU clock locking this
+  fails soft with a warning if you don't run under `sudo`.
+- **Run under `sudo` to get both confound controls actually applied**:
+  `sudo rl-exp/bin/python run_experiment.py --algo sac --env HalfCheetah-v5 --seed 0`
+  (see `cli_commands.txt`). Without root, GPU clock locking and CPU governor
+  pinning both no-op with a logged warning and the run proceeds unlocked --
+  still valid to run, just flag it as an unlocked-clocks run in your notes.
 - **Thermal gating** (`utils/thermal_gate.py`): before starting a run,
   polls GPU temp/power via NVML and blocks until they're within tolerance
   of a reference "cold" state. The reference is captured fresh at the
@@ -171,16 +177,19 @@ just an instrumentation change. Worth a footnote if you go that route.
 ## Known limitations / things to sanity-check before trusting the numbers
 
 - **CodeCarbon's CPU energy model degrades to a generic per-thread TDP
-  estimate** if it doesn't recognize your CPU model or can't read
-  `/sys/class/powercap/intel-rapl/subsystem` (permissions or non-Intel CPU).
-  That path is Linux-only (part of the kernel's `powercap` sysfs subsystem),
-  so **on Windows this fallback is essentially guaranteed** regardless of
-  CPU model -- CodeCarbon's Windows alternative is Intel Power Gadget, which
-  Intel has since discontinued and doesn't reliably support recent hybrid-
-  core CPUs. Check your `run.log` for a warning like *"We will use the
-  default power consumption of 4 W per thread"* — if you see this, your
-  CPU-side numbers are a rough estimate, not a direct RAPL reading, and you
-  should say so in the thesis. GPU (NVML) readings are unaffected by this.
+  estimate** if it can't read `/sys/class/powercap/intel-rapl/subsystem`
+  (permissions, non-Intel CPU, or a kernel built without the `powercap`
+  subsystem). On a normal Linux desktop install this file is world-readable
+  and RAPL "just works" with no root needed -- confirm with
+  `cat /sys/class/powercap/intel-rapl/intel-rapl:0/energy_uj` (should print a
+  number, not a permission error). `configs/config.py`'s
+  `force_cpu_power_w` is `None` by default so CodeCarbon uses this real RAPL
+  reading; only set it to a fixed watts figure if RAPL turns out to be
+  unreadable on your box. Check your `run.log` for a warning like *"We will
+  use the default power consumption of 4 W per thread"* — if you see this,
+  RAPL wasn't actually read, your CPU-side numbers are a rough estimate
+  rather than a direct hardware reading, and you should say so in the
+  thesis. GPU (NVML) readings are unaffected by this.
 - **Geolocation for CO2 conversion** may silently fall back to a default
   country if CodeCarbon can't reach its geolocation API (offline machine,
   firewall). This only affects the CO2e (kg) conversion, not the energy (kWh)
