@@ -28,8 +28,8 @@ class ExperimentConfig:
 
     # --- GPU / CPU control ---
     lock_gpu_clocks: bool = True
-    gpu_min_clock_mhz: Optional[int] = None   # None => query device and use its min
-    gpu_max_clock_mhz: Optional[int] = None   # None => query device and use a fixed low-variance value
+    gpu_min_clock_mhz: Optional[int] = None   # None => use gpu_control.DEFAULT_LOCK_MHZ (2000), clamped to device range
+    gpu_max_clock_mhz: Optional[int] = None   # None => use gpu_control.DEFAULT_LOCK_MHZ (2000), clamped to device range
     set_persistence_mode: bool = True
     set_cpu_performance_governor: bool = True
 
@@ -72,10 +72,83 @@ class SACConfig:
     policy_update_delay: int = 1   # e.g. set to 2 for TD3-style delayed actor updates (kept at 1 for vanilla SAC)
 
 
+@dataclass
+class MBPOConfig:
+    """
+    Model-Based Policy Optimization (Janner, Fu, Zhang & Levine, NeurIPS 2019,
+    "When to Trust Your Model: Model-Based Policy Optimization",
+    https://arxiv.org/abs/1906.08253), using SAC (Haarnoja et al. 2018/2019)
+    as the underlying model-free policy-optimization subroutine, exactly as
+    in the paper's reference implementation (https://github.com/JannerM/mbpo).
+
+    Defaults below reproduce the paper's HalfCheetah-v2 configuration
+    (Appendix A, Table 2) -- the closest published setting to this harness's
+    default `--env HalfCheetah-v5`. Hopper/Walker2d/Ant/Humanoid need a
+    longer, scheduled model rollout length and (for Humanoid) a wider model;
+    see configs/overrides/mbpo_*.json for the paper's per-env settings and
+    pass one via `--algo-config-overrides`.
+    """
+
+    # ---- SAC (policy) hyperparameters -- consumed by algorithms.sac.SACAgent,
+    # which MBPO reuses unmodified as its policy-optimization subroutine. ----
+    hidden_sizes: Tuple[int, int] = (256, 256)   # kept consistent with SACConfig's defaults in this repo
+    actor_lr: float = 3e-4
+    critic_lr: float = 3e-4
+    alpha_lr: float = 3e-4
+    gamma: float = 0.99
+    tau: float = 0.005                # target network Polyak averaging coefficient
+    target_entropy: Optional[float] = None  # None => -action_dim (standard heuristic)
+    autotune_alpha: bool = True
+    init_alpha: float = 0.2
+    policy_update_delay: int = 1
+
+    # ---- SAC gradient updates ("G" in the paper). MBPO uses far more updates
+    # per env step than vanilla SAC because most of the SAC minibatch is cheap
+    # model-generated data, not real env transitions. ----
+    updates_per_env_step: int = 1    # paper uses 40 for Hopper specifically
+    batch_size: int = 256             # SAC minibatch size, mixed real/model per real_ratio below
+    real_ratio: float = 0.05          # fraction of each SAC minibatch drawn from the *real* env buffer
+
+    # ---- real environment replay buffer (same role as SACConfig.buffer_capacity) ----
+    buffer_capacity: int = 1_000_000
+
+    # ---- probabilistic dynamics model ensemble (Chua et al. 2018, PETS-style) ----
+    ensemble_size: int = 7
+    num_elites: int = 5
+    model_hidden_sizes: Tuple[int, ...] = (200, 200, 200, 200)   # (400, 400, 400, 400) for Humanoid in the paper
+    model_lr: float = 1e-3
+    # Per-layer Adam weight decay (one entry per hidden layer + one for the output
+    # heads, so len == len(model_hidden_sizes) + 1), matching the PETS/MBPO
+    # reference implementation's FC-ensemble default.
+    model_weight_decays: Tuple[float, ...] = (2.5e-5, 5e-5, 7.5e-5, 1e-4, 1e-4)
+    model_train_batch_size: int = 256
+    model_holdout_ratio: float = 0.2   # fraction of each retrain's data held out for early stopping / elite selection
+    model_max_train_epochs: int = 200  # cap on passes over the training split per retrain call
+    model_train_patience: int = 5      # early-stop a retrain if holdout MSE hasn't improved for this many epochs
+    model_train_freq: int = 250        # retrain the ensemble once real env steps since the last retrain reach this
+    deterministic_model: bool = False  # False => sample from the predicted Gaussian (paper default); True => use the mean
+
+    # ---- branched model rollouts (the core MBPO mechanism, Sec 3.3) ----
+    rollout_batch_size: int = 10_000  # number of real states branched from each time model rollouts are generated
+    model_retain_epochs: int = 1       # model buffer capacity is sized to hold only this many epochs' worth of rollout data
+    # Rollout length k is linearly scheduled from rollout_min_length to
+    # rollout_max_length between epochs rollout_min_epoch and rollout_max_epoch
+    # (paper Table 2). Defaults below reproduce HalfCheetah-v2's setting: a
+    # fixed length of 1 (no scheduling) -- the paper notes HalfCheetah gets no
+    # benefit from longer rollouts. Override for other envs, e.g. Hopper:
+    # (20, 100, 1, 15); Walker2d: (20, 150, 1, 15); Ant: (20, 100, 1, 25);
+    # Humanoid: (20, 300, 1, 25).
+    rollout_min_epoch: int = 20
+    rollout_max_epoch: int = 150
+    rollout_min_length: int = 1
+    rollout_max_length: int = 1
+
+
 # Maps --algo name -> its hyperparameter config dataclass. run_experiment.py
 # uses this to pick the right config instead of hardcoding each algorithm's
 # hyperparameters as CLI flags. Add an entry here when adding a new algorithm
-# (PPO, MBPO, PETS, ...); no changes to run_experiment.py are needed.
+# (PPO, PETS, ...); no changes to run_experiment.py are needed.
 ALGO_CONFIGS = {
     "sac": SACConfig,
+    "mbpo": MBPOConfig,
 }

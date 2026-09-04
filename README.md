@@ -7,11 +7,16 @@ baseline) using CodeCarbon (NVML + RAPL under the hood).
 ## Layout
 
 ```
-configs/config.py        ExperimentConfig (protocol/timing) + SACConfig (hyperparameters)
+configs/config.py        ExperimentConfig (protocol/timing) + SACConfig + MBPOConfig (hyperparameters)
+configs/overrides/        Example --algo-config-overrides JSON files (e.g. per-env MBPO rollout schedules)
 utils/gpu_control.py      GPU clock locking, persistence mode, CPU governor (GpuCpuGuard context manager)
 utils/thermal_gate.py     Waits between runs until GPU temp/power return near a reference cold state
 algorithms/replay_buffer.py  Numpy circular replay buffer
+algorithms/tracker_utils.py  Shared CodeCarbon start_task/stop_task context manager (TrackerTask)
 algorithms/sac.py         SAC agent + segment-instrumented train() loop
+algorithms/dynamics_model.py  MBPO's probabilistic ensemble dynamics model (PETS-style)
+algorithms/termination_fns.py  Per-env early-termination heuristics for model rollouts
+algorithms/mbpo.py        MBPO train() loop -- reuses SACAgent, adds model training + branched rollouts
 experiment_runner.py      Orchestrates settle -> idle baseline -> warmup+train -> idle tail -> teardown
 run_experiment.py         CLI entry point
 aggregate_results.py      Combines many runs' segment_energy.json/metadata.json into one CSV
@@ -30,6 +35,14 @@ python run_experiment.py --algo sac --env Pendulum-v1 --seed 0 --device cpu \
 
 # Real run on your RL box:
 python run_experiment.py --algo sac --env HalfCheetah-v5 --seed 0
+
+# MBPO (model-based; same env/CLI surface, its own hyperparameters live in MBPOConfig):
+python run_experiment.py --algo mbpo --env HalfCheetah-v5 --seed 0
+
+# MBPO on an env with early termination needs its own rollout-length schedule
+# (see configs/overrides/mbpo_*.json and MBPOConfig's docstring):
+python run_experiment.py --algo mbpo --env Hopper-v5 --seed 0 \
+    --algo-config-overrides configs/overrides/mbpo_hopper.json
 
 # After several runs across seeds/envs:
 python aggregate_results.py --results-dir results --out summary.csv
@@ -158,21 +171,61 @@ just an instrumentation change. Worth a footnote if you go that route.
   one long-lived Python process, to avoid memory/cache/CUDA-context carryover
   between runs.
 
-## Extending to PPO / MBPO / PETS
+## MBPO
 
-- Add a new `{Algo}Config` dataclass to `configs/config.py`.
+`algorithms/mbpo.py` implements Model-Based Policy Optimization (Janner, Fu,
+Zhang & Levine, NeurIPS 2019, https://arxiv.org/abs/1906.08253), following
+the paper's reference implementation (https://github.com/JannerM/mbpo)
+closely enough to reuse its published HalfCheetah hyperparameters as
+`MBPOConfig`'s defaults (see that dataclass's docstring in `configs/config.py`
+for the full list and citations).
+
+It reuses `SACAgent` from `sac.py` completely unmodified as its inner policy
+optimizer — the only reason this works is `_MixedReplayBuffer` in `mbpo.py`,
+which presents the same `.sample()` interface as `ReplayBuffer` while drawing
+`real_ratio` of each minibatch from real env transitions and the rest from
+model-generated ones, so `SACAgent.update()` never needs to know the data is
+mixed. On top of that, MBPO adds:
+
+- **`algorithms/dynamics_model.py`** — a 7-network probabilistic ensemble
+  (PETS-style, Chua et al. 2018) predicting a diagonal Gaussian over
+  `[delta_obs, reward]`, retrained periodically on all real data seen so far
+  with holdout early stopping; the 5 lowest-holdout-error members ("elites")
+  are used for prediction.
+- **`algorithms/termination_fns.py`** — per-environment early-termination
+  heuristics (matching Gymnasium's `healthy_z_range`/`healthy_angle_range`
+  checks) so branched model rollouts stop at a fallen-over Hopper/Walker2d/
+  Ant/Humanoid instead of continuing through physically invalid states.
+- Two extra directly-measured CodeCarbon tasks per epoch, alongside `rollout`
+  and `gradient_updates`: **`dynamics_model_update`** (retraining the
+  ensemble) and **`synthetic_rollout_generation`** (branched model rollouts
+  filling the model buffer). `gradient_updates` is sub-split into
+  `buffer_sample`/`critic_update`/`actor_update`/`target_update` by the exact
+  same time-proportional allocation scheme as SAC (see above) — reusing
+  `SACAgent.update()` means that instrumentation comes along for free.
+
+This gives the cleanest possible model-free-vs-model-based energy comparison
+available under this harness's protocol, since the policy-learning code path
+(`SACAgent`) is byte-for-byte identical between the two `--algo` runs; only
+what feeds its replay buffer differs.
+
+MBPO defaults to HalfCheetah's published rollout schedule (fixed length 1 —
+the paper finds HalfCheetah gets no benefit from longer imagined rollouts).
+Hopper/Walker2d/Ant/Humanoid need a longer, scheduled rollout length (and
+Humanoid needs a wider dynamics model); `configs/overrides/mbpo_*.json` has
+the paper's settings for each, passed via `--algo-config-overrides`.
+
+## Extending to PPO / PETS
+
+- Add a new `{Algo}Config` dataclass to `configs/config.py` and register it
+  in `ALGO_CONFIGS`.
 - Add a new `algorithms/{algo}.py` with a `train(env, algo_cfg, exp_cfg,
   tracker, device, logger, steps_per_epoch=...)` function returning
-  `(agent, energy_log)`, following the same `_TrackerTask` pattern used in
-  `sac.py` (unique task names per epoch, sub-segment timing via
-  `time.perf_counter()` where finer breakdown than CodeCarbon's resolution
-  allows).
+  `(agent, energy_log, metrics)`, following the same `TrackerTask` pattern
+  (`algorithms/tracker_utils.py`, shared by `sac.py` and `mbpo.py`: unique
+  task names per epoch, sub-segment timing via `time.perf_counter()` where
+  finer breakdown than CodeCarbon's resolution allows).
 - Add a dispatch branch in `experiment_runner._dispatch_train`.
-- For MBPO specifically: since it wraps SAC as its inner policy optimizer,
-  you can literally reuse `SACAgent` and just add two more epoch-level tasks
-  (`dynamics_model_update`, `synthetic_rollout_generation`) around it — this
-  gives you the cleanest possible model-free-vs-model-based comparison, since
-  the policy-learning code path is identical.
 
 ## Known limitations / things to sanity-check before trusting the numbers
 

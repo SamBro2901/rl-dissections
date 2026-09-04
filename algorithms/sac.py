@@ -28,6 +28,7 @@ import torch.nn.functional as F
 from torch.distributions import Normal
 
 from algorithms.replay_buffer import ReplayBuffer
+from algorithms.tracker_utils import TrackerTask
 from configs.config import SACConfig, ExperimentConfig
 
 LOG_STD_MIN, LOG_STD_MAX = -20.0, 2.0
@@ -226,41 +227,6 @@ class SACAgent:
         return info
 
 
-class _NullTask:
-    """No-op context manager used when tracker is None (e.g. dry-run/debug)."""
-    def __enter__(self):
-        return self
-
-    def __exit__(self, *a):
-        return False
-
-
-class _TrackerTask:
-    """Wraps tracker.start_task/stop_task as a context manager and stores the
-    returned EmissionsData's energy_consumed (kWh) into a results dict keyed
-    by a stable prefix (unique task *names* per call avoid a CodeCarbon bug
-    where reusing a task name corrupts internal accounting -- see README)."""
-
-    def __init__(self, tracker, prefix: str, counter: int, energy_log: Dict[str, float]):
-        self.tracker = tracker
-        self.name = f"{prefix}_{counter}"
-        self.prefix = prefix
-        self.energy_log = energy_log
-
-    def __enter__(self):
-        if self.tracker is not None:
-            self.tracker.start_task(self.name)
-        return self
-
-    def __exit__(self, *a):
-        if self.tracker is not None:
-            data = self.tracker.stop_task(self.name)
-            self.energy_log[self.prefix] = self.energy_log.get(self.prefix, 0.0) + (
-                data.energy_consumed if data is not None else 0.0
-            )
-        return False
-
-
 def train(
     env,
     sac_cfg: SACConfig,
@@ -330,7 +296,7 @@ def train(
 
     # ---------------- warmup (random policy, fills buffer; excluded from analysis segments) ----------------
     logger.info("Starting warmup: %d steps", exp_cfg.warmup_steps)
-    with _TrackerTask(tracker, "warmup", 0, energy_log):
+    with TrackerTask(tracker, "warmup", 0, energy_log):
         for warmup_step in range(exp_cfg.warmup_steps):
             action = env.action_space.sample()
             next_obs, reward, terminated, truncated, _ = env.step(action)
@@ -355,7 +321,7 @@ def train(
         # --- rollout block ---
         epoch_reward_sum = 0.0
         epoch_episode_returns = []
-        with _TrackerTask(tracker, "rollout", epoch, energy_log):
+        with TrackerTask(tracker, "rollout", epoch, energy_log):
             for _ in range(steps_per_epoch):
                 action = agent.select_action(obs, deterministic=False)
                 next_obs, reward, terminated, truncated, _ = env.step(action)
@@ -375,7 +341,7 @@ def train(
         epoch_sub_times = {"buffer_sample": 0.0, "critic_update": 0.0, "actor_update": 0.0, "target_update": 0.0}
         critic_losses, actor_losses, alphas = [], [], []
         n_updates = steps_per_epoch * sac_cfg.updates_per_env_step
-        with _TrackerTask(tracker, "gradient_updates", epoch, energy_log):
+        with TrackerTask(tracker, "gradient_updates", epoch, energy_log):
             for _ in range(n_updates):
                 if len(buffer) < sac_cfg.batch_size:
                     break

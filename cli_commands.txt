@@ -2,6 +2,7 @@ cd /home/samanth/rl-dissection-linux
 source rl-exp/bin/activate
 python run_experiment.py --algo sac --env HalfCheetah-v5 --seed 0
 sudo /home/samanth/rl-dissection-linux/rl-exp/bin/python run_experiment.py --algo sac --env HalfCheetah-v5 --seed 56
+sudo /home/samanth/rl-dissection-linux/rl-exp/bin/python run_experiment.py --algo mbpo --env HalfCheetah-v5 --seed 0
 
 # Run with sudo instead if you want GPU clock locking + CPU governor pinning
 # actually applied (both need root on Linux); otherwise they fail soft and

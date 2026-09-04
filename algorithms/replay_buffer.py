@@ -27,6 +27,23 @@ class ReplayBuffer:
         self.ptr = (self.ptr + 1) % self.capacity
         self.size = min(self.size + 1, self.capacity)
 
+    def add_batch(self, obs, action, reward, next_obs, done):
+        """Vectorized insert of a batch of transitions. Used by MBPO's branched
+        model rollouts, where thousands of synthetic transitions are generated
+        per epoch -- inserting them one at a time in a Python loop would
+        dominate wall-clock cost. Behaves as a no-op for n == 0."""
+        n = obs.shape[0]
+        if n == 0:
+            return
+        idx = (self.ptr + np.arange(n)) % self.capacity
+        self.obs[idx] = obs
+        self.actions[idx] = action
+        self.rewards[idx, 0] = reward
+        self.next_obs[idx] = next_obs
+        self.dones[idx, 0] = done.astype(np.float32)
+        self.ptr = (self.ptr + n) % self.capacity
+        self.size = min(self.size + n, self.capacity)
+
     def sample(self, batch_size: int):
         idx = np.random.randint(0, self.size, size=batch_size)
         return (

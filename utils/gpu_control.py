@@ -20,6 +20,9 @@ from typing import Optional, Tuple
 
 logger = logging.getLogger("gpu_control")
 
+DEFAULT_LOCK_MHZ = 200  # fixed clock used when no explicit min/max is given --
+                          # representative of a real compute workload, not the idle floor
+
 
 def _run(cmd: list[str]) -> Tuple[bool, str]:
     try:
@@ -59,10 +62,9 @@ def set_persistence_mode(enabled: bool = True, gpu_index: int = 0) -> bool:
 def lock_gpu_clocks(min_mhz: Optional[int], max_mhz: Optional[int], gpu_index: int = 0) -> bool:
     """
     Locks GPU graphics clock to a fixed range to suppress boost-clock variability
-    between/within runs. If min/max not given, queries the device and locks to a
-    fixed low value near the low end of its supported range (favors reproducibility
-    over raw throughput -- this is a deliberate tradeoff for measurement, not
-    something you'd do for a production training run).
+    between/within runs. If min/max not given, queries the device and locks to
+    DEFAULT_LOCK_MHZ (clamped to the device's supported range) -- a fixed clock
+    representative of an actual compute workload, not the idle floor.
     """
     if min_mhz is None or max_mhz is None:
         queried = query_gpu_clock_range(gpu_index)
@@ -70,8 +72,9 @@ def lock_gpu_clocks(min_mhz: Optional[int], max_mhz: Optional[int], gpu_index: i
             logger.warning("Could not query GPU clock range; skipping clock lock.")
             return False
         qmin, qmax = queried
-        min_mhz = min_mhz or qmin
-        max_mhz = max_mhz or qmin  # lock to a single fixed low clock by default
+        target = min(max(DEFAULT_LOCK_MHZ, qmin), qmax)
+        min_mhz = min_mhz or target
+        max_mhz = max_mhz or target
     ok, _ = _run(["nvidia-smi", "-i", str(gpu_index), "-lgc", f"{min_mhz},{max_mhz}"])
     if ok:
         logger.info("Locked GPU %d clocks to [%d, %d] MHz", gpu_index, min_mhz, max_mhz)
