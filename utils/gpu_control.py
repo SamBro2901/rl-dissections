@@ -20,7 +20,7 @@ from typing import Optional, Tuple
 
 logger = logging.getLogger("gpu_control")
 
-DEFAULT_LOCK_MHZ = 200  # fixed clock used when no explicit min/max is given --
+DEFAULT_LOCK_MHZ = 2000  # fixed clock used when no explicit min/max is given --
                           # representative of a real compute workload, not the idle floor
 
 

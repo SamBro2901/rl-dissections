@@ -28,8 +28,8 @@ class ExperimentConfig:
 
     # --- GPU / CPU control ---
     lock_gpu_clocks: bool = True
-    gpu_min_clock_mhz: Optional[int] = None   # None => use gpu_control.DEFAULT_LOCK_MHZ (2000), clamped to device range
-    gpu_max_clock_mhz: Optional[int] = None   # None => use gpu_control.DEFAULT_LOCK_MHZ (2000), clamped to device range
+    gpu_min_clock_mhz: Optional[int] = 2000   # None => use gpu_control.DEFAULT_LOCK_MHZ (2000), clamped to device range
+    gpu_max_clock_mhz: Optional[int] = 2000   # None => use gpu_control.DEFAULT_LOCK_MHZ (2000), clamped to device range
     set_persistence_mode: bool = True
     set_cpu_performance_governor: bool = True
 
@@ -63,7 +63,7 @@ class SACConfig:
     alpha_lr: float = 3e-4
     gamma: float = 0.99
     tau: float = 0.005            # target network Polyak averaging coefficient
-    batch_size: int = 512
+    batch_size: int = 256
     buffer_capacity: int = 1_000_000
     target_entropy: Optional[float] = None  # None => -action_dim (standard heuristic)
     autotune_alpha: bool = True
