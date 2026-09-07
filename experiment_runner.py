@@ -35,7 +35,7 @@ import torch
 
 from configs.config import ExperimentConfig, SACConfig
 from utils.gpu_control import GpuCpuGuard
-from utils.thermal_gate import wait_for_thermal_baseline
+from utils.thermal_gate import wait_for_thermal_baseline, read_current_state
 
 
 def _git_commit_hash() -> str:
@@ -106,7 +106,7 @@ def run_experiment(exp_cfg: ExperimentConfig, algo_cfg, seed_everything: bool = 
         "device": str(device),
         "cuda_device_name": torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
         "start_time_utc": datetime.utcnow().isoformat(),
-        "experiment_config": exp_cfg.__dict__,
+        "experiment_config": {k: v for k, v in exp_cfg.__dict__.items() if k != "thermal_gate_reference_file"},
         "algo_config": algo_cfg.__dict__,
     }
 
@@ -125,6 +125,7 @@ def run_experiment(exp_cfg: ExperimentConfig, algo_cfg, seed_everything: bool = 
         set_governor=exp_cfg.set_cpu_performance_governor,
     ) if exp_cfg.lock_gpu_clocks else _NullGuard():
 
+        thermal_gate_info = {}
         if exp_cfg.thermal_gate_enabled:
             logger.info("Waiting for thermal baseline before starting...")
             gate_info = wait_for_thermal_baseline(
@@ -135,11 +136,16 @@ def run_experiment(exp_cfg: ExperimentConfig, algo_cfg, seed_everything: bool = 
                 poll_interval_seconds=exp_cfg.thermal_gate_poll_interval_seconds,
             )
             logger.info("Thermal gate result: %s", gate_info)
-            metadata["thermal_gate"] = gate_info
+            thermal_gate_info.update(gate_info)
 
         # ---------------- settle (unmeasured) ----------------
         logger.info("Settling for %.0fs (unmeasured)...", exp_cfg.settle_seconds)
         time.sleep(exp_cfg.settle_seconds)
+
+        run_start_state = read_current_state()
+        if run_start_state is not None:
+            thermal_gate_info["run_start_temp_c"] = run_start_state["temp_c"]
+            thermal_gate_info["run_start_power_w"] = run_start_state["power_w"]
 
         # ---------------- start CodeCarbon tracker for the whole remaining lifecycle ----------------
         from codecarbon import EmissionsTracker
@@ -179,9 +185,17 @@ def run_experiment(exp_cfg: ExperimentConfig, algo_cfg, seed_everything: bool = 
             data = tracker.stop_task("idle_baseline_tail")
             energy_log["idle_baseline_tail"] = data.energy_consumed if data else 0.0
 
+            run_end_state = read_current_state()
+            if run_end_state is not None:
+                thermal_gate_info["run_end_temp_c"] = run_end_state["temp_c"]
+                thermal_gate_info["run_end_power_w"] = run_end_state["power_w"]
+
         finally:
             total_data = tracker.stop()
             energy_log["_total_kg_co2eq"] = total_data
+
+    if thermal_gate_info:
+        metadata["thermal_gate"] = thermal_gate_info
 
     # ---------------- write outputs ----------------
     energy_log_serializable = {

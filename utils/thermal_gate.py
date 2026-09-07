@@ -68,6 +68,16 @@ def _read_gpu_state(gpu_index: int = 0) -> Optional[GpuState]:
             pass
 
 
+def read_current_state(gpu_index: int = 0) -> Optional[dict]:
+    """Single instantaneous GPU temp/power reading, for before/after-run snapshots
+    (as opposed to the gate's own reference/final readings, which are about
+    matching a cooldown target rather than bracketing the measured run)."""
+    state = _read_gpu_state(gpu_index)
+    if state is None:
+        return None
+    return {"temp_c": state.temp_c, "power_w": state.power_w}
+
+
 def _capture_stable_reference(
     gpu_index: int = 0,
     stabilize_window: int = 3,
