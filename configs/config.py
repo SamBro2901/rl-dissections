@@ -91,7 +91,7 @@ class MBPOConfig:
 
     # ---- SAC (policy) hyperparameters -- consumed by algorithms.sac.SACAgent,
     # which MBPO reuses unmodified as its policy-optimization subroutine. ----
-    hidden_sizes: Tuple[int, int] = (256, 256)   # kept consistent with SACConfig's defaults in this repo
+    hidden_sizes: Tuple[int, int] = (1024, 1024)   # kept consistent with SACConfig's defaults in this repo
     actor_lr: float = 3e-4
     critic_lr: float = 3e-4
     alpha_lr: float = 3e-4
