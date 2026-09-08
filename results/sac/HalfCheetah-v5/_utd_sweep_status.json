@@ -1,0 +1,127 @@
+{
+  "total_runs": 10,
+  "started_utc": "2026-09-08T10:22:54.255569+00:00",
+  "updated_utc": "2026-09-08T14:26:42",
+  "runs": [
+    {
+      "index": 1,
+      "algo": "sac",
+      "env": "HalfCheetah-v5",
+      "seed": 331,
+      "updates_per_env_step": 2,
+      "status": "done",
+      "run_dir": "results/sac/HalfCheetah-v5/seed_331/20260908_122254",
+      "started_utc": "2026-09-08T10:22:54",
+      "finished_utc": "2026-09-08T10:40:37",
+      "exit_code": 0
+    },
+    {
+      "index": 2,
+      "algo": "sac",
+      "env": "HalfCheetah-v5",
+      "seed": 958,
+      "updates_per_env_step": 2,
+      "status": "done",
+      "run_dir": "results/sac/HalfCheetah-v5/seed_958/20260908_124038",
+      "started_utc": "2026-09-08T10:40:38",
+      "finished_utc": "2026-09-08T10:58:27",
+      "exit_code": 0
+    },
+    {
+      "index": 3,
+      "algo": "sac",
+      "env": "HalfCheetah-v5",
+      "seed": 14577,
+      "updates_per_env_step": 2,
+      "status": "done",
+      "run_dir": "results/sac/HalfCheetah-v5/seed_14577/20260908_125827",
+      "started_utc": "2026-09-08T10:58:27",
+      "finished_utc": "2026-09-08T11:16:00",
+      "exit_code": 0
+    },
+    {
+      "index": 4,
+      "algo": "sac",
+      "env": "HalfCheetah-v5",
+      "seed": 43611,
+      "updates_per_env_step": 2,
+      "status": "done",
+      "run_dir": "results/sac/HalfCheetah-v5/seed_43611/20260908_131601",
+      "started_utc": "2026-09-08T11:16:00",
+      "finished_utc": "2026-09-08T11:33:30",
+      "exit_code": 0
+    },
+    {
+      "index": 5,
+      "algo": "sac",
+      "env": "HalfCheetah-v5",
+      "seed": 85062,
+      "updates_per_env_step": 2,
+      "status": "done",
+      "run_dir": "results/sac/HalfCheetah-v5/seed_85062/20260908_133331",
+      "started_utc": "2026-09-08T11:33:30",
+      "finished_utc": "2026-09-08T11:51:01",
+      "exit_code": 0
+    },
+    {
+      "index": 6,
+      "algo": "sac",
+      "env": "HalfCheetah-v5",
+      "seed": 331,
+      "updates_per_env_step": 4,
+      "status": "done",
+      "run_dir": "results/sac/HalfCheetah-v5/seed_331/20260908_135102",
+      "started_utc": "2026-09-08T11:51:01",
+      "finished_utc": "2026-09-08T12:22:03",
+      "exit_code": 0
+    },
+    {
+      "index": 7,
+      "algo": "sac",
+      "env": "HalfCheetah-v5",
+      "seed": 958,
+      "updates_per_env_step": 4,
+      "status": "done",
+      "run_dir": "results/sac/HalfCheetah-v5/seed_958/20260908_142203",
+      "started_utc": "2026-09-08T12:22:03",
+      "finished_utc": "2026-09-08T12:53:28",
+      "exit_code": 0
+    },
+    {
+      "index": 8,
+      "algo": "sac",
+      "env": "HalfCheetah-v5",
+      "seed": 14577,
+      "updates_per_env_step": 4,
+      "status": "done",
+      "run_dir": "results/sac/HalfCheetah-v5/seed_14577/20260908_145328",
+      "started_utc": "2026-09-08T12:53:28",
+      "finished_utc": "2026-09-08T13:24:38",
+      "exit_code": 0
+    },
+    {
+      "index": 9,
+      "algo": "sac",
+      "env": "HalfCheetah-v5",
+      "seed": 43611,
+      "updates_per_env_step": 4,
+      "status": "done",
+      "run_dir": "results/sac/HalfCheetah-v5/seed_43611/20260908_152438",
+      "started_utc": "2026-09-08T13:24:38",
+      "finished_utc": "2026-09-08T13:55:39",
+      "exit_code": 0
+    },
+    {
+      "index": 10,
+      "algo": "sac",
+      "env": "HalfCheetah-v5",
+      "seed": 85062,
+      "updates_per_env_step": 4,
+      "status": "done",
+      "run_dir": "results/sac/HalfCheetah-v5/seed_85062/20260908_155540",
+      "started_utc": "2026-09-08T13:55:39",
+      "finished_utc": "2026-09-08T14:26:42",
+      "exit_code": 0
+    }
+  ]
+}
