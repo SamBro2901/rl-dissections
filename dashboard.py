@@ -252,6 +252,69 @@ def duration_bar_figure(run_dir):
     return fig
 
 
+def _phase_grouped(df):
+    grouped = df.copy()
+    grouped["order"] = grouped["task_type"].apply(lambda t: PHASE_ORDER.index(t) if t in PHASE_ORDER else len(PHASE_ORDER))
+    return grouped.sort_values("order")
+
+
+def component_bar_figure(run_dir, components, agg, colors, title, y_title, hover_unit):
+    """Stacked bar of one or more emissions_base_* columns, grouped by phase."""
+    df = load_emissions_base(run_dir)
+    present = [c for c in components if df is not None and c in df.columns]
+    if df is None or "task_type" not in df.columns or not present:
+        return empty_figure("No data found for this run.")
+
+    grouped = df.groupby("task_type", sort=False)[present].agg(agg).reset_index()
+    grouped = _phase_grouped(grouped)
+
+    fig = go.Figure()
+    for col in present:
+        fig.add_trace(
+            go.Bar(
+                x=grouped["task_type"],
+                y=grouped[col],
+                name=col,
+                marker_color=colors.get(col, "#333333"),
+                hovertemplate=f"%{{x}}<br>{col}: %{{y:.4f}} {hover_unit}<extra></extra>",
+            )
+        )
+    fig.update_layout(
+        title=title,
+        height=380,
+        barmode="stack",
+        margin=dict(l=60, r=20, t=60, b=40),
+        legend=dict(orientation="h", yanchor="bottom", y=1.0, xanchor="left", x=0),
+    )
+    fig.update_xaxes(title_text="Phase")
+    fig.update_yaxes(title_text=y_title)
+    return fig
+
+
+def power_bar_figure(run_dir):
+    return component_bar_figure(
+        run_dir,
+        components=["cpu_power", "gpu_power", "ram_power"],
+        agg="mean",
+        colors={"cpu_power": "#1f77b4", "gpu_power": "#d62728", "ram_power": "#2ca02c"},
+        title="Phase power breakdown (avg)",
+        y_title="Avg power (W)",
+        hover_unit="W",
+    )
+
+
+def energy_bar_figure(run_dir):
+    return component_bar_figure(
+        run_dir,
+        components=["cpu_energy", "gpu_energy", "ram_energy"],
+        agg="sum",
+        colors={"cpu_energy": "#1f77b4", "gpu_energy": "#d62728", "ram_energy": "#2ca02c"},
+        title="Phase energy breakdown (total)",
+        y_title="Total energy (kWh)",
+        hover_unit="kWh",
+    )
+
+
 def info_card(label, value):
     return html.Div(
         [html.Div(label, className="info-label"), html.Div(value, className="info-value")],
@@ -336,6 +399,12 @@ def make_app(results_dir):
 
             html.H3("Phase duration breakdown"),
             dcc.Loading(dcc.Graph(id="duration-bar-graph")),
+
+            html.H3("Phase power breakdown"),
+            dcc.Loading(dcc.Graph(id="power-bar-graph")),
+
+            html.H3("Phase energy breakdown"),
+            dcc.Loading(dcc.Graph(id="energy-bar-graph")),
             html.Hr(),
 
             html.H3("CodeCarbon task metrics (emissions_base_*.csv)"),
@@ -429,6 +498,18 @@ def make_app(results_dir):
         if not run_dir:
             return empty_figure("No run selected.")
         return duration_bar_figure(run_dir)
+
+    @app.callback(Output("power-bar-graph", "figure"), Input("run-dropdown", "value"))
+    def _update_power_bar(run_dir):
+        if not run_dir:
+            return empty_figure("No run selected.")
+        return power_bar_figure(run_dir)
+
+    @app.callback(Output("energy-bar-graph", "figure"), Input("run-dropdown", "value"))
+    def _update_energy_bar(run_dir):
+        if not run_dir:
+            return empty_figure("No run selected.")
+        return energy_bar_figure(run_dir)
 
     @app.callback(
         Output("emissions-columns", "options"),
