@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 #
-# UTD (update-to-data ratio) sweep: sac / HalfCheetah-v5, updates_per_env_step
-# in {2, 4}, across seeds {331, 958, 14577, 43611, 85062} -- 10 runs total.
+# UTD (update-to-data ratio) sweep: updates_per_env_step in {2, 4}, across
+# seeds {331, 958, 14577, 43611, 85062}, for:
+#   - sac  on Ant-v5 only (HalfCheetah-v5 data already collected)
+#   - td3  on HalfCheetah-v5 and Ant-v5
+# -- 30 runs total.
 #
 # Each run needs sudo (for GPU clock locking + CPU governor pinning, see
 # cli_commands.txt), so this script primes a sudo credential cache once up
@@ -16,24 +19,30 @@
 #   ./run_utd_sweep.sh
 #   # Ctrl-A D to detach; reattach later with: screen -r utd_sweep
 #
-# Check progress at any time (from another terminal / after reattaching)
-# with:
-#   ./check_utd_sweep.sh
-#
 set -uo pipefail
 cd "$(dirname "$0")"
 
-ALGO="sac"
-ENV="HalfCheetah-v5"
+# algo:env combos to sweep -- sac:HalfCheetah-v5 is intentionally omitted,
+# that data has already been collected.
+COMBOS=("sac:Ant-v5" "td3:HalfCheetah-v5" "td3:Ant-v5")
 SEEDS=(331 958 14577 43611 85062)
 UTDS=(2 4)
 PYTHON_BIN="rl-exp/bin/python"
 
-STATUS_FILE="results/sac/HalfCheetah-v5/_utd_sweep_status.json"
-LOG_FILE="results/sac/HalfCheetah-v5/_utd_sweep.log"
+# Per-algo --warmup-steps. TD3's paper hyperparameters use 10,000 steps for
+# HalfCheetah-v1/Ant-v1 ("stable length environments", see TD3Config's
+# docstring in configs/config.py) rather than the CLI's default of 5,000;
+# SAC uses the CLI default for both envs, so no override is needed there.
+declare -A ALGO_WARMUP_STEPS=(
+    ["sac"]=""
+    ["td3"]="10000"
+)
+
+STATUS_FILE="results/_utd_sweep_status.json"
+LOG_FILE="results/_utd_sweep.log"
 mkdir -p "$(dirname "$STATUS_FILE")"
 
-TOTAL=$(( ${#SEEDS[@]} * ${#UTDS[@]} ))
+TOTAL=$(( ${#COMBOS[@]} * ${#UTDS[@]} * ${#SEEDS[@]} ))
 
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG_FILE"
@@ -65,30 +74,32 @@ SUDO_KEEPALIVE_PID=$!
 log "sudo credential keepalive started (pid $SUDO_KEEPALIVE_PID, refreshes every 60s)."
 
 # ---------------- build the initial status file (all runs 'pending') ----------------
-python3 - "$STATUS_FILE" "$TOTAL" "$ALGO" "$ENV" "${SEEDS[*]}" "${UTDS[*]}" <<'PYEOF'
+python3 - "$STATUS_FILE" "$TOTAL" "${COMBOS[*]}" "${UTDS[*]}" "${SEEDS[*]}" <<'PYEOF'
 import json, sys, datetime
 
-status_file, total, algo, env, seeds_str, utds_str = sys.argv[1:7]
-seeds = [int(s) for s in seeds_str.split()]
+status_file, total, combos_str, utds_str, seeds_str = sys.argv[1:6]
+combos = [tuple(c.split(":")) for c in combos_str.split()]
 utds = [int(u) for u in utds_str.split()]
+seeds = [int(s) for s in seeds_str.split()]
 
 runs = []
 idx = 1
-for utd in utds:
-    for seed in seeds:
-        runs.append({
-            "index": idx,
-            "algo": algo,
-            "env": env,
-            "seed": seed,
-            "updates_per_env_step": utd,
-            "status": "pending",
-            "run_dir": None,
-            "started_utc": None,
-            "finished_utc": None,
-            "exit_code": None,
-        })
-        idx += 1
+for algo, env in combos:
+    for utd in utds:
+        for seed in seeds:
+            runs.append({
+                "index": idx,
+                "algo": algo,
+                "env": env,
+                "seed": seed,
+                "updates_per_env_step": utd,
+                "status": "pending",
+                "run_dir": None,
+                "started_utc": None,
+                "finished_utc": None,
+                "exit_code": None,
+            })
+            idx += 1
 
 now = datetime.datetime.now(datetime.timezone.utc).isoformat()
 data = {
@@ -118,41 +129,49 @@ update_run_status() {
 # ---------------- run the sweep ----------------
 idx=0
 fail_count=0
-for utd in "${UTDS[@]}"; do
-    for seed in "${SEEDS[@]}"; do
-        idx=$((idx + 1))
-        overrides="configs/overrides/sac_utd${utd}.json"
+for combo in "${COMBOS[@]}"; do
+    algo="${combo%%:*}"
+    env="${combo#*:}"
+    warmup_steps="${ALGO_WARMUP_STEPS[$algo]}"
+    for utd in "${UTDS[@]}"; do
+        overrides="configs/overrides/${algo}_utd${utd}.json"
+        for seed in "${SEEDS[@]}"; do
+            idx=$((idx + 1))
 
-        log "[$idx/$TOTAL] Starting: algo=$ALGO env=$ENV seed=$seed utd=$utd"
-        update_run_status "$idx" \
-            "status=\"running\"" \
-            "started_utc=\"$(date -u +%Y-%m-%dT%H:%M:%S)\""
-
-        run_output="$(mktemp)"
-        sudo "$PYTHON_BIN" run_experiment.py \
-            --algo "$ALGO" --env "$ENV" --seed "$seed" \
-            --algo-config-overrides "$overrides" \
-            2>&1 | tee -a "$LOG_FILE" | tee "$run_output"
-        exit_code="${PIPESTATUS[0]}"
-
-        run_dir="$(grep -o 'Run artifacts written to: .*' "$run_output" | sed 's/Run artifacts written to: //' | tail -1)"
-        rm -f "$run_output"
-
-        if [[ "$exit_code" -eq 0 ]]; then
-            log "[$idx/$TOTAL] Finished OK: seed=$seed utd=$utd -> ${run_dir:-unknown}"
+            log "[$idx/$TOTAL] Starting: algo=$algo env=$env seed=$seed utd=$utd"
             update_run_status "$idx" \
-                "status=\"done\"" \
-                "run_dir=\"${run_dir:-null}\"" \
-                "finished_utc=\"$(date -u +%Y-%m-%dT%H:%M:%S)\"" \
-                "exit_code=$exit_code"
-        else
-            fail_count=$((fail_count + 1))
-            log "[$idx/$TOTAL] FAILED (exit $exit_code): seed=$seed utd=$utd -- see $LOG_FILE"
-            update_run_status "$idx" \
-                "status=\"failed\"" \
-                "finished_utc=\"$(date -u +%Y-%m-%dT%H:%M:%S)\"" \
-                "exit_code=$exit_code"
-        fi
+                "status=\"running\"" \
+                "started_utc=\"$(date -u +%Y-%m-%dT%H:%M:%S)\""
+
+            run_output="$(mktemp)"
+            cmd=(sudo "$PYTHON_BIN" run_experiment.py \
+                --algo "$algo" --env "$env" --seed "$seed" \
+                --algo-config-overrides "$overrides")
+            if [[ -n "$warmup_steps" ]]; then
+                cmd+=(--warmup-steps "$warmup_steps")
+            fi
+            "${cmd[@]}" 2>&1 | tee -a "$LOG_FILE" | tee "$run_output"
+            exit_code="${PIPESTATUS[0]}"
+
+            run_dir="$(grep -o 'Run artifacts written to: .*' "$run_output" | sed 's/Run artifacts written to: //' | tail -1)"
+            rm -f "$run_output"
+
+            if [[ "$exit_code" -eq 0 ]]; then
+                log "[$idx/$TOTAL] Finished OK: algo=$algo env=$env seed=$seed utd=$utd -> ${run_dir:-unknown}"
+                update_run_status "$idx" \
+                    "status=\"done\"" \
+                    "run_dir=\"${run_dir:-null}\"" \
+                    "finished_utc=\"$(date -u +%Y-%m-%dT%H:%M:%S)\"" \
+                    "exit_code=$exit_code"
+            else
+                fail_count=$((fail_count + 1))
+                log "[$idx/$TOTAL] FAILED (exit $exit_code): algo=$algo env=$env seed=$seed utd=$utd -- see $LOG_FILE"
+                update_run_status "$idx" \
+                    "status=\"failed\"" \
+                    "finished_utc=\"$(date -u +%Y-%m-%dT%H:%M:%S)\"" \
+                    "exit_code=$exit_code"
+            fi
+        done
     done
 done
 
