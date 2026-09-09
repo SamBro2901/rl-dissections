@@ -1,0 +1,117 @@
+{
+  "total_runs": 10,
+  "started_utc": "2026-09-09T10:22:03.576913+00:00",
+  "updated_utc": "2026-09-09T11:36:10",
+  "runs": [
+    {
+      "index": 1,
+      "algo": "td3",
+      "env": "HalfCheetah-v5",
+      "seed": 331,
+      "status": "done",
+      "run_dir": "results/td3/HalfCheetah-v5/seed_331/20260909_122204",
+      "started_utc": "2026-09-09T10:22:03",
+      "finished_utc": "2026-09-09T10:29:15",
+      "exit_code": 0
+    },
+    {
+      "index": 2,
+      "algo": "td3",
+      "env": "HalfCheetah-v5",
+      "seed": 958,
+      "status": "done",
+      "run_dir": "results/td3/HalfCheetah-v5/seed_958/20260909_122916",
+      "started_utc": "2026-09-09T10:29:15",
+      "finished_utc": "2026-09-09T10:36:30",
+      "exit_code": 0
+    },
+    {
+      "index": 3,
+      "algo": "td3",
+      "env": "HalfCheetah-v5",
+      "seed": 14577,
+      "status": "done",
+      "run_dir": "results/td3/HalfCheetah-v5/seed_14577/20260909_123631",
+      "started_utc": "2026-09-09T10:36:30",
+      "finished_utc": "2026-09-09T10:43:43",
+      "exit_code": 0
+    },
+    {
+      "index": 4,
+      "algo": "td3",
+      "env": "HalfCheetah-v5",
+      "seed": 43611,
+      "status": "done",
+      "run_dir": "results/td3/HalfCheetah-v5/seed_43611/20260909_124343",
+      "started_utc": "2026-09-09T10:43:43",
+      "finished_utc": "2026-09-09T10:51:05",
+      "exit_code": 0
+    },
+    {
+      "index": 5,
+      "algo": "td3",
+      "env": "HalfCheetah-v5",
+      "seed": 85062,
+      "status": "done",
+      "run_dir": "results/td3/HalfCheetah-v5/seed_85062/20260909_125105",
+      "started_utc": "2026-09-09T10:51:05",
+      "finished_utc": "2026-09-09T10:58:14",
+      "exit_code": 0
+    },
+    {
+      "index": 6,
+      "algo": "td3",
+      "env": "Ant-v5",
+      "seed": 331,
+      "status": "done",
+      "run_dir": "results/td3/Ant-v5/seed_331/20260909_125815",
+      "started_utc": "2026-09-09T10:58:14",
+      "finished_utc": "2026-09-09T11:05:50",
+      "exit_code": 0
+    },
+    {
+      "index": 7,
+      "algo": "td3",
+      "env": "Ant-v5",
+      "seed": 958,
+      "status": "done",
+      "run_dir": "results/td3/Ant-v5/seed_958/20260909_130550",
+      "started_utc": "2026-09-09T11:05:50",
+      "finished_utc": "2026-09-09T11:13:19",
+      "exit_code": 0
+    },
+    {
+      "index": 8,
+      "algo": "td3",
+      "env": "Ant-v5",
+      "seed": 14577,
+      "status": "done",
+      "run_dir": "results/td3/Ant-v5/seed_14577/20260909_131319",
+      "started_utc": "2026-09-09T11:13:19",
+      "finished_utc": "2026-09-09T11:20:51",
+      "exit_code": 0
+    },
+    {
+      "index": 9,
+      "algo": "td3",
+      "env": "Ant-v5",
+      "seed": 43611,
+      "status": "done",
+      "run_dir": "results/td3/Ant-v5/seed_43611/20260909_132052",
+      "started_utc": "2026-09-09T11:20:52",
+      "finished_utc": "2026-09-09T11:28:26",
+      "exit_code": 0
+    },
+    {
+      "index": 10,
+      "algo": "td3",
+      "env": "Ant-v5",
+      "seed": 85062,
+      "status": "done",
+      "run_dir": "results/td3/Ant-v5/seed_85062/20260909_132826",
+      "started_utc": "2026-09-09T11:28:26",
+      "finished_utc": "2026-09-09T11:36:10",
+      "exit_code": 0
+    }
+  ]
+}
