@@ -144,6 +144,54 @@ class MBPOConfig:
     rollout_max_length: int = 1
 
 
+@dataclass
+class TD3Config:
+    """
+    Twin Delayed Deep Deterministic Policy Gradient (Fujimoto, van Hoof &
+    Meger, ICML 2018, "Addressing Function Approximation Error in
+    Actor-Critic Methods", https://arxiv.org/abs/1802.09477), consumed by
+    algorithms/td3.py.
+
+    TD3 is DDPG (Lillicrap et al. 2015) plus three fixes for actor-critic
+    overestimation bias (paper Sections 4.2/5.2/5.3, Algorithm 1): clipped
+    double Q-learning (twin critics, target = min over both), delayed policy
+    updates (actor + both target networks updated once every
+    `policy_update_delay` critic updates), and target policy smoothing
+    (clipped Gaussian noise added to the target action).
+
+    Defaults below reproduce the paper's own hyperparameters (Section 6.1,
+    Table 3), which the paper applies *unmodified* across every MuJoCo-v1
+    task in its evaluation, including HalfCheetah-v1 and Ant-v1 -- so unlike
+    MBPOConfig, no per-env override file is needed here.
+
+    The one paper-specified setting that *does* vary by environment -- the
+    length of the purely-random warmup phase used to fill the buffer before
+    training starts -- lives on `ExperimentConfig.warmup_steps` (shared
+    across algorithms), not here: the paper uses 10,000 steps for
+    HalfCheetah-v1/Ant-v1 ("stable length environments") vs. 1,000 for the
+    rest (Section 6.1). Pass `--warmup-steps 10000` on the CLI for
+    HalfCheetah-v5/Ant-v5 runs to match.
+
+    hidden_sizes is the one deliberate deviation from the paper (which uses
+    (400, 300), Appendix C): kept at (1024, 1024) to match
+    SACConfig/MBPOConfig's defaults in this repo, so the network-capacity
+    term is held constant across algorithms when comparing energy usage.
+    """
+
+    hidden_sizes: Tuple[int, int] = (1024, 1024)   # paper: (400, 300)
+    actor_lr: float = 1e-3
+    critic_lr: float = 1e-3
+    gamma: float = 0.99
+    tau: float = 0.005                  # target network Polyak averaging coefficient
+    batch_size: int = 100
+    buffer_capacity: int = 1_000_000
+    exploration_noise: float = 0.1      # std of Gaussian action noise added during rollout, as a fraction of act_limit
+    target_policy_noise: float = 0.2    # std of clipped noise added to the target action (target policy smoothing), as a fraction of act_limit
+    target_noise_clip: float = 0.5      # clip range for target smoothing noise, as a fraction of act_limit
+    policy_update_delay: int = 2        # d in the paper -- actor + both target nets updated once every d critic updates
+    updates_per_env_step: int = 1       # gradient steps per environment step, after warmup ("iterations per time step" in Table 3)
+
+
 # Maps --algo name -> its hyperparameter config dataclass. run_experiment.py
 # uses this to pick the right config instead of hardcoding each algorithm's
 # hyperparameters as CLI flags. Add an entry here when adding a new algorithm
@@ -151,4 +199,5 @@ class MBPOConfig:
 ALGO_CONFIGS = {
     "sac": SACConfig,
     "mbpo": MBPOConfig,
+    "td3": TD3Config,
 }

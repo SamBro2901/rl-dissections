@@ -14,6 +14,7 @@ utils/thermal_gate.py     Waits between runs until GPU temp/power return near a 
 algorithms/replay_buffer.py  Numpy circular replay buffer
 algorithms/tracker_utils.py  Shared CodeCarbon start_task/stop_task context manager (TrackerTask)
 algorithms/sac.py         SAC agent + segment-instrumented train() loop
+algorithms/td3.py         TD3 agent + segment-instrumented train() loop
 algorithms/dynamics_model.py  MBPO's probabilistic ensemble dynamics model (PETS-style)
 algorithms/termination_fns.py  Per-env early-termination heuristics for model rollouts
 algorithms/mbpo.py        MBPO train() loop -- reuses SACAgent, adds model training + branched rollouts
@@ -43,6 +44,11 @@ python run_experiment.py --algo mbpo --env HalfCheetah-v5 --seed 0
 # (see configs/overrides/mbpo_*.json and MBPOConfig's docstring):
 python run_experiment.py --algo mbpo --env Hopper-v5 --seed 0 \
     --algo-config-overrides configs/overrides/mbpo_hopper.json
+
+# TD3 (model-free; the paper's warmup length differs by env -- see TD3Config's
+# docstring -- so pass it explicitly on HalfCheetah/Ant):
+python run_experiment.py --algo td3 --env HalfCheetah-v5 --seed 0 --warmup-steps 10000
+python run_experiment.py --algo td3 --env Ant-v5 --seed 0 --warmup-steps 10000
 
 # After several runs across seeds/envs:
 python aggregate_results.py --results-dir results --out summary.csv
@@ -214,6 +220,45 @@ the paper finds HalfCheetah gets no benefit from longer imagined rollouts).
 Hopper/Walker2d/Ant/Humanoid need a longer, scheduled rollout length (and
 Humanoid needs a wider dynamics model); `configs/overrides/mbpo_*.json` has
 the paper's settings for each, passed via `--algo-config-overrides`.
+
+## TD3
+
+`algorithms/td3.py` implements Twin Delayed Deep Deterministic Policy
+Gradient (Fujimoto, van Hoof & Meger, ICML 2018,
+https://arxiv.org/abs/1802.09477), reusing the paper's own hyperparameters
+(Section 6.1, Table 3) as `TD3Config`'s defaults. Unlike MBPO, the paper
+applies the same hyperparameters across every MuJoCo-v1 task it evaluates
+-- including HalfCheetah-v1 and Ant-v1 -- so there's no per-env
+`--algo-config-overrides` file for TD3; `TD3Config`'s docstring in
+`configs/config.py` has the full list and citations.
+
+Structurally it mirrors `sac.py` (same `TrackerTask` segment names, same
+`train()` return shape) but is model-free and off-policy with a
+*deterministic* actor rather than SAC's stochastic Gaussian policy, so the
+update step differs in three paper-specified ways:
+
+- **Clipped double Q-learning** — both critics are trained against a shared
+  target that takes the min over `Q1_targ`/`Q2_targ`, capping the
+  overestimation bias a single critic (or DDPG's single critic) is prone to.
+- **Delayed policy updates** — the actor and *both* target networks
+  (`policy_update_delay`, `d=2` by default) are only updated once every `d`
+  critic updates, so the actor is trained against a lower-variance,
+  more-converged critic.
+- **Target policy smoothing** — clipped `N(0, target_policy_noise)` noise is
+  added to the target action before it's passed to the target critics,
+  regularizing the target against sharp Q-value peaks a deterministic policy
+  could otherwise exploit.
+
+Exploration is handled differently from SAC too: since the actor is
+deterministic, `train()` adds `N(0, exploration_noise * act_limit)` Gaussian
+noise to the selected action during rollout (clipped to the action bounds)
+rather than relying on the policy's own stochasticity.
+
+The paper's warmup length is env-dependent (Section 6.1) — 10,000 purely
+random steps for HalfCheetah-v1/Ant-v1, 1,000 for the rest. Since
+`ExperimentConfig.warmup_steps` is shared across all algorithms in this
+harness (not part of `TD3Config`), pass `--warmup-steps 10000` explicitly
+when running TD3 on HalfCheetah-v5/Ant-v5 (see Quickstart above).
 
 ## Extending to PPO / PETS
 
