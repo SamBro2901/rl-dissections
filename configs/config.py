@@ -192,6 +192,103 @@ class TD3Config:
     updates_per_env_step: int = 1       # gradient steps per environment step, after warmup ("iterations per time step" in Table 3)
 
 
+@dataclass
+class TDMPC2Config:
+    """
+    TD-MPC2 (Hansen, Su & Wang, ICLR 2024, "TD-MPC2: Scalable, Robust World
+    Models for Continuous Control", https://arxiv.org/abs/2310.16828),
+    consumed by algorithms/tdmpc2.py.
+
+    TD-MPC2 learns a decoder-free latent world model (encoder, latent
+    dynamics, reward model, a 5-network Q-ensemble, and a Gaussian policy
+    prior) and selects actions via MPPI trajectory optimization in latent
+    space (Section 3, Algorithm 1) rather than by directly querying the
+    policy -- planning dominates its per-step compute, unlike the other
+    (model-free) algorithms in this repo.
+
+    Defaults below are the paper's own single-task, state-observation
+    hyperparameters -- i.e. the values in the authors' reference
+    implementation's `config.yaml` (https://github.com/nicklashansen/tdmpc2),
+    which the paper reports using *unmodified* across all 104 evaluated
+    single-task environments. Two values are nonetheless environment-shaped
+    and are computed from `episode_length` rather than hardcoded here (see
+    `algorithms/tdmpc2.py`'s `TDMPC2Agent._get_discount`):
+      - discount = clip((episode_length/discount_denom - 1) / (episode_length
+        /discount_denom), discount_min, discount_max). For HalfCheetah-v5 and
+        Ant-v5 (both 1000-step episodes by default), this evaluates to 0.995.
+      - the paper's seed-steps heuristic is max(5 * episode_length, 1000) =
+        5000 for 1000-step episodes -- which is exactly this harness's
+        default `ExperimentConfig.warmup_steps`, so no override is needed
+        for HalfCheetah-v5/Ant-v5.
+
+    `episodic` controls whether an auxiliary termination classifier is
+    learned and used to truncate imagined MPPI rollouts (paper Section 3,
+    "Handling termination"). It defaults to False (matching the paper's
+    default for fixed-length continuous-control tasks) since HalfCheetah-v5
+    never terminates early; `configs/overrides/tdmpc2_ant.json` sets it to
+    True for Ant-v5, since Gymnasium's default `terminate_when_unhealthy=True`
+    means Ant *can* end an episode early, and the planner should account for
+    that when imagining trajectories (the real TD-target already bootstraps
+    correctly off the env's own termination signal regardless of this flag --
+    see `TDMPC2Agent.update`'s `td_targets` computation).
+    """
+
+    # ---- architecture (paper's 5M-parameter state-based default) ----
+    num_enc_layers: int = 2
+    enc_dim: int = 256
+    mlp_dim: int = 512
+    latent_dim: int = 512
+    num_q: int = 5
+    dropout: float = 0.01
+    simnorm_dim: int = 8
+
+    # ---- optimization ----
+    lr: float = 3e-4
+    enc_lr_scale: float = 0.3      # encoder LR = lr * enc_lr_scale
+    grad_clip_norm: float = 20.0
+    batch_size: int = 256
+    tau: float = 0.01              # target Q-ensemble Polyak coefficient; also RunningScale's EMA rate
+    rho: float = 0.5               # temporal loss-weighting decay (rho^t) across the planning horizon
+    consistency_coef: float = 20.0
+    reward_coef: float = 0.1
+    value_coef: float = 0.1
+    termination_coef: float = 1.0  # only used when episodic=True
+    entropy_coef: float = 1e-4
+    updates_per_env_step: int = 1  # gradient steps per environment step, after the pretraining burst
+
+    # ---- discount heuristic (see class docstring) ----
+    discount_denom: float = 5.0
+    discount_min: float = 0.95
+    discount_max: float = 0.995
+    episode_length: int = 1000     # fallback only; algorithms/tdmpc2.py prefers env.spec.max_episode_steps
+
+    # ---- MPPI planning (Algorithm 1) ----
+    horizon: int = 3
+    iterations: int = 6            # +2 automatically for action_dim >= 20 (paper heuristic; irrelevant for
+                                    # HalfCheetah-v5 (6) / Ant-v5 (8))
+    num_samples: int = 512
+    num_elites: int = 64
+    num_pi_trajs: int = 24         # of num_samples, this many trajectories are seeded from the policy prior
+    min_std: float = 0.05
+    max_std: float = 2.0
+    temperature: float = 0.5
+
+    # ---- Gaussian policy prior ----
+    log_std_min: float = -10.0
+    log_std_max: float = 2.0
+
+    # ---- discrete regression (two-hot, symlog-transformed) for reward/value prediction ----
+    num_bins: int = 101
+    vmin: float = -10.0
+    vmax: float = 10.0
+
+    # ---- episodic termination model (see class docstring) ----
+    episodic: bool = False
+
+    # ---- sequence replay buffer ----
+    buffer_capacity: int = 1_000_000
+
+
 # Maps --algo name -> its hyperparameter config dataclass. run_experiment.py
 # uses this to pick the right config instead of hardcoding each algorithm's
 # hyperparameters as CLI flags. Add an entry here when adding a new algorithm
@@ -200,4 +297,5 @@ ALGO_CONFIGS = {
     "sac": SACConfig,
     "mbpo": MBPOConfig,
     "td3": TD3Config,
+    "tdmpc2": TDMPC2Config,
 }

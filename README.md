@@ -18,6 +18,7 @@ algorithms/td3.py         TD3 agent + segment-instrumented train() loop
 algorithms/dynamics_model.py  MBPO's probabilistic ensemble dynamics model (PETS-style)
 algorithms/termination_fns.py  Per-env early-termination heuristics for model rollouts
 algorithms/mbpo.py        MBPO train() loop -- reuses SACAgent, adds model training + branched rollouts
+algorithms/tdmpc2.py      TD-MPC2 latent world model + MPPI planner + train() loop
 experiment_runner.py      Orchestrates settle -> idle baseline -> warmup+train -> idle tail -> teardown
 run_experiment.py         CLI entry point
 aggregate_results.py      Combines many runs' segment_energy.json/metadata.json into one CSV
@@ -49,6 +50,12 @@ python run_experiment.py --algo mbpo --env Hopper-v5 --seed 0 \
 # docstring -- so pass it explicitly on HalfCheetah/Ant):
 python run_experiment.py --algo td3 --env HalfCheetah-v5 --seed 0 --warmup-steps 10000
 python run_experiment.py --algo td3 --env Ant-v5 --seed 0 --warmup-steps 10000
+
+# TD-MPC2 (planning-based; HalfCheetah-v5 uses defaults as-is, Ant-v5 needs the
+# episodic-termination override since it can terminate early -- see TDMPC2Config):
+python run_experiment.py --algo tdmpc2 --env HalfCheetah-v5 --seed 0
+python run_experiment.py --algo tdmpc2 --env Ant-v5 --seed 0 \
+    --algo-config-overrides configs/overrides/tdmpc2_ant.json
 
 # After several runs across seeds/envs:
 python aggregate_results.py --results-dir results --out summary.csv
@@ -259,6 +266,86 @@ random steps for HalfCheetah-v1/Ant-v1, 1,000 for the rest. Since
 `ExperimentConfig.warmup_steps` is shared across all algorithms in this
 harness (not part of `TD3Config`), pass `--warmup-steps 10000` explicitly
 when running TD3 on HalfCheetah-v5/Ant-v5 (see Quickstart above).
+
+## TD-MPC2
+
+`algorithms/tdmpc2.py` implements TD-MPC2 (Hansen, Su & Wang, ICLR 2024,
+"TD-MPC2: Scalable, Robust World Models for Continuous Control",
+https://arxiv.org/abs/2310.16828), a single-task, state-observation port of
+the authors' reference implementation
+(https://github.com/nicklashansen/tdmpc2) closely enough to reuse the
+paper's own hyperparameters as `TDMPC2Config`'s defaults (see that
+dataclass's docstring in `configs/config.py`).
+
+Unlike every other algorithm in this repo, TD-MPC2 is **not** a model-free
+actor-critic method wrapped around direct policy queries: it learns a
+decoder-free latent world model --
+
+- an **encoder** mapping raw observations to a `SimNorm`-normalized latent
+  state (https://arxiv.org/abs/2204.00616 -- softmax over small groups of
+  latent units, used to keep the latent space bounded and stable),
+- a **latent dynamics model** predicting the next latent state,
+- a **reward model** and a **5-network Q-ensemble**, both trained as
+  *discrete regression* (soft two-hot cross-entropy in a symlog-transformed
+  space, `num_bins=101`) rather than direct MSE/Huber regression,
+- a **Gaussian policy prior** trained to maximize Q-value plus an entropy
+  bonus --
+
+and at every environment step, selects actions by **MPPI trajectory
+optimization in latent space** (`TDMPC2Agent.act`/`_estimate_value`):
+`num_samples=512` imagined action sequences (`num_pi_trajs=24` seeded from
+the policy prior, the rest from a Gaussian search distribution) are rolled
+out through the *learned* dynamics/reward models over a short
+`horizon=3` and scored, the top `num_elites=64` re-fit the search
+distribution's mean/std, this repeats `iterations=6` times, and one action
+is sampled from the final distribution. The policy prior itself is mostly
+there to seed and regularize this search -- it is never used to act
+directly.
+
+The world model is trained on random-length-3 subsequences (not single
+transitions) drawn uniformly from a replay buffer of whole episodes
+(`_EpisodeSequenceBuffer` in `algorithms/tdmpc2.py` -- a plain-numpy
+adaptation of the reference's torchrl `SliceSampler`-based buffer). Its loss
+combines, at every step of the sampled horizon (weighted by `rho**t`,
+`rho=0.5`):
+- a **consistency loss**: only the first latent state in the sequence comes
+  from encoding a real observation; every later one is produced by unrolling
+  the dynamics model, and is pulled toward the encoding of the corresponding
+  real next-observation (stop-gradient target). This is what makes
+  multi-step *imagined* rollouts (used both in training and in MPPI
+  planning) trustworthy.
+- **reward loss** and **value loss** (soft two-hot cross-entropy against a
+  TD-target bootstrapped off a target Q-ensemble, exactly as SAC/TD3 use
+  target critics in this repo).
+
+Mapping onto this repo's segment names: `critic_update` is the world-model
+step (consistency + reward + value losses, since the Q-ensemble lives
+inside the world model here) and `actor_update` is the policy-prior step,
+by analogy with SAC/TD3's critic/actor split; `target_update` is the
+Q-ensemble's Polyak average. `rollout` includes the MPPI planner, which
+dominates TD-MPC2's per-step compute -- the opposite of SAC/TD3/MBPO, where
+`rollout` is cheap relative to `gradient_updates`. Two segments have no
+analogue elsewhere in this repo:
+- **`world_model_pretrain`**: right when warmup ends, the reference
+  algorithm runs a one-off burst of `warmup_steps` gradient updates on the
+  seed data ("pretraining on seed data") before ever using the planner for
+  real actions. This module reproduces that burst as its own
+  directly-measured CodeCarbon task.
+- Every other algorithm here interleaves rollout and gradient updates
+  strictly per-epoch (all of an epoch's rollout, then all of its updates);
+  TD-MPC2's reference implementation instead interleaves them one env-step
+  at a time. This module keeps the per-epoch separation for consistency
+  with the rest of this repo's CodeCarbon tagging scheme (see "Why
+  epoch-level tagging" above) -- a deliberate deviation from the reference
+  training loop's exact interleaving, not from its hyperparameters or
+  losses.
+
+`configs/overrides/tdmpc2_ant.json` sets `episodic: true` for Ant-v5, which
+turns on an auxiliary termination classifier used only to truncate
+*imagined* MPPI rollouts (Gymnasium's Ant-v5 can terminate early on an
+unhealthy state, unlike HalfCheetah-v5, which never does) -- see
+`TDMPC2Config`'s docstring for why the real TD-target bootstraps correctly
+off the environment's own termination signal either way.
 
 ## Extending to PPO / PETS
 

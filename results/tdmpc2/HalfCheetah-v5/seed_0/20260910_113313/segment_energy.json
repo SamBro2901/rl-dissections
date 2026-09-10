@@ -1,0 +1,18 @@
+{
+  "idle_baseline_head": 0.0016304555452308692,
+  "warmup": 5.3172981635616744e-06,
+  "world_model_pretrain": 0.0031055438460136408,
+  "rollout": 0.05903332889570918,
+  "buffer_sample": 0.002782878011057389,
+  "critic_update": 0.039484113767066155,
+  "actor_update": 0.015312563966233523,
+  "target_update": 0.0028346963501775587,
+  "_sub_segment_wall_time_seconds": {
+    "buffer_sample": 56.0378625598928,
+    "critic_update": 795.0780924591509,
+    "actor_update": 308.3438625659778,
+    "target_update": 57.081310729075994
+  },
+  "idle_baseline_tail": 0.0017777630308157821,
+  "_total_kg_co2eq": 0.04798701227672304
+}

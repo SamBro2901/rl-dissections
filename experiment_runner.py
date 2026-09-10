@@ -257,4 +257,8 @@ def _dispatch_train(exp_cfg: ExperimentConfig, algo_cfg, env, tracker, device, l
         from algorithms.td3 import train as td3_train
         return td3_train(env, algo_cfg, exp_cfg, tracker, device, logger,
                           steps_per_epoch=exp_cfg.steps_per_epoch)
+    if exp_cfg.algo_name == "tdmpc2":
+        from algorithms.tdmpc2 import train as tdmpc2_train
+        return tdmpc2_train(env, algo_cfg, exp_cfg, tracker, device, logger,
+                             steps_per_epoch=exp_cfg.steps_per_epoch)
     raise ValueError(f"Unknown algo_name '{exp_cfg.algo_name}' -- add a dispatch branch in experiment_runner.py")
