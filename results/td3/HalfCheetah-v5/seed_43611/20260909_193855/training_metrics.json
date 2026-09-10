@@ -1,0 +1,2086 @@
+{
+  "episodes": [
+    {
+      "episode_idx": 0,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 1000,
+      "return": -203.04742576385385,
+      "length": 1000
+    },
+    {
+      "episode_idx": 1,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 2000,
+      "return": -389.5230042628481,
+      "length": 1000
+    },
+    {
+      "episode_idx": 2,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 3000,
+      "return": -273.46336806729823,
+      "length": 1000
+    },
+    {
+      "episode_idx": 3,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 4000,
+      "return": -253.57218911189057,
+      "length": 1000
+    },
+    {
+      "episode_idx": 4,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 5000,
+      "return": -272.1475355897201,
+      "length": 1000
+    },
+    {
+      "episode_idx": 5,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 6000,
+      "return": -222.01848696174443,
+      "length": 1000
+    },
+    {
+      "episode_idx": 6,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 7000,
+      "return": -400.3505459419813,
+      "length": 1000
+    },
+    {
+      "episode_idx": 7,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 8000,
+      "return": -387.0023027231475,
+      "length": 1000
+    },
+    {
+      "episode_idx": 8,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 9000,
+      "return": -261.85127287564325,
+      "length": 1000
+    },
+    {
+      "episode_idx": 9,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 10000,
+      "return": -355.0279674224608,
+      "length": 1000
+    },
+    {
+      "episode_idx": 10,
+      "phase": "train",
+      "epoch": 0,
+      "env_step": 1000,
+      "return": -7.48780450834726,
+      "length": 1000
+    },
+    {
+      "episode_idx": 11,
+      "phase": "train",
+      "epoch": 1,
+      "env_step": 2000,
+      "return": -548.2895551695278,
+      "length": 1000
+    },
+    {
+      "episode_idx": 12,
+      "phase": "train",
+      "epoch": 2,
+      "env_step": 3000,
+      "return": -406.1865645980503,
+      "length": 1000
+    },
+    {
+      "episode_idx": 13,
+      "phase": "train",
+      "epoch": 3,
+      "env_step": 4000,
+      "return": -548.5750242957971,
+      "length": 1000
+    },
+    {
+      "episode_idx": 14,
+      "phase": "train",
+      "epoch": 4,
+      "env_step": 5000,
+      "return": -495.55830844608,
+      "length": 1000
+    },
+    {
+      "episode_idx": 15,
+      "phase": "train",
+      "epoch": 5,
+      "env_step": 6000,
+      "return": -472.07305378136954,
+      "length": 1000
+    },
+    {
+      "episode_idx": 16,
+      "phase": "train",
+      "epoch": 6,
+      "env_step": 7000,
+      "return": -236.63986554675213,
+      "length": 1000
+    },
+    {
+      "episode_idx": 17,
+      "phase": "train",
+      "epoch": 7,
+      "env_step": 8000,
+      "return": -175.6730919039017,
+      "length": 1000
+    },
+    {
+      "episode_idx": 18,
+      "phase": "train",
+      "epoch": 8,
+      "env_step": 9000,
+      "return": 559.6172880142291,
+      "length": 1000
+    },
+    {
+      "episode_idx": 19,
+      "phase": "train",
+      "epoch": 9,
+      "env_step": 10000,
+      "return": 777.5251985110244,
+      "length": 1000
+    },
+    {
+      "episode_idx": 20,
+      "phase": "train",
+      "epoch": 10,
+      "env_step": 11000,
+      "return": -978.4231667966316,
+      "length": 1000
+    },
+    {
+      "episode_idx": 21,
+      "phase": "train",
+      "epoch": 11,
+      "env_step": 12000,
+      "return": 14.498035802012613,
+      "length": 1000
+    },
+    {
+      "episode_idx": 22,
+      "phase": "train",
+      "epoch": 12,
+      "env_step": 13000,
+      "return": 820.4229752166711,
+      "length": 1000
+    },
+    {
+      "episode_idx": 23,
+      "phase": "train",
+      "epoch": 13,
+      "env_step": 14000,
+      "return": -321.84290968562937,
+      "length": 1000
+    },
+    {
+      "episode_idx": 24,
+      "phase": "train",
+      "epoch": 14,
+      "env_step": 15000,
+      "return": 1760.3353547153454,
+      "length": 1000
+    },
+    {
+      "episode_idx": 25,
+      "phase": "train",
+      "epoch": 15,
+      "env_step": 16000,
+      "return": 1922.3021702430187,
+      "length": 1000
+    },
+    {
+      "episode_idx": 26,
+      "phase": "train",
+      "epoch": 16,
+      "env_step": 17000,
+      "return": -568.310480340545,
+      "length": 1000
+    },
+    {
+      "episode_idx": 27,
+      "phase": "train",
+      "epoch": 17,
+      "env_step": 18000,
+      "return": 1682.608148815183,
+      "length": 1000
+    },
+    {
+      "episode_idx": 28,
+      "phase": "train",
+      "epoch": 18,
+      "env_step": 19000,
+      "return": 1026.7806832435344,
+      "length": 1000
+    },
+    {
+      "episode_idx": 29,
+      "phase": "train",
+      "epoch": 19,
+      "env_step": 20000,
+      "return": 2425.6014147006954,
+      "length": 1000
+    },
+    {
+      "episode_idx": 30,
+      "phase": "train",
+      "epoch": 20,
+      "env_step": 21000,
+      "return": 2892.22485179772,
+      "length": 1000
+    },
+    {
+      "episode_idx": 31,
+      "phase": "train",
+      "epoch": 21,
+      "env_step": 22000,
+      "return": 2901.6624987991054,
+      "length": 1000
+    },
+    {
+      "episode_idx": 32,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 23000,
+      "return": 2280.9152199311047,
+      "length": 1000
+    },
+    {
+      "episode_idx": 33,
+      "phase": "train",
+      "epoch": 23,
+      "env_step": 24000,
+      "return": 1173.0285350692498,
+      "length": 1000
+    },
+    {
+      "episode_idx": 34,
+      "phase": "train",
+      "epoch": 24,
+      "env_step": 25000,
+      "return": 2926.274980655136,
+      "length": 1000
+    },
+    {
+      "episode_idx": 35,
+      "phase": "train",
+      "epoch": 25,
+      "env_step": 26000,
+      "return": 987.6798027383613,
+      "length": 1000
+    },
+    {
+      "episode_idx": 36,
+      "phase": "train",
+      "epoch": 26,
+      "env_step": 27000,
+      "return": 3385.4088095621955,
+      "length": 1000
+    },
+    {
+      "episode_idx": 37,
+      "phase": "train",
+      "epoch": 27,
+      "env_step": 28000,
+      "return": 2992.359991540193,
+      "length": 1000
+    },
+    {
+      "episode_idx": 38,
+      "phase": "train",
+      "epoch": 28,
+      "env_step": 29000,
+      "return": 3569.1858430708985,
+      "length": 1000
+    },
+    {
+      "episode_idx": 39,
+      "phase": "train",
+      "epoch": 29,
+      "env_step": 30000,
+      "return": 2955.7002982739195,
+      "length": 1000
+    },
+    {
+      "episode_idx": 40,
+      "phase": "train",
+      "epoch": 30,
+      "env_step": 31000,
+      "return": 3656.5150892003917,
+      "length": 1000
+    },
+    {
+      "episode_idx": 41,
+      "phase": "train",
+      "epoch": 31,
+      "env_step": 32000,
+      "return": 3777.0794606234126,
+      "length": 1000
+    },
+    {
+      "episode_idx": 42,
+      "phase": "train",
+      "epoch": 32,
+      "env_step": 33000,
+      "return": 3252.5603569928444,
+      "length": 1000
+    },
+    {
+      "episode_idx": 43,
+      "phase": "train",
+      "epoch": 33,
+      "env_step": 34000,
+      "return": 3302.5264228036194,
+      "length": 1000
+    },
+    {
+      "episode_idx": 44,
+      "phase": "train",
+      "epoch": 34,
+      "env_step": 35000,
+      "return": 3755.7008980973455,
+      "length": 1000
+    },
+    {
+      "episode_idx": 45,
+      "phase": "train",
+      "epoch": 35,
+      "env_step": 36000,
+      "return": 3838.603303416961,
+      "length": 1000
+    },
+    {
+      "episode_idx": 46,
+      "phase": "train",
+      "epoch": 36,
+      "env_step": 37000,
+      "return": 797.5348594752625,
+      "length": 1000
+    },
+    {
+      "episode_idx": 47,
+      "phase": "train",
+      "epoch": 37,
+      "env_step": 38000,
+      "return": 3782.3572906587165,
+      "length": 1000
+    },
+    {
+      "episode_idx": 48,
+      "phase": "train",
+      "epoch": 38,
+      "env_step": 39000,
+      "return": 3625.5525054872605,
+      "length": 1000
+    },
+    {
+      "episode_idx": 49,
+      "phase": "train",
+      "epoch": 39,
+      "env_step": 40000,
+      "return": 4040.0518782791,
+      "length": 1000
+    },
+    {
+      "episode_idx": 50,
+      "phase": "train",
+      "epoch": 40,
+      "env_step": 41000,
+      "return": 3758.4265856996785,
+      "length": 1000
+    },
+    {
+      "episode_idx": 51,
+      "phase": "train",
+      "epoch": 41,
+      "env_step": 42000,
+      "return": 4238.66229530128,
+      "length": 1000
+    },
+    {
+      "episode_idx": 52,
+      "phase": "train",
+      "epoch": 42,
+      "env_step": 43000,
+      "return": 3887.8545929210445,
+      "length": 1000
+    },
+    {
+      "episode_idx": 53,
+      "phase": "train",
+      "epoch": 43,
+      "env_step": 44000,
+      "return": 4277.882528381928,
+      "length": 1000
+    },
+    {
+      "episode_idx": 54,
+      "phase": "train",
+      "epoch": 44,
+      "env_step": 45000,
+      "return": 4266.475526127526,
+      "length": 1000
+    },
+    {
+      "episode_idx": 55,
+      "phase": "train",
+      "epoch": 45,
+      "env_step": 46000,
+      "return": 4453.612570636872,
+      "length": 1000
+    },
+    {
+      "episode_idx": 56,
+      "phase": "train",
+      "epoch": 46,
+      "env_step": 47000,
+      "return": 4454.296791126652,
+      "length": 1000
+    },
+    {
+      "episode_idx": 57,
+      "phase": "train",
+      "epoch": 47,
+      "env_step": 48000,
+      "return": 4386.50516446868,
+      "length": 1000
+    },
+    {
+      "episode_idx": 58,
+      "phase": "train",
+      "epoch": 48,
+      "env_step": 49000,
+      "return": 4912.518236755382,
+      "length": 1000
+    },
+    {
+      "episode_idx": 59,
+      "phase": "train",
+      "epoch": 49,
+      "env_step": 50000,
+      "return": 4640.59799617558,
+      "length": 1000
+    },
+    {
+      "episode_idx": 60,
+      "phase": "train",
+      "epoch": 50,
+      "env_step": 51000,
+      "return": 4594.066360249717,
+      "length": 1000
+    },
+    {
+      "episode_idx": 61,
+      "phase": "train",
+      "epoch": 51,
+      "env_step": 52000,
+      "return": 4964.572635808953,
+      "length": 1000
+    },
+    {
+      "episode_idx": 62,
+      "phase": "train",
+      "epoch": 52,
+      "env_step": 53000,
+      "return": 4928.138130951577,
+      "length": 1000
+    },
+    {
+      "episode_idx": 63,
+      "phase": "train",
+      "epoch": 53,
+      "env_step": 54000,
+      "return": 4468.459059229983,
+      "length": 1000
+    },
+    {
+      "episode_idx": 64,
+      "phase": "train",
+      "epoch": 54,
+      "env_step": 55000,
+      "return": 5155.298866116437,
+      "length": 1000
+    },
+    {
+      "episode_idx": 65,
+      "phase": "train",
+      "epoch": 55,
+      "env_step": 56000,
+      "return": 4911.695614538759,
+      "length": 1000
+    },
+    {
+      "episode_idx": 66,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 57000,
+      "return": 5306.877892960751,
+      "length": 1000
+    },
+    {
+      "episode_idx": 67,
+      "phase": "train",
+      "epoch": 57,
+      "env_step": 58000,
+      "return": 5311.851795593536,
+      "length": 1000
+    },
+    {
+      "episode_idx": 68,
+      "phase": "train",
+      "epoch": 58,
+      "env_step": 59000,
+      "return": 5106.209795769026,
+      "length": 1000
+    },
+    {
+      "episode_idx": 69,
+      "phase": "train",
+      "epoch": 59,
+      "env_step": 60000,
+      "return": 5412.696974357893,
+      "length": 1000
+    },
+    {
+      "episode_idx": 70,
+      "phase": "train",
+      "epoch": 60,
+      "env_step": 61000,
+      "return": 5164.719677925176,
+      "length": 1000
+    },
+    {
+      "episode_idx": 71,
+      "phase": "train",
+      "epoch": 61,
+      "env_step": 62000,
+      "return": 5379.65862762613,
+      "length": 1000
+    },
+    {
+      "episode_idx": 72,
+      "phase": "train",
+      "epoch": 62,
+      "env_step": 63000,
+      "return": 5213.2213777444695,
+      "length": 1000
+    },
+    {
+      "episode_idx": 73,
+      "phase": "train",
+      "epoch": 63,
+      "env_step": 64000,
+      "return": 5515.986657692906,
+      "length": 1000
+    },
+    {
+      "episode_idx": 74,
+      "phase": "train",
+      "epoch": 64,
+      "env_step": 65000,
+      "return": 5431.059993749688,
+      "length": 1000
+    },
+    {
+      "episode_idx": 75,
+      "phase": "train",
+      "epoch": 65,
+      "env_step": 66000,
+      "return": 5301.5014680174145,
+      "length": 1000
+    },
+    {
+      "episode_idx": 76,
+      "phase": "train",
+      "epoch": 66,
+      "env_step": 67000,
+      "return": 5593.458257368674,
+      "length": 1000
+    },
+    {
+      "episode_idx": 77,
+      "phase": "train",
+      "epoch": 67,
+      "env_step": 68000,
+      "return": 5530.453523430243,
+      "length": 1000
+    },
+    {
+      "episode_idx": 78,
+      "phase": "train",
+      "epoch": 68,
+      "env_step": 69000,
+      "return": 5686.018876636925,
+      "length": 1000
+    },
+    {
+      "episode_idx": 79,
+      "phase": "train",
+      "epoch": 69,
+      "env_step": 70000,
+      "return": 5420.829619710617,
+      "length": 1000
+    },
+    {
+      "episode_idx": 80,
+      "phase": "train",
+      "epoch": 70,
+      "env_step": 71000,
+      "return": 5665.208647629209,
+      "length": 1000
+    },
+    {
+      "episode_idx": 81,
+      "phase": "train",
+      "epoch": 71,
+      "env_step": 72000,
+      "return": 5279.310413840965,
+      "length": 1000
+    },
+    {
+      "episode_idx": 82,
+      "phase": "train",
+      "epoch": 72,
+      "env_step": 73000,
+      "return": 5424.344719344866,
+      "length": 1000
+    },
+    {
+      "episode_idx": 83,
+      "phase": "train",
+      "epoch": 73,
+      "env_step": 74000,
+      "return": 5686.377217551345,
+      "length": 1000
+    },
+    {
+      "episode_idx": 84,
+      "phase": "train",
+      "epoch": 74,
+      "env_step": 75000,
+      "return": 5783.052954237753,
+      "length": 1000
+    },
+    {
+      "episode_idx": 85,
+      "phase": "train",
+      "epoch": 75,
+      "env_step": 76000,
+      "return": 5946.292873132101,
+      "length": 1000
+    },
+    {
+      "episode_idx": 86,
+      "phase": "train",
+      "epoch": 76,
+      "env_step": 77000,
+      "return": 6180.6602336071355,
+      "length": 1000
+    },
+    {
+      "episode_idx": 87,
+      "phase": "train",
+      "epoch": 77,
+      "env_step": 78000,
+      "return": 5967.427682837407,
+      "length": 1000
+    },
+    {
+      "episode_idx": 88,
+      "phase": "train",
+      "epoch": 78,
+      "env_step": 79000,
+      "return": 5852.645026643851,
+      "length": 1000
+    },
+    {
+      "episode_idx": 89,
+      "phase": "train",
+      "epoch": 79,
+      "env_step": 80000,
+      "return": 6092.187318095024,
+      "length": 1000
+    },
+    {
+      "episode_idx": 90,
+      "phase": "train",
+      "epoch": 80,
+      "env_step": 81000,
+      "return": 5378.21744749189,
+      "length": 1000
+    },
+    {
+      "episode_idx": 91,
+      "phase": "train",
+      "epoch": 81,
+      "env_step": 82000,
+      "return": 6268.341801105447,
+      "length": 1000
+    },
+    {
+      "episode_idx": 92,
+      "phase": "train",
+      "epoch": 82,
+      "env_step": 83000,
+      "return": 6387.711138471213,
+      "length": 1000
+    },
+    {
+      "episode_idx": 93,
+      "phase": "train",
+      "epoch": 83,
+      "env_step": 84000,
+      "return": 6026.750862805053,
+      "length": 1000
+    },
+    {
+      "episode_idx": 94,
+      "phase": "train",
+      "epoch": 84,
+      "env_step": 85000,
+      "return": 5313.931746684298,
+      "length": 1000
+    },
+    {
+      "episode_idx": 95,
+      "phase": "train",
+      "epoch": 85,
+      "env_step": 86000,
+      "return": 5993.5614242279935,
+      "length": 1000
+    },
+    {
+      "episode_idx": 96,
+      "phase": "train",
+      "epoch": 86,
+      "env_step": 87000,
+      "return": 6202.885931082958,
+      "length": 1000
+    },
+    {
+      "episode_idx": 97,
+      "phase": "train",
+      "epoch": 87,
+      "env_step": 88000,
+      "return": 6298.68347578008,
+      "length": 1000
+    },
+    {
+      "episode_idx": 98,
+      "phase": "train",
+      "epoch": 88,
+      "env_step": 89000,
+      "return": 6112.713925957426,
+      "length": 1000
+    },
+    {
+      "episode_idx": 99,
+      "phase": "train",
+      "epoch": 89,
+      "env_step": 90000,
+      "return": 6437.539151118425,
+      "length": 1000
+    },
+    {
+      "episode_idx": 100,
+      "phase": "train",
+      "epoch": 90,
+      "env_step": 91000,
+      "return": 6496.657667029334,
+      "length": 1000
+    },
+    {
+      "episode_idx": 101,
+      "phase": "train",
+      "epoch": 91,
+      "env_step": 92000,
+      "return": 6212.410524970453,
+      "length": 1000
+    },
+    {
+      "episode_idx": 102,
+      "phase": "train",
+      "epoch": 92,
+      "env_step": 93000,
+      "return": 6538.746168437783,
+      "length": 1000
+    },
+    {
+      "episode_idx": 103,
+      "phase": "train",
+      "epoch": 93,
+      "env_step": 94000,
+      "return": 6530.224362968125,
+      "length": 1000
+    },
+    {
+      "episode_idx": 104,
+      "phase": "train",
+      "epoch": 94,
+      "env_step": 95000,
+      "return": 5332.645540544002,
+      "length": 1000
+    },
+    {
+      "episode_idx": 105,
+      "phase": "train",
+      "epoch": 95,
+      "env_step": 96000,
+      "return": 6654.938997000901,
+      "length": 1000
+    },
+    {
+      "episode_idx": 106,
+      "phase": "train",
+      "epoch": 96,
+      "env_step": 97000,
+      "return": 6359.793065504572,
+      "length": 1000
+    },
+    {
+      "episode_idx": 107,
+      "phase": "train",
+      "epoch": 97,
+      "env_step": 98000,
+      "return": 6784.009875872339,
+      "length": 1000
+    },
+    {
+      "episode_idx": 108,
+      "phase": "train",
+      "epoch": 98,
+      "env_step": 99000,
+      "return": 6486.151056022111,
+      "length": 1000
+    },
+    {
+      "episode_idx": 109,
+      "phase": "train",
+      "epoch": 99,
+      "env_step": 100000,
+      "return": 6728.097119170486,
+      "length": 1000
+    }
+  ],
+  "epochs": [
+    {
+      "epoch": 0,
+      "env_step": 1000,
+      "cumulative_reward": -7.48780450834726,
+      "epoch_reward_sum": -7.48780450834726,
+      "epoch_reward_mean_per_step": -0.00748780450834726,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -7.48780450834726,
+      "critic_loss_mean": 0.30614165725558995,
+      "actor_loss_mean": -0.9306723829189432,
+      "buffer_size": 11000
+    },
+    {
+      "epoch": 1,
+      "env_step": 2000,
+      "cumulative_reward": -555.777359677875,
+      "epoch_reward_sum": -548.2895551695278,
+      "epoch_reward_mean_per_step": -0.5482895551695278,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -548.2895551695278,
+      "critic_loss_mean": 0.425358676193282,
+      "actor_loss_mean": -3.60251427090168,
+      "buffer_size": 12000
+    },
+    {
+      "epoch": 2,
+      "env_step": 3000,
+      "cumulative_reward": -961.9639242759233,
+      "epoch_reward_sum": -406.1865645980503,
+      "epoch_reward_mean_per_step": -0.4061865645980503,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -406.1865645980503,
+      "critic_loss_mean": 0.49023380180820825,
+      "actor_loss_mean": -4.985575116634369,
+      "buffer_size": 13000
+    },
+    {
+      "epoch": 3,
+      "env_step": 4000,
+      "cumulative_reward": -1510.5389485717226,
+      "epoch_reward_sum": -548.5750242957971,
+      "epoch_reward_mean_per_step": -0.5485750242957971,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -548.5750242957971,
+      "critic_loss_mean": 0.5762511607557536,
+      "actor_loss_mean": -4.292955898940563,
+      "buffer_size": 14000
+    },
+    {
+      "epoch": 4,
+      "env_step": 5000,
+      "cumulative_reward": -2006.0972570178046,
+      "epoch_reward_sum": -495.55830844608,
+      "epoch_reward_mean_per_step": -0.49555830844608,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -495.55830844608,
+      "critic_loss_mean": 1.110163279350847,
+      "actor_loss_mean": -4.065834335334599,
+      "buffer_size": 15000
+    },
+    {
+      "epoch": 5,
+      "env_step": 6000,
+      "cumulative_reward": -2478.1703107991734,
+      "epoch_reward_sum": -472.07305378136954,
+      "epoch_reward_mean_per_step": -0.47207305378136954,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -472.07305378136954,
+      "critic_loss_mean": 1.3811925692670046,
+      "actor_loss_mean": -10.236923063278198,
+      "buffer_size": 16000
+    },
+    {
+      "epoch": 6,
+      "env_step": 7000,
+      "cumulative_reward": -2714.810176345925,
+      "epoch_reward_sum": -236.63986554675213,
+      "epoch_reward_mean_per_step": -0.23663986554675212,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -236.63986554675213,
+      "critic_loss_mean": 1.0193998317718507,
+      "actor_loss_mean": -11.946258011817932,
+      "buffer_size": 17000
+    },
+    {
+      "epoch": 7,
+      "env_step": 8000,
+      "cumulative_reward": -2890.4832682498222,
+      "epoch_reward_sum": -175.6730919039017,
+      "epoch_reward_mean_per_step": -0.1756730919039017,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -175.6730919039017,
+      "critic_loss_mean": 1.1423839874193071,
+      "actor_loss_mean": -14.003955666065217,
+      "buffer_size": 18000
+    },
+    {
+      "epoch": 8,
+      "env_step": 9000,
+      "cumulative_reward": -2330.865980235598,
+      "epoch_reward_sum": 559.6172880142291,
+      "epoch_reward_mean_per_step": 0.559617288014229,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 559.6172880142291,
+      "critic_loss_mean": 1.3240265210568904,
+      "actor_loss_mean": -20.334852141857148,
+      "buffer_size": 19000
+    },
+    {
+      "epoch": 9,
+      "env_step": 10000,
+      "cumulative_reward": -1553.3407817245695,
+      "epoch_reward_sum": 777.5251985110244,
+      "epoch_reward_mean_per_step": 0.7775251985110244,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 777.5251985110244,
+      "critic_loss_mean": 1.5622851175516843,
+      "actor_loss_mean": -27.447023926734925,
+      "buffer_size": 20000
+    },
+    {
+      "epoch": 10,
+      "env_step": 11000,
+      "cumulative_reward": -2531.7639485212053,
+      "epoch_reward_sum": -978.4231667966316,
+      "epoch_reward_mean_per_step": -0.9784231667966315,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -978.4231667966316,
+      "critic_loss_mean": 1.6513572800457477,
+      "actor_loss_mean": -32.70763064098358,
+      "buffer_size": 21000
+    },
+    {
+      "epoch": 11,
+      "env_step": 12000,
+      "cumulative_reward": -2517.2659127191923,
+      "epoch_reward_sum": 14.498035802012613,
+      "epoch_reward_mean_per_step": 0.014498035802012612,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 14.498035802012613,
+      "critic_loss_mean": 1.6236724454537035,
+      "actor_loss_mean": -36.35473763847351,
+      "buffer_size": 22000
+    },
+    {
+      "epoch": 12,
+      "env_step": 13000,
+      "cumulative_reward": -1696.8429375025198,
+      "epoch_reward_sum": 820.4229752166711,
+      "epoch_reward_mean_per_step": 0.8204229752166712,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 820.4229752166711,
+      "critic_loss_mean": 2.022752818517387,
+      "actor_loss_mean": -40.17788851928711,
+      "buffer_size": 23000
+    },
+    {
+      "epoch": 13,
+      "env_step": 14000,
+      "cumulative_reward": -2018.685847188147,
+      "epoch_reward_sum": -321.84290968562937,
+      "epoch_reward_mean_per_step": -0.32184290968562934,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -321.84290968562937,
+      "critic_loss_mean": 2.2944767991304396,
+      "actor_loss_mean": -44.61792323112488,
+      "buffer_size": 24000
+    },
+    {
+      "epoch": 14,
+      "env_step": 15000,
+      "cumulative_reward": -258.35049247279994,
+      "epoch_reward_sum": 1760.3353547153454,
+      "epoch_reward_mean_per_step": 1.7603353547153453,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 1760.3353547153454,
+      "critic_loss_mean": 2.289859555825591,
+      "actor_loss_mean": -52.28214984321594,
+      "buffer_size": 25000
+    },
+    {
+      "epoch": 15,
+      "env_step": 16000,
+      "cumulative_reward": 1663.9516777702197,
+      "epoch_reward_sum": 1922.3021702430187,
+      "epoch_reward_mean_per_step": 1.9223021702430187,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 1922.3021702430187,
+      "critic_loss_mean": 2.414818540096283,
+      "actor_loss_mean": -60.77733215904236,
+      "buffer_size": 26000
+    },
+    {
+      "epoch": 16,
+      "env_step": 17000,
+      "cumulative_reward": 1095.6411974296727,
+      "epoch_reward_sum": -568.310480340545,
+      "epoch_reward_mean_per_step": -0.568310480340545,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -568.310480340545,
+      "critic_loss_mean": 2.8264725752174855,
+      "actor_loss_mean": -65.84735285949706,
+      "buffer_size": 27000
+    },
+    {
+      "epoch": 17,
+      "env_step": 18000,
+      "cumulative_reward": 2778.2493462448556,
+      "epoch_reward_sum": 1682.608148815183,
+      "epoch_reward_mean_per_step": 1.6826081488151832,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 1682.608148815183,
+      "critic_loss_mean": 3.169851062014699,
+      "actor_loss_mean": -73.80703775024413,
+      "buffer_size": 28000
+    },
+    {
+      "epoch": 18,
+      "env_step": 19000,
+      "cumulative_reward": 3805.0300294883837,
+      "epoch_reward_sum": 1026.7806832435344,
+      "epoch_reward_mean_per_step": 1.0267806832435344,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 1026.7806832435344,
+      "critic_loss_mean": 3.571087196201086,
+      "actor_loss_mean": -80.41330383682251,
+      "buffer_size": 29000
+    },
+    {
+      "epoch": 19,
+      "env_step": 20000,
+      "cumulative_reward": 6230.631444189081,
+      "epoch_reward_sum": 2425.6014147006954,
+      "epoch_reward_mean_per_step": 2.4256014147006955,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 2425.6014147006954,
+      "critic_loss_mean": 3.846483410701156,
+      "actor_loss_mean": -88.63038577651977,
+      "buffer_size": 30000
+    },
+    {
+      "epoch": 20,
+      "env_step": 21000,
+      "cumulative_reward": 9122.856295986812,
+      "epoch_reward_sum": 2892.22485179772,
+      "epoch_reward_mean_per_step": 2.89222485179772,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 2892.22485179772,
+      "critic_loss_mean": 3.964284232839942,
+      "actor_loss_mean": -96.95280216217041,
+      "buffer_size": 31000
+    },
+    {
+      "epoch": 21,
+      "env_step": 22000,
+      "cumulative_reward": 12024.518794785943,
+      "epoch_reward_sum": 2901.6624987991054,
+      "epoch_reward_mean_per_step": 2.9016624987991055,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 2901.6624987991054,
+      "critic_loss_mean": 4.431341312274337,
+      "actor_loss_mean": -105.93545970535278,
+      "buffer_size": 32000
+    },
+    {
+      "epoch": 22,
+      "env_step": 23000,
+      "cumulative_reward": 14305.434014717057,
+      "epoch_reward_sum": 2280.9152199311047,
+      "epoch_reward_mean_per_step": 2.2809152199311047,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 2280.9152199311047,
+      "critic_loss_mean": 5.209973454862833,
+      "actor_loss_mean": -114.6664846534729,
+      "buffer_size": 33000
+    },
+    {
+      "epoch": 23,
+      "env_step": 24000,
+      "cumulative_reward": 15478.462549786324,
+      "epoch_reward_sum": 1173.0285350692498,
+      "epoch_reward_mean_per_step": 1.1730285350692498,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 1173.0285350692498,
+      "critic_loss_mean": 6.380939296960831,
+      "actor_loss_mean": -121.28237800216675,
+      "buffer_size": 34000
+    },
+    {
+      "epoch": 24,
+      "env_step": 25000,
+      "cumulative_reward": 18404.737530441475,
+      "epoch_reward_sum": 2926.274980655136,
+      "epoch_reward_mean_per_step": 2.926274980655136,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 2926.274980655136,
+      "critic_loss_mean": 6.878486404627561,
+      "actor_loss_mean": -129.05436652755736,
+      "buffer_size": 35000
+    },
+    {
+      "epoch": 25,
+      "env_step": 26000,
+      "cumulative_reward": 19392.41733317981,
+      "epoch_reward_sum": 987.6798027383613,
+      "epoch_reward_mean_per_step": 0.9876798027383613,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 987.6798027383613,
+      "critic_loss_mean": 7.654870191723108,
+      "actor_loss_mean": -133.89323595809935,
+      "buffer_size": 36000
+    },
+    {
+      "epoch": 26,
+      "env_step": 27000,
+      "cumulative_reward": 22777.826142741953,
+      "epoch_reward_sum": 3385.4088095621955,
+      "epoch_reward_mean_per_step": 3.3854088095621955,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 3385.4088095621955,
+      "critic_loss_mean": 7.783274931758642,
+      "actor_loss_mean": -141.8795808982849,
+      "buffer_size": 37000
+    },
+    {
+      "epoch": 27,
+      "env_step": 28000,
+      "cumulative_reward": 25770.186134282187,
+      "epoch_reward_sum": 2992.359991540193,
+      "epoch_reward_mean_per_step": 2.9923599915401926,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 2992.359991540193,
+      "critic_loss_mean": 8.347392704725266,
+      "actor_loss_mean": -149.4005288467407,
+      "buffer_size": 38000
+    },
+    {
+      "epoch": 28,
+      "env_step": 29000,
+      "cumulative_reward": 29339.371977353123,
+      "epoch_reward_sum": 3569.1858430708985,
+      "epoch_reward_mean_per_step": 3.5691858430708985,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 3569.1858430708985,
+      "critic_loss_mean": 8.008280996114015,
+      "actor_loss_mean": -157.18412660217285,
+      "buffer_size": 39000
+    },
+    {
+      "epoch": 29,
+      "env_step": 30000,
+      "cumulative_reward": 32295.07227562704,
+      "epoch_reward_sum": 2955.7002982739195,
+      "epoch_reward_mean_per_step": 2.9557002982739196,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 2955.7002982739195,
+      "critic_loss_mean": 8.637763359814882,
+      "actor_loss_mean": -163.91166251373292,
+      "buffer_size": 40000
+    },
+    {
+      "epoch": 30,
+      "env_step": 31000,
+      "cumulative_reward": 35951.58736482745,
+      "epoch_reward_sum": 3656.5150892003917,
+      "epoch_reward_mean_per_step": 3.6565150892003917,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 3656.5150892003917,
+      "critic_loss_mean": 8.729754210948943,
+      "actor_loss_mean": -170.95789170837404,
+      "buffer_size": 41000
+    },
+    {
+      "epoch": 31,
+      "env_step": 32000,
+      "cumulative_reward": 39728.66682545093,
+      "epoch_reward_sum": 3777.0794606234126,
+      "epoch_reward_mean_per_step": 3.777079460623413,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 3777.0794606234126,
+      "critic_loss_mean": 8.849248961657286,
+      "actor_loss_mean": -178.44315573883057,
+      "buffer_size": 42000
+    },
+    {
+      "epoch": 32,
+      "env_step": 33000,
+      "cumulative_reward": 42981.22718244387,
+      "epoch_reward_sum": 3252.5603569928444,
+      "epoch_reward_mean_per_step": 3.2525603569928445,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 3252.5603569928444,
+      "critic_loss_mean": 9.121373057752848,
+      "actor_loss_mean": -185.10115860748292,
+      "buffer_size": 43000
+    },
+    {
+      "epoch": 33,
+      "env_step": 34000,
+      "cumulative_reward": 46283.75360524738,
+      "epoch_reward_sum": 3302.5264228036194,
+      "epoch_reward_mean_per_step": 3.3025264228036195,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 3302.5264228036194,
+      "critic_loss_mean": 9.489225430428982,
+      "actor_loss_mean": -191.3228500518799,
+      "buffer_size": 44000
+    },
+    {
+      "epoch": 34,
+      "env_step": 35000,
+      "cumulative_reward": 50039.45450334463,
+      "epoch_reward_sum": 3755.7008980973455,
+      "epoch_reward_mean_per_step": 3.7557008980973454,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 3755.7008980973455,
+      "critic_loss_mean": 9.935750511616469,
+      "actor_loss_mean": -198.61852059173583,
+      "buffer_size": 45000
+    },
+    {
+      "epoch": 35,
+      "env_step": 36000,
+      "cumulative_reward": 53878.05780676154,
+      "epoch_reward_sum": 3838.603303416961,
+      "epoch_reward_mean_per_step": 3.838603303416961,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 3838.603303416961,
+      "critic_loss_mean": 9.62691648337245,
+      "actor_loss_mean": -205.82661903381347,
+      "buffer_size": 46000
+    },
+    {
+      "epoch": 36,
+      "env_step": 37000,
+      "cumulative_reward": 54675.59266623678,
+      "epoch_reward_sum": 797.5348594752625,
+      "epoch_reward_mean_per_step": 0.7975348594752625,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 797.5348594752625,
+      "critic_loss_mean": 11.152160897135735,
+      "actor_loss_mean": -207.91110231781005,
+      "buffer_size": 47000
+    },
+    {
+      "epoch": 37,
+      "env_step": 38000,
+      "cumulative_reward": 58457.94995689549,
+      "epoch_reward_sum": 3782.3572906587165,
+      "epoch_reward_mean_per_step": 3.7823572906587164,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 3782.3572906587165,
+      "critic_loss_mean": 11.14527470099926,
+      "actor_loss_mean": -214.28402632904053,
+      "buffer_size": 48000
+    },
+    {
+      "epoch": 38,
+      "env_step": 39000,
+      "cumulative_reward": 62083.50246238278,
+      "epoch_reward_sum": 3625.5525054872605,
+      "epoch_reward_mean_per_step": 3.6255525054872604,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 3625.5525054872605,
+      "critic_loss_mean": 11.700294961631299,
+      "actor_loss_mean": -219.6726230392456,
+      "buffer_size": 49000
+    },
+    {
+      "epoch": 39,
+      "env_step": 40000,
+      "cumulative_reward": 66123.5543406619,
+      "epoch_reward_sum": 4040.0518782791,
+      "epoch_reward_mean_per_step": 4.0400518782791,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 4040.0518782791,
+      "critic_loss_mean": 11.550440369665623,
+      "actor_loss_mean": -224.11930221557617,
+      "buffer_size": 50000
+    },
+    {
+      "epoch": 40,
+      "env_step": 41000,
+      "cumulative_reward": 69881.98092636142,
+      "epoch_reward_sum": 3758.4265856996785,
+      "epoch_reward_mean_per_step": 3.7584265856996786,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 3758.4265856996785,
+      "critic_loss_mean": 12.142500075995923,
+      "actor_loss_mean": -228.98640114593505,
+      "buffer_size": 51000
+    },
+    {
+      "epoch": 41,
+      "env_step": 42000,
+      "cumulative_reward": 74120.64322166269,
+      "epoch_reward_sum": 4238.66229530128,
+      "epoch_reward_mean_per_step": 4.23866229530128,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 4238.66229530128,
+      "critic_loss_mean": 12.07969071930647,
+      "actor_loss_mean": -234.74365913391114,
+      "buffer_size": 52000
+    },
+    {
+      "epoch": 42,
+      "env_step": 43000,
+      "cumulative_reward": 78008.49781458368,
+      "epoch_reward_sum": 3887.8545929210445,
+      "epoch_reward_mean_per_step": 3.8878545929210446,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 3887.8545929210445,
+      "critic_loss_mean": 13.027133820652962,
+      "actor_loss_mean": -239.81500440979005,
+      "buffer_size": 53000
+    },
+    {
+      "epoch": 43,
+      "env_step": 44000,
+      "cumulative_reward": 82286.38034296552,
+      "epoch_reward_sum": 4277.882528381928,
+      "epoch_reward_mean_per_step": 4.2778825283819275,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 4277.882528381928,
+      "critic_loss_mean": 12.792237044334412,
+      "actor_loss_mean": -245.45463584899903,
+      "buffer_size": 54000
+    },
+    {
+      "epoch": 44,
+      "env_step": 45000,
+      "cumulative_reward": 86552.85586909286,
+      "epoch_reward_sum": 4266.475526127526,
+      "epoch_reward_mean_per_step": 4.266475526127526,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 4266.475526127526,
+      "critic_loss_mean": 12.201375246286393,
+      "actor_loss_mean": -250.73943579101564,
+      "buffer_size": 55000
+    },
+    {
+      "epoch": 45,
+      "env_step": 46000,
+      "cumulative_reward": 91006.46843972981,
+      "epoch_reward_sum": 4453.612570636872,
+      "epoch_reward_mean_per_step": 4.453612570636872,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 4453.612570636872,
+      "critic_loss_mean": 12.351657103300095,
+      "actor_loss_mean": -255.77659761047363,
+      "buffer_size": 56000
+    },
+    {
+      "epoch": 46,
+      "env_step": 47000,
+      "cumulative_reward": 95460.76523085625,
+      "epoch_reward_sum": 4454.296791126652,
+      "epoch_reward_mean_per_step": 4.454296791126652,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 4454.296791126652,
+      "critic_loss_mean": 12.445851380109787,
+      "actor_loss_mean": -261.45996703338625,
+      "buffer_size": 57000
+    },
+    {
+      "epoch": 47,
+      "env_step": 48000,
+      "cumulative_reward": 99847.27039532493,
+      "epoch_reward_sum": 4386.50516446868,
+      "epoch_reward_mean_per_step": 4.38650516446868,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 4386.50516446868,
+      "critic_loss_mean": 12.693318740069866,
+      "actor_loss_mean": -267.0771708679199,
+      "buffer_size": 58000
+    },
+    {
+      "epoch": 48,
+      "env_step": 49000,
+      "cumulative_reward": 104759.78863208037,
+      "epoch_reward_sum": 4912.518236755382,
+      "epoch_reward_mean_per_step": 4.912518236755382,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 4912.518236755382,
+      "critic_loss_mean": 12.569384073019028,
+      "actor_loss_mean": -273.0456883239746,
+      "buffer_size": 59000
+    },
+    {
+      "epoch": 49,
+      "env_step": 50000,
+      "cumulative_reward": 109400.38662825583,
+      "epoch_reward_sum": 4640.59799617558,
+      "epoch_reward_mean_per_step": 4.64059799617558,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 4640.59799617558,
+      "critic_loss_mean": 12.536545138955116,
+      "actor_loss_mean": -278.13957125091554,
+      "buffer_size": 60000
+    },
+    {
+      "epoch": 50,
+      "env_step": 51000,
+      "cumulative_reward": 113994.45298850519,
+      "epoch_reward_sum": 4594.066360249717,
+      "epoch_reward_mean_per_step": 4.594066360249717,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 4594.066360249717,
+      "critic_loss_mean": 12.567561578810215,
+      "actor_loss_mean": -283.51254739379885,
+      "buffer_size": 61000
+    },
+    {
+      "epoch": 51,
+      "env_step": 52000,
+      "cumulative_reward": 118959.02562431416,
+      "epoch_reward_sum": 4964.572635808953,
+      "epoch_reward_mean_per_step": 4.9645726358089535,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 4964.572635808953,
+      "critic_loss_mean": 12.760247206032275,
+      "actor_loss_mean": -288.70565029907226,
+      "buffer_size": 62000
+    },
+    {
+      "epoch": 52,
+      "env_step": 53000,
+      "cumulative_reward": 123887.16375526584,
+      "epoch_reward_sum": 4928.138130951577,
+      "epoch_reward_mean_per_step": 4.928138130951577,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 4928.138130951577,
+      "critic_loss_mean": 13.43782694518566,
+      "actor_loss_mean": -294.6455443267822,
+      "buffer_size": 63000
+    },
+    {
+      "epoch": 53,
+      "env_step": 54000,
+      "cumulative_reward": 128355.62281449593,
+      "epoch_reward_sum": 4468.459059229983,
+      "epoch_reward_mean_per_step": 4.468459059229983,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 4468.459059229983,
+      "critic_loss_mean": 13.339300237178803,
+      "actor_loss_mean": -298.99974394226075,
+      "buffer_size": 64000
+    },
+    {
+      "epoch": 54,
+      "env_step": 55000,
+      "cumulative_reward": 133510.9216806125,
+      "epoch_reward_sum": 5155.298866116437,
+      "epoch_reward_mean_per_step": 5.155298866116437,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5155.298866116437,
+      "critic_loss_mean": 13.725378464996815,
+      "actor_loss_mean": -303.47995616149905,
+      "buffer_size": 65000
+    },
+    {
+      "epoch": 55,
+      "env_step": 56000,
+      "cumulative_reward": 138422.61729515114,
+      "epoch_reward_sum": 4911.695614538759,
+      "epoch_reward_mean_per_step": 4.911695614538759,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 4911.695614538759,
+      "critic_loss_mean": 14.318698679029941,
+      "actor_loss_mean": -308.1473628082275,
+      "buffer_size": 66000
+    },
+    {
+      "epoch": 56,
+      "env_step": 57000,
+      "cumulative_reward": 143729.49518811217,
+      "epoch_reward_sum": 5306.877892960751,
+      "epoch_reward_mean_per_step": 5.306877892960751,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5306.877892960751,
+      "critic_loss_mean": 14.544462372779845,
+      "actor_loss_mean": -313.3399315490723,
+      "buffer_size": 67000
+    },
+    {
+      "epoch": 57,
+      "env_step": 58000,
+      "cumulative_reward": 149041.34698370585,
+      "epoch_reward_sum": 5311.851795593536,
+      "epoch_reward_mean_per_step": 5.311851795593536,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5311.851795593536,
+      "critic_loss_mean": 14.071480592608452,
+      "actor_loss_mean": -317.9506053161621,
+      "buffer_size": 68000
+    },
+    {
+      "epoch": 58,
+      "env_step": 59000,
+      "cumulative_reward": 154147.55677947475,
+      "epoch_reward_sum": 5106.209795769026,
+      "epoch_reward_mean_per_step": 5.106209795769026,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5106.209795769026,
+      "critic_loss_mean": 14.373460691154003,
+      "actor_loss_mean": -322.2321311035156,
+      "buffer_size": 69000
+    },
+    {
+      "epoch": 59,
+      "env_step": 60000,
+      "cumulative_reward": 159560.2537538326,
+      "epoch_reward_sum": 5412.696974357893,
+      "epoch_reward_mean_per_step": 5.4126969743578925,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5412.696974357893,
+      "critic_loss_mean": 15.132535504579543,
+      "actor_loss_mean": -326.5677763061523,
+      "buffer_size": 70000
+    },
+    {
+      "epoch": 60,
+      "env_step": 61000,
+      "cumulative_reward": 164724.97343175745,
+      "epoch_reward_sum": 5164.719677925176,
+      "epoch_reward_mean_per_step": 5.164719677925176,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5164.719677925176,
+      "critic_loss_mean": 14.982418468296528,
+      "actor_loss_mean": -331.0398795318604,
+      "buffer_size": 71000
+    },
+    {
+      "epoch": 61,
+      "env_step": 62000,
+      "cumulative_reward": 170104.63205938338,
+      "epoch_reward_sum": 5379.65862762613,
+      "epoch_reward_mean_per_step": 5.37965862762613,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5379.65862762613,
+      "critic_loss_mean": 14.752225121974945,
+      "actor_loss_mean": -335.4742796783447,
+      "buffer_size": 72000
+    },
+    {
+      "epoch": 62,
+      "env_step": 63000,
+      "cumulative_reward": 175317.85343712778,
+      "epoch_reward_sum": 5213.2213777444695,
+      "epoch_reward_mean_per_step": 5.213221377744469,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5213.2213777444695,
+      "critic_loss_mean": 15.050862260699272,
+      "actor_loss_mean": -339.3017723236084,
+      "buffer_size": 73000
+    },
+    {
+      "epoch": 63,
+      "env_step": 64000,
+      "cumulative_reward": 180833.84009482054,
+      "epoch_reward_sum": 5515.986657692906,
+      "epoch_reward_mean_per_step": 5.515986657692906,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5515.986657692906,
+      "critic_loss_mean": 15.625648227095605,
+      "actor_loss_mean": -342.8038037261963,
+      "buffer_size": 74000
+    },
+    {
+      "epoch": 64,
+      "env_step": 65000,
+      "cumulative_reward": 186264.9000885701,
+      "epoch_reward_sum": 5431.059993749688,
+      "epoch_reward_mean_per_step": 5.431059993749688,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5431.059993749688,
+      "critic_loss_mean": 15.185158485233783,
+      "actor_loss_mean": -346.90446742248537,
+      "buffer_size": 75000
+    },
+    {
+      "epoch": 65,
+      "env_step": 66000,
+      "cumulative_reward": 191566.4015565876,
+      "epoch_reward_sum": 5301.5014680174145,
+      "epoch_reward_mean_per_step": 5.301501468017414,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5301.5014680174145,
+      "critic_loss_mean": 15.060499016940593,
+      "actor_loss_mean": -350.70012870788577,
+      "buffer_size": 76000
+    },
+    {
+      "epoch": 66,
+      "env_step": 67000,
+      "cumulative_reward": 197159.85981395646,
+      "epoch_reward_sum": 5593.458257368674,
+      "epoch_reward_mean_per_step": 5.593458257368674,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5593.458257368674,
+      "critic_loss_mean": 15.204154965996743,
+      "actor_loss_mean": -353.6499570159912,
+      "buffer_size": 77000
+    },
+    {
+      "epoch": 67,
+      "env_step": 68000,
+      "cumulative_reward": 202690.31333738606,
+      "epoch_reward_sum": 5530.453523430243,
+      "epoch_reward_mean_per_step": 5.530453523430243,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5530.453523430243,
+      "critic_loss_mean": 15.639521622180938,
+      "actor_loss_mean": -357.66611770629885,
+      "buffer_size": 78000
+    },
+    {
+      "epoch": 68,
+      "env_step": 69000,
+      "cumulative_reward": 208376.33221402284,
+      "epoch_reward_sum": 5686.018876636925,
+      "epoch_reward_mean_per_step": 5.686018876636925,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5686.018876636925,
+      "critic_loss_mean": 15.780875206172466,
+      "actor_loss_mean": -361.8232680206299,
+      "buffer_size": 79000
+    },
+    {
+      "epoch": 69,
+      "env_step": 70000,
+      "cumulative_reward": 213797.16183373338,
+      "epoch_reward_sum": 5420.829619710617,
+      "epoch_reward_mean_per_step": 5.420829619710617,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5420.829619710617,
+      "critic_loss_mean": 15.649388431549072,
+      "actor_loss_mean": -365.43175715637204,
+      "buffer_size": 80000
+    },
+    {
+      "epoch": 70,
+      "env_step": 71000,
+      "cumulative_reward": 219462.3704813624,
+      "epoch_reward_sum": 5665.208647629209,
+      "epoch_reward_mean_per_step": 5.665208647629209,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5665.208647629209,
+      "critic_loss_mean": 15.996762022793293,
+      "actor_loss_mean": -368.96635446166994,
+      "buffer_size": 81000
+    },
+    {
+      "epoch": 71,
+      "env_step": 72000,
+      "cumulative_reward": 224741.68089520346,
+      "epoch_reward_sum": 5279.310413840965,
+      "epoch_reward_mean_per_step": 5.279310413840966,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5279.310413840965,
+      "critic_loss_mean": 16.383569194197655,
+      "actor_loss_mean": -372.1684226989746,
+      "buffer_size": 82000
+    },
+    {
+      "epoch": 72,
+      "env_step": 73000,
+      "cumulative_reward": 230166.02561454827,
+      "epoch_reward_sum": 5424.344719344866,
+      "epoch_reward_mean_per_step": 5.424344719344866,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5424.344719344866,
+      "critic_loss_mean": 17.904424514710904,
+      "actor_loss_mean": -374.91505329895017,
+      "buffer_size": 83000
+    },
+    {
+      "epoch": 73,
+      "env_step": 74000,
+      "cumulative_reward": 235852.40283209967,
+      "epoch_reward_sum": 5686.377217551345,
+      "epoch_reward_mean_per_step": 5.686377217551345,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5686.377217551345,
+      "critic_loss_mean": 17.328912104845045,
+      "actor_loss_mean": -378.1587840881348,
+      "buffer_size": 84000
+    },
+    {
+      "epoch": 74,
+      "env_step": 75000,
+      "cumulative_reward": 241635.45578633706,
+      "epoch_reward_sum": 5783.052954237753,
+      "epoch_reward_mean_per_step": 5.7830529542377525,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5783.052954237753,
+      "critic_loss_mean": 16.46261143541336,
+      "actor_loss_mean": -380.83358114624025,
+      "buffer_size": 85000
+    },
+    {
+      "epoch": 75,
+      "env_step": 76000,
+      "cumulative_reward": 247581.74865946936,
+      "epoch_reward_sum": 5946.292873132101,
+      "epoch_reward_mean_per_step": 5.9462928731321005,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5946.292873132101,
+      "critic_loss_mean": 16.08270945221186,
+      "actor_loss_mean": -383.90395915222166,
+      "buffer_size": 86000
+    },
+    {
+      "epoch": 76,
+      "env_step": 77000,
+      "cumulative_reward": 253762.40889307656,
+      "epoch_reward_sum": 6180.6602336071355,
+      "epoch_reward_mean_per_step": 6.180660233607136,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6180.6602336071355,
+      "critic_loss_mean": 16.481691228628158,
+      "actor_loss_mean": -387.2539449005127,
+      "buffer_size": 87000
+    },
+    {
+      "epoch": 77,
+      "env_step": 78000,
+      "cumulative_reward": 259729.83657591397,
+      "epoch_reward_sum": 5967.427682837407,
+      "epoch_reward_mean_per_step": 5.967427682837407,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5967.427682837407,
+      "critic_loss_mean": 16.46502954083681,
+      "actor_loss_mean": -390.7373110046387,
+      "buffer_size": 88000
+    },
+    {
+      "epoch": 78,
+      "env_step": 79000,
+      "cumulative_reward": 265582.4816025571,
+      "epoch_reward_sum": 5852.645026643851,
+      "epoch_reward_mean_per_step": 5.8526450266438514,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5852.645026643851,
+      "critic_loss_mean": 15.98356164008379,
+      "actor_loss_mean": -392.9889256439209,
+      "buffer_size": 89000
+    },
+    {
+      "epoch": 79,
+      "env_step": 80000,
+      "cumulative_reward": 271674.66892065195,
+      "epoch_reward_sum": 6092.187318095024,
+      "epoch_reward_mean_per_step": 6.092187318095024,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6092.187318095024,
+      "critic_loss_mean": 16.349934322416782,
+      "actor_loss_mean": -395.8420370788574,
+      "buffer_size": 90000
+    },
+    {
+      "epoch": 80,
+      "env_step": 81000,
+      "cumulative_reward": 277052.8863681442,
+      "epoch_reward_sum": 5378.21744749189,
+      "epoch_reward_mean_per_step": 5.37821744749189,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5378.21744749189,
+      "critic_loss_mean": 18.26146820026636,
+      "actor_loss_mean": -398.75993572998044,
+      "buffer_size": 91000
+    },
+    {
+      "epoch": 81,
+      "env_step": 82000,
+      "cumulative_reward": 283321.22816924925,
+      "epoch_reward_sum": 6268.341801105447,
+      "epoch_reward_mean_per_step": 6.268341801105447,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6268.341801105447,
+      "critic_loss_mean": 17.97791066354513,
+      "actor_loss_mean": -401.71617636108397,
+      "buffer_size": 92000
+    },
+    {
+      "epoch": 82,
+      "env_step": 83000,
+      "cumulative_reward": 289708.9393077196,
+      "epoch_reward_sum": 6387.711138471213,
+      "epoch_reward_mean_per_step": 6.3877111384712135,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6387.711138471213,
+      "critic_loss_mean": 18.016607964277267,
+      "actor_loss_mean": -404.7267129058838,
+      "buffer_size": 93000
+    },
+    {
+      "epoch": 83,
+      "env_step": 84000,
+      "cumulative_reward": 295735.6901705257,
+      "epoch_reward_sum": 6026.750862805053,
+      "epoch_reward_mean_per_step": 6.026750862805053,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6026.750862805053,
+      "critic_loss_mean": 17.88211540812254,
+      "actor_loss_mean": -407.7366932830811,
+      "buffer_size": 94000
+    },
+    {
+      "epoch": 84,
+      "env_step": 85000,
+      "cumulative_reward": 301049.6219172104,
+      "epoch_reward_sum": 5313.931746684298,
+      "epoch_reward_mean_per_step": 5.313931746684298,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5313.931746684298,
+      "critic_loss_mean": 18.550623723268508,
+      "actor_loss_mean": -411.1177757720947,
+      "buffer_size": 95000
+    },
+    {
+      "epoch": 85,
+      "env_step": 86000,
+      "cumulative_reward": 307043.18334143865,
+      "epoch_reward_sum": 5993.5614242279935,
+      "epoch_reward_mean_per_step": 5.993561424227994,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5993.5614242279935,
+      "critic_loss_mean": 18.697292092740536,
+      "actor_loss_mean": -414.72913810729983,
+      "buffer_size": 96000
+    },
+    {
+      "epoch": 86,
+      "env_step": 87000,
+      "cumulative_reward": 313246.0692725216,
+      "epoch_reward_sum": 6202.885931082958,
+      "epoch_reward_mean_per_step": 6.2028859310829585,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6202.885931082958,
+      "critic_loss_mean": 18.95891465818882,
+      "actor_loss_mean": -416.85842770385744,
+      "buffer_size": 97000
+    },
+    {
+      "epoch": 87,
+      "env_step": 88000,
+      "cumulative_reward": 319544.7527483018,
+      "epoch_reward_sum": 6298.68347578008,
+      "epoch_reward_mean_per_step": 6.29868347578008,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6298.68347578008,
+      "critic_loss_mean": 18.628436161875726,
+      "actor_loss_mean": -420.2424457397461,
+      "buffer_size": 98000
+    },
+    {
+      "epoch": 88,
+      "env_step": 89000,
+      "cumulative_reward": 325657.4666742588,
+      "epoch_reward_sum": 6112.713925957426,
+      "epoch_reward_mean_per_step": 6.112713925957426,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6112.713925957426,
+      "critic_loss_mean": 19.568173199892044,
+      "actor_loss_mean": -422.5333891143799,
+      "buffer_size": 99000
+    },
+    {
+      "epoch": 89,
+      "env_step": 90000,
+      "cumulative_reward": 332095.0058253784,
+      "epoch_reward_sum": 6437.539151118425,
+      "epoch_reward_mean_per_step": 6.4375391511184255,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6437.539151118425,
+      "critic_loss_mean": 19.812423753976823,
+      "actor_loss_mean": -424.9889333343506,
+      "buffer_size": 100000
+    },
+    {
+      "epoch": 90,
+      "env_step": 91000,
+      "cumulative_reward": 338591.66349240777,
+      "epoch_reward_sum": 6496.657667029334,
+      "epoch_reward_mean_per_step": 6.496657667029334,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6496.657667029334,
+      "critic_loss_mean": 20.165309517383577,
+      "actor_loss_mean": -427.66885330200193,
+      "buffer_size": 101000
+    },
+    {
+      "epoch": 91,
+      "env_step": 92000,
+      "cumulative_reward": 344804.0740173783,
+      "epoch_reward_sum": 6212.410524970453,
+      "epoch_reward_mean_per_step": 6.212410524970452,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6212.410524970453,
+      "critic_loss_mean": 20.08788979816437,
+      "actor_loss_mean": -429.7747557678223,
+      "buffer_size": 102000
+    },
+    {
+      "epoch": 92,
+      "env_step": 93000,
+      "cumulative_reward": 351342.82018581545,
+      "epoch_reward_sum": 6538.746168437783,
+      "epoch_reward_mean_per_step": 6.5387461684377834,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6538.746168437783,
+      "critic_loss_mean": 20.52656996667385,
+      "actor_loss_mean": -432.34409881591796,
+      "buffer_size": 103000
+    },
+    {
+      "epoch": 93,
+      "env_step": 94000,
+      "cumulative_reward": 357873.0445487844,
+      "epoch_reward_sum": 6530.224362968125,
+      "epoch_reward_mean_per_step": 6.530224362968125,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6530.224362968125,
+      "critic_loss_mean": 20.3750199008584,
+      "actor_loss_mean": -435.0483870239258,
+      "buffer_size": 104000
+    },
+    {
+      "epoch": 94,
+      "env_step": 95000,
+      "cumulative_reward": 363205.6900893273,
+      "epoch_reward_sum": 5332.645540544002,
+      "epoch_reward_mean_per_step": 5.332645540544002,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 5332.645540544002,
+      "critic_loss_mean": 22.749141176462174,
+      "actor_loss_mean": -436.94877255249025,
+      "buffer_size": 105000
+    },
+    {
+      "epoch": 95,
+      "env_step": 96000,
+      "cumulative_reward": 369860.62908632803,
+      "epoch_reward_sum": 6654.938997000901,
+      "epoch_reward_mean_per_step": 6.654938997000901,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6654.938997000901,
+      "critic_loss_mean": 22.92332060420513,
+      "actor_loss_mean": -439.35445018005373,
+      "buffer_size": 106000
+    },
+    {
+      "epoch": 96,
+      "env_step": 97000,
+      "cumulative_reward": 376220.42215183226,
+      "epoch_reward_sum": 6359.793065504572,
+      "epoch_reward_mean_per_step": 6.359793065504572,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6359.793065504572,
+      "critic_loss_mean": 23.284359540641308,
+      "actor_loss_mean": -441.800253616333,
+      "buffer_size": 107000
+    },
+    {
+      "epoch": 97,
+      "env_step": 98000,
+      "cumulative_reward": 383004.4320277048,
+      "epoch_reward_sum": 6784.009875872339,
+      "epoch_reward_mean_per_step": 6.784009875872339,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6784.009875872339,
+      "critic_loss_mean": 23.804607908427716,
+      "actor_loss_mean": -444.2308119659424,
+      "buffer_size": 108000
+    },
+    {
+      "epoch": 98,
+      "env_step": 99000,
+      "cumulative_reward": 389490.58308372746,
+      "epoch_reward_sum": 6486.151056022111,
+      "epoch_reward_mean_per_step": 6.486151056022111,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6486.151056022111,
+      "critic_loss_mean": 23.570865184903145,
+      "actor_loss_mean": -447.4400787811279,
+      "buffer_size": 109000
+    },
+    {
+      "epoch": 99,
+      "env_step": 100000,
+      "cumulative_reward": 396218.6802028983,
+      "epoch_reward_sum": 6728.097119170486,
+      "epoch_reward_mean_per_step": 6.728097119170486,
+      "num_episodes_completed": 1,
+      "mean_episode_return": 6728.097119170486,
+      "critic_loss_mean": 23.348018354773522,
+      "actor_loss_mean": -451.2509141998291,
+      "buffer_size": 110000
+    }
+  ]
+}
