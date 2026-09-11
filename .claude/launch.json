@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "flop-dashboard",
+      "runtimeExecutable": ".venv/Scripts/python.exe",
+      "runtimeArgs": ["flop_dashboard.py", "--port", "8051"],
+      "port": 8051
+    },
+    {
+      "name": "dashboard",
+      "runtimeExecutable": ".venv/Scripts/python.exe",
+      "runtimeArgs": ["dashboard.py", "--port", "8050"],
+      "port": 8050
+    }
+  ]
+}
