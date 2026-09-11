@@ -2,8 +2,9 @@
 Interactive Plotly Dash dashboard for browsing RL energy experiment results.
 
 Scans results/<algo>/<env_id>/<seed>/<timestamp>/ for run folders (any folder
-containing a metadata.json is treated as one run) and lets you pick a run from
-a dropdown. For the selected run it renders:
+containing a metadata.json is treated as one run) and lets you pick a run via
+four cascading dropdowns — Algorithm, Environment, Seed, Folder — each one
+filtered by the selections above it. For the selected run it renders:
 
   - CodeCarbon per-task metrics from emissions_base_*.csv
   - Training episode metrics from training_metrics.json ("episodes")
@@ -91,17 +92,47 @@ def axis_label(col):
     return f"{col} ({unit})" if unit else col
 
 
-def discover_runs(results_dir):
-    """Find every folder under results_dir that has a metadata.json (one per run)."""
-    runs = []
-    for meta_path in glob.glob(os.path.join(results_dir, "**", "metadata.json"), recursive=True):
-        run_dir = os.path.dirname(meta_path)
-        rel = os.path.relpath(run_dir, results_dir)
-        parts = rel.replace("\\", "/").split("/")
-        label = " / ".join(parts) if len(parts) > 1 else rel
-        runs.append({"label": label, "value": run_dir})
-    runs.sort(key=lambda r: r["value"])
-    return runs
+def _natural_sort_key(name):
+    """Sort key that orders trailing digits numerically (seed_2 before seed_10)."""
+    digits = "".join(ch for ch in name if ch.isdigit())
+    return (int(digits) if digits else -1, name)
+
+
+def _list_subdirs(path, reverse=False):
+    if not os.path.isdir(path):
+        return []
+    names = [n for n in os.listdir(path) if os.path.isdir(os.path.join(path, n))]
+    names.sort(key=_natural_sort_key, reverse=reverse)
+    return names
+
+
+def list_algorithms(results_dir):
+    """Top-level results/<algo> directories."""
+    return _list_subdirs(results_dir)
+
+
+def list_environments(results_dir, algo):
+    """results/<algo>/<env_id> directories."""
+    if not algo:
+        return []
+    return _list_subdirs(os.path.join(results_dir, algo))
+
+
+def list_seeds(results_dir, algo, env):
+    """results/<algo>/<env_id>/<seed> directories."""
+    if not algo or not env:
+        return []
+    return _list_subdirs(os.path.join(results_dir, algo, env))
+
+
+def list_run_folders(results_dir, algo, env, seed):
+    """results/<algo>/<env_id>/<seed>/<folder> directories that contain metadata.json,
+    newest folder first."""
+    if not algo or not env or not seed:
+        return []
+    seed_dir = os.path.join(results_dir, algo, env, seed)
+    folders = _list_subdirs(seed_dir, reverse=True)
+    return [f for f in folders if os.path.exists(os.path.join(seed_dir, f, "metadata.json"))]
 
 
 @lru_cache(maxsize=16)
@@ -377,19 +408,68 @@ def make_app(results_dir):
     app = Dash(__name__)
     app.title = "RL Energy Experiments Dashboard"
 
-    runs = discover_runs(results_dir)
-    initial_run = runs[0]["value"] if runs else None
+    algos = list_algorithms(results_dir)
+    initial_algo = algos[0] if algos else None
+    initial_envs = list_environments(results_dir, initial_algo)
+    initial_env = initial_envs[0] if initial_envs else None
+    initial_seeds = list_seeds(results_dir, initial_algo, initial_env)
+    initial_seed = initial_seeds[0] if initial_seeds else None
+    initial_folders = list_run_folders(results_dir, initial_algo, initial_env, initial_seed)
+    initial_folder = initial_folders[0] if initial_folders else None
 
     app.layout = html.Div(
         [
             html.H2("RL Energy Experiments Dashboard"),
             html.Div(
                 [
-                    html.Label("Run:"),
-                    dcc.Dropdown(id="run-dropdown", options=runs, value=initial_run, clearable=False),
+                    html.Div(
+                        [
+                            html.Label("Algorithm:"),
+                            dcc.Dropdown(
+                                id="algo-dropdown",
+                                options=[{"label": a, "value": a} for a in algos],
+                                value=initial_algo, clearable=False,
+                            ),
+                        ],
+                        className="run-picker-field",
+                    ),
+                    html.Div(
+                        [
+                            html.Label("Environment:"),
+                            dcc.Dropdown(
+                                id="env-dropdown",
+                                options=[{"label": e, "value": e} for e in initial_envs],
+                                value=initial_env, clearable=False,
+                            ),
+                        ],
+                        className="run-picker-field",
+                    ),
+                    html.Div(
+                        [
+                            html.Label("Seed:"),
+                            dcc.Dropdown(
+                                id="seed-dropdown",
+                                options=[{"label": s, "value": s} for s in initial_seeds],
+                                value=initial_seed, clearable=False,
+                            ),
+                        ],
+                        className="run-picker-field",
+                    ),
+                    html.Div(
+                        [
+                            html.Label("Folder:"),
+                            dcc.Dropdown(
+                                id="folder-dropdown",
+                                options=[{"label": f, "value": f} for f in initial_folders],
+                                value=initial_folder, clearable=False,
+                            ),
+                        ],
+                        className="run-picker-field",
+                    ),
                 ],
                 className="run-picker",
             ),
+            dcc.Store(id="run-dir"),
             html.Div(id="run-info"),
             html.Hr(),
 
@@ -481,31 +561,76 @@ def make_app(results_dir):
         className="app-container",
     )
 
-    @app.callback(Output("run-info", "children"), Input("run-dropdown", "value"))
+    @app.callback(
+        Output("env-dropdown", "options"),
+        Output("env-dropdown", "value"),
+        Input("algo-dropdown", "value"),
+    )
+    def _update_env_options(algo):
+        envs = list_environments(results_dir, algo)
+        value = envs[0] if envs else None
+        return [{"label": e, "value": e} for e in envs], value
+
+    @app.callback(
+        Output("seed-dropdown", "options"),
+        Output("seed-dropdown", "value"),
+        Input("algo-dropdown", "value"),
+        Input("env-dropdown", "value"),
+    )
+    def _update_seed_options(algo, env):
+        seeds = list_seeds(results_dir, algo, env)
+        value = seeds[0] if seeds else None
+        return [{"label": s, "value": s} for s in seeds], value
+
+    @app.callback(
+        Output("folder-dropdown", "options"),
+        Output("folder-dropdown", "value"),
+        Input("algo-dropdown", "value"),
+        Input("env-dropdown", "value"),
+        Input("seed-dropdown", "value"),
+    )
+    def _update_folder_options(algo, env, seed):
+        folders = list_run_folders(results_dir, algo, env, seed)
+        value = folders[0] if folders else None
+        return [{"label": f, "value": f} for f in folders], value
+
+    @app.callback(
+        Output("run-dir", "data"),
+        Input("algo-dropdown", "value"),
+        Input("env-dropdown", "value"),
+        Input("seed-dropdown", "value"),
+        Input("folder-dropdown", "value"),
+    )
+    def _update_run_dir(algo, env, seed, folder):
+        if not algo or not env or not seed or not folder:
+            return None
+        return os.path.join(results_dir, algo, env, seed, folder)
+
+    @app.callback(Output("run-info", "children"), Input("run-dir", "data"))
     def _update_run_info(run_dir):
         if not run_dir:
             return html.Div("No runs found under results/.")
         return build_run_info(run_dir)
 
-    @app.callback(Output("algo-params", "children"), Input("run-dropdown", "value"))
+    @app.callback(Output("algo-params", "children"), Input("run-dir", "data"))
     def _update_algo_params(run_dir):
         if not run_dir:
             return html.Div()
         return build_algo_params(run_dir)
 
-    @app.callback(Output("duration-bar-graph", "figure"), Input("run-dropdown", "value"))
+    @app.callback(Output("duration-bar-graph", "figure"), Input("run-dir", "data"))
     def _update_duration_bar(run_dir):
         if not run_dir:
             return empty_figure("No run selected.")
         return duration_bar_figure(run_dir)
 
-    @app.callback(Output("power-bar-graph", "figure"), Input("run-dropdown", "value"))
+    @app.callback(Output("power-bar-graph", "figure"), Input("run-dir", "data"))
     def _update_power_bar(run_dir):
         if not run_dir:
             return empty_figure("No run selected.")
         return power_bar_figure(run_dir)
 
-    @app.callback(Output("energy-bar-graph", "figure"), Input("run-dropdown", "value"))
+    @app.callback(Output("energy-bar-graph", "figure"), Input("run-dir", "data"))
     def _update_energy_bar(run_dir):
         if not run_dir:
             return empty_figure("No run selected.")
@@ -514,7 +639,7 @@ def make_app(results_dir):
     @app.callback(
         Output("emissions-columns", "options"),
         Output("emissions-columns", "value"),
-        Input("run-dropdown", "value"),
+        Input("run-dir", "data"),
     )
     def _update_emissions_columns(run_dir):
         df = load_emissions_base(run_dir) if run_dir else None
@@ -529,7 +654,7 @@ def make_app(results_dir):
 
     @app.callback(
         Output("emissions-graph", "figure"),
-        Input("run-dropdown", "value"),
+        Input("run-dir", "data"),
         Input("emissions-xaxis", "value"),
         Input("emissions-columns", "value"),
     )
@@ -541,7 +666,7 @@ def make_app(results_dir):
     @app.callback(
         Output("episodes-columns", "options"),
         Output("episodes-columns", "value"),
-        Input("run-dropdown", "value"),
+        Input("run-dir", "data"),
     )
     def _update_episodes_columns(run_dir):
         episodes, _ = load_training_metrics(run_dir) if run_dir else (None, None)
@@ -551,7 +676,7 @@ def make_app(results_dir):
 
     @app.callback(
         Output("episodes-graph", "figure"),
-        Input("run-dropdown", "value"),
+        Input("run-dir", "data"),
         Input("episodes-xaxis", "value"),
         Input("episodes-columns", "value"),
     )
@@ -565,7 +690,7 @@ def make_app(results_dir):
     @app.callback(
         Output("epochs-columns", "options"),
         Output("epochs-columns", "value"),
-        Input("run-dropdown", "value"),
+        Input("run-dir", "data"),
     )
     def _update_epochs_columns(run_dir):
         _, epochs = load_training_metrics(run_dir) if run_dir else (None, None)
@@ -575,7 +700,7 @@ def make_app(results_dir):
 
     @app.callback(
         Output("epochs-graph", "figure"),
-        Input("run-dropdown", "value"),
+        Input("run-dir", "data"),
         Input("epochs-xaxis", "value"),
         Input("epochs-columns", "value"),
     )
@@ -592,7 +717,8 @@ def make_app(results_dir):
 APP_CSS = """
 body { font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: #fafafa; color: #1a1a1a; }
 .app-container { max-width: 1200px; margin: 0 auto; padding: 24px; }
-.run-picker { max-width: 640px; margin-bottom: 16px; }
+.run-picker { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; }
+.run-picker-field { flex: 1 1 200px; min-width: 180px; }
 .controls { margin: 12px 0; padding: 12px; background: #f0f0f0; border-radius: 6px; }
 .col-checklist { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
 .col-checklist label { margin-right: 4px; }
