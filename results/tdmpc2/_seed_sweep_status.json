@@ -1,0 +1,117 @@
+{
+  "total_runs": 10,
+  "started_utc": "2026-09-10T10:28:44.703672+00:00",
+  "updated_utc": "2026-09-10T17:53:12",
+  "runs": [
+    {
+      "index": 1,
+      "algo": "tdmpc2",
+      "env": "HalfCheetah-v5",
+      "seed": 331,
+      "status": "done",
+      "run_dir": "results/tdmpc2/HalfCheetah-v5/seed_331/20260910_122845",
+      "started_utc": "2026-09-10T10:28:44",
+      "finished_utc": "2026-09-10T11:12:41",
+      "exit_code": 0
+    },
+    {
+      "index": 2,
+      "algo": "tdmpc2",
+      "env": "HalfCheetah-v5",
+      "seed": 958,
+      "status": "done",
+      "run_dir": "results/tdmpc2/HalfCheetah-v5/seed_958/20260910_131242",
+      "started_utc": "2026-09-10T11:12:41",
+      "finished_utc": "2026-09-10T11:55:23",
+      "exit_code": 0
+    },
+    {
+      "index": 3,
+      "algo": "tdmpc2",
+      "env": "HalfCheetah-v5",
+      "seed": 14577,
+      "status": "done",
+      "run_dir": "results/tdmpc2/HalfCheetah-v5/seed_14577/20260910_135524",
+      "started_utc": "2026-09-10T11:55:23",
+      "finished_utc": "2026-09-10T12:39:05",
+      "exit_code": 0
+    },
+    {
+      "index": 4,
+      "algo": "tdmpc2",
+      "env": "HalfCheetah-v5",
+      "seed": 43611,
+      "status": "done",
+      "run_dir": "results/tdmpc2/HalfCheetah-v5/seed_43611/20260910_143905",
+      "started_utc": "2026-09-10T12:39:05",
+      "finished_utc": "2026-09-10T13:21:22",
+      "exit_code": 0
+    },
+    {
+      "index": 5,
+      "algo": "tdmpc2",
+      "env": "HalfCheetah-v5",
+      "seed": 85062,
+      "status": "done",
+      "run_dir": "results/tdmpc2/HalfCheetah-v5/seed_85062/20260910_152122",
+      "started_utc": "2026-09-10T13:21:22",
+      "finished_utc": "2026-09-10T14:04:27",
+      "exit_code": 0
+    },
+    {
+      "index": 6,
+      "algo": "tdmpc2",
+      "env": "Ant-v5",
+      "seed": 331,
+      "status": "done",
+      "run_dir": "results/tdmpc2/Ant-v5/seed_331/20260910_160427",
+      "started_utc": "2026-09-10T14:04:27",
+      "finished_utc": "2026-09-10T14:50:24",
+      "exit_code": 0
+    },
+    {
+      "index": 7,
+      "algo": "tdmpc2",
+      "env": "Ant-v5",
+      "seed": 958,
+      "status": "done",
+      "run_dir": "results/tdmpc2/Ant-v5/seed_958/20260910_165024",
+      "started_utc": "2026-09-10T14:50:24",
+      "finished_utc": "2026-09-10T15:36:22",
+      "exit_code": 0
+    },
+    {
+      "index": 8,
+      "algo": "tdmpc2",
+      "env": "Ant-v5",
+      "seed": 14577,
+      "status": "done",
+      "run_dir": "results/tdmpc2/Ant-v5/seed_14577/20260910_173623",
+      "started_utc": "2026-09-10T15:36:22",
+      "finished_utc": "2026-09-10T16:22:37",
+      "exit_code": 0
+    },
+    {
+      "index": 9,
+      "algo": "tdmpc2",
+      "env": "Ant-v5",
+      "seed": 43611,
+      "status": "done",
+      "run_dir": "results/tdmpc2/Ant-v5/seed_43611/20260910_182237",
+      "started_utc": "2026-09-10T16:22:37",
+      "finished_utc": "2026-09-10T17:07:55",
+      "exit_code": 0
+    },
+    {
+      "index": 10,
+      "algo": "tdmpc2",
+      "env": "Ant-v5",
+      "seed": 85062,
+      "status": "done",
+      "run_dir": "results/tdmpc2/Ant-v5/seed_85062/20260910_190756",
+      "started_utc": "2026-09-10T17:07:55",
+      "finished_utc": "2026-09-10T17:53:12",
+      "exit_code": 0
+    }
+  ]
+}

@@ -1,0 +1,403 @@
+[2026-09-10 12:28:44] Priming sudo credentials (you may be prompted for your password now)...
+[2026-09-10 12:28:44] sudo credential keepalive started (pid 19002, refreshes every 60s).
+[2026-09-10 12:28:44] [1/10] Starting: algo=tdmpc2 env=HalfCheetah-v5 seed=331 overrides=none
+2026-09-10 12:28:45,215 [INFO] === Experiment run: algo=tdmpc2 env=HalfCheetah-v5 seed=331 ===
+2026-09-10 12:28:45,215 [INFO] Run directory: results/tdmpc2/HalfCheetah-v5/seed_331/20260910_122845
+2026-09-10 12:28:45,348 [INFO] Using device: cuda
+2026-09-10 12:28:45,440 [INFO] Waiting for thermal baseline before starting...
+2026-09-10 12:28:55,451 [INFO] Thermal gate result: {'gated': True, 'reason': 'reached_reference', 'waited_seconds': 1.0013580322265625e-05, 'final_temp_c': 44.0, 'final_power_w': 28.138}
+2026-09-10 12:28:55,451 [INFO] Settling for 30s (unmeasured)...
+[codecarbon WARNING @ 12:29:25] Multiple instances of codecarbon are allowed to run at the same time.
+2026-09-10 12:29:26,683 [INFO] Recording idle baseline for 90s...
+2026-09-10 12:31:00,340 [INFO] Starting warmup: 5000 steps
+2026-09-10 12:31:00,499 [INFO] Pretraining world model on seed data: 5000 updates
+2026-09-10 12:32:08,763 [INFO] Pretrain burst done: 5000 updates, mean total_loss=0.1083
+2026-09-10 12:32:08,763 [INFO] Starting measured training: 100 epochs x 1000 steps = 100000 env steps
+2026-09-10 12:36:06,107 [INFO] Epoch 10/100 done (buffer size=15000, cumulative_reward=1071.35, mean_episode_return=277.5558460409271)
+2026-09-10 12:39:56,828 [INFO] Epoch 20/100 done (buffer size=25000, cumulative_reward=11039.95, mean_episode_return=1464.2808767204929)
+2026-09-10 12:43:54,564 [INFO] Epoch 30/100 done (buffer size=35000, cumulative_reward=27081.21, mean_episode_return=1731.8426289009344)
+2026-09-10 12:47:53,235 [INFO] Epoch 40/100 done (buffer size=45000, cumulative_reward=45052.42, mean_episode_return=1860.2166580094056)
+2026-09-10 12:51:51,328 [INFO] Epoch 50/100 done (buffer size=55000, cumulative_reward=64391.87, mean_episode_return=1975.6581262188529)
+2026-09-10 12:55:50,054 [INFO] Epoch 60/100 done (buffer size=65000, cumulative_reward=84750.47, mean_episode_return=2056.7687437127415)
+2026-09-10 12:59:37,873 [INFO] Epoch 70/100 done (buffer size=75000, cumulative_reward=105715.74, mean_episode_return=2112.6830815363846)
+2026-09-10 13:03:17,686 [INFO] Epoch 80/100 done (buffer size=85000, cumulative_reward=127112.92, mean_episode_return=2136.0251835457693)
+2026-09-10 13:07:12,539 [INFO] Epoch 90/100 done (buffer size=95000, cumulative_reward=148859.21, mean_episode_return=2139.631699435808)
+2026-09-10 13:11:10,913 [INFO] Epoch 100/100 done (buffer size=105000, cumulative_reward=171094.21, mean_episode_return=2163.5889737193675)
+2026-09-10 13:11:10,913 [INFO] Recording idle tail for 90s...
+2026-09-10 13:12:40,974 [INFO] Run complete. Segment energy summary (kWh unless noted):
+2026-09-10 13:12:40,974 [INFO]   idle_baseline_head: 0.0016403623053437048
+2026-09-10 13:12:40,974 [INFO]   warmup: 4.067921288203671e-06
+2026-09-10 13:12:40,974 [INFO]   world_model_pretrain: 0.003122027218056527
+2026-09-10 13:12:40,974 [INFO]   rollout: 0.05935744782402038
+2026-09-10 13:12:40,974 [INFO]   buffer_sample: 0.0027081507010573228
+2026-09-10 13:12:40,974 [INFO]   critic_update: 0.04152392775908095
+2026-09-10 13:12:40,974 [INFO]   actor_update: 0.015749740148264246
+2026-09-10 13:12:40,974 [INFO]   target_update: 0.0027557977101698976
+2026-09-10 13:12:40,974 [INFO]   _sub_segment_wall_time_seconds: {'buffer_sample': 56.350384772794314, 'critic_update': 864.0173922331505, 'actor_update': 327.7158531390869, 'target_update': 57.341809399096746}
+2026-09-10 13:12:40,974 [INFO]   idle_baseline_tail: 0.001783131801343818
+2026-09-10 13:12:40,974 [INFO]   _total_kg_co2eq: 0.049007192077143324
+2026-09-10 13:12:40,974 [INFO] Training summary: 100 epochs, final cumulative_reward=171094.21, final mean_episode_return=2163.5889737193675, episodes completed=105
+
+Run artifacts written to: results/tdmpc2/HalfCheetah-v5/seed_331/20260910_122845
+[2026-09-10 13:12:41] [1/10] Finished OK: env=HalfCheetah-v5 seed=331 -> results/tdmpc2/HalfCheetah-v5/seed_331/20260910_122845
+[2026-09-10 13:12:41] [2/10] Starting: algo=tdmpc2 env=HalfCheetah-v5 seed=958 overrides=none
+2026-09-10 13:12:42,174 [INFO] === Experiment run: algo=tdmpc2 env=HalfCheetah-v5 seed=958 ===
+2026-09-10 13:12:42,174 [INFO] Run directory: results/tdmpc2/HalfCheetah-v5/seed_958/20260910_131242
+2026-09-10 13:12:42,305 [INFO] Using device: cuda
+2026-09-10 13:12:42,396 [INFO] Waiting for thermal baseline before starting...
+2026-09-10 13:12:52,407 [INFO] Thermal gate result: {'gated': True, 'reason': 'reached_reference', 'waited_seconds': 1.0251998901367188e-05, 'final_temp_c': 43.0, 'final_power_w': 26.404}
+2026-09-10 13:12:52,407 [INFO] Settling for 30s (unmeasured)...
+[codecarbon WARNING @ 13:13:22] Multiple instances of codecarbon are allowed to run at the same time.
+2026-09-10 13:13:23,643 [INFO] Recording idle baseline for 90s...
+2026-09-10 13:14:57,202 [INFO] Starting warmup: 5000 steps
+2026-09-10 13:14:57,361 [INFO] Pretraining world model on seed data: 5000 updates
+2026-09-10 13:15:55,969 [INFO] Pretrain burst done: 5000 updates, mean total_loss=0.1146
+2026-09-10 13:15:55,969 [INFO] Starting measured training: 100 epochs x 1000 steps = 100000 env steps
+2026-09-10 13:19:46,186 [INFO] Epoch 10/100 done (buffer size=15000, cumulative_reward=5996.78, mean_episode_return=1382.1280080987387)
+2026-09-10 13:23:30,989 [INFO] Epoch 20/100 done (buffer size=25000, cumulative_reward=19829.35, mean_episode_return=2564.4009696512558)
+2026-09-10 13:27:17,898 [INFO] Epoch 30/100 done (buffer size=35000, cumulative_reward=39694.66, mean_episode_return=2663.9849113377377)
+2026-09-10 13:30:54,485 [INFO] Epoch 40/100 done (buffer size=45000, cumulative_reward=70857.15, mean_episode_return=4270.797176364116)
+2026-09-10 13:34:31,747 [INFO] Epoch 50/100 done (buffer size=55000, cumulative_reward=104787.69, mean_episode_return=4478.157300581624)
+2026-09-10 13:38:15,377 [INFO] Epoch 60/100 done (buffer size=65000, cumulative_reward=156614.95, mean_episode_return=6805.734284097873)
+2026-09-10 13:42:11,359 [INFO] Epoch 70/100 done (buffer size=75000, cumulative_reward=220203.80, mean_episode_return=5077.493656735349)
+2026-09-10 13:46:07,281 [INFO] Epoch 80/100 done (buffer size=85000, cumulative_reward=294349.72, mean_episode_return=7394.375246616754)
+2026-09-10 13:50:03,587 [INFO] Epoch 90/100 done (buffer size=95000, cumulative_reward=365777.73, mean_episode_return=8509.794787340752)
+2026-09-10 13:53:52,794 [INFO] Epoch 100/100 done (buffer size=105000, cumulative_reward=444780.94, mean_episode_return=9240.335286078462)
+2026-09-10 13:53:52,794 [INFO] Recording idle tail for 90s...
+2026-09-10 13:55:22,866 [INFO] Run complete. Segment energy summary (kWh unless noted):
+2026-09-10 13:55:22,866 [INFO]   idle_baseline_head: 0.0016394263468620595
+2026-09-10 13:55:22,866 [INFO]   warmup: 5.36362514365861e-06
+2026-09-10 13:55:22,866 [INFO]   world_model_pretrain: 0.0028972146470956253
+2026-09-10 13:55:22,866 [INFO]   rollout: 0.05936210167959749
+2026-09-10 13:55:22,866 [INFO]   buffer_sample: 0.002792946843908026
+2026-09-10 13:55:22,866 [INFO]   critic_update: 0.04025890861994116
+2026-09-10 13:55:22,866 [INFO]   actor_update: 0.015516719575930519
+2026-09-10 13:55:22,866 [INFO]   target_update: 0.002803468792365431
+2026-09-10 13:55:22,866 [INFO]   _sub_segment_wall_time_seconds: {'buffer_sample': 56.65574224392458, 'critic_update': 816.6637165931725, 'actor_update': 314.76118733970725, 'target_update': 56.86918304069695}
+2026-09-10 13:55:22,866 [INFO]   idle_baseline_tail: 0.0018037094428142997
+2026-09-10 13:55:22,866 [INFO]   _total_kg_co2eq: 0.048411086614456984
+2026-09-10 13:55:22,866 [INFO] Training summary: 100 epochs, final cumulative_reward=444780.94, final mean_episode_return=9240.335286078462, episodes completed=105
+
+Run artifacts written to: results/tdmpc2/HalfCheetah-v5/seed_958/20260910_131242
+[2026-09-10 13:55:23] [2/10] Finished OK: env=HalfCheetah-v5 seed=958 -> results/tdmpc2/HalfCheetah-v5/seed_958/20260910_131242
+[2026-09-10 13:55:23] [3/10] Starting: algo=tdmpc2 env=HalfCheetah-v5 seed=14577 overrides=none
+2026-09-10 13:55:24,049 [INFO] === Experiment run: algo=tdmpc2 env=HalfCheetah-v5 seed=14577 ===
+2026-09-10 13:55:24,049 [INFO] Run directory: results/tdmpc2/HalfCheetah-v5/seed_14577/20260910_135524
+2026-09-10 13:55:24,181 [INFO] Using device: cuda
+2026-09-10 13:55:24,273 [INFO] Waiting for thermal baseline before starting...
+2026-09-10 13:55:44,284 [INFO] Thermal gate result: {'gated': True, 'reason': 'reached_reference', 'waited_seconds': 1.049041748046875e-05, 'final_temp_c': 43.0, 'final_power_w': 27.62}
+2026-09-10 13:55:44,284 [INFO] Settling for 30s (unmeasured)...
+[codecarbon WARNING @ 13:56:14] Multiple instances of codecarbon are allowed to run at the same time.
+2026-09-10 13:56:15,517 [INFO] Recording idle baseline for 90s...
+2026-09-10 13:57:49,071 [INFO] Starting warmup: 5000 steps
+2026-09-10 13:57:49,236 [INFO] Pretraining world model on seed data: 5000 updates
+2026-09-10 13:58:56,675 [INFO] Pretrain burst done: 5000 updates, mean total_loss=0.1080
+2026-09-10 13:58:56,675 [INFO] Starting measured training: 100 epochs x 1000 steps = 100000 env steps
+2026-09-10 14:02:52,348 [INFO] Epoch 10/100 done (buffer size=15000, cumulative_reward=5076.52, mean_episode_return=1386.3105190843144)
+2026-09-10 14:06:48,436 [INFO] Epoch 20/100 done (buffer size=25000, cumulative_reward=22367.77, mean_episode_return=1223.5848537199724)
+2026-09-10 14:10:44,168 [INFO] Epoch 30/100 done (buffer size=35000, cumulative_reward=52094.05, mean_episode_return=3861.0778779193033)
+2026-09-10 14:14:40,124 [INFO] Epoch 40/100 done (buffer size=45000, cumulative_reward=88371.81, mean_episode_return=5140.647601748494)
+2026-09-10 14:18:36,200 [INFO] Epoch 50/100 done (buffer size=55000, cumulative_reward=140432.66, mean_episode_return=6071.681847003987)
+2026-09-10 14:22:32,510 [INFO] Epoch 60/100 done (buffer size=65000, cumulative_reward=187786.00, mean_episode_return=425.67749732577226)
+2026-09-10 14:26:29,351 [INFO] Epoch 70/100 done (buffer size=75000, cumulative_reward=250867.16, mean_episode_return=8469.993189440056)
+2026-09-10 14:30:07,233 [INFO] Epoch 80/100 done (buffer size=85000, cumulative_reward=309563.87, mean_episode_return=3032.8397334762067)
+2026-09-10 14:33:45,105 [INFO] Epoch 90/100 done (buffer size=95000, cumulative_reward=388007.67, mean_episode_return=8584.560954487986)
+2026-09-10 14:37:34,591 [INFO] Epoch 100/100 done (buffer size=105000, cumulative_reward=462978.05, mean_episode_return=5801.543372962031)
+2026-09-10 14:37:34,591 [INFO] Recording idle tail for 90s...
+2026-09-10 14:39:04,662 [INFO] Run complete. Segment energy summary (kWh unless noted):
+2026-09-10 14:39:04,662 [INFO]   idle_baseline_head: 0.0016150685442726342
+2026-09-10 14:39:04,662 [INFO]   warmup: 5.217540358960337e-06
+2026-09-10 14:39:04,662 [INFO]   world_model_pretrain: 0.0031081841683206117
+2026-09-10 14:39:04,662 [INFO]   rollout: 0.059328963186825456
+2026-09-10 14:39:04,662 [INFO]   buffer_sample: 0.002717553547958574
+2026-09-10 14:39:04,662 [INFO]   critic_update: 0.04108032568081013
+2026-09-10 14:39:04,662 [INFO]   actor_update: 0.015712012643970354
+2026-09-10 14:39:04,662 [INFO]   target_update: 0.002743799954049746
+2026-09-10 14:39:04,662 [INFO]   _sub_segment_wall_time_seconds: {'buffer_sample': 56.09926703216479, 'critic_update': 848.0333945460843, 'actor_update': 324.34775520393123, 'target_update': 56.64107940787653}
+2026-09-10 14:39:04,662 [INFO]   idle_baseline_tail: 0.0017936307363159154
+2026-09-10 14:39:04,662 [INFO]   _total_kg_co2eq: 0.048801517738485095
+2026-09-10 14:39:04,662 [INFO] Training summary: 100 epochs, final cumulative_reward=462978.05, final mean_episode_return=5801.543372962031, episodes completed=105
+
+Run artifacts written to: results/tdmpc2/HalfCheetah-v5/seed_14577/20260910_135524
+[2026-09-10 14:39:05] [3/10] Finished OK: env=HalfCheetah-v5 seed=14577 -> results/tdmpc2/HalfCheetah-v5/seed_14577/20260910_135524
+[2026-09-10 14:39:05] [4/10] Starting: algo=tdmpc2 env=HalfCheetah-v5 seed=43611 overrides=none
+2026-09-10 14:39:05,837 [INFO] === Experiment run: algo=tdmpc2 env=HalfCheetah-v5 seed=43611 ===
+2026-09-10 14:39:05,837 [INFO] Run directory: results/tdmpc2/HalfCheetah-v5/seed_43611/20260910_143905
+2026-09-10 14:39:05,958 [INFO] Using device: cuda
+2026-09-10 14:39:06,048 [INFO] Waiting for thermal baseline before starting...
+2026-09-10 14:39:16,059 [INFO] Thermal gate result: {'gated': True, 'reason': 'reached_reference', 'waited_seconds': 9.775161743164062e-06, 'final_temp_c': 44.0, 'final_power_w': 26.151}
+2026-09-10 14:39:16,059 [INFO] Settling for 30s (unmeasured)...
+[codecarbon WARNING @ 14:39:46] Multiple instances of codecarbon are allowed to run at the same time.
+2026-09-10 14:39:47,292 [INFO] Recording idle baseline for 90s...
+2026-09-10 14:41:20,844 [INFO] Starting warmup: 5000 steps
+2026-09-10 14:41:21,002 [INFO] Pretraining world model on seed data: 5000 updates
+2026-09-10 14:42:18,593 [INFO] Pretrain burst done: 5000 updates, mean total_loss=0.1148
+2026-09-10 14:42:18,593 [INFO] Starting measured training: 100 epochs x 1000 steps = 100000 env steps
+2026-09-10 14:45:54,291 [INFO] Epoch 10/100 done (buffer size=15000, cumulative_reward=4563.25, mean_episode_return=1279.252339228942)
+2026-09-10 14:49:44,382 [INFO] Epoch 20/100 done (buffer size=25000, cumulative_reward=23528.61, mean_episode_return=1018.085938065132)
+2026-09-10 14:53:39,244 [INFO] Epoch 30/100 done (buffer size=35000, cumulative_reward=51545.88, mean_episode_return=3544.89899956834)
+2026-09-10 14:57:34,292 [INFO] Epoch 40/100 done (buffer size=45000, cumulative_reward=87094.12, mean_episode_return=5312.149681639124)
+2026-09-10 15:01:29,439 [INFO] Epoch 50/100 done (buffer size=55000, cumulative_reward=153963.13, mean_episode_return=7658.200707236169)
+2026-09-10 15:05:24,439 [INFO] Epoch 60/100 done (buffer size=65000, cumulative_reward=225921.25, mean_episode_return=8714.48339097146)
+2026-09-10 15:09:02,453 [INFO] Epoch 70/100 done (buffer size=75000, cumulative_reward=289180.05, mean_episode_return=9055.552851865012)
+2026-09-10 15:12:38,852 [INFO] Epoch 80/100 done (buffer size=85000, cumulative_reward=355017.12, mean_episode_return=7375.982030695548)
+2026-09-10 15:16:15,326 [INFO] Epoch 90/100 done (buffer size=95000, cumulative_reward=428409.99, mean_episode_return=7455.374484172318)
+2026-09-10 15:19:51,648 [INFO] Epoch 100/100 done (buffer size=105000, cumulative_reward=507981.80, mean_episode_return=2922.6140101747387)
+2026-09-10 15:19:51,648 [INFO] Recording idle tail for 90s...
+2026-09-10 15:21:21,710 [INFO] Run complete. Segment energy summary (kWh unless noted):
+2026-09-10 15:21:21,710 [INFO]   idle_baseline_head: 0.001573919856252132
+2026-09-10 15:21:21,710 [INFO]   warmup: 5.321097327830012e-06
+2026-09-10 15:21:21,710 [INFO]   world_model_pretrain: 0.0028546848548439523
+2026-09-10 15:21:21,710 [INFO]   rollout: 0.05935488894661299
+2026-09-10 15:21:21,710 [INFO]   buffer_sample: 0.0027683574291319894
+2026-09-10 15:21:21,710 [INFO]   critic_update: 0.03976569702562944
+2026-09-10 15:21:21,710 [INFO]   actor_update: 0.015446342253153611
+2026-09-10 15:21:21,710 [INFO]   target_update: 0.002794183878261614
+2026-09-10 15:21:21,710 [INFO]   _sub_segment_wall_time_seconds: {'buffer_sample': 55.63961695635771, 'critic_update': 799.2277757292104, 'actor_update': 310.44711109133823, 'target_update': 56.158687839977574}
+2026-09-10 15:21:21,710 [INFO]   idle_baseline_tail: 0.0018045785471014208
+2026-09-10 15:21:21,710 [INFO]   _total_kg_co2eq: 0.048139889226815516
+2026-09-10 15:21:21,710 [INFO] Training summary: 100 epochs, final cumulative_reward=507981.80, final mean_episode_return=2922.6140101747387, episodes completed=105
+
+Run artifacts written to: results/tdmpc2/HalfCheetah-v5/seed_43611/20260910_143905
+[2026-09-10 15:21:22] [4/10] Finished OK: env=HalfCheetah-v5 seed=43611 -> results/tdmpc2/HalfCheetah-v5/seed_43611/20260910_143905
+[2026-09-10 15:21:22] [5/10] Starting: algo=tdmpc2 env=HalfCheetah-v5 seed=85062 overrides=none
+2026-09-10 15:21:22,913 [INFO] === Experiment run: algo=tdmpc2 env=HalfCheetah-v5 seed=85062 ===
+2026-09-10 15:21:22,913 [INFO] Run directory: results/tdmpc2/HalfCheetah-v5/seed_85062/20260910_152122
+2026-09-10 15:21:23,044 [INFO] Using device: cuda
+2026-09-10 15:21:23,138 [INFO] Waiting for thermal baseline before starting...
+2026-09-10 15:21:33,149 [INFO] Thermal gate result: {'gated': True, 'reason': 'reached_reference', 'waited_seconds': 1.0251998901367188e-05, 'final_temp_c': 44.0, 'final_power_w': 28.056}
+2026-09-10 15:21:33,149 [INFO] Settling for 30s (unmeasured)...
+[codecarbon WARNING @ 15:22:03] Multiple instances of codecarbon are allowed to run at the same time.
+2026-09-10 15:22:04,380 [INFO] Recording idle baseline for 90s...
+2026-09-10 15:23:37,937 [INFO] Starting warmup: 5000 steps
+2026-09-10 15:23:38,101 [INFO] Pretraining world model on seed data: 5000 updates
+2026-09-10 15:24:47,488 [INFO] Pretrain burst done: 5000 updates, mean total_loss=0.1101
+2026-09-10 15:24:47,488 [INFO] Starting measured training: 100 epochs x 1000 steps = 100000 env steps
+2026-09-10 15:28:45,362 [INFO] Epoch 10/100 done (buffer size=15000, cumulative_reward=5892.54, mean_episode_return=1971.7094500009089)
+2026-09-10 15:32:43,741 [INFO] Epoch 20/100 done (buffer size=25000, cumulative_reward=14954.18, mean_episode_return=1365.7397407125354)
+2026-09-10 15:36:42,455 [INFO] Epoch 30/100 done (buffer size=35000, cumulative_reward=30441.60, mean_episode_return=1196.4843705529734)
+2026-09-10 15:40:40,883 [INFO] Epoch 40/100 done (buffer size=45000, cumulative_reward=55800.54, mean_episode_return=3561.2511984600587)
+2026-09-10 15:44:34,903 [INFO] Epoch 50/100 done (buffer size=55000, cumulative_reward=95405.60, mean_episode_return=4725.869353081838)
+2026-09-10 15:48:15,124 [INFO] Epoch 60/100 done (buffer size=65000, cumulative_reward=144402.14, mean_episode_return=5316.376038970255)
+2026-09-10 15:51:55,381 [INFO] Epoch 70/100 done (buffer size=75000, cumulative_reward=209145.82, mean_episode_return=6668.313373079177)
+2026-09-10 15:55:35,485 [INFO] Epoch 80/100 done (buffer size=85000, cumulative_reward=267391.17, mean_episode_return=4043.981734214974)
+2026-09-10 15:59:15,713 [INFO] Epoch 90/100 done (buffer size=95000, cumulative_reward=338339.30, mean_episode_return=8414.36199748997)
+2026-09-10 16:02:56,444 [INFO] Epoch 100/100 done (buffer size=105000, cumulative_reward=405467.69, mean_episode_return=9051.767186599733)
+2026-09-10 16:02:56,444 [INFO] Recording idle tail for 90s...
+2026-09-10 16:04:26,507 [INFO] Run complete. Segment energy summary (kWh unless noted):
+2026-09-10 16:04:26,507 [INFO]   idle_baseline_head: 0.0015915840003401236
+2026-09-10 16:04:26,507 [INFO]   warmup: 3.930713735701046e-06
+2026-09-10 16:04:26,507 [INFO]   world_model_pretrain: 0.003105958296073512
+2026-09-10 16:04:26,507 [INFO]   rollout: 0.059556036786290664
+2026-09-10 16:04:26,507 [INFO]   buffer_sample: 0.002740818849481701
+2026-09-10 16:04:26,507 [INFO]   critic_update: 0.04066595961376383
+2026-09-10 16:04:26,507 [INFO]   actor_update: 0.01554860338132687
+2026-09-10 16:04:26,507 [INFO]   target_update: 0.0028130234009649726
+2026-09-10 16:04:26,507 [INFO]   _sub_segment_wall_time_seconds: {'buffer_sample': 55.55273828666941, 'critic_update': 824.244700457637, 'actor_update': 315.1494286203615, 'target_update': 57.01622813110589}
+2026-09-10 16:04:26,507 [INFO]   idle_baseline_tail: 0.001828659510116043
+2026-09-10 16:04:26,507 [INFO]   _total_kg_co2eq: 0.048706211469082175
+2026-09-10 16:04:26,507 [INFO] Training summary: 100 epochs, final cumulative_reward=405467.69, final mean_episode_return=9051.767186599733, episodes completed=105
+
+Run artifacts written to: results/tdmpc2/HalfCheetah-v5/seed_85062/20260910_152122
+[2026-09-10 16:04:27] [5/10] Finished OK: env=HalfCheetah-v5 seed=85062 -> results/tdmpc2/HalfCheetah-v5/seed_85062/20260910_152122
+[2026-09-10 16:04:27] [6/10] Starting: algo=tdmpc2 env=Ant-v5 seed=331 overrides=configs/overrides/tdmpc2_ant.json
+2026-09-10 16:04:27,705 [INFO] === Experiment run: algo=tdmpc2 env=Ant-v5 seed=331 ===
+2026-09-10 16:04:27,705 [INFO] Run directory: results/tdmpc2/Ant-v5/seed_331/20260910_160427
+2026-09-10 16:04:27,837 [INFO] Using device: cuda
+2026-09-10 16:04:27,935 [INFO] Waiting for thermal baseline before starting...
+2026-09-10 16:04:37,946 [INFO] Thermal gate result: {'gated': True, 'reason': 'reached_reference', 'waited_seconds': 1.0967254638671875e-05, 'final_temp_c': 44.0, 'final_power_w': 29.618}
+2026-09-10 16:04:37,946 [INFO] Settling for 30s (unmeasured)...
+[codecarbon WARNING @ 16:05:07] Multiple instances of codecarbon are allowed to run at the same time.
+2026-09-10 16:05:09,181 [INFO] Recording idle baseline for 90s...
+2026-09-10 16:06:42,753 [INFO] Starting warmup: 5000 steps
+2026-09-10 16:06:43,430 [INFO] Pretraining world model on seed data: 5000 updates
+2026-09-10 16:07:43,479 [INFO] Pretrain burst done: 5000 updates, mean total_loss=0.1533
+2026-09-10 16:07:43,479 [INFO] Starting measured training: 100 epochs x 1000 steps = 100000 env steps
+2026-09-10 16:11:42,391 [INFO] Epoch 10/100 done (buffer size=14822, cumulative_reward=2588.17, mean_episode_return=87.04985582360558)
+2026-09-10 16:15:55,522 [INFO] Epoch 20/100 done (buffer size=24892, cumulative_reward=9907.65, mean_episode_return=189.34596509309551)
+2026-09-10 16:19:59,311 [INFO] Epoch 30/100 done (buffer size=34608, cumulative_reward=19503.07, mean_episode_return=169.0229385207986)
+2026-09-10 16:23:59,176 [INFO] Epoch 40/100 done (buffer size=44877, cumulative_reward=42979.82, mean_episode_return=788.7229379203824)
+2026-09-10 16:27:59,383 [INFO] Epoch 50/100 done (buffer size=54994, cumulative_reward=79260.00, mean_episode_return=124.97074135305057)
+2026-09-10 16:32:00,018 [INFO] Epoch 60/100 done (buffer size=64999, cumulative_reward=122411.74, mean_episode_return=329.0260124674774)
+2026-09-10 16:36:04,264 [INFO] Epoch 70/100 done (buffer size=74982, cumulative_reward=159650.19, mean_episode_return=2556.831343628767)
+2026-09-10 16:40:25,178 [INFO] Epoch 80/100 done (buffer size=84378, cumulative_reward=198984.73, mean_episode_return=1416.003991989688)
+2026-09-10 16:44:43,339 [INFO] Epoch 90/100 done (buffer size=94965, cumulative_reward=229365.36, mean_episode_return=581.719617067352)
+2026-09-10 16:48:53,621 [INFO] Epoch 100/100 done (buffer size=104935, cumulative_reward=271354.32, mean_episode_return=860.066303010032)
+2026-09-10 16:48:53,621 [INFO] Recording idle tail for 90s...
+2026-09-10 16:50:23,686 [INFO] Run complete. Segment energy summary (kWh unless noted):
+2026-09-10 16:50:23,686 [INFO]   idle_baseline_head: 0.0015994413180501078
+2026-09-10 16:50:23,686 [INFO]   warmup: 2.1339869725626147e-05
+2026-09-10 16:50:23,686 [INFO]   world_model_pretrain: 0.003003295840333734
+2026-09-10 16:50:23,686 [INFO]   rollout: 0.07078717957222863
+2026-09-10 16:50:23,686 [INFO]   buffer_sample: 0.003226746330136865
+2026-09-10 16:50:23,686 [INFO]   critic_update: 0.04199730359235081
+2026-09-10 16:50:23,686 [INFO]   actor_update: 0.015486541395869148
+2026-09-10 16:50:23,686 [INFO]   target_update: 0.0028658988565475477
+2026-09-10 16:50:23,686 [INFO]   _sub_segment_wall_time_seconds: {'buffer_sample': 63.43107583295932, 'critic_update': 825.5790435293457, 'actor_update': 304.4329740137873, 'target_update': 56.33757014036746}
+2026-09-10 16:50:23,686 [INFO]   idle_baseline_tail: 0.001814969594614163
+2026-09-10 16:50:23,686 [INFO]   _total_kg_co2eq: 0.05363880723781813
+2026-09-10 16:50:23,686 [INFO] Training summary: 100 epochs, final cumulative_reward=271354.32, final mean_episode_return=860.066303010032, episodes completed=923
+
+Run artifacts written to: results/tdmpc2/Ant-v5/seed_331/20260910_160427
+[2026-09-10 16:50:24] [6/10] Finished OK: env=Ant-v5 seed=331 -> results/tdmpc2/Ant-v5/seed_331/20260910_160427
+[2026-09-10 16:50:24] [7/10] Starting: algo=tdmpc2 env=Ant-v5 seed=958 overrides=configs/overrides/tdmpc2_ant.json
+2026-09-10 16:50:24,884 [INFO] === Experiment run: algo=tdmpc2 env=Ant-v5 seed=958 ===
+2026-09-10 16:50:24,884 [INFO] Run directory: results/tdmpc2/Ant-v5/seed_958/20260910_165024
+2026-09-10 16:50:25,005 [INFO] Using device: cuda
+2026-09-10 16:50:25,093 [INFO] Waiting for thermal baseline before starting...
+2026-09-10 16:50:35,104 [INFO] Thermal gate result: {'gated': True, 'reason': 'reached_reference', 'waited_seconds': 9.775161743164062e-06, 'final_temp_c': 44.0, 'final_power_w': 28.962}
+2026-09-10 16:50:35,104 [INFO] Settling for 30s (unmeasured)...
+[codecarbon WARNING @ 16:51:05] Multiple instances of codecarbon are allowed to run at the same time.
+2026-09-10 16:51:06,336 [INFO] Recording idle baseline for 90s...
+2026-09-10 16:52:40,027 [INFO] Starting warmup: 5000 steps
+2026-09-10 16:52:40,709 [INFO] Pretraining world model on seed data: 5000 updates
+2026-09-10 16:53:40,672 [INFO] Pretrain burst done: 5000 updates, mean total_loss=0.1431
+2026-09-10 16:53:40,672 [INFO] Starting measured training: 100 epochs x 1000 steps = 100000 env steps
+2026-09-10 16:57:39,451 [INFO] Epoch 10/100 done (buffer size=14714, cumulative_reward=1527.61, mean_episode_return=36.96711888919228)
+2026-09-10 17:01:38,504 [INFO] Epoch 20/100 done (buffer size=24692, cumulative_reward=7417.56, mean_episode_return=61.092111929870605)
+2026-09-10 17:05:38,068 [INFO] Epoch 30/100 done (buffer size=34575, cumulative_reward=14043.43, mean_episode_return=59.715080286340225)
+2026-09-10 17:09:37,877 [INFO] Epoch 40/100 done (buffer size=44512, cumulative_reward=29630.58, mean_episode_return=135.22641838149792)
+2026-09-10 17:13:38,230 [INFO] Epoch 50/100 done (buffer size=54964, cumulative_reward=52355.51, mean_episode_return=145.44834886472853)
+2026-09-10 17:17:38,998 [INFO] Epoch 60/100 done (buffer size=64833, cumulative_reward=80818.93, mean_episode_return=498.7134439743855)
+2026-09-10 17:21:54,134 [INFO] Epoch 70/100 done (buffer size=74967, cumulative_reward=115201.18, mean_episode_return=910.4183742698863)
+2026-09-10 17:26:15,334 [INFO] Epoch 80/100 done (buffer size=84964, cumulative_reward=157979.40, mean_episode_return=337.47646528970466)
+2026-09-10 17:30:31,526 [INFO] Epoch 90/100 done (buffer size=94976, cumulative_reward=186743.70, mean_episode_return=122.07149687775426)
+2026-09-10 17:34:52,123 [INFO] Epoch 100/100 done (buffer size=104788, cumulative_reward=215896.59, mean_episode_return=241.9045499775095)
+2026-09-10 17:34:52,123 [INFO] Recording idle tail for 90s...
+2026-09-10 17:36:22,188 [INFO] Run complete. Segment energy summary (kWh unless noted):
+2026-09-10 17:36:22,188 [INFO]   idle_baseline_head: 0.0016301391283097236
+2026-09-10 17:36:22,189 [INFO]   warmup: 2.1368602534057495e-05
+2026-09-10 17:36:22,189 [INFO]   world_model_pretrain: 0.003008649935312817
+2026-09-10 17:36:22,189 [INFO]   rollout: 0.07046928363195609
+2026-09-10 17:36:22,189 [INFO]   buffer_sample: 0.003249412953182278
+2026-09-10 17:36:22,189 [INFO]   critic_update: 0.04181067085478201
+2026-09-10 17:36:22,189 [INFO]   actor_update: 0.015425138964058178
+2026-09-10 17:36:22,189 [INFO]   target_update: 0.0028721975387577415
+2026-09-10 17:36:22,189 [INFO]   _sub_segment_wall_time_seconds: {'buffer_sample': 64.16241500111937, 'critic_update': 825.5871609770256, 'actor_update': 304.58245286816236, 'target_update': 56.713976678922336}
+2026-09-10 17:36:22,189 [INFO]   idle_baseline_tail: 0.0018091944941664717
+2026-09-10 17:36:22,189 [INFO]   _total_kg_co2eq: 0.053445794996906895
+2026-09-10 17:36:22,189 [INFO] Training summary: 100 epochs, final cumulative_reward=215896.59, final mean_episode_return=241.9045499775095, episodes completed=1132
+
+Run artifacts written to: results/tdmpc2/Ant-v5/seed_958/20260910_165024
+[2026-09-10 17:36:22] [7/10] Finished OK: env=Ant-v5 seed=958 -> results/tdmpc2/Ant-v5/seed_958/20260910_165024
+[2026-09-10 17:36:22] [8/10] Starting: algo=tdmpc2 env=Ant-v5 seed=14577 overrides=configs/overrides/tdmpc2_ant.json
+2026-09-10 17:36:23,373 [INFO] === Experiment run: algo=tdmpc2 env=Ant-v5 seed=14577 ===
+2026-09-10 17:36:23,373 [INFO] Run directory: results/tdmpc2/Ant-v5/seed_14577/20260910_173623
+2026-09-10 17:36:23,503 [INFO] Using device: cuda
+2026-09-10 17:36:23,596 [INFO] Waiting for thermal baseline before starting...
+2026-09-10 17:36:33,607 [INFO] Thermal gate result: {'gated': True, 'reason': 'reached_reference', 'waited_seconds': 1.049041748046875e-05, 'final_temp_c': 44.0, 'final_power_w': 28.918}
+2026-09-10 17:36:33,607 [INFO] Settling for 30s (unmeasured)...
+[codecarbon WARNING @ 17:37:03] Multiple instances of codecarbon are allowed to run at the same time.
+2026-09-10 17:37:04,842 [INFO] Recording idle baseline for 90s...
+2026-09-10 17:38:39,166 [INFO] Starting warmup: 5000 steps
+2026-09-10 17:38:39,854 [INFO] Pretraining world model on seed data: 5000 updates
+2026-09-10 17:39:44,416 [INFO] Pretrain burst done: 5000 updates, mean total_loss=0.1441
+2026-09-10 17:39:44,416 [INFO] Starting measured training: 100 epochs x 1000 steps = 100000 env steps
+2026-09-10 17:43:45,700 [INFO] Epoch 10/100 done (buffer size=14495, cumulative_reward=-943.26, mean_episode_return=3.5132161426664523)
+2026-09-10 17:47:45,361 [INFO] Epoch 20/100 done (buffer size=24376, cumulative_reward=5807.62, mean_episode_return=84.43239650440763)
+2026-09-10 17:51:45,895 [INFO] Epoch 30/100 done (buffer size=34035, cumulative_reward=14019.64, mean_episode_return=94.37388008110418)
+2026-09-10 17:55:55,180 [INFO] Epoch 40/100 done (buffer size=44964, cumulative_reward=27679.60, mean_episode_return=94.21053914676153)
+2026-09-10 18:00:15,941 [INFO] Epoch 50/100 done (buffer size=54412, cumulative_reward=38385.56, mean_episode_return=223.8942085912024)
+2026-09-10 18:04:17,551 [INFO] Epoch 60/100 done (buffer size=64991, cumulative_reward=54800.94, mean_episode_return=75.71690640587607)
+2026-09-10 18:08:18,801 [INFO] Epoch 70/100 done (buffer size=74983, cumulative_reward=75518.82, mean_episode_return=60.216426537736254)
+2026-09-10 18:12:21,016 [INFO] Epoch 80/100 done (buffer size=84203, cumulative_reward=93572.57, mean_episode_return=63.13425970228176)
+2026-09-10 18:16:43,714 [INFO] Epoch 90/100 done (buffer size=94936, cumulative_reward=113025.60, mean_episode_return=45.46706978129373)
+2026-09-10 18:21:06,614 [INFO] Epoch 100/100 done (buffer size=104999, cumulative_reward=136690.48, mean_episode_return=158.21779360794287)
+2026-09-10 18:21:06,614 [INFO] Recording idle tail for 90s...
+2026-09-10 18:22:36,684 [INFO] Run complete. Segment energy summary (kWh unless noted):
+2026-09-10 18:22:36,684 [INFO]   idle_baseline_head: 0.001628498381993025
+2026-09-10 18:22:36,684 [INFO]   warmup: 2.1277514615767852e-05
+2026-09-10 18:22:36,684 [INFO]   world_model_pretrain: 0.003067774329059622
+2026-09-10 18:22:36,684 [INFO]   rollout: 0.0706850145668299
+2026-09-10 18:22:36,684 [INFO]   buffer_sample: 0.003345517814566038
+2026-09-10 18:22:36,684 [INFO]   critic_update: 0.04210533520620324
+2026-09-10 18:22:36,684 [INFO]   actor_update: 0.015489970451704905
+2026-09-10 18:22:36,684 [INFO]   target_update: 0.0029401564533498717
+2026-09-10 18:22:36,684 [INFO]   _sub_segment_wall_time_seconds: {'buffer_sample': 66.04955818967574, 'critic_update': 831.2730470869319, 'actor_update': 305.8138564534747, 'target_update': 58.04663000351502}
+2026-09-10 18:22:36,684 [INFO]   idle_baseline_tail: 0.0018192355464769772
+2026-09-10 18:22:36,684 [INFO]   _total_kg_co2eq: 0.053753115599289886
+2026-09-10 18:22:36,684 [INFO] Training summary: 100 epochs, final cumulative_reward=136690.48, final mean_episode_return=158.21779360794287, episodes completed=2224
+
+Run artifacts written to: results/tdmpc2/Ant-v5/seed_14577/20260910_173623
+[2026-09-10 18:22:37] [8/10] Finished OK: env=Ant-v5 seed=14577 -> results/tdmpc2/Ant-v5/seed_14577/20260910_173623
+[2026-09-10 18:22:37] [9/10] Starting: algo=tdmpc2 env=Ant-v5 seed=43611 overrides=configs/overrides/tdmpc2_ant.json
+2026-09-10 18:22:37,882 [INFO] === Experiment run: algo=tdmpc2 env=Ant-v5 seed=43611 ===
+2026-09-10 18:22:37,882 [INFO] Run directory: results/tdmpc2/Ant-v5/seed_43611/20260910_182237
+2026-09-10 18:22:38,004 [INFO] Using device: cuda
+2026-09-10 18:22:38,095 [INFO] Waiting for thermal baseline before starting...
+2026-09-10 18:22:48,106 [INFO] Thermal gate result: {'gated': True, 'reason': 'reached_reference', 'waited_seconds': 1.0013580322265625e-05, 'final_temp_c': 44.0, 'final_power_w': 29.306}
+2026-09-10 18:22:48,107 [INFO] Settling for 30s (unmeasured)...
+[codecarbon WARNING @ 18:23:18] Multiple instances of codecarbon are allowed to run at the same time.
+2026-09-10 18:23:19,342 [INFO] Recording idle baseline for 90s...
+2026-09-10 18:24:52,929 [INFO] Starting warmup: 5000 steps
+2026-09-10 18:24:53,609 [INFO] Pretraining world model on seed data: 5000 updates
+2026-09-10 18:25:53,877 [INFO] Pretrain burst done: 5000 updates, mean total_loss=0.1520
+2026-09-10 18:25:53,877 [INFO] Starting measured training: 100 epochs x 1000 steps = 100000 env steps
+2026-09-10 18:29:53,302 [INFO] Epoch 10/100 done (buffer size=14850, cumulative_reward=3035.18, mean_episode_return=80.55156351331136)
+2026-09-10 18:34:00,049 [INFO] Epoch 20/100 done (buffer size=24946, cumulative_reward=9614.31, mean_episode_return=159.14273190461628)
+2026-09-10 18:38:17,168 [INFO] Epoch 30/100 done (buffer size=34836, cumulative_reward=21754.77, mean_episode_return=73.49363375541633)
+2026-09-10 18:42:17,590 [INFO] Epoch 40/100 done (buffer size=44990, cumulative_reward=31805.84, mean_episode_return=76.3984042533028)
+2026-09-10 18:46:18,179 [INFO] Epoch 50/100 done (buffer size=54097, cumulative_reward=49945.76, mean_episode_return=67.08549907838704)
+2026-09-10 18:50:19,198 [INFO] Epoch 60/100 done (buffer size=64976, cumulative_reward=68333.97, mean_episode_return=105.54927542138088)
+2026-09-10 18:54:20,194 [INFO] Epoch 70/100 done (buffer size=74994, cumulative_reward=91028.05, mean_episode_return=107.10012779918311)
+2026-09-10 18:58:21,665 [INFO] Epoch 80/100 done (buffer size=84979, cumulative_reward=111788.24, mean_episode_return=43.46357884024237)
+2026-09-10 19:02:22,813 [INFO] Epoch 90/100 done (buffer size=94971, cumulative_reward=146773.66, mean_episode_return=164.10761408894348)
+2026-09-10 19:06:24,786 [INFO] Epoch 100/100 done (buffer size=104993, cumulative_reward=167818.91, mean_episode_return=114.87071674626786)
+2026-09-10 19:06:24,786 [INFO] Recording idle tail for 90s...
+2026-09-10 19:07:54,855 [INFO] Run complete. Segment energy summary (kWh unless noted):
+2026-09-10 19:07:54,855 [INFO]   idle_baseline_head: 0.0016136224065064287
+2026-09-10 19:07:54,855 [INFO]   warmup: 2.143303741427888e-05
+2026-09-10 19:07:54,855 [INFO]   world_model_pretrain: 0.002996637946461606
+2026-09-10 19:07:54,855 [INFO]   rollout: 0.07082598993144841
+2026-09-10 19:07:54,855 [INFO]   buffer_sample: 0.0034466308696003245
+2026-09-10 19:07:54,855 [INFO]   critic_update: 0.04118691609273915
+2026-09-10 19:07:54,855 [INFO]   actor_update: 0.015329928054648091
+2026-09-10 19:07:54,855 [INFO]   target_update: 0.002958164727871428
+2026-09-10 19:07:54,855 [INFO]   _sub_segment_wall_time_seconds: {'buffer_sample': 66.33558527472633, 'critic_update': 792.7040312819227, 'actor_update': 295.04747917564237, 'target_update': 56.93432107661647}
+2026-09-10 19:07:54,855 [INFO]   idle_baseline_tail: 0.0018885042889917325
+2026-09-10 19:07:54,855 [INFO]   _total_kg_co2eq: 0.0534350406993443
+2026-09-10 19:07:54,855 [INFO] Training summary: 100 epochs, final cumulative_reward=167818.91, final mean_episode_return=114.87071674626786, episodes completed=2010
+
+Run artifacts written to: results/tdmpc2/Ant-v5/seed_43611/20260910_182237
+[2026-09-10 19:07:55] [9/10] Finished OK: env=Ant-v5 seed=43611 -> results/tdmpc2/Ant-v5/seed_43611/20260910_182237
+[2026-09-10 19:07:55] [10/10] Starting: algo=tdmpc2 env=Ant-v5 seed=85062 overrides=configs/overrides/tdmpc2_ant.json
+2026-09-10 19:07:56,053 [INFO] === Experiment run: algo=tdmpc2 env=Ant-v5 seed=85062 ===
+2026-09-10 19:07:56,053 [INFO] Run directory: results/tdmpc2/Ant-v5/seed_85062/20260910_190756
+2026-09-10 19:07:56,175 [INFO] Using device: cuda
+2026-09-10 19:07:56,268 [INFO] Waiting for thermal baseline before starting...
+2026-09-10 19:08:16,279 [INFO] Thermal gate result: {'gated': True, 'reason': 'reached_reference', 'waited_seconds': 9.775161743164062e-06, 'final_temp_c': 44.0, 'final_power_w': 32.083}
+2026-09-10 19:08:16,279 [INFO] Settling for 30s (unmeasured)...
+[codecarbon WARNING @ 19:08:46] Multiple instances of codecarbon are allowed to run at the same time.
+2026-09-10 19:08:47,513 [INFO] Recording idle baseline for 90s...
+2026-09-10 19:10:21,088 [INFO] Starting warmup: 5000 steps
+2026-09-10 19:10:21,769 [INFO] Pretraining world model on seed data: 5000 updates
+2026-09-10 19:11:22,167 [INFO] Pretrain burst done: 5000 updates, mean total_loss=0.1484
+2026-09-10 19:11:22,167 [INFO] Starting measured training: 100 epochs x 1000 steps = 100000 env steps
+2026-09-10 19:15:20,914 [INFO] Epoch 10/100 done (buffer size=14338, cumulative_reward=-637.72, mean_episode_return=-457.8229295062632)
+2026-09-10 19:19:30,088 [INFO] Epoch 20/100 done (buffer size=24851, cumulative_reward=6817.52, mean_episode_return=91.2953083670884)
+2026-09-10 19:23:34,646 [INFO] Epoch 30/100 done (buffer size=34994, cumulative_reward=19462.21, mean_episode_return=131.7279746304543)
+2026-09-10 19:27:34,550 [INFO] Epoch 40/100 done (buffer size=44326, cumulative_reward=31341.05, mean_episode_return=84.34338607117667)
+2026-09-10 19:31:34,787 [INFO] Epoch 50/100 done (buffer size=54909, cumulative_reward=54269.24, mean_episode_return=152.65602481043408)
+2026-09-10 19:35:35,627 [INFO] Epoch 60/100 done (buffer size=64982, cumulative_reward=69431.01, mean_episode_return=133.70806433611648)
+2026-09-10 19:39:36,757 [INFO] Epoch 70/100 done (buffer size=74760, cumulative_reward=87568.55, mean_episode_return=201.97275280555843)
+2026-09-10 19:43:37,919 [INFO] Epoch 80/100 done (buffer size=84988, cumulative_reward=115486.49, mean_episode_return=158.24118570780377)
+2026-09-10 19:47:39,990 [INFO] Epoch 90/100 done (buffer size=94846, cumulative_reward=143665.91, mean_episode_return=129.4817181608158)
+2026-09-10 19:51:41,776 [INFO] Epoch 100/100 done (buffer size=104973, cumulative_reward=175396.84, mean_episode_return=194.33661046403927)
+2026-09-10 19:51:41,776 [INFO] Recording idle tail for 90s...
+2026-09-10 19:53:11,846 [INFO] Run complete. Segment energy summary (kWh unless noted):
+2026-09-10 19:53:11,846 [INFO]   idle_baseline_head: 0.0016793187667022897
+2026-09-10 19:53:11,846 [INFO]   warmup: 2.1394899306412642e-05
+2026-09-10 19:53:11,846 [INFO]   world_model_pretrain: 0.003010089686502475
+2026-09-10 19:53:11,846 [INFO]   rollout: 0.07081029322332989
+2026-09-10 19:53:11,846 [INFO]   buffer_sample: 0.003433526101845559
+2026-09-10 19:53:11,846 [INFO]   critic_update: 0.0409078267429317
+2026-09-10 19:53:11,846 [INFO]   actor_update: 0.015292211438995161
+2026-09-10 19:53:11,846 [INFO]   target_update: 0.0029533707335490465
+2026-09-10 19:53:11,846 [INFO]   _sub_segment_wall_time_seconds: {'buffer_sample': 65.8204111932464, 'critic_update': 784.1996528858654, 'actor_update': 293.1504276107589, 'target_update': 56.615872523529106}
+2026-09-10 19:53:11,846 [INFO]   idle_baseline_tail: 0.0018337409958976425
+2026-09-10 19:53:11,846 [INFO]   _total_kg_co2eq: 0.05331083169286248
+2026-09-10 19:53:11,846 [INFO] Training summary: 100 epochs, final cumulative_reward=175396.84, final mean_episode_return=194.33661046403927, episodes completed=1864
+
+Run artifacts written to: results/tdmpc2/Ant-v5/seed_85062/20260910_190756
+[2026-09-10 19:53:12] [10/10] Finished OK: env=Ant-v5 seed=85062 -> results/tdmpc2/Ant-v5/seed_85062/20260910_190756
+[2026-09-10 19:53:12] Sweep complete: 10/10 runs succeeded, 0 failed.
