@@ -2,9 +2,11 @@
 #
 # UTD (update-to-data ratio) sweep: updates_per_env_step in {2, 4}, across
 # seeds {331, 958, 14577, 43611, 85062}, for:
-#   - sac  on Ant-v5 only (HalfCheetah-v5 data already collected)
-#   - td3  on HalfCheetah-v5 and Ant-v5
-# -- 30 runs total.
+#   - mbpo on HalfCheetah-v5 and Ant-v5
+# -- 20 runs total.
+#
+# Shuts the machine down when the sweep is done (see bottom of script) --
+# this is meant to be launched unattended (e.g. overnight).
 #
 # Each run needs sudo (for GPU clock locking + CPU governor pinning, see
 # cli_commands.txt), so this script primes a sudo credential cache once up
@@ -22,20 +24,27 @@
 set -uo pipefail
 cd "$(dirname "$0")"
 
-# algo:env combos to sweep -- sac:HalfCheetah-v5 is intentionally omitted,
-# that data has already been collected.
-COMBOS=("sac:Ant-v5" "td3:HalfCheetah-v5" "td3:Ant-v5")
+# algo:env combos to sweep.
+COMBOS=("mbpo:HalfCheetah-v5" "mbpo:Ant-v5")
 SEEDS=(331 958 14577 43611 85062)
 UTDS=(2 4)
 PYTHON_BIN="rl-exp/bin/python"
 
-# Per-algo --warmup-steps. TD3's paper hyperparameters use 10,000 steps for
-# HalfCheetah-v1/Ant-v1 ("stable length environments", see TD3Config's
-# docstring in configs/config.py) rather than the CLI's default of 5,000;
-# SAC uses the CLI default for both envs, so no override is needed there.
+# Per-algo --warmup-steps. MBPO uses the CLI default for both envs, so no
+# override is needed here.
 declare -A ALGO_WARMUP_STEPS=(
-    ["sac"]=""
-    ["td3"]="10000"
+    ["mbpo"]=""
+)
+
+# Per-(algo,env) --algo-config-overrides file prefix, combined below with
+# "_utd${utd}.json". MBPO needs Ant-v5's own rollout-schedule overrides
+# (mbpo_ant.json) layered under the UTD override, since run_experiment.py
+# only accepts one overrides file per run -- hence the separate
+# mbpo_ant_utd{2,4}.json files (vs. plain mbpo_utd{2,4}.json for
+# HalfCheetah-v5, which uses MBPOConfig defaults otherwise).
+declare -A OVERRIDE_PREFIX=(
+    ["mbpo:HalfCheetah-v5"]="mbpo"
+    ["mbpo:Ant-v5"]="mbpo_ant"
 )
 
 STATUS_FILE="results/_utd_sweep_status.json"
@@ -133,8 +142,9 @@ for combo in "${COMBOS[@]}"; do
     algo="${combo%%:*}"
     env="${combo#*:}"
     warmup_steps="${ALGO_WARMUP_STEPS[$algo]}"
+    override_prefix="${OVERRIDE_PREFIX[$combo]}"
     for utd in "${UTDS[@]}"; do
-        overrides="configs/overrides/${algo}_utd${utd}.json"
+        overrides="configs/overrides/${override_prefix}_utd${utd}.json"
         for seed in "${SEEDS[@]}"; do
             idx=$((idx + 1))
 
@@ -176,4 +186,12 @@ for combo in "${COMBOS[@]}"; do
 done
 
 log "Sweep complete: $((TOTAL - fail_count))/$TOTAL runs succeeded, $fail_count failed."
+
+# ---------------- shutdown ----------------
+# Always powers the machine off once the sweep is done (success or not) --
+# this is meant to run unattended overnight. 60s grace period so you can
+# still Ctrl-C it if you're at the console when it finishes.
+log "Sweep finished. Shutting down in 60s -- press Ctrl-C now to cancel."
+sleep 60
+sudo shutdown -h now
 exit $(( fail_count > 0 ? 1 : 0 ))
