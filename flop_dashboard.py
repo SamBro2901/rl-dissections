@@ -26,6 +26,7 @@ Usage:
 """
 import argparse
 import os
+import re
 
 import pandas as pd
 import plotly.express as px
@@ -50,6 +51,23 @@ ALGO_COLORS = {"sac": "#1f77b4", "td3": "#2ca02c", "mbpo": "#d62728", "tdmpc2": 
 # methodology's "measured vs. allocated / caveats" reporting standard.
 NON_FLOP_SEGMENTS = {"buffer_sample", "target_update", "warmup", "idle_baseline_head", "idle_baseline_tail"}
 
+# architecture_signature is "bs{batch_size}_h{hidden_sizes}..." for sac/td3/mbpo
+# (see flop_analysis/flop_keys.py) -- pull the hidden_sizes component out into
+# its own facet so the width sweep (256x256 / 512x512 / 1024x1024) can be
+# compared independent of the other architecture details (batch size, MBPO's
+# ensemble/model config, ...). TD-MPC2's signature also has an "h" component
+# but it's the MPPI planning horizon, not a network width -- excluded below.
+HIDDEN_SIZES_RE = re.compile(r"^bs\d+_h([\dx]+)(?:_|$)")
+HIDDEN_SIZES_ALGOS = {"sac", "td3", "mbpo"}
+
+
+def extract_hidden_sizes(algo, architecture_signature):
+    if algo not in HIDDEN_SIZES_ALGOS or not isinstance(architecture_signature, str):
+        return None
+    m = HIDDEN_SIZES_RE.match(architecture_signature)
+    return m.group(1) if m else None
+
+
 # Dimensions pivotable onto X-axis / Color / Facet, keyed by the option value
 # used in the dropdowns. "col" is the dataframe column (post category-cast).
 DIMENSIONS = {
@@ -58,6 +76,7 @@ DIMENSIONS = {
     "env_id": {"label": "Environment", "col": "env_id", "order": None},
     "updates_per_env_step": {"label": "UTD (updates/env step)", "col": "utd_str", "order": None},
     "architecture_signature": {"label": "Architecture", "col": "architecture_signature", "order": None},
+    "hidden_sizes": {"label": "Hidden sizes", "col": "hidden_sizes", "order": None},
 }
 PER_RUN_DIMENSIONS = dict(DIMENSIONS, seed=dict(label="Seed", col="seed_str", order=None))
 
@@ -83,6 +102,7 @@ def load_cross_seed(flop_dir):
     path = os.path.join(flop_dir, "cross_seed_energy_per_flop.csv")
     df = pd.read_csv(path)
     df["utd_str"] = "UTD " + df["updates_per_env_step"].astype(str)
+    df["hidden_sizes"] = [extract_hidden_sizes(a, s) for a, s in zip(df["algo"], df["architecture_signature"])]
     df["is_flop_normalized"] = ~df["segment"].isin(NON_FLOP_SEGMENTS)
     return df
 
@@ -92,13 +112,14 @@ def load_per_run(flop_dir):
     df = pd.read_csv(path)
     df["utd_str"] = "UTD " + df["updates_per_env_step"].astype(str)
     df["seed_str"] = df["seed"].astype(str)
+    df["hidden_sizes"] = [extract_hidden_sizes(a, s) for a, s in zip(df["algo"], df["architecture_signature"])]
     df["is_flop_normalized"] = ~df["segment"].isin(NON_FLOP_SEGMENTS)
     if df["included_in_cross_seed_avg"].dtype == object:
         df["included_in_cross_seed_avg"] = df["included_in_cross_seed_avg"].astype(str).str.strip().eq("True")
     return df
 
 
-FILTER_FIELDS = ["algo", "env_id", "architecture_signature", "updates_per_env_step", "segment"]
+FILTER_FIELDS = ["algo", "env_id", "architecture_signature", "hidden_sizes", "updates_per_env_step", "segment"]
 PER_RUN_FILTER_FIELDS = FILTER_FIELDS + ["seed"]
 
 
@@ -274,6 +295,7 @@ def make_app(flop_dir):
                 filter_dropdown(f"{prefix}-algo", "Algorithm"),
                 filter_dropdown(f"{prefix}-env", "Environment"),
                 filter_dropdown(f"{prefix}-arch", "Architecture"),
+                filter_dropdown(f"{prefix}-hidden", "Hidden sizes"),
                 filter_dropdown(f"{prefix}-utd", "UTD"),
                 filter_dropdown(f"{prefix}-segment", "Segment"),
             ] + ([filter_dropdown(f"{prefix}-seed", "Seed")] if prefix == "pr" else []),
@@ -377,32 +399,32 @@ def make_app(flop_dir):
     # ---- Cross-seed tab: crossfilter dropdown options ----
     @app.callback(
         Output("cs-algo", "options"), Output("cs-env", "options"), Output("cs-arch", "options"),
-        Output("cs-utd", "options"), Output("cs-segment", "options"),
+        Output("cs-hidden", "options"), Output("cs-utd", "options"), Output("cs-segment", "options"),
         Input("cs-algo", "value"), Input("cs-env", "value"), Input("cs-arch", "value"),
-        Input("cs-utd", "value"), Input("cs-segment", "value"),
+        Input("cs-hidden", "value"), Input("cs-utd", "value"), Input("cs-segment", "value"),
     )
-    def _cs_options(algo, env, arch, utd, segment):
+    def _cs_options(algo, env, arch, hidden, utd, segment):
         current = {"algo": algo, "env_id": env, "architecture_signature": arch,
-                   "updates_per_env_step": utd, "segment": segment}
+                   "hidden_sizes": hidden, "updates_per_env_step": utd, "segment": segment}
         opts = crossfilter_options(cross_df, FILTER_FIELDS, current)
         return tuple([{"label": str(v), "value": v} for v in opts[f]] for f in FILTER_FIELDS)
 
     @app.callback(
         Output("cs-graph", "figure"), Output("cs-table-wrap", "children"),
         Input("cs-algo", "value"), Input("cs-env", "value"), Input("cs-arch", "value"),
-        Input("cs-utd", "value"), Input("cs-segment", "value"),
+        Input("cs-hidden", "value"), Input("cs-utd", "value"), Input("cs-segment", "value"),
         Input("cs-xaxis", "value"), Input("cs-color", "value"), Input("cs-facet", "value"),
         Input("cs-metric", "value"), Input("cs-logy", "value"),
     )
-    def _cs_update(algo, env, arch, utd, segment, x_dim, color_dim, facet_dim, metric, logy):
+    def _cs_update(algo, env, arch, hidden, utd, segment, x_dim, color_dim, facet_dim, metric, logy):
         current = {"algo": algo, "env_id": env, "architecture_signature": arch,
-                   "updates_per_env_step": utd, "segment": segment}
+                   "hidden_sizes": hidden, "updates_per_env_step": utd, "segment": segment}
         filtered = apply_filters(cross_df, FILTER_FIELDS, current)
         color_dim = None if color_dim == NONE_VALUE else color_dim
         facet_dim = None if facet_dim == NONE_VALUE else facet_dim
         metric_label = dict(CROSS_SEED_METRICS)[metric]
         fig = build_grouped_bar(filtered, DIMENSIONS, x_dim, color_dim, facet_dim, metric, metric_label, bool(logy))
-        display_cols = ["algo", "env_id", "architecture_signature", "updates_per_env_step", "segment",
+        display_cols = ["algo", "env_id", "architecture_signature", "hidden_sizes", "updates_per_env_step", "segment",
                          "n_seeds", "mean_energy_kwh", "mean_energy_joules", "total_flops",
                          "mean_energy_per_flop_j_per_flop"]
         table = dash_table.DataTable(
@@ -417,32 +439,33 @@ def make_app(flop_dir):
     # ---- Per-run tab: crossfilter dropdown options ----
     @app.callback(
         Output("pr-algo", "options"), Output("pr-env", "options"), Output("pr-arch", "options"),
-        Output("pr-utd", "options"), Output("pr-segment", "options"), Output("pr-seed", "options"),
+        Output("pr-hidden", "options"), Output("pr-utd", "options"), Output("pr-segment", "options"),
+        Output("pr-seed", "options"),
         Input("pr-algo", "value"), Input("pr-env", "value"), Input("pr-arch", "value"),
-        Input("pr-utd", "value"), Input("pr-segment", "value"), Input("pr-seed", "value"),
-        Input("pr-canonical", "value"),
+        Input("pr-hidden", "value"), Input("pr-utd", "value"), Input("pr-segment", "value"),
+        Input("pr-seed", "value"), Input("pr-canonical", "value"),
     )
-    def _pr_options(algo, env, arch, utd, segment, seed, canonical):
+    def _pr_options(algo, env, arch, hidden, utd, segment, seed, canonical):
         base = per_run_df[per_run_df["included_in_cross_seed_avg"]] if canonical == "canonical" else per_run_df
         current = {"algo": algo, "env_id": env, "architecture_signature": arch,
-                   "updates_per_env_step": utd, "segment": segment, "seed": seed}
+                   "hidden_sizes": hidden, "updates_per_env_step": utd, "segment": segment, "seed": seed}
         opts = crossfilter_options(base, PER_RUN_FILTER_FIELDS, current)
         return tuple([{"label": str(v), "value": v} for v in opts[f]] for f in PER_RUN_FILTER_FIELDS)
 
     @app.callback(
         Output("pr-graph", "figure"), Output("pr-table-wrap", "children"),
         Input("pr-algo", "value"), Input("pr-env", "value"), Input("pr-arch", "value"),
-        Input("pr-utd", "value"), Input("pr-segment", "value"), Input("pr-seed", "value"),
-        Input("pr-canonical", "value"),
+        Input("pr-hidden", "value"), Input("pr-utd", "value"), Input("pr-segment", "value"),
+        Input("pr-seed", "value"), Input("pr-canonical", "value"),
         Input("pr-charttype", "value"),
         Input("pr-xaxis", "value"), Input("pr-color", "value"), Input("pr-facet", "value"),
         Input("pr-metric", "value"), Input("pr-logy", "value"),
     )
-    def _pr_update(algo, env, arch, utd, segment, seed, canonical, charttype,
+    def _pr_update(algo, env, arch, hidden, utd, segment, seed, canonical, charttype,
                     x_dim, color_dim, facet_dim, metric, logy):
         base = per_run_df[per_run_df["included_in_cross_seed_avg"]] if canonical == "canonical" else per_run_df
         current = {"algo": algo, "env_id": env, "architecture_signature": arch,
-                   "updates_per_env_step": utd, "segment": segment, "seed": seed}
+                   "hidden_sizes": hidden, "updates_per_env_step": utd, "segment": segment, "seed": seed}
         filtered = apply_filters(base, PER_RUN_FILTER_FIELDS, current)
         color_dim = None if color_dim == NONE_VALUE else color_dim
         facet_dim = None if facet_dim == NONE_VALUE else facet_dim
@@ -451,7 +474,7 @@ def make_app(flop_dir):
             fig = build_box(filtered, PER_RUN_DIMENSIONS, x_dim, color_dim, facet_dim, metric, metric_label, bool(logy))
         else:
             fig = build_grouped_bar(filtered, PER_RUN_DIMENSIONS, x_dim, color_dim, facet_dim, metric, metric_label, bool(logy))
-        display_cols = ["algo", "env_id", "architecture_signature", "updates_per_env_step", "seed",
+        display_cols = ["algo", "env_id", "architecture_signature", "hidden_sizes", "updates_per_env_step", "seed",
                          "included_in_cross_seed_avg", "segment", "call_count", "total_flops",
                          "total_energy_kwh", "total_energy_joules", "energy_per_flop_j_per_flop",
                          "run_dir", "note"]

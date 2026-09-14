@@ -17,6 +17,40 @@
           "actor_forward_bs1_analytic": 2344960,
           "critic_fwdbwd_analytic_approx": 3579838464
         }
+      },
+      "bs256_h256x256": {
+        "obs_dim": 105,
+        "act_dim": 8,
+        "hidden_sizes": [
+          256,
+          256
+        ],
+        "batch_size": 256,
+        "actor_forward_bs1": 193024,
+        "critic_fwdbwd": 407764992,
+        "actor_fwdbwd": 328466432,
+        "target_update_elementwise_ops": 380932,
+        "_analytic_cross_check": {
+          "actor_forward_bs1_analytic": 193024,
+          "critic_fwdbwd_analytic_approx": 290979840
+        }
+      },
+      "bs256_h512x512": {
+        "obs_dim": 105,
+        "act_dim": 8,
+        "hidden_sizes": [
+          512,
+          512
+        ],
+        "batch_size": 256,
+        "actor_forward_bs1": 648192,
+        "critic_fwdbwd": 1419509760,
+        "actor_fwdbwd": 1126694912,
+        "target_update_elementwise_ops": 1286148,
+        "_analytic_cross_check": {
+          "actor_forward_bs1_analytic": 648192,
+          "critic_fwdbwd_analytic_approx": 984612864
+        }
       }
     },
     "HalfCheetah-v5": {
@@ -157,6 +191,32 @@
         "critic_fwdbwd": 2051072000,
         "actor_fwdbwd": 1143193600,
         "target_update_elementwise_ops": 7002132
+      },
+      "bs100_h256x256": {
+        "obs_dim": 105,
+        "act_dim": 8,
+        "hidden_sizes": [
+          256,
+          256
+        ],
+        "batch_size": 100,
+        "actor_forward_bs1": 188928,
+        "critic_fwdbwd": 158873600,
+        "actor_fwdbwd": 89190400,
+        "target_update_elementwise_ops": 570900
+      },
+      "bs100_h512x512": {
+        "obs_dim": 105,
+        "act_dim": 8,
+        "hidden_sizes": [
+          512,
+          512
+        ],
+        "batch_size": 100,
+        "actor_forward_bs1": 640000,
+        "critic_fwdbwd": 553676800,
+        "actor_fwdbwd": 309452800,
+        "target_update_elementwise_ops": 1928212
       }
     },
     "HalfCheetah-v5": {
@@ -172,6 +232,32 @@
         "critic_fwdbwd": 1922048000,
         "actor_fwdbwd": 1069056000,
         "target_update_elementwise_ops": 6449168
+      },
+      "bs100_h256x256": {
+        "obs_dim": 17,
+        "act_dim": 6,
+        "hidden_sizes": [
+          256,
+          256
+        ],
+        "batch_size": 100,
+        "actor_forward_bs1": 142848,
+        "critic_fwdbwd": 126617600,
+        "actor_fwdbwd": 70656000,
+        "target_update_elementwise_ops": 432656
+      },
+      "bs100_h512x512": {
+        "obs_dim": 17,
+        "act_dim": 6,
+        "hidden_sizes": [
+          512,
+          512
+        ],
+        "batch_size": 100,
+        "actor_forward_bs1": 547840,
+        "critic_fwdbwd": 489164800,
+        "actor_fwdbwd": 272384000,
+        "target_update_elementwise_ops": 1651728
       }
     }
   },
@@ -189,6 +275,58 @@
         "critic_fwdbwd": 5254938624,
         "actor_fwdbwd": 4132438016,
         "target_update_elementwise_ops": 4669444,
+        "_analytic_cross_check": {
+          "dynamics_member_fwdbwd_analytic_approx": 284160000
+        },
+        "ensemble_size": 7,
+        "model_hidden_sizes": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "model_train_batch_size": 256,
+        "dynamics_member_fwdbwd": 272588800,
+        "dynamics_ensemble_forward_all_bs1": 2590000
+      },
+      "bs256_h256x256_ens7_mh200x200x200x200_mb256": {
+        "obs_dim": 105,
+        "act_dim": 8,
+        "hidden_sizes": [
+          256,
+          256
+        ],
+        "batch_size": 256,
+        "actor_forward_bs1": 193024,
+        "critic_fwdbwd": 407764992,
+        "actor_fwdbwd": 328466432,
+        "target_update_elementwise_ops": 380932,
+        "_analytic_cross_check": {
+          "dynamics_member_fwdbwd_analytic_approx": 284160000
+        },
+        "ensemble_size": 7,
+        "model_hidden_sizes": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "model_train_batch_size": 256,
+        "dynamics_member_fwdbwd": 272588800,
+        "dynamics_ensemble_forward_all_bs1": 2590000
+      },
+      "bs256_h512x512_ens7_mh200x200x200x200_mb256": {
+        "obs_dim": 105,
+        "act_dim": 8,
+        "hidden_sizes": [
+          512,
+          512
+        ],
+        "batch_size": 256,
+        "actor_forward_bs1": 648192,
+        "critic_fwdbwd": 1419509760,
+        "actor_fwdbwd": 1126694912,
+        "target_update_elementwise_ops": 1286148,
         "_analytic_cross_check": {
           "dynamics_member_fwdbwd_analytic_approx": 284160000
         },
@@ -243,6 +381,32 @@
         "critic_fwdbwd": 4923588608,
         "actor_fwdbwd": 3845128192,
         "target_update_elementwise_ops": 4300804,
+        "_analytic_cross_check": {
+          "dynamics_member_fwdbwd_analytic_approx": 202444800
+        },
+        "ensemble_size": 7,
+        "model_hidden_sizes": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "model_train_batch_size": 256,
+        "dynamics_member_fwdbwd": 200089600,
+        "dynamics_ensemble_forward_all_bs1": 1845200
+      },
+      "bs256_h512x512_ens7_mh200x200x200x200_mb256": {
+        "obs_dim": 17,
+        "act_dim": 6,
+        "hidden_sizes": [
+          512,
+          512
+        ],
+        "batch_size": 256,
+        "actor_forward_bs1": 553984,
+        "critic_fwdbwd": 1253834752,
+        "actor_fwdbwd": 983040000,
+        "target_update_elementwise_ops": 1101828,
         "_analytic_cross_check": {
           "dynamics_member_fwdbwd_analytic_approx": 202444800
         },
