@@ -1,0 +1,32 @@
+2026-09-12 22:31:03,112 [INFO] === Experiment run: algo=sac env=Ant-v5 seed=43611 ===
+2026-09-12 22:31:03,112 [INFO] Run directory: results/sac/Ant-v5/seed_43611/20260912_223103
+2026-09-12 22:31:03,252 [INFO] Using device: cuda
+2026-09-12 22:31:03,349 [INFO] Waiting for thermal baseline before starting...
+2026-09-12 22:31:13,360 [INFO] Thermal gate result: {'gated': True, 'reason': 'reached_reference', 'waited_seconds': 1.0251998901367188e-05, 'final_temp_c': 42.0, 'final_power_w': 25.426}
+2026-09-12 22:31:13,360 [INFO] Settling for 30s (unmeasured)...
+2026-09-12 22:31:44,598 [INFO] Recording idle baseline for 90s...
+2026-09-12 22:33:18,147 [INFO] Starting warmup: 5000 steps
+2026-09-12 22:33:18,815 [INFO] Starting measured training: 100 epochs x 1000 steps = 100000 env steps
+2026-09-12 22:34:04,667 [INFO] Epoch 10/100 done (buffer size=15000, cumulative_reward=-1042.92, mean_episode_return=-71.53294629307484)
+2026-09-12 22:34:50,386 [INFO] Epoch 20/100 done (buffer size=25000, cumulative_reward=-1314.25, mean_episode_return=-13.84292686028109)
+2026-09-12 22:35:35,982 [INFO] Epoch 30/100 done (buffer size=35000, cumulative_reward=-914.36, mean_episode_return=0.04511549466381659)
+2026-09-12 22:36:21,336 [INFO] Epoch 40/100 done (buffer size=45000, cumulative_reward=-459.14, mean_episode_return=-184.05885958724613)
+2026-09-12 22:37:06,251 [INFO] Epoch 50/100 done (buffer size=55000, cumulative_reward=1101.81, mean_episode_return=276.14599257590896)
+2026-09-12 22:37:49,255 [INFO] Epoch 60/100 done (buffer size=65000, cumulative_reward=2989.21, mean_episode_return=205.23458830285787)
+2026-09-12 22:38:32,414 [INFO] Epoch 70/100 done (buffer size=75000, cumulative_reward=4920.44, mean_episode_return=80.18589289625596)
+2026-09-12 22:39:15,418 [INFO] Epoch 80/100 done (buffer size=85000, cumulative_reward=7263.86, mean_episode_return=118.55828674527918)
+2026-09-12 22:39:58,602 [INFO] Epoch 90/100 done (buffer size=95000, cumulative_reward=12086.14, mean_episode_return=245.4573863799416)
+2026-09-12 22:40:41,760 [INFO] Epoch 100/100 done (buffer size=105000, cumulative_reward=17001.65, mean_episode_return=682.8575362962582)
+2026-09-12 22:40:41,761 [INFO] Recording idle tail for 90s...
+2026-09-12 22:42:11,824 [INFO] Run complete. Segment energy summary (kWh unless noted):
+2026-09-12 22:42:11,824 [INFO]   idle_baseline_head: 0.0015893977467292188
+2026-09-12 22:42:11,824 [INFO]   warmup: 2.1292509205480528e-05
+2026-09-12 22:42:11,824 [INFO]   rollout: 0.0011664604075205356
+2026-09-12 22:42:11,824 [INFO]   buffer_sample: 0.0004280968731450641
+2026-09-12 22:42:11,824 [INFO]   critic_update: 0.0056487577164195
+2026-09-12 22:42:11,824 [INFO]   actor_update: 0.006777132918876315
+2026-09-12 22:42:11,824 [INFO]   target_update: 0.0005737998690996799
+2026-09-12 22:42:11,824 [INFO]   _sub_segment_wall_time_seconds: {'buffer_sample': 12.565549494151128, 'critic_update': 165.8029972157383, 'actor_update': 198.9231981419416, 'target_update': 16.842240873986157}
+2026-09-12 22:42:11,824 [INFO]   idle_baseline_tail: 0.00195800642236571
+2026-09-12 22:42:11,824 [INFO]   _total_kg_co2eq: 0.006919186485338609
+2026-09-12 22:42:11,824 [INFO] Training summary: 100 epochs, final cumulative_reward=17001.65, final mean_episode_return=682.8575362962582, episodes completed=314
