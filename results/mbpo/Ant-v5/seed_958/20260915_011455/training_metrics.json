@@ -1,0 +1,5310 @@
+{
+  "episodes": [
+    {
+      "episode_idx": 0,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 15,
+      "return": -7.482446382297974,
+      "length": 15
+    },
+    {
+      "episode_idx": 1,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 171,
+      "return": -91.75438455765625,
+      "length": 156
+    },
+    {
+      "episode_idx": 2,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 201,
+      "return": 10.12178119509599,
+      "length": 30
+    },
+    {
+      "episode_idx": 3,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 1201,
+      "return": -387.3794805035153,
+      "length": 1000
+    },
+    {
+      "episode_idx": 4,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 1296,
+      "return": -36.20125175859205,
+      "length": 95
+    },
+    {
+      "episode_idx": 5,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 1603,
+      "return": -100.0834776680118,
+      "length": 307
+    },
+    {
+      "episode_idx": 6,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 1778,
+      "return": -57.33622828285485,
+      "length": 175
+    },
+    {
+      "episode_idx": 7,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 1814,
+      "return": -36.0496416609698,
+      "length": 36
+    },
+    {
+      "episode_idx": 8,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 1972,
+      "return": -55.7671029176149,
+      "length": 158
+    },
+    {
+      "episode_idx": 9,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 2017,
+      "return": -28.436360634023842,
+      "length": 45
+    },
+    {
+      "episode_idx": 10,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 2150,
+      "return": -31.499531280666375,
+      "length": 133
+    },
+    {
+      "episode_idx": 11,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 2277,
+      "return": -50.80440547785076,
+      "length": 127
+    },
+    {
+      "episode_idx": 12,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 2363,
+      "return": -22.78001665938447,
+      "length": 86
+    },
+    {
+      "episode_idx": 13,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 2407,
+      "return": -17.44067570894862,
+      "length": 44
+    },
+    {
+      "episode_idx": 14,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 2442,
+      "return": -4.618916171234808,
+      "length": 35
+    },
+    {
+      "episode_idx": 15,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 2486,
+      "return": -17.165265234671494,
+      "length": 44
+    },
+    {
+      "episode_idx": 16,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 2512,
+      "return": -7.516152895117777,
+      "length": 26
+    },
+    {
+      "episode_idx": 17,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 3512,
+      "return": -367.40812992539554,
+      "length": 1000
+    },
+    {
+      "episode_idx": 18,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 3588,
+      "return": -18.23510188767027,
+      "length": 76
+    },
+    {
+      "episode_idx": 19,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 3643,
+      "return": 7.112527040751913,
+      "length": 55
+    },
+    {
+      "episode_idx": 20,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 3695,
+      "return": -25.622834985409256,
+      "length": 52
+    },
+    {
+      "episode_idx": 21,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 3721,
+      "return": -0.9731730229332602,
+      "length": 26
+    },
+    {
+      "episode_idx": 22,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 4721,
+      "return": -240.28481691564082,
+      "length": 1000
+    },
+    {
+      "episode_idx": 23,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 4856,
+      "return": -95.31018725147601,
+      "length": 135
+    },
+    {
+      "episode_idx": 24,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 4921,
+      "return": -6.809330935888096,
+      "length": 65
+    },
+    {
+      "episode_idx": 25,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 4939,
+      "return": 2.2312619717124376,
+      "length": 18
+    },
+    {
+      "episode_idx": 26,
+      "phase": "warmup",
+      "epoch": null,
+      "env_step": 4990,
+      "return": -53.51590243799779,
+      "length": 51
+    },
+    {
+      "episode_idx": 27,
+      "phase": "train",
+      "epoch": 0,
+      "env_step": 4,
+      "return": -15.009144768317949,
+      "length": 14
+    },
+    {
+      "episode_idx": 28,
+      "phase": "train",
+      "epoch": 0,
+      "env_step": 18,
+      "return": -14.49780657569736,
+      "length": 14
+    },
+    {
+      "episode_idx": 29,
+      "phase": "train",
+      "epoch": 0,
+      "env_step": 74,
+      "return": -49.20285064951986,
+      "length": 56
+    },
+    {
+      "episode_idx": 30,
+      "phase": "train",
+      "epoch": 0,
+      "env_step": 104,
+      "return": -29.360204219125503,
+      "length": 30
+    },
+    {
+      "episode_idx": 31,
+      "phase": "train",
+      "epoch": 0,
+      "env_step": 203,
+      "return": -71.95390525634245,
+      "length": 99
+    },
+    {
+      "episode_idx": 32,
+      "phase": "train",
+      "epoch": 1,
+      "env_step": 1203,
+      "return": -604.9916379668937,
+      "length": 1000
+    },
+    {
+      "episode_idx": 33,
+      "phase": "train",
+      "epoch": 1,
+      "env_step": 1236,
+      "return": -51.10286352089453,
+      "length": 33
+    },
+    {
+      "episode_idx": 34,
+      "phase": "train",
+      "epoch": 1,
+      "env_step": 1331,
+      "return": -102.52127780513311,
+      "length": 95
+    },
+    {
+      "episode_idx": 35,
+      "phase": "train",
+      "epoch": 1,
+      "env_step": 1404,
+      "return": -115.87314646625151,
+      "length": 73
+    },
+    {
+      "episode_idx": 36,
+      "phase": "train",
+      "epoch": 1,
+      "env_step": 1425,
+      "return": -22.932149025083152,
+      "length": 21
+    },
+    {
+      "episode_idx": 37,
+      "phase": "train",
+      "epoch": 1,
+      "env_step": 1448,
+      "return": -27.17467247717699,
+      "length": 23
+    },
+    {
+      "episode_idx": 38,
+      "phase": "train",
+      "epoch": 1,
+      "env_step": 1476,
+      "return": -33.33797255079247,
+      "length": 28
+    },
+    {
+      "episode_idx": 39,
+      "phase": "train",
+      "epoch": 2,
+      "env_step": 2476,
+      "return": -1008.4487952931604,
+      "length": 1000
+    },
+    {
+      "episode_idx": 40,
+      "phase": "train",
+      "epoch": 2,
+      "env_step": 2486,
+      "return": -10.971784247000969,
+      "length": 10
+    },
+    {
+      "episode_idx": 41,
+      "phase": "train",
+      "epoch": 2,
+      "env_step": 2503,
+      "return": -8.608571644029398,
+      "length": 17
+    },
+    {
+      "episode_idx": 42,
+      "phase": "train",
+      "epoch": 2,
+      "env_step": 2591,
+      "return": -101.41991445824259,
+      "length": 88
+    },
+    {
+      "episode_idx": 43,
+      "phase": "train",
+      "epoch": 3,
+      "env_step": 3591,
+      "return": -783.5573770089717,
+      "length": 1000
+    },
+    {
+      "episode_idx": 44,
+      "phase": "train",
+      "epoch": 3,
+      "env_step": 3604,
+      "return": -4.995173317056648,
+      "length": 13
+    },
+    {
+      "episode_idx": 45,
+      "phase": "train",
+      "epoch": 3,
+      "env_step": 3644,
+      "return": -38.32677938353855,
+      "length": 40
+    },
+    {
+      "episode_idx": 46,
+      "phase": "train",
+      "epoch": 3,
+      "env_step": 3681,
+      "return": -54.72462550534348,
+      "length": 37
+    },
+    {
+      "episode_idx": 47,
+      "phase": "train",
+      "epoch": 3,
+      "env_step": 3856,
+      "return": -211.44272066842495,
+      "length": 175
+    },
+    {
+      "episode_idx": 48,
+      "phase": "train",
+      "epoch": 3,
+      "env_step": 3952,
+      "return": -79.74713532645742,
+      "length": 96
+    },
+    {
+      "episode_idx": 49,
+      "phase": "train",
+      "epoch": 3,
+      "env_step": 3979,
+      "return": -11.326983763039562,
+      "length": 27
+    },
+    {
+      "episode_idx": 50,
+      "phase": "train",
+      "epoch": 4,
+      "env_step": 4096,
+      "return": -76.95070926657232,
+      "length": 117
+    },
+    {
+      "episode_idx": 51,
+      "phase": "train",
+      "epoch": 4,
+      "env_step": 4184,
+      "return": -19.520826050818876,
+      "length": 88
+    },
+    {
+      "episode_idx": 52,
+      "phase": "train",
+      "epoch": 5,
+      "env_step": 5184,
+      "return": -615.0602230614044,
+      "length": 1000
+    },
+    {
+      "episode_idx": 53,
+      "phase": "train",
+      "epoch": 5,
+      "env_step": 5362,
+      "return": -146.85433851143418,
+      "length": 178
+    },
+    {
+      "episode_idx": 54,
+      "phase": "train",
+      "epoch": 5,
+      "env_step": 5421,
+      "return": -27.022265184840688,
+      "length": 59
+    },
+    {
+      "episode_idx": 55,
+      "phase": "train",
+      "epoch": 5,
+      "env_step": 5534,
+      "return": -34.85470532427507,
+      "length": 113
+    },
+    {
+      "episode_idx": 56,
+      "phase": "train",
+      "epoch": 5,
+      "env_step": 5614,
+      "return": -40.45995915920314,
+      "length": 80
+    },
+    {
+      "episode_idx": 57,
+      "phase": "train",
+      "epoch": 5,
+      "env_step": 5653,
+      "return": -4.174405809197408,
+      "length": 39
+    },
+    {
+      "episode_idx": 58,
+      "phase": "train",
+      "epoch": 5,
+      "env_step": 5706,
+      "return": -37.369197340212764,
+      "length": 53
+    },
+    {
+      "episode_idx": 59,
+      "phase": "train",
+      "epoch": 5,
+      "env_step": 5748,
+      "return": -27.850342745239818,
+      "length": 42
+    },
+    {
+      "episode_idx": 60,
+      "phase": "train",
+      "epoch": 5,
+      "env_step": 5803,
+      "return": -21.486139732936564,
+      "length": 55
+    },
+    {
+      "episode_idx": 61,
+      "phase": "train",
+      "epoch": 5,
+      "env_step": 5838,
+      "return": 6.196172559915184,
+      "length": 35
+    },
+    {
+      "episode_idx": 62,
+      "phase": "train",
+      "epoch": 5,
+      "env_step": 5979,
+      "return": -50.182917225419594,
+      "length": 141
+    },
+    {
+      "episode_idx": 63,
+      "phase": "train",
+      "epoch": 6,
+      "env_step": 6010,
+      "return": -37.0267668809984,
+      "length": 31
+    },
+    {
+      "episode_idx": 64,
+      "phase": "train",
+      "epoch": 6,
+      "env_step": 6113,
+      "return": -58.10883602032753,
+      "length": 103
+    },
+    {
+      "episode_idx": 65,
+      "phase": "train",
+      "epoch": 6,
+      "env_step": 6220,
+      "return": -145.54702430101537,
+      "length": 107
+    },
+    {
+      "episode_idx": 66,
+      "phase": "train",
+      "epoch": 6,
+      "env_step": 6252,
+      "return": -13.058944591729805,
+      "length": 32
+    },
+    {
+      "episode_idx": 67,
+      "phase": "train",
+      "epoch": 6,
+      "env_step": 6359,
+      "return": -31.18378051287907,
+      "length": 107
+    },
+    {
+      "episode_idx": 68,
+      "phase": "train",
+      "epoch": 6,
+      "env_step": 6397,
+      "return": -2.8553843358028677,
+      "length": 38
+    },
+    {
+      "episode_idx": 69,
+      "phase": "train",
+      "epoch": 6,
+      "env_step": 6441,
+      "return": -12.19015553999627,
+      "length": 44
+    },
+    {
+      "episode_idx": 70,
+      "phase": "train",
+      "epoch": 6,
+      "env_step": 6472,
+      "return": -12.60632256770753,
+      "length": 31
+    },
+    {
+      "episode_idx": 71,
+      "phase": "train",
+      "epoch": 6,
+      "env_step": 6505,
+      "return": 1.1868987450108053,
+      "length": 33
+    },
+    {
+      "episode_idx": 72,
+      "phase": "train",
+      "epoch": 6,
+      "env_step": 6663,
+      "return": -90.52990283556673,
+      "length": 158
+    },
+    {
+      "episode_idx": 73,
+      "phase": "train",
+      "epoch": 6,
+      "env_step": 6693,
+      "return": -12.338825147709091,
+      "length": 30
+    },
+    {
+      "episode_idx": 74,
+      "phase": "train",
+      "epoch": 6,
+      "env_step": 6857,
+      "return": -43.055825736374025,
+      "length": 164
+    },
+    {
+      "episode_idx": 75,
+      "phase": "train",
+      "epoch": 6,
+      "env_step": 6928,
+      "return": -4.87952613485106,
+      "length": 71
+    },
+    {
+      "episode_idx": 76,
+      "phase": "train",
+      "epoch": 6,
+      "env_step": 6987,
+      "return": -60.522016674452644,
+      "length": 59
+    },
+    {
+      "episode_idx": 77,
+      "phase": "train",
+      "epoch": 7,
+      "env_step": 7032,
+      "return": -34.91075191539471,
+      "length": 45
+    },
+    {
+      "episode_idx": 78,
+      "phase": "train",
+      "epoch": 7,
+      "env_step": 7065,
+      "return": -34.60392131903489,
+      "length": 33
+    },
+    {
+      "episode_idx": 79,
+      "phase": "train",
+      "epoch": 7,
+      "env_step": 7097,
+      "return": -27.879696073033,
+      "length": 32
+    },
+    {
+      "episode_idx": 80,
+      "phase": "train",
+      "epoch": 7,
+      "env_step": 7149,
+      "return": -27.884002959243972,
+      "length": 52
+    },
+    {
+      "episode_idx": 81,
+      "phase": "train",
+      "epoch": 7,
+      "env_step": 7178,
+      "return": -8.233646270034697,
+      "length": 29
+    },
+    {
+      "episode_idx": 82,
+      "phase": "train",
+      "epoch": 7,
+      "env_step": 7193,
+      "return": -12.332510819340264,
+      "length": 15
+    },
+    {
+      "episode_idx": 83,
+      "phase": "train",
+      "epoch": 7,
+      "env_step": 7267,
+      "return": -5.798848543715741,
+      "length": 74
+    },
+    {
+      "episode_idx": 84,
+      "phase": "train",
+      "epoch": 7,
+      "env_step": 7417,
+      "return": 3.6079785052865714,
+      "length": 150
+    },
+    {
+      "episode_idx": 85,
+      "phase": "train",
+      "epoch": 7,
+      "env_step": 7564,
+      "return": -115.58987729092216,
+      "length": 147
+    },
+    {
+      "episode_idx": 86,
+      "phase": "train",
+      "epoch": 7,
+      "env_step": 7600,
+      "return": -5.158966340050673,
+      "length": 36
+    },
+    {
+      "episode_idx": 87,
+      "phase": "train",
+      "epoch": 7,
+      "env_step": 7655,
+      "return": -21.612582936029938,
+      "length": 55
+    },
+    {
+      "episode_idx": 88,
+      "phase": "train",
+      "epoch": 8,
+      "env_step": 8655,
+      "return": -499.24252145929955,
+      "length": 1000
+    },
+    {
+      "episode_idx": 89,
+      "phase": "train",
+      "epoch": 8,
+      "env_step": 8690,
+      "return": -16.438582479728716,
+      "length": 35
+    },
+    {
+      "episode_idx": 90,
+      "phase": "train",
+      "epoch": 8,
+      "env_step": 8762,
+      "return": 9.653628810001035,
+      "length": 72
+    },
+    {
+      "episode_idx": 91,
+      "phase": "train",
+      "epoch": 8,
+      "env_step": 8801,
+      "return": -13.698174323555182,
+      "length": 39
+    },
+    {
+      "episode_idx": 92,
+      "phase": "train",
+      "epoch": 8,
+      "env_step": 8820,
+      "return": -25.620376716280113,
+      "length": 19
+    },
+    {
+      "episode_idx": 93,
+      "phase": "train",
+      "epoch": 8,
+      "env_step": 8912,
+      "return": -49.867807812464726,
+      "length": 92
+    },
+    {
+      "episode_idx": 94,
+      "phase": "train",
+      "epoch": 9,
+      "env_step": 9026,
+      "return": -5.012228386220839,
+      "length": 114
+    },
+    {
+      "episode_idx": 95,
+      "phase": "train",
+      "epoch": 9,
+      "env_step": 9063,
+      "return": -14.033014108815326,
+      "length": 37
+    },
+    {
+      "episode_idx": 96,
+      "phase": "train",
+      "epoch": 9,
+      "env_step": 9122,
+      "return": -3.2967746206387663,
+      "length": 59
+    },
+    {
+      "episode_idx": 97,
+      "phase": "train",
+      "epoch": 9,
+      "env_step": 9234,
+      "return": -7.796451728240058,
+      "length": 112
+    },
+    {
+      "episode_idx": 98,
+      "phase": "train",
+      "epoch": 9,
+      "env_step": 9262,
+      "return": 1.1981210081121845,
+      "length": 28
+    },
+    {
+      "episode_idx": 99,
+      "phase": "train",
+      "epoch": 9,
+      "env_step": 9334,
+      "return": -23.8493373644731,
+      "length": 72
+    },
+    {
+      "episode_idx": 100,
+      "phase": "train",
+      "epoch": 9,
+      "env_step": 9473,
+      "return": -71.70905205945876,
+      "length": 139
+    },
+    {
+      "episode_idx": 101,
+      "phase": "train",
+      "epoch": 10,
+      "env_step": 10473,
+      "return": -260.109095947206,
+      "length": 1000
+    },
+    {
+      "episode_idx": 102,
+      "phase": "train",
+      "epoch": 10,
+      "env_step": 10578,
+      "return": 18.65969652424136,
+      "length": 105
+    },
+    {
+      "episode_idx": 103,
+      "phase": "train",
+      "epoch": 10,
+      "env_step": 10661,
+      "return": 28.994125245230617,
+      "length": 83
+    },
+    {
+      "episode_idx": 104,
+      "phase": "train",
+      "epoch": 10,
+      "env_step": 10750,
+      "return": -1.335240481812848,
+      "length": 89
+    },
+    {
+      "episode_idx": 105,
+      "phase": "train",
+      "epoch": 11,
+      "env_step": 11750,
+      "return": -126.83918874218675,
+      "length": 1000
+    },
+    {
+      "episode_idx": 106,
+      "phase": "train",
+      "epoch": 11,
+      "env_step": 11988,
+      "return": -84.08923671697036,
+      "length": 238
+    },
+    {
+      "episode_idx": 107,
+      "phase": "train",
+      "epoch": 12,
+      "env_step": 12011,
+      "return": -19.379912078921027,
+      "length": 23
+    },
+    {
+      "episode_idx": 108,
+      "phase": "train",
+      "epoch": 12,
+      "env_step": 12030,
+      "return": -25.542371332114996,
+      "length": 19
+    },
+    {
+      "episode_idx": 109,
+      "phase": "train",
+      "epoch": 12,
+      "env_step": 12169,
+      "return": -101.0074716789019,
+      "length": 139
+    },
+    {
+      "episode_idx": 110,
+      "phase": "train",
+      "epoch": 12,
+      "env_step": 12204,
+      "return": -38.13087962242228,
+      "length": 35
+    },
+    {
+      "episode_idx": 111,
+      "phase": "train",
+      "epoch": 12,
+      "env_step": 12223,
+      "return": -21.193947321592926,
+      "length": 19
+    },
+    {
+      "episode_idx": 112,
+      "phase": "train",
+      "epoch": 12,
+      "env_step": 12273,
+      "return": -40.13727749225134,
+      "length": 50
+    },
+    {
+      "episode_idx": 113,
+      "phase": "train",
+      "epoch": 12,
+      "env_step": 12392,
+      "return": -66.4505483095772,
+      "length": 119
+    },
+    {
+      "episode_idx": 114,
+      "phase": "train",
+      "epoch": 12,
+      "env_step": 12417,
+      "return": -12.668323412364737,
+      "length": 25
+    },
+    {
+      "episode_idx": 115,
+      "phase": "train",
+      "epoch": 12,
+      "env_step": 12577,
+      "return": -132.27106662841214,
+      "length": 160
+    },
+    {
+      "episode_idx": 116,
+      "phase": "train",
+      "epoch": 12,
+      "env_step": 12707,
+      "return": -76.96561301896435,
+      "length": 130
+    },
+    {
+      "episode_idx": 117,
+      "phase": "train",
+      "epoch": 12,
+      "env_step": 12766,
+      "return": -69.12470388389248,
+      "length": 59
+    },
+    {
+      "episode_idx": 118,
+      "phase": "train",
+      "epoch": 12,
+      "env_step": 12822,
+      "return": -24.475651515096754,
+      "length": 56
+    },
+    {
+      "episode_idx": 119,
+      "phase": "train",
+      "epoch": 12,
+      "env_step": 12852,
+      "return": -26.79374973936008,
+      "length": 30
+    },
+    {
+      "episode_idx": 120,
+      "phase": "train",
+      "epoch": 12,
+      "env_step": 12869,
+      "return": -16.18756432865658,
+      "length": 17
+    },
+    {
+      "episode_idx": 121,
+      "phase": "train",
+      "epoch": 12,
+      "env_step": 12881,
+      "return": -2.276083476417251,
+      "length": 12
+    },
+    {
+      "episode_idx": 122,
+      "phase": "train",
+      "epoch": 12,
+      "env_step": 12926,
+      "return": -19.572736010419774,
+      "length": 45
+    },
+    {
+      "episode_idx": 123,
+      "phase": "train",
+      "epoch": 13,
+      "env_step": 13926,
+      "return": -510.8135627524277,
+      "length": 1000
+    },
+    {
+      "episode_idx": 124,
+      "phase": "train",
+      "epoch": 14,
+      "env_step": 14068,
+      "return": -14.32690166197645,
+      "length": 142
+    },
+    {
+      "episode_idx": 125,
+      "phase": "train",
+      "epoch": 14,
+      "env_step": 14110,
+      "return": -28.749098665840947,
+      "length": 42
+    },
+    {
+      "episode_idx": 126,
+      "phase": "train",
+      "epoch": 14,
+      "env_step": 14150,
+      "return": -17.052211363758136,
+      "length": 40
+    },
+    {
+      "episode_idx": 127,
+      "phase": "train",
+      "epoch": 14,
+      "env_step": 14174,
+      "return": 1.9621293279857497,
+      "length": 24
+    },
+    {
+      "episode_idx": 128,
+      "phase": "train",
+      "epoch": 14,
+      "env_step": 14246,
+      "return": -82.33183771196373,
+      "length": 72
+    },
+    {
+      "episode_idx": 129,
+      "phase": "train",
+      "epoch": 14,
+      "env_step": 14456,
+      "return": -65.77464224886275,
+      "length": 210
+    },
+    {
+      "episode_idx": 130,
+      "phase": "train",
+      "epoch": 15,
+      "env_step": 15456,
+      "return": -399.9006029599588,
+      "length": 1000
+    },
+    {
+      "episode_idx": 131,
+      "phase": "train",
+      "epoch": 15,
+      "env_step": 15620,
+      "return": -63.604651470934606,
+      "length": 164
+    },
+    {
+      "episode_idx": 132,
+      "phase": "train",
+      "epoch": 15,
+      "env_step": 15678,
+      "return": -21.242107663320407,
+      "length": 58
+    },
+    {
+      "episode_idx": 133,
+      "phase": "train",
+      "epoch": 15,
+      "env_step": 15862,
+      "return": 28.07989204190591,
+      "length": 184
+    },
+    {
+      "episode_idx": 134,
+      "phase": "train",
+      "epoch": 16,
+      "env_step": 16039,
+      "return": -6.271860152513954,
+      "length": 177
+    },
+    {
+      "episode_idx": 135,
+      "phase": "train",
+      "epoch": 16,
+      "env_step": 16057,
+      "return": -4.462642356161221,
+      "length": 18
+    },
+    {
+      "episode_idx": 136,
+      "phase": "train",
+      "epoch": 16,
+      "env_step": 16098,
+      "return": -35.810663795782,
+      "length": 41
+    },
+    {
+      "episode_idx": 137,
+      "phase": "train",
+      "epoch": 16,
+      "env_step": 16113,
+      "return": -22.749482724784816,
+      "length": 15
+    },
+    {
+      "episode_idx": 138,
+      "phase": "train",
+      "epoch": 16,
+      "env_step": 16270,
+      "return": -41.81227685805136,
+      "length": 157
+    },
+    {
+      "episode_idx": 139,
+      "phase": "train",
+      "epoch": 17,
+      "env_step": 17270,
+      "return": -206.495181309912,
+      "length": 1000
+    },
+    {
+      "episode_idx": 140,
+      "phase": "train",
+      "epoch": 17,
+      "env_step": 17301,
+      "return": -15.466617796866341,
+      "length": 31
+    },
+    {
+      "episode_idx": 141,
+      "phase": "train",
+      "epoch": 17,
+      "env_step": 17547,
+      "return": -55.738684245022014,
+      "length": 246
+    },
+    {
+      "episode_idx": 142,
+      "phase": "train",
+      "epoch": 17,
+      "env_step": 17618,
+      "return": 5.140426484382917,
+      "length": 71
+    },
+    {
+      "episode_idx": 143,
+      "phase": "train",
+      "epoch": 17,
+      "env_step": 17635,
+      "return": 5.953287998211068,
+      "length": 17
+    },
+    {
+      "episode_idx": 144,
+      "phase": "train",
+      "epoch": 17,
+      "env_step": 17671,
+      "return": -9.646688103462331,
+      "length": 36
+    },
+    {
+      "episode_idx": 145,
+      "phase": "train",
+      "epoch": 17,
+      "env_step": 17799,
+      "return": -65.19645582162498,
+      "length": 128
+    },
+    {
+      "episode_idx": 146,
+      "phase": "train",
+      "epoch": 18,
+      "env_step": 18799,
+      "return": -373.54557749519427,
+      "length": 1000
+    },
+    {
+      "episode_idx": 147,
+      "phase": "train",
+      "epoch": 18,
+      "env_step": 18813,
+      "return": -4.534260587632673,
+      "length": 14
+    },
+    {
+      "episode_idx": 148,
+      "phase": "train",
+      "epoch": 18,
+      "env_step": 18909,
+      "return": -13.245979329633943,
+      "length": 96
+    },
+    {
+      "episode_idx": 149,
+      "phase": "train",
+      "epoch": 18,
+      "env_step": 18921,
+      "return": -6.641182649609058,
+      "length": 12
+    },
+    {
+      "episode_idx": 150,
+      "phase": "train",
+      "epoch": 18,
+      "env_step": 18934,
+      "return": -0.6641784225267704,
+      "length": 13
+    },
+    {
+      "episode_idx": 151,
+      "phase": "train",
+      "epoch": 19,
+      "env_step": 19094,
+      "return": -91.73651492465683,
+      "length": 160
+    },
+    {
+      "episode_idx": 152,
+      "phase": "train",
+      "epoch": 19,
+      "env_step": 19159,
+      "return": -10.340136676659721,
+      "length": 65
+    },
+    {
+      "episode_idx": 153,
+      "phase": "train",
+      "epoch": 20,
+      "env_step": 20159,
+      "return": -386.23748759669263,
+      "length": 1000
+    },
+    {
+      "episode_idx": 154,
+      "phase": "train",
+      "epoch": 20,
+      "env_step": 20202,
+      "return": 9.114223316432977,
+      "length": 43
+    },
+    {
+      "episode_idx": 155,
+      "phase": "train",
+      "epoch": 20,
+      "env_step": 20237,
+      "return": -13.567167545529598,
+      "length": 35
+    },
+    {
+      "episode_idx": 156,
+      "phase": "train",
+      "epoch": 20,
+      "env_step": 20312,
+      "return": -24.500403052483627,
+      "length": 75
+    },
+    {
+      "episode_idx": 157,
+      "phase": "train",
+      "epoch": 20,
+      "env_step": 20378,
+      "return": -38.42165545782385,
+      "length": 66
+    },
+    {
+      "episode_idx": 158,
+      "phase": "train",
+      "epoch": 20,
+      "env_step": 20425,
+      "return": -25.622378644608297,
+      "length": 47
+    },
+    {
+      "episode_idx": 159,
+      "phase": "train",
+      "epoch": 20,
+      "env_step": 20446,
+      "return": -22.45127495648187,
+      "length": 21
+    },
+    {
+      "episode_idx": 160,
+      "phase": "train",
+      "epoch": 20,
+      "env_step": 20466,
+      "return": -3.6652711999128735,
+      "length": 20
+    },
+    {
+      "episode_idx": 161,
+      "phase": "train",
+      "epoch": 20,
+      "env_step": 20506,
+      "return": -16.339704786747234,
+      "length": 40
+    },
+    {
+      "episode_idx": 162,
+      "phase": "train",
+      "epoch": 20,
+      "env_step": 20610,
+      "return": -40.62862411393194,
+      "length": 104
+    },
+    {
+      "episode_idx": 163,
+      "phase": "train",
+      "epoch": 21,
+      "env_step": 21610,
+      "return": -439.15592325996266,
+      "length": 1000
+    },
+    {
+      "episode_idx": 164,
+      "phase": "train",
+      "epoch": 21,
+      "env_step": 21641,
+      "return": -1.8879964729701841,
+      "length": 31
+    },
+    {
+      "episode_idx": 165,
+      "phase": "train",
+      "epoch": 21,
+      "env_step": 21664,
+      "return": -15.092632666976652,
+      "length": 23
+    },
+    {
+      "episode_idx": 166,
+      "phase": "train",
+      "epoch": 21,
+      "env_step": 21685,
+      "return": -12.735533597205404,
+      "length": 21
+    },
+    {
+      "episode_idx": 167,
+      "phase": "train",
+      "epoch": 21,
+      "env_step": 21705,
+      "return": -18.448014496501862,
+      "length": 20
+    },
+    {
+      "episode_idx": 168,
+      "phase": "train",
+      "epoch": 21,
+      "env_step": 21772,
+      "return": -9.099401570369665,
+      "length": 67
+    },
+    {
+      "episode_idx": 169,
+      "phase": "train",
+      "epoch": 21,
+      "env_step": 21911,
+      "return": -74.38886952271835,
+      "length": 139
+    },
+    {
+      "episode_idx": 170,
+      "phase": "train",
+      "epoch": 21,
+      "env_step": 21963,
+      "return": -30.698433003132774,
+      "length": 52
+    },
+    {
+      "episode_idx": 171,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22024,
+      "return": -40.222762543821474,
+      "length": 61
+    },
+    {
+      "episode_idx": 172,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22044,
+      "return": -16.20584422017887,
+      "length": 20
+    },
+    {
+      "episode_idx": 173,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22093,
+      "return": -22.85878491321488,
+      "length": 49
+    },
+    {
+      "episode_idx": 174,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22109,
+      "return": -17.695979842460638,
+      "length": 16
+    },
+    {
+      "episode_idx": 175,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22139,
+      "return": -15.776019205330732,
+      "length": 30
+    },
+    {
+      "episode_idx": 176,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22164,
+      "return": 9.96242916358896,
+      "length": 25
+    },
+    {
+      "episode_idx": 177,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22175,
+      "return": -4.592127192391519,
+      "length": 11
+    },
+    {
+      "episode_idx": 178,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22201,
+      "return": -8.676937517700722,
+      "length": 26
+    },
+    {
+      "episode_idx": 179,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22221,
+      "return": -9.646710811817723,
+      "length": 20
+    },
+    {
+      "episode_idx": 180,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22252,
+      "return": -51.15474224402479,
+      "length": 31
+    },
+    {
+      "episode_idx": 181,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22308,
+      "return": -4.6233752797576475,
+      "length": 56
+    },
+    {
+      "episode_idx": 182,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22349,
+      "return": -11.944444132908124,
+      "length": 41
+    },
+    {
+      "episode_idx": 183,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22441,
+      "return": -52.13530720830094,
+      "length": 92
+    },
+    {
+      "episode_idx": 184,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22466,
+      "return": -12.459682563365494,
+      "length": 25
+    },
+    {
+      "episode_idx": 185,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22485,
+      "return": -8.378938576278387,
+      "length": 19
+    },
+    {
+      "episode_idx": 186,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22526,
+      "return": -40.18027564061299,
+      "length": 41
+    },
+    {
+      "episode_idx": 187,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22538,
+      "return": -3.5376524301195604,
+      "length": 12
+    },
+    {
+      "episode_idx": 188,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22570,
+      "return": -16.519043942089752,
+      "length": 32
+    },
+    {
+      "episode_idx": 189,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22620,
+      "return": -61.814861125355534,
+      "length": 50
+    },
+    {
+      "episode_idx": 190,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22703,
+      "return": -69.6379425746969,
+      "length": 83
+    },
+    {
+      "episode_idx": 191,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22725,
+      "return": -8.17320771838423,
+      "length": 22
+    },
+    {
+      "episode_idx": 192,
+      "phase": "train",
+      "epoch": 22,
+      "env_step": 22927,
+      "return": -2.6615953974611433,
+      "length": 202
+    },
+    {
+      "episode_idx": 193,
+      "phase": "train",
+      "epoch": 23,
+      "env_step": 23059,
+      "return": -47.432827826260166,
+      "length": 132
+    },
+    {
+      "episode_idx": 194,
+      "phase": "train",
+      "epoch": 23,
+      "env_step": 23136,
+      "return": -51.05751679892989,
+      "length": 77
+    },
+    {
+      "episode_idx": 195,
+      "phase": "train",
+      "epoch": 23,
+      "env_step": 23384,
+      "return": -131.18623006058527,
+      "length": 248
+    },
+    {
+      "episode_idx": 196,
+      "phase": "train",
+      "epoch": 23,
+      "env_step": 23426,
+      "return": -31.51627996716146,
+      "length": 42
+    },
+    {
+      "episode_idx": 197,
+      "phase": "train",
+      "epoch": 23,
+      "env_step": 23552,
+      "return": -36.72510803536808,
+      "length": 126
+    },
+    {
+      "episode_idx": 198,
+      "phase": "train",
+      "epoch": 23,
+      "env_step": 23605,
+      "return": -21.447303285534872,
+      "length": 53
+    },
+    {
+      "episode_idx": 199,
+      "phase": "train",
+      "epoch": 23,
+      "env_step": 23863,
+      "return": -139.70382760301993,
+      "length": 258
+    },
+    {
+      "episode_idx": 200,
+      "phase": "train",
+      "epoch": 24,
+      "env_step": 24863,
+      "return": -421.2508684031397,
+      "length": 1000
+    },
+    {
+      "episode_idx": 201,
+      "phase": "train",
+      "epoch": 24,
+      "env_step": 24955,
+      "return": 4.838768497000078,
+      "length": 92
+    },
+    {
+      "episode_idx": 202,
+      "phase": "train",
+      "epoch": 25,
+      "env_step": 25955,
+      "return": -562.2864689041674,
+      "length": 1000
+    },
+    {
+      "episode_idx": 203,
+      "phase": "train",
+      "epoch": 26,
+      "env_step": 26014,
+      "return": 12.1584747572082,
+      "length": 59
+    },
+    {
+      "episode_idx": 204,
+      "phase": "train",
+      "epoch": 26,
+      "env_step": 26053,
+      "return": -5.559139343269167,
+      "length": 39
+    },
+    {
+      "episode_idx": 205,
+      "phase": "train",
+      "epoch": 26,
+      "env_step": 26103,
+      "return": -37.342956581298516,
+      "length": 50
+    },
+    {
+      "episode_idx": 206,
+      "phase": "train",
+      "epoch": 26,
+      "env_step": 26152,
+      "return": -83.59650948033674,
+      "length": 49
+    },
+    {
+      "episode_idx": 207,
+      "phase": "train",
+      "epoch": 26,
+      "env_step": 26164,
+      "return": -12.384011906201602,
+      "length": 12
+    },
+    {
+      "episode_idx": 208,
+      "phase": "train",
+      "epoch": 26,
+      "env_step": 26269,
+      "return": -81.77715229992707,
+      "length": 105
+    },
+    {
+      "episode_idx": 209,
+      "phase": "train",
+      "epoch": 26,
+      "env_step": 26291,
+      "return": -28.0579905822404,
+      "length": 22
+    },
+    {
+      "episode_idx": 210,
+      "phase": "train",
+      "epoch": 27,
+      "env_step": 27291,
+      "return": -1041.9824182778557,
+      "length": 1000
+    },
+    {
+      "episode_idx": 211,
+      "phase": "train",
+      "epoch": 27,
+      "env_step": 27316,
+      "return": -24.630226375179646,
+      "length": 25
+    },
+    {
+      "episode_idx": 212,
+      "phase": "train",
+      "epoch": 27,
+      "env_step": 27376,
+      "return": -76.73379792530639,
+      "length": 60
+    },
+    {
+      "episode_idx": 213,
+      "phase": "train",
+      "epoch": 27,
+      "env_step": 27461,
+      "return": -51.93205623472163,
+      "length": 85
+    },
+    {
+      "episode_idx": 214,
+      "phase": "train",
+      "epoch": 28,
+      "env_step": 28461,
+      "return": -1171.8351524980978,
+      "length": 1000
+    },
+    {
+      "episode_idx": 215,
+      "phase": "train",
+      "epoch": 28,
+      "env_step": 28547,
+      "return": -92.88020391720455,
+      "length": 86
+    },
+    {
+      "episode_idx": 216,
+      "phase": "train",
+      "epoch": 28,
+      "env_step": 28574,
+      "return": -77.78901911641584,
+      "length": 27
+    },
+    {
+      "episode_idx": 217,
+      "phase": "train",
+      "epoch": 29,
+      "env_step": 29179,
+      "return": -828.634711920648,
+      "length": 605
+    },
+    {
+      "episode_idx": 218,
+      "phase": "train",
+      "epoch": 29,
+      "env_step": 29198,
+      "return": -12.116674627716119,
+      "length": 19
+    },
+    {
+      "episode_idx": 219,
+      "phase": "train",
+      "epoch": 29,
+      "env_step": 29249,
+      "return": -127.41760208718826,
+      "length": 51
+    },
+    {
+      "episode_idx": 220,
+      "phase": "train",
+      "epoch": 29,
+      "env_step": 29302,
+      "return": -109.87702735162938,
+      "length": 53
+    },
+    {
+      "episode_idx": 221,
+      "phase": "train",
+      "epoch": 29,
+      "env_step": 29326,
+      "return": -18.469081916536606,
+      "length": 24
+    },
+    {
+      "episode_idx": 222,
+      "phase": "train",
+      "epoch": 29,
+      "env_step": 29340,
+      "return": -9.029800560116833,
+      "length": 14
+    },
+    {
+      "episode_idx": 223,
+      "phase": "train",
+      "epoch": 29,
+      "env_step": 29378,
+      "return": -52.84495038514514,
+      "length": 38
+    },
+    {
+      "episode_idx": 224,
+      "phase": "train",
+      "epoch": 29,
+      "env_step": 29397,
+      "return": -29.019644777986247,
+      "length": 19
+    },
+    {
+      "episode_idx": 225,
+      "phase": "train",
+      "epoch": 29,
+      "env_step": 29429,
+      "return": -40.73557509415762,
+      "length": 32
+    },
+    {
+      "episode_idx": 226,
+      "phase": "train",
+      "epoch": 29,
+      "env_step": 29470,
+      "return": -45.80076814220741,
+      "length": 41
+    },
+    {
+      "episode_idx": 227,
+      "phase": "train",
+      "epoch": 29,
+      "env_step": 29549,
+      "return": -100.65415814548803,
+      "length": 79
+    },
+    {
+      "episode_idx": 228,
+      "phase": "train",
+      "epoch": 29,
+      "env_step": 29598,
+      "return": -90.97419808304275,
+      "length": 49
+    },
+    {
+      "episode_idx": 229,
+      "phase": "train",
+      "epoch": 29,
+      "env_step": 29617,
+      "return": -41.92953310182486,
+      "length": 19
+    },
+    {
+      "episode_idx": 230,
+      "phase": "train",
+      "epoch": 29,
+      "env_step": 29843,
+      "return": -350.6851505646728,
+      "length": 226
+    },
+    {
+      "episode_idx": 231,
+      "phase": "train",
+      "epoch": 29,
+      "env_step": 29856,
+      "return": -33.74243323351488,
+      "length": 13
+    },
+    {
+      "episode_idx": 232,
+      "phase": "train",
+      "epoch": 29,
+      "env_step": 29958,
+      "return": -119.28831269871044,
+      "length": 102
+    },
+    {
+      "episode_idx": 233,
+      "phase": "train",
+      "epoch": 30,
+      "env_step": 30022,
+      "return": -71.16594900576723,
+      "length": 64
+    },
+    {
+      "episode_idx": 234,
+      "phase": "train",
+      "epoch": 30,
+      "env_step": 30035,
+      "return": -21.047778135505204,
+      "length": 13
+    },
+    {
+      "episode_idx": 235,
+      "phase": "train",
+      "epoch": 30,
+      "env_step": 30064,
+      "return": -59.32409319597234,
+      "length": 29
+    },
+    {
+      "episode_idx": 236,
+      "phase": "train",
+      "epoch": 31,
+      "env_step": 31064,
+      "return": -1507.3819996582342,
+      "length": 1000
+    },
+    {
+      "episode_idx": 237,
+      "phase": "train",
+      "epoch": 31,
+      "env_step": 31081,
+      "return": -3.8000991484040925,
+      "length": 17
+    },
+    {
+      "episode_idx": 238,
+      "phase": "train",
+      "epoch": 31,
+      "env_step": 31161,
+      "return": -133.93544354946627,
+      "length": 80
+    },
+    {
+      "episode_idx": 239,
+      "phase": "train",
+      "epoch": 32,
+      "env_step": 32161,
+      "return": -1567.1689292361764,
+      "length": 1000
+    },
+    {
+      "episode_idx": 240,
+      "phase": "train",
+      "epoch": 32,
+      "env_step": 32191,
+      "return": -29.882641907753626,
+      "length": 30
+    },
+    {
+      "episode_idx": 241,
+      "phase": "train",
+      "epoch": 32,
+      "env_step": 32227,
+      "return": -45.088186744268384,
+      "length": 36
+    },
+    {
+      "episode_idx": 242,
+      "phase": "train",
+      "epoch": 32,
+      "env_step": 32258,
+      "return": -30.70434017861258,
+      "length": 31
+    },
+    {
+      "episode_idx": 243,
+      "phase": "train",
+      "epoch": 32,
+      "env_step": 32334,
+      "return": -101.82504138767855,
+      "length": 76
+    },
+    {
+      "episode_idx": 244,
+      "phase": "train",
+      "epoch": 32,
+      "env_step": 32358,
+      "return": -30.138699066084442,
+      "length": 24
+    },
+    {
+      "episode_idx": 245,
+      "phase": "train",
+      "epoch": 32,
+      "env_step": 32373,
+      "return": -11.25706545175545,
+      "length": 15
+    },
+    {
+      "episode_idx": 246,
+      "phase": "train",
+      "epoch": 32,
+      "env_step": 32393,
+      "return": -23.284955221850808,
+      "length": 20
+    },
+    {
+      "episode_idx": 247,
+      "phase": "train",
+      "epoch": 33,
+      "env_step": 33393,
+      "return": -1252.9460217009346,
+      "length": 1000
+    },
+    {
+      "episode_idx": 248,
+      "phase": "train",
+      "epoch": 33,
+      "env_step": 33597,
+      "return": -220.99135245449662,
+      "length": 204
+    },
+    {
+      "episode_idx": 249,
+      "phase": "train",
+      "epoch": 34,
+      "env_step": 34597,
+      "return": -969.5898804031729,
+      "length": 1000
+    },
+    {
+      "episode_idx": 250,
+      "phase": "train",
+      "epoch": 34,
+      "env_step": 34615,
+      "return": -16.058335136538254,
+      "length": 18
+    },
+    {
+      "episode_idx": 251,
+      "phase": "train",
+      "epoch": 35,
+      "env_step": 35615,
+      "return": -800.6671844985003,
+      "length": 1000
+    },
+    {
+      "episode_idx": 252,
+      "phase": "train",
+      "epoch": 36,
+      "env_step": 36615,
+      "return": -1016.4053740357455,
+      "length": 1000
+    },
+    {
+      "episode_idx": 253,
+      "phase": "train",
+      "epoch": 36,
+      "env_step": 36724,
+      "return": -114.44513071146164,
+      "length": 109
+    },
+    {
+      "episode_idx": 254,
+      "phase": "train",
+      "epoch": 36,
+      "env_step": 36782,
+      "return": -65.15891298000624,
+      "length": 58
+    },
+    {
+      "episode_idx": 255,
+      "phase": "train",
+      "epoch": 36,
+      "env_step": 36808,
+      "return": -30.41096726017624,
+      "length": 26
+    },
+    {
+      "episode_idx": 256,
+      "phase": "train",
+      "epoch": 36,
+      "env_step": 36829,
+      "return": -27.24932027032711,
+      "length": 21
+    },
+    {
+      "episode_idx": 257,
+      "phase": "train",
+      "epoch": 36,
+      "env_step": 36894,
+      "return": -65.19701601731495,
+      "length": 65
+    },
+    {
+      "episode_idx": 258,
+      "phase": "train",
+      "epoch": 36,
+      "env_step": 36925,
+      "return": -34.61258122143424,
+      "length": 31
+    },
+    {
+      "episode_idx": 259,
+      "phase": "train",
+      "epoch": 37,
+      "env_step": 37925,
+      "return": -957.4208313742793,
+      "length": 1000
+    },
+    {
+      "episode_idx": 260,
+      "phase": "train",
+      "epoch": 38,
+      "env_step": 38075,
+      "return": -129.9318666232437,
+      "length": 150
+    },
+    {
+      "episode_idx": 261,
+      "phase": "train",
+      "epoch": 39,
+      "env_step": 39075,
+      "return": -1136.2228120433028,
+      "length": 1000
+    },
+    {
+      "episode_idx": 262,
+      "phase": "train",
+      "epoch": 39,
+      "env_step": 39280,
+      "return": -228.02617217457683,
+      "length": 205
+    },
+    {
+      "episode_idx": 263,
+      "phase": "train",
+      "epoch": 39,
+      "env_step": 39749,
+      "return": -503.15209652339655,
+      "length": 469
+    },
+    {
+      "episode_idx": 264,
+      "phase": "train",
+      "epoch": 39,
+      "env_step": 39791,
+      "return": -33.75912240876185,
+      "length": 42
+    },
+    {
+      "episode_idx": 265,
+      "phase": "train",
+      "epoch": 39,
+      "env_step": 39810,
+      "return": -14.968304743689284,
+      "length": 19
+    },
+    {
+      "episode_idx": 266,
+      "phase": "train",
+      "epoch": 39,
+      "env_step": 39936,
+      "return": -125.51620911860095,
+      "length": 126
+    },
+    {
+      "episode_idx": 267,
+      "phase": "train",
+      "epoch": 40,
+      "env_step": 40936,
+      "return": -1082.4899488237554,
+      "length": 1000
+    },
+    {
+      "episode_idx": 268,
+      "phase": "train",
+      "epoch": 40,
+      "env_step": 40988,
+      "return": -64.02567814166422,
+      "length": 52
+    },
+    {
+      "episode_idx": 269,
+      "phase": "train",
+      "epoch": 41,
+      "env_step": 41061,
+      "return": -49.367023747715,
+      "length": 73
+    },
+    {
+      "episode_idx": 270,
+      "phase": "train",
+      "epoch": 42,
+      "env_step": 42061,
+      "return": -855.8230689558015,
+      "length": 1000
+    },
+    {
+      "episode_idx": 271,
+      "phase": "train",
+      "epoch": 42,
+      "env_step": 42156,
+      "return": -85.37769956022883,
+      "length": 95
+    },
+    {
+      "episode_idx": 272,
+      "phase": "train",
+      "epoch": 42,
+      "env_step": 42180,
+      "return": -24.610583735819052,
+      "length": 24
+    },
+    {
+      "episode_idx": 273,
+      "phase": "train",
+      "epoch": 42,
+      "env_step": 42194,
+      "return": -9.51776636940823,
+      "length": 14
+    },
+    {
+      "episode_idx": 274,
+      "phase": "train",
+      "epoch": 42,
+      "env_step": 42299,
+      "return": -112.68517654757824,
+      "length": 105
+    },
+    {
+      "episode_idx": 275,
+      "phase": "train",
+      "epoch": 42,
+      "env_step": 42550,
+      "return": -278.30416385601285,
+      "length": 251
+    },
+    {
+      "episode_idx": 276,
+      "phase": "train",
+      "epoch": 42,
+      "env_step": 42569,
+      "return": -10.340943567760416,
+      "length": 19
+    },
+    {
+      "episode_idx": 277,
+      "phase": "train",
+      "epoch": 42,
+      "env_step": 42667,
+      "return": -119.9119341805367,
+      "length": 98
+    },
+    {
+      "episode_idx": 278,
+      "phase": "train",
+      "epoch": 42,
+      "env_step": 42677,
+      "return": -16.09714101139648,
+      "length": 10
+    },
+    {
+      "episode_idx": 279,
+      "phase": "train",
+      "epoch": 42,
+      "env_step": 42709,
+      "return": -39.19783799561949,
+      "length": 32
+    },
+    {
+      "episode_idx": 280,
+      "phase": "train",
+      "epoch": 42,
+      "env_step": 42725,
+      "return": -21.770881962927184,
+      "length": 16
+    },
+    {
+      "episode_idx": 281,
+      "phase": "train",
+      "epoch": 42,
+      "env_step": 42770,
+      "return": -87.03786495988426,
+      "length": 45
+    },
+    {
+      "episode_idx": 282,
+      "phase": "train",
+      "epoch": 42,
+      "env_step": 42915,
+      "return": -56.55735372432842,
+      "length": 145
+    },
+    {
+      "episode_idx": 283,
+      "phase": "train",
+      "epoch": 42,
+      "env_step": 42924,
+      "return": -12.572139681112928,
+      "length": 9
+    },
+    {
+      "episode_idx": 284,
+      "phase": "train",
+      "epoch": 42,
+      "env_step": 42961,
+      "return": -19.752201623082158,
+      "length": 37
+    },
+    {
+      "episode_idx": 285,
+      "phase": "train",
+      "epoch": 43,
+      "env_step": 43194,
+      "return": -290.266427323537,
+      "length": 233
+    },
+    {
+      "episode_idx": 286,
+      "phase": "train",
+      "epoch": 44,
+      "env_step": 44194,
+      "return": -1338.8694859617374,
+      "length": 1000
+    },
+    {
+      "episode_idx": 287,
+      "phase": "train",
+      "epoch": 44,
+      "env_step": 44209,
+      "return": -15.051495073124638,
+      "length": 15
+    },
+    {
+      "episode_idx": 288,
+      "phase": "train",
+      "epoch": 45,
+      "env_step": 45209,
+      "return": -1199.5226997768966,
+      "length": 1000
+    },
+    {
+      "episode_idx": 289,
+      "phase": "train",
+      "epoch": 45,
+      "env_step": 45331,
+      "return": -117.38205588271022,
+      "length": 122
+    },
+    {
+      "episode_idx": 290,
+      "phase": "train",
+      "epoch": 45,
+      "env_step": 45349,
+      "return": -15.29802927875833,
+      "length": 18
+    },
+    {
+      "episode_idx": 291,
+      "phase": "train",
+      "epoch": 45,
+      "env_step": 45545,
+      "return": -214.0119667033923,
+      "length": 196
+    },
+    {
+      "episode_idx": 292,
+      "phase": "train",
+      "epoch": 45,
+      "env_step": 45558,
+      "return": -8.967680068817593,
+      "length": 13
+    },
+    {
+      "episode_idx": 293,
+      "phase": "train",
+      "epoch": 45,
+      "env_step": 45634,
+      "return": -91.51994619333153,
+      "length": 76
+    },
+    {
+      "episode_idx": 294,
+      "phase": "train",
+      "epoch": 45,
+      "env_step": 45752,
+      "return": -102.12878059305373,
+      "length": 118
+    },
+    {
+      "episode_idx": 295,
+      "phase": "train",
+      "epoch": 45,
+      "env_step": 45783,
+      "return": -20.165900633732285,
+      "length": 31
+    },
+    {
+      "episode_idx": 296,
+      "phase": "train",
+      "epoch": 45,
+      "env_step": 45807,
+      "return": -15.378411411546825,
+      "length": 24
+    },
+    {
+      "episode_idx": 297,
+      "phase": "train",
+      "epoch": 45,
+      "env_step": 45818,
+      "return": -3.576445397864952,
+      "length": 11
+    },
+    {
+      "episode_idx": 298,
+      "phase": "train",
+      "epoch": 45,
+      "env_step": 45836,
+      "return": -12.247608929055334,
+      "length": 18
+    },
+    {
+      "episode_idx": 299,
+      "phase": "train",
+      "epoch": 46,
+      "env_step": 46836,
+      "return": -1568.64492326396,
+      "length": 1000
+    },
+    {
+      "episode_idx": 300,
+      "phase": "train",
+      "epoch": 47,
+      "env_step": 47836,
+      "return": -1595.361645478945,
+      "length": 1000
+    },
+    {
+      "episode_idx": 301,
+      "phase": "train",
+      "epoch": 47,
+      "env_step": 47862,
+      "return": -31.262565978180824,
+      "length": 26
+    },
+    {
+      "episode_idx": 302,
+      "phase": "train",
+      "epoch": 47,
+      "env_step": 47902,
+      "return": -22.14199175866954,
+      "length": 40
+    },
+    {
+      "episode_idx": 303,
+      "phase": "train",
+      "epoch": 47,
+      "env_step": 47934,
+      "return": -35.35038662723578,
+      "length": 32
+    },
+    {
+      "episode_idx": 304,
+      "phase": "train",
+      "epoch": 47,
+      "env_step": 47962,
+      "return": -32.317402722149524,
+      "length": 28
+    },
+    {
+      "episode_idx": 305,
+      "phase": "train",
+      "epoch": 48,
+      "env_step": 48077,
+      "return": -154.80041077667812,
+      "length": 115
+    },
+    {
+      "episode_idx": 306,
+      "phase": "train",
+      "epoch": 48,
+      "env_step": 48096,
+      "return": -30.856435086406496,
+      "length": 19
+    },
+    {
+      "episode_idx": 307,
+      "phase": "train",
+      "epoch": 48,
+      "env_step": 48142,
+      "return": -60.47391181157986,
+      "length": 46
+    },
+    {
+      "episode_idx": 308,
+      "phase": "train",
+      "epoch": 48,
+      "env_step": 48191,
+      "return": -55.84198313389069,
+      "length": 49
+    },
+    {
+      "episode_idx": 309,
+      "phase": "train",
+      "epoch": 48,
+      "env_step": 48535,
+      "return": -452.4914047077529,
+      "length": 344
+    },
+    {
+      "episode_idx": 310,
+      "phase": "train",
+      "epoch": 48,
+      "env_step": 48553,
+      "return": -25.74200436539597,
+      "length": 18
+    },
+    {
+      "episode_idx": 311,
+      "phase": "train",
+      "epoch": 48,
+      "env_step": 48582,
+      "return": -65.94551566335754,
+      "length": 29
+    },
+    {
+      "episode_idx": 312,
+      "phase": "train",
+      "epoch": 48,
+      "env_step": 48594,
+      "return": -24.93189025241934,
+      "length": 12
+    },
+    {
+      "episode_idx": 313,
+      "phase": "train",
+      "epoch": 48,
+      "env_step": 48654,
+      "return": -55.12109891918946,
+      "length": 60
+    },
+    {
+      "episode_idx": 314,
+      "phase": "train",
+      "epoch": 48,
+      "env_step": 48667,
+      "return": -18.882264529653135,
+      "length": 13
+    },
+    {
+      "episode_idx": 315,
+      "phase": "train",
+      "epoch": 48,
+      "env_step": 48750,
+      "return": -84.12743814080918,
+      "length": 83
+    },
+    {
+      "episode_idx": 316,
+      "phase": "train",
+      "epoch": 48,
+      "env_step": 48765,
+      "return": -30.04494385741213,
+      "length": 15
+    },
+    {
+      "episode_idx": 317,
+      "phase": "train",
+      "epoch": 49,
+      "env_step": 49765,
+      "return": -1736.2386037753463,
+      "length": 1000
+    },
+    {
+      "episode_idx": 318,
+      "phase": "train",
+      "epoch": 50,
+      "env_step": 50683,
+      "return": -1692.6163898553275,
+      "length": 918
+    },
+    {
+      "episode_idx": 319,
+      "phase": "train",
+      "epoch": 50,
+      "env_step": 50744,
+      "return": -85.27320811214432,
+      "length": 61
+    },
+    {
+      "episode_idx": 320,
+      "phase": "train",
+      "epoch": 50,
+      "env_step": 50850,
+      "return": -135.9284841719106,
+      "length": 106
+    },
+    {
+      "episode_idx": 321,
+      "phase": "train",
+      "epoch": 50,
+      "env_step": 50951,
+      "return": -112.97334502237547,
+      "length": 101
+    },
+    {
+      "episode_idx": 322,
+      "phase": "train",
+      "epoch": 50,
+      "env_step": 50975,
+      "return": -28.530921657102667,
+      "length": 24
+    },
+    {
+      "episode_idx": 323,
+      "phase": "train",
+      "epoch": 51,
+      "env_step": 51020,
+      "return": -49.46666382326298,
+      "length": 45
+    },
+    {
+      "episode_idx": 324,
+      "phase": "train",
+      "epoch": 52,
+      "env_step": 52020,
+      "return": -1943.814219754206,
+      "length": 1000
+    },
+    {
+      "episode_idx": 325,
+      "phase": "train",
+      "epoch": 52,
+      "env_step": 52031,
+      "return": -11.634348148041203,
+      "length": 11
+    },
+    {
+      "episode_idx": 326,
+      "phase": "train",
+      "epoch": 52,
+      "env_step": 52058,
+      "return": -16.03545317860593,
+      "length": 27
+    },
+    {
+      "episode_idx": 327,
+      "phase": "train",
+      "epoch": 52,
+      "env_step": 52121,
+      "return": -69.30772604516113,
+      "length": 63
+    },
+    {
+      "episode_idx": 328,
+      "phase": "train",
+      "epoch": 53,
+      "env_step": 53121,
+      "return": -1842.9378838781379,
+      "length": 1000
+    },
+    {
+      "episode_idx": 329,
+      "phase": "train",
+      "epoch": 53,
+      "env_step": 53177,
+      "return": -81.80121405322159,
+      "length": 56
+    },
+    {
+      "episode_idx": 330,
+      "phase": "train",
+      "epoch": 53,
+      "env_step": 53208,
+      "return": -38.23449880347262,
+      "length": 31
+    },
+    {
+      "episode_idx": 331,
+      "phase": "train",
+      "epoch": 53,
+      "env_step": 53235,
+      "return": -8.645991711404841,
+      "length": 27
+    },
+    {
+      "episode_idx": 332,
+      "phase": "train",
+      "epoch": 53,
+      "env_step": 53251,
+      "return": -22.52753005539505,
+      "length": 16
+    },
+    {
+      "episode_idx": 333,
+      "phase": "train",
+      "epoch": 53,
+      "env_step": 53284,
+      "return": -43.65552926062106,
+      "length": 33
+    },
+    {
+      "episode_idx": 334,
+      "phase": "train",
+      "epoch": 53,
+      "env_step": 53396,
+      "return": -99.58467033257332,
+      "length": 112
+    },
+    {
+      "episode_idx": 335,
+      "phase": "train",
+      "epoch": 53,
+      "env_step": 53484,
+      "return": -132.5736285786489,
+      "length": 88
+    },
+    {
+      "episode_idx": 336,
+      "phase": "train",
+      "epoch": 53,
+      "env_step": 53542,
+      "return": -60.635871305978235,
+      "length": 58
+    },
+    {
+      "episode_idx": 337,
+      "phase": "train",
+      "epoch": 53,
+      "env_step": 53834,
+      "return": -551.8991442791324,
+      "length": 292
+    },
+    {
+      "episode_idx": 338,
+      "phase": "train",
+      "epoch": 53,
+      "env_step": 53890,
+      "return": -72.5769191770305,
+      "length": 56
+    },
+    {
+      "episode_idx": 339,
+      "phase": "train",
+      "epoch": 53,
+      "env_step": 53950,
+      "return": -65.36696740259369,
+      "length": 60
+    },
+    {
+      "episode_idx": 340,
+      "phase": "train",
+      "epoch": 54,
+      "env_step": 54074,
+      "return": -136.05027164078095,
+      "length": 124
+    },
+    {
+      "episode_idx": 341,
+      "phase": "train",
+      "epoch": 54,
+      "env_step": 54124,
+      "return": -48.57661036490999,
+      "length": 50
+    },
+    {
+      "episode_idx": 342,
+      "phase": "train",
+      "epoch": 54,
+      "env_step": 54214,
+      "return": -136.56096268634994,
+      "length": 90
+    },
+    {
+      "episode_idx": 343,
+      "phase": "train",
+      "epoch": 54,
+      "env_step": 54296,
+      "return": -120.68523687940517,
+      "length": 82
+    },
+    {
+      "episode_idx": 344,
+      "phase": "train",
+      "epoch": 54,
+      "env_step": 54465,
+      "return": -226.77843355861214,
+      "length": 169
+    },
+    {
+      "episode_idx": 345,
+      "phase": "train",
+      "epoch": 54,
+      "env_step": 54594,
+      "return": -162.31168713767218,
+      "length": 129
+    },
+    {
+      "episode_idx": 346,
+      "phase": "train",
+      "epoch": 54,
+      "env_step": 54757,
+      "return": -225.8848487789191,
+      "length": 163
+    },
+    {
+      "episode_idx": 347,
+      "phase": "train",
+      "epoch": 55,
+      "env_step": 55757,
+      "return": -1183.7506545641156,
+      "length": 1000
+    },
+    {
+      "episode_idx": 348,
+      "phase": "train",
+      "epoch": 55,
+      "env_step": 55915,
+      "return": -173.38090329898537,
+      "length": 158
+    },
+    {
+      "episode_idx": 349,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56038,
+      "return": -176.05104401254266,
+      "length": 123
+    },
+    {
+      "episode_idx": 350,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56053,
+      "return": -27.70101217616156,
+      "length": 15
+    },
+    {
+      "episode_idx": 351,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56084,
+      "return": -42.29332714028498,
+      "length": 31
+    },
+    {
+      "episode_idx": 352,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56147,
+      "return": -14.025039102456185,
+      "length": 63
+    },
+    {
+      "episode_idx": 353,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56256,
+      "return": -117.55161140766283,
+      "length": 109
+    },
+    {
+      "episode_idx": 354,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56279,
+      "return": -39.26679854853113,
+      "length": 23
+    },
+    {
+      "episode_idx": 355,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56303,
+      "return": -58.151488916603995,
+      "length": 24
+    },
+    {
+      "episode_idx": 356,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56354,
+      "return": -53.64018885759476,
+      "length": 51
+    },
+    {
+      "episode_idx": 357,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56412,
+      "return": -41.476177094224084,
+      "length": 58
+    },
+    {
+      "episode_idx": 358,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56457,
+      "return": -89.85363575935934,
+      "length": 45
+    },
+    {
+      "episode_idx": 359,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56592,
+      "return": -237.3943174110515,
+      "length": 135
+    },
+    {
+      "episode_idx": 360,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56603,
+      "return": -11.249250579710951,
+      "length": 11
+    },
+    {
+      "episode_idx": 361,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56613,
+      "return": -10.795390310567825,
+      "length": 10
+    },
+    {
+      "episode_idx": 362,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56625,
+      "return": -9.562761759661573,
+      "length": 12
+    },
+    {
+      "episode_idx": 363,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56725,
+      "return": -156.39346788779483,
+      "length": 100
+    },
+    {
+      "episode_idx": 364,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56766,
+      "return": -59.58650401129327,
+      "length": 41
+    },
+    {
+      "episode_idx": 365,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56793,
+      "return": -44.23293470396245,
+      "length": 27
+    },
+    {
+      "episode_idx": 366,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56856,
+      "return": -71.78982752880405,
+      "length": 63
+    },
+    {
+      "episode_idx": 367,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56896,
+      "return": -79.0714366307162,
+      "length": 40
+    },
+    {
+      "episode_idx": 368,
+      "phase": "train",
+      "epoch": 56,
+      "env_step": 56924,
+      "return": -65.10639250777419,
+      "length": 28
+    },
+    {
+      "episode_idx": 369,
+      "phase": "train",
+      "epoch": 57,
+      "env_step": 57021,
+      "return": -85.72468588685922,
+      "length": 97
+    },
+    {
+      "episode_idx": 370,
+      "phase": "train",
+      "epoch": 57,
+      "env_step": 57056,
+      "return": -46.175843028713196,
+      "length": 35
+    },
+    {
+      "episode_idx": 371,
+      "phase": "train",
+      "epoch": 57,
+      "env_step": 57114,
+      "return": -101.43568345795104,
+      "length": 58
+    },
+    {
+      "episode_idx": 372,
+      "phase": "train",
+      "epoch": 57,
+      "env_step": 57208,
+      "return": -150.5186025827706,
+      "length": 94
+    },
+    {
+      "episode_idx": 373,
+      "phase": "train",
+      "epoch": 57,
+      "env_step": 57228,
+      "return": -39.16307898675951,
+      "length": 20
+    },
+    {
+      "episode_idx": 374,
+      "phase": "train",
+      "epoch": 57,
+      "env_step": 57299,
+      "return": -71.37266311329401,
+      "length": 71
+    },
+    {
+      "episode_idx": 375,
+      "phase": "train",
+      "epoch": 58,
+      "env_step": 58299,
+      "return": -1316.1240774224677,
+      "length": 1000
+    },
+    {
+      "episode_idx": 376,
+      "phase": "train",
+      "epoch": 59,
+      "env_step": 59299,
+      "return": -1385.5027145579893,
+      "length": 1000
+    },
+    {
+      "episode_idx": 377,
+      "phase": "train",
+      "epoch": 60,
+      "env_step": 60299,
+      "return": -1438.7228490714795,
+      "length": 1000
+    },
+    {
+      "episode_idx": 378,
+      "phase": "train",
+      "epoch": 60,
+      "env_step": 60420,
+      "return": -179.76637357060926,
+      "length": 121
+    },
+    {
+      "episode_idx": 379,
+      "phase": "train",
+      "epoch": 60,
+      "env_step": 60429,
+      "return": -18.900050197810558,
+      "length": 9
+    },
+    {
+      "episode_idx": 380,
+      "phase": "train",
+      "epoch": 60,
+      "env_step": 60458,
+      "return": -40.96634502880061,
+      "length": 29
+    },
+    {
+      "episode_idx": 381,
+      "phase": "train",
+      "epoch": 61,
+      "env_step": 61458,
+      "return": -1379.4828756817767,
+      "length": 1000
+    },
+    {
+      "episode_idx": 382,
+      "phase": "train",
+      "epoch": 61,
+      "env_step": 61489,
+      "return": -56.03540733267408,
+      "length": 31
+    },
+    {
+      "episode_idx": 383,
+      "phase": "train",
+      "epoch": 61,
+      "env_step": 61658,
+      "return": -274.1337674299263,
+      "length": 169
+    },
+    {
+      "episode_idx": 384,
+      "phase": "train",
+      "epoch": 62,
+      "env_step": 62658,
+      "return": -1385.8947463909271,
+      "length": 1000
+    },
+    {
+      "episode_idx": 385,
+      "phase": "train",
+      "epoch": 62,
+      "env_step": 62665,
+      "return": -16.576287122268475,
+      "length": 7
+    },
+    {
+      "episode_idx": 386,
+      "phase": "train",
+      "epoch": 62,
+      "env_step": 62678,
+      "return": -14.750701533450282,
+      "length": 13
+    },
+    {
+      "episode_idx": 387,
+      "phase": "train",
+      "epoch": 62,
+      "env_step": 62697,
+      "return": -36.207569612969124,
+      "length": 19
+    },
+    {
+      "episode_idx": 388,
+      "phase": "train",
+      "epoch": 62,
+      "env_step": 62721,
+      "return": -46.91741877673656,
+      "length": 24
+    },
+    {
+      "episode_idx": 389,
+      "phase": "train",
+      "epoch": 63,
+      "env_step": 63721,
+      "return": -1232.041124506435,
+      "length": 1000
+    },
+    {
+      "episode_idx": 390,
+      "phase": "train",
+      "epoch": 63,
+      "env_step": 63749,
+      "return": -45.65571623280539,
+      "length": 28
+    },
+    {
+      "episode_idx": 391,
+      "phase": "train",
+      "epoch": 63,
+      "env_step": 63800,
+      "return": -83.12928734956589,
+      "length": 51
+    },
+    {
+      "episode_idx": 392,
+      "phase": "train",
+      "epoch": 63,
+      "env_step": 63819,
+      "return": -28.740003010391067,
+      "length": 19
+    },
+    {
+      "episode_idx": 393,
+      "phase": "train",
+      "epoch": 63,
+      "env_step": 63886,
+      "return": -119.29437281208918,
+      "length": 67
+    },
+    {
+      "episode_idx": 394,
+      "phase": "train",
+      "epoch": 64,
+      "env_step": 64886,
+      "return": -1301.2841097154837,
+      "length": 1000
+    },
+    {
+      "episode_idx": 395,
+      "phase": "train",
+      "epoch": 65,
+      "env_step": 65886,
+      "return": -1032.468224946118,
+      "length": 1000
+    },
+    {
+      "episode_idx": 396,
+      "phase": "train",
+      "epoch": 66,
+      "env_step": 66886,
+      "return": -1175.0987147223177,
+      "length": 1000
+    },
+    {
+      "episode_idx": 397,
+      "phase": "train",
+      "epoch": 67,
+      "env_step": 67244,
+      "return": -303.20603948138,
+      "length": 358
+    },
+    {
+      "episode_idx": 398,
+      "phase": "train",
+      "epoch": 67,
+      "env_step": 67437,
+      "return": -185.28501891683112,
+      "length": 193
+    },
+    {
+      "episode_idx": 399,
+      "phase": "train",
+      "epoch": 68,
+      "env_step": 68437,
+      "return": -1033.880164940891,
+      "length": 1000
+    },
+    {
+      "episode_idx": 400,
+      "phase": "train",
+      "epoch": 68,
+      "env_step": 68656,
+      "return": -201.8957921899124,
+      "length": 219
+    },
+    {
+      "episode_idx": 401,
+      "phase": "train",
+      "epoch": 68,
+      "env_step": 68791,
+      "return": -85.93898523018295,
+      "length": 135
+    },
+    {
+      "episode_idx": 402,
+      "phase": "train",
+      "epoch": 68,
+      "env_step": 68966,
+      "return": -141.37662786698618,
+      "length": 175
+    },
+    {
+      "episode_idx": 403,
+      "phase": "train",
+      "epoch": 69,
+      "env_step": 69966,
+      "return": -526.6433269420462,
+      "length": 1000
+    },
+    {
+      "episode_idx": 404,
+      "phase": "train",
+      "epoch": 70,
+      "env_step": 70966,
+      "return": -410.25550133907916,
+      "length": 1000
+    },
+    {
+      "episode_idx": 405,
+      "phase": "train",
+      "epoch": 71,
+      "env_step": 71966,
+      "return": -627.5438049121576,
+      "length": 1000
+    },
+    {
+      "episode_idx": 406,
+      "phase": "train",
+      "epoch": 72,
+      "env_step": 72966,
+      "return": -188.91392317987922,
+      "length": 1000
+    },
+    {
+      "episode_idx": 407,
+      "phase": "train",
+      "epoch": 73,
+      "env_step": 73966,
+      "return": -153.4999490698186,
+      "length": 1000
+    },
+    {
+      "episode_idx": 408,
+      "phase": "train",
+      "epoch": 74,
+      "env_step": 74966,
+      "return": -438.11261766436945,
+      "length": 1000
+    },
+    {
+      "episode_idx": 409,
+      "phase": "train",
+      "epoch": 75,
+      "env_step": 75966,
+      "return": -71.94961614618778,
+      "length": 1000
+    },
+    {
+      "episode_idx": 410,
+      "phase": "train",
+      "epoch": 76,
+      "env_step": 76966,
+      "return": -19.933830088225246,
+      "length": 1000
+    },
+    {
+      "episode_idx": 411,
+      "phase": "train",
+      "epoch": 77,
+      "env_step": 77966,
+      "return": -236.79300524869296,
+      "length": 1000
+    },
+    {
+      "episode_idx": 412,
+      "phase": "train",
+      "epoch": 78,
+      "env_step": 78966,
+      "return": 41.637833860240676,
+      "length": 1000
+    },
+    {
+      "episode_idx": 413,
+      "phase": "train",
+      "epoch": 78,
+      "env_step": 78979,
+      "return": -8.787139882510234,
+      "length": 13
+    },
+    {
+      "episode_idx": 414,
+      "phase": "train",
+      "epoch": 79,
+      "env_step": 79624,
+      "return": -210.5068891157816,
+      "length": 645
+    },
+    {
+      "episode_idx": 415,
+      "phase": "train",
+      "epoch": 80,
+      "env_step": 80624,
+      "return": -219.07214551256627,
+      "length": 1000
+    },
+    {
+      "episode_idx": 416,
+      "phase": "train",
+      "epoch": 81,
+      "env_step": 81624,
+      "return": -535.2895311915864,
+      "length": 1000
+    },
+    {
+      "episode_idx": 417,
+      "phase": "train",
+      "epoch": 82,
+      "env_step": 82624,
+      "return": -592.6520963105398,
+      "length": 1000
+    },
+    {
+      "episode_idx": 418,
+      "phase": "train",
+      "epoch": 83,
+      "env_step": 83022,
+      "return": -371.15986421199176,
+      "length": 398
+    },
+    {
+      "episode_idx": 419,
+      "phase": "train",
+      "epoch": 83,
+      "env_step": 83501,
+      "return": -237.44987082270302,
+      "length": 479
+    },
+    {
+      "episode_idx": 420,
+      "phase": "train",
+      "epoch": 84,
+      "env_step": 84501,
+      "return": -677.3655450206587,
+      "length": 1000
+    },
+    {
+      "episode_idx": 421,
+      "phase": "train",
+      "epoch": 84,
+      "env_step": 84998,
+      "return": -402.04157461672014,
+      "length": 497
+    },
+    {
+      "episode_idx": 422,
+      "phase": "train",
+      "epoch": 85,
+      "env_step": 85998,
+      "return": -885.5037634017674,
+      "length": 1000
+    },
+    {
+      "episode_idx": 423,
+      "phase": "train",
+      "epoch": 86,
+      "env_step": 86998,
+      "return": -961.7849111714162,
+      "length": 1000
+    },
+    {
+      "episode_idx": 424,
+      "phase": "train",
+      "epoch": 87,
+      "env_step": 87998,
+      "return": -900.9682608934962,
+      "length": 1000
+    },
+    {
+      "episode_idx": 425,
+      "phase": "train",
+      "epoch": 88,
+      "env_step": 88998,
+      "return": -819.3845274874079,
+      "length": 1000
+    },
+    {
+      "episode_idx": 426,
+      "phase": "train",
+      "epoch": 89,
+      "env_step": 89998,
+      "return": -508.40086490878855,
+      "length": 1000
+    },
+    {
+      "episode_idx": 427,
+      "phase": "train",
+      "epoch": 90,
+      "env_step": 90998,
+      "return": -429.4452179832409,
+      "length": 1000
+    },
+    {
+      "episode_idx": 428,
+      "phase": "train",
+      "epoch": 91,
+      "env_step": 91998,
+      "return": -1395.4543429192029,
+      "length": 1000
+    },
+    {
+      "episode_idx": 429,
+      "phase": "train",
+      "epoch": 92,
+      "env_step": 92998,
+      "return": -466.22050598048816,
+      "length": 1000
+    },
+    {
+      "episode_idx": 430,
+      "phase": "train",
+      "epoch": 93,
+      "env_step": 93998,
+      "return": -1201.72884552132,
+      "length": 1000
+    },
+    {
+      "episode_idx": 431,
+      "phase": "train",
+      "epoch": 94,
+      "env_step": 94998,
+      "return": -769.0223452549493,
+      "length": 1000
+    },
+    {
+      "episode_idx": 432,
+      "phase": "train",
+      "epoch": 95,
+      "env_step": 95998,
+      "return": -1181.2862586615797,
+      "length": 1000
+    },
+    {
+      "episode_idx": 433,
+      "phase": "train",
+      "epoch": 96,
+      "env_step": 96998,
+      "return": -629.1860333697208,
+      "length": 1000
+    },
+    {
+      "episode_idx": 434,
+      "phase": "train",
+      "epoch": 97,
+      "env_step": 97998,
+      "return": -1277.6625019681348,
+      "length": 1000
+    },
+    {
+      "episode_idx": 435,
+      "phase": "train",
+      "epoch": 98,
+      "env_step": 98998,
+      "return": -911.7882917380225,
+      "length": 1000
+    },
+    {
+      "episode_idx": 436,
+      "phase": "train",
+      "epoch": 99,
+      "env_step": 99998,
+      "return": -1233.6515347969532,
+      "length": 1000
+    },
+    {
+      "episode_idx": 437,
+      "phase": "train_incomplete",
+      "epoch": 99,
+      "env_step": 100000,
+      "return": -1.5882722455076999,
+      "length": 2
+    }
+  ],
+  "epochs": [
+    {
+      "epoch": 0,
+      "env_step": 1000,
+      "cumulative_reward": -584.2581209951936,
+      "epoch_reward_sum": -584.2581209951936,
+      "epoch_reward_mean_per_step": -0.5842581209951936,
+      "num_episodes_completed": 5,
+      "mean_episode_return": -36.00478229380062,
+      "critic_loss_mean": 0.9050204830095172,
+      "actor_loss_mean": -7.53364487054944,
+      "alpha_end": 0.074381984770298,
+      "buffer_size": 6000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 6000,
+      "model_buffer_size": 6000,
+      "model_holdout_mse": 1.816762924194336,
+      "model_train_epochs": 41
+    },
+    {
+      "epoch": 1,
+      "env_step": 2000,
+      "cumulative_reward": -1691.1823309170102,
+      "epoch_reward_sum": -1106.9242099218172,
+      "epoch_reward_mean_per_step": -1.1069242099218173,
+      "num_episodes_completed": 7,
+      "mean_episode_return": -136.84767425888936,
+      "critic_loss_mean": 9.935985597610474,
+      "actor_loss_mean": -26.977635246038435,
+      "alpha_end": 0.0520513541996479,
+      "buffer_size": 7000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 7000,
+      "model_buffer_size": 13000,
+      "model_holdout_mse": 1.8519983291625977,
+      "model_train_epochs": 26
+    },
+    {
+      "epoch": 2,
+      "env_step": 3000,
+      "cumulative_reward": -2618.7209841977487,
+      "epoch_reward_sum": -927.5386532807391,
+      "epoch_reward_mean_per_step": -0.9275386532807391,
+      "num_episodes_completed": 4,
+      "mean_episode_return": -282.36226641060836,
+      "critic_loss_mean": 56.01229481744766,
+      "actor_loss_mean": -65.06166415023803,
+      "alpha_end": 0.10822311788797379,
+      "buffer_size": 8000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 8000,
+      "model_buffer_size": 21000,
+      "model_holdout_mse": 1.9618217945098877,
+      "model_train_epochs": 19
+    },
+    {
+      "epoch": 3,
+      "env_step": 4000,
+      "cumulative_reward": -3462.2123839955193,
+      "epoch_reward_sum": -843.4913997977687,
+      "epoch_reward_mean_per_step": -0.8434913997977688,
+      "num_episodes_completed": 7,
+      "mean_episode_return": -169.1601135675475,
+      "critic_loss_mean": 152.89952290725708,
+      "actor_loss_mean": -101.797669921875,
+      "alpha_end": 0.16733701527118683,
+      "buffer_size": 9000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 9000,
+      "model_buffer_size": 30000,
+      "model_holdout_mse": 2.009666919708252,
+      "model_train_epochs": 22
+    },
+    {
+      "epoch": 4,
+      "env_step": 5000,
+      "cumulative_reward": -4054.540818608689,
+      "epoch_reward_sum": -592.3284346131709,
+      "epoch_reward_mean_per_step": -0.5923284346131709,
+      "num_episodes_completed": 2,
+      "mean_episode_return": -48.23576765869559,
+      "critic_loss_mean": 244.8788978023529,
+      "actor_loss_mean": -121.04798231506348,
+      "alpha_end": 0.19933751225471497,
+      "buffer_size": 10000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 40000,
+      "model_holdout_mse": 2.043851613998413,
+      "model_train_epochs": 14
+    },
+    {
+      "epoch": 5,
+      "env_step": 6000,
+      "cumulative_reward": -4563.711040200777,
+      "epoch_reward_sum": -509.1702215920835,
+      "epoch_reward_mean_per_step": -0.5091702215920835,
+      "num_episodes_completed": 11,
+      "mean_episode_return": -90.8289383212953,
+      "critic_loss_mean": 324.6270064277649,
+      "actor_loss_mean": -129.70371705818175,
+      "alpha_end": 0.22155848145484924,
+      "buffer_size": 11000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 50000,
+      "model_holdout_mse": 2.101693630218506,
+      "model_train_epochs": 10
+    },
+    {
+      "epoch": 6,
+      "env_step": 7000,
+      "cumulative_reward": -5067.792600517588,
+      "epoch_reward_sum": -504.081560316808,
+      "epoch_reward_mean_per_step": -0.5040815603168081,
+      "num_episodes_completed": 14,
+      "mean_episode_return": -37.33688660959997,
+      "critic_loss_mean": 352.2031979484558,
+      "actor_loss_mean": -125.80085620498657,
+      "alpha_end": 0.22170428931713104,
+      "buffer_size": 12000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 60000,
+      "model_holdout_mse": 2.047792911529541,
+      "model_train_epochs": 15
+    },
+    {
+      "epoch": 7,
+      "env_step": 8000,
+      "cumulative_reward": -5557.174828480461,
+      "epoch_reward_sum": -489.3822279628769,
+      "epoch_reward_mean_per_step": -0.48938222796287695,
+      "num_episodes_completed": 11,
+      "mean_episode_return": -26.399711451046674,
+      "critic_loss_mean": 306.2781482887268,
+      "actor_loss_mean": -106.45016986274719,
+      "alpha_end": 0.2084515541791916,
+      "buffer_size": 13000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 70000,
+      "model_holdout_mse": 2.076303720474243,
+      "model_train_epochs": 11
+    },
+    {
+      "epoch": 8,
+      "env_step": 9000,
+      "cumulative_reward": -5963.002465547362,
+      "epoch_reward_sum": -405.8276370668887,
+      "epoch_reward_mean_per_step": -0.40582763706688874,
+      "num_episodes_completed": 6,
+      "mean_episode_return": -99.20230566355457,
+      "critic_loss_mean": 218.31960688114165,
+      "actor_loss_mean": -71.07873067951202,
+      "alpha_end": 0.1701461672782898,
+      "buffer_size": 14000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 80000,
+      "model_holdout_mse": 2.059239625930786,
+      "model_train_epochs": 11
+    },
+    {
+      "epoch": 9,
+      "env_step": 10000,
+      "cumulative_reward": -6227.300897424194,
+      "epoch_reward_sum": -264.298431876817,
+      "epoch_reward_mean_per_step": -0.264298431876817,
+      "num_episodes_completed": 7,
+      "mean_episode_return": -17.78553389424781,
+      "critic_loss_mean": 106.89089424610138,
+      "actor_loss_mean": -20.368994593329727,
+      "alpha_end": 0.10851670056581497,
+      "buffer_size": 15000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 90000,
+      "model_holdout_mse": 2.038844108581543,
+      "model_train_epochs": 12
+    },
+    {
+      "epoch": 10,
+      "env_step": 11000,
+      "cumulative_reward": -6283.203693616554,
+      "epoch_reward_sum": -55.90279619235823,
+      "epoch_reward_mean_per_step": -0.05590279619235823,
+      "num_episodes_completed": 4,
+      "mean_episode_return": -53.44762866488673,
+      "critic_loss_mean": 76.48914793682098,
+      "actor_loss_mean": 38.14158411324024,
+      "alpha_end": 0.07653219252824783,
+      "buffer_size": 16000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 100000,
+      "model_holdout_mse": 1.9908456802368164,
+      "model_train_epochs": 13
+    },
+    {
+      "epoch": 11,
+      "env_step": 12000,
+      "cumulative_reward": -6498.521596384004,
+      "epoch_reward_sum": -215.31790276743453,
+      "epoch_reward_mean_per_step": -0.21531790276743454,
+      "num_episodes_completed": 2,
+      "mean_episode_return": -105.46421272957855,
+      "critic_loss_mean": 242.29483187103273,
+      "actor_loss_mean": 119.53477995300292,
+      "alpha_end": 0.15077656507492065,
+      "buffer_size": 17000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 110000,
+      "model_holdout_mse": 1.9878028631210327,
+      "model_train_epochs": 13
+    },
+    {
+      "epoch": 12,
+      "env_step": 13000,
+      "cumulative_reward": -7238.125417548003,
+      "epoch_reward_sum": -739.6038211640157,
+      "epoch_reward_mean_per_step": -0.7396038211640157,
+      "num_episodes_completed": 16,
+      "mean_episode_return": -43.26111874058537,
+      "critic_loss_mean": 942.092077949524,
+      "actor_loss_mean": 261.82035703277586,
+      "alpha_end": 0.19899797439575195,
+      "buffer_size": 18000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 120000,
+      "model_holdout_mse": 1.9645650386810303,
+      "model_train_epochs": 11
+    },
+    {
+      "epoch": 13,
+      "env_step": 14000,
+      "cumulative_reward": -7722.856972100978,
+      "epoch_reward_sum": -484.73155455297774,
+      "epoch_reward_mean_per_step": -0.48473155455297773,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -510.8135627524277,
+      "critic_loss_mean": 3311.9446136169436,
+      "actor_loss_mean": 502.6584694900513,
+      "alpha_end": 0.32100263237953186,
+      "buffer_size": 19000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 130000,
+      "model_holdout_mse": 1.987249493598938,
+      "model_train_epochs": 17
+    },
+    {
+      "epoch": 14,
+      "env_step": 15000,
+      "cumulative_reward": -8131.944607858723,
+      "epoch_reward_sum": -409.08763575773884,
+      "epoch_reward_mean_per_step": -0.4090876357577388,
+      "num_episodes_completed": 6,
+      "mean_episode_return": -34.37876038740271,
+      "critic_loss_mean": 11217.089958312989,
+      "actor_loss_mean": 939.6646015167237,
+      "alpha_end": 0.5294579863548279,
+      "buffer_size": 20000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 140000,
+      "model_holdout_mse": 1.9583085775375366,
+      "model_train_epochs": 14
+    },
+    {
+      "epoch": 15,
+      "env_step": 16000,
+      "cumulative_reward": -8406.541076215903,
+      "epoch_reward_sum": -274.5964683572055,
+      "epoch_reward_mean_per_step": -0.27459646835720547,
+      "num_episodes_completed": 4,
+      "mean_episode_return": -114.16686751307697,
+      "critic_loss_mean": 40041.21093725586,
+      "actor_loss_mean": 1760.0448320007324,
+      "alpha_end": 0.8996129035949707,
+      "buffer_size": 21000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 150000,
+      "model_holdout_mse": 1.942307472229004,
+      "model_train_epochs": 8
+    },
+    {
+      "epoch": 16,
+      "env_step": 17000,
+      "cumulative_reward": -8620.473968517546,
+      "epoch_reward_sum": -213.93289230166968,
+      "epoch_reward_mean_per_step": -0.21393289230166967,
+      "num_episodes_completed": 5,
+      "mean_episode_return": -22.221385177458668,
+      "critic_loss_mean": 138121.93139941405,
+      "actor_loss_mean": 3240.611378845215,
+      "alpha_end": 1.495395302772522,
+      "buffer_size": 22000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 160000,
+      "model_holdout_mse": 1.9303613901138306,
+      "model_train_epochs": 10
+    },
+    {
+      "epoch": 17,
+      "env_step": 18000,
+      "cumulative_reward": -8862.890304320677,
+      "epoch_reward_sum": -242.41633580310938,
+      "epoch_reward_mean_per_step": -0.24241633580310937,
+      "num_episodes_completed": 7,
+      "mean_episode_return": -48.77855897061338,
+      "critic_loss_mean": 419290.9110683594,
+      "actor_loss_mean": 5683.182118164063,
+      "alpha_end": 2.387238025665283,
+      "buffer_size": 23000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 170000,
+      "model_holdout_mse": 1.9348111152648926,
+      "model_train_epochs": 9
+    },
+    {
+      "epoch": 18,
+      "env_step": 19000,
+      "cumulative_reward": -9254.387085350158,
+      "epoch_reward_sum": -391.49678102947456,
+      "epoch_reward_mean_per_step": -0.39149678102947455,
+      "num_episodes_completed": 5,
+      "mean_episode_return": -79.72623569691935,
+      "critic_loss_mean": 1220077.418515625,
+      "actor_loss_mean": 9479.841717407227,
+      "alpha_end": 3.968627691268921,
+      "buffer_size": 24000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 180000,
+      "model_holdout_mse": 1.9211645126342773,
+      "model_train_epochs": 10
+    },
+    {
+      "epoch": 19,
+      "env_step": 20000,
+      "cumulative_reward": -9640.019627432543,
+      "epoch_reward_sum": -385.6325420823911,
+      "epoch_reward_mean_per_step": -0.3856325420823911,
+      "num_episodes_completed": 2,
+      "mean_episode_return": -51.03832580065828,
+      "critic_loss_mean": 3218043.08775,
+      "actor_loss_mean": 15378.001242919921,
+      "alpha_end": 6.384667873382568,
+      "buffer_size": 25000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 190000,
+      "model_holdout_mse": 1.9061723947525024,
+      "model_train_epochs": 15
+    },
+    {
+      "epoch": 20,
+      "env_step": 21000,
+      "cumulative_reward": -10059.246893395584,
+      "epoch_reward_sum": -419.2272659630425,
+      "epoch_reward_mean_per_step": -0.4192272659630425,
+      "num_episodes_completed": 10,
+      "mean_episode_return": -56.2319744037779,
+      "critic_loss_mean": 7853676.29946875,
+      "actor_loss_mean": 23357.020066894533,
+      "alpha_end": 9.337881088256836,
+      "buffer_size": 26000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 200000,
+      "model_holdout_mse": 1.8763737678527832,
+      "model_train_epochs": 9
+    },
+    {
+      "epoch": 21,
+      "env_step": 22000,
+      "cumulative_reward": -10512.857326219635,
+      "epoch_reward_sum": -453.61043282402966,
+      "epoch_reward_mean_per_step": -0.4536104328240297,
+      "num_episodes_completed": 8,
+      "mean_episode_return": -75.18835057372969,
+      "critic_loss_mean": 17373230.2276875,
+      "actor_loss_mean": 33414.63074316406,
+      "alpha_end": 12.857195854187012,
+      "buffer_size": 27000,
+      "rollout_length": 1,
+      "synthetic_transitions_generated": 10000,
+      "model_buffer_size": 210000,
+      "model_holdout_mse": 1.932546615600586,
+      "model_train_epochs": 10
+    },
+    {
+      "epoch": 22,
+      "env_step": 23000,
+      "cumulative_reward": -10948.535962677617,
+      "epoch_reward_sum": -435.67863645800014,
+      "epoch_reward_mean_per_step": -0.43567863645800015,
+      "num_episodes_completed": 22,
+      "mean_episode_return": -21.31517299621287,
+      "critic_loss_mean": 37102981.69125,
+      "actor_loss_mean": 47091.245209960936,
+      "alpha_end": 16.481372833251953,
+      "buffer_size": 28000,
+      "rollout_length": 2,
+      "synthetic_transitions_generated": 19940,
+      "model_buffer_size": 229940,
+      "model_holdout_mse": 1.9027442932128906,
+      "model_train_epochs": 11
+    },
+    {
+      "epoch": 23,
+      "env_step": 24000,
+      "cumulative_reward": -11486.06101493119,
+      "epoch_reward_sum": -537.5250522535889,
+      "epoch_reward_mean_per_step": -0.5375250522535889,
+      "num_episodes_completed": 7,
+      "mean_episode_return": -65.58129908240852,
+      "critic_loss_mean": 85004657.7115,
+      "actor_loss_mean": 64831.45763964844,
+      "alpha_end": 22.236961364746094,
+      "buffer_size": 29000,
+      "rollout_length": 2,
+      "synthetic_transitions_generated": 19930,
+      "model_buffer_size": 249870,
+      "model_holdout_mse": 1.9215704202651978,
+      "model_train_epochs": 13
+    },
+    {
+      "epoch": 24,
+      "env_step": 25000,
+      "cumulative_reward": -11814.10877754578,
+      "epoch_reward_sum": -328.04776261459915,
+      "epoch_reward_mean_per_step": -0.32804776261459917,
+      "num_episodes_completed": 2,
+      "mean_episode_return": -208.2060499530698,
+      "critic_loss_mean": 167265640.41,
+      "actor_loss_mean": 75614.9282421875,
+      "alpha_end": 31.736412048339844,
+      "buffer_size": 30000,
+      "rollout_length": 2,
+      "synthetic_transitions_generated": 19931,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9295097589492798,
+      "model_train_epochs": 8
+    },
+    {
+      "epoch": 25,
+      "env_step": 26000,
+      "cumulative_reward": -12368.27710558578,
+      "epoch_reward_sum": -554.1683280399951,
+      "epoch_reward_mean_per_step": -0.5541683280399952,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -562.2864689041674,
+      "critic_loss_mean": 239900293.554,
+      "actor_loss_mean": 70484.5971279297,
+      "alpha_end": 44.371707916259766,
+      "buffer_size": 31000,
+      "rollout_length": 2,
+      "synthetic_transitions_generated": 19944,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.887873888015747,
+      "model_train_epochs": 9
+    },
+    {
+      "epoch": 26,
+      "env_step": 27000,
+      "cumulative_reward": -13278.728861253772,
+      "epoch_reward_sum": -910.4517556680026,
+      "epoch_reward_mean_per_step": -0.9104517556680026,
+      "num_episodes_completed": 7,
+      "mean_episode_return": -33.79418363372361,
+      "critic_loss_mean": 270849519.918,
+      "actor_loss_mean": 52840.66049804688,
+      "alpha_end": 50.78866958618164,
+      "buffer_size": 32000,
+      "rollout_length": 3,
+      "synthetic_transitions_generated": 29751,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8973474502563477,
+      "model_train_epochs": 14
+    },
+    {
+      "epoch": 27,
+      "env_step": 28000,
+      "cumulative_reward": -14459.380220985393,
+      "epoch_reward_sum": -1180.6513597316266,
+      "epoch_reward_mean_per_step": -1.1806513597316266,
+      "num_episodes_completed": 4,
+      "mean_episode_return": -298.81962470326584,
+      "critic_loss_mean": 268332658.304,
+      "actor_loss_mean": 35025.36185351563,
+      "alpha_end": 57.2564697265625,
+      "buffer_size": 33000,
+      "rollout_length": 3,
+      "synthetic_transitions_generated": 29762,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.924783706665039,
+      "model_train_epochs": 9
+    },
+    {
+      "epoch": 28,
+      "env_step": 29000,
+      "cumulative_reward": -15745.22525204776,
+      "epoch_reward_sum": -1285.8450310623612,
+      "epoch_reward_mean_per_step": -1.2858450310623613,
+      "num_episodes_completed": 3,
+      "mean_episode_return": -447.5014585105728,
+      "critic_loss_mean": 247240867.186,
+      "actor_loss_mean": 13622.898572998047,
+      "alpha_end": 58.97404479980469,
+      "buffer_size": 34000,
+      "rollout_length": 3,
+      "synthetic_transitions_generated": 29755,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.944314956665039,
+      "model_train_epochs": 11
+    },
+    {
+      "epoch": 29,
+      "env_step": 30000,
+      "cumulative_reward": -17208.856999436754,
+      "epoch_reward_sum": -1463.6317473890422,
+      "epoch_reward_mean_per_step": -1.4636317473890421,
+      "num_episodes_completed": 16,
+      "mean_episode_return": -125.70122641816158,
+      "critic_loss_mean": 176916367.433,
+      "actor_loss_mean": -4881.415019657135,
+      "alpha_end": 47.310096740722656,
+      "buffer_size": 35000,
+      "rollout_length": 4,
+      "synthetic_transitions_generated": 39564,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9397296905517578,
+      "model_train_epochs": 18
+    },
+    {
+      "epoch": 30,
+      "env_step": 31000,
+      "cumulative_reward": -18737.868236159702,
+      "epoch_reward_sum": -1529.0112367229563,
+      "epoch_reward_mean_per_step": -1.5290112367229562,
+      "num_episodes_completed": 3,
+      "mean_episode_return": -50.5126067790816,
+      "critic_loss_mean": 101327923.2755,
+      "actor_loss_mean": -7431.73146105957,
+      "alpha_end": 32.231903076171875,
+      "buffer_size": 36000,
+      "rollout_length": 4,
+      "synthetic_transitions_generated": 39171,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9461482763290405,
+      "model_train_epochs": 32
+    },
+    {
+      "epoch": 31,
+      "env_step": 32000,
+      "cumulative_reward": -20295.257938831208,
+      "epoch_reward_sum": -1557.38970267153,
+      "epoch_reward_mean_per_step": -1.55738970267153,
+      "num_episodes_completed": 3,
+      "mean_episode_return": -548.3725141187016,
+      "critic_loss_mean": 57600708.88,
+      "actor_loss_mean": -1133.5213595218659,
+      "alpha_end": 20.024171829223633,
+      "buffer_size": 37000,
+      "rollout_length": 4,
+      "synthetic_transitions_generated": 39400,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9837428331375122,
+      "model_train_epochs": 24
+    },
+    {
+      "epoch": 32,
+      "env_step": 33000,
+      "cumulative_reward": -21619.88156752906,
+      "epoch_reward_sum": -1324.6236286978283,
+      "epoch_reward_mean_per_step": -1.3246236286978283,
+      "num_episodes_completed": 8,
+      "mean_episode_return": -229.9187323992725,
+      "critic_loss_mean": 24016366.47275,
+      "actor_loss_mean": 3483.30196566391,
+      "alpha_end": 10.212310791015625,
+      "buffer_size": 38000,
+      "rollout_length": 5,
+      "synthetic_transitions_generated": 48574,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9894963502883911,
+      "model_train_epochs": 27
+    },
+    {
+      "epoch": 33,
+      "env_step": 34000,
+      "cumulative_reward": -22762.227702185497,
+      "epoch_reward_sum": -1142.3461346563772,
+      "epoch_reward_mean_per_step": -1.1423461346563772,
+      "num_episodes_completed": 2,
+      "mean_episode_return": -736.9686870777156,
+      "critic_loss_mean": 10258945.4758125,
+      "actor_loss_mean": 4487.052704711914,
+      "alpha_end": 6.272915840148926,
+      "buffer_size": 39000,
+      "rollout_length": 5,
+      "synthetic_transitions_generated": 48575,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9888722896575928,
+      "model_train_epochs": 17
+    },
+    {
+      "epoch": 34,
+      "env_step": 35000,
+      "cumulative_reward": -23532.257098030823,
+      "epoch_reward_sum": -770.0293958453362,
+      "epoch_reward_mean_per_step": -0.7700293958453363,
+      "num_episodes_completed": 2,
+      "mean_episode_return": -492.8241077698556,
+      "critic_loss_mean": 5816480.05784375,
+      "actor_loss_mean": 3725.3667280883787,
+      "alpha_end": 5.626638889312744,
+      "buffer_size": 40000,
+      "rollout_length": 5,
+      "synthetic_transitions_generated": 48479,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 2.001101493835449,
+      "model_train_epochs": 17
+    },
+    {
+      "epoch": 35,
+      "env_step": 36000,
+      "cumulative_reward": -24369.134239648454,
+      "epoch_reward_sum": -836.8771416176157,
+      "epoch_reward_mean_per_step": -0.8368771416176157,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -800.6671844985003,
+      "critic_loss_mean": 4055451.449328125,
+      "actor_loss_mean": 2305.2540896606447,
+      "alpha_end": 5.414685249328613,
+      "buffer_size": 41000,
+      "rollout_length": 6,
+      "synthetic_transitions_generated": 57380,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 2.0461266040802,
+      "model_train_epochs": 17
+    },
+    {
+      "epoch": 36,
+      "env_step": 37000,
+      "cumulative_reward": -25508.673198535533,
+      "epoch_reward_sum": -1139.538958887133,
+      "epoch_reward_mean_per_step": -1.139538958887133,
+      "num_episodes_completed": 7,
+      "mean_episode_return": -193.35418607092376,
+      "critic_loss_mean": 3169064.6329375,
+      "actor_loss_mean": 1240.5403592796326,
+      "alpha_end": 5.0205254554748535,
+      "buffer_size": 42000,
+      "rollout_length": 6,
+      "synthetic_transitions_generated": 57716,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 2.0082805156707764,
+      "model_train_epochs": 13
+    },
+    {
+      "epoch": 37,
+      "env_step": 38000,
+      "cumulative_reward": -26427.18953567391,
+      "epoch_reward_sum": -918.5163371383646,
+      "epoch_reward_mean_per_step": -0.9185163371383647,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -957.4208313742793,
+      "critic_loss_mean": 3428988.25615625,
+      "actor_loss_mean": 548.28170352602,
+      "alpha_end": 5.354255676269531,
+      "buffer_size": 43000,
+      "rollout_length": 6,
+      "synthetic_transitions_generated": 57688,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9930109977722168,
+      "model_train_epochs": 19
+    },
+    {
+      "epoch": 38,
+      "env_step": 39000,
+      "cumulative_reward": -27527.20243702251,
+      "epoch_reward_sum": -1100.0129013486085,
+      "epoch_reward_mean_per_step": -1.1000129013486084,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -129.9318666232437,
+      "critic_loss_mean": 3625103.2581875,
+      "actor_loss_mean": -11.09634013581276,
+      "alpha_end": 5.109180450439453,
+      "buffer_size": 44000,
+      "rollout_length": 6,
+      "synthetic_transitions_generated": 57624,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9881434440612793,
+      "model_train_epochs": 22
+    },
+    {
+      "epoch": 39,
+      "env_step": 40000,
+      "cumulative_reward": -28613.527965746667,
+      "epoch_reward_sum": -1086.3255287241545,
+      "epoch_reward_mean_per_step": -1.0863255287241544,
+      "num_episodes_completed": 6,
+      "mean_episode_return": -340.2741195020547,
+      "critic_loss_mean": 3074977.001328125,
+      "actor_loss_mean": -98.97375676321984,
+      "alpha_end": 4.279362201690674,
+      "buffer_size": 45000,
+      "rollout_length": 7,
+      "synthetic_transitions_generated": 65574,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9829187393188477,
+      "model_train_epochs": 21
+    },
+    {
+      "epoch": 40,
+      "env_step": 41000,
+      "cumulative_reward": -29706.302276510272,
+      "epoch_reward_sum": -1092.774310763619,
+      "epoch_reward_mean_per_step": -1.092774310763619,
+      "num_episodes_completed": 2,
+      "mean_episode_return": -573.2578134827098,
+      "critic_loss_mean": 2350147.237171875,
+      "actor_loss_mean": 55.0944464263916,
+      "alpha_end": 3.6100215911865234,
+      "buffer_size": 46000,
+      "rollout_length": 7,
+      "synthetic_transitions_generated": 66402,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9636967182159424,
+      "model_train_epochs": 22
+    },
+    {
+      "epoch": 41,
+      "env_step": 42000,
+      "cumulative_reward": -30550.06476605476,
+      "epoch_reward_sum": -843.7624895445298,
+      "epoch_reward_mean_per_step": -0.8437624895445298,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -49.367023747715,
+      "critic_loss_mean": 2641179.4133671876,
+      "actor_loss_mean": 48.31619021844864,
+      "alpha_end": 4.001943588256836,
+      "buffer_size": 47000,
+      "rollout_length": 7,
+      "synthetic_transitions_generated": 66861,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9575697183609009,
+      "model_train_epochs": 21
+    },
+    {
+      "epoch": 42,
+      "env_step": 43000,
+      "cumulative_reward": -31548.911459440893,
+      "epoch_reward_sum": -998.8466933862012,
+      "epoch_reward_mean_per_step": -0.9988466933862012,
+      "num_episodes_completed": 15,
+      "mean_episode_return": -116.63711718209977,
+      "critic_loss_mean": 4085058.7293515624,
+      "actor_loss_mean": -732.5917709789276,
+      "alpha_end": 4.747831344604492,
+      "buffer_size": 48000,
+      "rollout_length": 8,
+      "synthetic_transitions_generated": 74799,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9596586227416992,
+      "model_train_epochs": 11
+    },
+    {
+      "epoch": 43,
+      "env_step": 44000,
+      "cumulative_reward": -32893.223520445084,
+      "epoch_reward_sum": -1344.3120610041624,
+      "epoch_reward_mean_per_step": -1.3443120610041623,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -290.266427323537,
+      "critic_loss_mean": 5053438.997382812,
+      "actor_loss_mean": -1327.7248098526002,
+      "alpha_end": 5.240348815917969,
+      "buffer_size": 49000,
+      "rollout_length": 8,
+      "synthetic_transitions_generated": 74728,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9653255939483643,
+      "model_train_epochs": 14
+    },
+    {
+      "epoch": 44,
+      "env_step": 45000,
+      "cumulative_reward": -34057.07199789918,
+      "epoch_reward_sum": -1163.8484774540077,
+      "epoch_reward_mean_per_step": -1.1638484774540077,
+      "num_episodes_completed": 2,
+      "mean_episode_return": -676.960490517431,
+      "critic_loss_mean": 7033382.87215625,
+      "actor_loss_mean": -1764.4482944793701,
+      "alpha_end": 6.1523756980896,
+      "buffer_size": 50000,
+      "rollout_length": 8,
+      "synthetic_transitions_generated": 74284,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9179404973983765,
+      "model_train_epochs": 12
+    },
+    {
+      "epoch": 45,
+      "env_step": 46000,
+      "cumulative_reward": -35179.80225369176,
+      "epoch_reward_sum": -1122.7302557925927,
+      "epoch_reward_mean_per_step": -1.1227302557925927,
+      "num_episodes_completed": 11,
+      "mean_episode_return": -163.6545022608327,
+      "critic_loss_mean": 8945031.855875,
+      "actor_loss_mean": -2287.8163676452637,
+      "alpha_end": 6.794076919555664,
+      "buffer_size": 51000,
+      "rollout_length": 8,
+      "synthetic_transitions_generated": 75139,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.95350980758667,
+      "model_train_epochs": 17
+    },
+    {
+      "epoch": 46,
+      "env_step": 47000,
+      "cumulative_reward": -36704.29152934334,
+      "epoch_reward_sum": -1524.4892756515478,
+      "epoch_reward_mean_per_step": -1.5244892756515478,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -1568.64492326396,
+      "critic_loss_mean": 13211648.445609376,
+      "actor_loss_mean": -3255.2056815490723,
+      "alpha_end": 9.464524269104004,
+      "buffer_size": 52000,
+      "rollout_length": 9,
+      "synthetic_transitions_generated": 82935,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9391473531723022,
+      "model_train_epochs": 19
+    },
+    {
+      "epoch": 47,
+      "env_step": 48000,
+      "cumulative_reward": -38312.224938673324,
+      "epoch_reward_sum": -1607.9334093299613,
+      "epoch_reward_mean_per_step": -1.6079334093299613,
+      "num_episodes_completed": 5,
+      "mean_episode_return": -343.28679851303616,
+      "critic_loss_mean": 20053881.328125,
+      "actor_loss_mean": -5339.411516845703,
+      "alpha_end": 13.426392555236816,
+      "buffer_size": 53000,
+      "rollout_length": 9,
+      "synthetic_transitions_generated": 82332,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9172803163528442,
+      "model_train_epochs": 17
+    },
+    {
+      "epoch": 48,
+      "env_step": 49000,
+      "cumulative_reward": -39766.78302536031,
+      "epoch_reward_sum": -1454.5580866869966,
+      "epoch_reward_mean_per_step": -1.4545580866869967,
+      "num_episodes_completed": 12,
+      "mean_episode_return": -88.2716084370454,
+      "critic_loss_mean": 34302224.204625,
+      "actor_loss_mean": -7535.930426879882,
+      "alpha_end": 16.702857971191406,
+      "buffer_size": 54000,
+      "rollout_length": 9,
+      "synthetic_transitions_generated": 81284,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9249521493911743,
+      "model_train_epochs": 11
+    },
+    {
+      "epoch": 49,
+      "env_step": 50000,
+      "cumulative_reward": -41514.616302154944,
+      "epoch_reward_sum": -1747.8332767947138,
+      "epoch_reward_mean_per_step": -1.7478332767947138,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -1736.2386037753463,
+      "critic_loss_mean": 41509512.120375,
+      "actor_loss_mean": -8415.946956420898,
+      "alpha_end": 17.915197372436523,
+      "buffer_size": 55000,
+      "rollout_length": 10,
+      "synthetic_transitions_generated": 89989,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.9129366874694824,
+      "model_train_epochs": 15
+    },
+    {
+      "epoch": 50,
+      "env_step": 51000,
+      "cumulative_reward": -43106.41289130795,
+      "epoch_reward_sum": -1591.7965891529416,
+      "epoch_reward_mean_per_step": -1.5917965891529415,
+      "num_episodes_completed": 5,
+      "mean_episode_return": -411.0644697637721,
+      "critic_loss_mean": 40712704.2765625,
+      "actor_loss_mean": -7381.9572919921875,
+      "alpha_end": 16.637359619140625,
+      "buffer_size": 56000,
+      "rollout_length": 10,
+      "synthetic_transitions_generated": 91309,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8878453969955444,
+      "model_train_epochs": 18
+    },
+    {
+      "epoch": 51,
+      "env_step": 52000,
+      "cumulative_reward": -45044.843475105416,
+      "epoch_reward_sum": -1938.4305837974014,
+      "epoch_reward_mean_per_step": -1.9384305837974014,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -49.46666382326298,
+      "critic_loss_mean": 37372810.6275,
+      "actor_loss_mean": -6081.2623750610355,
+      "alpha_end": 14.328458786010742,
+      "buffer_size": 57000,
+      "rollout_length": 10,
+      "synthetic_transitions_generated": 89281,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8674004077911377,
+      "model_train_epochs": 19
+    },
+    {
+      "epoch": 52,
+      "env_step": 53000,
+      "cumulative_reward": -46739.251179185056,
+      "epoch_reward_sum": -1694.4077040796165,
+      "epoch_reward_mean_per_step": -1.6944077040796164,
+      "num_episodes_completed": 4,
+      "mean_episode_return": -510.1979367815036,
+      "critic_loss_mean": 33426773.2859375,
+      "actor_loss_mean": -4987.041180847168,
+      "alpha_end": 14.200655937194824,
+      "buffer_size": 58000,
+      "rollout_length": 11,
+      "synthetic_transitions_generated": 94707,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8573377132415771,
+      "model_train_epochs": 15
+    },
+    {
+      "epoch": 53,
+      "env_step": 54000,
+      "cumulative_reward": -48237.764401677836,
+      "epoch_reward_sum": -1498.5132224926394,
+      "epoch_reward_mean_per_step": -1.4985132224926394,
+      "num_episodes_completed": 12,
+      "mean_episode_return": -251.70332073651753,
+      "critic_loss_mean": 31877999.1778125,
+      "actor_loss_mean": -3593.403583251953,
+      "alpha_end": 11.285177230834961,
+      "buffer_size": 59000,
+      "rollout_length": 11,
+      "synthetic_transitions_generated": 95997,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8685905933380127,
+      "model_train_epochs": 14
+    },
+    {
+      "epoch": 54,
+      "env_step": 55000,
+      "cumulative_reward": -49556.281413387085,
+      "epoch_reward_sum": -1318.5170117091902,
+      "epoch_reward_mean_per_step": -1.3185170117091902,
+      "num_episodes_completed": 7,
+      "mean_episode_return": -150.97829300666422,
+      "critic_loss_mean": 24621328.716875,
+      "actor_loss_mean": -2349.769431411743,
+      "alpha_end": 10.004965782165527,
+      "buffer_size": 60000,
+      "rollout_length": 11,
+      "synthetic_transitions_generated": 96529,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.867858648300171,
+      "model_train_epochs": 15
+    },
+    {
+      "epoch": 55,
+      "env_step": 56000,
+      "cumulative_reward": -50721.25220273293,
+      "epoch_reward_sum": -1164.9707893458828,
+      "epoch_reward_mean_per_step": -1.164970789345883,
+      "num_episodes_completed": 2,
+      "mean_episode_return": -678.5657789315505,
+      "critic_loss_mean": 21025226.8588125,
+      "actor_loss_mean": -1819.7916530456544,
+      "alpha_end": 9.776776313781738,
+      "buffer_size": 61000,
+      "rollout_length": 12,
+      "synthetic_transitions_generated": 102061,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8722352981567383,
+      "model_train_epochs": 12
+    },
+    {
+      "epoch": 56,
+      "env_step": 57000,
+      "cumulative_reward": -52074.88003469353,
+      "epoch_reward_sum": -1353.6278319606017,
+      "epoch_reward_mean_per_step": -1.3536278319606017,
+      "num_episodes_completed": 20,
+      "mean_episode_return": -70.25963031733792,
+      "critic_loss_mean": 17553043.77428125,
+      "actor_loss_mean": -1133.154489268303,
+      "alpha_end": 8.052164077758789,
+      "buffer_size": 62000,
+      "rollout_length": 12,
+      "synthetic_transitions_generated": 102380,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8909552097320557,
+      "model_train_epochs": 13
+    },
+    {
+      "epoch": 57,
+      "env_step": 58000,
+      "cumulative_reward": -53427.40361932788,
+      "epoch_reward_sum": -1352.5235846344192,
+      "epoch_reward_mean_per_step": -1.3525235846344192,
+      "num_episodes_completed": 6,
+      "mean_episode_return": -82.39842617605792,
+      "critic_loss_mean": 12034432.66934375,
+      "actor_loss_mean": 49.129967839717864,
+      "alpha_end": 5.9282002449035645,
+      "buffer_size": 63000,
+      "rollout_length": 12,
+      "synthetic_transitions_generated": 104365,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8594192266464233,
+      "model_train_epochs": 14
+    },
+    {
+      "epoch": 58,
+      "env_step": 59000,
+      "cumulative_reward": -54784.69604903104,
+      "epoch_reward_sum": -1357.292429703201,
+      "epoch_reward_mean_per_step": -1.357292429703201,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -1316.1240774224677,
+      "critic_loss_mean": 13362352.726765625,
+      "actor_loss_mean": 1085.398857858658,
+      "alpha_end": 6.07140588760376,
+      "buffer_size": 64000,
+      "rollout_length": 12,
+      "synthetic_transitions_generated": 102934,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.897282600402832,
+      "model_train_epochs": 13
+    },
+    {
+      "epoch": 59,
+      "env_step": 60000,
+      "cumulative_reward": -56190.16232158847,
+      "epoch_reward_sum": -1405.466272557499,
+      "epoch_reward_mean_per_step": -1.405466272557499,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -1385.5027145579893,
+      "critic_loss_mean": 21719390.06521875,
+      "actor_loss_mean": 565.0525680904389,
+      "alpha_end": 7.2193603515625,
+      "buffer_size": 65000,
+      "rollout_length": 13,
+      "synthetic_transitions_generated": 105891,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8997442722320557,
+      "model_train_epochs": 16
+    },
+    {
+      "epoch": 60,
+      "env_step": 61000,
+      "cumulative_reward": -57614.71498150526,
+      "epoch_reward_sum": -1424.552659916813,
+      "epoch_reward_mean_per_step": -1.4245526599168128,
+      "num_episodes_completed": 4,
+      "mean_episode_return": -419.5889044671749,
+      "critic_loss_mean": 28241420.695625,
+      "actor_loss_mean": 69.19818200111389,
+      "alpha_end": 6.544281005859375,
+      "buffer_size": 66000,
+      "rollout_length": 13,
+      "synthetic_transitions_generated": 112083,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8888782262802124,
+      "model_train_epochs": 11
+    },
+    {
+      "epoch": 61,
+      "env_step": 62000,
+      "cumulative_reward": -59063.69330136212,
+      "epoch_reward_sum": -1448.9783198568473,
+      "epoch_reward_mean_per_step": -1.4489783198568473,
+      "num_episodes_completed": 3,
+      "mean_episode_return": -569.8840168147924,
+      "critic_loss_mean": 31122361.44734375,
+      "actor_loss_mean": 425.41998857593535,
+      "alpha_end": 7.209216594696045,
+      "buffer_size": 67000,
+      "rollout_length": 13,
+      "synthetic_transitions_generated": 107460,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8878575563430786,
+      "model_train_epochs": 14
+    },
+    {
+      "epoch": 62,
+      "env_step": 63000,
+      "cumulative_reward": -60380.333718725546,
+      "epoch_reward_sum": -1316.6404173632704,
+      "epoch_reward_mean_per_step": -1.3166404173632704,
+      "num_episodes_completed": 5,
+      "mean_episode_return": -300.0693446872703,
+      "critic_loss_mean": 25104544.05796875,
+      "actor_loss_mean": 1564.952189163208,
+      "alpha_end": 6.619729518890381,
+      "buffer_size": 68000,
+      "rollout_length": 14,
+      "synthetic_transitions_generated": 114561,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8897536993026733,
+      "model_train_epochs": 11
+    },
+    {
+      "epoch": 63,
+      "env_step": 64000,
+      "cumulative_reward": -61759.73481946303,
+      "epoch_reward_sum": -1379.4011007374788,
+      "epoch_reward_mean_per_step": -1.379401100737479,
+      "num_episodes_completed": 5,
+      "mean_episode_return": -301.7721007822573,
+      "critic_loss_mean": 14973272.538203126,
+      "actor_loss_mean": 2962.0900449142455,
+      "alpha_end": 5.338163375854492,
+      "buffer_size": 69000,
+      "rollout_length": 14,
+      "synthetic_transitions_generated": 118513,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.89057457447052,
+      "model_train_epochs": 11
+    },
+    {
+      "epoch": 64,
+      "env_step": 65000,
+      "cumulative_reward": -63010.414824374275,
+      "epoch_reward_sum": -1250.680004911241,
+      "epoch_reward_mean_per_step": -1.250680004911241,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -1301.2841097154837,
+      "critic_loss_mean": 8883135.5809375,
+      "actor_loss_mean": 3891.268981567383,
+      "alpha_end": 4.191688060760498,
+      "buffer_size": 70000,
+      "rollout_length": 14,
+      "synthetic_transitions_generated": 117767,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8910080194473267,
+      "model_train_epochs": 9
+    },
+    {
+      "epoch": 65,
+      "env_step": 66000,
+      "cumulative_reward": -64083.823004098536,
+      "epoch_reward_sum": -1073.408179724299,
+      "epoch_reward_mean_per_step": -1.0734081797242991,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -1032.468224946118,
+      "critic_loss_mean": 7886255.8689375,
+      "actor_loss_mean": 4079.5730145568846,
+      "alpha_end": 3.8584039211273193,
+      "buffer_size": 71000,
+      "rollout_length": 14,
+      "synthetic_transitions_generated": 112796,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.885596513748169,
+      "model_train_epochs": 10
+    },
+    {
+      "epoch": 66,
+      "env_step": 67000,
+      "cumulative_reward": -65237.719771323835,
+      "epoch_reward_sum": -1153.8967672254103,
+      "epoch_reward_mean_per_step": -1.1538967672254103,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -1175.0987147223177,
+      "critic_loss_mean": 6020346.02984375,
+      "actor_loss_mean": 3667.029786437988,
+      "alpha_end": 3.11031174659729,
+      "buffer_size": 72000,
+      "rollout_length": 15,
+      "synthetic_transitions_generated": 120187,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8932057619094849,
+      "model_train_epochs": 10
+    },
+    {
+      "epoch": 67,
+      "env_step": 68000,
+      "cumulative_reward": -66153.81998651224,
+      "epoch_reward_sum": -916.1002151885025,
+      "epoch_reward_mean_per_step": -0.9161002151885025,
+      "num_episodes_completed": 2,
+      "mean_episode_return": -244.24552919910556,
+      "critic_loss_mean": 4799438.6368125,
+      "actor_loss_mean": 3627.7134285430907,
+      "alpha_end": 2.6088993549346924,
+      "buffer_size": 73000,
+      "rollout_length": 15,
+      "synthetic_transitions_generated": 120103,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8620129823684692,
+      "model_train_epochs": 7
+    },
+    {
+      "epoch": 68,
+      "env_step": 69000,
+      "cumulative_reward": -67115.51959600652,
+      "epoch_reward_sum": -961.6996094942521,
+      "epoch_reward_mean_per_step": -0.961699609494252,
+      "num_episodes_completed": 4,
+      "mean_episode_return": -365.7728925569931,
+      "critic_loss_mean": 3657353.8968398436,
+      "actor_loss_mean": 3893.6896141204834,
+      "alpha_end": 2.165142774581909,
+      "buffer_size": 74000,
+      "rollout_length": 15,
+      "synthetic_transitions_generated": 122552,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8518691062927246,
+      "model_train_epochs": 12
+    },
+    {
+      "epoch": 69,
+      "env_step": 70000,
+      "cumulative_reward": -67614.30838940102,
+      "epoch_reward_sum": -498.7887933944813,
+      "epoch_reward_mean_per_step": -0.4987887933944813,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -526.6433269420462,
+      "critic_loss_mean": 3001944.699949219,
+      "actor_loss_mean": 4044.193443206787,
+      "alpha_end": 1.8141510486602783,
+      "buffer_size": 75000,
+      "rollout_length": 16,
+      "synthetic_transitions_generated": 126980,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8432942628860474,
+      "model_train_epochs": 9
+    },
+    {
+      "epoch": 70,
+      "env_step": 71000,
+      "cumulative_reward": -68008.09944661033,
+      "epoch_reward_sum": -393.7910572093174,
+      "epoch_reward_mean_per_step": -0.3937910572093174,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -410.25550133907916,
+      "critic_loss_mean": 1025367.105046875,
+      "actor_loss_mean": 4225.73652142334,
+      "alpha_end": 1.7232791185379028,
+      "buffer_size": 76000,
+      "rollout_length": 16,
+      "synthetic_transitions_generated": 128655,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8427526950836182,
+      "model_train_epochs": 12
+    },
+    {
+      "epoch": 71,
+      "env_step": 72000,
+      "cumulative_reward": -68662.99415850716,
+      "epoch_reward_sum": -654.8947118969463,
+      "epoch_reward_mean_per_step": -0.6548947118969464,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -627.5438049121576,
+      "critic_loss_mean": 866674.8691210938,
+      "actor_loss_mean": 4486.876222839355,
+      "alpha_end": 1.2830497026443481,
+      "buffer_size": 77000,
+      "rollout_length": 16,
+      "synthetic_transitions_generated": 130933,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.830377221107483,
+      "model_train_epochs": 8
+    },
+    {
+      "epoch": 72,
+      "env_step": 73000,
+      "cumulative_reward": -68814.80214374939,
+      "epoch_reward_sum": -151.80798524207077,
+      "epoch_reward_mean_per_step": -0.15180798524207076,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -188.91392317987922,
+      "critic_loss_mean": 954408.93409375,
+      "actor_loss_mean": 4938.802255004883,
+      "alpha_end": 1.2155447006225586,
+      "buffer_size": 78000,
+      "rollout_length": 17,
+      "synthetic_transitions_generated": 136546,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.8084676265716553,
+      "model_train_epochs": 8
+    },
+    {
+      "epoch": 73,
+      "env_step": 74000,
+      "cumulative_reward": -68971.15384207554,
+      "epoch_reward_sum": -156.35169832636768,
+      "epoch_reward_mean_per_step": -0.1563516983263677,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -153.4999490698186,
+      "critic_loss_mean": 1060067.7750761718,
+      "actor_loss_mean": 5418.960908081055,
+      "alpha_end": 1.4629220962524414,
+      "buffer_size": 79000,
+      "rollout_length": 17,
+      "synthetic_transitions_generated": 140352,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.7818574905395508,
+      "model_train_epochs": 11
+    },
+    {
+      "epoch": 74,
+      "env_step": 75000,
+      "cumulative_reward": -69419.2609679057,
+      "epoch_reward_sum": -448.1071258301293,
+      "epoch_reward_mean_per_step": -0.4481071258301293,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -438.11261766436945,
+      "critic_loss_mean": 1229414.0903554687,
+      "actor_loss_mean": 5651.641630004883,
+      "alpha_end": 1.383182168006897,
+      "buffer_size": 80000,
+      "rollout_length": 17,
+      "synthetic_transitions_generated": 135975,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.7639716863632202,
+      "model_train_epochs": 13
+    },
+    {
+      "epoch": 75,
+      "env_step": 76000,
+      "cumulative_reward": -69489.05094882949,
+      "epoch_reward_sum": -69.78998092382572,
+      "epoch_reward_mean_per_step": -0.06978998092382573,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -71.94961614618778,
+      "critic_loss_mean": 1182592.836640625,
+      "actor_loss_mean": 5368.4981372070315,
+      "alpha_end": 1.3966100215911865,
+      "buffer_size": 81000,
+      "rollout_length": 18,
+      "synthetic_transitions_generated": 141795,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.7549052238464355,
+      "model_train_epochs": 7
+    },
+    {
+      "epoch": 76,
+      "env_step": 77000,
+      "cumulative_reward": -69505.32157636185,
+      "epoch_reward_sum": -16.27062753234786,
+      "epoch_reward_mean_per_step": -0.01627062753234786,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -19.933830088225246,
+      "critic_loss_mean": 1171797.673203125,
+      "actor_loss_mean": 5330.11174975586,
+      "alpha_end": 1.4593926668167114,
+      "buffer_size": 82000,
+      "rollout_length": 18,
+      "synthetic_transitions_generated": 143945,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.7209898233413696,
+      "model_train_epochs": 7
+    },
+    {
+      "epoch": 77,
+      "env_step": 78000,
+      "cumulative_reward": -69745.80243404025,
+      "epoch_reward_sum": -240.4808576782679,
+      "epoch_reward_mean_per_step": -0.2404808576782679,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -236.79300524869296,
+      "critic_loss_mean": 1224226.6108867188,
+      "actor_loss_mean": 5338.568755615234,
+      "alpha_end": 1.4635461568832397,
+      "buffer_size": 83000,
+      "rollout_length": 18,
+      "synthetic_transitions_generated": 139337,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.7100163698196411,
+      "model_train_epochs": 10
+    },
+    {
+      "epoch": 78,
+      "env_step": 79000,
+      "cumulative_reward": -69701.06889149283,
+      "epoch_reward_sum": 44.733542547328,
+      "epoch_reward_mean_per_step": 0.044733542547328,
+      "num_episodes_completed": 2,
+      "mean_episode_return": 16.425346988865222,
+      "critic_loss_mean": 1058096.6323554688,
+      "actor_loss_mean": 4695.477647155762,
+      "alpha_end": 1.6030057668685913,
+      "buffer_size": 84000,
+      "rollout_length": 18,
+      "synthetic_transitions_generated": 140670,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.6946120262145996,
+      "model_train_epochs": 13
+    },
+    {
+      "epoch": 79,
+      "env_step": 80000,
+      "cumulative_reward": -70048.65419340375,
+      "epoch_reward_sum": -347.5853019109069,
+      "epoch_reward_mean_per_step": -0.34758530191090686,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -210.5068891157816,
+      "critic_loss_mean": 701342.3684863282,
+      "actor_loss_mean": 3665.9088177490235,
+      "alpha_end": 1.449669361114502,
+      "buffer_size": 85000,
+      "rollout_length": 19,
+      "synthetic_transitions_generated": 142235,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.662932276725769,
+      "model_train_epochs": 10
+    },
+    {
+      "epoch": 80,
+      "env_step": 81000,
+      "cumulative_reward": -70252.28065664312,
+      "epoch_reward_sum": -203.62646323937037,
+      "epoch_reward_mean_per_step": -0.20362646323937036,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -219.07214551256627,
+      "critic_loss_mean": 447819.36563671875,
+      "actor_loss_mean": 3121.6869138793945,
+      "alpha_end": 1.4643203020095825,
+      "buffer_size": 86000,
+      "rollout_length": 19,
+      "synthetic_transitions_generated": 155107,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.6766191720962524,
+      "model_train_epochs": 12
+    },
+    {
+      "epoch": 81,
+      "env_step": 82000,
+      "cumulative_reward": -70985.98581417107,
+      "epoch_reward_sum": -733.7051575278995,
+      "epoch_reward_mean_per_step": -0.7337051575278994,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -535.2895311915864,
+      "critic_loss_mean": 413175.8940859375,
+      "actor_loss_mean": 3156.729658569336,
+      "alpha_end": 1.2788021564483643,
+      "buffer_size": 87000,
+      "rollout_length": 19,
+      "synthetic_transitions_generated": 147629,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.654403567314148,
+      "model_train_epochs": 12
+    },
+    {
+      "epoch": 82,
+      "env_step": 83000,
+      "cumulative_reward": -71619.14716501569,
+      "epoch_reward_sum": -633.1613508445452,
+      "epoch_reward_mean_per_step": -0.6331613508445452,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -592.6520963105398,
+      "critic_loss_mean": 441661.94556640624,
+      "actor_loss_mean": 3158.9939619750976,
+      "alpha_end": 1.4168564081192017,
+      "buffer_size": 88000,
+      "rollout_length": 20,
+      "synthetic_transitions_generated": 150748,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.6348305940628052,
+      "model_train_epochs": 16
+    },
+    {
+      "epoch": 83,
+      "env_step": 84000,
+      "cumulative_reward": -72192.05234450684,
+      "epoch_reward_sum": -572.9051794910351,
+      "epoch_reward_mean_per_step": -0.5729051794910351,
+      "num_episodes_completed": 2,
+      "mean_episode_return": -304.30486751734736,
+      "critic_loss_mean": 418595.09527929686,
+      "actor_loss_mean": 2921.6065471191405,
+      "alpha_end": 1.4280154705047607,
+      "buffer_size": 89000,
+      "rollout_length": 20,
+      "synthetic_transitions_generated": 150961,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.622589349746704,
+      "model_train_epochs": 12
+    },
+    {
+      "epoch": 84,
+      "env_step": 85000,
+      "cumulative_reward": -72949.13536398057,
+      "epoch_reward_sum": -757.0830194736609,
+      "epoch_reward_mean_per_step": -0.7570830194736609,
+      "num_episodes_completed": 2,
+      "mean_episode_return": -539.7035598186894,
+      "critic_loss_mean": 392473.39423828124,
+      "actor_loss_mean": 2769.902331237793,
+      "alpha_end": 1.4013001918792725,
+      "buffer_size": 90000,
+      "rollout_length": 20,
+      "synthetic_transitions_generated": 150917,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.6067191362380981,
+      "model_train_epochs": 12
+    },
+    {
+      "epoch": 85,
+      "env_step": 86000,
+      "cumulative_reward": -73834.16146626222,
+      "epoch_reward_sum": -885.0261022814666,
+      "epoch_reward_mean_per_step": -0.8850261022814666,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -885.5037634017674,
+      "critic_loss_mean": 368665.5452226563,
+      "actor_loss_mean": 2627.892737915039,
+      "alpha_end": 1.423810362815857,
+      "buffer_size": 91000,
+      "rollout_length": 20,
+      "synthetic_transitions_generated": 149696,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.6020547151565552,
+      "model_train_epochs": 11
+    },
+    {
+      "epoch": 86,
+      "env_step": 87000,
+      "cumulative_reward": -74796.66514190541,
+      "epoch_reward_sum": -962.5036756434815,
+      "epoch_reward_mean_per_step": -0.9625036756434815,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -961.7849111714162,
+      "critic_loss_mean": 404678.42062109377,
+      "actor_loss_mean": 2735.9651840209963,
+      "alpha_end": 1.6307506561279297,
+      "buffer_size": 92000,
+      "rollout_length": 21,
+      "synthetic_transitions_generated": 156972,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.5826566219329834,
+      "model_train_epochs": 11
+    },
+    {
+      "epoch": 87,
+      "env_step": 88000,
+      "cumulative_reward": -75696.94346248748,
+      "epoch_reward_sum": -900.2783205820149,
+      "epoch_reward_mean_per_step": -0.9002783205820148,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -900.9682608934962,
+      "critic_loss_mean": 453261.01557421876,
+      "actor_loss_mean": 2942.7361185913087,
+      "alpha_end": 1.6242148876190186,
+      "buffer_size": 93000,
+      "rollout_length": 21,
+      "synthetic_transitions_generated": 157914,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.5598241090774536,
+      "model_train_epochs": 10
+    },
+    {
+      "epoch": 88,
+      "env_step": 89000,
+      "cumulative_reward": -76517.05179624203,
+      "epoch_reward_sum": -820.1083337546112,
+      "epoch_reward_mean_per_step": -0.8201083337546112,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -819.3845274874079,
+      "critic_loss_mean": 460399.2551855469,
+      "actor_loss_mean": 3108.4470817871093,
+      "alpha_end": 1.7870957851409912,
+      "buffer_size": 94000,
+      "rollout_length": 21,
+      "synthetic_transitions_generated": 164053,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.533585786819458,
+      "model_train_epochs": 9
+    },
+    {
+      "epoch": 89,
+      "env_step": 90000,
+      "cumulative_reward": -77024.12986234124,
+      "epoch_reward_sum": -507.0780660991248,
+      "epoch_reward_mean_per_step": -0.5070780660991248,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -508.40086490878855,
+      "critic_loss_mean": 458619.763984375,
+      "actor_loss_mean": 3167.41473046875,
+      "alpha_end": 1.8010305166244507,
+      "buffer_size": 95000,
+      "rollout_length": 22,
+      "synthetic_transitions_generated": 172774,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.5357552766799927,
+      "model_train_epochs": 6
+    },
+    {
+      "epoch": 90,
+      "env_step": 91000,
+      "cumulative_reward": -77454.42072099373,
+      "epoch_reward_sum": -430.2908586526743,
+      "epoch_reward_mean_per_step": -0.43029085865267425,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -429.4452179832409,
+      "critic_loss_mean": 424252.5964365234,
+      "actor_loss_mean": 3127.8966392822267,
+      "alpha_end": 1.999576210975647,
+      "buffer_size": 96000,
+      "rollout_length": 22,
+      "synthetic_transitions_generated": 174302,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.5134717226028442,
+      "model_train_epochs": 6
+    },
+    {
+      "epoch": 91,
+      "env_step": 92000,
+      "cumulative_reward": -78848.43387920086,
+      "epoch_reward_sum": -1394.0131582070949,
+      "epoch_reward_mean_per_step": -1.394013158207095,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -1395.4543429192029,
+      "critic_loss_mean": 477759.86827734375,
+      "actor_loss_mean": 3339.522780029297,
+      "alpha_end": 2.0899477005004883,
+      "buffer_size": 97000,
+      "rollout_length": 22,
+      "synthetic_transitions_generated": 170433,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.5141284465789795,
+      "model_train_epochs": 11
+    },
+    {
+      "epoch": 92,
+      "env_step": 93000,
+      "cumulative_reward": -79316.28746896755,
+      "epoch_reward_sum": -467.8535897667171,
+      "epoch_reward_mean_per_step": -0.4678535897667171,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -466.22050598048816,
+      "critic_loss_mean": 519871.6847265625,
+      "actor_loss_mean": 3621.706209411621,
+      "alpha_end": 2.612546682357788,
+      "buffer_size": 98000,
+      "rollout_length": 23,
+      "synthetic_transitions_generated": 180389,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.4986813068389893,
+      "model_train_epochs": 9
+    },
+    {
+      "epoch": 93,
+      "env_step": 94000,
+      "cumulative_reward": -80517.08697538021,
+      "epoch_reward_sum": -1200.7995064123759,
+      "epoch_reward_mean_per_step": -1.200799506412376,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -1201.72884552132,
+      "critic_loss_mean": 519533.0764160156,
+      "actor_loss_mean": 3839.946598327637,
+      "alpha_end": 2.9497528076171875,
+      "buffer_size": 99000,
+      "rollout_length": 23,
+      "synthetic_transitions_generated": 185037,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.4916383028030396,
+      "model_train_epochs": 6
+    },
+    {
+      "epoch": 94,
+      "env_step": 95000,
+      "cumulative_reward": -81287.30565584825,
+      "epoch_reward_sum": -770.218680468072,
+      "epoch_reward_mean_per_step": -0.770218680468072,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -769.0223452549493,
+      "critic_loss_mean": 553883.9032148437,
+      "actor_loss_mean": 4231.257067138672,
+      "alpha_end": 2.9006478786468506,
+      "buffer_size": 100000,
+      "rollout_length": 23,
+      "synthetic_transitions_generated": 183579,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.4810693264007568,
+      "model_train_epochs": 6
+    },
+    {
+      "epoch": 95,
+      "env_step": 96000,
+      "cumulative_reward": -82467.44146124349,
+      "epoch_reward_sum": -1180.135805395193,
+      "epoch_reward_mean_per_step": -1.1801358053951931,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -1181.2862586615797,
+      "critic_loss_mean": 723829.1039316406,
+      "actor_loss_mean": 5038.979786376953,
+      "alpha_end": 3.7834177017211914,
+      "buffer_size": 101000,
+      "rollout_length": 24,
+      "synthetic_transitions_generated": 188963,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.4794102907180786,
+      "model_train_epochs": 6
+    },
+    {
+      "epoch": 96,
+      "env_step": 97000,
+      "cumulative_reward": -83097.15975008071,
+      "epoch_reward_sum": -629.7182888370878,
+      "epoch_reward_mean_per_step": -0.6297182888370878,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -629.1860333697208,
+      "critic_loss_mean": 819726.0858632813,
+      "actor_loss_mean": 5744.642230957032,
+      "alpha_end": 3.2289609909057617,
+      "buffer_size": 102000,
+      "rollout_length": 24,
+      "synthetic_transitions_generated": 195699,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.455899953842163,
+      "model_train_epochs": 9
+    },
+    {
+      "epoch": 97,
+      "env_step": 98000,
+      "cumulative_reward": -84375.58739746132,
+      "epoch_reward_sum": -1278.4276473807622,
+      "epoch_reward_mean_per_step": -1.2784276473807623,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -1277.6625019681348,
+      "critic_loss_mean": 926107.2237539062,
+      "actor_loss_mean": 6041.632510742187,
+      "alpha_end": 4.809323310852051,
+      "buffer_size": 103000,
+      "rollout_length": 24,
+      "synthetic_transitions_generated": 194982,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.44591224193573,
+      "model_train_epochs": 6
+    },
+    {
+      "epoch": 98,
+      "env_step": 99000,
+      "cumulative_reward": -85287.63527257675,
+      "epoch_reward_sum": -912.0478751154491,
+      "epoch_reward_mean_per_step": -0.912047875115449,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -911.7882917380225,
+      "critic_loss_mean": 1136745.9681523438,
+      "actor_loss_mean": 6712.860985595703,
+      "alpha_end": 4.9628119468688965,
+      "buffer_size": 104000,
+      "rollout_length": 24,
+      "synthetic_transitions_generated": 192069,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.4338933229446411,
+      "model_train_epochs": 6
+    },
+    {
+      "epoch": 99,
+      "env_step": 100000,
+      "cumulative_reward": -86520.94618030787,
+      "epoch_reward_sum": -1233.3109077313916,
+      "epoch_reward_mean_per_step": -1.2333109077313915,
+      "num_episodes_completed": 1,
+      "mean_episode_return": -1233.6515347969532,
+      "critic_loss_mean": 1214789.6925195314,
+      "actor_loss_mean": 7053.944585449219,
+      "alpha_end": 5.86173152923584,
+      "buffer_size": 105000,
+      "rollout_length": 25,
+      "synthetic_transitions_generated": 208320,
+      "model_buffer_size": 250000,
+      "model_holdout_mse": 1.4113065004348755,
+      "model_train_epochs": 6
+    }
+  ]
+}
