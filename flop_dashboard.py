@@ -206,13 +206,11 @@ def build_grouped_bar(df, dims, x_dim, color_dim, facet_dim, metric_col, metric_
     fig.update_traces(
         hovertemplate=metric_label + ": %{y:.4g}<br>Rows averaged: %{customdata[0]}<extra></extra>"
     )
-    subtitle = "Bars average over any filtered dimension not mapped to X-axis/Color/Facet." if len(g) < len(df) else ""
     fig.update_layout(
         height=520,
         margin=dict(l=60, r=20, t=60, b=80),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0),
         yaxis_type="log" if log_y else "linear",
-        title=subtitle,
     )
     fig.update_xaxes(matches=None, showticklabels=True)
     return fig
