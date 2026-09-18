@@ -65,6 +65,18 @@ HIDDEN_SIZES_ALGOS = {"sac", "td3", "mbpo"}
 # extracts for every algo -- pulled into its own facet for the batch-size sweep.
 BATCH_SIZE_RE = re.compile(r"^bs(\d+)(?:_|$)")
 
+# mbpo_rollout_regime values look like "rl1-15_re20-100" (see
+# flop_keys.mbpo_rollout_regime) -- plain alphabetical sort orders them
+# rl1-15 < rl1-25 < rl1-1 (string comparison sees "_" > "5"/"2"), so pivoting
+# on this dimension needs its own numeric sort key to read left-to-right as
+# increasing rollout length.
+ROLLOUT_REGIME_RE = re.compile(r"^rl(\d+)-(\d+)_re(\d+)-(\d+)$")
+
+
+def rollout_regime_sort_key(value):
+    m = ROLLOUT_REGIME_RE.match(str(value))
+    return tuple(int(x) for x in m.groups()) if m else (0, 0, 0, 0)
+
 
 def extract_hidden_sizes(algo, architecture_signature):
     if algo not in HIDDEN_SIZES_ALGOS or not isinstance(architecture_signature, str):
@@ -90,7 +102,14 @@ DIMENSIONS = {
     "architecture_signature": {"label": "Architecture", "col": "architecture_signature", "order": None},
     "hidden_sizes": {"label": "Hidden sizes", "col": "hidden_sizes", "order": None},
     "batch_size": {"label": "Batch size", "col": "batch_size", "order": None},
+    "mbpo_rollout_regime": {"label": "MBPO Rollout Regime", "col": "mbpo_rollout_regime", "order": None,
+                             "sort_key": rollout_regime_sort_key},
 }
+# Only meaningful for algo == "mbpo" (NaN elsewhere) -- excluded from the
+# X-axis/Color/Facet pivot dropdowns unless "mbpo" is among the selected
+# algos (see the *-pivot-options callbacks, mirroring the rollout FILTER
+# dropdown's own visibility toggle).
+MBPO_ROLLOUT_DIM = "mbpo_rollout_regime"
 PER_RUN_DIMENSIONS = dict(DIMENSIONS, seed=dict(label="Seed", col="seed_str", order=None))
 
 CROSS_SEED_METRICS = [
@@ -134,8 +153,23 @@ def load_per_run(flop_dir):
     return df
 
 
+# mbpo_rollout_regime (see flop_analysis/flop_keys.mbpo_rollout_regime) is only
+# populated for algo == "mbpo" -- NaN everywhere else. It's included in the
+# generic crossfilter fields so it interacts normally with every other filter,
+# but its dropdown is only shown in the UI while "mbpo" is among the selected
+# algos (see the *-rollout-wrap visibility callbacks below).
+#
+# NOTE: FILTER_FIELDS_WITH_ROLLOUT's order must exactly match the Dash
+# callback Output()/dropdown order (rollout slotted in between UTD and
+# Segment) -- crossfilter_options()/apply_filters() zip these field lists
+# positionally against the callback's Output tuple, so a mismatch here
+# silently wires the wrong dropdown's options to the wrong field.
 FILTER_FIELDS = ["algo", "env_id", "architecture_signature", "hidden_sizes", "batch_size", "updates_per_env_step", "segment"]
 PER_RUN_FILTER_FIELDS = FILTER_FIELDS + ["seed"]
+MBPO_ROLLOUT_FIELD = "mbpo_rollout_regime"
+FILTER_FIELDS_WITH_ROLLOUT = ["algo", "env_id", "architecture_signature", "hidden_sizes", "batch_size",
+                              "updates_per_env_step", MBPO_ROLLOUT_FIELD, "segment"]
+PER_RUN_FILTER_FIELDS_WITH_ROLLOUT = FILTER_FIELDS_WITH_ROLLOUT + ["seed"]
 
 
 def crossfilter_options(df, fields, current):
@@ -198,11 +232,15 @@ def build_grouped_bar(df, dims, x_dim, color_dim, facet_dim, metric_col, metric_
 
     category_orders = {}
     for k in group_keys:
+        col = dims[k]["col"]
         order = dims[k]["order"]
+        sort_key = dims[k].get("sort_key")
         if order:
-            col = dims[k]["col"]
             present = g[col].unique().tolist()
             category_orders[col] = [v for v in order if v in present] + sorted(set(present) - set(order))
+        elif sort_key:
+            present = g[col].dropna().unique().tolist()
+            category_orders[col] = sorted(present, key=sort_key)
 
     color_col = dims[color_dim]["col"] if color_dim else None
     facet_col = dims[facet_dim]["col"] if facet_dim else None
@@ -242,10 +280,15 @@ def build_box(df, dims, x_dim, color_dim, facet_dim, metric_col, metric_label, l
 
     category_orders = {}
     for k in [x_dim, color_dim, facet_dim]:
-        if k and dims[k]["order"]:
-            col = dims[k]["col"]
+        if not k:
+            continue
+        col = dims[k]["col"]
+        if dims[k]["order"]:
             present = df[col].unique().tolist()
             category_orders[col] = [v for v in dims[k]["order"] if v in present] + sorted(set(present) - set(dims[k]["order"]))
+        elif dims[k].get("sort_key"):
+            present = df[col].dropna().unique().tolist()
+            category_orders[col] = sorted(present, key=dims[k]["sort_key"])
 
     fig = px.box(
         df, x=dims[x_dim]["col"], y=metric_col, color=color_col, facet_col=facet_col,
@@ -311,6 +354,10 @@ def make_app(flop_dir):
                 filter_dropdown(f"{prefix}-hidden", "Hidden sizes"),
                 filter_dropdown(f"{prefix}-batch", "Batch size"),
                 filter_dropdown(f"{prefix}-utd", "UTD"),
+                html.Div(
+                    [html.Label("MBPO Rollout Regime"), dcc.Dropdown(id=f"{prefix}-rollout", options=[], value=[], multi=True, placeholder="All")],
+                    id=f"{prefix}-rollout-wrap", className="filter-field", style={"display": "none"},
+                ),
                 filter_dropdown(f"{prefix}-segment", "Segment"),
             ] + ([filter_dropdown(f"{prefix}-seed", "Seed")] if prefix == "pr" else []),
             className="filters-row",
@@ -410,35 +457,59 @@ def make_app(flop_dir):
         className="app-container",
     )
 
+    # ---- Cross-seed tab: rollout-filter visibility (only while "mbpo" is selected) ----
+    @app.callback(Output("cs-rollout-wrap", "style"), Input("cs-algo", "value"))
+    def _cs_rollout_visibility(algo):
+        return {"display": "block"} if algo and "mbpo" in algo else {"display": "none"}
+
+    # ---- Cross-seed tab: X-axis/Color/Facet pivot options -- only offer
+    # "MBPO Rollout Regime" as a pivotable dimension while "mbpo" is selected,
+    # same gating as the filter dropdown above.
+    @app.callback(
+        Output("cs-xaxis", "options"), Output("cs-color", "options"), Output("cs-facet", "options"),
+        Input("cs-algo", "value"),
+    )
+    def _cs_pivot_options(algo):
+        show_rollout = bool(algo) and "mbpo" in algo
+        xaxis_opts = dim_opts if show_rollout else [o for o in dim_opts if o["value"] != MBPO_ROLLOUT_DIM]
+        other_opts = dim_opts_with_none if show_rollout else [o for o in dim_opts_with_none if o["value"] != MBPO_ROLLOUT_DIM]
+        return xaxis_opts, other_opts, other_opts
+
     # ---- Cross-seed tab: crossfilter dropdown options ----
     @app.callback(
         Output("cs-algo", "options"), Output("cs-env", "options"), Output("cs-arch", "options"),
-        Output("cs-hidden", "options"), Output("cs-batch", "options"), Output("cs-utd", "options"), Output("cs-segment", "options"),
+        Output("cs-hidden", "options"), Output("cs-batch", "options"), Output("cs-utd", "options"),
+        Output("cs-rollout", "options"), Output("cs-segment", "options"),
         Input("cs-algo", "value"), Input("cs-env", "value"), Input("cs-arch", "value"),
-        Input("cs-hidden", "value"), Input("cs-batch", "value"), Input("cs-utd", "value"), Input("cs-segment", "value"),
+        Input("cs-hidden", "value"), Input("cs-batch", "value"), Input("cs-utd", "value"),
+        Input("cs-rollout", "value"), Input("cs-segment", "value"),
     )
-    def _cs_options(algo, env, arch, hidden, batch, utd, segment):
+    def _cs_options(algo, env, arch, hidden, batch, utd, rollout, segment):
         current = {"algo": algo, "env_id": env, "architecture_signature": arch,
-                   "hidden_sizes": hidden, "batch_size": batch, "updates_per_env_step": utd, "segment": segment}
-        opts = crossfilter_options(cross_df, FILTER_FIELDS, current)
-        return tuple([{"label": str(v), "value": v} for v in opts[f]] for f in FILTER_FIELDS)
+                   "hidden_sizes": hidden, "batch_size": batch, "updates_per_env_step": utd,
+                   MBPO_ROLLOUT_FIELD: rollout, "segment": segment}
+        opts = crossfilter_options(cross_df, FILTER_FIELDS_WITH_ROLLOUT, current)
+        return tuple([{"label": str(v), "value": v} for v in opts[f]] for f in FILTER_FIELDS_WITH_ROLLOUT)
 
     @app.callback(
         Output("cs-graph", "figure"), Output("cs-table-wrap", "children"),
         Input("cs-algo", "value"), Input("cs-env", "value"), Input("cs-arch", "value"),
-        Input("cs-hidden", "value"), Input("cs-batch", "value"), Input("cs-utd", "value"), Input("cs-segment", "value"),
+        Input("cs-hidden", "value"), Input("cs-batch", "value"), Input("cs-utd", "value"),
+        Input("cs-rollout", "value"), Input("cs-segment", "value"),
         Input("cs-xaxis", "value"), Input("cs-color", "value"), Input("cs-facet", "value"),
         Input("cs-metric", "value"), Input("cs-logy", "value"),
     )
-    def _cs_update(algo, env, arch, hidden, batch, utd, segment, x_dim, color_dim, facet_dim, metric, logy):
+    def _cs_update(algo, env, arch, hidden, batch, utd, rollout, segment, x_dim, color_dim, facet_dim, metric, logy):
         current = {"algo": algo, "env_id": env, "architecture_signature": arch,
-                   "hidden_sizes": hidden, "batch_size": batch, "updates_per_env_step": utd, "segment": segment}
-        filtered = apply_filters(cross_df, FILTER_FIELDS, current)
+                   "hidden_sizes": hidden, "batch_size": batch, "updates_per_env_step": utd,
+                   MBPO_ROLLOUT_FIELD: rollout, "segment": segment}
+        filtered = apply_filters(cross_df, FILTER_FIELDS_WITH_ROLLOUT, current)
         color_dim = None if color_dim == NONE_VALUE else color_dim
         facet_dim = None if facet_dim == NONE_VALUE else facet_dim
         metric_label = dict(CROSS_SEED_METRICS)[metric]
         fig = build_grouped_bar(filtered, DIMENSIONS, x_dim, color_dim, facet_dim, metric, metric_label, bool(logy))
-        display_cols = ["algo", "env_id", "architecture_signature", "hidden_sizes", "batch_size", "updates_per_env_step", "segment",
+        display_cols = ["algo", "env_id", "architecture_signature", "hidden_sizes", "batch_size", "updates_per_env_step",
+                         "mbpo_rollout_regime", "segment",
                          "n_seeds", "mean_energy_kwh", "mean_energy_joules", "total_flops",
                          "mean_energy_per_flop_j_per_flop"]
         table = dash_table.DataTable(
@@ -450,37 +521,58 @@ def make_app(flop_dir):
         )
         return fig, table
 
+    # ---- Per-run tab: rollout-filter visibility (only while "mbpo" is selected) ----
+    @app.callback(Output("pr-rollout-wrap", "style"), Input("pr-algo", "value"))
+    def _pr_rollout_visibility(algo):
+        return {"display": "block"} if algo and "mbpo" in algo else {"display": "none"}
+
+    # ---- Per-run tab: X-axis/Color/Facet pivot options (same gating as cross-seed tab) ----
+    @app.callback(
+        Output("pr-xaxis", "options"), Output("pr-color", "options"), Output("pr-facet", "options"),
+        Input("pr-algo", "value"),
+    )
+    def _pr_pivot_options(algo):
+        show_rollout = bool(algo) and "mbpo" in algo
+        xaxis_opts = pr_dim_opts if show_rollout else [o for o in pr_dim_opts if o["value"] != MBPO_ROLLOUT_DIM]
+        other_opts = pr_dim_opts_with_none if show_rollout else [o for o in pr_dim_opts_with_none if o["value"] != MBPO_ROLLOUT_DIM]
+        return xaxis_opts, other_opts, other_opts
+
     # ---- Per-run tab: crossfilter dropdown options ----
     @app.callback(
         Output("pr-algo", "options"), Output("pr-env", "options"), Output("pr-arch", "options"),
-        Output("pr-hidden", "options"), Output("pr-batch", "options"), Output("pr-utd", "options"), Output("pr-segment", "options"),
+        Output("pr-hidden", "options"), Output("pr-batch", "options"), Output("pr-utd", "options"),
+        Output("pr-rollout", "options"), Output("pr-segment", "options"),
         Output("pr-seed", "options"),
         Input("pr-algo", "value"), Input("pr-env", "value"), Input("pr-arch", "value"),
-        Input("pr-hidden", "value"), Input("pr-batch", "value"), Input("pr-utd", "value"), Input("pr-segment", "value"),
+        Input("pr-hidden", "value"), Input("pr-batch", "value"), Input("pr-utd", "value"),
+        Input("pr-rollout", "value"), Input("pr-segment", "value"),
         Input("pr-seed", "value"), Input("pr-canonical", "value"),
     )
-    def _pr_options(algo, env, arch, hidden, batch, utd, segment, seed, canonical):
+    def _pr_options(algo, env, arch, hidden, batch, utd, rollout, segment, seed, canonical):
         base = per_run_df[per_run_df["included_in_cross_seed_avg"]] if canonical == "canonical" else per_run_df
         current = {"algo": algo, "env_id": env, "architecture_signature": arch,
-                   "hidden_sizes": hidden, "batch_size": batch, "updates_per_env_step": utd, "segment": segment, "seed": seed}
-        opts = crossfilter_options(base, PER_RUN_FILTER_FIELDS, current)
-        return tuple([{"label": str(v), "value": v} for v in opts[f]] for f in PER_RUN_FILTER_FIELDS)
+                   "hidden_sizes": hidden, "batch_size": batch, "updates_per_env_step": utd,
+                   MBPO_ROLLOUT_FIELD: rollout, "segment": segment, "seed": seed}
+        opts = crossfilter_options(base, PER_RUN_FILTER_FIELDS_WITH_ROLLOUT, current)
+        return tuple([{"label": str(v), "value": v} for v in opts[f]] for f in PER_RUN_FILTER_FIELDS_WITH_ROLLOUT)
 
     @app.callback(
         Output("pr-graph", "figure"), Output("pr-table-wrap", "children"),
         Input("pr-algo", "value"), Input("pr-env", "value"), Input("pr-arch", "value"),
-        Input("pr-hidden", "value"), Input("pr-batch", "value"), Input("pr-utd", "value"), Input("pr-segment", "value"),
+        Input("pr-hidden", "value"), Input("pr-batch", "value"), Input("pr-utd", "value"),
+        Input("pr-rollout", "value"), Input("pr-segment", "value"),
         Input("pr-seed", "value"), Input("pr-canonical", "value"),
         Input("pr-charttype", "value"),
         Input("pr-xaxis", "value"), Input("pr-color", "value"), Input("pr-facet", "value"),
         Input("pr-metric", "value"), Input("pr-logy", "value"),
     )
-    def _pr_update(algo, env, arch, hidden, batch, utd, segment, seed, canonical, charttype,
+    def _pr_update(algo, env, arch, hidden, batch, utd, rollout, segment, seed, canonical, charttype,
                     x_dim, color_dim, facet_dim, metric, logy):
         base = per_run_df[per_run_df["included_in_cross_seed_avg"]] if canonical == "canonical" else per_run_df
         current = {"algo": algo, "env_id": env, "architecture_signature": arch,
-                   "hidden_sizes": hidden, "batch_size": batch, "updates_per_env_step": utd, "segment": segment, "seed": seed}
-        filtered = apply_filters(base, PER_RUN_FILTER_FIELDS, current)
+                   "hidden_sizes": hidden, "batch_size": batch, "updates_per_env_step": utd,
+                   MBPO_ROLLOUT_FIELD: rollout, "segment": segment, "seed": seed}
+        filtered = apply_filters(base, PER_RUN_FILTER_FIELDS_WITH_ROLLOUT, current)
         color_dim = None if color_dim == NONE_VALUE else color_dim
         facet_dim = None if facet_dim == NONE_VALUE else facet_dim
         metric_label = dict(PER_RUN_METRICS)[metric]
@@ -488,7 +580,8 @@ def make_app(flop_dir):
             fig = build_box(filtered, PER_RUN_DIMENSIONS, x_dim, color_dim, facet_dim, metric, metric_label, bool(logy))
         else:
             fig = build_grouped_bar(filtered, PER_RUN_DIMENSIONS, x_dim, color_dim, facet_dim, metric, metric_label, bool(logy))
-        display_cols = ["algo", "env_id", "architecture_signature", "hidden_sizes", "batch_size", "updates_per_env_step", "seed",
+        display_cols = ["algo", "env_id", "architecture_signature", "hidden_sizes", "batch_size", "updates_per_env_step",
+                         "mbpo_rollout_regime", "seed",
                          "included_in_cross_seed_avg", "segment", "call_count", "total_flops",
                          "total_energy_kwh", "total_energy_joules", "energy_per_flop_j_per_flop",
                          "run_dir", "note"]

@@ -27,6 +27,23 @@ def sig_mbpo(algo_config: dict) -> str:
     return f"{base}_ens{algo_config['ensemble_size']}_mh{mh}_mb{algo_config['model_train_batch_size']}"
 
 
+def mbpo_rollout_regime(algo_config: dict) -> str:
+    """Identifies the model-rollout-length schedule (rollout_min/max_length,
+    scheduled between rollout_min/max_epoch -- see MBPOConfig in
+    configs/config.py). Deliberately kept OUT of sig_mbpo: rollout length
+    doesn't change the per-call FLOP constants measure_flops.py measures
+    (dynamics_ensemble_forward_all_bs1 etc. are per-sample costs), only the
+    *number* of synthetic_rollout_generation calls a run makes -- exactly the
+    same reasoning that keeps updates_per_env_step (UTD) out of sig_sac_td3
+    and instead tracked as its own field in compute_energy_per_flop.py's
+    cross-seed grouping key. Two runs at the same architecture but different
+    rollout-length regimes must NOT be averaged together."""
+    return (
+        f"rl{algo_config['rollout_min_length']}-{algo_config['rollout_max_length']}"
+        f"_re{algo_config['rollout_min_epoch']}-{algo_config['rollout_max_epoch']}"
+    )
+
+
 def sig_tdmpc2(algo_config: dict) -> str:
     return (
         f"bs{algo_config['batch_size']}"

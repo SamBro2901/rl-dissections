@@ -51,6 +51,40 @@
           "actor_forward_bs1_analytic": 648192,
           "critic_fwdbwd_analytic_approx": 984612864
         }
+      },
+      "bs512_h1024x1024": {
+        "obs_dim": 105,
+        "act_dim": 8,
+        "hidden_sizes": [
+          1024,
+          1024
+        ],
+        "batch_size": 512,
+        "actor_forward_bs1": 2344960,
+        "critic_fwdbwd": 10509877248,
+        "actor_fwdbwd": 8264876032,
+        "target_update_elementwise_ops": 4669444,
+        "_analytic_cross_check": {
+          "actor_forward_bs1_analytic": 2344960,
+          "critic_fwdbwd_analytic_approx": 7159676928
+        }
+      },
+      "bs1024_h1024x1024": {
+        "obs_dim": 105,
+        "act_dim": 8,
+        "hidden_sizes": [
+          1024,
+          1024
+        ],
+        "batch_size": 1024,
+        "actor_forward_bs1": 2344960,
+        "critic_fwdbwd": 21019754496,
+        "actor_fwdbwd": 16529752064,
+        "target_update_elementwise_ops": 4669444,
+        "_analytic_cross_check": {
+          "actor_forward_bs1_analytic": 2344960,
+          "critic_fwdbwd_analytic_approx": 14319353856
+        }
       }
     },
     "HalfCheetah-v5": {
@@ -217,6 +251,45 @@
         "critic_fwdbwd": 553676800,
         "actor_fwdbwd": 309452800,
         "target_update_elementwise_ops": 1928212
+      },
+      "bs256_h1024x1024": {
+        "obs_dim": 105,
+        "act_dim": 8,
+        "hidden_sizes": [
+          1024,
+          1024
+        ],
+        "batch_size": 256,
+        "actor_forward_bs1": 2328576,
+        "critic_fwdbwd": 5250744320,
+        "actor_fwdbwd": 2926575616,
+        "target_update_elementwise_ops": 7002132
+      },
+      "bs512_h1024x1024": {
+        "obs_dim": 105,
+        "act_dim": 8,
+        "hidden_sizes": [
+          1024,
+          1024
+        ],
+        "batch_size": 512,
+        "actor_forward_bs1": 2328576,
+        "critic_fwdbwd": 10501488640,
+        "actor_fwdbwd": 5853151232,
+        "target_update_elementwise_ops": 7002132
+      },
+      "bs1024_h1024x1024": {
+        "obs_dim": 105,
+        "act_dim": 8,
+        "hidden_sizes": [
+          1024,
+          1024
+        ],
+        "batch_size": 1024,
+        "actor_forward_bs1": 2328576,
+        "critic_fwdbwd": 21002977280,
+        "actor_fwdbwd": 11706302464,
+        "target_update_elementwise_ops": 7002132
       }
     },
     "HalfCheetah-v5": {
@@ -366,6 +439,58 @@
         "critic_fwdbwd": 1419509760,
         "actor_fwdbwd": 1126694912,
         "target_update_elementwise_ops": 1286148,
+        "_analytic_cross_check": {
+          "dynamics_member_fwdbwd_analytic_approx": 284160000
+        },
+        "ensemble_size": 7,
+        "model_hidden_sizes": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "model_train_batch_size": 256,
+        "dynamics_member_fwdbwd": 272588800,
+        "dynamics_ensemble_forward_all_bs1": 2590000
+      },
+      "bs512_h1024x1024_ens7_mh200x200x200x200_mb256": {
+        "obs_dim": 105,
+        "act_dim": 8,
+        "hidden_sizes": [
+          1024,
+          1024
+        ],
+        "batch_size": 512,
+        "actor_forward_bs1": 2344960,
+        "critic_fwdbwd": 10509877248,
+        "actor_fwdbwd": 8264876032,
+        "target_update_elementwise_ops": 4669444,
+        "_analytic_cross_check": {
+          "dynamics_member_fwdbwd_analytic_approx": 284160000
+        },
+        "ensemble_size": 7,
+        "model_hidden_sizes": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "model_train_batch_size": 256,
+        "dynamics_member_fwdbwd": 272588800,
+        "dynamics_ensemble_forward_all_bs1": 2590000
+      },
+      "bs1024_h1024x1024_ens7_mh200x200x200x200_mb256": {
+        "obs_dim": 105,
+        "act_dim": 8,
+        "hidden_sizes": [
+          1024,
+          1024
+        ],
+        "batch_size": 1024,
+        "actor_forward_bs1": 2344960,
+        "critic_fwdbwd": 21019754496,
+        "actor_fwdbwd": 16529752064,
+        "target_update_elementwise_ops": 4669444,
         "_analytic_cross_check": {
           "dynamics_member_fwdbwd_analytic_approx": 284160000
         },

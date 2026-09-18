@@ -55,7 +55,7 @@ import json
 import os
 from collections import defaultdict
 
-from flop_keys import signature
+from flop_keys import mbpo_rollout_regime, signature
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESULTS_DIR = os.path.join(REPO_ROOT, "results")
@@ -264,6 +264,14 @@ def main():
         # must not mix runs at different UTD together, so it's part of the group key.
         utd = algo_config["updates_per_env_step"]
 
+        # Same reasoning for MBPO's model-rollout-length schedule: it doesn't change
+        # the architecture signature (per-call FLOP constants are rollout-length
+        # invariant, see flop_keys.mbpo_rollout_regime), but it does change how many
+        # synthetic_rollout_generation calls a run makes -- must not average runs
+        # from different rollout-length regimes (e.g. the rollout1/rollout15 sweep)
+        # together with each other or with the canonical Ant-v5 sweep (length up to 25).
+        rollout_regime = mbpo_rollout_regime(algo_config) if algo == "mbpo" else None
+
         total_energy_kwh = 0.0
         total_flops = 0
         for segment, (call_count, total_flops_seg, note) in rows.items():
@@ -278,6 +286,7 @@ def main():
 
             per_run_rows.append({
                 "algo": algo, "env_id": env_id, "architecture_signature": sig, "updates_per_env_step": utd,
+                "mbpo_rollout_regime": rollout_regime,
                 "seed": seed, "run_dir": os.path.relpath(run_dir, REPO_ROOT),
                 "included_in_cross_seed_avg": include_in_avg,
                 "segment": segment, "call_count": call_count, "total_flops": total_flops_seg,
@@ -290,12 +299,13 @@ def main():
                 total_flops += total_flops_seg
 
             if total_flops_seg is not None and include_in_avg:
-                agg[(algo, env_id, sig, utd, segment)].append((energy_kwh, total_flops_seg))
+                agg[(algo, env_id, sig, utd, rollout_regime, segment)].append((energy_kwh, total_flops_seg))
 
         if total_flops:
             total_energy_j = total_energy_kwh * KWH_TO_J
             per_run_rows.append({
                 "algo": algo, "env_id": env_id, "architecture_signature": sig, "updates_per_env_step": utd,
+                "mbpo_rollout_regime": rollout_regime,
                 "seed": seed, "run_dir": os.path.relpath(run_dir, REPO_ROOT),
                 "included_in_cross_seed_avg": include_in_avg,
                 "segment": "TOTAL_MEASURED_TRAINING", "call_count": None, "total_flops": total_flops,
@@ -304,10 +314,11 @@ def main():
                 "note": "sum over matmul-FLOP-accounted segments only (excludes idle baselines, warmup, buffer_sample, target_update)",
             })
             if include_in_avg:
-                agg[(algo, env_id, sig, utd, "TOTAL_MEASURED_TRAINING")].append((total_energy_kwh, total_flops))
+                agg[(algo, env_id, sig, utd, rollout_regime, "TOTAL_MEASURED_TRAINING")].append((total_energy_kwh, total_flops))
 
     per_run_csv = os.path.join(OUT_DIR, "per_run_energy_per_flop.csv")
-    fieldnames = ["algo", "env_id", "architecture_signature", "updates_per_env_step", "seed", "run_dir",
+    fieldnames = ["algo", "env_id", "architecture_signature", "updates_per_env_step", "mbpo_rollout_regime",
+                  "seed", "run_dir",
                   "included_in_cross_seed_avg", "segment", "call_count", "total_flops",
                   "total_energy_kwh", "total_energy_joules", "energy_per_flop_j_per_flop", "note"]
     with open(per_run_csv, "w", newline="") as f:
@@ -319,11 +330,12 @@ def main():
     cross_seed_csv = os.path.join(OUT_DIR, "cross_seed_energy_per_flop.csv")
     with open(cross_seed_csv, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=[
-            "algo", "env_id", "architecture_signature", "updates_per_env_step", "segment", "n_seeds",
+            "algo", "env_id", "architecture_signature", "updates_per_env_step", "mbpo_rollout_regime",
+            "segment", "n_seeds",
             "mean_energy_kwh", "mean_energy_joules", "total_flops", "mean_energy_per_flop_j_per_flop",
         ])
         w.writeheader()
-        for (algo, env_id, sig, utd, segment), vals in sorted(agg.items()):
+        for (algo, env_id, sig, utd, rollout_regime, segment), vals in sorted(agg.items()):
             energies = [e for e, _ in vals]
             flop_vals = [fl for _, fl in vals if fl]
             mean_energy_kwh = sum(energies) / len(energies)
@@ -331,6 +343,7 @@ def main():
             mean_energy_j = mean_energy_kwh * KWH_TO_J
             w.writerow({
                 "algo": algo, "env_id": env_id, "architecture_signature": sig, "updates_per_env_step": utd,
+                "mbpo_rollout_regime": rollout_regime,
                 "segment": segment, "n_seeds": len(vals),
                 "mean_energy_kwh": mean_energy_kwh, "mean_energy_joules": mean_energy_j,
                 "total_flops": mean_flops,
