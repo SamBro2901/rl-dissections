@@ -315,6 +315,7 @@ def build_grouped_bar(df, dims, x_dim, color_dim, facet_dim, metric_col, metric_
         yaxis_type="log" if log_y else "linear",
     )
     fig.update_xaxes(matches=None, showticklabels=True)
+    fig.update_yaxes(matches=None, showticklabels=True)
     return fig
 
 
@@ -354,6 +355,7 @@ def build_box(df, dims, x_dim, color_dim, facet_dim, metric_col, metric_label, l
         yaxis_type="log" if log_y else "linear",
     )
     fig.update_xaxes(matches=None, showticklabels=True)
+    fig.update_yaxes(matches=None, showticklabels=True)
     return fig
 
 
