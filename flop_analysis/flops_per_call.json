@@ -664,6 +664,102 @@
           "breakdown_total": 42459070464,
           "pct_diff": 0.0
         }
+      },
+      "bs256_h3_ns512_it6_pit24_ne64_nq3_enc2x256_mlp512_lat512_epTrue": {
+        "obs_dim": 105,
+        "act_dim": 8,
+        "batch_size": 256,
+        "horizon": 3,
+        "num_samples": 512,
+        "iterations": 6,
+        "num_pi_trajs": 24,
+        "num_elites": 64,
+        "num_q": 3,
+        "episodic": true,
+        "episode_length": 1000,
+        "rollout_per_env_step": 49053225472,
+        "gradient_update_critic": 20715798528,
+        "gradient_update_actor": 9862905856,
+        "gradient_update_target": 0,
+        "gradient_update_target_elementwise_ops": 3499614,
+        "gradient_update_total": 30578704384,
+        "_cross_check_blackbox_vs_breakdown": {
+          "blackbox_total": 30578704384,
+          "breakdown_total": 30578704384,
+          "pct_diff": 0.0
+        }
+      },
+      "bs256_h3_ns512_it6_pit24_ne64_nq7_enc2x256_mlp512_lat512_epTrue": {
+        "obs_dim": 105,
+        "act_dim": 8,
+        "batch_size": 256,
+        "horizon": 3,
+        "num_samples": 512,
+        "iterations": 6,
+        "num_pi_trajs": 24,
+        "num_elites": 64,
+        "num_q": 7,
+        "episodic": true,
+        "episode_length": 1000,
+        "rollout_per_env_step": 63309664768,
+        "gradient_update_critic": 34972237824,
+        "gradient_update_actor": 19367198720,
+        "gradient_update_target": 0,
+        "gradient_update_target_elementwise_ops": 8165766,
+        "gradient_update_total": 54339436544,
+        "_cross_check_blackbox_vs_breakdown": {
+          "blackbox_total": 54339436544,
+          "breakdown_total": 54339436544,
+          "pct_diff": 0.0
+        }
+      },
+      "bs256_h1_ns512_it6_pit24_ne64_nq5_enc2x256_mlp512_lat512_epTrue": {
+        "obs_dim": 105,
+        "act_dim": 8,
+        "batch_size": 256,
+        "horizon": 1,
+        "num_samples": 512,
+        "iterations": 6,
+        "num_pi_trajs": 24,
+        "num_elites": 64,
+        "num_q": 5,
+        "episodic": true,
+        "episode_length": 1000,
+        "rollout_per_env_step": 32763466240,
+        "gradient_update_critic": 9433907200,
+        "gradient_update_actor": 7307526144,
+        "gradient_update_target": 0,
+        "gradient_update_target_elementwise_ops": 5832690,
+        "gradient_update_total": 16741433344,
+        "_cross_check_blackbox_vs_breakdown": {
+          "blackbox_total": 16741433344,
+          "breakdown_total": 16741433344,
+          "pct_diff": 0.0
+        }
+      },
+      "bs256_h5_ns512_it6_pit24_ne64_nq5_enc2x256_mlp512_lat512_epTrue": {
+        "obs_dim": 105,
+        "act_dim": 8,
+        "batch_size": 256,
+        "horizon": 5,
+        "num_samples": 512,
+        "iterations": 6,
+        "num_pi_trajs": 24,
+        "num_elites": 64,
+        "num_q": 5,
+        "episodic": true,
+        "episode_length": 1000,
+        "rollout_per_env_step": 79599424000,
+        "gradient_update_critic": 46254129152,
+        "gradient_update_actor": 21922578432,
+        "gradient_update_target": 0,
+        "gradient_update_target_elementwise_ops": 5832690,
+        "gradient_update_total": 68176707584,
+        "_cross_check_blackbox_vs_breakdown": {
+          "blackbox_total": 68176707584,
+          "breakdown_total": 68176707584,
+          "pct_diff": 0.0
+        }
       }
     },
     "HalfCheetah-v5": {
@@ -688,6 +784,102 @@
         "_cross_check_blackbox_vs_breakdown": {
           "blackbox_total": 39905525760,
           "breakdown_total": 39905525760,
+          "pct_diff": 0.0
+        }
+      },
+      "bs256_h3_ns512_it6_pit24_ne64_nq3_enc2x256_mlp512_lat512_epFalse": {
+        "obs_dim": 17,
+        "act_dim": 6,
+        "batch_size": 256,
+        "horizon": 3,
+        "num_samples": 512,
+        "iterations": 6,
+        "num_pi_trajs": 24,
+        "num_elites": 64,
+        "num_q": 3,
+        "episodic": false,
+        "episode_length": 1000,
+        "rollout_per_env_step": 39310467584,
+        "gradient_update_critic": 18208391168,
+        "gradient_update_actor": 9837740032,
+        "gradient_update_target": 0,
+        "gradient_update_target_elementwise_ops": 3493470,
+        "gradient_update_total": 28046131200,
+        "_cross_check_blackbox_vs_breakdown": {
+          "blackbox_total": 28046131200,
+          "breakdown_total": 28046131200,
+          "pct_diff": 0.0
+        }
+      },
+      "bs256_h3_ns512_it6_pit24_ne64_nq7_enc2x256_mlp512_lat512_epFalse": {
+        "obs_dim": 17,
+        "act_dim": 6,
+        "batch_size": 256,
+        "horizon": 3,
+        "num_samples": 512,
+        "iterations": 6,
+        "num_pi_trajs": 24,
+        "num_elites": 64,
+        "num_q": 7,
+        "episodic": false,
+        "episode_length": 1000,
+        "rollout_per_env_step": 53541741056,
+        "gradient_update_critic": 32439664640,
+        "gradient_update_actor": 19325255680,
+        "gradient_update_target": 0,
+        "gradient_update_target_elementwise_ops": 8151430,
+        "gradient_update_total": 51764920320,
+        "_cross_check_blackbox_vs_breakdown": {
+          "blackbox_total": 51764920320,
+          "breakdown_total": 51764920320,
+          "pct_diff": 0.0
+        }
+      },
+      "bs256_h1_ns512_it6_pit24_ne64_nq5_enc2x256_mlp512_lat512_epFalse": {
+        "obs_dim": 17,
+        "act_dim": 6,
+        "batch_size": 256,
+        "horizon": 1,
+        "num_samples": 512,
+        "iterations": 6,
+        "num_pi_trajs": 24,
+        "num_elites": 64,
+        "num_q": 5,
+        "episodic": false,
+        "episode_length": 1000,
+        "rollout_per_env_step": 29482328576,
+        "gradient_update_critic": 8578531328,
+        "gradient_update_actor": 7290748928,
+        "gradient_update_target": 0,
+        "gradient_update_target_elementwise_ops": 5822450,
+        "gradient_update_total": 15869280256,
+        "_cross_check_blackbox_vs_breakdown": {
+          "blackbox_total": 15869280256,
+          "breakdown_total": 15869280256,
+          "pct_diff": 0.0
+        }
+      },
+      "bs256_h5_ns512_it6_pit24_ne64_nq5_enc2x256_mlp512_lat512_epFalse": {
+        "obs_dim": 17,
+        "act_dim": 6,
+        "batch_size": 256,
+        "horizon": 5,
+        "num_samples": 512,
+        "iterations": 6,
+        "num_pi_trajs": 24,
+        "num_elites": 64,
+        "num_q": 5,
+        "episodic": false,
+        "episode_length": 1000,
+        "rollout_per_env_step": 63369880064,
+        "gradient_update_critic": 42069524480,
+        "gradient_update_actor": 21872246784,
+        "gradient_update_target": 0,
+        "gradient_update_target_elementwise_ops": 5822450,
+        "gradient_update_total": 63941771264,
+        "_cross_check_blackbox_vs_breakdown": {
+          "blackbox_total": 63941771264,
+          "breakdown_total": 63941771264,
           "pct_diff": 0.0
         }
       }

@@ -50,10 +50,14 @@ PARAM_VALUES=("num_q:3" "num_q:7" "horizon:1" "horizon:5")
 
 override_file() {
     local param="$1" value="$2" env="$3"
+    # Override filenames drop the underscore in "num_q" (tdmpc2_numq3.json,
+    # not tdmpc2_num_q3.json) -- config field name and filename fragment
+    # differ, so translate here rather than renaming the field everywhere.
+    local param_slug="${param//_/}"
     if [[ "$env" == "Ant-v5" ]]; then
-        echo "configs/overrides/tdmpc2_ant_${param}${value}.json"
+        echo "configs/overrides/tdmpc2_ant_${param_slug}${value}.json"
     else
-        echo "configs/overrides/tdmpc2_${param}${value}.json"
+        echo "configs/overrides/tdmpc2_${param_slug}${value}.json"
     fi
 }
 

@@ -24,6 +24,15 @@ For every run under results/<algo>/<env_id>/seed_*/<timestamp>/, this:
      synthetic_transitions_generated (termination-dependent rollout length).
   4. Joins against flops_per_call.json (produced by measure_flops.py) to get
      Total_FLOPs(segment, run), then Energy_per_FLOP = Energy_J / Total_FLOPs.
+  5. Reads each run's per-task CodeCarbon log (run_dir/emissions_<experiment>_
+     <run_id>.csv -- NOT the top-level emissions.csv, which holds only the
+     one whole-run row written by tracker.stop(); see codecarbon's
+     FileOutput.task_out()) to get duration_s and a CPU/GPU/RAM mean-power
+     breakdown (energy / duration) per segment. buffer_sample/critic_update/
+     actor_update/target_update aren't their own CodeCarbon task, so their
+     CPU/GPU/RAM energy is split out of the measured "gradient_updates" task
+     using the same wall-clock time-share ratio segment_energy.json already
+     uses for the *total* energy allocation (see segment_hw_raw()).
 
 Output:
   flop_analysis/output/per_run_energy_per_flop.csv       -- one row per (run, segment); every run,
@@ -53,6 +62,7 @@ import csv
 import glob
 import json
 import os
+import re
 from collections import defaultdict
 
 from flop_keys import mbpo_rollout_regime, signature
@@ -63,6 +73,20 @@ FLOPS_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), "flops_per
 OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
 
 KWH_TO_J = 3.6e6
+
+# CodeCarbon's per-task log (see algorithms/tracker_utils.py's TrackerTask --
+# every start_task/stop_task call gets a unique "{prefix}_{counter}" name).
+# experiment_runner.py's tracker is created with save_to_file=True, which
+# makes CodeCarbon write this to run_dir/emissions_<experiment_name>_<run_id>.csv
+# (NOT the top-level emissions.csv, which only holds the one whole-run row
+# written by tracker.stop()) -- see codecarbon's FileOutput.task_out().
+SEGMENT_TASK_RE = re.compile(r"^(.*)_(\d+)$")
+
+# buffer_sample/critic_update/actor_update/target_update are never their own
+# CodeCarbon task -- they're allocated out of the fused "gradient_updates"
+# task by wall-clock time share (see algorithms/sac.py's "reconcile" step,
+# whose exact same ratios are replicated below for the CPU/GPU/RAM split).
+ALLOCATED_SUB_SEGMENTS = ("buffer_sample", "critic_update", "actor_update", "target_update")
 
 # The 5-seed sweep that recurs across every algo/env in results/ (see docstring above).
 CANONICAL_SEEDS = {331, 958, 14577, 43611, 85062}
@@ -91,6 +115,99 @@ def find_runs(results_dir):
         if not os.path.exists(seg_path):
             continue
         yield run_dir, meta_path, seg_path, tm_path
+
+
+def find_task_emissions_csv(run_dir):
+    matches = sorted(glob.glob(os.path.join(run_dir, "emissions_*.csv")))
+    return matches[0] if matches else None
+
+
+def segment_from_task_name(task_name):
+    m = SEGMENT_TASK_RE.match(task_name)
+    return m.group(1) if m else task_name  # idle_baseline_head/tail carry no _N counter
+
+
+def load_segment_hw_energy(run_dir):
+    """Aggregates the run's per-task CodeCarbon CSV by segment (stripping the
+    trailing _N call counter), returning summed wall-clock duration plus the
+    CPU/GPU/RAM energy split CodeCarbon already measures per task (these three
+    sum to exactly the task's energy_consumed, which is what TrackerTask sums
+    into segment_energy.json)."""
+    csv_path = find_task_emissions_csv(run_dir)
+    if not csv_path:
+        return {}
+    agg = defaultdict(lambda: {"duration_s": 0.0, "cpu_energy_kwh": 0.0, "gpu_energy_kwh": 0.0, "ram_energy_kwh": 0.0})
+    with open(csv_path, newline="") as f:
+        for row in csv.DictReader(f):
+            task_name = row.get("task_name")
+            if not task_name:
+                continue
+            a = agg[segment_from_task_name(task_name)]
+            a["duration_s"] += float(row.get("duration") or 0.0)
+            a["cpu_energy_kwh"] += float(row.get("cpu_energy") or 0.0)
+            a["gpu_energy_kwh"] += float(row.get("gpu_energy") or 0.0)
+            a["ram_energy_kwh"] += float(row.get("ram_energy") or 0.0)
+    return agg
+
+
+def segment_hw_raw(run_dir, seg_energy):
+    """Per-segment {duration_s, cpu_energy_kwh, gpu_energy_kwh, ram_energy_kwh}
+    for every segment_energy.json key that has hardware data available.
+    Directly-measured segments (rollout/gradient_updates/dynamics_model_update/
+    synthetic_rollout_generation/world_model_pretrain/warmup/idle_baseline_*)
+    come straight from the per-task CSV. The four allocated sub-segments
+    (ALLOCATED_SUB_SEGMENTS) are never their own CodeCarbon task, so their
+    CPU/GPU/RAM energy is split out of gradient_updates' measured hardware
+    energy using the same wall-clock time-share ratio segment_energy.json
+    already used to allocate gradient_updates' *total* energy; their duration
+    is that sub-segment's own summed time.perf_counter() wall time (an exact
+    measurement, not itself an allocation) -- see
+    segment_energy.json["_sub_segment_wall_time_seconds"] and the "reconcile"
+    step in algorithms/sac.py (shared by td3.py/mbpo.py/tdmpc2.py)."""
+    hw = load_segment_hw_energy(run_dir)
+    out = {segment: dict(vals) for segment, vals in hw.items()}
+
+    sub_times = seg_energy.get("_sub_segment_wall_time_seconds")
+    grad = hw.get("gradient_updates")
+    if sub_times and grad:
+        total_sub_time = sum(sub_times.values())
+        for sub_seg in ALLOCATED_SUB_SEGMENTS:
+            t = sub_times.get(sub_seg, 0.0)
+            share = (t / total_sub_time) if total_sub_time > 0 else 0.0
+            out[sub_seg] = {
+                "duration_s": t,
+                "cpu_energy_kwh": grad["cpu_energy_kwh"] * share,
+                "gpu_energy_kwh": grad["gpu_energy_kwh"] * share,
+                "ram_energy_kwh": grad["ram_energy_kwh"] * share,
+            }
+    return out
+
+
+def mean_power_w(energy_kwh, duration_s):
+    return (energy_kwh * KWH_TO_J / duration_s) if duration_s else None
+
+
+def power_fields(raw):
+    """raw: {duration_s, cpu_energy_kwh, gpu_energy_kwh, ram_energy_kwh} -> the
+    duration/mean-power fields carried in the output CSVs."""
+    d = raw["duration_s"]
+    total_e = raw["cpu_energy_kwh"] + raw["gpu_energy_kwh"] + raw["ram_energy_kwh"]
+    return {
+        "duration_s": d,
+        "mean_power_w": mean_power_w(total_e, d),
+        "mean_cpu_power_w": mean_power_w(raw["cpu_energy_kwh"], d),
+        "mean_gpu_power_w": mean_power_w(raw["gpu_energy_kwh"], d),
+        "mean_ram_power_w": mean_power_w(raw["ram_energy_kwh"], d),
+    }
+
+
+EMPTY_POWER_FIELDS = {"duration_s": None, "mean_power_w": None, "mean_cpu_power_w": None,
+                       "mean_gpu_power_w": None, "mean_ram_power_w": None}
+
+
+def safe_mean(values):
+    values = [v for v in values if v is not None]
+    return sum(values) / len(values) if values else None
 
 
 def sac_like_call_counts(algo_config, experiment_config):
@@ -222,6 +339,7 @@ def main():
             meta = json.load(f)
         with open(seg_path) as f:
             seg_energy = json.load(f)
+        seg_hw_raw = segment_hw_raw(run_dir, seg_energy)
 
         algo = meta["algo_name"]
         env_id = meta["env_id"]
@@ -274,6 +392,7 @@ def main():
 
         total_energy_kwh = 0.0
         total_flops = 0
+        total_hw_raw = {"duration_s": 0.0, "cpu_energy_kwh": 0.0, "gpu_energy_kwh": 0.0, "ram_energy_kwh": 0.0}
         for segment, (call_count, total_flops_seg, note) in rows.items():
             energy_kwh = seg_energy.get(segment)
             if energy_kwh is None:
@@ -284,6 +403,9 @@ def main():
             else:
                 energy_per_flop = None
 
+            seg_raw = seg_hw_raw.get(segment)
+            pw = power_fields(seg_raw) if seg_raw else dict(EMPTY_POWER_FIELDS)
+
             per_run_rows.append({
                 "algo": algo, "env_id": env_id, "architecture_signature": sig, "updates_per_env_step": utd,
                 "mbpo_rollout_regime": rollout_regime,
@@ -291,18 +413,25 @@ def main():
                 "included_in_cross_seed_avg": include_in_avg,
                 "segment": segment, "call_count": call_count, "total_flops": total_flops_seg,
                 "total_energy_kwh": energy_kwh, "total_energy_joules": energy_j,
+                **pw,
                 "energy_per_flop_j_per_flop": energy_per_flop, "note": note,
             })
 
             if segment not in NON_TRAINING_SEGMENTS and segment != "warmup" and total_flops_seg:
                 total_energy_kwh += energy_kwh
                 total_flops += total_flops_seg
+                if seg_raw:
+                    total_hw_raw["duration_s"] += seg_raw["duration_s"]
+                    total_hw_raw["cpu_energy_kwh"] += seg_raw["cpu_energy_kwh"]
+                    total_hw_raw["gpu_energy_kwh"] += seg_raw["gpu_energy_kwh"]
+                    total_hw_raw["ram_energy_kwh"] += seg_raw["ram_energy_kwh"]
 
             if total_flops_seg is not None and include_in_avg:
-                agg[(algo, env_id, sig, utd, rollout_regime, segment)].append((energy_kwh, total_flops_seg))
+                agg[(algo, env_id, sig, utd, rollout_regime, segment)].append((energy_kwh, total_flops_seg, pw))
 
         if total_flops:
             total_energy_j = total_energy_kwh * KWH_TO_J
+            total_pw = power_fields(total_hw_raw)
             per_run_rows.append({
                 "algo": algo, "env_id": env_id, "architecture_signature": sig, "updates_per_env_step": utd,
                 "mbpo_rollout_regime": rollout_regime,
@@ -310,17 +439,22 @@ def main():
                 "included_in_cross_seed_avg": include_in_avg,
                 "segment": "TOTAL_MEASURED_TRAINING", "call_count": None, "total_flops": total_flops,
                 "total_energy_kwh": total_energy_kwh, "total_energy_joules": total_energy_j,
+                **total_pw,
                 "energy_per_flop_j_per_flop": total_energy_j / total_flops,
                 "note": "sum over matmul-FLOP-accounted segments only (excludes idle baselines, warmup, buffer_sample, target_update)",
             })
             if include_in_avg:
-                agg[(algo, env_id, sig, utd, rollout_regime, "TOTAL_MEASURED_TRAINING")].append((total_energy_kwh, total_flops))
+                agg[(algo, env_id, sig, utd, rollout_regime, "TOTAL_MEASURED_TRAINING")].append(
+                    (total_energy_kwh, total_flops, total_pw)
+                )
 
     per_run_csv = os.path.join(OUT_DIR, "per_run_energy_per_flop.csv")
     fieldnames = ["algo", "env_id", "architecture_signature", "updates_per_env_step", "mbpo_rollout_regime",
                   "seed", "run_dir",
                   "included_in_cross_seed_avg", "segment", "call_count", "total_flops",
-                  "total_energy_kwh", "total_energy_joules", "energy_per_flop_j_per_flop", "note"]
+                  "total_energy_kwh", "total_energy_joules",
+                  "duration_s", "mean_power_w", "mean_cpu_power_w", "mean_gpu_power_w", "mean_ram_power_w",
+                  "energy_per_flop_j_per_flop", "note"]
     with open(per_run_csv, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)
         w.writeheader()
@@ -332,12 +466,14 @@ def main():
         w = csv.DictWriter(f, fieldnames=[
             "algo", "env_id", "architecture_signature", "updates_per_env_step", "mbpo_rollout_regime",
             "segment", "n_seeds",
-            "mean_energy_kwh", "mean_energy_joules", "total_flops", "mean_energy_per_flop_j_per_flop",
+            "mean_energy_kwh", "mean_energy_joules",
+            "mean_duration_s", "mean_power_w", "mean_cpu_power_w", "mean_gpu_power_w", "mean_ram_power_w",
+            "total_flops", "mean_energy_per_flop_j_per_flop",
         ])
         w.writeheader()
         for (algo, env_id, sig, utd, rollout_regime, segment), vals in sorted(agg.items()):
-            energies = [e for e, _ in vals]
-            flop_vals = [fl for _, fl in vals if fl]
+            energies = [e for e, _, _ in vals]
+            flop_vals = [fl for _, fl, _ in vals if fl]
             mean_energy_kwh = sum(energies) / len(energies)
             mean_flops = sum(flop_vals) / len(flop_vals) if flop_vals else 0
             mean_energy_j = mean_energy_kwh * KWH_TO_J
@@ -346,6 +482,11 @@ def main():
                 "mbpo_rollout_regime": rollout_regime,
                 "segment": segment, "n_seeds": len(vals),
                 "mean_energy_kwh": mean_energy_kwh, "mean_energy_joules": mean_energy_j,
+                "mean_duration_s": safe_mean([pw["duration_s"] for _, _, pw in vals]),
+                "mean_power_w": safe_mean([pw["mean_power_w"] for _, _, pw in vals]),
+                "mean_cpu_power_w": safe_mean([pw["mean_cpu_power_w"] for _, _, pw in vals]),
+                "mean_gpu_power_w": safe_mean([pw["mean_gpu_power_w"] for _, _, pw in vals]),
+                "mean_ram_power_w": safe_mean([pw["mean_ram_power_w"] for _, _, pw in vals]),
                 "total_flops": mean_flops,
                 "mean_energy_per_flop_j_per_flop": (mean_energy_j / mean_flops) if mean_flops else None,
             })

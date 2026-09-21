@@ -78,6 +78,33 @@ def rollout_regime_sort_key(value):
     return tuple(int(x) for x in m.groups()) if m else (0, 0, 0, 0)
 
 
+# TD-MPC2's num_q (Q-ensemble size) and horizon (MPPI planning horizon) are
+# already part of sig_tdmpc2 (see flop_keys.py) -- unlike mbpo_rollout_regime
+# they don't need any extra grouping-key plumbing in compute_energy_per_flop.py,
+# since two runs with different num_q/horizon already get different
+# architecture_signature strings and are never averaged together. They're
+# just pulled back out of the signature string here for the dashboard, the
+# same way hidden_sizes/batch_size are pulled out below. The "h" component of
+# sig_tdmpc2 is this horizon (not a network width, see HIDDEN_SIZES_ALGOS above).
+TDMPC2_HORIZON_RE = re.compile(r"^bs\d+_h(\d+)(?:_|$)")
+TDMPC2_NUM_Q_RE = re.compile(r"_nq(\d+)(?:_|$)")
+TDMPC2_ALGOS = {"tdmpc2"}
+
+
+def extract_tdmpc2_horizon(algo, architecture_signature):
+    if algo not in TDMPC2_ALGOS or not isinstance(architecture_signature, str):
+        return None
+    m = TDMPC2_HORIZON_RE.match(architecture_signature)
+    return m.group(1) if m else None
+
+
+def extract_tdmpc2_num_q(algo, architecture_signature):
+    if algo not in TDMPC2_ALGOS or not isinstance(architecture_signature, str):
+        return None
+    m = TDMPC2_NUM_Q_RE.search(architecture_signature)
+    return m.group(1) if m else None
+
+
 def extract_hidden_sizes(algo, architecture_signature):
     if algo not in HIDDEN_SIZES_ALGOS or not isinstance(architecture_signature, str):
         return None
@@ -104,18 +131,27 @@ DIMENSIONS = {
     "batch_size": {"label": "Batch size", "col": "batch_size", "order": None},
     "mbpo_rollout_regime": {"label": "MBPO Rollout Regime", "col": "mbpo_rollout_regime", "order": None,
                              "sort_key": rollout_regime_sort_key},
+    "tdmpc2_horizon": {"label": "TD-MPC2 Horizon", "col": "tdmpc2_horizon", "order": None},
+    "tdmpc2_num_q": {"label": "TD-MPC2 Num Q", "col": "tdmpc2_num_q", "order": None},
 }
-# Only meaningful for algo == "mbpo" (NaN elsewhere) -- excluded from the
-# X-axis/Color/Facet pivot dropdowns unless "mbpo" is among the selected
-# algos (see the *-pivot-options callbacks, mirroring the rollout FILTER
-# dropdown's own visibility toggle).
+# Only meaningful for algo == "mbpo" / "tdmpc2" respectively (NaN elsewhere)
+# -- excluded from the X-axis/Color/Facet pivot dropdowns unless that algo is
+# among the selected algos (see the *-pivot-options callbacks, mirroring
+# each field's own FILTER dropdown visibility toggle).
 MBPO_ROLLOUT_DIM = "mbpo_rollout_regime"
+TDMPC2_EXTRA_DIMS = {"tdmpc2_horizon", "tdmpc2_num_q"}
+GATED_DIMS = {MBPO_ROLLOUT_DIM} | TDMPC2_EXTRA_DIMS
 PER_RUN_DIMENSIONS = dict(DIMENSIONS, seed=dict(label="Seed", col="seed_str", order=None))
 
 CROSS_SEED_METRICS = [
     ("mean_energy_per_flop_j_per_flop", "Energy per FLOP (J/FLOP)"),
     ("mean_energy_kwh", "Mean Energy (kWh)"),
     ("mean_energy_joules", "Mean Energy (J)"),
+    ("mean_duration_s", "Mean Duration (s)"),
+    ("mean_power_w", "Mean Power (W)"),
+    ("mean_cpu_power_w", "Mean CPU Power (W)"),
+    ("mean_gpu_power_w", "Mean GPU Power (W)"),
+    ("mean_ram_power_w", "Mean RAM Power (W)"),
     ("total_flops", "Mean Total FLOPs"),
     ("n_seeds", "# Seeds included"),
 ]
@@ -123,6 +159,11 @@ PER_RUN_METRICS = [
     ("energy_per_flop_j_per_flop", "Energy per FLOP (J/FLOP)"),
     ("total_energy_kwh", "Energy (kWh)"),
     ("total_energy_joules", "Energy (J)"),
+    ("duration_s", "Duration (s)"),
+    ("mean_power_w", "Mean Power (W)"),
+    ("mean_cpu_power_w", "Mean CPU Power (W)"),
+    ("mean_gpu_power_w", "Mean GPU Power (W)"),
+    ("mean_ram_power_w", "Mean RAM Power (W)"),
     ("total_flops", "Total FLOPs"),
     ("call_count", "Call count"),
 ]
@@ -136,6 +177,8 @@ def load_cross_seed(flop_dir):
     df["utd_str"] = "UTD " + df["updates_per_env_step"].astype(str)
     df["hidden_sizes"] = [extract_hidden_sizes(a, s) for a, s in zip(df["algo"], df["architecture_signature"])]
     df["batch_size"] = [extract_batch_size(s) for s in df["architecture_signature"]]
+    df["tdmpc2_horizon"] = [extract_tdmpc2_horizon(a, s) for a, s in zip(df["algo"], df["architecture_signature"])]
+    df["tdmpc2_num_q"] = [extract_tdmpc2_num_q(a, s) for a, s in zip(df["algo"], df["architecture_signature"])]
     df["is_flop_normalized"] = ~df["segment"].isin(NON_FLOP_SEGMENTS)
     return df
 
@@ -147,29 +190,35 @@ def load_per_run(flop_dir):
     df["seed_str"] = df["seed"].astype(str)
     df["hidden_sizes"] = [extract_hidden_sizes(a, s) for a, s in zip(df["algo"], df["architecture_signature"])]
     df["batch_size"] = [extract_batch_size(s) for s in df["architecture_signature"]]
+    df["tdmpc2_horizon"] = [extract_tdmpc2_horizon(a, s) for a, s in zip(df["algo"], df["architecture_signature"])]
+    df["tdmpc2_num_q"] = [extract_tdmpc2_num_q(a, s) for a, s in zip(df["algo"], df["architecture_signature"])]
     df["is_flop_normalized"] = ~df["segment"].isin(NON_FLOP_SEGMENTS)
     if df["included_in_cross_seed_avg"].dtype == object:
         df["included_in_cross_seed_avg"] = df["included_in_cross_seed_avg"].astype(str).str.strip().eq("True")
     return df
 
 
-# mbpo_rollout_regime (see flop_analysis/flop_keys.mbpo_rollout_regime) is only
-# populated for algo == "mbpo" -- NaN everywhere else. It's included in the
-# generic crossfilter fields so it interacts normally with every other filter,
-# but its dropdown is only shown in the UI while "mbpo" is among the selected
-# algos (see the *-rollout-wrap visibility callbacks below).
+# mbpo_rollout_regime / tdmpc2_horizon / tdmpc2_num_q (see flop_analysis/flop_keys.py
+# and the extract_tdmpc2_* functions above) are only populated for their one
+# relevant algo -- NaN everywhere else. They're included in the generic
+# crossfilter fields so they interact normally with every other filter, but
+# their dropdowns are only shown in the UI while the relevant algo is among
+# the selected algos (see the *-extra-visibility callbacks below).
 #
-# NOTE: FILTER_FIELDS_WITH_ROLLOUT's order must exactly match the Dash
-# callback Output()/dropdown order (rollout slotted in between UTD and
-# Segment) -- crossfilter_options()/apply_filters() zip these field lists
-# positionally against the callback's Output tuple, so a mismatch here
+# NOTE: FILTER_FIELDS_WITH_EXTRAS's order must exactly match the Dash
+# callback Output()/dropdown order (rollout/horizon/num_q slotted in between
+# UTD and Segment) -- crossfilter_options()/apply_filters() zip these field
+# lists positionally against the callback's Output tuple, so a mismatch here
 # silently wires the wrong dropdown's options to the wrong field.
 FILTER_FIELDS = ["algo", "env_id", "architecture_signature", "hidden_sizes", "batch_size", "updates_per_env_step", "segment"]
 PER_RUN_FILTER_FIELDS = FILTER_FIELDS + ["seed"]
 MBPO_ROLLOUT_FIELD = "mbpo_rollout_regime"
-FILTER_FIELDS_WITH_ROLLOUT = ["algo", "env_id", "architecture_signature", "hidden_sizes", "batch_size",
-                              "updates_per_env_step", MBPO_ROLLOUT_FIELD, "segment"]
-PER_RUN_FILTER_FIELDS_WITH_ROLLOUT = FILTER_FIELDS_WITH_ROLLOUT + ["seed"]
+TDMPC2_HORIZON_FIELD = "tdmpc2_horizon"
+TDMPC2_NUM_Q_FIELD = "tdmpc2_num_q"
+FILTER_FIELDS_WITH_EXTRAS = ["algo", "env_id", "architecture_signature", "hidden_sizes", "batch_size",
+                             "updates_per_env_step", MBPO_ROLLOUT_FIELD, TDMPC2_HORIZON_FIELD, TDMPC2_NUM_Q_FIELD,
+                             "segment"]
+PER_RUN_FILTER_FIELDS_WITH_EXTRAS = FILTER_FIELDS_WITH_EXTRAS + ["seed"]
 
 
 def crossfilter_options(df, fields, current):
@@ -358,6 +407,14 @@ def make_app(flop_dir):
                     [html.Label("MBPO Rollout Regime"), dcc.Dropdown(id=f"{prefix}-rollout", options=[], value=[], multi=True, placeholder="All")],
                     id=f"{prefix}-rollout-wrap", className="filter-field", style={"display": "none"},
                 ),
+                html.Div(
+                    [html.Label("TD-MPC2 Horizon"), dcc.Dropdown(id=f"{prefix}-horizon", options=[], value=[], multi=True, placeholder="All")],
+                    id=f"{prefix}-horizon-wrap", className="filter-field", style={"display": "none"},
+                ),
+                html.Div(
+                    [html.Label("TD-MPC2 Num Q"), dcc.Dropdown(id=f"{prefix}-numq", options=[], value=[], multi=True, placeholder="All")],
+                    id=f"{prefix}-numq-wrap", className="filter-field", style={"display": "none"},
+                ),
                 filter_dropdown(f"{prefix}-segment", "Segment"),
             ] + ([filter_dropdown(f"{prefix}-seed", "Seed")] if prefix == "pr" else []),
             className="filters-row",
@@ -457,63 +514,84 @@ def make_app(flop_dir):
         className="app-container",
     )
 
-    # ---- Cross-seed tab: rollout-filter visibility (only while "mbpo" is selected) ----
-    @app.callback(Output("cs-rollout-wrap", "style"), Input("cs-algo", "value"))
-    def _cs_rollout_visibility(algo):
-        return {"display": "block"} if algo and "mbpo" in algo else {"display": "none"}
+    # ---- Cross-seed tab: algo-gated filter visibility (rollout only while
+    # "mbpo" is selected; horizon/num_q only while "tdmpc2" is selected) ----
+    @app.callback(
+        Output("cs-rollout-wrap", "style"),
+        Output("cs-horizon-wrap", "style"), Output("cs-numq-wrap", "style"),
+        Input("cs-algo", "value"),
+    )
+    def _cs_extra_visibility(algo):
+        algo = algo or []
+        rollout_style = {"display": "block"} if "mbpo" in algo else {"display": "none"}
+        tdmpc2_style = {"display": "block"} if "tdmpc2" in algo else {"display": "none"}
+        return rollout_style, tdmpc2_style, tdmpc2_style
 
-    # ---- Cross-seed tab: X-axis/Color/Facet pivot options -- only offer
-    # "MBPO Rollout Regime" as a pivotable dimension while "mbpo" is selected,
-    # same gating as the filter dropdown above.
+    # ---- Cross-seed tab: X-axis/Color/Facet pivot options -- only offer the
+    # algo-gated dimensions while their algo is selected, same gating as the
+    # filter dropdowns above.
     @app.callback(
         Output("cs-xaxis", "options"), Output("cs-color", "options"), Output("cs-facet", "options"),
         Input("cs-algo", "value"),
     )
     def _cs_pivot_options(algo):
-        show_rollout = bool(algo) and "mbpo" in algo
-        xaxis_opts = dim_opts if show_rollout else [o for o in dim_opts if o["value"] != MBPO_ROLLOUT_DIM]
-        other_opts = dim_opts_with_none if show_rollout else [o for o in dim_opts_with_none if o["value"] != MBPO_ROLLOUT_DIM]
+        algo = algo or []
+        hidden = set() if "mbpo" in algo else {MBPO_ROLLOUT_DIM}
+        if "tdmpc2" not in algo:
+            hidden |= TDMPC2_EXTRA_DIMS
+        xaxis_opts = [o for o in dim_opts if o["value"] not in hidden]
+        other_opts = [o for o in dim_opts_with_none if o["value"] not in hidden]
         return xaxis_opts, other_opts, other_opts
 
     # ---- Cross-seed tab: crossfilter dropdown options ----
     @app.callback(
         Output("cs-algo", "options"), Output("cs-env", "options"), Output("cs-arch", "options"),
         Output("cs-hidden", "options"), Output("cs-batch", "options"), Output("cs-utd", "options"),
-        Output("cs-rollout", "options"), Output("cs-segment", "options"),
+        Output("cs-rollout", "options"), Output("cs-horizon", "options"), Output("cs-numq", "options"),
+        Output("cs-segment", "options"),
         Input("cs-algo", "value"), Input("cs-env", "value"), Input("cs-arch", "value"),
         Input("cs-hidden", "value"), Input("cs-batch", "value"), Input("cs-utd", "value"),
-        Input("cs-rollout", "value"), Input("cs-segment", "value"),
+        Input("cs-rollout", "value"), Input("cs-horizon", "value"), Input("cs-numq", "value"),
+        Input("cs-segment", "value"),
     )
-    def _cs_options(algo, env, arch, hidden, batch, utd, rollout, segment):
+    def _cs_options(algo, env, arch, hidden, batch, utd, rollout, horizon, numq, segment):
         current = {"algo": algo, "env_id": env, "architecture_signature": arch,
                    "hidden_sizes": hidden, "batch_size": batch, "updates_per_env_step": utd,
-                   MBPO_ROLLOUT_FIELD: rollout, "segment": segment}
-        opts = crossfilter_options(cross_df, FILTER_FIELDS_WITH_ROLLOUT, current)
-        return tuple([{"label": str(v), "value": v} for v in opts[f]] for f in FILTER_FIELDS_WITH_ROLLOUT)
+                   MBPO_ROLLOUT_FIELD: rollout, TDMPC2_HORIZON_FIELD: horizon, TDMPC2_NUM_Q_FIELD: numq,
+                   "segment": segment}
+        opts = crossfilter_options(cross_df, FILTER_FIELDS_WITH_EXTRAS, current)
+        return tuple([{"label": str(v), "value": v} for v in opts[f]] for f in FILTER_FIELDS_WITH_EXTRAS)
 
     @app.callback(
         Output("cs-graph", "figure"), Output("cs-table-wrap", "children"),
         Input("cs-algo", "value"), Input("cs-env", "value"), Input("cs-arch", "value"),
         Input("cs-hidden", "value"), Input("cs-batch", "value"), Input("cs-utd", "value"),
-        Input("cs-rollout", "value"), Input("cs-segment", "value"),
+        Input("cs-rollout", "value"), Input("cs-horizon", "value"), Input("cs-numq", "value"),
+        Input("cs-segment", "value"),
         Input("cs-xaxis", "value"), Input("cs-color", "value"), Input("cs-facet", "value"),
         Input("cs-metric", "value"), Input("cs-logy", "value"),
     )
-    def _cs_update(algo, env, arch, hidden, batch, utd, rollout, segment, x_dim, color_dim, facet_dim, metric, logy):
+    def _cs_update(algo, env, arch, hidden, batch, utd, rollout, horizon, numq, segment, x_dim, color_dim, facet_dim, metric, logy):
         current = {"algo": algo, "env_id": env, "architecture_signature": arch,
                    "hidden_sizes": hidden, "batch_size": batch, "updates_per_env_step": utd,
-                   MBPO_ROLLOUT_FIELD: rollout, "segment": segment}
-        filtered = apply_filters(cross_df, FILTER_FIELDS_WITH_ROLLOUT, current)
+                   MBPO_ROLLOUT_FIELD: rollout, TDMPC2_HORIZON_FIELD: horizon, TDMPC2_NUM_Q_FIELD: numq,
+                   "segment": segment}
+        filtered = apply_filters(cross_df, FILTER_FIELDS_WITH_EXTRAS, current)
         color_dim = None if color_dim == NONE_VALUE else color_dim
         facet_dim = None if facet_dim == NONE_VALUE else facet_dim
         metric_label = dict(CROSS_SEED_METRICS)[metric]
         fig = build_grouped_bar(filtered, DIMENSIONS, x_dim, color_dim, facet_dim, metric, metric_label, bool(logy))
         display_cols = ["algo", "env_id", "architecture_signature", "hidden_sizes", "batch_size", "updates_per_env_step",
-                         "mbpo_rollout_regime", "segment",
-                         "n_seeds", "mean_energy_kwh", "mean_energy_joules", "total_flops",
-                         "mean_energy_per_flop_j_per_flop"]
+                         "mbpo_rollout_regime", "tdmpc2_horizon", "tdmpc2_num_q", "segment",
+                         "n_seeds", "mean_energy_kwh", "mean_energy_joules",
+                         "mean_duration_s", "mean_power_w", "mean_cpu_power_w", "mean_gpu_power_w", "mean_ram_power_w",
+                         "total_flops", "mean_energy_per_flop_j_per_flop"]
         table = dash_table.DataTable(
-            columns=numeric_table_columns(filtered[display_cols], {"mean_energy_kwh", "mean_energy_joules", "total_flops", "mean_energy_per_flop_j_per_flop"}),
+            columns=numeric_table_columns(filtered[display_cols], {
+                "mean_energy_kwh", "mean_energy_joules", "mean_duration_s", "mean_power_w",
+                "mean_cpu_power_w", "mean_gpu_power_w", "mean_ram_power_w",
+                "total_flops", "mean_energy_per_flop_j_per_flop",
+            }),
             data=filtered[display_cols].to_dict("records"),
             filter_action="native", sort_action="native", page_size=15,
             style_table={"overflowX": "auto"}, style_cell={"fontSize": 12, "fontFamily": "monospace", "padding": "4px"},
@@ -521,10 +599,17 @@ def make_app(flop_dir):
         )
         return fig, table
 
-    # ---- Per-run tab: rollout-filter visibility (only while "mbpo" is selected) ----
-    @app.callback(Output("pr-rollout-wrap", "style"), Input("pr-algo", "value"))
-    def _pr_rollout_visibility(algo):
-        return {"display": "block"} if algo and "mbpo" in algo else {"display": "none"}
+    # ---- Per-run tab: algo-gated filter visibility (same gating as cross-seed tab) ----
+    @app.callback(
+        Output("pr-rollout-wrap", "style"),
+        Output("pr-horizon-wrap", "style"), Output("pr-numq-wrap", "style"),
+        Input("pr-algo", "value"),
+    )
+    def _pr_extra_visibility(algo):
+        algo = algo or []
+        rollout_style = {"display": "block"} if "mbpo" in algo else {"display": "none"}
+        tdmpc2_style = {"display": "block"} if "tdmpc2" in algo else {"display": "none"}
+        return rollout_style, tdmpc2_style, tdmpc2_style
 
     # ---- Per-run tab: X-axis/Color/Facet pivot options (same gating as cross-seed tab) ----
     @app.callback(
@@ -532,47 +617,55 @@ def make_app(flop_dir):
         Input("pr-algo", "value"),
     )
     def _pr_pivot_options(algo):
-        show_rollout = bool(algo) and "mbpo" in algo
-        xaxis_opts = pr_dim_opts if show_rollout else [o for o in pr_dim_opts if o["value"] != MBPO_ROLLOUT_DIM]
-        other_opts = pr_dim_opts_with_none if show_rollout else [o for o in pr_dim_opts_with_none if o["value"] != MBPO_ROLLOUT_DIM]
+        algo = algo or []
+        hidden = set() if "mbpo" in algo else {MBPO_ROLLOUT_DIM}
+        if "tdmpc2" not in algo:
+            hidden |= TDMPC2_EXTRA_DIMS
+        xaxis_opts = [o for o in pr_dim_opts if o["value"] not in hidden]
+        other_opts = [o for o in pr_dim_opts_with_none if o["value"] not in hidden]
         return xaxis_opts, other_opts, other_opts
 
     # ---- Per-run tab: crossfilter dropdown options ----
     @app.callback(
         Output("pr-algo", "options"), Output("pr-env", "options"), Output("pr-arch", "options"),
         Output("pr-hidden", "options"), Output("pr-batch", "options"), Output("pr-utd", "options"),
-        Output("pr-rollout", "options"), Output("pr-segment", "options"),
+        Output("pr-rollout", "options"), Output("pr-horizon", "options"), Output("pr-numq", "options"),
+        Output("pr-segment", "options"),
         Output("pr-seed", "options"),
         Input("pr-algo", "value"), Input("pr-env", "value"), Input("pr-arch", "value"),
         Input("pr-hidden", "value"), Input("pr-batch", "value"), Input("pr-utd", "value"),
-        Input("pr-rollout", "value"), Input("pr-segment", "value"),
+        Input("pr-rollout", "value"), Input("pr-horizon", "value"), Input("pr-numq", "value"),
+        Input("pr-segment", "value"),
         Input("pr-seed", "value"), Input("pr-canonical", "value"),
     )
-    def _pr_options(algo, env, arch, hidden, batch, utd, rollout, segment, seed, canonical):
+    def _pr_options(algo, env, arch, hidden, batch, utd, rollout, horizon, numq, segment, seed, canonical):
         base = per_run_df[per_run_df["included_in_cross_seed_avg"]] if canonical == "canonical" else per_run_df
         current = {"algo": algo, "env_id": env, "architecture_signature": arch,
                    "hidden_sizes": hidden, "batch_size": batch, "updates_per_env_step": utd,
-                   MBPO_ROLLOUT_FIELD: rollout, "segment": segment, "seed": seed}
-        opts = crossfilter_options(base, PER_RUN_FILTER_FIELDS_WITH_ROLLOUT, current)
-        return tuple([{"label": str(v), "value": v} for v in opts[f]] for f in PER_RUN_FILTER_FIELDS_WITH_ROLLOUT)
+                   MBPO_ROLLOUT_FIELD: rollout, TDMPC2_HORIZON_FIELD: horizon, TDMPC2_NUM_Q_FIELD: numq,
+                   "segment": segment, "seed": seed}
+        opts = crossfilter_options(base, PER_RUN_FILTER_FIELDS_WITH_EXTRAS, current)
+        return tuple([{"label": str(v), "value": v} for v in opts[f]] for f in PER_RUN_FILTER_FIELDS_WITH_EXTRAS)
 
     @app.callback(
         Output("pr-graph", "figure"), Output("pr-table-wrap", "children"),
         Input("pr-algo", "value"), Input("pr-env", "value"), Input("pr-arch", "value"),
         Input("pr-hidden", "value"), Input("pr-batch", "value"), Input("pr-utd", "value"),
-        Input("pr-rollout", "value"), Input("pr-segment", "value"),
+        Input("pr-rollout", "value"), Input("pr-horizon", "value"), Input("pr-numq", "value"),
+        Input("pr-segment", "value"),
         Input("pr-seed", "value"), Input("pr-canonical", "value"),
         Input("pr-charttype", "value"),
         Input("pr-xaxis", "value"), Input("pr-color", "value"), Input("pr-facet", "value"),
         Input("pr-metric", "value"), Input("pr-logy", "value"),
     )
-    def _pr_update(algo, env, arch, hidden, batch, utd, rollout, segment, seed, canonical, charttype,
+    def _pr_update(algo, env, arch, hidden, batch, utd, rollout, horizon, numq, segment, seed, canonical, charttype,
                     x_dim, color_dim, facet_dim, metric, logy):
         base = per_run_df[per_run_df["included_in_cross_seed_avg"]] if canonical == "canonical" else per_run_df
         current = {"algo": algo, "env_id": env, "architecture_signature": arch,
                    "hidden_sizes": hidden, "batch_size": batch, "updates_per_env_step": utd,
-                   MBPO_ROLLOUT_FIELD: rollout, "segment": segment, "seed": seed}
-        filtered = apply_filters(base, PER_RUN_FILTER_FIELDS_WITH_ROLLOUT, current)
+                   MBPO_ROLLOUT_FIELD: rollout, TDMPC2_HORIZON_FIELD: horizon, TDMPC2_NUM_Q_FIELD: numq,
+                   "segment": segment, "seed": seed}
+        filtered = apply_filters(base, PER_RUN_FILTER_FIELDS_WITH_EXTRAS, current)
         color_dim = None if color_dim == NONE_VALUE else color_dim
         facet_dim = None if facet_dim == NONE_VALUE else facet_dim
         metric_label = dict(PER_RUN_METRICS)[metric]
@@ -581,12 +674,18 @@ def make_app(flop_dir):
         else:
             fig = build_grouped_bar(filtered, PER_RUN_DIMENSIONS, x_dim, color_dim, facet_dim, metric, metric_label, bool(logy))
         display_cols = ["algo", "env_id", "architecture_signature", "hidden_sizes", "batch_size", "updates_per_env_step",
-                         "mbpo_rollout_regime", "seed",
+                         "mbpo_rollout_regime", "tdmpc2_horizon", "tdmpc2_num_q", "seed",
                          "included_in_cross_seed_avg", "segment", "call_count", "total_flops",
-                         "total_energy_kwh", "total_energy_joules", "energy_per_flop_j_per_flop",
+                         "total_energy_kwh", "total_energy_joules",
+                         "duration_s", "mean_power_w", "mean_cpu_power_w", "mean_gpu_power_w", "mean_ram_power_w",
+                         "energy_per_flop_j_per_flop",
                          "run_dir", "note"]
         table = dash_table.DataTable(
-            columns=numeric_table_columns(filtered[display_cols], {"total_flops", "total_energy_kwh", "total_energy_joules", "energy_per_flop_j_per_flop"}),
+            columns=numeric_table_columns(filtered[display_cols], {
+                "total_flops", "total_energy_kwh", "total_energy_joules",
+                "duration_s", "mean_power_w", "mean_cpu_power_w", "mean_gpu_power_w", "mean_ram_power_w",
+                "energy_per_flop_j_per_flop",
+            }),
             data=filtered[display_cols].to_dict("records"),
             filter_action="native", sort_action="native", page_size=15,
             style_table={"overflowX": "auto"}, style_cell={"fontSize": 12, "fontFamily": "monospace", "padding": "4px"},
