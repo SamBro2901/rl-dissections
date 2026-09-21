@@ -7,8 +7,10 @@ baseline) using CodeCarbon (NVML + RAPL under the hood).
 ## Layout
 
 ```
-configs/config.py        ExperimentConfig (protocol/timing) + SACConfig + MBPOConfig (hyperparameters)
-configs/overrides/        Example --algo-config-overrides JSON files (e.g. per-env MBPO rollout schedules)
+configs/config.py        ExperimentConfig (protocol/timing) + SACConfig/MBPOConfig/TD3Config/TDMPC2Config
+configs/overrides/        --algo-config-overrides JSON files -- per-env hyperparameters (e.g. MBPO rollout
+                           schedules) and per-sweep hyperparameters (width/batch-size/UTD/rollout-length/
+                           num_q/horizon -- see "Hyperparameter sensitivity sweeps" below)
 utils/gpu_control.py      GPU clock locking, persistence mode, CPU governor (GpuCpuGuard context manager)
 utils/thermal_gate.py     Waits between runs until GPU temp/power return near a reference cold state
 algorithms/replay_buffer.py  Numpy circular replay buffer
@@ -21,7 +23,13 @@ algorithms/mbpo.py        MBPO train() loop -- reuses SACAgent, adds model train
 algorithms/tdmpc2.py      TD-MPC2 latent world model + MPPI planner + train() loop
 experiment_runner.py      Orchestrates settle -> idle baseline -> warmup+train -> idle tail -> teardown
 run_experiment.py         CLI entry point
-aggregate_results.py      Combines many runs' segment_energy.json/metadata.json into one CSV
+aggregate_results.py      Combines many runs' segment_energy.json/metadata.json/training_metrics.json into one CSV
+dashboard.py              Plotly Dash app for browsing individual runs under results/
+flop_analysis/            Energy-per-FLOP methodology: measure_flops.py, compute_energy_per_flop.py, flop_keys.py
+flop_dashboard.py         Plotly Dash app for browsing flop_analysis/output/*.csv
+scripts/                  Sweep-runner shell scripts (seed sweeps, UTD/width/batch-size/rollout-length/
+                           num_q/horizon sweeps -- see "Hyperparameter sensitivity sweeps" below)
+cli_commands.txt          Reference invocations for the Linux experiment box (sudo + rl-exp venv)
 ```
 
 ## Quickstart
@@ -347,6 +355,148 @@ unhealthy state, unlike HalfCheetah-v5, which never does) -- see
 `TDMPC2Config`'s docstring for why the real TD-target bootstraps correctly
 off the environment's own termination signal either way.
 
+## Energy-per-FLOP analysis (`flop_analysis/`)
+
+Raw per-segment kWh numbers only tell you how much energy an algorithm used
+at *one particular architecture and batch size*; they don't tell you whether
+that's because the algorithm is inherently more expensive per unit of useful
+compute, or just because someone gave it a bigger network. `flop_analysis/`
+adds a second, compute-normalized metric -- **Joules per FLOP** -- so
+algorithms (and hyperparameter choices) can be compared on that basis too.
+It's a two-step pipeline:
+
+1. **`flop_analysis/measure_flops.py`** -- for every distinct `(algo, env_id,
+   architecture_signature)` combination actually present under `results/`
+   (see `flop_keys.py` below), runs `torch.utils.flop_counter.FlopCounterMode`
+   against the **real** network classes (`SACAgent`, `TD3Agent`, MBPO's
+   dynamics ensemble, `TDMPC2Agent.act()`/`.update()`) to get exact per-call
+   FLOP counts: rollout forward pass, critic forward+backward, actor
+   forward+backward, target-update elementwise ops, MBPO's dynamics-ensemble
+   forward/backward, and TD-MPC2's three-way critic/actor/target breakdown
+   (cross-checked against a black-box `agent.update()` call, since TD-MPC2's
+   world-model/policy-prior/Q-ensemble losses aren't as cleanly separable as
+   SAC/TD3's critic/actor split). Includes an analytic dense-layer FLOP
+   cross-check as a sanity check on the profiler's own numbers. Output:
+   `flop_analysis/flops_per_call.json`.
+2. **`flop_analysis/compute_energy_per_flop.py`** -- joins each run's
+   `metadata.json` (hyperparameters, used to derive call *counts* -- this
+   harness logs per-epoch, not per-gradient-step, so a call count has to be
+   reconstructed from `steps_per_epoch × updates_per_env_step` etc., not read
+   directly off a CodeCarbon task) and `segment_energy.json` (the
+   authoritative per-segment kWh, already reconciled from the directly
+   measured `rollout`/`gradient_updates` tasks -- see "Why epoch-level
+   tagging" above) against `flops_per_call.json`, per architecture signature.
+   Cross-seed averaging defaults to the canonical 5-seed set `{331, 958,
+   14577, 43611, 85062}` (`--all-seeds` to include every run found instead,
+   or `--seeds 1,2,3` for a custom list); dev/exploratory runs at other seeds
+   or older architectures are still written to the per-run CSV
+   (`included_in_cross_seed_avg=False`) but excluded from the cross-seed
+   average so they don't dilute it. Outputs:
+   - `flop_analysis/output/per_run_energy_per_flop.csv` -- one row per
+     run×segment, plus a `TOTAL_MEASURED_TRAINING` rollup row per run summing
+     only matmul-FLOP-accounted segments (excludes idle baselines, `warmup`,
+     `buffer_sample` (CPU-side, 0 FLOPs), and `target_update` (elementwise
+     Polyak-average ops, not matmul FLOPs -- expect a near-meaningless
+     Energy/FLOP figure there by design, not a bug).
+   - `flop_analysis/output/cross_seed_energy_per_flop.csv` -- averaged by
+     `(algo, env, architecture, UTD, segment)`.
+
+`flop_analysis/flop_keys.py` supplies the shared architecture-signature
+functions (`sig_sac_td3`, `sig_mbpo`, `sig_tdmpc2`) both scripts use, so a
+run is always joined against the FLOP constants for its *actual*
+architecture -- `results/` holds more than one architecture per (algo, env)
+pair (e.g. SAC on HalfCheetah-v5 has runs at (256,256), (512,512), and
+(1024,1024) from the project's evolution, plus the hyperparameter sweeps
+below), and averaging across architectures would silently corrupt the
+metric. `sig_sac_td3`/`sig_mbpo` key on `hidden_sizes`/`batch_size` (plus
+MBPO's ensemble config); `sig_tdmpc2` keys on the planner config
+(`num_q`, `horizon`, `num_samples`, etc.) and `episodic`. A separate
+`mbpo_rollout_regime()` function fingerprints MBPO's model-rollout-length
+schedule independently of the architecture signature -- rollout length
+changes how many `synthetic_rollout_generation` calls a run makes, not the
+per-call FLOP cost, so conflating the two would be wrong.
+
+Browse the output interactively with **`flop_dashboard.py`** (`python
+flop_dashboard.py [--flop-dir flop_analysis/output] [--port 8051]`) -- a
+cross-seed-comparison tab and a per-run-detail tab, each with crossfiltering
+dropdowns that pivot the filtered rows into a grouped bar chart (or, on the
+per-run tab, a per-seed box plot), plus a sortable/filterable data table.
+
+Both `measure_flops.py`/`compute_energy_per_flop.py` reference a
+`flop_calculation_methodology.md` for the full step-by-step methodology --
+**this file is not currently checked into the repo**; it may exist only in
+the thesis write-up, or may still need to be created. Worth confirming
+before assuming the methodology documentation is lost.
+
+## Hyperparameter sensitivity sweeps (`scripts/`)
+
+Once 5-seed energy comparisons existed for all four algorithms at the
+settled `hidden_sizes=(1024,1024)` architecture (see runs recorded in
+`CLAUDE.md`), the natural next question is whether those comparisons --
+energy in kWh *and* energy-per-FLOP -- are robust to the specific
+architecture/hyperparameter choice, or an artifact of that one point. A set
+of sweep scripts under `scripts/` answer this by revisiting the same
+canonical 5-seed set `{331, 958, 14577, 43611, 85062}` at different
+hyperparameter values, on both `HalfCheetah-v5` and `Ant-v5` unless noted:
+
+- **Network width** (`scripts/run_width_sweep.sh`): `hidden_sizes` ∈
+  {(256,256), (512,512)} for SAC/MBPO/TD3 (TD-MPC2 excluded -- its
+  architecture is the paper's own fixed spec with no equivalent width knob).
+  60 runs.
+- **Update-to-data ratio (UTD)**: `updates_per_env_step` ∈ {2, 4}. SAC-on-
+  Ant-v5 and TD3-on-both-envs were swept first (`scripts/run_utd_sweep.sh`
+  originally); MBPO's UTD sweep (`scripts/run_utd_sweep.sh` as it exists now
+  -- the file was later repointed at MBPO, see `CLAUDE.md` for the exact
+  history) fills in the fourth algorithm, on both envs. SAC-on-HalfCheetah's
+  UTD sweep predates the canonical seed set and was run separately earlier.
+- **Batch size** (`scripts/run_batch_size_sweep.sh` for HalfCheetah-v5,
+  `scripts/run_batch_size_sweep_ant.sh` for Ant-v5): `batch_size` ∈ {256,
+  512, 1024} for SAC/MBPO/TD3 (256 skipped for SAC/MBPO where it's already
+  each algorithm's own default, already covered by the baseline runs; TD3's
+  own paper default is 100, so all three sizes are new for TD3). 35 runs per env.
+- **MBPO model-rollout length** (`scripts/run_mbpo_rollout_length_sweep.sh`,
+  Ant-v5 only): `rollout_max_length` ∈ {1, 15} (with `rollout_min_length`
+  held at 1), bracketing the established Ant-v5 schedule
+  (`configs/overrides/mbpo_ant.json`, max length 25) to see how the length of
+  MBPO's branched imagined rollouts trades off against
+  `dynamics_model_update`/`synthetic_rollout_generation` energy. 10 runs.
+- **TD-MPC2 num_q / horizon** (`scripts/run_tdmpc2_numq_horizon_sweep.sh`):
+  two independent single-parameter ablations, `num_q` (Q-ensemble size) ∈
+  {3, 7} and `horizon` (MPPI planning horizon) ∈ {1, 5} -- the paper
+  defaults (5 and 3 respectively) are already covered by the canonical seed
+  sweep, so they're skipped here. 40 runs.
+- **`scripts/run_ant_overnight_sweep.sh`** combines the Ant-v5 batch-size
+  sweep and the MBPO rollout-length sweep into a single unattended overnight
+  session (one sudo priming, one status/log file, one shutdown at the end);
+  the two component scripts still exist standalone if you want to rerun just
+  one phase.
+
+Every sweep script follows the same shape: prime a sudo credential cache up
+front (needed once per run for GPU clock locking + CPU governor pinning),
+keep it alive in the background for the sweep's duration, write live
+progress to a `results/..._status.json` + `.log` pair (one JSON row per
+planned run: `pending` → `running` → `done`/`failed`), and power the
+machine off automatically once every run has been attempted -- meant to be
+launched inside `screen`/`nohup` and left running unattended (often
+overnight, given some sweeps take dozens of runs). See each script's own
+header comment for the exact algo/env/value combinations and run counts;
+run one with, e.g.:
+
+```bash
+screen -S width_sweep
+scripts/run_width_sweep.sh
+# Ctrl-A D to detach; reattach later with: screen -r width_sweep
+```
+
+All hyperparameter-sweep runs go through the same `configs/overrides/*.json`
+mechanism as any other run (`--algo-config-overrides`) and land in the same
+`results/{algo}/{env}/seed_{n}/{timestamp}/` layout as the baseline runs --
+they're distinguished from each other only by their `metadata.json` config,
+which is exactly what `flop_analysis/flop_keys.py`'s architecture signatures
+(and, for MBPO rollout length, `mbpo_rollout_regime()`) key on. As of the
+most recent commit, all five sweeps above have completed every one of their
+scheduled runs.
+
 ## Extending to PPO / PETS
 
 - Add a new `{Algo}Config` dataclass to `configs/config.py` and register it
@@ -358,6 +508,74 @@ off the environment's own termination signal either way.
   task names per epoch, sub-segment timing via `time.perf_counter()` where
   finer breakdown than CodeCarbon's resolution allows).
 - Add a dispatch branch in `experiment_runner._dispatch_train`.
+
+## Known exceptions in the recorded data
+
+The sections above describe the harness as designed; this section documents
+what was actually found on disk when auditing all 300 recorded runs under
+`results/` (as opposed to generic caveats about the methodology, which are
+in "Known limitations" below). Cite these directly in the thesis rather than
+re-deriving them, since some are easy to miss by just looking at summary CSVs.
+
+**Confirmed clean** (checked because these are exactly the kind of thing that
+would silently invalidate a comparison if they went wrong):
+- Every one of the 300 runs used the same physical GPU (`NVIDIA GeForce RTX
+  5090`) -- no hardware substitution anywhere in the dataset.
+- No run's log shows a RAPL fallback, a geolocation fallback, a thermal-gate
+  timeout, or a GPU-clock-lock/CPU-governor permission failure -- every run's
+  confound controls were actually applied (not merely requested), and every
+  run's CPU/GPU energy is a real hardware reading, not an estimate.
+- Every hyperparameter sweep (width, UTD, batch-size ×2, MBPO rollout-length,
+  TD-MPC2 num_q/horizon) and every per-algorithm seed/env sweep completed
+  100% of its scheduled runs -- no partial sweeps to account for.
+
+**Exceptions to know about**:
+- **The TD-MPC2 num_q/horizon sweep had a false start.** Its first launch
+  (2026-09-18, `results/tdmpc2/_numq_horizon_sweep.log`) crashed instantly on
+  its first 5 runs with a `FileNotFoundError` from a filename mismatch in the
+  sweep script (`tdmpc2_num_q3.json` generated vs. the actual
+  `tdmpc2_numq3.json`). The crash happened before `run_experiment.py` ever
+  started a process/tracker, so nothing was written to `results/` and no
+  energy/GPU time was spent on the failed attempts -- the script was fixed and
+  the full 40-run sweep relaunched cleanly from the beginning a few minutes
+  later. The recorded data (5 runs × 2 envs × 2 params × 5 seeds = 40 runs)
+  is exclusively from the successful second attempt; there's nothing to
+  exclude or filter out.
+- **`scripts/run_utd_sweep.sh` (and its status-file path,
+  `results/_utd_sweep_status.json`) was reused for two different sweeps.**
+  It originally ran the SAC-on-Ant-v5/TD3-on-both-envs UTD∈{2,4} sweep, then
+  was edited in place to run MBPO's UTD sweep instead, overwriting the
+  original sweep's top-level status/log bookkeeping (the actual run data for
+  both sweeps is intact under `results/sac/Ant-v5/`, `results/td3/*/*/`, and
+  `results/mbpo/*/*/`, distinguishable via each run's own `metadata.json`).
+  Don't treat `results/_utd_sweep_status.json` as a record of the SAC/TD3 UTD
+  sweep -- it now reflects the MBPO one.
+- **A software-stack version change happened partway through the project,
+  but only affects already-excluded dev runs.** `results/sac/HalfCheetah-v5/
+  seed_0/*` and `seed_42/*` (7 runs, Aug 2026) ran under torch 2.11.0+cu128 /
+  codecarbon 3.2.9-3.3.0; every other run in the entire dataset -- all
+  canonical-seed runs, all sweep runs, every other algorithm/environment --
+  ran under torch 2.13.0+cu130 / codecarbon 3.3.0. This is a second,
+  independent reason (beyond their non-canonical architectures) that seed
+  0/42 must never be mixed into a canonical or sweep-based comparison.
+- **One run was locked at the wrong GPU clock.**
+  `results/mbpo/HalfCheetah-v5/seed_0/20260904_130915` (an already-excluded
+  seed-0 dev run) has GPU clocks locked at 200/200 MHz instead of the
+  standard 2000/2000 MHz -- isolated to that single dev run, doesn't touch
+  any canonical or sweep data, but flag it if that specific run is ever cited.
+- **15 of the earliest SAC dev runs** (seed 0/42/56, Aug 2026) have
+  `gpu_min_clock_mhz`/`gpu_max_clock_mhz: null` in their metadata -- this
+  predates the CLI exposing an explicit default and resolves to the same
+  2000 MHz via `GpuCpuGuard`'s own internal default, so it's not a real
+  confound, just an artifact of older metadata.
+- **`training_metrics.json` is missing on 4 of the earliest SAC seed_0 runs**
+  (Aug 13/19, before per-episode/per-epoch return logging existed). All 296
+  other run directories -- every canonical-seed and sweep run included --
+  have the complete output set (`metadata.json`, `segment_energy.json`,
+  `training_metrics.json`, `emissions.csv`, `run.log`).
+- The `flop_calculation_methodology.md` referenced by both FLOP-analysis
+  scripts' docstrings is not checked into this repo -- confirm whether it
+  exists as part of the thesis document itself before citing it as a repo file.
 
 ## Known limitations / things to sanity-check before trusting the numbers
 
