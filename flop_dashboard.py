@@ -427,7 +427,9 @@ def make_app(flop_dir):
             html.P(
                 "Averaged across the canonical 5-seed sweep (per architecture/UTD/segment). "
                 "Segments in " + ", ".join(sorted(NON_FLOP_SEGMENTS)) + " are not matmul-FLOP-normalized "
-                "(CPU-side or elementwise ops) -- their Energy/FLOP is excluded from TOTAL_MEASURED_TRAINING.",
+                "(CPU-side or elementwise ops; see the flop_type column -- target_update's value is J per "
+                "elementwise op, not J/FLOP). TOTAL_MEASURED_TRAINING = all training energy (incl. buffer_sample "
+                "and target_update) / matmul FLOPs only.",
                 className="note",
             ),
             html.H4("Filter rows"),
@@ -584,7 +586,7 @@ def make_app(flop_dir):
         metric_label = dict(CROSS_SEED_METRICS)[metric]
         fig = build_grouped_bar(filtered, DIMENSIONS, x_dim, color_dim, facet_dim, metric, metric_label, bool(logy))
         display_cols = ["algo", "env_id", "architecture_signature", "hidden_sizes", "batch_size", "updates_per_env_step",
-                         "mbpo_rollout_regime", "tdmpc2_horizon", "tdmpc2_num_q", "segment",
+                         "mbpo_rollout_regime", "tdmpc2_horizon", "tdmpc2_num_q", "segment", "flop_type",
                          "n_seeds", "mean_energy_kwh", "mean_energy_joules",
                          "mean_duration_s", "mean_power_w", "mean_cpu_power_w", "mean_gpu_power_w", "mean_ram_power_w",
                          "total_flops", "mean_energy_per_flop_j_per_flop"]
@@ -677,7 +679,7 @@ def make_app(flop_dir):
             fig = build_grouped_bar(filtered, PER_RUN_DIMENSIONS, x_dim, color_dim, facet_dim, metric, metric_label, bool(logy))
         display_cols = ["algo", "env_id", "architecture_signature", "hidden_sizes", "batch_size", "updates_per_env_step",
                          "mbpo_rollout_regime", "tdmpc2_horizon", "tdmpc2_num_q", "seed",
-                         "included_in_cross_seed_avg", "segment", "call_count", "total_flops",
+                         "included_in_cross_seed_avg", "segment", "flop_type", "call_count", "total_flops",
                          "total_energy_kwh", "total_energy_joules",
                          "duration_s", "mean_power_w", "mean_cpu_power_w", "mean_gpu_power_w", "mean_ram_power_w",
                          "energy_per_flop_j_per_flop",
