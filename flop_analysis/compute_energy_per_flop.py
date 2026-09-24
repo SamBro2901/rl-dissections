@@ -1,5 +1,6 @@
 """
-Step 2+3 of the FLOP-per-segment methodology (see flop_calculation_methodology.md).
+Step 2+3 of the FLOP-per-segment methodology (documented in README.md,
+section "Energy-per-FLOP analysis (`flop_analysis/`)").
 
 For every run under results/<algo>/<env_id>/seed_*/<timestamp>/, this:
   1. Reads metadata.json for the exact hyperparameters used (batch size, UTD,
@@ -16,12 +17,17 @@ For every run under results/<algo>/<env_id>/seed_*/<timestamp>/, this:
      energy for the fused "gradient_updates" task into buffer_sample /
      critic_update / actor_update / target_update buckets by wall-clock time
      share (see algorithms/sac.py's module docstring). This is the
-     authoritative per-segment Energy(segment, run) in kWh -- it is already
-     exactly what the methodology doc's Step 2/3 call "Energy(segment, run)".
+     authoritative per-segment Energy(segment, run) in kWh.
   3. Reads training_metrics.json for the few call counts that are genuinely
      data-dependent rather than derivable from config alone: MBPO's
      model_train_epochs (early-stopping is holdout-MSE-dependent) and
      synthetic_transitions_generated (termination-dependent rollout length).
+     MBPO's dynamics_model_update FLOPs follow EnsembleDynamicsModel.fit()
+     exactly (see mbpo_fit_flops()): per fit epoch, every member's fwd+bwd
+     over the n_train bootstrap (true partial last batch) PLUS the
+     full-ensemble holdout forward pass (_holdout_mse), from per-sample
+     constants -- verified against FlopCounterMode on the real fit() by
+     verify_mbpo_fit_flops.py.
   4. Joins against flops_per_call.json (produced by measure_flops.py) to get
      Total_FLOPs(segment, run), then Energy_per_FLOP = Energy_J / Total_FLOPs.
   5. Reads each run's per-task CodeCarbon log (run_dir/emissions_<experiment>_
@@ -38,7 +44,13 @@ Output:
   flop_analysis/output/per_run_energy_per_flop.csv       -- one row per (run, segment); every run,
                                                               tagged with included_in_cross_seed_avg
   flop_analysis/output/cross_seed_energy_per_flop.csv    -- averaged across seeds per (algo, env,
-                                                              architecture, UTD, segment)
+                                                              architecture, UTD, rollout regime, segment)
+
+Each row carries flop_type: "matmul", "elementwise" (target_update -- its
+energy_per_flop is J per elementwise Polyak op, NOT J/FLOP), "none"
+(buffer_sample, warmup, idle baselines) or "mixed_total". Each run also gets
+a TOTAL_MEASURED_TRAINING row = all training energy / matmul FLOPs only (see
+TRAINING_SEGMENTS below); check_totals.py asserts its consistency.
 
 By default, cross-seed averaging is restricted to the canonical 5-seed sweep
 {331, 958, 14577, 43611, 85062} -- inspecting results/, this is the exact seed
@@ -553,7 +565,7 @@ def main():
             total_hw_raw = {"duration_s": 0.0, "cpu_energy_kwh": 0.0, "gpu_energy_kwh": 0.0, "ram_energy_kwh": 0.0}
             hw_sources = {("gradient_updates" if s in ALLOCATED_SUB_SEGMENTS else s) for s in training_present}
             missing_hw = sorted(src for src in hw_sources if src not in hw)
-            for src in hw_sources - set(missing_hw):
+            for src in sorted(hw_sources - set(missing_hw)):  # fixed order -> bit-identical reruns
                 for k in total_hw_raw:
                     total_hw_raw[k] += hw[src][k]
             if missing_hw:

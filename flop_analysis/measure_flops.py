@@ -1,5 +1,6 @@
 """
-Step 1 of the FLOP-per-segment methodology (see flop_calculation_methodology.md).
+Step 1 of the FLOP-per-segment methodology (documented in README.md,
+section "Energy-per-FLOP analysis (`flop_analysis/`)").
 
 Measures per-call FLOPs for every (algorithm, environment) combination that
 actually appears under results/, using torch's native FlopCounterMode against
@@ -9,6 +10,11 @@ given (architecture, batch size, planner hyperparameters), so this only needs
 to run once per distinct (algo, env_id) pair, not once per run/seed.
 
 Output: flop_analysis/flops_per_call.json
+
+Matmul FLOPs are exactly linear in batch size, so compute_energy_per_flop.py
+derives per-sample costs from the batch-B constants measured here (e.g. MBPO's
+dynamics_member_fwdbwd / model_train_batch_size, for fit()'s partial last
+batch) -- verify_mbpo_fit_flops.py checks this at batch sizes 256 vs. 100.
 
 Usage (from repo root, with the project venv active):
     python3 flop_analysis/measure_flops.py
