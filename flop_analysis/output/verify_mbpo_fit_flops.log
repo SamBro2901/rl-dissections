@@ -1,0 +1,16 @@
+
+MBPOConfig defaults: HalfCheetah-v5, obs_dim=17, act_dim=6, ensemble=7, model_hidden=(200, 200, 200, 200), batch=256, holdout_ratio=0.2
+  linearity: member fwd+bwd bs256=200089600, bs100=78160000, bs256*100/256=78160000.0 -> exact
+  flops_per_call.json[bs256_h1024x1024_ens7_mh200x200x200x200_mb256]: member_fwdbwd=200089600, forward_all_bs1=1845200 (matches fresh measurement)
+  N=  5000: train_epochs=3 optimizer_steps=48 measured=71190000000 predicted=71190000000 (train=65654400000, holdout=5535600000, holdout share=7.78%) rel diff=0.000e+00 -> PASS
+  N= 12345: train_epochs=3 optimizer_steps=117 measured=175768110000 predicted=175768110000 (train=162100713600, holdout=13667396400, holdout share=7.78%) rel diff=0.000e+00 -> PASS
+  N= 30000: train_epochs=3 optimizer_steps=282 measured=427140000000 predicted=427140000000 (train=393926400000, holdout=33213600000, holdout share=7.78%) rel diff=0.000e+00 -> PASS
+
+Ant override: Ant-v5, obs_dim=105, act_dim=8, ensemble=7, model_hidden=(200, 200, 200, 200), batch=256, holdout_ratio=0.2
+  linearity: member fwd+bwd bs256=272588800, bs100=106480000, bs256*100/256=106480000.0 -> exact
+  flops_per_call.json[bs256_h1024x1024_ens7_mh200x200x200x200_mb256]: member_fwdbwd=272588800, forward_all_bs1=2590000 (matches fresh measurement)
+  N=  5000: train_epochs=3 optimizer_steps=48 measured=97213200000 predicted=97213200000 (train=89443200000, holdout=7770000000, holdout share=7.99%) rel diff=0.000e+00 -> PASS
+  N= 12345: train_epochs=3 optimizer_steps=117 measured=240019390800 predicted=240019390800 (train=220835260800, holdout=19184130000, holdout share=7.99%) rel diff=0.000e+00 -> PASS
+  N= 30000: train_epochs=3 optimizer_steps=282 measured=583279200000 predicted=583279200000 (train=536659200000, holdout=46620000000, holdout share=7.99%) rel diff=0.000e+00 -> PASS
+
+ALL PASSED (acceptance: rel diff < 0.5% for every N)
