@@ -294,29 +294,69 @@ def rows_for_sac_or_td3(algo, flops_key, algo_config, experiment_config):
     return rows
 
 
-def rows_for_mbpo(flops_key, algo_config, experiment_config, epochs_log):
-    fc = sac_like_call_counts(algo_config, experiment_config)
+def mbpo_fit_flops(n_total, train_epochs, algo_config, flops_key):
+    """Matmul FLOPs of one EnsembleDynamicsModel.fit() call on a real buffer
+    holding n_total transitions that ran train_epochs passes. Returns
+    (train_flops, holdout_flops, optimizer_steps).
+
+    Mirrors fit() in algorithms/dynamics_model.py: each pass trains every
+    member on its n_train-sample bootstrap (the last minibatch is partial,
+    charged at its true size) and then scores all members on the n_holdout
+    split via _holdout_mse() -> forward_all(). Matmul FLOPs are exactly
+    linear in batch size, so per-sample constants are taken from the
+    measured batch-B constants (verified by verify_mbpo_fit_flops.py)."""
+    train_batch = algo_config["model_train_batch_size"]
+    member_fwdbwd = flops_key["dynamics_member_fwdbwd"]
+    if member_fwdbwd % train_batch:
+        raise ValueError(f"dynamics_member_fwdbwd={member_fwdbwd} not divisible by "
+                         f"model_train_batch_size={train_batch}; linear per-sample scaling doesn't hold")
+    per_sample_member_fwdbwd = member_fwdbwd // train_batch
+    per_sample_ensemble_fwd = flops_key["dynamics_ensemble_forward_all_bs1"]  # already all members, bs=1
+
+    n_holdout = max(1, int(n_total * algo_config["model_holdout_ratio"]))  # exactly as fit()
+    n_train = n_total - n_holdout
+    train_flops = train_epochs * algo_config["ensemble_size"] * n_train * per_sample_member_fwdbwd
+    holdout_flops = train_epochs * n_holdout * per_sample_ensemble_fwd
+    optimizer_steps = train_epochs * ceil_div(n_train, train_batch)
+    return train_flops, holdout_flops, optimizer_steps
+
+
+def rows_for_mbpo(flops_key, algo_config, experiment_config, epochs_log, run_dir=None):
+    """Returns (rows, dynamics_split) -- dynamics_split holds the
+    dynamics_model_update train/holdout FLOP breakdown for the CSV."""
     rows = rows_for_sac_or_td3("sac", flops_key, algo_config, experiment_config)
 
     warmup = experiment_config["warmup_steps"]
     steps_per_epoch = experiment_config["steps_per_epoch"]
-    holdout_ratio = algo_config["model_holdout_ratio"]
-    train_batch = algo_config["model_train_batch_size"]
-    ensemble_size = algo_config["ensemble_size"]
-    member_fwdbwd = flops_key["dynamics_member_fwdbwd"]
+    capacity = algo_config["buffer_capacity"]
 
-    dyn_flops = 0
-    dyn_calls = 0
+    dyn_train = dyn_holdout = dyn_steps = 0
     for row in epochs_log:
-        epoch = row["epoch"]
-        n_total = warmup + epoch * steps_per_epoch  # real buffer size just before this epoch's fit() call
-        n_holdout = max(1, int(n_total * holdout_ratio))
-        n_train = n_total - n_holdout
-        n_batches = ceil_div(n_train, train_batch)
-        epochs_run = row.get("model_train_epochs") or 0
-        dyn_calls += n_batches * epochs_run
-        dyn_flops += ensemble_size * member_fwdbwd * n_batches * epochs_run
-    rows["dynamics_model_update"] = (dyn_calls, dyn_flops, "ensemble_size x member fwd+bwd x batches x epochs_run (epochs_run from training_metrics.json, early-stopping is data-dependent)")
+        epochs_run = row.get("model_train_epochs")
+        if not epochs_run:  # fit() skipped this epoch (model_train_freq) or never ran
+            continue
+        # algorithms/mbpo.py calls fit() at the start of each epoch, before that
+        # epoch's rollout -- so the real buffer holds warmup + epoch * steps_per_epoch.
+        n_total = min(warmup + row["epoch"] * steps_per_epoch, capacity)
+        logged = row.get("buffer_size")  # len(real_buffer) at the END of the epoch
+        if logged is not None and logged != min(n_total + steps_per_epoch, capacity):
+            print(f"WARNING: {run_dir} epoch {row['epoch']}: logged buffer_size {logged} inconsistent "
+                  f"with fit() size {n_total} + {steps_per_epoch} steps")
+        train_f, holdout_f, steps = mbpo_fit_flops(n_total, epochs_run, algo_config, flops_key)
+        dyn_train += train_f
+        dyn_holdout += holdout_f
+        dyn_steps += steps
+    dyn_flops = dyn_train + dyn_holdout
+    holdout_pct = (100.0 * dyn_holdout / dyn_flops) if dyn_flops else 0.0
+    rows["dynamics_model_update"] = (
+        dyn_steps, dyn_flops,
+        f"per fit() epoch: ensemble_size x n_train x per-sample member fwd+bwd (exact partial last "
+        f"batch) + n_holdout x per-sample full-ensemble forward (_holdout_mse). call_count = optimizer "
+        f"steps (sum of epochs_run x ceil(n_train/batch)); epochs_run from training_metrics.json "
+        f"(early stopping is data-dependent). train={dyn_train} holdout={dyn_holdout} "
+        f"({holdout_pct:.2f}% holdout)",
+    )
+    dynamics_split = {"dynamics_train_flops": dyn_train, "dynamics_holdout_flops": dyn_holdout}
 
     per_sample = flops_key["actor_forward_bs1"] + flops_key["dynamics_ensemble_forward_all_bs1"]
     total_samples = sum(row.get("synthetic_transitions_generated", 0) for row in epochs_log)
@@ -324,7 +364,7 @@ def rows_for_mbpo(flops_key, algo_config, experiment_config, epochs_log):
         total_samples, total_samples * per_sample,
         "actor forward + full-ensemble forward, per synthetic sample (all members scored every predict() call)",
     )
-    return rows
+    return rows, dynamics_split
 
 
 def rows_for_tdmpc2(flops_key, algo_config, experiment_config):
@@ -382,7 +422,8 @@ def main():
     flops = load_flops()
 
     per_run_rows = []
-    # cross-seed accumulator: (algo, env, architecture_signature, utd, segment) -> [(energy_kwh, total_flops), ...]
+    # cross-seed accumulator: (algo, env, architecture_signature, utd, rollout_regime, segment, flop_type)
+    #   -> [(energy_kwh, total_flops, power_fields, extra_cols), ...]
     agg = defaultdict(list)
 
     for run_dir, meta_path, seg_path, tm_path in find_runs(RESULTS_DIR):
@@ -408,6 +449,7 @@ def main():
         flops_key = flops[algo][env_id][sig]
 
         epochs_log = []
+        extra_cols = {}  # segment -> extra CSV columns (MBPO's dynamics train/holdout FLOP split)
         if os.path.exists(tm_path):
             with open(tm_path) as f:
                 epochs_log = json.load(f).get("epochs", [])
@@ -417,7 +459,8 @@ def main():
         elif algo == "td3":
             rows = rows_for_sac_or_td3("td3", flops_key, algo_config, experiment_config)
         elif algo == "mbpo":
-            rows = rows_for_mbpo(flops_key, algo_config, experiment_config, epochs_log)
+            rows, dynamics_split = rows_for_mbpo(flops_key, algo_config, experiment_config, epochs_log, run_dir)
+            extra_cols["dynamics_model_update"] = dynamics_split
         elif algo == "tdmpc2":
             rows = rows_for_tdmpc2(flops_key, algo_config, experiment_config)
         else:
@@ -486,6 +529,7 @@ def main():
                 "total_energy_kwh": energy_kwh, "total_energy_joules": energy_j,
                 **pw,
                 "energy_per_flop_j_per_flop": energy_per_flop, "note": note,
+                **extra_cols.get(segment, {}),
             })
 
             if seg_flop_type == "matmul":
@@ -493,7 +537,7 @@ def main():
 
             if total_flops_seg is not None and include_in_avg:
                 agg[(algo, env_id, sig, utd, rollout_regime, segment, seg_flop_type)].append(
-                    (energy_kwh, total_flops_seg, pw)
+                    (energy_kwh, total_flops_seg, pw, extra_cols.get(segment, {}))
                 )
 
         # Numerator: iterate the fixed training-segment set against segment_energy.json
@@ -529,7 +573,7 @@ def main():
             })
             if include_in_avg:
                 agg[(algo, env_id, sig, utd, rollout_regime, TOTAL_SEGMENT, "mixed_total")].append(
-                    (total_energy_kwh, total_flops, total_pw)
+                    (total_energy_kwh, total_flops, total_pw, {})
                 )
 
     per_run_csv = os.path.join(OUT_DIR, "per_run_energy_per_flop.csv")
@@ -538,7 +582,8 @@ def main():
                   "included_in_cross_seed_avg", "segment", "flop_type", "call_count", "total_flops",
                   "total_energy_kwh", "total_energy_joules",
                   "duration_s", "mean_power_w", "mean_cpu_power_w", "mean_gpu_power_w", "mean_ram_power_w",
-                  "energy_per_flop_j_per_flop", "note"]
+                  "energy_per_flop_j_per_flop", "note",
+                  "dynamics_train_flops", "dynamics_holdout_flops"]
     with open(per_run_csv, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)
         w.writeheader()
@@ -553,11 +598,12 @@ def main():
             "mean_energy_kwh", "mean_energy_joules",
             "mean_duration_s", "mean_power_w", "mean_cpu_power_w", "mean_gpu_power_w", "mean_ram_power_w",
             "total_flops", "mean_energy_per_flop_j_per_flop",
+            "dynamics_train_flops", "dynamics_holdout_flops",
         ])
         w.writeheader()
         for (algo, env_id, sig, utd, rollout_regime, segment, seg_flop_type), vals in sorted(agg.items()):
-            energies = [e for e, _, _ in vals]
-            flop_vals = [fl for _, fl, _ in vals if fl]
+            energies = [e for e, _, _, _ in vals]
+            flop_vals = [fl for _, fl, _, _ in vals if fl]
             mean_energy_kwh = sum(energies) / len(energies)
             mean_flops = sum(flop_vals) / len(flop_vals) if flop_vals else 0
             mean_energy_j = mean_energy_kwh * KWH_TO_J
@@ -566,13 +612,15 @@ def main():
                 "mbpo_rollout_regime": rollout_regime,
                 "segment": segment, "flop_type": seg_flop_type, "n_seeds": len(vals),
                 "mean_energy_kwh": mean_energy_kwh, "mean_energy_joules": mean_energy_j,
-                "mean_duration_s": safe_mean([pw["duration_s"] for _, _, pw in vals]),
-                "mean_power_w": safe_mean([pw["mean_power_w"] for _, _, pw in vals]),
-                "mean_cpu_power_w": safe_mean([pw["mean_cpu_power_w"] for _, _, pw in vals]),
-                "mean_gpu_power_w": safe_mean([pw["mean_gpu_power_w"] for _, _, pw in vals]),
-                "mean_ram_power_w": safe_mean([pw["mean_ram_power_w"] for _, _, pw in vals]),
+                "mean_duration_s": safe_mean([pw["duration_s"] for _, _, pw, _ in vals]),
+                "mean_power_w": safe_mean([pw["mean_power_w"] for _, _, pw, _ in vals]),
+                "mean_cpu_power_w": safe_mean([pw["mean_cpu_power_w"] for _, _, pw, _ in vals]),
+                "mean_gpu_power_w": safe_mean([pw["mean_gpu_power_w"] for _, _, pw, _ in vals]),
+                "mean_ram_power_w": safe_mean([pw["mean_ram_power_w"] for _, _, pw, _ in vals]),
                 "total_flops": mean_flops,
                 "mean_energy_per_flop_j_per_flop": (mean_energy_j / mean_flops) if mean_flops else None,
+                "dynamics_train_flops": safe_mean([ex.get("dynamics_train_flops") for _, _, _, ex in vals]),
+                "dynamics_holdout_flops": safe_mean([ex.get("dynamics_holdout_flops") for _, _, _, ex in vals]),
             })
     print(f"Wrote {cross_seed_csv} ({len(agg)} rows)")
 
