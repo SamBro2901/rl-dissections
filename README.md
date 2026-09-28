@@ -393,13 +393,64 @@ It's a two-step pipeline:
    (`included_in_cross_seed_avg=False`) but excluded from the cross-seed
    average so they don't dilute it. Outputs:
    - `flop_analysis/output/per_run_energy_per_flop.csv` -- one row per
-     run×segment, plus a `TOTAL_MEASURED_TRAINING` rollup row per run summing
-     only matmul-FLOP-accounted segments (excludes idle baselines, `warmup`,
-     `buffer_sample` (CPU-side, 0 FLOPs), and `target_update` (elementwise
-     Polyak-average ops, not matmul FLOPs -- expect a near-meaningless
-     Energy/FLOP figure there by design, not a bug).
+     run×segment, plus a `TOTAL_MEASURED_TRAINING` rollup row per run
+     (definition below).
    - `flop_analysis/output/cross_seed_energy_per_flop.csv` -- averaged by
-     `(algo, env, architecture, UTD, segment)`.
+     `(algo, env, architecture, UTD, MBPO rollout regime, segment)`.
+
+   Every row has a **`flop_type`** column saying what its `total_flops`
+   counts: `matmul` (FlopCounterMode matmul FLOPs), `elementwise`
+   (`target_update`: the Polyak-average op count, so its
+   `energy_per_flop_j_per_flop` is **J per elementwise op, not J/FLOP** --
+   a near-meaningless figure by design, never mix it with the others),
+   `none` (`buffer_sample` -- CPU-side, 0 FLOPs -- plus `warmup` and the idle
+   baselines), or `mixed_total` (the TOTAL row).
+
+   Both CSVs also carry a **`hidden_sizes`** column (`"{h1}x{h2}"`,
+   `flop_keys.hidden_sizes()`): the policy/critic width for sac/td3/mbpo
+   (MBPO's dynamics-model width is `model_hidden_sizes`, still only in the
+   signature), and `{mlp_dim}x{mlp_dim}` for TD-MPC2, which has no
+   `hidden_sizes` field -- every one of its heads is an MLP with two hidden
+   layers of `mlp_dim`, the closest analogue. It's fully determined by the
+   architecture signature, so it never splits a cross-seed group.
+
+   **`TOTAL_MEASURED_TRAINING` = all training energy / matmul FLOPs only.**
+   The numerator sums the energy of every training segment present in
+   `segment_energy.json`: `rollout`; `buffer_sample` + `critic_update` +
+   `actor_update` + `target_update` (together = all of the measured
+   `gradient_updates` task); `dynamics_model_update` and
+   `synthetic_rollout_generation` (MBPO); `world_model_pretrain` (TD-MPC2).
+   It excludes `idle_baseline_head`/`_tail`, `warmup`, and `_`-prefixed
+   bookkeeping keys. The denominator sums matmul FLOPs over the same
+   segments except `target_update` (elementwise ops never mix with matmul
+   FLOPs); `buffer_sample` contributes 0. Membership is fixed by the
+   `TRAINING_SEGMENTS`/`ELEMENTWISE_OP_SEGMENTS` constants, not inferred
+   from whether a FLOP count is non-zero. The TOTAL row's duration/power
+   fields come from the directly measured CodeCarbon tasks: the whole
+   `gradient_updates` task stands in for the four allocated sub-segments,
+   whose `perf_counter` durations cover only ~87-99% of it.
+   `flop_analysis/check_totals.py` asserts, over every run, that the TOTAL
+   energy equals the training-segment sum from `segment_energy.json`, that
+   the TOTAL FLOPs equal the sum of the `matmul` rows, and that the four
+   sub-segments sum to the measured `gradient_updates` energy.
+
+   **MBPO `dynamics_model_update` FLOPs** follow `EnsembleDynamicsModel.fit()`
+   exactly. Per logged fit() call (epoch `e`, `E = model_train_epochs`
+   from `training_metrics.json`, `n_total = min(warmup + e ×
+   steps_per_epoch, buffer_capacity)`, since `fit()` runs at the start of
+   the epoch before its rollout), each fit epoch costs `ensemble_size ×
+   n_train × per-sample member fwd+bwd` (the partial last minibatch is
+   charged at its true size) **plus** `n_holdout × per-sample full-ensemble
+   forward` for `_holdout_mse()`, the holdout evaluation that runs after
+   every fit epoch (~8% of the total at `model_holdout_ratio=0.2`).
+   Per-sample constants come from the batch-B constants in
+   `flops_per_call.json`, because matmul FLOPs are exactly linear in batch
+   size. `call_count` is the number of optimizer steps. The
+   `dynamics_train_flops`/`dynamics_holdout_flops` columns hold the split.
+   `flop_analysis/verify_mbpo_fit_flops.py` checks the formula against
+   FlopCounterMode wrapped around the real `fit()` (exact match). The
+   before/after effect of these two fixes is in
+   `flop_analysis/output/FIX_REPORT.md`.
 
 `flop_analysis/flop_keys.py` supplies the shared architecture-signature
 functions (`sig_sac_td3`, `sig_mbpo`, `sig_tdmpc2`) both scripts use, so a
@@ -422,11 +473,9 @@ cross-seed-comparison tab and a per-run-detail tab, each with crossfiltering
 dropdowns that pivot the filtered rows into a grouped bar chart (or, on the
 per-run tab, a per-seed box plot), plus a sortable/filterable data table.
 
-Both `measure_flops.py`/`compute_energy_per_flop.py` reference a
-`flop_calculation_methodology.md` for the full step-by-step methodology --
-**this file is not currently checked into the repo**; it may exist only in
-the thesis write-up, or may still need to be created. Worth confirming
-before assuming the methodology documentation is lost.
+This section is the methodology reference for `flop_analysis/`: both
+scripts' docstrings point here. (They used to reference a
+`flop_calculation_methodology.md`, which was never checked into the repo.)
 
 ## Hyperparameter sensitivity sweeps (`scripts/`)
 
@@ -573,9 +622,9 @@ would silently invalidate a comparison if they went wrong):
   other run directories -- every canonical-seed and sweep run included --
   have the complete output set (`metadata.json`, `segment_energy.json`,
   `training_metrics.json`, `emissions.csv`, `run.log`).
-- The `flop_calculation_methodology.md` referenced by both FLOP-analysis
-  scripts' docstrings is not checked into this repo -- confirm whether it
-  exists as part of the thesis document itself before citing it as a repo file.
+- The `flop_calculation_methodology.md` that both FLOP-analysis scripts'
+  docstrings used to reference was never checked into this repo. The
+  docstrings now point to README's "Energy-per-FLOP analysis" section instead.
 
 ## Known limitations / things to sanity-check before trusting the numbers
 

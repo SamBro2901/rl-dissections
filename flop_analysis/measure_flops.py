@@ -1,5 +1,6 @@
 """
-Step 1 of the FLOP-per-segment methodology (see flop_calculation_methodology.md).
+Step 1 of the FLOP-per-segment methodology (documented in README.md,
+section "Energy-per-FLOP analysis (`flop_analysis/`)").
 
 Measures per-call FLOPs for every (algorithm, environment) combination that
 actually appears under results/, using torch's native FlopCounterMode against
@@ -9,6 +10,11 @@ given (architecture, batch size, planner hyperparameters), so this only needs
 to run once per distinct (algo, env_id) pair, not once per run/seed.
 
 Output: flop_analysis/flops_per_call.json
+
+Matmul FLOPs are exactly linear in batch size, so compute_energy_per_flop.py
+derives per-sample costs from the batch-B constants measured here (e.g. MBPO's
+dynamics_member_fwdbwd / model_train_batch_size, for fit()'s partial last
+batch) -- verify_mbpo_fit_flops.py checks this at batch sizes 256 vs. 100.
 
 Usage (from repo root, with the project venv active):
     python3 flop_analysis/measure_flops.py
@@ -33,7 +39,7 @@ from algorithms.td3 import DeterministicPolicy as TD3Actor, QNetwork as TD3QNetw
 from algorithms.dynamics_model import GaussianEnsembleMLP  # noqa: E402
 from algorithms.tdmpc2 import TDMPC2Agent, soft_ce  # noqa: E402
 from configs.config import TDMPC2Config  # noqa: E402
-from flop_keys import signature  # noqa: E402
+from flop_keys import signature, tdmpc2_hidden_sizes  # noqa: E402
 
 torch.manual_seed(0)
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -430,6 +436,7 @@ def measure_tdmpc2(obs_dim, act_dim, episode_length, algo_config):
 
     return {
         "obs_dim": obs_dim, "act_dim": act_dim, "batch_size": cfg.batch_size,
+        "mlp_dim": cfg.mlp_dim, "hidden_sizes": tdmpc2_hidden_sizes(algo_config),
         "horizon": cfg.horizon, "num_samples": cfg.num_samples, "iterations": agent.iterations,
         "num_pi_trajs": cfg.num_pi_trajs, "num_elites": cfg.num_elites, "num_q": cfg.num_q,
         "episodic": cfg.episodic, "episode_length": episode_length,

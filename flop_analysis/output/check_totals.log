@@ -1,0 +1,6 @@
+Runs under results/ with segment_energy.json: 300
+Check 1 (TOTAL energy == sum of training segments, rtol 1e-12): 300 runs, max rel err 0.000e+00
+Check 2 (TOTAL flops == sum of matmul rows, exact): 300 runs
+Check 3 (sub-segments == measured gradient_updates, rtol 1e-09): 300 runs, max rel err 2.164e-16
+
+ALL CHECKS PASSED

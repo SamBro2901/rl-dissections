@@ -392,11 +392,9 @@ because they easily could have):
   canonical-seed run, every sweep run) have the complete file set
   (`metadata.json`, `segment_energy.json`, `training_metrics.json`,
   `emissions.csv`, `run.log`) — verified directly, not just assumed.
-- The `flop_calculation_methodology.md` referenced by both
-  `flop_analysis/measure_flops.py` and `compute_energy_per_flop.py`'s
-  docstrings is **not checked into the repo** (see FLOP section below) —
-  confirm with the user whether it exists in the thesis document itself
-  before citing it as a repo file.
+- `flop_calculation_methodology.md` was never checked into the repo; both
+  FLOP scripts' docstrings now point to README's "Energy-per-FLOP analysis"
+  section instead (see FLOP section below).
 
 ## FLOP / energy-per-FLOP analysis (`flop_analysis/`)
 
@@ -427,12 +425,37 @@ kWh, to compare algorithms on a compute-normalized basis.
    (`included_in_cross_seed_avg=False`) but excluded from the cross-seed
    average so they don't dilute it.
    Outputs: `flop_analysis/output/per_run_energy_per_flop.csv` (one row per
-   run×segment, plus a `TOTAL_MEASURED_TRAINING` rollup row per run summing
-   matmul-FLOP-accounted segments only — excludes idle baselines, `warmup`,
-   `buffer_sample` (CPU-side, 0 FLOPs), and `target_update` (elementwise
-   Polyak ops, not matmul FLOPs — expect a meaningless-looking Energy/FLOP
-   there by design)) and `cross_seed_energy_per_flop.csv` (averaged by
-   `(algo, env, architecture, UTD, segment)`).
+   run×segment, plus a `TOTAL_MEASURED_TRAINING` rollup row per run) and
+   `cross_seed_energy_per_flop.csv` (averaged by `(algo, env, architecture,
+   UTD, MBPO rollout regime, segment)`).
+   - **`TOTAL_MEASURED_TRAINING` = all training energy / matmul FLOPs only.**
+     Numerator = energy of every `TRAINING_SEGMENTS` key present in
+     `segment_energy.json` (`rollout`, `buffer_sample`+`critic_update`+
+     `actor_update`+`target_update` = all of `gradient_updates`, MBPO's
+     `dynamics_model_update`/`synthetic_rollout_generation`, TD-MPC2's
+     `world_model_pretrain`). Excluded: idle baselines, `warmup`, and
+     `_`-prefixed keys. Denominator = matmul FLOPs of the same segments
+     except `target_update` (an elementwise op count, never mixed in).
+     `buffer_sample` adds 0. Its duration/power fields use the directly
+     measured `gradient_updates` task, not summed sub-segment `perf_counter`
+     times. (Fixed on branch `fix/flop-aggregation`: before, membership was
+     "has non-zero FLOPs", which wrongly included `target_update` ops and
+     dropped `buffer_sample` energy.)
+   - **`flop_type` column** (both CSVs): `matmul` | `elementwise`
+     (`target_update`: J per Polyak op, NOT J/FLOP) | `none` (`buffer_sample`,
+     `warmup`, idle) | `mixed_total` (TOTAL row).
+   - **MBPO `dynamics_model_update` FLOPs** (`mbpo_fit_flops()`) mirror
+     `EnsembleDynamicsModel.fit()`. Per fit epoch they count every member's
+     fwd+bwd over `n_train` samples (true partial last batch) **plus** the
+     full-ensemble `_holdout_mse()` forward over `n_holdout` samples
+     (~8% of the total, previously omitted). `n_total = min(warmup + epoch ×
+     steps_per_epoch, buffer_capacity)`. `call_count` = optimizer steps.
+     `dynamics_train_flops`/`dynamics_holdout_flops` columns hold the split.
+   - Verification: `check_totals.py` (TOTAL consistency over all runs,
+     non-zero exit on failure), `verify_mbpo_fit_flops.py` (formula vs.
+     FlopCounterMode on the real `fit()`: exact match), and
+     `make_fix_report.py` → `output/FIX_REPORT.md` (before/after vs.
+     `output/_before_fix/`).
 3. `flop_keys.py` — shared architecture-signature functions
    (`sig_sac_td3`/`sig_mbpo`/`sig_tdmpc2`) used by both scripts so a run is
    always joined against FLOP constants for its *actual* architecture, plus
@@ -443,11 +466,9 @@ kWh, to compare algorithms on a compute-normalized basis.
    with the architecture signature (added for the MBPO rollout-length sweep,
    see "Hyperparameter sensitivity sweeps" above).
 
-Note: both scripts' docstrings reference a `flop_calculation_methodology.md`
-for the full step-by-step methodology — **this file does not currently exist
-in the repo** (not found under any tracked path); it may live only in the
-thesis write-up, or still needs to be created/committed. Worth checking with
-the user before assuming it's missing/lost.
+Methodology reference: README.md's "Energy-per-FLOP analysis" section, which
+both scripts' docstrings point to. `flop_calculation_methodology.md` was never
+checked into the repo.
 
 ## Aggregation & visualization tooling
 
