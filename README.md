@@ -406,6 +406,14 @@ It's a two-step pipeline:
    `none` (`buffer_sample` -- CPU-side, 0 FLOPs -- plus `warmup` and the idle
    baselines), or `mixed_total` (the TOTAL row).
 
+   Both CSVs also carry a **`hidden_sizes`** column (`"{h1}x{h2}"`,
+   `flop_keys.hidden_sizes()`): the policy/critic width for sac/td3/mbpo
+   (MBPO's dynamics-model width is `model_hidden_sizes`, still only in the
+   signature), and `{mlp_dim}x{mlp_dim}` for TD-MPC2, which has no
+   `hidden_sizes` field -- every one of its heads is an MLP with two hidden
+   layers of `mlp_dim`, the closest analogue. It's fully determined by the
+   architecture signature, so it never splits a cross-seed group.
+
    **`TOTAL_MEASURED_TRAINING` = all training energy / matmul FLOPs only.**
    The numerator sums the energy of every training segment present in
    `segment_energy.json`: `rollout`; `buffer_sample` + `critic_update` +

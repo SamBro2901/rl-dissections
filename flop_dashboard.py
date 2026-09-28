@@ -51,17 +51,14 @@ ALGO_COLORS = {"sac": "#1f77b4", "td3": "#2ca02c", "mbpo": "#d62728", "tdmpc2": 
 # methodology's "measured vs. allocated / caveats" reporting standard.
 NON_FLOP_SEGMENTS = {"buffer_sample", "target_update", "warmup", "idle_baseline_head", "idle_baseline_tail"}
 
-# architecture_signature is "bs{batch_size}_h{hidden_sizes}..." for sac/td3/mbpo
-# (see flop_analysis/flop_keys.py) -- pull the hidden_sizes component out into
-# its own facet so the width sweep (256x256 / 512x512 / 1024x1024) can be
-# compared independent of the other architecture details (batch size, MBPO's
-# ensemble/model config, ...). TD-MPC2's signature also has an "h" component
-# but it's the MPPI planning horizon, not a network width -- excluded below.
-HIDDEN_SIZES_RE = re.compile(r"^bs\d+_h([\dx]+)(?:_|$)")
-HIDDEN_SIZES_ALGOS = {"sac", "td3", "mbpo"}
+# hidden_sizes ("256x256" / "512x512" / "1024x1024") is written as its own
+# column by compute_energy_per_flop.py (flop_keys.hidden_sizes) so the width
+# sweep can be compared independent of the other architecture details (batch
+# size, MBPO's ensemble/model config, ...). For TD-MPC2 it's derived from
+# mlp_dim, the closest analogue (it has no hidden_sizes field).
 
 # The "bs{batch_size}" prefix is common to all four algos' signatures (see
-# flop_keys.py's sig_sac_td3/sig_mbpo/sig_tdmpc2), so unlike hidden_sizes this
+# flop_keys.py's sig_sac_td3/sig_mbpo/sig_tdmpc2), so this
 # extracts for every algo -- pulled into its own facet for the batch-size sweep.
 BATCH_SIZE_RE = re.compile(r"^bs(\d+)(?:_|$)")
 
@@ -84,8 +81,8 @@ def rollout_regime_sort_key(value):
 # since two runs with different num_q/horizon already get different
 # architecture_signature strings and are never averaged together. They're
 # just pulled back out of the signature string here for the dashboard, the
-# same way hidden_sizes/batch_size are pulled out below. The "h" component of
-# sig_tdmpc2 is this horizon (not a network width, see HIDDEN_SIZES_ALGOS above).
+# same way batch_size is pulled out below. The "h" component of
+# sig_tdmpc2 is this horizon, not a network width.
 TDMPC2_HORIZON_RE = re.compile(r"^bs\d+_h(\d+)(?:_|$)")
 TDMPC2_NUM_Q_RE = re.compile(r"_nq(\d+)(?:_|$)")
 TDMPC2_ALGOS = {"tdmpc2"}
@@ -102,13 +99,6 @@ def extract_tdmpc2_num_q(algo, architecture_signature):
     if algo not in TDMPC2_ALGOS or not isinstance(architecture_signature, str):
         return None
     m = TDMPC2_NUM_Q_RE.search(architecture_signature)
-    return m.group(1) if m else None
-
-
-def extract_hidden_sizes(algo, architecture_signature):
-    if algo not in HIDDEN_SIZES_ALGOS or not isinstance(architecture_signature, str):
-        return None
-    m = HIDDEN_SIZES_RE.match(architecture_signature)
     return m.group(1) if m else None
 
 
@@ -175,7 +165,7 @@ def load_cross_seed(flop_dir):
     path = os.path.join(flop_dir, "cross_seed_energy_per_flop.csv")
     df = pd.read_csv(path)
     df["utd_str"] = "UTD " + df["updates_per_env_step"].astype(str)
-    df["hidden_sizes"] = [extract_hidden_sizes(a, s) for a, s in zip(df["algo"], df["architecture_signature"])]
+    df["hidden_sizes"] = df["hidden_sizes"].astype(str)
     df["batch_size"] = [extract_batch_size(s) for s in df["architecture_signature"]]
     df["tdmpc2_horizon"] = [extract_tdmpc2_horizon(a, s) for a, s in zip(df["algo"], df["architecture_signature"])]
     df["tdmpc2_num_q"] = [extract_tdmpc2_num_q(a, s) for a, s in zip(df["algo"], df["architecture_signature"])]
@@ -188,7 +178,7 @@ def load_per_run(flop_dir):
     df = pd.read_csv(path)
     df["utd_str"] = "UTD " + df["updates_per_env_step"].astype(str)
     df["seed_str"] = df["seed"].astype(str)
-    df["hidden_sizes"] = [extract_hidden_sizes(a, s) for a, s in zip(df["algo"], df["architecture_signature"])]
+    df["hidden_sizes"] = df["hidden_sizes"].astype(str)
     df["batch_size"] = [extract_batch_size(s) for s in df["architecture_signature"]]
     df["tdmpc2_horizon"] = [extract_tdmpc2_horizon(a, s) for a, s in zip(df["algo"], df["architecture_signature"])]
     df["tdmpc2_num_q"] = [extract_tdmpc2_num_q(a, s) for a, s in zip(df["algo"], df["architecture_signature"])]
@@ -312,10 +302,10 @@ def build_grouped_bar(df, dims, x_dim, color_dim, facet_dim, metric_col, metric_
         height=520,
         margin=dict(l=60, r=20, t=60, b=80),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0),
-        yaxis_type="log" if log_y else "linear",
     )
     fig.update_xaxes(matches=None, showticklabels=True)
-    fig.update_yaxes(matches=None, showticklabels=True)
+    # Set type via update_yaxes so it applies to every facet's y-axis, not just the first
+    fig.update_yaxes(matches=None, showticklabels=True, type="log" if log_y else "linear")
     return fig
 
 
@@ -352,10 +342,10 @@ def build_box(df, dims, x_dim, color_dim, facet_dim, metric_col, metric_label, l
         height=520,
         margin=dict(l=60, r=20, t=40, b=80),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0),
-        yaxis_type="log" if log_y else "linear",
     )
     fig.update_xaxes(matches=None, showticklabels=True)
-    fig.update_yaxes(matches=None, showticklabels=True)
+    # Set type via update_yaxes so it applies to every facet's y-axis, not just the first
+    fig.update_yaxes(matches=None, showticklabels=True, type="log" if log_y else "linear")
     return fig
 
 

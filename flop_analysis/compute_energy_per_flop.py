@@ -77,7 +77,7 @@ import os
 import re
 from collections import defaultdict
 
-from flop_keys import mbpo_rollout_regime, signature
+from flop_keys import hidden_sizes, mbpo_rollout_regime, signature
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESULTS_DIR = os.path.join(REPO_ROOT, "results")
@@ -434,7 +434,7 @@ def main():
     flops = load_flops()
 
     per_run_rows = []
-    # cross-seed accumulator: (algo, env, architecture_signature, utd, rollout_regime, segment, flop_type)
+    # cross-seed accumulator: (algo, env, architecture_signature, hidden_sizes, utd, rollout_regime, segment, flop_type)
     #   -> [(energy_kwh, total_flops, power_fields, extra_cols), ...]
     agg = defaultdict(list)
 
@@ -454,6 +454,9 @@ def main():
         include_in_avg = (canonical_seeds is None) or (seed in canonical_seeds)
 
         sig = signature(algo, algo_config)
+        # Network width as its own column (TD-MPC2: mlp_dim, see flop_keys.hidden_sizes).
+        # Fully determined by sig, so adding it to the cross-seed key below never splits a group.
+        hs = hidden_sizes(algo, algo_config)
         if algo not in flops or env_id not in flops[algo] or sig not in flops[algo][env_id]:
             print(f"WARNING: no flops_per_call.json entry for {algo}/{env_id}/{sig}; "
                   f"run measure_flops.py first (or it hasn't seen this architecture). Skipping {run_dir}")
@@ -513,8 +516,8 @@ def main():
         # run_dir is written with "/" regardless of OS so Windows/Linux regenerate identical CSVs
         run_rel = os.path.relpath(run_dir, REPO_ROOT).replace(os.sep, "/")
         row_ids = {
-            "algo": algo, "env_id": env_id, "architecture_signature": sig, "updates_per_env_step": utd,
-            "mbpo_rollout_regime": rollout_regime,
+            "algo": algo, "env_id": env_id, "architecture_signature": sig, "hidden_sizes": hs,
+            "updates_per_env_step": utd, "mbpo_rollout_regime": rollout_regime,
             "seed": seed, "run_dir": run_rel,
             "included_in_cross_seed_avg": include_in_avg,
         }
@@ -548,7 +551,7 @@ def main():
                 total_flops += total_flops_seg
 
             if total_flops_seg is not None and include_in_avg:
-                agg[(algo, env_id, sig, utd, rollout_regime, segment, seg_flop_type)].append(
+                agg[(algo, env_id, sig, hs, utd, rollout_regime, segment, seg_flop_type)].append(
                     (energy_kwh, total_flops_seg, pw, extra_cols.get(segment, {}))
                 )
 
@@ -584,12 +587,12 @@ def main():
                 "note": TOTAL_NOTE,
             })
             if include_in_avg:
-                agg[(algo, env_id, sig, utd, rollout_regime, TOTAL_SEGMENT, "mixed_total")].append(
+                agg[(algo, env_id, sig, hs, utd, rollout_regime, TOTAL_SEGMENT, "mixed_total")].append(
                     (total_energy_kwh, total_flops, total_pw, {})
                 )
 
     per_run_csv = os.path.join(OUT_DIR, "per_run_energy_per_flop.csv")
-    fieldnames = ["algo", "env_id", "architecture_signature", "updates_per_env_step", "mbpo_rollout_regime",
+    fieldnames = ["algo", "env_id", "architecture_signature", "hidden_sizes", "updates_per_env_step", "mbpo_rollout_regime",
                   "seed", "run_dir",
                   "included_in_cross_seed_avg", "segment", "flop_type", "call_count", "total_flops",
                   "total_energy_kwh", "total_energy_joules",
@@ -605,7 +608,7 @@ def main():
     cross_seed_csv = os.path.join(OUT_DIR, "cross_seed_energy_per_flop.csv")
     with open(cross_seed_csv, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=[
-            "algo", "env_id", "architecture_signature", "updates_per_env_step", "mbpo_rollout_regime",
+            "algo", "env_id", "architecture_signature", "hidden_sizes", "updates_per_env_step", "mbpo_rollout_regime",
             "segment", "flop_type", "n_seeds",
             "mean_energy_kwh", "mean_energy_joules",
             "mean_duration_s", "mean_power_w", "mean_cpu_power_w", "mean_gpu_power_w", "mean_ram_power_w",
@@ -613,15 +616,15 @@ def main():
             "dynamics_train_flops", "dynamics_holdout_flops",
         ])
         w.writeheader()
-        for (algo, env_id, sig, utd, rollout_regime, segment, seg_flop_type), vals in sorted(agg.items()):
+        for (algo, env_id, sig, hs, utd, rollout_regime, segment, seg_flop_type), vals in sorted(agg.items()):
             energies = [e for e, _, _, _ in vals]
             flop_vals = [fl for _, fl, _, _ in vals if fl]
             mean_energy_kwh = sum(energies) / len(energies)
             mean_flops = sum(flop_vals) / len(flop_vals) if flop_vals else 0
             mean_energy_j = mean_energy_kwh * KWH_TO_J
             w.writerow({
-                "algo": algo, "env_id": env_id, "architecture_signature": sig, "updates_per_env_step": utd,
-                "mbpo_rollout_regime": rollout_regime,
+                "algo": algo, "env_id": env_id, "architecture_signature": sig, "hidden_sizes": hs,
+                "updates_per_env_step": utd, "mbpo_rollout_regime": rollout_regime,
                 "segment": segment, "flop_type": seg_flop_type, "n_seeds": len(vals),
                 "mean_energy_kwh": mean_energy_kwh, "mean_energy_joules": mean_energy_j,
                 "mean_duration_s": safe_mean([pw["duration_s"] for _, _, pw, _ in vals]),

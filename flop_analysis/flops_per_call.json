@@ -645,6 +645,11 @@
         "obs_dim": 105,
         "act_dim": 8,
         "batch_size": 256,
+        "mlp_dim": 512,
+        "hidden_sizes": [
+          512,
+          512
+        ],
         "horizon": 3,
         "num_samples": 512,
         "iterations": 6,
@@ -669,6 +674,11 @@
         "obs_dim": 105,
         "act_dim": 8,
         "batch_size": 256,
+        "mlp_dim": 512,
+        "hidden_sizes": [
+          512,
+          512
+        ],
         "horizon": 3,
         "num_samples": 512,
         "iterations": 6,
@@ -693,6 +703,11 @@
         "obs_dim": 105,
         "act_dim": 8,
         "batch_size": 256,
+        "mlp_dim": 512,
+        "hidden_sizes": [
+          512,
+          512
+        ],
         "horizon": 3,
         "num_samples": 512,
         "iterations": 6,
@@ -717,6 +732,11 @@
         "obs_dim": 105,
         "act_dim": 8,
         "batch_size": 256,
+        "mlp_dim": 512,
+        "hidden_sizes": [
+          512,
+          512
+        ],
         "horizon": 1,
         "num_samples": 512,
         "iterations": 6,
@@ -741,6 +761,11 @@
         "obs_dim": 105,
         "act_dim": 8,
         "batch_size": 256,
+        "mlp_dim": 512,
+        "hidden_sizes": [
+          512,
+          512
+        ],
         "horizon": 5,
         "num_samples": 512,
         "iterations": 6,
@@ -767,6 +792,11 @@
         "obs_dim": 17,
         "act_dim": 6,
         "batch_size": 256,
+        "mlp_dim": 512,
+        "hidden_sizes": [
+          512,
+          512
+        ],
         "horizon": 3,
         "num_samples": 512,
         "iterations": 6,
@@ -791,6 +821,11 @@
         "obs_dim": 17,
         "act_dim": 6,
         "batch_size": 256,
+        "mlp_dim": 512,
+        "hidden_sizes": [
+          512,
+          512
+        ],
         "horizon": 3,
         "num_samples": 512,
         "iterations": 6,
@@ -815,6 +850,11 @@
         "obs_dim": 17,
         "act_dim": 6,
         "batch_size": 256,
+        "mlp_dim": 512,
+        "hidden_sizes": [
+          512,
+          512
+        ],
         "horizon": 3,
         "num_samples": 512,
         "iterations": 6,
@@ -839,6 +879,11 @@
         "obs_dim": 17,
         "act_dim": 6,
         "batch_size": 256,
+        "mlp_dim": 512,
+        "hidden_sizes": [
+          512,
+          512
+        ],
         "horizon": 1,
         "num_samples": 512,
         "iterations": 6,
@@ -863,6 +908,11 @@
         "obs_dim": 17,
         "act_dim": 6,
         "batch_size": 256,
+        "mlp_dim": 512,
+        "hidden_sizes": [
+          512,
+          512
+        ],
         "horizon": 5,
         "num_samples": 512,
         "iterations": 6,
@@ -885,5 +935,5 @@
       }
     }
   },
-  "_device_used_for_measurement": "cuda"
+  "_device_used_for_measurement": "cpu"
 }

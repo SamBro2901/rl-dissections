@@ -70,3 +70,21 @@ SIGNATURE_FNS = {
 
 def signature(algo: str, algo_config: dict) -> str:
     return SIGNATURE_FNS[algo](algo_config)
+
+
+def tdmpc2_hidden_sizes(algo_config: dict) -> list:
+    """TD-MPC2 has no hidden_sizes field; its closest analogue is mlp_dim --
+    every head (dynamics, reward, policy prior, Q-ensemble, termination) is an
+    MLP with two hidden layers of mlp_dim (see algorithms/tdmpc2.py)."""
+    return [algo_config["mlp_dim"], algo_config["mlp_dim"]]
+
+
+def hidden_sizes(algo: str, algo_config: dict) -> str:
+    """Policy/value network width as "{h1}x{h2}" (e.g. "1024x1024"), comparable
+    across all four algos. For MBPO this is the SAC policy/critic width, not
+    the dynamics model's model_hidden_sizes."""
+    if algo == "tdmpc2":
+        sizes = tdmpc2_hidden_sizes(algo_config)
+    else:
+        sizes = algo_config["hidden_sizes"]
+    return "x".join(str(x) for x in sizes)

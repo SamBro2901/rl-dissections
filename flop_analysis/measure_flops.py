@@ -39,7 +39,7 @@ from algorithms.td3 import DeterministicPolicy as TD3Actor, QNetwork as TD3QNetw
 from algorithms.dynamics_model import GaussianEnsembleMLP  # noqa: E402
 from algorithms.tdmpc2 import TDMPC2Agent, soft_ce  # noqa: E402
 from configs.config import TDMPC2Config  # noqa: E402
-from flop_keys import signature  # noqa: E402
+from flop_keys import signature, tdmpc2_hidden_sizes  # noqa: E402
 
 torch.manual_seed(0)
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -436,6 +436,7 @@ def measure_tdmpc2(obs_dim, act_dim, episode_length, algo_config):
 
     return {
         "obs_dim": obs_dim, "act_dim": act_dim, "batch_size": cfg.batch_size,
+        "mlp_dim": cfg.mlp_dim, "hidden_sizes": tdmpc2_hidden_sizes(algo_config),
         "horizon": cfg.horizon, "num_samples": cfg.num_samples, "iterations": agent.iterations,
         "num_pi_trajs": cfg.num_pi_trajs, "num_elites": cfg.num_elites, "num_q": cfg.num_q,
         "episodic": cfg.episodic, "episode_length": episode_length,
