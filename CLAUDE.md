@@ -488,6 +488,11 @@ checked into the repo.
   per run×segment, including dev/exploratory runs flagged via
   `included_in_cross_seed_avg`), each with crossfiltering dropdowns pivoting
   into a grouped bar chart or per-seed box plot, plus a sortable data table.
+  Both tabs also have a derived **ΔEnergy / ΔFLOPs** metric (marginal J per
+  extra FLOP): pairs of rows differing only in the X-axis dimension (all other
+  config dims + flop_type, and seed on the per-run tab, held fixed), matmul/
+  mixed_total rows only, pairs with |ΔF| < 1% of reference dropped, bars pool
+  ΣΔE/ΣΔF; X=Segment/Seed blocked. See `compute_delta_pairs()`.
   `python flop_dashboard.py [--flop-dir flop_analysis/output] [--port 8051]`.
 
 ## Quick reference: running an experiment
