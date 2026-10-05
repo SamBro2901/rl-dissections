@@ -12,6 +12,12 @@
       "runtimeExecutable": ".venv/Scripts/python.exe",
       "runtimeArgs": ["dashboard.py", "--port", "8050"],
       "port": 8050
+    },
+    {
+      "name": "static-reports",
+      "runtimeExecutable": ".venv/Scripts/python.exe",
+      "runtimeArgs": ["-m", "http.server", "8052", "--bind", "127.0.0.1"],
+      "port": 8052
     }
   ]
 }
