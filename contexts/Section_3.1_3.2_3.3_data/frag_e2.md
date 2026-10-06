@@ -1,0 +1,43 @@
+| setting | value | n_runs |
+|---|---|---|
+| train_steps | 100000 | 280 |
+| steps_per_epoch | 1000 | 280 |
+| warmup_steps | 5000 | 200 |
+| warmup_steps | 10000 | 80 |
+| settle_seconds | 30 | 280 |
+| idle_baseline_seconds(head) | 90 | 280 |
+| idle_tail_seconds | 90 | 280 |
+| measure_power_secs | 1 | 280 |
+| tracking_mode | machine | 280 |
+| gpu_min_clock_mhz | 2000 | 280 |
+| gpu_max_clock_mhz | 2000 | 280 |
+| lock_gpu_clocks | True | 280 |
+| set_persistence_mode | True | 280 |
+| set_cpu_performance_governor | True | 280 |
+| thermal_gate_enabled | True | 280 |
+| torch_version | 2.13.0+cu130 | 280 |
+| codecarbon_version | 3.3.0 | 280 |
+| cuda_device_name | NVIDIA GeForce RTX 5090 | 280 |
+| device | cuda | 280 |
+| country_iso_code | DEU | 280 |
+| force_cpu_power_w |  | 280 |
+| git_commit | 7e672ef | 60 |
+| git_commit | 788ffcd | 45 |
+| git_commit | a3582b5 | 40 |
+| git_commit | 9b4b44c | 35 |
+| git_commit | aa9186b | 30 |
+| git_commit | ecb7135 | 20 |
+| git_commit | 0bbbbb7 | 10 |
+| git_commit | ecb98bb | 10 |
+| git_commit | 58962d2 | 10 |
+| git_commit | b5b7e54 | 10 |
+| git_commit | f23f448 | 8 |
+| git_commit | 92dcee0 | 2 |
+| warmup_steps[sac|HalfCheetah-v5] | 5000 | 35 |
+| warmup_steps[sac|Ant-v5] | 5000 | 35 |
+| warmup_steps[mbpo|HalfCheetah-v5] | 5000 | 35 |
+| warmup_steps[mbpo|Ant-v5] | 5000 | 45 |
+| warmup_steps[td3|HalfCheetah-v5] | 10000 | 40 |
+| warmup_steps[td3|Ant-v5] | 10000 | 40 |
+| warmup_steps[tdmpc2|HalfCheetah-v5] | 5000 | 25 |
+| warmup_steps[tdmpc2|Ant-v5] | 5000 | 25 |

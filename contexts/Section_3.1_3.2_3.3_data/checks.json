@@ -1,0 +1,54 @@
+{
+  "n_canonical_runs": 280,
+  "n_all_metadata": 300,
+  "n_groups": 56,
+  "groups_with_fewer_than_5_seeds": [],
+  "my_group_keys_equal_pipeline_cross_seed_keys": true,
+  "n_pipeline_cross_seed_groups": 56,
+  "groups_distinct_by_pipeline_key": 56,
+  "per_run_csv_canonical_runs": 280,
+  "per_run_csv_vs_segment_energy_json": {
+    "n_pairs": 2450,
+    "max_rel_diff": 6.495436123105204e-13
+  },
+  "max_rel_diff_sum_of_4_allocated_vs_measured_gradient_updates_task": 5.85514380180025e-14,
+  "max_rel_diff_TOTAL_vs_sum_of_training_segments": 6.028273002248479e-14,
+  "recomputed_vs_cross_seed_csv": {
+    "n_rows_compared": 378,
+    "max_rel_diff_energy": 3.908277077124353e-16,
+    "max_rel_diff_flops": 0.0,
+    "max_rel_diff_j_per_flop_for_defined_rows": 5.482367949281732e-16,
+    "segments_absent_from_cross_seed_csv": {
+      "warmup": 56,
+      "idle_baseline_head": 56,
+      "idle_baseline_tail": 56
+    }
+  },
+  "share_mean_of_ratios_vs_ratio_of_means_max_abs_diff_pp_over_B1": 0.1328597617324192,
+  "max_abs_deviation_of_nonoverlapping_shares_sum_from_100_pp": 2.842170943040401e-14,
+  "C4_rows": 280,
+  "C4_distinct_seeds": [
+    331,
+    958,
+    14577,
+    43611,
+    85062
+  ],
+  "e2_deviating_runs_train_steps_not_100000": [],
+  "e2_runs_with_epochs_not_100": [],
+  "e2_start_time_min_max_utc": [
+    "2026-09-07T10:13:36.036705",
+    "2026-09-19T15:12:17.106425"
+  ],
+  "e2_git_commit_count": 12,
+  "sac_rows_vs_section_4_1_data": {
+    "compared_rows_baseline": 20,
+    "max_rel_diff_energy_mean": 1.778067725359936e-16,
+    "max_rel_diff_energy_sd": 1.8922627844204357e-14,
+    "max_abs_diff_share_mean_pp": 2.842170943040401e-14,
+    "max_abs_diff_share_sd_pp": 5.412337245047638e-15,
+    "sweep_rows_compared": 120,
+    "sweep_max_rel_diff_energy_mean": 4.324409559876472e-16,
+    "sweep_max_rel_diff_flops_mean": 0.0
+  }
+}

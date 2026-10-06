@@ -1,0 +1,5 @@
+label,env,analysis,grouping,n_groups,rho,p_value,existing_rho,existing_p,abs_diff_rho,abs_diff_p
+NEWLY COMPUTED,Ant-v5,return_vs_flops,"per env, one point per group (mean of 5 seeds)",29,-0.32618872633183615,0.08418470912236206,-0.3261887263318361,0.084184709122362,5.551115123125783e-17,5.551115123125783e-17
+NEWLY COMPUTED,Ant-v5,energy_vs_flops,"per env, one point per group (mean of 5 seeds)",29,0.8462675792672636,7.333029498527863e-09,0.8462675792672636,7.333029498527844e-09,0.0,1.9025154088719637e-23
+NEWLY COMPUTED,HalfCheetah-v5,return_vs_flops,"per env, one point per group (mean of 5 seeds)",27,0.41740459961096016,0.030291807480301036,0.4174045996109601,0.030291807480301,5.551115123125783e-17,3.469446951953614e-17
+NEWLY COMPUTED,HalfCheetah-v5,energy_vs_flops,"per env, one point per group (mean of 5 seeds)",27,0.8357252297989743,5.782164541916285e-08,0.8357252297989743,5.782164541916297e-08,0.0,1.1911400820763599e-22
