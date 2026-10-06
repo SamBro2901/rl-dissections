@@ -47,6 +47,8 @@ aggregate_results.py      Combines many runs' segment_energy.json/metadata.json/
 dashboard.py              Interactive Plotly Dash app for browsing individual runs under results/
 flop_analysis/            Energy-per-FLOP methodology (measure_flops.py, compute_energy_per_flop.py, flop_keys.py)
 flop_dashboard.py         Interactive Plotly Dash app for browsing flop_analysis/output/*.csv (cross-seed + per-run tabs)
+flop_analysis/correlation_analysis.py  Spearman return-vs-FLOPs / energy-vs-FLOPs per env -> flop_analysis/output/correlation/
+idle_power_analysis.py    Head-vs-tail idle-baseline power check over all runs -> idle_power.csv + idle_power_report.html
 scripts/                  All sweep-runner shell scripts (moved out of repo root, commit 88170be)
 scripts/run_mbpo_env_sweep.sh     MBPO across HalfCheetah-v5/Ant-v5, 5 seeds — 10 runs
 scripts/run_td3_env_sweep.sh      TD3 across HalfCheetah-v5/Ant-v5, 5 seeds, warmup=10000 — 10 runs
@@ -469,6 +471,51 @@ kWh, to compare algorithms on a compute-normalized basis.
 Methodology reference: README.md's "Energy-per-FLOP analysis" section, which
 both scripts' docstrings point to. `flop_calculation_methodology.md` was never
 checked into the repo.
+
+## Correlation analysis (`flop_analysis/correlation_analysis.py`, commit `4247c30`)
+
+Does more training compute buy more return, and does it cost proportionally
+more energy? One point per **(env, config)** — seeds are averaged, never used
+as separate points (FLOPs are identical across a config's 5 canonical seeds).
+Configs = `(algo, architecture signature, UTD, MBPO rollout regime)`, so
+sweep variants are separate points: 27 on HalfCheetah-v5, 29 on Ant-v5.
+Return = mean of the last 10% of train-phase episode returns (same as
+`aggregate_results.py`); FLOPs/energy = the `TOTAL_MEASURED_TRAINING` row of
+`per_run_energy_per_flop.csv`. Reports Spearman ρ + p-value + 95% bootstrap
+CI (5000 resamples of seeds *within* each config, fixed RNG), plus an OLS
+log10(energy)~log10(FLOPs) fit for the energy control. Outputs in
+`flop_analysis/output/correlation/`: `config_means.csv`,
+`correlation_summary.csv`, `correlation_plots.html`.
+Snapshot (as of `57b3d21`): return-vs-FLOPs ρ=+0.42 (p=0.03) HalfCheetah,
+ρ=−0.33 (p=0.08) Ant — weak/inconsistent; energy-vs-FLOPs ρ≈0.84–0.85
+(p<1e-7) both envs, log-log slope ≈0.47/0.51 (energy grows ~√FLOPs: fixed
+per-step costs dominate). Caveat: MBPO's FLOPs vary slightly per seed
+(model-fit early stopping), so its config point uses the seed-mean FLOPs.
+
+## Idle-baseline drift check (`idle_power_analysis.py`, commit `57b3d21`)
+
+Data-quality check on the two idle windows bracketing each run
+(`idle_baseline_head` before warmup, `idle_baseline_tail` after the last
+epoch): if the controls work, tail − head power should be ≈ 0. Mean power =
+energy ÷ duration per component, from `emissions_base_*.csv` (CodeCarbon's own
+`*_power` columns are point samples / whole-run averages and are **not**
+used). Canonical seeds only by default (`--all-seeds` for dev runs). Outputs:
+`idle_power.csv` (280 runs) and the self-contained interactive
+`idle_power_report.html`. Findings (snapshot):
+- **Head window integrates ~3.1 s more than its reported 90 s** (RAM
+  energy ÷ constant RAM power), so as-recorded head power / `idle_baseline_head`
+  kWh are ~3.4% high; the CSV/report give both *as-recorded* and
+  *window-corrected* (energy ÷ integrated span) values — use corrected.
+- **Tail > head is real and GPU-driven**: corrected mean +6.4 W total
+  (63.1 → 69.5 W, +10%), GPU +6.7 W, CPU −0.3 W, RAM 0; tail > head in 261/280
+  runs. Largest after TD-MPC2 (+8.4 W) and TD3 (+7.3 W), smallest after MBPO
+  (+4.7 W). The GPU hasn't returned to its pre-run idle 90 s after training.
+- Thermal gate passed immediately (waited ≈0 s) in all 280 runs by design;
+  head idle power tracks pre-head GPU temp (r=0.88, 40–55 °C), but
+  temperature alone doesn't explain the tail excess (~+6.3 W above the
+  head's power-vs-temp line).
+- Implication: idle-subtracted energy figures and the smallest segments
+  (`target_update`) are sensitive to which idle window is used as baseline.
 
 ## Aggregation & visualization tooling
 
