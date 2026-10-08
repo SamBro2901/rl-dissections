@@ -1,0 +1,33 @@
+env,sweep,metric,baseline_ordering,ordering,same_as_baseline,swapped_pairs
+HalfCheetah-v5,baseline,energy,td3 < sac < mbpo,td3 < sac < mbpo,True,none
+HalfCheetah-v5,baseline,jpf,sac < td3 < mbpo,sac < td3 < mbpo,True,none
+HalfCheetah-v5,utd2,energy,td3 < sac < mbpo,td3 < sac < mbpo,True,none
+HalfCheetah-v5,utd2,jpf,sac < td3 < mbpo,sac < td3 < mbpo,True,none
+HalfCheetah-v5,utd4,energy,td3 < sac < mbpo,td3 < sac < mbpo,True,none
+HalfCheetah-v5,utd4,jpf,sac < td3 < mbpo,sac < mbpo < td3,False,td3<mbpo -> mbpo<td3
+HalfCheetah-v5,w256,energy,td3 < sac < mbpo,td3 < sac < mbpo,True,none
+HalfCheetah-v5,w256,jpf,sac < td3 < mbpo,mbpo < sac < td3,False,sac<mbpo -> mbpo<sac; td3<mbpo -> mbpo<td3
+HalfCheetah-v5,w512,energy,td3 < sac < mbpo,td3 < sac < mbpo,True,none
+HalfCheetah-v5,w512,jpf,sac < td3 < mbpo,sac < mbpo < td3,False,td3<mbpo -> mbpo<td3
+HalfCheetah-v5,b256,energy,td3 < sac < mbpo,td3 < sac < mbpo,True,none
+HalfCheetah-v5,b256,jpf,sac < td3 < mbpo,td3 < sac < mbpo,False,sac<td3 -> td3<sac
+HalfCheetah-v5,b512,energy,td3 < sac < mbpo,td3 < sac < mbpo,True,none
+HalfCheetah-v5,b512,jpf,sac < td3 < mbpo,td3 < sac < mbpo,False,sac<td3 -> td3<sac
+HalfCheetah-v5,b1024,energy,td3 < sac < mbpo,td3 < sac < mbpo,True,none
+HalfCheetah-v5,b1024,jpf,sac < td3 < mbpo,td3 < sac < mbpo,False,sac<td3 -> td3<sac
+Ant-v5,baseline,energy,td3 < sac < mbpo,td3 < sac < mbpo,True,none
+Ant-v5,baseline,jpf,sac < td3 < mbpo,sac < td3 < mbpo,True,none
+Ant-v5,utd2,energy,td3 < sac < mbpo,td3 < sac < mbpo,True,none
+Ant-v5,utd2,jpf,sac < td3 < mbpo,sac < td3 < mbpo,True,none
+Ant-v5,utd4,energy,td3 < sac < mbpo,td3 < sac < mbpo,True,none
+Ant-v5,utd4,jpf,sac < td3 < mbpo,sac < mbpo < td3,False,td3<mbpo -> mbpo<td3
+Ant-v5,w256,energy,td3 < sac < mbpo,td3 < sac < mbpo,True,none
+Ant-v5,w256,jpf,sac < td3 < mbpo,mbpo < sac < td3,False,sac<mbpo -> mbpo<sac; td3<mbpo -> mbpo<td3
+Ant-v5,w512,energy,td3 < sac < mbpo,td3 < sac < mbpo,True,none
+Ant-v5,w512,jpf,sac < td3 < mbpo,sac < mbpo < td3,False,td3<mbpo -> mbpo<td3
+Ant-v5,b256,energy,td3 < sac < mbpo,td3 < sac < mbpo,True,none
+Ant-v5,b256,jpf,sac < td3 < mbpo,td3 < sac < mbpo,False,sac<td3 -> td3<sac
+Ant-v5,b512,energy,td3 < sac < mbpo,td3 < sac < mbpo,True,none
+Ant-v5,b512,jpf,sac < td3 < mbpo,td3 < sac < mbpo,False,sac<td3 -> td3<sac
+Ant-v5,b1024,energy,td3 < sac < mbpo,td3 < sac < mbpo,True,none
+Ant-v5,b1024,jpf,sac < td3 < mbpo,td3 < sac < mbpo,False,sac<td3 -> td3<sac

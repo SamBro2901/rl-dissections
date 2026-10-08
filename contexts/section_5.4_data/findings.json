@@ -1,0 +1,424 @@
+{
+ "pair_counts": {
+  "mbpo": 7,
+  "sac": 7,
+  "td3": 8,
+  "tdmpc2": 5
+ },
+ "x2_n_compared": 203,
+ "x2_all_ok": true,
+ "x2_configs_covered": [
+  [
+   "mbpo",
+   "b1024"
+  ],
+  [
+   "mbpo",
+   "b512"
+  ],
+  [
+   "mbpo",
+   "base"
+  ],
+  [
+   "mbpo",
+   "utd2"
+  ],
+  [
+   "mbpo",
+   "utd4"
+  ],
+  [
+   "mbpo",
+   "w256"
+  ],
+  [
+   "mbpo",
+   "w512"
+  ],
+  [
+   "td3",
+   "b1024"
+  ],
+  [
+   "td3",
+   "b256"
+  ],
+  [
+   "td3",
+   "b512"
+  ],
+  [
+   "td3",
+   "base"
+  ],
+  [
+   "td3",
+   "utd2"
+  ],
+  [
+   "td3",
+   "utd4"
+  ],
+  [
+   "td3",
+   "w256"
+  ],
+  [
+   "td3",
+   "w512"
+  ],
+  [
+   "tdmpc2",
+   "base"
+  ],
+  [
+   "tdmpc2",
+   "horizon1"
+  ],
+  [
+   "tdmpc2",
+   "horizon5"
+  ],
+  [
+   "tdmpc2",
+   "numq3"
+  ],
+  [
+   "tdmpc2",
+   "numq7"
+  ]
+ ],
+ "mbpo_confound": {
+  "algo_config_diff_HC_base_vs_Ant_base": {
+   "rollout_max_epoch": [
+    150,
+    100
+   ],
+   "rollout_max_length": [
+    1,
+    25
+   ]
+  },
+  "algo_config_diff_HC_base_vs_Ant_rollout1": {
+   "rollout_max_epoch": [
+    150,
+    100
+   ]
+  },
+  "algo_config_diff_Ant_base_vs_Ant_rollout1": {
+   "rollout_max_length": [
+    25,
+    1
+   ]
+  },
+  "algo_config_diff_Ant_base_vs_Ant_rollout15": {
+   "rollout_max_length": [
+    25,
+    15
+   ]
+  },
+  "experiment_config_diff_HC_base_vs_Ant_base": {},
+  "experiment_config_diff_HC_base_vs_Ant_rollout1": {},
+  "git_commits": {
+   "HC_base": [
+    "0bbbbb7"
+   ],
+   "Ant_base": [
+    "0bbbbb7"
+   ],
+   "Ant_rollout1": [
+    "788ffcd"
+   ],
+   "Ant_rollout15": [
+    "788ffcd"
+   ]
+  },
+  "regimes": {
+   "HC_base": [
+    "rl1-1_re20-150"
+   ],
+   "Ant_base": [
+    "rl1-25_re20-100"
+   ],
+   "Ant_rollout1": [
+    "rl1-1_re20-100"
+   ],
+   "Ant_rollout15": [
+    "rl1-15_re20-100"
+   ]
+  },
+  "start_utc_range": {
+   "HC_base": [
+    "2026-09-08T17:44:55.988580",
+    "2026-09-08T19:52:22.366682"
+   ],
+   "Ant_base": [
+    "2026-09-08T20:24:06.699630",
+    "2026-09-08T22:57:55.367255"
+   ],
+   "Ant_rollout1": [
+    "2026-09-17T20:09:20.845516",
+    "2026-09-17T22:34:13.007588"
+   ]
+  }
+ },
+ "mbpo_l1_envrow": {
+  "algo": "mbpo",
+  "config": "rollout L_max 1",
+  "config_tag": "rollout1",
+  "E_total_ratio_of_means": 1.1608272506979815,
+  "E_total_paired_mean": 1.161959391500974,
+  "E_total_paired_sd": 0.042707162843143014,
+  "E_rollout_ratio_of_means": 1.7510051349503584,
+  "E_rollout_paired_mean": 1.7516126495515612,
+  "E_rollout_paired_sd": 0.04145916360327584,
+  "dshare_rollout_mean_pp": 0.5950518072540701,
+  "dshare_rollout_sd_pp": 0.04321504616026258,
+  "dshare_rollout_same_sign_k_of_5": 5,
+  "dshare_gradient_updates_mean_pp": -3.4335872422193994,
+  "dshare_gradient_updates_sd_pp": 1.1752065763328283,
+  "dshare_gradient_updates_same_sign_k_of_5": 5,
+  "dshare_dynamics_model_update_mean_pp": 2.8244808657924265,
+  "dshare_dynamics_model_update_sd_pp": 1.207802158821425,
+  "dshare_dynamics_model_update_same_sign_k_of_5": 5,
+  "dshare_synthetic_rollout_generation_mean_pp": 0.014054569172893761,
+  "dshare_synthetic_rollout_generation_sd_pp": 0.00911382191908108,
+  "dshare_synthetic_rollout_generation_same_sign_k_of_5": 5,
+  "dshare_buffer_sample_mean_pp": 0.02906767386374427,
+  "dshare_buffer_sample_sd_pp": 0.027419926630859022,
+  "dshare_buffer_sample_same_sign_k_of_5": 4,
+  "dshare_critic_update_mean_pp": -1.3839215504877604,
+  "dshare_critic_update_sd_pp": 0.6354591156660663,
+  "dshare_critic_update_same_sign_k_of_5": 5,
+  "dshare_actor_update_mean_pp": -1.901441847677012,
+  "dshare_actor_update_sd_pp": 0.5007947067267163,
+  "dshare_actor_update_same_sign_k_of_5": 5,
+  "dshare_target_update_mean_pp": -0.17729151791837308,
+  "dshare_target_update_sd_pp": 0.03782499283641836,
+  "dshare_target_update_same_sign_k_of_5": 5,
+  "max_abs_dshare_pp": 2.8244808657924265,
+  "max_abs_dshare_segment": "dynamics_model_update",
+  "signflip_p_rollout_share": 0.0625,
+  "signflip_patterns_rollout_share": 2,
+  "signflip_n_positive_rollout_share": 5,
+  "signflip_p_total_energy": 0.0625,
+  "signflip_patterns_total_energy": 2,
+  "signflip_n_positive_total_energy": 5,
+  "P_total_ratio_of_means": 0.9996863466960768,
+  "P_total_paired_mean": 0.9997407104863887,
+  "P_total_paired_sd": 0.011121376364578172,
+  "Proll_over_PGU_HC": 0.827399964424881,
+  "Proll_over_PGU_Ant": 0.808290544796749,
+  "Proll_over_PGU_double_ratio_Ant_over_HC": 0.9769042537469593,
+  "Proll_over_PGU_double_ratio_paired_mean": 0.9769305952216089,
+  "Proll_over_PGU_double_ratio_paired_sd": 0.005022201640025603,
+  "jpf_total_HC_J_per_FLOP": 1.8307283299784964e-10,
+  "jpf_total_Ant_J_per_FLOP": 1.754584490403305e-10,
+  "jpf_total_ratio_Ant_over_HC": 0.9584078979232895,
+  "flops_total_ratio_Ant_over_HC": 1.2112037611681845,
+  "flops_total_HC": 1132852836960000.0,
+  "flops_total_Ant": 1372115616976000.0
+ },
+ "mbpo_synthetic_samples": {
+  "HC_base": {
+   "min": 990000,
+   "median": 990000.0,
+   "max": 990000
+  },
+  "Ant_base": {
+   "min": 9155434,
+   "median": 9330597.0,
+   "max": 9578166
+  },
+  "Ant_rollout1": {
+   "min": 990000,
+   "median": 990000.0,
+   "max": 990000
+  },
+  "Ant_rollout15": {
+   "min": 6046589,
+   "median": 6127301.0,
+   "max": 6182511
+  }
+ },
+ "tdmpc2_episodic_counts": {
+  "Ant-v5|episodic=True|canonical": 25,
+  "HalfCheetah-v5|episodic=False|canonical": 25,
+  "HalfCheetah-v5|episodic=False|non-canonical": 1
+ },
+ "tdmpc2_flop_sigs_episodic": {
+  "HalfCheetah-v5": [
+   [
+    "bs256_h1_ns512_it6_pit24_ne64_nq5_enc2x256_mlp512_lat512_epFalse",
+    false
+   ],
+   [
+    "bs256_h3_ns512_it6_pit24_ne64_nq3_enc2x256_mlp512_lat512_epFalse",
+    false
+   ],
+   [
+    "bs256_h3_ns512_it6_pit24_ne64_nq5_enc2x256_mlp512_lat512_epFalse",
+    false
+   ],
+   [
+    "bs256_h3_ns512_it6_pit24_ne64_nq7_enc2x256_mlp512_lat512_epFalse",
+    false
+   ],
+   [
+    "bs256_h5_ns512_it6_pit24_ne64_nq5_enc2x256_mlp512_lat512_epFalse",
+    false
+   ]
+  ],
+  "Ant-v5": [
+   [
+    "bs256_h1_ns512_it6_pit24_ne64_nq5_enc2x256_mlp512_lat512_epTrue",
+    true
+   ],
+   [
+    "bs256_h3_ns512_it6_pit24_ne64_nq3_enc2x256_mlp512_lat512_epTrue",
+    true
+   ],
+   [
+    "bs256_h3_ns512_it6_pit24_ne64_nq5_enc2x256_mlp512_lat512_epTrue",
+    true
+   ],
+   [
+    "bs256_h3_ns512_it6_pit24_ne64_nq7_enc2x256_mlp512_lat512_epTrue",
+    true
+   ],
+   [
+    "bs256_h5_ns512_it6_pit24_ne64_nq5_enc2x256_mlp512_lat512_epTrue",
+    true
+   ]
+  ]
+ },
+ "tdmpc2_flop_both_episodic_values_in_one_env": {
+  "HalfCheetah-v5": false,
+  "Ant-v5": false
+ },
+ "measure_flops_mentions_termination_isolation": false,
+ "dims": {
+  "HalfCheetah-v5": [
+   [
+    17,
+    6
+   ]
+  ],
+  "Ant-v5": [
+   [
+    105,
+    8
+   ]
+  ]
+ },
+ "metadata_has_obs_dim": false,
+ "live_env_dims_this_machine": {
+  "HalfCheetah-v5": [
+   17,
+   6
+  ],
+  "Ant-v5": [
+   105,
+   8
+  ]
+ },
+ "gymnasium_version_this_machine": "1.3.0",
+ "wallclock_pipeline_vs_taskcsv_max_rel_dev": 5.329971286940855e-16,
+ "training_metrics_epoch_keys": [
+  "actor_loss_mean",
+  "alpha_end",
+  "buffer_size",
+  "consistency_loss_mean",
+  "critic_loss_mean",
+  "cumulative_reward",
+  "env_step",
+  "epoch",
+  "epoch_reward_mean_per_step",
+  "epoch_reward_sum",
+  "mean_episode_return",
+  "model_buffer_size",
+  "model_holdout_mse",
+  "model_train_epochs",
+  "num_episodes_completed",
+  "pi_loss_mean",
+  "reward_loss_mean",
+  "rollout_length",
+  "synthetic_transitions_generated",
+  "total_loss_mean",
+  "value_loss_mean"
+ ],
+ "segment_energy_keys": [
+  "_sub_segment_wall_time_seconds",
+  "_total_kg_co2eq",
+  "actor_update",
+  "buffer_sample",
+  "critic_update",
+  "dynamics_model_update",
+  "idle_baseline_head",
+  "idle_baseline_tail",
+  "rollout",
+  "synthetic_rollout_generation",
+  "target_update",
+  "warmup",
+  "world_model_pretrain"
+ ],
+ "algorithms_files_with_timers": [
+  "sac.py:12",
+  "sac.py:148",
+  "sac.py:155",
+  "sac.py:158",
+  "sac.py:178",
+  "sac.py:184",
+  "sac.py:211",
+  "sac.py:216",
+  "sac.py:224",
+  "td3.py:23",
+  "td3.py:133",
+  "td3.py:140",
+  "td3.py:143",
+  "td3.py:166",
+  "td3.py:172",
+  "td3.py:185",
+  "td3.py:188",
+  "td3.py:199",
+  "tdmpc2.py:565",
+  "tdmpc2.py:574",
+  "tdmpc2.py:577",
+  "tdmpc2.py:629",
+  "tdmpc2.py:636",
+  "tdmpc2.py:638",
+  "tdmpc2.py:642",
+  "tdmpc2.py:647"
+ ],
+ "simulator_mentions": [
+  "Section_3.1_3.2_3.3.md:275: - **Ant-v5 and early termination:** `gym.make(\"Ant-v5\")` default `terminate_when_unhealthy=True` (README/`termination_fns.py:6`; the installed gymnasium/mujoco versions of the Linux box are **not reco",
+  "section_4.1.md:1341: | `buffer_sample` | 147\u2013155 | `ReplayBuffer.sample()` = `np.random.randint` + 5 NumPy fancy-index gathers on **host** (float32 arrays, pageable memory), then 5 \u00d7 `torch.as_tensor(x, device=cuda)` = bl",
+  "section_4.1.md:2142: - Simulator: both are MuJoCo envs stepped on the CPU (`frame_skip` = 5 for HC, 5 for Ant; Ant has more",
+  "section_4.1.md:2143: bodies/contacts and computes the 78-dim contact-force part of its observation). No per-step simulator timing is",
+  "section_4.1.md:2144: logged, so the simulator's share of the `rollout` task duration is **NOT MEASURED**.",
+  "section_4.1.md:2632: 14. Simulator share of rollout time: NOT MEASURED (Part 5.6).",
+  "Section_4.2.md:2106: - *Host-side work counted as FLOPs:* none. `FlopCounterMode` counts matmul-type operators only (`aten.mm/addmm/bmm`\u2026). **Not counted (0 FLOPs):** replay-buffer sampling and the host\u2192device copies (`bu",
+  "Section_4.2.md:2123: - NOT AVAILABLE: Simulator (MuJoCo) share of the `rollout` task duration: no per-step simulator timing is logged, so the split of `rollout` into policy/model compute and `env.step()` is not measurable",
+  "Section_4.3.md:3279: - NOT AVAILABLE: Simulator (MuJoCo) share of the `rollout` task duration: no per-step simulator timing is logged, so the split of `rollout` into policy/model compute and `env.step()` is not measurable",
+  "Section_4.4.md:2262: - NOT AVAILABLE: Simulator (MuJoCo) share of the `rollout` task duration: no per-step simulator timing is logged, so the split of `rollout` into policy/model compute and `env.step()` is not measurable"
+ ],
+ "mbpo_ant_returns": {
+  "n_configs": 9,
+  "n_negative_mean": 9,
+  "n_all_seeds_negative": 8
+ },
+ "mbpo_hc_returns": {
+  "n_configs": 7,
+  "n_negative_mean": 0,
+  "min": 4534.754450496254,
+  "max": 5903.650509603668
+ },
+ "return_check_vs_summary_csv": {
+  "n_matched": 80,
+  "max_abs_dev": 9.094947017729282e-13
+ },
+ "n_runs": 280,
+ "cross_check_all_ok": true,
+ "cross_check_mismatches": []
+}
