@@ -1,0 +1,97 @@
+{
+ "A1_count": 16,
+ "training_metrics_epochs_identical": true,
+ "n_epoch_rows_differing": 0,
+ "episode_returns_identical": true,
+ "E_candidate_runs_all_seeds": [
+  [
+   0,
+   "results/mbpo/HalfCheetah-v5/seed_0/20260904_122958",
+   false
+  ],
+  [
+   0,
+   "results/mbpo/HalfCheetah-v5/seed_0/20260904_130915",
+   false
+  ],
+  [
+   14577,
+   "results/mbpo/HalfCheetah-v5/seed_14577/20260912_235401",
+   true
+  ],
+  [
+   331,
+   "results/mbpo/HalfCheetah-v5/seed_331/20260912_225321",
+   true
+  ],
+  [
+   43611,
+   "results/mbpo/HalfCheetah-v5/seed_43611/20260913_002507",
+   true
+  ],
+  [
+   85062,
+   "results/mbpo/HalfCheetah-v5/seed_85062/20260913_005629",
+   true
+  ],
+  [
+   958,
+   "results/mbpo/HalfCheetah-v5/seed_958/20260912_232353",
+   true
+  ]
+ ],
+ "E_n_config_field_diffs": 5,
+ "E_canonical_commits": [
+  "7e672ef12c53bf4c201241c549527a7ef8bd4bff"
+ ],
+ "E_canonical_versions": [
+  [
+   "2.13.0+cu130",
+   "3.3.0"
+  ]
+ ],
+ "F3_total_dev_runs": 20,
+ "F3_total_runs": 300,
+ "F2_canonical_mbpo_hc_batch_sizes_by_signature": {
+  "bs1024_h1024x1024_ens7_mh200x200x200x200_mb256": 5,
+  "bs256_h1024x1024_ens7_mh200x200x200x200_mb256": 15,
+  "bs256_h256x256_ens7_mh200x200x200x200_mb256": 5,
+  "bs256_h512x512_ens7_mh200x200x200x200_mb256": 5,
+  "bs512_h1024x1024_ens7_mh200x200x200x200_mb256": 5
+ },
+ "F2_canonical_mbpo_hc_batch_sizes_set": [
+  256,
+  512,
+  1024
+ ],
+ "F2_canonical_mbpo_hc_configs(hidden,batch,utd):n": {
+  "((1024, 1024), 256, 1)": 5,
+  "((256, 256), 256, 1)": 5,
+  "((512, 512), 256, 1)": 5,
+  "((1024, 1024), 256, 2)": 5,
+  "((1024, 1024), 256, 4)": 5,
+  "((1024, 1024), 512, 1)": 5,
+  "((1024, 1024), 1024, 1)": 5
+ },
+ "same_commit": true,
+ "thermal_gate": {
+  "2000MHz": {
+   "gated": true,
+   "reason": "reached_reference",
+   "waited_seconds": 1.1682510375976562e-05,
+   "final_temp_c": 45.0,
+   "final_power_w": 26.467
+  },
+  "200MHz": {
+   "gated": true,
+   "reason": "reached_reference",
+   "waited_seconds": 1.0728836059570312e-05,
+   "final_temp_c": 44.0,
+   "final_power_w": 21.006
+  }
+ },
+ "metadata_keys_run_start_temp_present": {
+  "2000MHz": false,
+  "200MHz": false
+ }
+}

@@ -1,0 +1,15 @@
+line,log_2000MHz,log_200MHz
+2,[INFO] Run directory: results/mbpo/HalfCheetah-v5/seed_0/20260904_122958,[INFO] Run directory: results/mbpo/HalfCheetah-v5/seed_0/20260904_130915
+5,"[INFO] Thermal gate result: {'gated': True, 'reason': 'reached_reference', 'waited_seconds': 1.1682510375976562e-05, 'final_temp_c': 45.0, 'final_power_w': 26.467}","[INFO] Thermal gate result: {'gated': True, 'reason': 'reached_reference', 'waited_seconds': 1.0728836059570312e-05, 'final_temp_c': 44.0, 'final_power_w': 21.006}"
+22,[INFO]   idle_baseline_head: 0.0016405614888457837,[INFO]   idle_baseline_head: 0.0014817379924547266
+23,[INFO]   warmup: 3.7619386439289876e-06,[INFO]   warmup: 4.742169141036317e-06
+24,[INFO]   dynamics_model_update: 0.03949454014057444,[INFO]   dynamics_model_update: 0.13409906540958969
+25,[INFO]   rollout: 0.0006349279292438351,[INFO]   rollout: 0.0009637223233003303
+26,[INFO]   synthetic_rollout_generation: 1.2804141580080065e-05,[INFO]   synthetic_rollout_generation: 6.085804162468851e-05
+27,[INFO]   buffer_sample: 0.00036838315925908483,[INFO]   buffer_sample: 0.0010212501462399327
+28,[INFO]   critic_update: 0.0052657167686204105,[INFO]   critic_update: 0.009628564004972216
+29,[INFO]   actor_update: 0.00632101293494484,[INFO]   actor_update: 0.011323730548469595
+30,[INFO]   target_update: 0.0005446207779469977,[INFO]   target_update: 0.0007389072662470544
+31,"[INFO]   _sub_segment_wall_time_seconds: {'buffer_sample': 11.672165659015263, 'critic_update': 166.8434533229174, 'actor_update': 200.28035553483278, 'target_update': 17.25622841805398}","[INFO]   _sub_segment_wall_time_seconds: {'buffer_sample': 23.56117137083129, 'critic_update': 222.13974451942886, 'actor_update': 261.2487812040199, 'target_update': 17.047263876826037}"
+32,[INFO]   idle_baseline_tail: 0.0016568965506780359,[INFO]   idle_baseline_tail: 0.0015772077844781462
+33,[INFO]   _total_kg_co2eq: 0.021311583383765147,[INFO]   _total_kg_co2eq: 0.061294793236258686

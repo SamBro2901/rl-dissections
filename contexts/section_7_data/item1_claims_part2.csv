@@ -1,0 +1,18 @@
+claim,item,found,status,source
+7,"energy ordering td3<sac<mbpo at all 8 sweep values, both envs",16/16 same as baseline; orderings=['td3 < sac < mbpo'],VERIFIED,contexts/section_5.3_data/o2_swaps_vs_baseline.csv
+7,seed-level energy orderings equal td3<sac<mbpo,80/80,VERIFIED,contexts/section_5.3_data/o3_seed_level.csv
+7,J/FLOP non-baseline sweep values differing from baseline ordering (Ant-v5),6 of 7,VERIFIED,o2_swaps_vs_baseline.csv (metric=jpf)
+7,J/FLOP non-baseline sweep values differing from baseline ordering (HalfCheetah-v5),6 of 7,VERIFIED,o2_swaps_vs_baseline.csv (metric=jpf)
+8,total energy Ant/HC ratio range over 27 pairs,1.027–1.248,VERIFIED,contexts/section_5.4_data/pooled_summary.csv (ratio of means per pair)
+8,rollout energy Ant/HC ratio range,1.1055–2.2878,VERIFIED,pooled_summary.csv E_rollout_min/max (1.1055 rounds to 1.106 at 3dp: 1.10552 -> 1.106)
+9,"R2000 (results/mbpo/HalfCheetah-v5/seed_0/20260904_122958) training tasks (non-idle, non-warmup)","189.5 kJ, 27.30 min, 115.7 W",VERIFIED,"emissions_base_*.csv, sum over tasks excluding idle_baseline_*/warmup"
+9,"R200 (results/mbpo/HalfCheetah-v5/seed_0/20260904_130915) training tasks (non-idle, non-warmup)","568.2 kJ, 95.53 min, 99.1 W",VERIFIED,"emissions_base_*.csv, sum over tasks excluding idle_baseline_*/warmup"
+10,300 run directories; 280 canonical; 20 dev,"total=300, canonical=280, dev=20, configs=56",VERIFIED,rglob results/**/metadata.json
+11,SAC rollout median s / n,0.3409 / 7000,VERIFIED,item1_claim11_task_durations.csv
+11,TD3 rollout median s / n,0.2175 / 8000,VERIFIED,
+11,MBPO rollout median s / n,0.3536 / 8000,VERIFIED,
+11,MBPO synthetic_rollout_generation median s,0.008523,VERIFIED,
+11,all sac rollout tasks < 1 s (max),"max=0.532s, n>=1s=0/7000",VERIFIED,
+11,all td3 rollout tasks < 1 s (max),"max=0.349s, n>=1s=0/8000",VERIFIED,
+11,all mbpo rollout tasks < 1 s (max),"max=0.408s, n>=1s=0/8000",VERIFIED,
+11,all tdmpc2 rollout tasks < 1 s (max),"max=16.678s, n>=1s=5000/5000",MISMATCH,

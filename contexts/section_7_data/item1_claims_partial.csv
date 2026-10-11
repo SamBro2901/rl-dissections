@@ -1,0 +1,21 @@
+claim,item,found,status,source
+1,sac HalfCheetah-v5 total mean±sd J,60911.0 ± 254.1,VERIFIED,contexts/section_5.2_data/d1_config_table.csv total_E_J/total_E_sd_J
+1,sac Ant-v5 total mean±sd J,64382.6 ± 588.3,VERIFIED,contexts/section_5.2_data/d1_config_table.csv total_E_J/total_E_sd_J
+1,td3 HalfCheetah-v5 total mean±sd J,28111.5 ± 310.7,VERIFIED,contexts/section_5.2_data/d1_config_table.csv total_E_J/total_E_sd_J
+1,td3 Ant-v5 total mean±sd J,30519.8 ± 431.9,VERIFIED,contexts/section_5.2_data/d1_config_table.csv total_E_J/total_E_sd_J
+2,mbpo HalfCheetah-v5 total mean±sd J,207394.6 ± 7451.4,VERIFIED,contexts/section_5.2_data/d1_config_table.csv total_E_J/total_E_sd_J
+2,mbpo Ant-v5 total mean±sd J,253137.9 ± 20140.0,VERIFIED,contexts/section_5.2_data/d1_config_table.csv total_E_J/total_E_sd_J
+3,tdmpc2 HalfCheetah-v5 total mean±sd J,447086.8 ± 3184.4,VERIFIED,contexts/section_5.2_data/d1_config_table.csv total_E_J/total_E_sd_J
+3,tdmpc2 Ant-v5 total mean±sd J,493191.1 ± 1782.0,VERIFIED,contexts/section_5.2_data/d1_config_table.csv total_E_J/total_E_sd_J
+2,mbpo HalfCheetah-v5 dynamics_model_update share %,70.49,MISMATCH,d1_config_table: dynamics_model_update_E_J/total_E_J (ratio of means)
+2,mbpo HalfCheetah-v5 dyn share % (mean of per-run shares),70.46,VERIFIED,per-run via section_5_2_analysis.load()
+2,mbpo Ant-v5 dynamics_model_update share %,74.41,MISMATCH,d1_config_table: dynamics_model_update_E_J/total_E_J (ratio of means)
+2,mbpo Ant-v5 dyn share % (mean of per-run shares),74.28,VERIFIED,per-run via section_5_2_analysis.load()
+3,tdmpc2 HalfCheetah-v5 rollout share %,47.82,VERIFIED,d1_config_table rollout_E_J/total_E_J
+3,tdmpc2 HalfCheetah-v5 total J/FLOP pJ,50.62,VERIFIED,d1_config_table total_J_per_F
+3,tdmpc2 Ant-v5 rollout share %,51.62,VERIFIED,d1_config_table rollout_E_J/total_E_J
+3,tdmpc2 Ant-v5 total J/FLOP pJ,48.95,VERIFIED,d1_config_table total_J_per_F
+6,HalfCheetah-v5 total J/FLOP min pJ,"19.11 (td3,b1024)",VERIFIED,d1_config_table total_J_per_F
+6,HalfCheetah-v5 total J/FLOP max pJ,"1421.3 (td3,w256)",VERIFIED,d1_config_table total_J_per_F
+6,Ant-v5 total J/FLOP min pJ,"19.82 (td3,b1024)",VERIFIED,d1_config_table total_J_per_F
+6,Ant-v5 total J/FLOP max pJ,"1232.5 (td3,w256)",VERIFIED,d1_config_table total_J_per_F

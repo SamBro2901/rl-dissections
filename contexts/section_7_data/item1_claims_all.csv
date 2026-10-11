@@ -1,0 +1,42 @@
+claim,item,found,status,source
+1,sac HalfCheetah-v5 total mean±sd J,60911.0 ± 254.1,VERIFIED,contexts/section_5.2_data/d1_config_table.csv total_E_J/total_E_sd_J
+1,sac Ant-v5 total mean±sd J,64382.6 ± 588.3,VERIFIED,contexts/section_5.2_data/d1_config_table.csv total_E_J/total_E_sd_J
+1,td3 HalfCheetah-v5 total mean±sd J,28111.5 ± 310.7,VERIFIED,contexts/section_5.2_data/d1_config_table.csv total_E_J/total_E_sd_J
+1,td3 Ant-v5 total mean±sd J,30519.8 ± 431.9,VERIFIED,contexts/section_5.2_data/d1_config_table.csv total_E_J/total_E_sd_J
+2,mbpo HalfCheetah-v5 total mean±sd J,207394.6 ± 7451.4,VERIFIED,contexts/section_5.2_data/d1_config_table.csv total_E_J/total_E_sd_J
+2,mbpo Ant-v5 total mean±sd J,253137.9 ± 20140.0,VERIFIED,contexts/section_5.2_data/d1_config_table.csv total_E_J/total_E_sd_J
+2,mbpo HalfCheetah-v5 dyn share % (mean of per-run shares),70.46,VERIFIED,per-run via section_5_2_analysis.load()
+2,mbpo Ant-v5 dyn share % (mean of per-run shares),74.28,VERIFIED,per-run via section_5_2_analysis.load()
+3,tdmpc2 HalfCheetah-v5 total mean±sd J,447086.8 ± 3184.4,VERIFIED,contexts/section_5.2_data/d1_config_table.csv total_E_J/total_E_sd_J
+3,tdmpc2 Ant-v5 total mean±sd J,493191.1 ± 1782.0,VERIFIED,contexts/section_5.2_data/d1_config_table.csv total_E_J/total_E_sd_J
+3,tdmpc2 HalfCheetah-v5 rollout share %,47.82,VERIFIED,d1_config_table rollout_E_J/total_E_J
+3,tdmpc2 HalfCheetah-v5 total J/FLOP pJ,50.62,VERIFIED,d1_config_table total_J_per_F
+3,tdmpc2 Ant-v5 rollout share %,51.62,VERIFIED,d1_config_table rollout_E_J/total_E_J
+3,tdmpc2 Ant-v5 total J/FLOP pJ,48.95,VERIFIED,d1_config_table total_J_per_F
+4,pooled Spearman energy vs FLOPs HalfCheetah-v5,"rho=0.8357, n=27",VERIFIED,"contexts/section_5.2_data/d2_total_correlation.csv spearman_rho,n"
+4,pooled Spearman energy vs FLOPs Ant-v5,"rho=0.8463, n=29",VERIFIED,"contexts/section_5.2_data/d2_total_correlation.csv spearman_rho,n"
+4,Spearman return vs FLOPs HalfCheetah-v5,"rho=0.4174, p=0.0303, n=27",VERIFIED,flop_analysis/output/correlation/correlation_summary.csv
+4,Spearman return vs FLOPs Ant-v5,"rho=-0.3262, p=0.0842, n=29",VERIFIED,flop_analysis/output/correlation/correlation_summary.csv
+5,pooled log-log slope / R2 HalfCheetah-v5,"slope=0.4715, R2=0.6110",VERIFIED,"d2_total_correlation.csv loglog_slope,loglog_r2"
+5,pooled log-log slope / R2 Ant-v5,"slope=0.5071, R2=0.6253",VERIFIED,"d2_total_correlation.csv loglog_slope,loglog_r2"
+6,HalfCheetah-v5 total J/FLOP min pJ,"19.11 (td3,b1024)",VERIFIED,d1_config_table total_J_per_F
+6,HalfCheetah-v5 total J/FLOP max pJ,"1421.3 (td3,w256)",VERIFIED,d1_config_table total_J_per_F
+6,Ant-v5 total J/FLOP min pJ,"19.82 (td3,b1024)",VERIFIED,d1_config_table total_J_per_F
+6,Ant-v5 total J/FLOP max pJ,"1232.5 (td3,w256)",VERIFIED,d1_config_table total_J_per_F
+7,"energy ordering td3<sac<mbpo at all 8 sweep values, both envs",16/16 same as baseline; orderings=['td3 < sac < mbpo'],VERIFIED,contexts/section_5.3_data/o2_swaps_vs_baseline.csv
+7,seed-level energy orderings equal td3<sac<mbpo,80/80,VERIFIED,contexts/section_5.3_data/o3_seed_level.csv
+7,J/FLOP non-baseline sweep values differing from baseline ordering (Ant-v5),6 of 7,VERIFIED,o2_swaps_vs_baseline.csv (metric=jpf)
+7,J/FLOP non-baseline sweep values differing from baseline ordering (HalfCheetah-v5),6 of 7,VERIFIED,o2_swaps_vs_baseline.csv (metric=jpf)
+8,total energy Ant/HC ratio range over 27 pairs,1.027–1.248,VERIFIED,contexts/section_5.4_data/pooled_summary.csv (ratio of means per pair)
+8,rollout energy Ant/HC ratio range,1.1055–2.2878,VERIFIED,pooled_summary.csv E_rollout_min/max (1.1055 rounds to 1.106 at 3dp: 1.10552 -> 1.106)
+9,"R2000 (results/mbpo/HalfCheetah-v5/seed_0/20260904_122958) training tasks (non-idle, non-warmup)","189.5 kJ, 27.30 min, 115.7 W",VERIFIED,"emissions_base_*.csv, sum over tasks excluding idle_baseline_*/warmup"
+9,"R200 (results/mbpo/HalfCheetah-v5/seed_0/20260904_130915) training tasks (non-idle, non-warmup)","568.2 kJ, 95.53 min, 99.1 W",VERIFIED,"emissions_base_*.csv, sum over tasks excluding idle_baseline_*/warmup"
+10,300 run directories; 280 canonical; 20 dev,"total=300, canonical=280, dev=20, configs=56",VERIFIED,rglob results/**/metadata.json
+11,SAC rollout median s / n,0.3409 / 7000,VERIFIED,item1_claim11_task_durations.csv
+11,TD3 rollout median s / n,0.2175 / 8000,VERIFIED,
+11,MBPO rollout median s / n,0.3536 / 8000,VERIFIED,
+11,MBPO synthetic_rollout_generation median s,0.008523,VERIFIED,
+11,all sac rollout tasks < 1 s (max),"max=0.532s, n>=1s=0/7000",VERIFIED,
+11,all td3 rollout tasks < 1 s (max),"max=0.349s, n>=1s=0/8000",VERIFIED,
+11,all mbpo rollout tasks < 1 s (max),"max=0.408s, n>=1s=0/8000",VERIFIED,
+11,all tdmpc2 rollout tasks < 1 s (max),"max=16.678s, n>=1s=5000/5000",MISMATCH,

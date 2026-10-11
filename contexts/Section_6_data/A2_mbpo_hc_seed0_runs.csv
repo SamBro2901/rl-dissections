@@ -1,0 +1,3 @@
+run_dir,timestamp,git_commit,gpu_min_clock_mhz,gpu_max_clock_mhz,hidden_sizes,batch_size,updates_per_env_step,rollout_min_length,rollout_max_length,rollout_min_epoch,rollout_max_epoch,warmup_steps,train_steps,steps_per_epoch,model_hidden_sizes,torch,codecarbon,gpu,training_metrics_exists
+results/mbpo/HalfCheetah-v5/seed_0/20260904_122958,20260904_122958,ae3880860ebcce0c1e729714cdf48a08039adc46,2000,2000,"[256, 256]",256,1,1,1,20,150,5000,100000,1000,"[200, 200, 200, 200]",2.13.0+cu130,3.3.0,NVIDIA GeForce RTX 5090,True
+results/mbpo/HalfCheetah-v5/seed_0/20260904_130915,20260904_130915,ae3880860ebcce0c1e729714cdf48a08039adc46,200,200,"[256, 256]",256,1,1,1,20,150,5000,100000,1000,"[200, 200, 200, 200]",2.13.0+cu130,3.3.0,NVIDIA GeForce RTX 5090,True
