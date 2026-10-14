@@ -1,0 +1,57 @@
+override_file,algo,env,config,runs
+(none: defaults),sac,HalfCheetah-v5,baseline,5
+(none: defaults),sac,Ant-v5,baseline,5
+sac_utd2.json,sac,HalfCheetah-v5,updates_per_env_step=2,5
+sac_utd4.json,sac,HalfCheetah-v5,updates_per_env_step=4,5
+(none: defaults),mbpo,HalfCheetah-v5,baseline,5
+mbpo_ant.json,mbpo,Ant-v5,baseline,5
+(none: defaults),td3,HalfCheetah-v5,baseline,5
+(none: defaults),td3,Ant-v5,baseline,5
+sac_utd2.json,sac,Ant-v5,updates_per_env_step=2,5
+sac_utd4.json,sac,Ant-v5,updates_per_env_step=4,5
+td3_utd2.json,td3,HalfCheetah-v5,updates_per_env_step=2,5
+td3_utd4.json,td3,HalfCheetah-v5,updates_per_env_step=4,5
+td3_utd2.json,td3,Ant-v5,updates_per_env_step=2,5
+td3_utd4.json,td3,Ant-v5,updates_per_env_step=4,5
+(none: defaults),tdmpc2,HalfCheetah-v5,baseline,5
+tdmpc2_ant.json,tdmpc2,Ant-v5,baseline,5
+sac_width256.json,sac,HalfCheetah-v5,"hidden_sizes=[256, 256]",5
+sac_width512.json,sac,HalfCheetah-v5,"hidden_sizes=[512, 512]",5
+sac_width256.json,sac,Ant-v5,"hidden_sizes=[256, 256]",5
+sac_width512.json,sac,Ant-v5,"hidden_sizes=[512, 512]",5
+mbpo_width256.json,mbpo,HalfCheetah-v5,"hidden_sizes=[256, 256]",5
+mbpo_width512.json,mbpo,HalfCheetah-v5,"hidden_sizes=[512, 512]",5
+mbpo_ant_width256.json,mbpo,Ant-v5,"hidden_sizes=[256, 256]",5
+mbpo_ant_width512.json,mbpo,Ant-v5,"hidden_sizes=[512, 512]",5
+td3_width256.json,td3,HalfCheetah-v5,"hidden_sizes=[256, 256]",5
+td3_width512.json,td3,HalfCheetah-v5,"hidden_sizes=[512, 512]",5
+td3_width256.json,td3,Ant-v5,"hidden_sizes=[256, 256]",5
+td3_width512.json,td3,Ant-v5,"hidden_sizes=[512, 512]",5
+mbpo_utd2.json,mbpo,HalfCheetah-v5,updates_per_env_step=2,5
+mbpo_utd4.json,mbpo,HalfCheetah-v5,updates_per_env_step=4,5
+mbpo_ant_utd2.json,mbpo,Ant-v5,updates_per_env_step=2,5
+mbpo_ant_utd4.json,mbpo,Ant-v5,updates_per_env_step=4,5
+sac_batch512.json,sac,HalfCheetah-v5,batch_size=512,5
+sac_batch1024.json,sac,HalfCheetah-v5,batch_size=1024,5
+mbpo_batch512.json,mbpo,HalfCheetah-v5,batch_size=512,5
+mbpo_batch1024.json,mbpo,HalfCheetah-v5,batch_size=1024,5
+td3_batch256.json,td3,HalfCheetah-v5,batch_size=256,5
+td3_batch512.json,td3,HalfCheetah-v5,batch_size=512,5
+td3_batch1024.json,td3,HalfCheetah-v5,batch_size=1024,5
+sac_batch512.json,sac,Ant-v5,batch_size=512,5
+sac_batch1024.json,sac,Ant-v5,batch_size=1024,5
+mbpo_ant_batch512.json,mbpo,Ant-v5,batch_size=512,5
+mbpo_ant_batch1024.json,mbpo,Ant-v5,batch_size=1024,5
+td3_batch256.json,td3,Ant-v5,batch_size=256,5
+td3_batch512.json,td3,Ant-v5,batch_size=512,5
+td3_batch1024.json,td3,Ant-v5,batch_size=1024,5
+mbpo_ant_rollout1.json,mbpo,Ant-v5,rollout_max_length=1,5
+mbpo_ant_rollout15.json,mbpo,Ant-v5,rollout_max_length=15,5
+tdmpc2_numq3.json,tdmpc2,HalfCheetah-v5,num_q=3,5
+tdmpc2_ant_numq3.json,tdmpc2,Ant-v5,num_q=3,5
+tdmpc2_numq7.json,tdmpc2,HalfCheetah-v5,num_q=7,5
+tdmpc2_ant_numq7.json,tdmpc2,Ant-v5,num_q=7,5
+tdmpc2_horizon1.json,tdmpc2,HalfCheetah-v5,horizon=1,5
+tdmpc2_ant_horizon1.json,tdmpc2,Ant-v5,horizon=1,5
+tdmpc2_horizon5.json,tdmpc2,HalfCheetah-v5,horizon=5,5
+tdmpc2_ant_horizon5.json,tdmpc2,Ant-v5,horizon=5,5

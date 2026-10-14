@@ -1,0 +1,88 @@
+\chapter{Clock Experiment Details}
+\label{app:clock-details}
+
+This appendix documents the two runs of \zcref{ch:clock}.
+\Zcref{app:clock-provenance} lists what the repository shows about their origin, \zcref{app:clock-suballoc} gives the energy of the sub-segments allocated within the gradient updates, \zcref{app:clock-idle} the idle windows, and \zcref{app:clock-full} all segments of both runs.
+R2000 is the run \texttt{results/mbpo/HalfCheetah-v5/seed\_0/20260904\_122958} and R200 the run \texttt{results/mbpo/HalfCheetah-v5/seed\_0/20260904\_130915}.
+All values were recomputed from the run files (\texttt{segment\_energy.json} and the per-task CodeCarbon file).
+
+\section{Provenance of the Two Runs}
+\label{app:clock-provenance}
+
+\begin{itemize}
+  \item Both runs record the commit \texttt{ae38808}, which dates from 2026-09-02 (14:53 UTC+2) and predates the MBPO implementation (first committed in \texttt{f109bd4} on 2026-09-04, which also contains both run directories). Only \texttt{git rev-parse HEAD} is stored, so both runs executed uncommitted working-tree code.
+  \item Both runs record the same software (PyTorch 2.13.0+cu130, CodeCarbon 3.3.0), the hidden sizes $(256,256)$ and the clock request of their column (\num{2000}/\num{2000}\,MHz and \num{200}/\num{200}\,MHz); \texttt{lock\_gpu\_clocks} is true in both.
+  \item At \texttt{ae38808} and \texttt{f109bd4} the committed default of the two clock fields is \texttt{None}, whereas both runs record explicit values. The explicit values therefore come from a working-tree edit; its form is not recorded. No command-line flag for the clock values exists.
+  \item Later commits set the default to $2000/2000$\,MHz (commit \texttt{f23f448}, 2026-09-07); all canonical and sweep runs record this value.
+  \item Not found in the repository: reason for trying \SI{200}{\mega\hertz}, exact command line, GPU power limit, supported and maximum clocks, driver and CUDA versions, and temperatures before and after the idle windows.
+\end{itemize}
+
+\paragraph{Unset clock fields in development runs.}
+Of the \num{300} run directories in the repository, \num{280} are the canonical runs; the other \num{20} are development runs.
+Fifteen of them, all SAC runs of 13 August to 2 September 2026, record \texttt{None} for both clock fields; the other five (the two runs of this chapter and one development run each of MBPO, TD3 and TD-MPC2) record \num{2000}/\num{2000}\,MHz or, for R200, \num{200}/\num{200}\,MHz.
+The fifteen runs record the commits \texttt{97eb7a7}, \texttt{64fb0cd}, \texttt{20b4d4f}, \texttt{4b9f11a}, \texttt{2aa4ccd}, \texttt{cf4d327}, \texttt{d05cbe6} and \texttt{d5880ed}.
+In the source of all eight commits, and of \texttt{ae38808}, an unset field means that the clock-control function queries the supported graphics clocks with \texttt{nvidia-smi} and sets any unset bound to the \emph{lowest} supported clock (comment in the code: ``lock to a single fixed low clock by default''); the value of that clock was not recorded.
+The constant \texttt{DEFAULT\_LOCK\_MHZ} first appears in \texttt{f109bd4} (2026-09-04) with the value \num{200}, applied to unset bounds after clamping to the supported range, and has the value \num{2000} from \texttt{f23f448} (2026-09-07), together with the configuration defaults of \num{2000}.
+The repository documentation (\texttt{README.md} and \texttt{CLAUDE.md}) describes the fifteen runs as equivalent to \SI{2000}{\mega\hertz}; the commit history shows no code that gives an unset field the value \num{2000} before \texttt{f23f448}.
+\todo{AUTHOR: decide how the unset clock fields of the fifteen development runs are described (they are not part of the 280 canonical runs), and correct the statement in \texttt{README.md} and \texttt{CLAUDE.md}.}
+
+\section{Allocated Sub-Segments}
+\label{app:clock-suballoc}
+
+\begin{table}[tbp]
+  \centering
+  \caption{Allocated sub-segments of gradient updates (energy only; allocated by timed share, see text).}
+  \label{tab:app-clock-suballoc}
+  \begin{tabular}{lrrr}
+    \toprule
+    Sub-segment                 & R2000 (kJ) & R200 (kJ) & Ratio \\
+    \midrule
+%%F_SUBALLOC_ROWS%%
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Allocated power.}
+The allocated powers (\SI{%%F_PALLOC_2000%%}{\watt} and \SI{%%F_PALLOC_200%%}{\watt}) are energy divided by the timed sub-segment duration and are not comparable to the measured power of gradient updates (\SI{%%F_PGU_2000%%}{\watt} and \SI{%%F_PGU_200%%}{\watt}).
+All four sub-segments of a run share the same allocated power, because the allocation splits the measured energy in proportion to the timed durations (\zcref{eq:allocation}).
+
+\section{Idle Windows}
+\label{app:clock-idle}
+
+\begin{table}[tbp]
+  \centering
+  \caption{Idle power of the head and tail windows (total, W). Window-corrected: energy divided by the integration window of the task instead of its recorded duration (\zcref{sec:units}).}
+  \label{tab:app-clock-idle}
+  \begin{tabular}{lrrrrrr}
+    \toprule
+          & \multicolumn{3}{c}{Window-corrected} & \multicolumn{2}{c}{As recorded} &                  \\
+    \cmidrule(lr){2-4}\cmidrule(lr){5-6}
+          & Head                                 & Tail                            & Mean            & Head  & Tail \\
+    \midrule
+%%F_IDLE_ROWS%%
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Full Segment Table}
+\label{app:clock-full}
+
+\Zcref{tab:app-clock-full} lists all segments of both runs: the directly measured segments, the allocated sub-segments, the training total, and the warm-up and idle tasks, which are not part of the training total.
+Energy per FLOP is given for segments with a matmul FLOP count; for \texttt{target\_update} it is joules per Polyak operation.
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{All segments of the two runs (gross energy, seed~\num{0}, $n=1$ each). ``Alloc.'' marks sub-segments allocated within the gradient updates. Share is the share of the training total.}
+  \label{tab:app-clock-full}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}llrrrrrrrrr@{}}
+      \toprule
+      Segment & Kind & \multicolumn{2}{c}{Energy [J]} & \multicolumn{2}{c}{Duration [s]} & \multicolumn{2}{c}{Mean power [W]} & \multicolumn{2}{c}{J/FLOP} & Share R2000 [\%] \\
+      \cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}\cmidrule(lr){9-10}
+              &      & R2000 & R200 & R2000 & R200 & R2000 & R200 & R2000 & R200 & \\
+      \midrule
+%%F_FULL_ROWS%%
+      \bottomrule
+    \end{tabular}}
+\end{table}

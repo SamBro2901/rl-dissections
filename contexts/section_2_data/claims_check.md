@@ -1,0 +1,58 @@
+# Claims verification for Chapter 2 (2026-10-14)
+
+Sources were read as text (PDF to text) or from the CodeCarbon 3.3.0 source. "Chapter 5" means the introduction of Section 5.2 (`sec:energy-vs-compute`), lines 5614 to 5618 of `thesis-main.tex` before the insertion of Chapter 2. Chapter 5 was **not edited**.
+
+## A. The four claims in the introduction of Section 5.2
+
+Text of the claim: *FLOP counts are a common stand-in for energy when energy cannot be measured, because they do not depend on the hardware and can be obtained without running the model [schwartz2020green]. Estimates built on them convert FLOPs into energy with an assumed efficiency of the hardware [desislavov2023trends, patterson2021carbon], whereas measurement-based approaches sample the power drawn during the run [strubell2019energy, henderson2020systematic].*
+
+| # | Claim | Source | Outcome |
+|---|---|---|---|
+| 1 | FLOPs are a hardware-independent stand-in for energy | Schwartz et al. 2020, Section 3.1 ("FPO") | **Confirmed.** They propose reporting the number of floating-point operations (FPO), computed analytically with a cost for ADD and MUL; FPO "does not depend on the underlying hardware", is "tied to the amount of energy consumed" and correlates with running time. They also state limits: it ignores memory consumption and depends on the implementation. |
+| 2a | Desislavov et al. convert FLOPs to energy with an assumed efficiency | Desislavov et al. 2023 (arXiv 2109.05472v2), Sections on hardware efficiency and "Energy Consumption Analysis" | **Confirmed.** They compute efficiency as peak FLOPS divided by thermal design power for NVIDIA GPUs ("efficiency when the GPU is at full utilisation"), fit GFLOPS per Watt over time, and estimate the energy of one inference (inference only) by dividing the FLOPs of the forward pass by FLOPS per Watt. They state that more precise numbers would require measured power per network. |
+| 2b | **Patterson et al. convert FLOPs to energy with an assumed efficiency** | Patterson et al. 2021 (arXiv 2104.10350v3), Section 2 (energy equation), Section 4.3, Appendix A, footnote 17 | **NOT confirmed.** The paper computes energy as hours to train x number of processors x **measured** average power per processor x PUE / 1000, and the text says "We measured the power of the processors during training, which is ideal". FLOPs are reported as a **measured** quantity ("Measured FLOPs/s are calculated as the number of computed operations divided by execution time", profiling data from Google's Xprof; "Total Computation ... from measured performance, number of chips, and days to train"). Section 4.3 argues for "measurements are more interesting than extrapolations" and shows that measured performance per Watt is below the theoretical value by factors of 1.6 (TPU) and 3.5 (GPU) on average. An **assumed efficiency appears only once**: footnote 17, a hypothetical training of Transformer (Big) on a supercomputer, "assume it runs at 40 % of the peak floating point performance"; Figure 5 shows the V100 at 20 % of peak. |
+| 3a | Strubell et al. sample the power during the run | Strubell et al. 2019, methods section (power and carbon computation) | **Confirmed.** They sample GPU power with `nvidia-smi` and CPU power with Intel RAPL during training and report the average, then multiply by hours and PUE. |
+| 3b | Henderson et al. sample the power during the run | Henderson et al. 2020, Section 4 and Example 3/4 | **Confirmed.** The experiment-impact-tracker uses RAPL for CPU and DRAM and `nvidia-smi` for the GPU. The paper also **discusses FLOP-based estimation itself**: the discussion of metrics that allow rough estimates describes PFLOPs-hr x TDP / peak throughput as an estimate that "makes assumptions based on maximum efficiency of a GPU", and Example 3 reports that FPOs vs. energy has R^2 = 0.083 (Pearson 0.289) across image-classification architectures but R^2 = 0.999 (Pearson 1.0) within VGG versions. |
+
+### Suggested rewording of the Chapter 5 sentence (not applied)
+
+Current: "Estimates built on them convert FLOPs into energy with an assumed efficiency of the hardware~\cite{desislavov2023trends,patterson2021carbon}, whereas measurement-based approaches sample the power drawn during the run~\cite{strubell2019energy,henderson2020systematic}."
+
+Proposal: "Estimates built on them convert FLOPs into energy with an assumed efficiency of the hardware~\cite{desislavov2023trends}, a conversion that Henderson et al.\ describe as resting on the maximum efficiency of the GPU~\cite{henderson2020systematic}, whereas measurement-based approaches sample the power drawn during the run~\cite{strubell2019energy,henderson2020systematic} or use its measured average~\cite{patterson2021carbon}."
+
+Chapter 2 (`sec:related-flop`) already uses this reading. The `\todo` at line 5957 of the original text ("verify that patterson2021carbon converts FLOPs with an assumed efficiency") can be closed with this result.
+
+## B. Statements of Chapter 3 checked against sources while writing Chapter 2
+
+| Statement (Chapter 3) | Check | Result |
+|---|---|---|
+| RAM energy is a constant capacity heuristic (3.4.6, 3.7.1); constant 20.0 W for 60.8 GB (Ch. 7) | `codecarbon/external/ram.py` 3.3.0 | **Consistent.** v3 model: DIMM count estimated from capacity (17 to 64 GB gives 4), 5 W per DIMM for up to 4 DIMMs, so 4 x 5 = 20 W. The "3 W per 8 GB" rule is the pre-v3 heuristic (it is still quoted in the class docstring) and would give 22.8 W for 60.8 GB. |
+| `thesis-layout.md` line 121: "RAM energy is a constant capacity heuristic (3 W per 8 GB)" | same | **Outdated for CodeCarbon 3.x.** The words "constant capacity heuristic" are right; the number is not. Replace by "per-DIMM model (5 W per estimated DIMM; 20 W for the machine of the thesis)". Nothing in `thesis-main.tex` states 3 W per 8 GB (grep). |
+| The task energy is the difference of the cumulative counters; the polling interval does not limit it (3.4.2) | `start_task`, `stop_task`, `hardware.start()`, `RAPLFile.delta`, `GPUDevice.delta` | **Confirmed.** `start_task` stops the scheduler, re-reads the counters, snapshots the totals; `stop_task` reads again and subtracts the snapshot. |
+| Reusing a task name corrupts accounting (3.4.2) | `start_task`: if the name exists in `_tasks`, a UUID is appended to the key and `_active_task` is set to the new key | **Mechanism found (consistent with, not a proof of, the observation).** A later `stop_task(old_name)` then finds the *old* Task object (`self._tasks.get(task_name)` is not None) and takes its start time for the duration, so the duration is wrong. The harness's unique names avoid it. |
+| The head idle window integrates about 3.1 s more than recorded; "a one-time lookup at the first `start_task`" (3.4.1) | `start_task` sets `_last_measured_time` first, then `hardware.start()`, then `_prepare_emissions_data()` -> `_update_emissions()` -> `_ensure_geo_metadata()` (one-time geolocation lookup, the first call only), and only afterwards constructs `Task` (whose `start_time` is taken in `Task.__init__`). `stop_task` computes RAM energy from `now - _last_measured_time` but the task duration from `now - Task.start_time`. | **Supports the explanation** and names the mechanism: the lookup time is inside the RAM energy but outside the recorded duration. This also means a network lookup happens inside the harness at the first task (relevant for the "geolocation fallback" statement). The wording "the order of the calls ... suggests" in 3.4.1 can be made definite if you wish; not edited. |
+| CPU energy is read from RAPL (3.4.6) and the DRAM domain is not included | `IntelRAPL` defaults `rapl_include_dram=False`, `rapl_prefer_psys=False`; package domains used | **Consistent.** Which domains exist on the Core Ultra 9 285K is still open (the existing `\todo` about `ls /sys/class/powercap/intel-rapl*`). |
+| The power CodeCarbon reports for a GPU | `GPUDevice.delta` uses `Power.from_energies_and_delay` on energy differences | **Derived from the energy counter, not a read of `nvmlDeviceGetPowerUsage`.** Relevant for any statement in later chapters about "GPU power" of a task (it is energy over duration). |
+| NVML energy counter is in mJ since driver reload, Volta or newer | NVML R470 reference page | **Confirmed.** |
+
+## C. Other literature statements used in Chapter 2
+
+| Statement | Source / location | Status |
+|---|---|---|
+| RAPL counters updated about every 1 ms; 32-bit counters overflow | Jay et al. 2023 Section II-A; Raffin and Trystram 2024 Section III-B ("about 60 s under heavy load" quoted from Intel's manual) | confirmed in the text of the papers |
+| Power update period about 20 ms (Volta/Pascal), 100 ms (Turing, A100: 101 ms median); averaging window 10, 100 or 25 ms depending on the GPU; error about +/-5 % of the reading; only 25 % of the runtime sampled on A100/H100 | Yang et al. (arXiv v3), Figures 6, 10, 14 and Section 5 | confirmed. Not covered: the NVML *energy counter*, RTX 5090 (Blackwell) |
+| Best tool in the wattmeter comparison: CodeCarbon (machine mode), 96 %, 80 % (Grid5000) and 102 %, 95 % (Labri) of the wattmeter | Bouza et al. 2023 (via publisher page) | confirmed; the chapter states only "closest of seven tools" |
+| Energy overhead of the software meters below 1 % on average (max about 2 %) | Jay et al. 2023 Section V | confirmed |
+| MBPO uses 20 to 40 updates per environment step; SAC 1; DreamerV3 UTD 512 | REDQ introduction; TD-MPC2 Section 4 | confirmed |
+| MBPO Table 1: B = 7, 4 x 200, E = 1000, M = 400, G = 40 (HalfCheetah) / 20, horizons | MBPO arXiv v3 Appendix C | confirmed. "Elites" are **not** in the paper |
+| TD-MPC2 planner: 512 samples, 24 policy-prior, horizon 3, 6 iterations, 64 elites; Q-subset of two (REDQ); SimNorm; discrete regression; warm start | TD-MPC2 Table 8 (garbled by text extraction, consistent with `TDMPC2Config`), Section 3 | confirmed |
+| SAC automatic temperature, target entropy -dim(A) | Haarnoja et al., "Soft Actor-Critic Algorithms and Applications", hyperparameter table | confirmed |
+| TD3 noise 0.2 clipped at 0.5, delay d = 2 | Fujimoto et al. 2018, Section 6.1 | confirmed |
+| Gardner et al. 2025: seven model-free algorithms, ten Atari games, CodeCarbon 2.4.2, RAPL and nvidia-smi, logged every 10 000 steps, no phase breakdown | arXiv HTML | confirmed (read by the fetch tool, not as PDF text) |
+| QuaRL: 1.9 to 3.8x carbon reduction, experiment-impact-tracker | Google Research blog; arXiv v6 comments | the blog and the arXiv page were read; the figure is not repeated in the chapter |
+| RL-Scope: RL less GPU-bound; on-policy at least 3.5x more simulation-bound | arXiv abstract | confirmed from the abstract |
+| Hackenberg 2013 evaluates RAPL accuracy | title (Crossref) and the description in Raffin and Trystram 2024 | the paper itself was not opened |
+
+## D. Gap statement
+
+Outcome: **supported**, with the wording "no study was found" and the qualification that the search was a web search, not a systematic review. Closest work: Henderson et al. 2020 (RL energy leaderboard, totals), Gardner et al. 2025 (CodeCarbon, seven model-free algorithms on Atari, totals, one normalised metric), Krishnan et al. 2022 (QuaRL, carbon of whole experiments), Gleeson et al. 2021 (RL-Scope, per-operation *time*). Searches for per-phase energy of RL training, energy of model-based or planning-based RL, and FLOP-normalised energy in RL found nothing further (several queries, including extended search, 2026-10-14). The statement in 3.1 ("energy is usually reported as one total ...") therefore stands; Chapter 1.2 can reuse `sec:related-positioning`.

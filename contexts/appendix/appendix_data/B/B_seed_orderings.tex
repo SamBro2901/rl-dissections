@@ -1,0 +1,54 @@
+{\scriptsize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}lllllllccccc@{}}
+    \caption[Orderings of SAC (S), TD3 (T) and MBPO (M) by total energy and by total J/FLOP, from lowest to highest, at every sweep value: the ordering of the seed means, the number of seeds (of five) whose own ordering is the same, the ordering at the baseline and the number of seeds whose ordering equals it, and the ordering of each seed]{Orderings of SAC (S), TD3 (T) and MBPO (M) by total energy and by total J/FLOP, from lowest to highest, at every sweep value: the ordering of the seed means, the number of seeds (of five) whose own ordering is the same, the ordering at the baseline and the number of seeds whose ordering equals it, and the ordering of each seed. TD3 is at its baseline batch size \num{100} in the baseline, update-to-data and width rows. HC is HalfCheetah-v5, Ant is Ant-v5.}
+    \label{tab:app-seed-orderings} \\
+    \toprule
+    Metric & Env. & Sweep value & Mean order & $n$ & Base order & $n$ & 331 & 958 & 14577 & 43611 & 85062 \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Metric & Env. & Sweep value & Mean order & $n$ & Base order & $n$ & 331 & 958 & 14577 & 43611 & 85062 \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{12}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    energy & HC & baseline & T<S<M & \num{5} & T<S<M & \num{5} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & UTD 2 & T<S<M & \num{5} & T<S<M & \num{5} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & UTD 4 & T<S<M & \num{5} & T<S<M & \num{5} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & width 256 & T<S<M & \num{5} & T<S<M & \num{5} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & width 512 & T<S<M & \num{5} & T<S<M & \num{5} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & batch 256 & T<S<M & \num{5} & T<S<M & \num{5} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & batch 512 & T<S<M & \num{5} & T<S<M & \num{5} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & batch 1024 & T<S<M & \num{5} & T<S<M & \num{5} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+    \midrule
+    energy & Ant & baseline & T<S<M & \num{5} & T<S<M & \num{5} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & UTD 2 & T<S<M & \num{5} & T<S<M & \num{5} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & UTD 4 & T<S<M & \num{5} & T<S<M & \num{5} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & width 256 & T<S<M & \num{5} & T<S<M & \num{5} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & width 512 & T<S<M & \num{5} & T<S<M & \num{5} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & batch 256 & T<S<M & \num{5} & T<S<M & \num{5} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & batch 512 & T<S<M & \num{5} & T<S<M & \num{5} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & batch 1024 & T<S<M & \num{5} & T<S<M & \num{5} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+    \midrule
+    J/FLOP & HC & baseline & S<T<M & \num{5} & S<T<M & \num{5} & S<T<M & S<T<M & S<T<M & S<T<M & S<T<M \\
+     &  & UTD 2 & S<T<M & \num{5} & S<T<M & \num{5} & S<T<M & S<T<M & S<T<M & S<T<M & S<T<M \\
+     &  & UTD 4 & S<M<T & \num{5} & S<T<M & \num{0} & S<M<T & S<M<T & S<M<T & S<M<T & S<M<T \\
+     &  & width 256 & M<S<T & \num{5} & S<T<M & \num{0} & M<S<T & M<S<T & M<S<T & M<S<T & M<S<T \\
+     &  & width 512 & S<M<T & \num{3} & S<T<M & \num{2} & S<M<T & S<M<T & S<M<T & S<T<M & S<T<M \\
+     &  & batch 256 & T<S<M & \num{5} & S<T<M & \num{0} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & batch 512 & T<S<M & \num{5} & S<T<M & \num{0} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & batch 1024 & T<S<M & \num{5} & S<T<M & \num{0} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+    \midrule
+    J/FLOP & Ant & baseline & S<T<M & \num{5} & S<T<M & \num{5} & S<T<M & S<T<M & S<T<M & S<T<M & S<T<M \\
+     &  & UTD 2 & S<T<M & \num{5} & S<T<M & \num{5} & S<T<M & S<T<M & S<T<M & S<T<M & S<T<M \\
+     &  & UTD 4 & S<M<T & \num{5} & S<T<M & \num{0} & S<M<T & S<M<T & S<M<T & S<M<T & S<M<T \\
+     &  & width 256 & M<S<T & \num{5} & S<T<M & \num{0} & M<S<T & M<S<T & M<S<T & M<S<T & M<S<T \\
+     &  & width 512 & S<M<T & \num{5} & S<T<M & \num{0} & S<M<T & S<M<T & S<M<T & S<M<T & S<M<T \\
+     &  & batch 256 & T<S<M & \num{5} & S<T<M & \num{0} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & batch 512 & T<S<M & \num{5} & S<T<M & \num{0} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+     &  & batch 1024 & T<S<M & \num{5} & S<T<M & \num{0} & T<S<M & T<S<M & T<S<M & T<S<M & T<S<M \\
+  \end{longtable}
+}

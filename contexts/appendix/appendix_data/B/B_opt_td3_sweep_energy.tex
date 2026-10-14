@@ -1,0 +1,132 @@
+{\footnotesize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}lllrrr@{}}
+    \caption[TD3: energy per segment, share of the total and share of the gradient updates (mean $\pm$ sd over the five seeds, gross energy)]{TD3: energy per segment, share of the total and share of the gradient updates (mean $\pm$ sd over the five seeds, gross energy). Segment abbreviations: buffer = \texttt{buffer\_sample}, critic = \texttt{critic\_update} (TD-MPC2: world-model step), actor = \texttt{actor\_update} (TD-MPC2: policy-prior step), target = \texttt{target\_update}, GU = \texttt{gradient\_updates}, fit = \texttt{dynamics\_model\_update}, synth = \texttt{synthetic\_rollout\_generation}, pretrain = \texttt{world\_model\_pretrain}. Buffer, critic, actor and target are allocated from the GU energy by timed share; the other segments are measured. HC is HalfCheetah-v5, Ant is Ant-v5.}
+    \label{tab:app-td3-sweep-energy} \\
+    \toprule
+    Env. & Config. & Segment & Energy [J] & Share of total [\%] & Share of GU [\%] \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Env. & Config. & Segment & Energy [J] & Share of total [\%] & Share of GU [\%] \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{6}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    HC & UTD 2 & rollout & \num{1431.6+-25.9} & \num{2.5862+-0.06012} & --- \\
+     &  & buffer & \num{2630.09+-8.555} & \num{4.75103+-0.04325} & \num{4.87718+-0.04716} \\
+     &  & critic & \num{37419.5+-352.3} & \num{67.591+-0.1692} & \num{69.3854+-0.1316} \\
+     &  & actor & \num{10466.8+-59.16} & \num{18.9066+-0.0298} & \num{19.4086+-0.04151} \\
+     &  & target & \num{3412.99+-18.82} & \num{6.16514+-0.04263} & \num{6.32884+-0.0476} \\
+     &  & GU & \num{53929.4+-413.5} & \num{97.4138+-0.06012} & 100 \\
+     &  & total & \num{55361+-397.5} & \num{100} & --- \\
+    \addlinespace[2pt]
+     & UTD 4 & rollout & \num{1380.45+-11.95} & \num{1.2861+-0.01693} & --- \\
+     &  & buffer & \num{5214.36+-46.68} & \num{4.85773+-0.03948} & \num{4.92102+-0.04048} \\
+     &  & critic & \num{73363.4+-803.5} & \num{68.343+-0.1159} & \num{69.2334+-0.1068} \\
+     &  & actor & \num{20567.4+-158.1} & \num{19.1604+-0.05046} & \num{19.4101+-0.05369} \\
+     &  & target & \num{6819.28+-77.91} & \num{6.35271+-0.0436} & \num{6.43548+-0.04486} \\
+     &  & GU & \num{105964+-1045} & \num{98.7139+-0.01693} & 100 \\
+     &  & total & \num{107345+-1045} & \num{100} & --- \\
+    \addlinespace[2pt]
+     & width 256 & rollout & \num{1240.18+-21.93} & \num{5.38503+-0.09867} & --- \\
+     &  & buffer & \num{1042.98+-18.97} & \num{4.52838+-0.05516} & \num{4.78614+-0.06099} \\
+     &  & critic & \num{15153.1+-457.2} & \num{65.7727+-0.2339} & \num{69.5161+-0.1972} \\
+     &  & actor & \num{4198.84+-112.8} & \num{18.2265+-0.01569} & \num{19.2639+-0.02386} \\
+     &  & target & \num{1401.87+-21.44} & \num{6.08733+-0.1132} & \num{6.43385+-0.1229} \\
+     &  & GU & \num{21796.8+-602.3} & \num{94.615+-0.09867} & 100 \\
+     &  & total & \num{23037+-618.5} & \num{100} & --- \\
+    \addlinespace[2pt]
+     & width 512 & rollout & \num{1301.93+-21.87} & \num{5.13305+-0.1289} & --- \\
+     &  & buffer & \num{1119.71+-21.1} & \num{4.41473+-0.1225} & \num{4.65371+-0.1338} \\
+     &  & critic & \num{16794.9+-362.8} & \num{66.1962+-0.4397} & \num{69.7776+-0.3831} \\
+     &  & actor & \num{4654.2+-66.02} & \num{18.3459+-0.04208} & \num{19.3386+-0.06866} \\
+     &  & target & \num{1498.93+-27.03} & \num{5.91018+-0.1728} & \num{6.23012+-0.1885} \\
+     &  & GU & \num{24067.7+-403.6} & \num{94.867+-0.1289} & 100 \\
+     &  & total & \num{25369.7+-399.1} & \num{100} & --- \\
+    \addlinespace[2pt]
+     & batch 256 & rollout & \num{1516.82+-44.86} & \num{4.53511+-0.1616} & --- \\
+     &  & buffer & \num{1689.43+-12.87} & \num{5.05097+-0.09405} & \num{5.29104+-0.1059} \\
+     &  & critic & \num{22121.8+-403.8} & \num{66.1231+-0.3768} & \num{69.264+-0.2968} \\
+     &  & actor & \num{6160.56+-66.4} & \num{18.4156+-0.05491} & \num{19.2905+-0.06715} \\
+     &  & target & \num{1965.08+-16.89} & \num{5.87517+-0.1164} & \num{6.15442+-0.1307} \\
+     &  & GU & \num{31936.9+-450} & \num{95.4649+-0.1616} & 100 \\
+     &  & total & \num{33453.7+-435.4} & \num{100} & --- \\
+    \addlinespace[2pt]
+     & batch 512 & rollout & \num{1681.61+-39.6} & \num{4.0364+-0.1579} & --- \\
+     &  & buffer & \num{2431.45+-70.67} & \num{5.83711+-0.2714} & \num{6.08297+-0.2914} \\
+     &  & critic & \num{27596.4+-829.8} & \num{66.1941+-0.7605} & \num{68.9775+-0.6874} \\
+     &  & actor & \num{7582.97+-122.3} & \num{18.1926+-0.05058} & \num{18.9579+-0.0822} \\
+     &  & target & \num{2390.74+-81.67} & \num{5.73984+-0.2972} & \num{5.98164+-0.3183} \\
+     &  & GU & \num{40001.6+-807.4} & \num{95.9636+-0.1579} & 100 \\
+     &  & total & \num{41683.2+-778.1} & \num{100} & --- \\
+    \addlinespace[2pt]
+     & batch 1024 & rollout & \num{1752.39+-41.15} & \num{3.64674+-0.118} & --- \\
+     &  & buffer & \num{3406.18+-102.4} & \num{7.09048+-0.3309} & \num{7.35913+-0.3512} \\
+     &  & critic & \num{31608.6+-900} & \num{65.7474+-0.7826} & \num{68.2351+-0.7427} \\
+     &  & actor & \num{8610.15+-119.1} & \num{17.913+-0.05678} & \num{18.591+-0.07738} \\
+     &  & target & \num{2691.06+-100.3} & \num{5.60242+-0.3021} & \num{5.8147+-0.3191} \\
+     &  & GU & \num{46316+-819.4} & \num{96.3533+-0.118} & 100 \\
+     &  & total & \num{48068.4+-808.1} & \num{100} & --- \\
+    \addlinespace[2pt]
+    \midrule
+    Ant & UTD 2 & rollout & \num{3031.22+-58.52} & \num{5.26784+-0.1004} & --- \\
+     &  & buffer & \num{2949.52+-13.14} & \num{5.12603+-0.04911} & \num{5.4111+-0.05425} \\
+     &  & critic & \num{37577.8+-305.8} & \num{65.3037+-0.16} & \num{68.9351+-0.1288} \\
+     &  & actor & \num{10505.6+-62.85} & \num{18.2572+-0.03723} & \num{19.2725+-0.02559} \\
+     &  & target & \num{3478.44+-33.54} & \num{6.04517+-0.06973} & \num{6.38136+-0.0761} \\
+     &  & GU & \num{54511.4+-353.8} & \num{94.7322+-0.1004} & 100 \\
+     &  & total & \num{57542.6+-361} & \num{100} & --- \\
+    \addlinespace[2pt]
+     & UTD 4 & rollout & \num{3014.92+-36.86} & \num{2.69486+-0.05802} & --- \\
+     &  & buffer & \num{5838.23+-31.26} & \num{5.21832+-0.08663} & \num{5.36288+-0.09198} \\
+     &  & critic & \num{75164.3+-1338} & \num{67.1685+-0.2591} & \num{69.0286+-0.229} \\
+     &  & actor & \num{20961.7+-266.5} & \num{18.7329+-0.04111} & \num{19.2517+-0.04705} \\
+     &  & target & \num{6920.61+-72.73} & \num{6.1855+-0.0981} & \num{6.35685+-0.1042} \\
+     &  & GU & \num{108885+-1603} & \num{97.3051+-0.05802} & 100 \\
+     &  & total & \num{111900+-1590} & \num{100} & --- \\
+    \addlinespace[2pt]
+     & width 256 & rollout & \num{2837.25+-72.51} & \num{11.3066+-0.1902} & --- \\
+     &  & buffer & \num{1160.03+-25.36} & \num{4.62377+-0.117} & \num{5.21344+-0.1419} \\
+     &  & critic & \num{15463+-584.1} & \num{61.5966+-0.4218} & \num{69.4484+-0.3327} \\
+     &  & actor & \num{4261.64+-141.5} & \num{16.978+-0.03427} & \num{19.1424+-0.03687} \\
+     &  & target & \num{1378.52+-26.24} & \num{5.49502+-0.1428} & \num{6.1958+-0.1728} \\
+     &  & GU & \num{22263.2+-751.2} & \num{88.6934+-0.1902} & 100 \\
+     &  & total & \num{25100.4+-811.3} & \num{100} & --- \\
+    \addlinespace[2pt]
+     & width 512 & rollout & \num{2897.84+-62.24} & \num{10.5487+-0.2512} & --- \\
+     &  & buffer & \num{1244.82+-24.37} & \num{4.5315+-0.1051} & \num{5.06615+-0.13} \\
+     &  & critic & \num{17133.3+-268.5} & \num{62.3616+-0.4937} & \num{69.715+-0.3688} \\
+     &  & actor & \num{4704.94+-41.26} & \num{17.1257+-0.02196} & \num{19.1454+-0.06074} \\
+     &  & target & \num{1492.27+-32.81} & \num{5.4325+-0.1479} & \num{6.07349+-0.1796} \\
+     &  & GU & \num{24575.4+-275.2} & \num{89.4513+-0.2512} & 100 \\
+     &  & total & \num{27473.2+-264.6} & \num{100} & --- \\
+    \addlinespace[2pt]
+     & batch 256 & rollout & \num{3086.58+-58.23} & \num{8.69063+-0.2052} & --- \\
+     &  & buffer & \num{2132.18+-13.3} & \num{6.0034+-0.09446} & \num{6.57492+-0.112} \\
+     &  & critic & \num{22136.2+-344.2} & \num{62.3167+-0.3628} & \num{68.2475+-0.266} \\
+     &  & actor & \num{6165.5+-60.88} & \num{17.3576+-0.0187} & \num{19.0097+-0.04441} \\
+     &  & target & \num{2000.11+-16.18} & \num{5.63164+-0.09876} & \num{6.16782+-0.1189} \\
+     &  & GU & \num{32434+-378.5} & \num{91.3094+-0.2052} & 100 \\
+     &  & total & \num{35520.5+-357.7} & \num{100} & --- \\
+    \addlinespace[2pt]
+     & batch 512 & rollout & \num{3301.77+-33.34} & \num{7.44421+-0.141} & --- \\
+     &  & buffer & \num{3463.12+-52.16} & \num{7.80888+-0.2163} & \num{8.43721+-0.2451} \\
+     &  & critic & \num{27504.1+-598.8} & \num{61.9948+-0.5342} & \num{66.9805+-0.4854} \\
+     &  & actor & \num{7620.33+-97.63} & \num{17.178+-0.02115} & \num{18.5597+-0.03868} \\
+     &  & target & \num{2471.88+-48.64} & \num{5.57404+-0.1811} & \num{6.02257+-0.2036} \\
+     &  & GU & \num{41059.4+-602.2} & \num{92.5558+-0.141} & 100 \\
+     &  & total & \num{44361.2+-591.8} & \num{100} & --- \\
+    \addlinespace[2pt]
+     & batch 1024 & rollout & \num{3390.84+-70.87} & \num{6.3708+-0.1729} & --- \\
+     &  & buffer & \num{6012.97+-196.3} & \num{11.298+-0.4374} & \num{12.0667+-0.4649} \\
+     &  & critic & \num{32144.2+-805} & \num{60.3743+-0.7168} & \num{64.4819+-0.7136} \\
+     &  & actor & \num{8843.11+-83.09} & \num{16.6123+-0.09129} & \num{17.7428+-0.1265} \\
+     &  & target & \num{2843.88+-87.06} & \num{5.34462+-0.2337} & \num{5.70855+-0.2569} \\
+     &  & GU & \num{49844.2+-728} & \num{93.6292+-0.1729} & 100 \\
+     &  & total & \num{53235+-707.8} & \num{100} & --- \\
+    \addlinespace[2pt]
+  \end{longtable}
+}

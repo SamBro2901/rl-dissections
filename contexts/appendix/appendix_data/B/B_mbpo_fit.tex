@@ -1,0 +1,61 @@
+\begin{table}[tbp]
+  \centering
+  \scriptsize
+  \caption[MBPO: fit epochs, optimiser steps and synthetic samples of all configurations (mean $\pm$ sd over the five seeds)]{MBPO: fit epochs, optimiser steps and synthetic samples of all configurations (mean $\pm$ sd over the five seeds). Every run has exactly 100 fits. Fit epochs are the passes over the training split of one fit; the first fit is the one of epoch 0 and the later fits are those of epochs 1 to 99. Steps of the first fit are its fit epochs times 16 optimiser steps per fit epoch (buffer of 5000 transitions, 4000 of them in the training split). Synthetic samples are the synthetic transitions generated per run. HC is HalfCheetah-v5, Ant is Ant-v5.}
+  \label{tab:app-mbpo-fit}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}llrrrrr@{}}
+      \toprule
+      Env. & Config. & Epochs, first fit & Epochs, later fits & Optimiser steps & Steps, first fit & Synthetic samples \\
+      \midrule
+        HC & baseline & \num{186+-16.37} & \num{9.92323+-0.4731} & \num{166294+-5046} & \num{2976+-261.9} & \num{990000} \\
+         & UTD 2 & \num{186+-16.37} & \num{10.1111+-0.5312} & \num{173106+-10470} & \num{2976+-261.9} & \num{990000} \\
+         & UTD 4 & \num{186+-16.37} & \num{9.70101+-0.5465} & \num{162606+-11360} & \num{2976+-261.9} & \num{990000} \\
+         & width 256 & \num{161.2+-42.92} & \num{9.98788+-0.5461} & \num{162846+-5103} & \num{2579.2+-686.6} & \num{990000} \\
+         & width 512 & \num{174.4+-26.91} & \num{10.002+-0.6129} & \num{165829+-7778} & \num{2790.4+-430.6} & \num{990000} \\
+         & batch 512 & \num{186+-16.37} & \num{9.53333+-0.3905} & \num{159823+-5345} & \num{2976+-261.9} & \num{990000} \\
+         & batch 1024 & \num{186+-16.37} & \num{9.71717+-0.5691} & \num{159605+-5866} & \num{2976+-261.9} & \num{990000} \\
+        \midrule
+        Ant & baseline & \num{29+-13.21} & \num{14.5071+-1.045} & \num{208429+-22280} & \num{464+-211.4} & \num{9342760+-151100} \\
+         & UTD 2 & \num{29+-13.21} & \num{14.6384+-0.8049} & \num{220701+-18450} & \num{464+-211.4} & \num{9235140+-180500} \\
+         & UTD 4 & \num{29+-13.21} & \num{14.1091+-1.047} & \num{212141+-17960} & \num{464+-211.4} & \num{8961710+-367100} \\
+         & width 256 & \num{25.2+-7.362} & \num{14.4788+-0.5282} & \num{214821+-11920} & \num{403.2+-117.8} & \num{9253920+-108400} \\
+         & width 512 & \num{28.8+-7.596} & \num{14.6303+-1.017} & \num{208889+-21080} & \num{460.8+-121.5} & \num{9397580+-171600} \\
+         & batch 512 & \num{29+-13.21} & \num{13.9879+-1.315} & \num{200737+-25780} & \num{464+-211.4} & \num{9334930+-257800} \\
+         & batch 1024 & \num{29+-13.21} & \num{14.3515+-0.8313} & \num{212390+-16760} & \num{464+-211.4} & \num{9213470+-122900} \\
+         & rollout 1 & \num{29+-13.21} & \num{14.8424+-0.6323} & \num{207135+-6321} & \num{464+-211.4} & \num{990000} \\
+         & rollout 15 & \num{29+-13.21} & \num{14.7374+-0.7665} & \num{211290+-13110} & \num{464+-211.4} & \num{6116390+-50540} \\
+      \bottomrule
+    \end{tabular}}
+\end{table}
+
+\begin{table}[tbp]
+  \centering
+  \scriptsize
+  \caption[MBPO: FLOPs and energy of the model fit of all configurations (mean $\pm$ sd over the five seeds; for the FLOPs the mean and the minimum and maximum over the seeds)]{MBPO: FLOPs and energy of the model fit of all configurations (mean $\pm$ sd over the five seeds; for the FLOPs the mean and the minimum and maximum over the seeds). The holdout share is the share of the holdout evaluation in the FLOPs of the fit. CV (within) is the coefficient of variation of the per-epoch fit energy within a run, epoch 0 / rest the energy of epoch 0 divided by the mean of epochs 1 to 99, and CV (seeds) the coefficient of variation of the fit energy of the run over the seeds. HC is HalfCheetah-v5, Ant is Ant-v5.}
+  \label{tab:app-mbpo-fit-flops}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}llrrrrrr@{}}
+      \toprule
+      Env. & Config. & FLOPs (mean) & FLOPs (min--max) & Holdout share [\%] & CV (within) [\%] & Epoch 0 / rest & CV (seeds) [\%] \\
+      \midrule
+        HC & baseline & \num{2.518e14} & \num{2.4256e14}--\num{2.6025e14} & \num{7.7758} & \num{72.42+-5.34} & \num{1.8648+-0.206} & \num{5.0886} \\
+         & UTD 2 & \num{2.6217e14} & \num{2.3982e14}--\num{2.7765e14} & \num{7.7758} & \num{85.235+-20.5} & \num{1.7272+-0.238} & \num{4.4863} \\
+         & UTD 4 & \num{2.4623e14} & \num{2.2301e14}--\num{2.6121e14} & \num{7.7758} & \num{79.894+-12.7} & \num{1.8786+-0.336} & \num{6.2258} \\
+         & width 256 & \num{2.466e14} & \num{2.3358e14}--\num{2.5425e14} & \num{7.7758} & \num{84.792+-14.7} & \num{1.5389+-0.36} & \num{3.2308} \\
+         & width 512 & \num{2.5114e14} & \num{2.3758e14}--\num{2.6094e14} & \num{7.7758} & \num{78.9+-9.4} & \num{1.8027+-0.228} & \num{6.5192} \\
+         & batch 512 & \num{2.4202e14} & \num{2.3023e14}--\num{2.5107e14} & \num{7.7758} & \num{75.234+-11.8} & \num{1.9252+-0.108} & \num{3.6393} \\
+         & batch 1024 & \num{2.4165e14} & \num{2.2899e14}--\num{2.5113e14} & \num{7.7758} & \num{79.65+-10.8} & \num{1.9426+-0.118} & \num{3.4949} \\
+        \midrule
+        Ant & baseline & \num{4.3095e14} & \num{3.8173e14}--\num{4.8434e14} & \num{7.9927} & \num{45.285+-3.19} & \num{0.24392+-0.122} & \num{10.775} \\
+         & UTD 2 & \num{4.5638e14} & \num{3.9349e14}--\num{4.8885e14} & \num{7.9927} & \num{47.565+-2.43} & \num{0.2428+-0.125} & \num{9.583} \\
+         & UTD 4 & \num{4.3871e14} & \num{3.9745e14}--\num{4.9504e14} & \num{7.9927} & \num{45.747+-4.87} & \num{0.24367+-0.115} & \num{9.0035} \\
+         & width 256 & \num{4.4421e14} & \num{4.2015e14}--\num{4.8008e14} & \num{7.9927} & \num{48.213+-3.05} & \num{0.20999+-0.0585} & \num{5.3663} \\
+         & width 512 & \num{4.3194e14} & \num{3.6005e14}--\num{4.7649e14} & \num{7.9927} & \num{46.265+-1.07} & \num{0.24915+-0.0852} & \num{10.475} \\
+         & batch 512 & \num{4.1504e14} & \num{3.638e14}--\num{4.8426e14} & \num{7.9927} & \num{44.502+-1.32} & \num{0.27715+-0.151} & \num{12.423} \\
+         & batch 1024 & \num{4.3918e14} & \num{3.9821e14}--\num{4.8079e14} & \num{7.9927} & \num{44.393+-3.37} & \num{0.2496+-0.116} & \num{8.6416} \\
+         & rollout 1 & \num{4.2826e14} & \num{4.108e14}--\num{4.4616e14} & \num{7.9927} & \num{44.191+-3.06} & \num{0.25006+-0.108} & \num{2.1125} \\
+         & rollout 15 & \num{4.3686e14} & \num{4.0847e14}--\num{4.6605e14} & \num{7.9927} & \num{44.865+-2.19} & \num{0.24362+-0.113} & \num{7.0274} \\
+      \bottomrule
+    \end{tabular}}
+\end{table}

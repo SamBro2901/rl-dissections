@@ -1,0 +1,118 @@
+{\scriptsize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}lllrrrr@{}}
+    \caption[Pairwise seed counts: for every pair of algorithms, the algorithm with the lower seed mean is named first, and the table gives the number of seeds (of five) in which it also has the lower value, and the smallest and largest seed-wise ratio of the higher to the lower mean-ordered algorithm (ratios of values of the same seed)]{Pairwise seed counts: for every pair of algorithms, the algorithm with the lower seed mean is named first, and the table gives the number of seeds (of five) in which it also has the lower value, and the smallest and largest seed-wise ratio of the higher to the lower mean-ordered algorithm (ratios of values of the same seed). A ratio below one means that the pair swaps in that seed. TD3 is at its baseline batch size \num{100} in the baseline, update-to-data and width rows. HC is HalfCheetah-v5, Ant is Ant-v5.}
+    \label{tab:app-pairwise} \\
+    \toprule
+    Metric & Env. & Sweep value & Pair & Seeds & Min.\ ratio & Max.\ ratio \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Metric & Env. & Sweep value & Pair & Seeds & Min.\ ratio & Max.\ ratio \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{7}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    energy & HC & baseline & SAC $<$ MBPO & \num{5} & \num{3.27026} & \num{3.56985} \\
+     &  & baseline & TD3 $<$ MBPO & \num{5} & \num{7.11383} & \num{7.82614} \\
+     &  & baseline & TD3 $<$ SAC & \num{5} & \num{2.1177} & \num{2.19229} \\
+     &  & UTD 2 & SAC $<$ MBPO & \num{5} & \num{2.18598} & \num{2.34433} \\
+     &  & UTD 2 & TD3 $<$ MBPO & \num{5} & \num{4.64765} & \num{5.02342} \\
+     &  & UTD 2 & TD3 $<$ SAC & \num{5} & \num{2.11977} & \num{2.1428} \\
+     &  & UTD 4 & SAC $<$ MBPO & \num{5} & \num{1.5334} & \num{1.63591} \\
+     &  & UTD 4 & TD3 $<$ MBPO & \num{5} & \num{3.38441} & \num{3.55045} \\
+     &  & UTD 4 & TD3 $<$ SAC & \num{5} & \num{2.15391} & \num{2.20734} \\
+     &  & width 256 & SAC $<$ MBPO & \num{5} & \num{3.78089} & \num{4.08394} \\
+     &  & width 256 & TD3 $<$ MBPO & \num{5} & \num{7.89423} & \num{8.4745} \\
+     &  & width 256 & TD3 $<$ SAC & \num{5} & \num{1.95798} & \num{2.12025} \\
+     &  & width 512 & SAC $<$ MBPO & \num{5} & \num{3.65337} & \num{4.07156} \\
+     &  & width 512 & TD3 $<$ MBPO & \num{5} & \num{7.18406} & \num{7.9646} \\
+     &  & width 512 & TD3 $<$ SAC & \num{5} & \num{1.92627} & \num{1.97492} \\
+     &  & batch 256 & SAC $<$ MBPO & \num{5} & \num{3.27026} & \num{3.56985} \\
+     &  & batch 256 & TD3 $<$ MBPO & \num{5} & \num{5.98174} & \num{6.48633} \\
+     &  & batch 256 & TD3 $<$ SAC & \num{5} & \num{1.7853} & \num{1.85997} \\
+     &  & batch 512 & SAC $<$ MBPO & \num{5} & \num{2.76697} & \num{2.98451} \\
+     &  & batch 512 & TD3 $<$ MBPO & \num{5} & \num{4.88605} & \num{5.26134} \\
+     &  & batch 512 & TD3 $<$ SAC & \num{5} & \num{1.70921} & \num{1.79238} \\
+     &  & batch 1024 & SAC $<$ MBPO & \num{5} & \num{2.55404} & \num{2.74078} \\
+     &  & batch 1024 & TD3 $<$ MBPO & \num{5} & \num{4.42113} & \num{4.74802} \\
+     &  & batch 1024 & TD3 $<$ SAC & \num{5} & \num{1.67691} & \num{1.7428} \\
+    \midrule
+    energy & Ant & baseline & SAC $<$ MBPO & \num{5} & \num{3.62674} & \num{4.26183} \\
+     &  & baseline & TD3 $<$ MBPO & \num{5} & \num{7.70441} & \num{9.04883} \\
+     &  & baseline & TD3 $<$ SAC & \num{5} & \num{2.07134} & \num{2.12564} \\
+     &  & UTD 2 & SAC $<$ MBPO & \num{5} & \num{2.35911} & \num{2.67825} \\
+     &  & UTD 2 & TD3 $<$ MBPO & \num{5} & \num{4.96412} & \num{5.73511} \\
+     &  & UTD 2 & TD3 $<$ SAC & \num{5} & \num{2.10424} & \num{2.16189} \\
+     &  & UTD 4 & SAC $<$ MBPO & \num{5} & \num{1.67639} & \num{1.85402} \\
+     &  & UTD 4 & TD3 $<$ MBPO & \num{5} & \num{3.53408} & \num{4.05679} \\
+     &  & UTD 4 & TD3 $<$ SAC & \num{5} & \num{2.10815} & \num{2.1881} \\
+     &  & width 256 & SAC $<$ MBPO & \num{5} & \num{4.45117} & \num{4.86524} \\
+     &  & width 256 & TD3 $<$ MBPO & \num{5} & \num{8.70152} & \num{10.1757} \\
+     &  & width 256 & TD3 $<$ SAC & \num{5} & \num{1.87735} & \num{2.09151} \\
+     &  & width 512 & SAC $<$ MBPO & \num{5} & \num{3.88983} & \num{4.74529} \\
+     &  & width 512 & TD3 $<$ MBPO & \num{5} & \num{7.30744} & \num{8.97476} \\
+     &  & width 512 & TD3 $<$ SAC & \num{5} & \num{1.86979} & \num{1.93537} \\
+     &  & batch 256 & SAC $<$ MBPO & \num{5} & \num{3.62674} & \num{4.26183} \\
+     &  & batch 256 & TD3 $<$ MBPO & \num{5} & \num{6.45768} & \num{7.76777} \\
+     &  & batch 256 & TD3 $<$ SAC & \num{5} & \num{1.78057} & \num{1.8497} \\
+     &  & batch 512 & SAC $<$ MBPO & \num{5} & \num{2.91952} & \num{3.59322} \\
+     &  & batch 512 & TD3 $<$ MBPO & \num{5} & \num{5.0752} & \num{6.28873} \\
+     &  & batch 512 & TD3 $<$ SAC & \num{5} & \num{1.69006} & \num{1.75016} \\
+     &  & batch 1024 & SAC $<$ MBPO & \num{5} & \num{2.80761} & \num{3.22931} \\
+     &  & batch 1024 & TD3 $<$ MBPO & \num{5} & \num{4.74264} & \num{5.3333} \\
+     &  & batch 1024 & TD3 $<$ SAC & \num{5} & \num{1.64836} & \num{1.69237} \\
+    \midrule
+    J/FLOP & HC & baseline & SAC $<$ MBPO & \num{5} & \num{2.54685} & \num{2.74343} \\
+     &  & baseline & SAC $<$ TD3 & \num{5} & \num{1.62718} & \num{1.6845} \\
+     &  & baseline & TD3 $<$ MBPO & \num{5} & \num{1.55307} & \num{1.686} \\
+     &  & UTD 2 & SAC $<$ MBPO & \num{5} & \num{1.91922} & \num{2.02014} \\
+     &  & UTD 2 & SAC $<$ TD3 & \num{5} & \num{1.66529} & \num{1.68338} \\
+     &  & UTD 2 & TD3 $<$ MBPO & \num{5} & \num{1.14352} & \num{1.21309} \\
+     &  & UTD 4 & MBPO $<$ TD3 & \num{5} & \num{1.08119} & \num{1.12275} \\
+     &  & UTD 4 & SAC $<$ MBPO & \num{5} & \num{1.44021} & \num{1.52094} \\
+     &  & UTD 4 & SAC $<$ TD3 & \num{5} & \num{1.61684} & \num{1.65695} \\
+     &  & width 256 & MBPO $<$ SAC & \num{5} & \num{1.29674} & \num{1.35331} \\
+     &  & width 256 & MBPO $<$ TD3 & \num{5} & \num{2.24272} & \num{2.43883} \\
+     &  & width 256 & SAC $<$ TD3 & \num{5} & \num{1.69266} & \num{1.83293} \\
+     &  & width 512 & MBPO $<$ TD3 & \num{3} & \num{0.977021} & \num{1.03124} \\
+     &  & width 512 & SAC $<$ MBPO & \num{5} & \num{1.7628} & \num{1.8704} \\
+     &  & width 512 & SAC $<$ TD3 & \num{5} & \num{1.81005} & \num{1.85577} \\
+     &  & batch 256 & SAC $<$ MBPO & \num{5} & \num{2.54685} & \num{2.74343} \\
+     &  & batch 256 & TD3 $<$ MBPO & \num{5} & \num{3.34137} & \num{3.57535} \\
+     &  & batch 256 & TD3 $<$ SAC & \num{5} & \num{1.28052} & \num{1.33408} \\
+     &  & batch 512 & SAC $<$ MBPO & \num{5} & \num{2.44103} & \num{2.60565} \\
+     &  & batch 512 & TD3 $<$ MBPO & \num{5} & \num{3.07966} & \num{3.29453} \\
+     &  & batch 512 & TD3 $<$ SAC & \num{5} & \num{1.22589} & \num{1.28553} \\
+     &  & batch 1024 & SAC $<$ MBPO & \num{5} & \num{2.39499} & \num{2.55498} \\
+     &  & batch 1024 & TD3 $<$ MBPO & \num{5} & \num{2.96729} & \num{3.17446} \\
+     &  & batch 1024 & TD3 $<$ SAC & \num{5} & \num{1.20269} & \num{1.24995} \\
+    \midrule
+    J/FLOP & Ant & baseline & SAC $<$ MBPO & \num{5} & \num{2.48939} & \num{2.72357} \\
+     &  & baseline & SAC $<$ TD3 & \num{5} & \num{1.68281} & \num{1.72692} \\
+     &  & baseline & TD3 $<$ MBPO & \num{5} & \num{1.4784} & \num{1.61663} \\
+     &  & UTD 2 & SAC $<$ MBPO & \num{5} & \num{1.91089} & \num{2.08468} \\
+     &  & UTD 2 & SAC $<$ TD3 & \num{5} & \num{1.65512} & \num{1.70046} \\
+     &  & UTD 2 & TD3 $<$ MBPO & \num{5} & \num{1.12375} & \num{1.25212} \\
+     &  & UTD 4 & MBPO $<$ TD3 & \num{5} & \num{1.00829} & \num{1.13191} \\
+     &  & UTD 4 & SAC $<$ MBPO & \num{5} & \num{1.49975} & \num{1.6221} \\
+     &  & UTD 4 & SAC $<$ TD3 & \num{5} & \num{1.63555} & \num{1.69758} \\
+     &  & width 256 & MBPO $<$ SAC & \num{5} & \num{1.53945} & \num{1.61632} \\
+     &  & width 256 & MBPO $<$ TD3 & \num{5} & \num{2.78491} & \num{2.99927} \\
+     &  & width 256 & SAC $<$ TD3 & \num{5} & \num{1.72889} & \num{1.92611} \\
+     &  & width 512 & MBPO $<$ TD3 & \num{5} & \num{1.1569} & \num{1.24682} \\
+     &  & width 512 & SAC $<$ MBPO & \num{5} & \num{1.53354} & \num{1.60425} \\
+     &  & width 512 & SAC $<$ TD3 & \num{5} & \num{1.85596} & \num{1.92105} \\
+     &  & batch 256 & SAC $<$ MBPO & \num{5} & \num{2.48939} & \num{2.72357} \\
+     &  & batch 256 & TD3 $<$ MBPO & \num{5} & \num{3.17054} & \num{3.55074} \\
+     &  & batch 256 & TD3 $<$ SAC & \num{5} & \num{1.27362} & \num{1.32307} \\
+     &  & batch 512 & SAC $<$ MBPO & \num{5} & \num{2.39469} & \num{2.80332} \\
+     &  & batch 512 & TD3 $<$ MBPO & \num{5} & \num{2.97749} & \num{3.50922} \\
+     &  & batch 512 & TD3 $<$ SAC & \num{5} & \num{1.20882} & \num{1.25181} \\
+     &  & batch 1024 & SAC $<$ MBPO & \num{5} & \num{2.51129} & \num{2.8324} \\
+     &  & batch 1024 & TD3 $<$ MBPO & \num{5} & \num{3.02191} & \num{3.34572} \\
+     &  & batch 1024 & TD3 $<$ SAC & \num{5} & \num{1.17896} & \num{1.21045} \\
+  \end{longtable}
+}

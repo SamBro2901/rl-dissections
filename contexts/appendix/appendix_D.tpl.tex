@@ -1,0 +1,139 @@
+\chapter{Learning check details}
+\label{app:learning}
+
+This appendix documents the returns of the training runs, which the thesis uses as a sanity check only and never in a comparison (\zcref{sec:metric}).
+\Zcref{sec:app-learn-def} defines the quantities, \zcref{sec:app-learn-curves} shows the return curves of all configurations, \zcref{sec:app-learn-hc} and \zcref{sec:app-learn-ant} give the learning check of HalfCheetah-v5 and Ant-v5, and \zcref{sec:app-learn-means} the means of all \num{56} configurations.
+\Zcref{sec:app-learn-spearman} holds an optional extension of the rank-correlation analysis of \zcref{tab:spearman}, and \zcref{sec:app-learn-random} the placeholder for the return of a random policy.
+All values were recomputed from the \texttt{training\_metrics.json} files of the \num{280} canonical runs.
+
+%-------------------------------------------------------------------------------
+\section{Definitions}\label{sec:app-learn-def}
+
+The returns are those of the training episodes, which run under the behaviour policy of the algorithm (a stochastic sample for SAC and MBPO, Gaussian action noise for TD3, noisy planning for TD-MPC2).
+There are no separate evaluation episodes.
+
+For a run with $n$ completed training episodes, the \emph{first \SI{10}{\percent}} and the \emph{last \SI{10}{\percent}} are its first and last $k=\max(1,\lfloor n/10\rfloor)$ training episodes.
+The warm-up episodes (random actions) and the incomplete episode at the end of the run are not counted.
+On HalfCheetah-v5, every episode ends after \num{1000} steps, so $n=\num{100}$ and $k=\num{10}$ in all \num{135} runs.
+On Ant-v5, episodes end early when the robot leaves its healthy state; $n$ lies between \num{154} and \num{2556} per run, and $k$ between \num{15} and \num{255}.
+The \emph{return} of the first (last) tenth of a run is the unweighted mean of the returns of its $k$ episodes.
+The \emph{return per step} is the sum of the returns divided by the sum of the lengths of the same episodes, i.e.\ a ratio of sums and not a mean of per-episode ratios.
+Values of a configuration are means over the five seeds, and the spread is the sample standard deviation ($n-1$) over the seeds.
+
+%-------------------------------------------------------------------------------
+\section{Return Curves}\label{sec:app-learn-curves}
+
+\Zcref{fig:app-return-sac-hc} to \zcref{fig:app-return-tdmpc2-ant} show the return of the training episodes against the number of training steps, one figure per algorithm and environment.
+The \num{100000} training steps are divided into ten windows of \num{10000} steps; a point is the mean return of the episodes that ended within the window, and the bars are the sample standard deviation over the five seeds.
+The warm-up is not shown.
+Each panel varies one parameter around the baseline; the baseline (black) is the same data in every panel of a figure.
+The returns are those of the training policy.
+
+%%D_FIGURES%%
+
+%-------------------------------------------------------------------------------
+\section{HalfCheetah-v5}\label{sec:app-learn-hc}
+
+\Zcref{tab:app-learning-hc} lists the \num{27} HalfCheetah-v5 configurations.
+In all \num{27} configurations the mean return of the last tenth is above that of the first tenth, and this holds in each of the five seeds of every configuration (\num{135} of \num{135} runs).
+The mean return of the last tenth lies between \num{2921} (SAC, batch size \num{1024}) and \num{7756} (TD-MPC2, \texttt{num\_q} \num{7}).
+
+{\footnotesize
+  \begin{longtable}{@{}llrrr@{}}
+    \caption{Learning check of the \num{27} configurations on HalfCheetah-v5: mean $\pm$ standard deviation over five seeds of the mean return of the first and the last \SI{10}{\percent} of the training episodes (\num{10} episodes each), and the number of seeds in which the last tenth is above the first.}
+    \label{tab:app-learning-hc}                                                                                         \\
+    \toprule
+    Algorithm & Configuration & First \SI{10}{\percent} & Last \SI{10}{\percent} & Seeds improving                    \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Algorithm & Configuration & First \SI{10}{\percent} & Last \SI{10}{\percent} & Seeds improving                    \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{5}{r@{}}{\emph{continued on the next page}}                                                             \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+%%D_HC_ROWS%%
+  \end{longtable}
+}
+
+%-------------------------------------------------------------------------------
+\section{Ant-v5}\label{sec:app-learn-ant}
+
+\Zcref{tab:app-learning} lists the \num{14} of the \num{29} Ant-v5 configurations whose mean return of the last tenth is not above that of the first tenth.
+The returns of the other \num{15} configurations rise; all \num{29} are in \zcref{tab:app-config-means}.
+
+%%D_EXISTING_ANT%%
+
+\Zcref{tab:app-learning-perstep} adds the return per step of the \num{14} configurations (definition in \zcref{sec:app-learn-def}).
+The return per step rises in \num{10} of the \num{14} configurations and does not rise in the four that are marked with an asterisk in \zcref{tab:app-learning}: MBPO with maximum rollout length \num{1}, MBPO with width \num{256}, SAC with batch size \num{1024} and TD3 with batch size \num{1024}.
+
+\begin{table}[tb]
+  \centering
+  \caption{Return per step (sum of returns divided by sum of lengths) of the first and last \SI{10}{\percent} of the training episodes for the \num{14} configurations of \zcref{tab:app-learning} (mean over five seeds), and the number of seeds in which it rises.
+    $^\ast$: not above the first tenth in the mean.}
+  \label{tab:app-learning-perstep}
+  \small
+  \begin{tabular}{llrrr}
+    \toprule
+    Algorithm & Configuration & First \SI{10}{\percent} & Last \SI{10}{\percent} & Seeds rising \\
+    \midrule
+%%D_PERSTEP_ROWS%%
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+%-------------------------------------------------------------------------------
+\section{Means of All Configurations}\label{sec:app-learn-means}
+
+%%D_EXISTING_MEANS%%
+
+%-------------------------------------------------------------------------------
+\section{Rank Correlation of Return and Energy with FLOPs}\label{sec:app-learn-spearman}
+
+% --- OPTIONAL BLOCK (Spearman analysis per environment and per algorithm): begin ---
+\todo{AUTHOR: keep or delete this optional block. Per-algorithm correlations of the return are stated as not computed in the thesis (\zcref{sec:metric}); the block would change that statement.}
+
+\Zcref{tab:app-spearman} extends \zcref{tab:spearman} by the correlations within each algorithm.
+The pooled rows reproduce \zcref{tab:spearman}.
+The per-algorithm rows use the configurations of one algorithm in one environment ($n=5$ to $9$), which are not independent samples; the $p$-values are those of the $t$ approximation of \texttt{scipy.stats.spearmanr} and are descriptive.
+For $|\rho|=1$ the approximation is not defined and no value is given.
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Spearman rank correlation $\rho$ of the FLOPs of the training phase with the return and with the energy (means over five seeds per configuration).}
+  \label{tab:app-spearman}
+  \begin{tabular}{@{}llrrrrrr@{}}
+    \toprule
+                   &           & \multicolumn{3}{c}{Return vs.\ FLOPs} & \multicolumn{3}{c}{Energy vs.\ FLOPs}                                        \\
+    \cmidrule(lr){3-5}\cmidrule(lr){6-8}
+    Environment    & Scope     & $n$                                   & $\rho$                                & $p$       & $n$ & $\rho$   & $p$       \\
+    \midrule
+%%D_SPEARMAN_ROWS%%
+    \bottomrule
+  \end{tabular}
+\end{table}
+% --- OPTIONAL BLOCK (Spearman analysis per environment and per algorithm): end ---
+
+%-------------------------------------------------------------------------------
+\section{Return of a Random Policy}\label{sec:app-learn-random}
+
+\Zcref{tab:app-random} is the reference for the returns of this appendix.
+\todo{NOT RUN: random-policy return (command F3 of \texttt{todo-changes-step4.md}).}
+
+\begin{table}[tbp]
+  \centering
+  \caption{Return of a random policy (uniform random actions), mean $\pm$ standard deviation over $100$ episodes ($20$ per canonical seed).}
+  \label{tab:app-random}
+  \begin{tabular}{lrrr}
+    \toprule
+    Environment    & Return & Episode length & Episodes \\
+    \midrule
+    HalfCheetah-v5 & ---    & ---            & ---      \\
+    Ant-v5         & ---    & ---            & ---      \\
+    \bottomrule
+  \end{tabular}
+\end{table}

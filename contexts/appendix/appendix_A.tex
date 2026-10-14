@@ -1,0 +1,294 @@
+\chapter{Hyperparameters and Configuration}
+\label{app:hyperparameters}
+
+This appendix lists the complete parameter sets of the \num{280} canonical runs.
+\Zcref{sec:app-hp-baselines} gives the baseline parameters of each algorithm, \zcref{sec:app-hp-protocol} the settings of the measurement protocol that are common to all runs, and \zcref{sec:app-hp-sweeps} the override files that define the sweeps.
+\Zcref{sec:app-hp-check} reports the check of the logged configurations against the baselines, and \zcref{sec:app-hp-refit} states how the refit interval of MBPO is evaluated.
+The baseline settings and their deviations from the publications are discussed in \zcref{sec:baselines}.
+All values were read from the configuration classes (\texttt{configs/\allowbreak config.py}) and checked against the \texttt{algo\_\allowbreak config} and \texttt{experiment\_\allowbreak config} fields of the \texttt{metadata.json} file of every canonical run.
+
+%-------------------------------------------------------------------------------
+\section{Baseline Parameter Sets}\label{sec:app-hp-baselines}
+
+\Zcref{tab:app-hp-sac}, \zcref{tab:app-hp-td3}, \zcref{tab:app-hp-mbpo} and \zcref{tab:app-hp-tdmpc2} list every field of the configuration class of one algorithm.
+The baseline is the same on HalfCheetah-v5 and Ant-v5 except where a column for each environment is given.
+Marked entries: $^{\dagger}$ implementation setting that is not taken from the publication; $^{\ddagger}$ deliberate deviation from the publication (\zcref{sec:baselines}).
+Warmup is a protocol setting and is listed in \zcref{tab:app-hp-protocol}.
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{SAC baseline parameters (\texttt{SACConfig}; identical on both environments).}
+  \label{tab:app-hp-sac}
+  \begin{tabular}{@{}p{4.7cm}p{3.7cm}p{5.0cm}@{}}
+    \toprule
+    Parameter                                                               & Value                         & Meaning                                      \\
+    \midrule
+    \texttt{hidden\_\allowbreak sizes}$^{\ddagger}$                                     & $(1024,1024)$                 & hidden layers of actor and both critics      \\
+    \texttt{actor\_\allowbreak lr}, \texttt{critic\_\allowbreak lr}, \texttt{alpha\_\allowbreak lr}             & \num{3e-4}                    & Adam learning rates                          \\
+    \texttt{gamma}                                                          & \num{0.99}                    & discount                                     \\
+    \texttt{tau}                                                            & \num{0.005}                   & Polyak coefficient of the target critics     \\
+    \texttt{batch\_\allowbreak size}                                                    & \num{256}                     & minibatch size                               \\
+    \texttt{buffer\_\allowbreak capacity}                                               & \num{1000000}                 & replay buffer, never filled at this run length \\
+    \texttt{autotune\_\allowbreak alpha}                                                & true                          & automatic entropy tuning                     \\
+    \texttt{init\_\allowbreak alpha}$^{\dagger}$                                        & \num{0.2}                     & initial temperature                          \\
+    \texttt{target\_\allowbreak entropy}                                                & none ($-|A|$)                 & default heuristic, $|A|$ is the action dimension \\
+    \texttt{updates\_\allowbreak per\_\allowbreak env\_\allowbreak step}                                        & \num{1}                       & update-to-data ratio                         \\
+    \texttt{policy\_\allowbreak update\_\allowbreak delay}                                          & \num{1}                       & actor updated on every update                \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{TD3 baseline parameters (\texttt{TD3Config}; identical on both environments).}
+  \label{tab:app-hp-td3}
+  \begin{tabular}{@{}p{4.7cm}p{3.7cm}p{5.0cm}@{}}
+    \toprule
+    Parameter                                                   & Value                         & Meaning                                              \\
+    \midrule
+    \texttt{hidden\_\allowbreak sizes}$^{\ddagger}$                         & $(1024,1024)$                 & hidden layers of actor and both critics              \\
+    \texttt{actor\_\allowbreak lr}, \texttt{critic\_\allowbreak lr}                     & \num{1e-3}                    & Adam learning rates                                  \\
+    \texttt{gamma}                                              & \num{0.99}                    & discount                                             \\
+    \texttt{tau}                                                & \num{0.005}                   & Polyak coefficient of the target networks            \\
+    \texttt{batch\_\allowbreak size}                                        & \num{100}                     & minibatch size                                       \\
+    \texttt{buffer\_\allowbreak capacity}                                   & \num{1000000}                 & replay buffer, never filled at this run length       \\
+    \texttt{exploration\_\allowbreak noise}                                 & \num{0.1}                     & standard deviation of the action noise during rollout \\
+    \texttt{target\_\allowbreak policy\_\allowbreak noise}                              & \num{0.2}                     & noise of the target policy smoothing                 \\
+    \texttt{target\_\allowbreak noise\_\allowbreak clip}                                & \num{0.5}                     & clip range of that noise                             \\
+    \texttt{policy\_\allowbreak update\_\allowbreak delay}                              & \num{2}                       & actor and target networks updated on every second update \\
+    \texttt{updates\_\allowbreak per\_\allowbreak env\_\allowbreak step}                            & \num{1}                       & update-to-data ratio                                 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{MBPO baseline parameters (\texttt{MBPOConfig}). The first part is the SAC learner, which MBPO reuses unmodified. The rollout schedule is the only entry that differs between the environments.}
+  \label{tab:app-hp-mbpo}
+  \begin{tabular}{@{}p{4.7cm}p{3.7cm}p{5.0cm}@{}}
+    \toprule
+    Parameter                                                                  & Value                                                    & Meaning                                                       \\
+    \midrule
+    \multicolumn{3}{@{}l}{\emph{SAC learner (both environments)}}                                                                                                                                       \\
+    \texttt{hidden\_\allowbreak sizes}$^{\ddagger}$                                        & $(1024,1024)$                                            & hidden layers of actor and both critics                       \\
+    \texttt{actor\_\allowbreak lr}, \texttt{critic\_\allowbreak lr}, \texttt{alpha\_\allowbreak lr}                & \num{3e-4}                                               & Adam learning rates                                           \\
+    \texttt{gamma}, \texttt{tau}                                               & \num{0.99}, \num{0.005}                                  & discount, Polyak coefficient                                  \\
+    \texttt{autotune\_\allowbreak alpha}, \texttt{init\_\allowbreak alpha}$^{\dagger}$                 & true, \num{0.2}                                          & automatic entropy tuning, initial temperature                 \\
+    \texttt{policy\_\allowbreak update\_\allowbreak delay}                                             & \num{1}                                                  & actor updated on every update                                 \\
+    \texttt{updates\_\allowbreak per\_\allowbreak env\_\allowbreak step}$^{\ddagger}$                              & \num{1}                                                  & update-to-data ratio                                          \\
+    \texttt{batch\_\allowbreak size}                                                       & \num{256}                                                & SAC minibatch size                                            \\
+    \texttt{real\_\allowbreak ratio}                                                       & \num{0.05}                                               & fraction of each minibatch drawn from the real buffer         \\
+    \texttt{buffer\_\allowbreak capacity}                                                  & \num{1000000}                                            & real replay buffer                                            \\
+    \midrule
+    \multicolumn{3}{@{}l}{\emph{Dynamics ensemble (both environments)}}                                                                                                                                 \\
+    \texttt{ensemble\_\allowbreak size}, \texttt{num\_\allowbreak elites}                              & \num{7}, \num{5}                                         & ensemble members, elite members                               \\
+    \texttt{model\_\allowbreak hidden\_\allowbreak sizes}                                              & $(200,200,200,200)$                                      & hidden layers of one member                                   \\
+    \texttt{model\_\allowbreak lr}                                                         & \num{1e-3}                                               & Adam learning rate of the ensemble                            \\
+    \texttt{model\_\allowbreak weight\_\allowbreak decays}                                             & \num{2.5e-5}, \num{5e-5}, \num{7.5e-5}, \num{1e-4}, \num{1e-4} & per layer: four hidden layers and the output heads            \\
+    \texttt{model\_\allowbreak train\_\allowbreak batch\_\allowbreak size}                                         & \num{256}                                                & minibatch size of the model fit                               \\
+    \texttt{model\_\allowbreak holdout\_\allowbreak ratio}                                             & \num{0.2}                                                & share of the real data held out in each fit                   \\
+    \texttt{model\_\allowbreak max\_\allowbreak train\_\allowbreak epochs}                                         & \num{200}                                                & cap on passes over the training split per fit                 \\
+    \texttt{model\_\allowbreak train\_\allowbreak patience}                                            & \num{5}                                                  & early stopping on the holdout error                           \\
+    \texttt{model\_\allowbreak train\_\allowbreak freq}$^{\ddagger}$                                   & \num{250}                                                & refit interval in real steps, evaluated once per epoch (\zcref{sec:app-hp-refit}) \\
+    \texttt{deterministic\_\allowbreak model}                                              & false                                                    & predictions are sampled from the predicted Gaussian           \\
+    \midrule
+    \multicolumn{3}{@{}l}{\emph{Branched model rollouts (both environments)}}                                                                                                                           \\
+    \texttt{rollout\_\allowbreak batch\_\allowbreak size}$^{\ddagger}$                                 & \num{10000}                                              & start states per generation, once per epoch                   \\
+    \texttt{model\_\allowbreak retain\_\allowbreak epochs}                                             & \num{1}                                                  & model buffer retains one generation                           \\
+    \midrule
+    \multicolumn{3}{@{}l}{\emph{Rollout schedule (by environment)}}                                                                                                                                     \\
+    \texttt{rollout\_\allowbreak min\_\allowbreak epoch}, \texttt{rollout\_\allowbreak max\_\allowbreak epoch}                 & HalfCheetah-v5: \num{20}, \num{150}; Ant-v5: \num{20}, \num{100} & epochs between which the length rises linearly              \\
+    \texttt{rollout\_\allowbreak min\_\allowbreak length}, \texttt{rollout\_\allowbreak max\_\allowbreak length}               & HalfCheetah-v5: \num{1}, \num{1}; Ant-v5: \num{1}, \num{25}   & rollout length (fixed at \num{1} on HalfCheetah-v5)            \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{TD-MPC2 baseline parameters (\texttt{TDMPC2Config}). Only \texttt{episodic} differs between the environments.}
+  \label{tab:app-hp-tdmpc2}
+  \begin{tabular}{@{}p{4.7cm}p{3.7cm}p{5.0cm}@{}}
+    \toprule
+    Parameter                                                                        & Value                                      & Meaning                                                      \\
+    \midrule
+    \multicolumn{3}{@{}l}{\emph{Architecture}}                                                                                                                                                         \\
+    \texttt{num\_\allowbreak enc\_\allowbreak layers}, \texttt{enc\_\allowbreak dim}                                     & \num{2}, \num{256}                          & encoder layers and width                                     \\
+    \texttt{mlp\_\allowbreak dim}, \texttt{latent\_\allowbreak dim}                                          & \num{512}, \num{512}                        & width of the MLPs, latent dimension                          \\
+    \texttt{num\_\allowbreak q}                                                                  & \num{5}                                     & size of the Q-ensemble                                       \\
+    \texttt{dropout}, \texttt{simnorm\_\allowbreak dim}                                          & \num{0.01}, \num{8}                         & dropout in the Q-networks, SimNorm group size                \\
+    \midrule
+    \multicolumn{3}{@{}l}{\emph{Optimisation}}                                                                                                                                                         \\
+    \texttt{lr}, \texttt{enc\_\allowbreak lr\_\allowbreak scale}                                             & \num{3e-4}, \num{0.3}                       & learning rate, factor for the encoder                        \\
+    \texttt{grad\_\allowbreak clip\_\allowbreak norm}                                                        & \num{20}                                    & gradient-norm clipping                                       \\
+    \texttt{batch\_\allowbreak size}                                                             & \num{256}                                   & minibatch size                                               \\
+    \texttt{tau}                                                                     & \num{0.01}                                  & Polyak coefficient of the target Q-ensemble                  \\
+    \texttt{rho}                                                                     & \num{0.5}                                   & temporal weighting of the losses over the horizon            \\
+    \texttt{consistency\_\allowbreak coef}, \texttt{reward\_\allowbreak coef}, \texttt{value\_\allowbreak coef}          & \num{20}, \num{0.1}, \num{0.1}              & loss coefficients                                            \\
+    \texttt{termination\_\allowbreak coef}                                                       & \num{1}                                     & used only if \texttt{episodic} is true                       \\
+    \texttt{entropy\_\allowbreak coef}                                                           & \num{1e-4}                                  & entropy coefficient of the policy prior                      \\
+    \texttt{updates\_\allowbreak per\_\allowbreak env\_\allowbreak step}                                                 & \num{1}                                     & update-to-data ratio                                         \\
+    \texttt{discount\_\allowbreak denom}, \texttt{discount\_\allowbreak min}, \texttt{discount\_\allowbreak max}         & \num{5}, \num{0.95}, \num{0.995}            & discount heuristic; gives \num{0.995} for \num{1000}-step episodes \\
+    \texttt{episode\_\allowbreak length}                                                         & \num{1000}                                  & fallback, the environment value is preferred                 \\
+    \midrule
+    \multicolumn{3}{@{}l}{\emph{MPPI planning}}                                                                                                                                                        \\
+    \texttt{horizon}                                                                 & \num{3}                                     & planning horizon                                             \\
+    \texttt{iterations}                                                              & \num{6}                                     & MPPI iterations ($+2$ only for action dimension $\ge 20$)    \\
+    \texttt{num\_\allowbreak samples}, \texttt{num\_\allowbreak elites}, \texttt{num\_\allowbreak pi\_\allowbreak trajs}             & \num{512}, \num{64}, \num{24}               & candidate sequences, elites, sequences seeded from the policy prior \\
+    \texttt{min\_\allowbreak std}, \texttt{max\_\allowbreak std}, \texttt{temperature}                       & \num{0.05}, \num{2}, \num{0.5}              & planner distribution                                         \\
+    \midrule
+    \multicolumn{3}{@{}l}{\emph{Policy prior and value regression}}                                                                                                                                    \\
+    \texttt{log\_\allowbreak std\_\allowbreak min}, \texttt{log\_\allowbreak std\_\allowbreak max}                                   & \num{-10}, \num{2}                          & range of the policy log standard deviation                   \\
+    \texttt{num\_\allowbreak bins}, \texttt{vmin}, \texttt{vmax}                                 & \num{101}, \num{-10}, \num{10}              & two-hot regression of reward and value                       \\
+    \midrule
+    \multicolumn{3}{@{}l}{\emph{Termination and buffer}}                                                                                                                                               \\
+    \texttt{episodic}$^{\dagger}$                                                    & HalfCheetah-v5: false; Ant-v5: true         & termination classifier (\zcref{sec:baselines})               \\
+    \texttt{buffer\_\allowbreak capacity}                                                        & \num{1000000}                               & sequence replay buffer                                       \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+%-------------------------------------------------------------------------------
+\section{Protocol Settings Common to All Runs}\label{sec:app-hp-protocol}
+
+\Zcref{tab:app-hp-protocol} lists the settings of the experiment configuration (\texttt{ExperimentConfig}) that are identical in all \num{280} runs.
+The measurement protocol itself is described in \zcref{sec:protocol}.
+The clock lock, the persistence mode and the CPU governor are recorded as requested; no record shows that they took effect (\zcref{sec:data-quality}).
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Protocol settings of the \num{280} canonical runs (\texttt{ExperimentConfig}).}
+  \label{tab:app-hp-protocol}
+  \begin{tabular}{@{}p{4.7cm}p{3.7cm}p{5.0cm}@{}}
+    \toprule
+    Setting                                                              & Value                          & Remark                                                   \\
+    \midrule
+    \texttt{train\_\allowbreak steps}                                                & \num{100000}                   & environment steps of the measured training              \\
+    \texttt{steps\_\allowbreak per\_\allowbreak epoch}                                           & \num{1000}                     & one rollout and one gradient-update task per epoch      \\
+    \texttt{warmup\_\allowbreak steps}                                               & \num{5000}                     & \num{10000} for TD3 (\num{80} runs); random actions, measured but excluded \\
+    \texttt{settle\_\allowbreak seconds}                                             & \SI{30}{\second}               & unmeasured                                               \\
+    \texttt{idle\_\allowbreak baseline\_\allowbreak seconds}, \texttt{idle\_\allowbreak tail\_\allowbreak seconds}       & \SI{90}{\second}, \SI{90}{\second} & idle windows before and after training               \\
+    \texttt{measure\_\allowbreak power\_\allowbreak secs}                                        & \SI{1}{\second}                & CodeCarbon polling interval                             \\
+    \texttt{tracking\_\allowbreak mode}                                              & \texttt{machine}               & whole-machine CPU, GPU and RAM terms                     \\
+    \texttt{force\_\allowbreak cpu\_\allowbreak power\_\allowbreak w}                                        & none                           & no fixed CPU power (RAPL energy is read)                \\
+    \texttt{lock\_\allowbreak gpu\_\allowbreak clocks}                                           & true                           & requested                                                \\
+    \texttt{gpu\_\allowbreak min\_\allowbreak clock\_\allowbreak mhz}, \texttt{gpu\_\allowbreak max\_\allowbreak clock\_\allowbreak mhz}         & \SI{2000}{\mega\hertz}, \SI{2000}{\mega\hertz} & requested lock of the graphics clock               \\
+    \texttt{set\_\allowbreak persistence\_\allowbreak mode}                                      & true                           & requested                                                \\
+    \texttt{set\_\allowbreak cpu\_\allowbreak performance\_\allowbreak governor}                             & true                           & requested; governor \texttt{performance}                \\
+    \texttt{thermal\_\allowbreak gate\_\allowbreak enabled}                                      & true                           & wait between runs for the GPU to return to the reference state \\
+    \texttt{thermal\_\allowbreak gate\_\allowbreak temp\_\allowbreak tolerance\_\allowbreak c}                           & \SI{2}{\celsius}               & temperature tolerance                                    \\
+    \texttt{thermal\_\allowbreak gate\_\allowbreak power\_\allowbreak tolerance\_\allowbreak w}                          & \SI{5}{\watt}                  & power tolerance                                          \\
+    \texttt{thermal\_\allowbreak gate\_\allowbreak max\_\allowbreak wait\_\allowbreak seconds}                           & \SI{600}{\second}              & timeout of the gate                                      \\
+    \texttt{thermal\_\allowbreak gate\_\allowbreak poll\_\allowbreak interval\_\allowbreak seconds}                      & \SI{5}{\second}                & polling interval of the gate                             \\
+    \texttt{device}                                                      & \texttt{cuda}                  & NVIDIA GeForce RTX 5090                                  \\
+    \texttt{country\_\allowbreak iso\_\allowbreak code}                                          & \texttt{DEU}                   & affects only the CO$_2$ conversion, which the thesis does not report \\
+    Seeds                                                                & \num{331}, \num{958}, \num{14577}, \num{43611}, \num{85062} & in this order within every configuration          \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The thermal gate reached its reference state in all \num{280} runs; none ran into the timeout (field \texttt{thermal\_\allowbreak gate.reason} of the metadata).
+
+%-------------------------------------------------------------------------------
+\section{Sweep Override Files}\label{sec:app-hp-sweeps}
+
+Hyperparameters other than the baseline values are set through JSON override files that are passed to the entry point with \texttt{--algo-config-overrides} (\zcref{sec:app-repro-run}).
+Because only one file can be passed per run, the files of the Ant-v5 sweeps of MBPO and TD-MPC2 repeat the environment baseline (the rollout schedule of MBPO, \texttt{episodic} of TD-MPC2).
+\Zcref{tab:app-hp-sweeps} lists the \num{37} files that the canonical runs use, with the parameter, the value and the number of canonical runs that were produced with the file.
+The \num{6} baseline configurations without a file (SAC and TD3 on both environments, MBPO and TD-MPC2 on HalfCheetah-v5) use the defaults of \zcref{tab:app-hp-sac} to \zcref{tab:app-hp-tdmpc2}, and TD3 additionally the command-line option \texttt{--warmup-steps 10000}; they account for \num{30} runs, so the files account for \num{250} runs.
+The runs of a file and the logged configuration of each run were matched by file name; for all \num{280} runs, the dataclass default with the file applied equals the \texttt{algo\_\allowbreak config} logged in the metadata (\zcref{sec:app-hp-check}).
+
+{\scriptsize\setlength{\tabcolsep}{3pt}
+  \begin{longtable}{@{}p{3.1cm}lp{1.9cm}p{2.3cm}lp{2.4cm}r@{}}
+    \caption{Override files of the sweeps. $^{a}$: \texttt{rollout\_\allowbreak min\_\allowbreak epoch} \num{20}, \texttt{rollout\_\allowbreak max\_\allowbreak epoch} \num{100}, \texttt{rollout\_\allowbreak min\_\allowbreak length} \num{1}, \texttt{rollout\_\allowbreak max\_\allowbreak length} \num{25}.
+      The row without a swept parameter is the file of the environment baseline.}
+    \label{tab:app-hp-sweeps}                                                                                                                                  \\
+    \toprule
+    File & Algorithm & Environment & Swept parameter & Value & Also sets & Runs                                                                               \\
+    \midrule
+    \endfirsthead
+    \toprule
+    File & Algorithm & Environment & Swept parameter & Value & Also sets & Runs                                                                               \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{7}{r@{}}{\emph{continued on the next page}}                                                                                                   \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    \texttt{sac\_\allowbreak utd2.json} & SAC & HalfCheetah-v5 and Ant-v5 & \texttt{updates\_\allowbreak per\_\allowbreak env\_\allowbreak step} & 2 & --- & \num{10} \\
+    \texttt{sac\_\allowbreak utd4.json} & SAC & HalfCheetah-v5 and Ant-v5 & \texttt{updates\_\allowbreak per\_\allowbreak env\_\allowbreak step} & 4 & --- & \num{10} \\
+    \texttt{sac\_\allowbreak width256.json} & SAC & HalfCheetah-v5 and Ant-v5 & \texttt{hidden\_\allowbreak sizes} & $(256,256)$ & --- & \num{10} \\
+    \texttt{sac\_\allowbreak width512.json} & SAC & HalfCheetah-v5 and Ant-v5 & \texttt{hidden\_\allowbreak sizes} & $(512,512)$ & --- & \num{10} \\
+    \texttt{sac\_\allowbreak batch1024.json} & SAC & HalfCheetah-v5 and Ant-v5 & \texttt{batch\_\allowbreak size} & 1024 & --- & \num{10} \\
+    \texttt{sac\_\allowbreak batch512.json} & SAC & HalfCheetah-v5 and Ant-v5 & \texttt{batch\_\allowbreak size} & 512 & --- & \num{10} \\
+    \texttt{td3\_\allowbreak utd2.json} & TD3 & HalfCheetah-v5 and Ant-v5 & \texttt{updates\_\allowbreak per\_\allowbreak env\_\allowbreak step} & 2 & --- & \num{10} \\
+    \texttt{td3\_\allowbreak utd4.json} & TD3 & HalfCheetah-v5 and Ant-v5 & \texttt{updates\_\allowbreak per\_\allowbreak env\_\allowbreak step} & 4 & --- & \num{10} \\
+    \texttt{td3\_\allowbreak width256.json} & TD3 & HalfCheetah-v5 and Ant-v5 & \texttt{hidden\_\allowbreak sizes} & $(256,256)$ & --- & \num{10} \\
+    \texttt{td3\_\allowbreak width512.json} & TD3 & HalfCheetah-v5 and Ant-v5 & \texttt{hidden\_\allowbreak sizes} & $(512,512)$ & --- & \num{10} \\
+    \texttt{td3\_\allowbreak batch1024.json} & TD3 & HalfCheetah-v5 and Ant-v5 & \texttt{batch\_\allowbreak size} & 1024 & --- & \num{10} \\
+    \texttt{td3\_\allowbreak batch256.json} & TD3 & HalfCheetah-v5 and Ant-v5 & \texttt{batch\_\allowbreak size} & 256 & --- & \num{10} \\
+    \texttt{td3\_\allowbreak batch512.json} & TD3 & HalfCheetah-v5 and Ant-v5 & \texttt{batch\_\allowbreak size} & 512 & --- & \num{10} \\
+    \texttt{mbpo\_\allowbreak ant.json} & MBPO & Ant-v5 & --- & --- & Ant schedule$^{a}$ & \num{5} \\
+    \texttt{mbpo\_\allowbreak utd2.json} & MBPO & HalfCheetah-v5 & \texttt{updates\_\allowbreak per\_\allowbreak env\_\allowbreak step} & 2 & --- & \num{5} \\
+    \texttt{mbpo\_\allowbreak utd4.json} & MBPO & HalfCheetah-v5 & \texttt{updates\_\allowbreak per\_\allowbreak env\_\allowbreak step} & 4 & --- & \num{5} \\
+    \texttt{mbpo\_\allowbreak ant\_\allowbreak utd2.json} & MBPO & Ant-v5 & \texttt{updates\_\allowbreak per\_\allowbreak env\_\allowbreak step} & 2 & Ant schedule$^{a}$ & \num{5} \\
+    \texttt{mbpo\_\allowbreak ant\_\allowbreak utd4.json} & MBPO & Ant-v5 & \texttt{updates\_\allowbreak per\_\allowbreak env\_\allowbreak step} & 4 & Ant schedule$^{a}$ & \num{5} \\
+    \texttt{mbpo\_\allowbreak width256.json} & MBPO & HalfCheetah-v5 & \texttt{hidden\_\allowbreak sizes} & $(256,256)$ & --- & \num{5} \\
+    \texttt{mbpo\_\allowbreak width512.json} & MBPO & HalfCheetah-v5 & \texttt{hidden\_\allowbreak sizes} & $(512,512)$ & --- & \num{5} \\
+    \texttt{mbpo\_\allowbreak ant\_\allowbreak width256.json} & MBPO & Ant-v5 & \texttt{hidden\_\allowbreak sizes} & $(256,256)$ & Ant schedule$^{a}$ & \num{5} \\
+    \texttt{mbpo\_\allowbreak ant\_\allowbreak width512.json} & MBPO & Ant-v5 & \texttt{hidden\_\allowbreak sizes} & $(512,512)$ & Ant schedule$^{a}$ & \num{5} \\
+    \texttt{mbpo\_\allowbreak batch1024.json} & MBPO & HalfCheetah-v5 & \texttt{batch\_\allowbreak size} & 1024 & --- & \num{5} \\
+    \texttt{mbpo\_\allowbreak batch512.json} & MBPO & HalfCheetah-v5 & \texttt{batch\_\allowbreak size} & 512 & --- & \num{5} \\
+    \texttt{mbpo\_\allowbreak ant\_\allowbreak batch1024.json} & MBPO & Ant-v5 & \texttt{batch\_\allowbreak size} & 1024 & Ant schedule$^{a}$ & \num{5} \\
+    \texttt{mbpo\_\allowbreak ant\_\allowbreak batch512.json} & MBPO & Ant-v5 & \texttt{batch\_\allowbreak size} & 512 & Ant schedule$^{a}$ & \num{5} \\
+    \texttt{mbpo\_\allowbreak ant\_\allowbreak rollout1.json} & MBPO & Ant-v5 & \texttt{rollout\_\allowbreak max\_\allowbreak length} & 1 & Ant schedule$^{a}$ with the maximum length above & \num{5} \\
+    \texttt{mbpo\_\allowbreak ant\_\allowbreak rollout15.json} & MBPO & Ant-v5 & \texttt{rollout\_\allowbreak max\_\allowbreak length} & 15 & Ant schedule$^{a}$ with the maximum length above & \num{5} \\
+    \texttt{tdmpc2\_\allowbreak ant.json} & TD-MPC2 & Ant-v5 & --- & --- & \texttt{episodic} true & \num{5} \\
+    \texttt{tdmpc2\_\allowbreak numq3.json} & TD-MPC2 & HalfCheetah-v5 & \texttt{num\_\allowbreak q} & 3 & --- & \num{5} \\
+    \texttt{tdmpc2\_\allowbreak numq7.json} & TD-MPC2 & HalfCheetah-v5 & \texttt{num\_\allowbreak q} & 7 & --- & \num{5} \\
+    \texttt{tdmpc2\_\allowbreak ant\_\allowbreak numq3.json} & TD-MPC2 & Ant-v5 & \texttt{num\_\allowbreak q} & 3 & \texttt{episodic} true & \num{5} \\
+    \texttt{tdmpc2\_\allowbreak ant\_\allowbreak numq7.json} & TD-MPC2 & Ant-v5 & \texttt{num\_\allowbreak q} & 7 & \texttt{episodic} true & \num{5} \\
+    \texttt{tdmpc2\_\allowbreak horizon1.json} & TD-MPC2 & HalfCheetah-v5 & \texttt{horizon} & 1 & --- & \num{5} \\
+    \texttt{tdmpc2\_\allowbreak horizon5.json} & TD-MPC2 & HalfCheetah-v5 & \texttt{horizon} & 5 & --- & \num{5} \\
+    \texttt{tdmpc2\_\allowbreak ant\_\allowbreak horizon1.json} & TD-MPC2 & Ant-v5 & \texttt{horizon} & 1 & \texttt{episodic} true & \num{5} \\
+    \texttt{tdmpc2\_\allowbreak ant\_\allowbreak horizon5.json} & TD-MPC2 & Ant-v5 & \texttt{horizon} & 5 & \texttt{episodic} true & \num{5} \\
+  \end{longtable}
+}
+
+%-------------------------------------------------------------------------------
+\section{Check of the Logged Configurations}\label{sec:app-hp-check}
+
+The \texttt{metadata.json} file of every canonical run stores the full algorithm configuration and the experiment configuration of the run.
+The following checks were run on all \num{280} files.
+\begin{itemize}
+  \item The logged \texttt{algo\_\allowbreak config} equals the default of the configuration class of the algorithm with the override file of \zcref{tab:app-hp-sweeps} applied, for all \num{280} runs (no deviation).
+  \item For each of the \num{56} configurations, the logged \texttt{algo\_\allowbreak config} differs from that of the baseline of the same algorithm and environment in exactly the swept parameter and in no other field (no exception).
+        For TD3, the baseline has batch size \num{100}, so the batch-size sweep changes this one field.
+  \item Within each configuration, the \texttt{algo\_\allowbreak config} and the \texttt{experiment\_\allowbreak config} are identical for the five seeds, apart from the seed itself and from one logging field described next.
+  \item The \texttt{experiment\_\allowbreak config} is identical in all \num{280} runs except for \texttt{warmup\_\allowbreak steps} (\num{10000} in the \num{80} TD3 runs, \num{5000} otherwise).
+\end{itemize}
+The only exception is a logging field, not a setting: the field \texttt{thermal\_\allowbreak gate\_\allowbreak reference\_\allowbreak file} is stored in the metadata of only three runs (SAC on HalfCheetah-v5, baseline, seeds \num{331}, \num{958} and \num{14577}) and is absent from the other \num{277}, because the runner excludes it from the logged configuration from the fourth canonical run on (\zcref{sec:app-repro-code}).
+The thermal gate was enabled and reached its reference state in all \num{280} runs.
+
+%-------------------------------------------------------------------------------
+\section{Refit Interval of the MBPO Dynamics Model}\label{sec:app-hp-refit}
+
+The configuration field \texttt{model\_\allowbreak train\_\allowbreak freq} is \num{250}, and the training loop of MBPO (\texttt{algorithms/\allowbreak mbpo.py}, function \texttt{train}) refits the ensemble when
+\begin{center}
+  \footnotesize\texttt{(global\_\allowbreak step - last\_\allowbreak model\_\allowbreak train\_\allowbreak step) >= model\_\allowbreak train\_\allowbreak freq}
+\end{center}
+holds.
+This condition is evaluated once at the start of every epoch of \num{1000} environment steps, and \texttt{last\_\allowbreak model\_\allowbreak train\_\allowbreak step} is initialised to $-250$, so the first epoch also fits.
+At every epoch the difference is \num{1000} and therefore at least \num{250}, so the model is refitted at the start of every epoch: \num{100} fits per run, one per \texttt{dynamics\_\allowbreak model\_\allowbreak update} task, and not one fit every \num{250} real steps.
+The synthetic rollouts are generated once per epoch as well, directly after the rollout block, so the model buffer is refreshed once per epoch.
+The logged number of fit epochs confirms this: in all \num{80} canonical MBPO runs, all \num{100} epochs of \texttt{training\_\allowbreak metrics.json} carry the diagnostics of a fit (\texttt{model\_\allowbreak train\_\allowbreak epochs} is set), i.e.\ there are exactly \num{100} fits per run.
+Each fit continues from the weights of the previous one and refits only the input normaliser; the fit stops early after \texttt{model\_\allowbreak train\_\allowbreak patience} epochs without improvement of the holdout error.
+
+\paragraph{Deviation from the publication.} The publication~\cite{janner2019mbpo} lists \num{20} policy updates per environment step on Ant and \num{40} on HalfCheetah, and \num{400} model rollouts per environment step.
+The baselines of this thesis use one update per environment step, refit and refill once per epoch, and draw \num{10000} start states for each refill, i.e.\ \num{10} per environment step.
+The reasons for this reduction and the resulting limits are given in \zcref{sec:baselines} and \zcref{sec:thr-design}.

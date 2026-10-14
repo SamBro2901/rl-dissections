@@ -1,0 +1,26 @@
+{\footnotesize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}lrrrrrr@{}}
+    \caption[Environment comparison of all MBPO configurations (Ant-v5 relative to HalfCheetah-v5, runs paired by seed; full precision)]{Environment comparison of all MBPO configurations (Ant-v5 relative to HalfCheetah-v5, runs paired by seed; full precision). Energy ratios are ratios of means. $\Delta$share is the difference of the mean shares in percentage points; the segment that attains the maximum absolute difference is given in brackets. $\bar P_r/\bar P_{\mathrm{GU}}$ is the ratio of the mean power of the rollout to that of the GU; the column gives the ratio of this quantity on Ant-v5 to that on HalfCheetah-v5. MBPO and the environment are confounded through the rollout schedule (fixed length 1 on HalfCheetah-v5, scheduled maximum 25 on Ant-v5).}
+    \label{tab:app-mbpo-env} \\
+    \toprule
+    Config. & $E_{\mathrm{total}}$ ratio & $E_{\mathrm{rollout}}$ ratio & max $|\Delta$share$|$ [pp] & $\bar P_{\mathrm{total}}$ ratio & $\bar P_r/\bar P_{\mathrm{GU}}$ ratio & J/FLOP total ratio \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Config. & $E_{\mathrm{total}}$ ratio & $E_{\mathrm{rollout}}$ ratio & max $|\Delta$share$|$ [pp] & $\bar P_{\mathrm{total}}$ ratio & $\bar P_r/\bar P_{\mathrm{GU}}$ ratio & J/FLOP total ratio \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{7}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    baseline & \num{1.22056} & \num{1.76769} & \num{3.81837} (fit) & \num{0.995821} & \num{0.97315} & \num{0.976476} \\
+    UTD 2 & \num{1.17834} & \num{1.74901} & \num{5.0602} (fit) & \num{0.99452} & \num{0.974258} & \num{1.00028} \\
+    UTD 4 & \num{1.1361} & \num{1.75506} & \num{5.94838} (fit) & \num{0.99078} & \num{0.97539} & \num{1.00737} \\
+    width 256 & \num{1.24787} & \num{1.76152} & \num{3.8587} (fit) & \num{1.00567} & \num{0.976461} & \num{0.704152} \\
+    width 512 & \num{1.20163} & \num{1.75899} & \num{2.96201} (fit) & \num{1.00332} & \num{0.971942} & \num{0.799789} \\
+    batch 512 & \num{1.18312} & \num{1.72588} & \num{3.2277} (fit) & \num{0.993772} & \num{0.944864} & \num{1.0117} \\
+    batch 1024 & \num{1.22421} & \num{1.76828} & \num{3.2987} (fit) & \num{1.00426} & \num{0.951041} & \num{1.08374} \\
+  \end{longtable}
+}

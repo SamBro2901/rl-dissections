@@ -1,0 +1,133 @@
+\chapter{Full Result Tables}
+\label{app:full-results}
+
+This appendix gives the results of \zcref{ch:per-algorithm} and \zcref{ch:comparison} at full precision and in the full extent that the main text refers to.
+Nothing is added to the interpretation.
+\Zcref{sec:app-full-ch4} contains the tables of the four sections of \zcref{ch:per-algorithm} for all configurations, \zcref{sec:app-full-ec} the statistics behind \zcref{sec:energy-vs-compute}, \zcref{sec:app-full-rob} the orderings behind \zcref{sec:robustness}, and \zcref{sec:app-full-cross} the cross-seed table of all \num{56} configurations.
+\Zcref{sec:app-full-opt} holds optional blocks that wait for a decision of the author.
+All tables are generated from the raw run files and the context files of the repository by \texttt{flop\_analysis/appendix\_tables.py}.
+
+\paragraph{Conventions.} As in \zcref{ch:per-algorithm}, a value is the mean over the five canonical seeds and the number after the plus--minus sign is the sample standard deviation ($n-1$); means are given with six and spreads with four significant digits.
+All energies are gross (\zcref{sec:units}).
+J/FLOP is the ratio of the mean energy to the mean FLOPs, and its spread is the standard deviation of the five per-seed ratios.
+Shares and percentages are computed per run and then averaged.
+The segment names are abbreviated in the tables; the abbreviations are listed in each caption.
+
+%-------------------------------------------------------------------------------
+\section{Tables of the Per-Algorithm Chapter}\label{sec:app-full-ch4}
+
+Each subsection contains, for all configurations, the content of the tables of the corresponding section of \zcref{ch:per-algorithm}: energies and shares, FLOPs and energy per FLOP, durations, power and throughput, the composition of the measured energy with the idle-floor fractions, and the measurement diagnostics.
+The tables of the baselines and of the sweeps of the main text are subsets of these tables.
+The values of the main text agree with them to the rounding of the digits printed there (\zcref{tab:app-verification}).
+
+\subsection{SAC}\label{sec:app-full-sac}
+
+%%B_sac_energy%%
+%%B_sac_jpf%%
+%%B_sac_time%%
+%%B_sac_comp%%
+%%B_sac_quality%%
+%%B_sac_env%%
+
+\subsection{TD3}\label{sec:app-full-td3}
+
+\Zcref{sec:td3} reports the baseline of TD3; the tables below therefore list the baseline of each environment, and the measurement diagnostics list all \num{16} configurations.
+The segment tables of the TD3 sweeps are in the optional block of \zcref{sec:app-full-opt}.
+
+%%B_td3_energy%%
+%%B_td3_jpf%%
+%%B_td3_time%%
+%%B_td3_comp%%
+%%B_td3_quality%%
+
+\subsection{MBPO}\label{sec:app-full-mbpo}
+
+The composition of the energy and the idle-floor fractions of all \num{16} configurations (the content that \zcref{sec:mbpo} refers to) are in \zcref{tab:app-mbpo-comp}.
+
+%%B_mbpo_energy%%
+%%B_mbpo_jpf%%
+%%B_mbpo_time%%
+%%B_mbpo_comp%%
+%%B_mbpo_quality%%
+%%B_mbpo_fit%%
+%%B_mbpo_sac%%
+%%B_mbpo_env%%
+
+\subsection{TD-MPC2}\label{sec:app-full-tdmpc2}
+
+%%B_tdmpc2_energy%%
+%%B_tdmpc2_jpf%%
+%%B_tdmpc2_time%%
+%%B_tdmpc2_comp%%
+%%B_tdmpc2_quality%%
+
+\subsection{Agreement with the Main Text}\label{sec:app-full-verify}
+
+\Zcref{tab:app-verification} reports the comparison of the tables of this appendix with the tables printed in \zcref{ch:per-algorithm} and \zcref{ch:comparison}.
+For each table of the main text, every printed number was looked up among the recomputed values and compared at the number of digits printed with it; the numbers that are not tabulated in this appendix (ratios between the environments and similar derived columns) were not looked up and are counted as not found.
+In addition, the cells of the \num{15} baseline tables of \zcref{ch:per-algorithm} (energies and shares, J/FLOP, durations and power, composition) were compared row by row with the recomputed value of the same environment, segment and quantity: \num{844} of \num{846} cells equal the recomputed value rounded to the printed digits, and the other two differ in the last printed digit (the standard deviation of the energy of \texttt{target\_update} of TD-MPC2 on HalfCheetah-v5, printed \num{109.8}, recomputed \num{109.7498}; the standard deviation of the RAM share in the gradient updates of TD-MPC2 on HalfCheetah-v5, printed \num{0.1613}, recomputed \num{0.16125}, a rounding tie).
+
+%%B_verification_table%%
+
+%-------------------------------------------------------------------------------
+\section{Energy versus Compute}\label{sec:app-full-ec}
+
+\Zcref{tab:app-segment-stats} gives the rank correlation and the log-log fit for every algorithm--segment combination (the pooled rows and the rows of \zcref{tab:ec-pooled} and \zcref{tab:ec-algo} are subsets).
+\Zcref{tab:app-fits-means} gives the fixed and marginal cost $E=a+bF$ of every segment along every sweep (\zcref{tab:ec-fits} gives the training total), \zcref{tab:app-fits-runs} the same fits on the individual runs, and \zcref{tab:app-pairs} the marginal cost between all adjacent sweep values (\zcref{tab:ec-delta} gives SAC and TD3).
+
+%%B_segment_stats%%
+%%B_fits_means%%
+%%B_fits_runs%%
+%%B_pairs%%
+
+%-------------------------------------------------------------------------------
+\section{Robustness of the Comparison}\label{sec:app-full-rob}
+
+\Zcref{tab:app-rob-sd} gives the values with their standard deviations behind \zcref{tab:rob-energy} and \zcref{tab:rob-jpf}.
+\Zcref{tab:app-seed-orderings} gives the orderings of the individual seeds and \zcref{tab:app-pairwise} the pairwise seed counts.
+
+%%B_rob_sd%%
+%%B_seed_orderings%%
+%%B_pairwise%%
+
+%-------------------------------------------------------------------------------
+\section{Cross-Seed Table of All Configurations}\label{sec:app-full-cross}
+
+%%B_cross_seed%%
+
+%-------------------------------------------------------------------------------
+\section{Optional Blocks}\label{sec:app-full-opt}
+
+Each block below belongs to a decision that the main text leaves to the author.
+A block that is not wanted is deleted together with its marker lines; the main text is not changed by any of them.
+
+% --- OPTIONAL BLOCK 1 (TD-MPC2 sweep and ranges: counterpart of tab:rob-tdmpc2 and tab:rob-ranges): begin ---
+\subsection{Optional: TD-MPC2 and the Range of the Other Algorithms}\label{sec:app-opt-rob}
+
+\todo{AUTHOR: keep or delete this block. If the two tables are moved here from \zcref{sec:rob-tdmpc2}, the main text keeps the paragraphs and replaces \zcref{tab:rob-tdmpc2} and \zcref{tab:rob-ranges} by \zcref{tab:app-rob-tdmpc2} and \zcref{tab:app-rob-ranges}, and the todo of \zcref{sec:rob-tdmpc2} is deleted.}
+\Zcref{tab:app-rob-tdmpc2} and \zcref{tab:app-rob-ranges} are the tables \zcref{tab:rob-tdmpc2} and \zcref{tab:rob-ranges} at full precision.
+
+%%B_opt_rob_tdmpc2%%
+%%B_opt_rob_ranges%%
+% --- OPTIONAL BLOCK 1: end ---
+
+% --- OPTIONAL BLOCK 2 (environment comparison of TD3 and TD-MPC2: counterpart of tab:sac-env and tab:mbpo-env): begin ---
+\subsection{Optional: Environment Comparison of TD3 and TD-MPC2}\label{sec:app-opt-env}
+
+\todo{AUTHOR: keep or delete this block. If kept, the todo at the end of \zcref{sec:env-effect} is replaced by a reference to \zcref{tab:app-td3-env} and \zcref{tab:app-tdmpc2-env}; these are the tables \texttt{tab:td3-env} and \texttt{tab:tdmpc2-env} that the todo asks for.}
+\Zcref{tab:app-td3-env} and \zcref{tab:app-tdmpc2-env} give the environment comparison of the \num{8} TD3 and the \num{5} TD-MPC2 configurations in the format of \zcref{tab:app-sac-env} and \zcref{tab:app-mbpo-env}; together with those, they cover all \num{27} pairs of configurations.
+
+%%B_opt_td3_env%%
+%%B_opt_tdmpc2_env%%
+% --- OPTIONAL BLOCK 2: end ---
+
+% --- OPTIONAL BLOCK 3 (TD3 along its sweeps: segment energies and shares for RQ3 criterion (i)): begin ---
+\subsection{Optional: Segments of TD3 Along Its Sweeps}\label{sec:app-opt-td3}
+
+\todo{AUTHOR: keep or delete this block. The main text states that the segment energies of TD3 along its sweeps are not tabulated (\zcref{sec:td3}) and that the criterion (i) of \zcref{tab:rqs} asks for the change of the shares along each sweep; if this block is kept, that statement and the corresponding sentence of the conclusion would need to be changed (not done here).}
+\Zcref{tab:app-td3-sweep-energy} and \zcref{tab:app-td3-sweep-jpf} give, for the \num{7} non-baseline configurations of TD3 on each environment (update-to-data ratio \num{2} and \num{4}, width \num{256} and \num{512}, batch size \num{256}, \num{512} and \num{1024}), the energy, the share of the total, the share of the gradient updates and the energy per FLOP of each segment.
+The baseline rows are in \zcref{tab:app-td3-energy} and \zcref{tab:app-td3-jpf}.
+
+%%B_opt_td3_sweep_energy%%
+%%B_opt_td3_sweep_jpf%%
+% --- OPTIONAL BLOCK 3: end ---

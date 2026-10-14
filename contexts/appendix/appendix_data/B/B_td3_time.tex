@@ -1,0 +1,36 @@
+{\footnotesize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}lllrrr@{}}
+    \caption[TD3: duration $T$, mean power $\bar P$ and achieved throughput (mean $\pm$ sd over the five seeds)]{TD3: duration $T$, mean power $\bar P$ and achieved throughput (mean $\pm$ sd over the five seeds). The duration of a measured segment is the sum of the CodeCarbon task durations, that of an allocated sub-segment the summed host time of its timers, and the throughput of a sub-segment is its FLOPs divided by this host time. Segment abbreviations: buffer = \texttt{buffer\_sample}, critic = \texttt{critic\_update} (TD-MPC2: world-model step), actor = \texttt{actor\_update} (TD-MPC2: policy-prior step), target = \texttt{target\_update}, GU = \texttt{gradient\_updates}, fit = \texttt{dynamics\_model\_update}, synth = \texttt{synthetic\_rollout\_generation}, pretrain = \texttt{world\_model\_pretrain}. Buffer, critic, actor and target are allocated from the GU energy by timed share; the other segments are measured. HC is HalfCheetah-v5, Ant is Ant-v5.}
+    \label{tab:app-td3-time} \\
+    \toprule
+    Env. & Config. & Segment & $T$ [s] & $\bar P$ [W] & GFLOP/s \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Env. & Config. & Segment & $T$ [s] & $\bar P$ [W] & GFLOP/s \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{6}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    HC & baseline & rollout & \num{11.1119+-0.05962} & \num{126.974+-1.589} & \num{19.2974+-0.1032} \\
+     &  & buffer & \num{8.87991+-0.04412} & --- & --- \\
+     &  & critic & \num{127.075+-3.892} & --- & \num{1513.64+-45.3} \\
+     &  & actor & \num{35.5388+-0.8536} & --- & \num{1504.75+-35.41} \\
+     &  & target & \num{11.6014+-0.09381} & --- & --- \\
+     &  & GU & \num{195.987+-4.596} & \num{136.273+-2.187} & \num{1253.98+-28.89} \\
+     &  & total & \num{207.099+-4.649} & \num{135.772+-2.094} & \num{1187.69+-26.21} \\
+    \addlinespace[2pt]
+    \midrule
+    Ant & baseline & rollout & \num{24.7473+-0.1781} & \num{124.115+-2.067} & \num{9.4098+-0.0676} \\
+     &  & buffer & \num{9.85333+-0.06158} & --- & --- \\
+     &  & critic & \num{126.797+-2.934} & --- & \num{1618.3+-37.72} \\
+     &  & actor & \num{35.341+-0.6203} & --- & \num{1617.78+-28.56} \\
+     &  & target & \num{11.5912+-0.05271} & --- & --- \\
+     &  & GU & \num{199.38+-3.548} & \num{137.683+-1.754} & \num{1315.75+-23.55} \\
+     &  & total & \num{224.127+-3.535} & \num{136.183+-1.735} & \num{1171.44+-18.58} \\
+    \addlinespace[2pt]
+  \end{longtable}
+}

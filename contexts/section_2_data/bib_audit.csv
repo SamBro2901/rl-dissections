@@ -1,0 +1,69 @@
+key,status,note
+Winery,ok,Template example entry; not cited in the thesis text; not audited
+Binz2009,ok,Template example entry (key says 2009, year field 2012); not cited; not audited
+mwe,ok,Template reference; not audited
+Lichter2026,ok,Cited in the template text; not re-verified online
+khan2018rapl,ok,Crossref 10.1145/3177754: authors/venue/volume/issue/pages 1-26 match
+codecarbon,fixed,Authors wrong (Luccioni is not a Zenodo creator); now version-exact record v3.3.0 (doi 10.5281/zenodo.21791294; Zenodo API 2026-10-14)
+nvml,fixed,urldate placeholder YYYY-MM-DD replaced by 2026-10-14; vendor page; no author/year verifiable
+nvmlapi,added,NVML API reference Device Queries (R470 archive page read; units mJ and Volta or newer confirmed)
+haarnoja2018sac,ok,PMLR page: authors/volume 80/pages 1861-1870 match
+haarnoja2018sacapps,added,arXiv API 1812.05905: 11 authors; table gives entropy target -dim(A)
+fujimoto2018td3,ok,PMLR page: pages 1587-1596 match (author 'Herke Hoof' in PMLR meta; van Hoof is the correct form)
+janner2019mbpo,ok,NeurIPS page: authors/title/volume 32 match; pages not listed there
+chua2018pets,ok,NeurIPS page: authors/volume 31 match
+hansen2024tdmpc2,ok,arXiv 2310.16828 authors/title match; ICLR 2024 as in paper header
+williams2017mppi,ok,Crossref 10.1109/ICRA.2017.7989202: 7 authors and pages 1714-1721 match
+pytorchflopcounter,fixed,Placeholder note removed; URL set to flop_counter.py at tag v2.13.0 (read; formulas m*n*2*k); urldate 2026-10-14
+towers2024gymnasium,ok,arXiv API 2407.17032: authors match
+todorov2012mujoco,ok,Crossref 10.1109/IROS.2012.6386109: pages 5026-5033 match
+paszke2019pytorch,ok,Not re-verified online (NeurIPS 32)
+henderson2018matters,ok,Crossref 10.1609/aaai.v32i1.11694: authors/volume/issue match; pages 3207-3214 not returned by Crossref
+colas2018seeds,ok,arXiv API 1806.08295 authors match
+schulman2016gae,ok,arXiv API 1506.02438 authors match (ICLR 2016 from memory)
+wawrzynski2009cat,ok,Crossref 10.1007/978-3-642-04921-7_39: pages 380-390 match
+lillicrap2016ddpg,ok,arXiv API 1509.02971 authors match
+silver2014dpg,ok,PMLR page: volume 32 pages 387-395 match
+vanhasselt2010doubleq,ok,Not re-verified online (NIPS 23 pages 2613-2621 from memory)
+hansen2022tdmpc,ok,PMLR page: volume 162 pages 8387-8406 match
+chen2021redq,ok,arXiv API 2101.05982 authors/title match; ICLR 2021 venue not re-verified online
+schwartz2020green,ok,Crossref 10.1145/3381831: volume 63 issue 12 pages 54-63 match
+strubell2019energy,ok,Crossref 10.18653/v1/P19-1355: pages 3645-3650 match
+patterson2021carbon,ok,arXiv API and PDF header: 9 authors match; the claim made about it in Chapter 5 is NOT confirmed (see claims_check.md)
+desislavov2023trends,ok,Crossref 10.1016/j.suscom.2023.100857: volume 38 article 100857 match
+getzner2023accuracy,ok,PDF header: workshop paper at ICLR 2023 Tackling Climate Change with ML; authors match
+henderson2020systematic,ok,JMLR page: volume 21 issue 248 pages 1-43 match
+williams2009roofline,ok,Crossref 10.1145/1498765.1498785: match
+spearman1904proof,ok,Crossref 10.2307/1412159: volume 15 issue 1 start page 72 match
+virtanen2020scipy,ok,Crossref 10.1038/s41592-019-0686-2: title match; author list shortened with 'and others'
+agarwal2021precipice,ok,arXiv API 2108.13264 authors match; NeurIPS 34 not re-verified
+gymnasium_ant,ok,Web documentation; not re-verified
+courty2024codecarbon,fixed,Pointed to v2.4.1 DOI while the note said 3.3.0; now DOI of the v3.3.0 record; year 2026
+mei2017dvfs,fixed,doi 10.1016/j.dcan.2016.10.001 added (Crossref: volume 3 issue 2 pages 89-100 match)
+abe2014gpu,fixed,doi 10.1109/IPDPS.2014.23 added; booktitle completed (Crossref: pages 113-122 match)
+you2023zeus,fixed,Pages 119-139 and publisher/address added (USENIX NSDI 23 page)
+burtscher2014k20,fixed,doi 10.1145/2576779.2576783 added (Crossref: pages 28-36 match); TODO note removed
+yang2023parttime,fixed,Authors verified (arXiv v3); TODO note removed; doi added; published SC24 version has another title (10.1109/SC41406.2024.00028)
+pytorchtf32,ok,TODO access date remains (not part of this task; not changed)
+schulman2017ppo,ok,arXiv API 1707.06347 authors match
+sutton2018rl,added,MIT Press 2018 2nd edition; ISBN 978-0-262-03924-6 from catalogue records
+lin1992replay,added,Crossref 10.1007/BF00992699
+sutton1991dyna,added,Crossref 10.1145/122344.122377
+polyak1992averaging,added,Crossref 10.1137/0330046
+mnih2015dqn,added,Crossref 10.1038/nature14236
+fedus2020replay,added,PMLR page v119 pages 3061-3071
+doro2023replayratio,added,ICLR 2023; authors from mlanthology; OpenReview page blocked for the fetch tool
+lacoste2019quantifying,added,arXiv 1910.09700 (4 authors)
+wu2022sustainable,added,MLSys 2022 volume 4 (proceedings page); author spelling as in proceedings; pages not recorded
+luccioni2023bloom,added,JMLR 24(253) 1-15 (journal page)
+luccioni2024power,added,Crossref 10.1145/3630106.3658542 pages 85-99
+anthony2020carbontracker,added,arXiv 2007.03051; ICML 2020 workshop per arXiv comments
+lannelongue2021green,added,Crossref 10.1002/advs.202100707
+bouza2023carbon,added,IOP page: Environ. Res. Commun. 5(11) 115014; 3 authors
+jay2023softwaremeters,added,Crossref 10.1109/CCGrid57682.2023.00020 pages 106-118
+hackenberg2013power,added,Crossref 10.1109/ISPASS.2013.6557170 pages 194-204; content characterised via Raffin and Trystram
+desrochers2016dram,added,Crossref 10.1145/2989081.2989088 pages 455-470
+raffin2024dissecting,added,arXiv 2401.15985 (v2); 2 authors
+gleeson2021rlscope,added,arXiv 2102.04285 and MLSys proceedings link; volume 3 per proceedings listing
+krishnan2022quarl,added,arXiv 1910.01055 v6: TMLR 07/2022
+gardner2025greener,added,arXiv 2509.05273; journal version exists (Springer s10462-026-11520-x) but was not accessible

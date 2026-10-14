@@ -1,0 +1,27 @@
+{\footnotesize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}lrrrrrr@{}}
+    \caption[Environment comparison of all TD3 configurations (Ant-v5 relative to HalfCheetah-v5, runs paired by seed; full precision)]{Environment comparison of all TD3 configurations (Ant-v5 relative to HalfCheetah-v5, runs paired by seed; full precision). Energy ratios are ratios of means. $\Delta$share is the difference of the mean shares in percentage points; the segment that attains the maximum absolute difference is given in brackets. $\bar P_r/\bar P_{\mathrm{GU}}$ is the ratio of the mean power of the rollout to that of the GU; the column gives the ratio of this quantity on Ant-v5 to that on HalfCheetah-v5. The TD3 baseline, update-to-data and width rows use TD3 at its baseline batch size of 100, which is not matched to SAC and MBPO; the batch-size rows are matched.}
+    \label{tab:app-td3-env} \\
+    \toprule
+    Config. & $E_{\mathrm{total}}$ ratio & $E_{\mathrm{rollout}}$ ratio & max $|\Delta$share$|$ [pp] & $\bar P_{\mathrm{total}}$ ratio & $\bar P_r/\bar P_{\mathrm{GU}}$ ratio & J/FLOP total ratio \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Config. & $E_{\mathrm{total}}$ ratio & $E_{\mathrm{rollout}}$ ratio & max $|\Delta$share$|$ [pp] & $\bar P_{\mathrm{total}}$ ratio & $\bar P_r/\bar P_{\mathrm{GU}}$ ratio & J/FLOP total ratio \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{7}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    baseline & \num{1.08567} & \num{2.17694} & \num{5.04534} (rollout) & \num{1.00303} & \num{0.967471} & \num{1.0169} \\
+    UTD 2 & \num{1.03941} & \num{2.11737} & \num{2.68164} (rollout) & \num{1.00393} & \num{0.943745} & \num{0.973574} \\
+    UTD 4 & \num{1.04243} & \num{2.18401} & \num{1.40876} (rollout) & \num{1.00646} & \num{0.968212} & \num{0.976411} \\
+    width 256 & \num{1.08957} & \num{2.28777} & \num{5.92159} (rollout) & \num{0.993753} & \num{0.993364} & \num{0.867175} \\
+    width 512 & \num{1.08292} & \num{2.2258} & \num{5.41569} (rollout) & \num{0.985437} & \num{0.985714} & \num{0.955939} \\
+    batch 256 & \num{1.06178} & \num{2.0349} & \num{4.15552} (rollout) & \num{0.984926} & \num{0.910268} & \num{0.994533} \\
+    batch 512 & \num{1.06425} & \num{1.96346} & \num{4.19923} (critic) & \num{0.992165} & \num{0.86578} & \num{0.996845} \\
+    batch 1024 & \num{1.10748} & \num{1.93498} & \num{5.37308} (critic) & \num{1.00206} & \num{0.837722} & \num{1.03735} \\
+  \end{longtable}
+}

@@ -1,0 +1,2082 @@
+{
+ "n_runs": 280,
+ "per_algo_env_configs_per_seed": {
+  "mbpo/Ant-v5": 9,
+  "mbpo/HalfCheetah-v5": 7,
+  "sac/Ant-v5": 7,
+  "sac/HalfCheetah-v5": 7,
+  "td3/Ant-v5": 8,
+  "td3/HalfCheetah-v5": 8,
+  "tdmpc2/Ant-v5": 5,
+  "tdmpc2/HalfCheetah-v5": 5
+ },
+ "per_algo_env_seed_counts_all_equal": {
+  "mbpo/Ant-v5": true,
+  "mbpo/HalfCheetah-v5": true,
+  "sac/Ant-v5": true,
+  "sac/HalfCheetah-v5": true,
+  "td3/Ant-v5": true,
+  "td3/HalfCheetah-v5": true,
+  "tdmpc2/Ant-v5": true,
+  "tdmpc2/HalfCheetah-v5": true
+ },
+ "duplicates_same_algo_env_config_seed": [],
+ "configs_without_all_5_seeds": [],
+ "n_configurations": 56,
+ "non_canonical_run_dirs": {
+  "mbpo/HalfCheetah-v5/seed_0": 2,
+  "mbpo/HalfCheetah-v5/seed_42": 1,
+  "sac/HalfCheetah-v5/seed_0": 7,
+  "sac/HalfCheetah-v5/seed_42": 3,
+  "sac/HalfCheetah-v5/seed_56": 3,
+  "sac/Humanoid-v5/seed_56": 2,
+  "td3/HalfCheetah-v5/seed_0": 1,
+  "tdmpc2/HalfCheetah-v5/seed_0": 1
+ },
+ "total_run_dirs": 300,
+ "missing_files": [],
+ "train_steps": {
+  "100000": 280
+ },
+ "steps_per_epoch": {
+  "1000": 280
+ },
+ "warmup_steps_by_algo": {
+  "mbpo": {
+   "5000": 80
+  },
+  "sac": {
+   "5000": 70
+  },
+  "td3": {
+   "10000": 80
+  },
+  "tdmpc2": {
+   "5000": 50
+  }
+ },
+ "idle_secs": {
+  "(90.0, 90.0, 30.0)": 280
+ },
+ "epochs_in_training_metrics": {
+  "100": 280
+ },
+ "rollout_task_rows_per_run": {
+  "100": 280
+ },
+ "last_epoch_env_step_distinct": {
+  "100000": 280
+ },
+ "N_env_equals_train_steps_all": true,
+ "updates_per_env_step_by_algo_all_configs": {
+  "sac": {
+   "1": 50,
+   "2": 10,
+   "4": 10
+  },
+  "mbpo": {
+   "1": 60,
+   "2": 10,
+   "4": 10
+  },
+  "td3": {
+   "1": 60,
+   "2": 10,
+   "4": 10
+  },
+  "tdmpc2": {
+   "1": 50
+  }
+ },
+ "updates_per_env_step_baseline": {
+  "sac/HalfCheetah-v5": {
+   "1": 5
+  },
+  "sac/Ant-v5": {
+   "1": 5
+  },
+  "mbpo/HalfCheetah-v5": {
+   "1": 5
+  },
+  "mbpo/Ant-v5": {
+   "1": 5
+  },
+  "td3/HalfCheetah-v5": {
+   "1": 5
+  },
+  "td3/Ant-v5": {
+   "1": 5
+  },
+  "tdmpc2/HalfCheetah-v5": {
+   "1": 5
+  },
+  "tdmpc2/Ant-v5": {
+   "1": 5
+  }
+ },
+ "baseline_batch_size": {
+  "mbpo/Ant-v5": {
+   "256": 5
+  },
+  "mbpo/HalfCheetah-v5": {
+   "256": 5
+  },
+  "sac/Ant-v5": {
+   "256": 5
+  },
+  "sac/HalfCheetah-v5": {
+   "256": 5
+  },
+  "td3/Ant-v5": {
+   "100": 5
+  },
+  "td3/HalfCheetah-v5": {
+   "100": 5
+  },
+  "tdmpc2/Ant-v5": {
+   "256": 5
+  },
+  "tdmpc2/HalfCheetah-v5": {
+   "256": 5
+  }
+ },
+ "baseline_hidden": {
+  "mbpo/Ant-v5": {
+   "[1024, 1024]": 5
+  },
+  "mbpo/HalfCheetah-v5": {
+   "[1024, 1024]": 5
+  },
+  "sac/Ant-v5": {
+   "[1024, 1024]": 5
+  },
+  "sac/HalfCheetah-v5": {
+   "[1024, 1024]": 5
+  },
+  "td3/Ant-v5": {
+   "[1024, 1024]": 5
+  },
+  "td3/HalfCheetah-v5": {
+   "[1024, 1024]": 5
+  },
+  "tdmpc2/Ant-v5": {
+   "None": 5
+  },
+  "tdmpc2/HalfCheetah-v5": {
+   "None": 5
+  }
+ },
+ "tdmpc2_config_keys": [
+  "batch_size",
+  "buffer_capacity",
+  "consistency_coef",
+  "discount_denom",
+  "discount_max",
+  "discount_min",
+  "dropout",
+  "enc_dim",
+  "enc_lr_scale",
+  "entropy_coef",
+  "episode_length",
+  "episodic",
+  "grad_clip_norm",
+  "horizon",
+  "iterations",
+  "latent_dim",
+  "log_std_max",
+  "log_std_min",
+  "lr",
+  "max_std",
+  "min_std",
+  "mlp_dim",
+  "num_bins",
+  "num_elites",
+  "num_enc_layers",
+  "num_pi_trajs",
+  "num_q",
+  "num_samples",
+  "reward_coef",
+  "rho",
+  "simnorm_dim",
+  "tau",
+  "temperature",
+  "termination_coef",
+  "updates_per_env_step",
+  "value_coef",
+  "vmax",
+  "vmin"
+ ],
+ "configs_by_algo_env": {
+  "mbpo/Ant-v5": [
+   "baseline",
+   "batch_size=1024",
+   "batch_size=512",
+   "hidden_sizes=[256, 256]",
+   "hidden_sizes=[512, 512]",
+   "rollout_max_length=1",
+   "rollout_max_length=15",
+   "updates_per_env_step=2",
+   "updates_per_env_step=4"
+  ],
+  "mbpo/HalfCheetah-v5": [
+   "baseline",
+   "batch_size=1024",
+   "batch_size=512",
+   "hidden_sizes=[256, 256]",
+   "hidden_sizes=[512, 512]",
+   "updates_per_env_step=2",
+   "updates_per_env_step=4"
+  ],
+  "sac/Ant-v5": [
+   "baseline",
+   "batch_size=1024",
+   "batch_size=512",
+   "hidden_sizes=[256, 256]",
+   "hidden_sizes=[512, 512]",
+   "updates_per_env_step=2",
+   "updates_per_env_step=4"
+  ],
+  "sac/HalfCheetah-v5": [
+   "baseline",
+   "batch_size=1024",
+   "batch_size=512",
+   "hidden_sizes=[256, 256]",
+   "hidden_sizes=[512, 512]",
+   "updates_per_env_step=2",
+   "updates_per_env_step=4"
+  ],
+  "td3/Ant-v5": [
+   "baseline",
+   "batch_size=1024",
+   "batch_size=256",
+   "batch_size=512",
+   "hidden_sizes=[256, 256]",
+   "hidden_sizes=[512, 512]",
+   "updates_per_env_step=2",
+   "updates_per_env_step=4"
+  ],
+  "td3/HalfCheetah-v5": [
+   "baseline",
+   "batch_size=1024",
+   "batch_size=256",
+   "batch_size=512",
+   "hidden_sizes=[256, 256]",
+   "hidden_sizes=[512, 512]",
+   "updates_per_env_step=2",
+   "updates_per_env_step=4"
+  ],
+  "tdmpc2/Ant-v5": [
+   "baseline",
+   "horizon=1",
+   "horizon=5",
+   "num_q=3",
+   "num_q=7"
+  ],
+  "tdmpc2/HalfCheetah-v5": [
+   "baseline",
+   "horizon=1",
+   "horizon=5",
+   "num_q=3",
+   "num_q=7"
+  ]
+ },
+ "check_totals_canonical": {
+  "runs_with_csv_rows": 280,
+  "check1_runs": 280,
+  "check1_max_rel_err": 0.0,
+  "check2_runs": 280,
+  "check3_runs": 280,
+  "check3_max_rel_err": 4.772470139016794e-13,
+  "failures": []
+ },
+ "run_log_scan_patterns": {
+  "rapl_fallback_4W_per_thread": "default power consumption of 4 W per thread",
+  "geolocation_fallback": "(?i)geoloc|fall(ing)? back to default country|Unable to retrieve|fallback.*country",
+  "thermal_gate_timeout": "(?i)reason': 'timeout|timed out waiting|max_wait",
+  "thermal_gate_nvml_unavailable": "nvml_unavailable|No NVML reference",
+  "gpu_control_failure": "Command failed|Command not found|Command timed out|Could not query GPU clock range|Could not read current CPU governor",
+  "gpu_control_success_info": "Locked GPU|Reset GPU|Set CPU governor",
+  "codecarbon_any_warning": "codecarbon \\w+ @",
+  "any_WARNING_level_line": "\\[WARNING\\]",
+  "any_ERROR_level_line": "\\[ERROR\\]"
+ },
+ "run_log_scan_hits": {
+  "rapl_fallback_4W_per_thread": {
+   "n_runs": 0,
+   "runs": []
+  },
+  "geolocation_fallback": {
+   "n_runs": 0,
+   "runs": []
+  },
+  "thermal_gate_timeout": {
+   "n_runs": 0,
+   "runs": []
+  },
+  "thermal_gate_nvml_unavailable": {
+   "n_runs": 0,
+   "runs": []
+  },
+  "gpu_control_failure": {
+   "n_runs": 0,
+   "runs": []
+  },
+  "gpu_control_success_info": {
+   "n_runs": 0,
+   "runs": []
+  },
+  "codecarbon_any_warning": {
+   "n_runs": 0,
+   "runs": []
+  },
+  "any_WARNING_level_line": {
+   "n_runs": 0,
+   "runs": []
+  },
+  "any_ERROR_level_line": {
+   "n_runs": 0,
+   "runs": []
+  }
+ },
+ "run_log_thermal_reason_counts": {
+  "reached_reference": 280
+ },
+ "metadata_thermal_gate_reason": {
+  "reached_reference": 280
+ },
+ "metadata_thermal_gate_gated": {
+  "True": 280
+ },
+ "metadata_thermal_waited_s_max": 2.6941299438476562e-05,
+ "metadata_thermal_missing_fields": {
+  "final_temp_c": 0,
+  "run_start_temp_c": 4,
+  "run_end_temp_c": 4
+ },
+ "meta_requested": {
+  "lock_gpu_clocks": {
+   "True": 280
+  },
+  "gpu_min_clock_mhz": {
+   "2000": 280
+  },
+  "gpu_max_clock_mhz": {
+   "2000": 280
+  },
+  "set_persistence_mode": {
+   "True": 280
+  },
+  "set_cpu_performance_governor": {
+   "True": 280
+  },
+  "thermal_gate_enabled": {
+   "True": 280
+  },
+  "tracking_mode": {
+   "machine": 280
+  },
+  "measure_power_secs": {
+   "1.0": 280
+  }
+ },
+ "sweep_logs": [
+  "results/_ant_overnight_sweep.log",
+  "results/_batch_size_sweep.log",
+  "results/_utd_sweep.log",
+  "results/_width_sweep.log",
+  "results/mbpo/_env_sweep.log",
+  "results/sac/HalfCheetah-v5/_utd_sweep.log",
+  "results/td3/_env_sweep.log",
+  "results/tdmpc2/_numq_horizon_sweep.log",
+  "results/tdmpc2/_seed_sweep.log"
+ ],
+ "sweep_log_coverage_by_group": {
+  "mbpo/Ant-v5/baseline": "5/5",
+  "mbpo/Ant-v5/batch_size=1024": "5/5",
+  "mbpo/Ant-v5/batch_size=512": "5/5",
+  "mbpo/Ant-v5/hidden_sizes=[256, 256]": "5/5",
+  "mbpo/Ant-v5/hidden_sizes=[512, 512]": "5/5",
+  "mbpo/Ant-v5/rollout_max_length=1": "5/5",
+  "mbpo/Ant-v5/rollout_max_length=15": "5/5",
+  "mbpo/Ant-v5/updates_per_env_step=2": "5/5",
+  "mbpo/Ant-v5/updates_per_env_step=4": "5/5",
+  "mbpo/HalfCheetah-v5/baseline": "5/5",
+  "mbpo/HalfCheetah-v5/batch_size=1024": "5/5",
+  "mbpo/HalfCheetah-v5/batch_size=512": "5/5",
+  "mbpo/HalfCheetah-v5/hidden_sizes=[256, 256]": "5/5",
+  "mbpo/HalfCheetah-v5/hidden_sizes=[512, 512]": "5/5",
+  "mbpo/HalfCheetah-v5/updates_per_env_step=2": "5/5",
+  "mbpo/HalfCheetah-v5/updates_per_env_step=4": "5/5",
+  "sac/Ant-v5/baseline": "0/5",
+  "sac/Ant-v5/batch_size=1024": "5/5",
+  "sac/Ant-v5/batch_size=512": "5/5",
+  "sac/Ant-v5/hidden_sizes=[256, 256]": "5/5",
+  "sac/Ant-v5/hidden_sizes=[512, 512]": "5/5",
+  "sac/Ant-v5/updates_per_env_step=2": "5/5",
+  "sac/Ant-v5/updates_per_env_step=4": "5/5",
+  "sac/HalfCheetah-v5/baseline": "0/5",
+  "sac/HalfCheetah-v5/batch_size=1024": "5/5",
+  "sac/HalfCheetah-v5/batch_size=512": "5/5",
+  "sac/HalfCheetah-v5/hidden_sizes=[256, 256]": "5/5",
+  "sac/HalfCheetah-v5/hidden_sizes=[512, 512]": "5/5",
+  "sac/HalfCheetah-v5/updates_per_env_step=2": "5/5",
+  "sac/HalfCheetah-v5/updates_per_env_step=4": "5/5",
+  "td3/Ant-v5/baseline": "5/5",
+  "td3/Ant-v5/batch_size=1024": "5/5",
+  "td3/Ant-v5/batch_size=256": "5/5",
+  "td3/Ant-v5/batch_size=512": "5/5",
+  "td3/Ant-v5/hidden_sizes=[256, 256]": "5/5",
+  "td3/Ant-v5/hidden_sizes=[512, 512]": "5/5",
+  "td3/Ant-v5/updates_per_env_step=2": "5/5",
+  "td3/Ant-v5/updates_per_env_step=4": "5/5",
+  "td3/HalfCheetah-v5/baseline": "5/5",
+  "td3/HalfCheetah-v5/batch_size=1024": "5/5",
+  "td3/HalfCheetah-v5/batch_size=256": "5/5",
+  "td3/HalfCheetah-v5/batch_size=512": "5/5",
+  "td3/HalfCheetah-v5/hidden_sizes=[256, 256]": "5/5",
+  "td3/HalfCheetah-v5/hidden_sizes=[512, 512]": "5/5",
+  "td3/HalfCheetah-v5/updates_per_env_step=2": "5/5",
+  "td3/HalfCheetah-v5/updates_per_env_step=4": "5/5",
+  "tdmpc2/Ant-v5/baseline": "5/5",
+  "tdmpc2/Ant-v5/horizon=1": "5/5",
+  "tdmpc2/Ant-v5/horizon=5": "5/5",
+  "tdmpc2/Ant-v5/num_q=3": "5/5",
+  "tdmpc2/Ant-v5/num_q=7": "5/5",
+  "tdmpc2/HalfCheetah-v5/baseline": "5/5",
+  "tdmpc2/HalfCheetah-v5/horizon=1": "5/5",
+  "tdmpc2/HalfCheetah-v5/horizon=5": "5/5",
+  "tdmpc2/HalfCheetah-v5/num_q=3": "5/5",
+  "tdmpc2/HalfCheetah-v5/num_q=7": "5/5"
+ },
+ "sweep_log_coverage_total": 270,
+ "sweep_log_nonstandard_lines": [
+  {
+   "pattern": "Run artifacts written to: results/mbpo/Ant-v#/seed_#/#_#",
+   "count": 45,
+   "first_seen": [
+    "results/_ant_overnight_sweep.log",
+    374
+   ]
+  },
+  {
+   "pattern": "Run artifacts written to: results/td#/Ant-v#/seed_#/#_#",
+   "count": 40,
+   "first_seen": [
+    "results/_ant_overnight_sweep.log",
+    764
+   ]
+  },
+  {
+   "pattern": "Run artifacts written to: results/td#/HalfCheetah-v#/seed_#/#_#",
+   "count": 40,
+   "first_seen": [
+    "results/_batch_size_sweep.log",
+    763
+   ]
+  },
+  {
+   "pattern": "Run artifacts written to: results/mbpo/HalfCheetah-v#/seed_#/#_#",
+   "count": 35,
+   "first_seen": [
+    "results/_batch_size_sweep.log",
+    373
+   ]
+  },
+  {
+   "pattern": "Run artifacts written to: results/sac/Ant-v#/seed_#/#_#",
+   "count": 30,
+   "first_seen": [
+    "results/_ant_overnight_sweep.log",
+    4
+   ]
+  },
+  {
+   "pattern": "Run artifacts written to: results/sac/HalfCheetah-v#/seed_#/#_#",
+   "count": 30,
+   "first_seen": [
+    "results/_batch_size_sweep.log",
+    3
+   ]
+  },
+  {
+   "pattern": "Run artifacts written to: results/tdmpc#/HalfCheetah-v#/seed_#/#_#",
+   "count": 25,
+   "first_seen": [
+    "results/tdmpc2/_numq_horizon_sweep.log",
+    66
+   ]
+  },
+  {
+   "pattern": "Run artifacts written to: results/tdmpc#/Ant-v#/seed_#/#_#",
+   "count": 25,
+   "first_seen": [
+    "results/tdmpc2/_numq_horizon_sweep.log",
+    266
+   ]
+  },
+  {
+   "pattern": "Traceback (most recent call last):",
+   "count": 5,
+   "first_seen": [
+    "results/tdmpc2/_numq_horizon_sweep.log",
+    3
+   ]
+  },
+  {
+   "pattern": "File \"/home/samanth/rl-dissection-linux/run_experiment.py\", line #, in <module>",
+   "count": 5,
+   "first_seen": [
+    "results/tdmpc2/_numq_horizon_sweep.log",
+    3
+   ]
+  },
+  {
+   "pattern": "main()",
+   "count": 5,
+   "first_seen": [
+    "results/tdmpc2/_numq_horizon_sweep.log",
+    3
+   ]
+  },
+  {
+   "pattern": "~~~~^^",
+   "count": 5,
+   "first_seen": [
+    "results/tdmpc2/_numq_horizon_sweep.log",
+    3
+   ]
+  },
+  {
+   "pattern": "File \"/home/samanth/rl-dissection-linux/run_experiment.py\", line #, in main",
+   "count": 5,
+   "first_seen": [
+    "results/tdmpc2/_numq_horizon_sweep.log",
+    3
+   ]
+  },
+  {
+   "pattern": "algo_cfg = build_algo_config(args.algo, args.algo_config_overrides)",
+   "count": 5,
+   "first_seen": [
+    "results/tdmpc2/_numq_horizon_sweep.log",
+    3
+   ]
+  },
+  {
+   "pattern": "File \"/home/samanth/rl-dissection-linux/run_experiment.py\", line #, in build_algo_config",
+   "count": 5,
+   "first_seen": [
+    "results/tdmpc2/_numq_horizon_sweep.log",
+    3
+   ]
+  },
+  {
+   "pattern": "with open(overrides_path) as f:",
+   "count": 5,
+   "first_seen": [
+    "results/tdmpc2/_numq_horizon_sweep.log",
+    3
+   ]
+  },
+  {
+   "pattern": "~~~~^^^^^^^^^^^^^^^^",
+   "count": 5,
+   "first_seen": [
+    "results/tdmpc2/_numq_horizon_sweep.log",
+    3
+   ]
+  },
+  {
+   "pattern": "FileNotFoundError: [Errno #] No such file or directory: 'configs/overrides/tdmpc#_num_q#.json'",
+   "count": 5,
+   "first_seen": [
+    "results/tdmpc2/_numq_horizon_sweep.log",
+    3
+   ]
+  }
+ ],
+ "sweep_log_block_hits": {
+  "gpu_control_failure": {
+   "n_blocks": 0,
+   "examples": []
+  },
+  "rapl_fallback": {
+   "n_blocks": 0,
+   "examples": []
+  },
+  "geolocation": {
+   "n_blocks": 0,
+   "examples": []
+  },
+  "thermal_timeout_or_nvml": {
+   "n_blocks": 0,
+   "examples": []
+  }
+ },
+ "sweep_log_whole_file_counts": {
+  "results/_ant_overnight_sweep.log": {
+   "gpu_control_failure": 0,
+   "rapl_fallback": 0,
+   "geolocation": 0,
+   "thermal_timeout_or_nvml": 0,
+   "Locked/Reset/governor INFO": 0
+  },
+  "results/_batch_size_sweep.log": {
+   "gpu_control_failure": 0,
+   "rapl_fallback": 0,
+   "geolocation": 0,
+   "thermal_timeout_or_nvml": 0,
+   "Locked/Reset/governor INFO": 0
+  },
+  "results/_utd_sweep.log": {
+   "gpu_control_failure": 0,
+   "rapl_fallback": 0,
+   "geolocation": 0,
+   "thermal_timeout_or_nvml": 0,
+   "Locked/Reset/governor INFO": 0
+  },
+  "results/_width_sweep.log": {
+   "gpu_control_failure": 0,
+   "rapl_fallback": 0,
+   "geolocation": 0,
+   "thermal_timeout_or_nvml": 0,
+   "Locked/Reset/governor INFO": 0
+  },
+  "results/mbpo/_env_sweep.log": {
+   "gpu_control_failure": 0,
+   "rapl_fallback": 0,
+   "geolocation": 0,
+   "thermal_timeout_or_nvml": 0,
+   "Locked/Reset/governor INFO": 0
+  },
+  "results/sac/HalfCheetah-v5/_utd_sweep.log": {
+   "gpu_control_failure": 0,
+   "rapl_fallback": 0,
+   "geolocation": 0,
+   "thermal_timeout_or_nvml": 0,
+   "Locked/Reset/governor INFO": 0
+  },
+  "results/td3/_env_sweep.log": {
+   "gpu_control_failure": 0,
+   "rapl_fallback": 0,
+   "geolocation": 0,
+   "thermal_timeout_or_nvml": 0,
+   "Locked/Reset/governor INFO": 0
+  },
+  "results/tdmpc2/_numq_horizon_sweep.log": {
+   "gpu_control_failure": 0,
+   "rapl_fallback": 0,
+   "geolocation": 0,
+   "thermal_timeout_or_nvml": 0,
+   "Locked/Reset/governor INFO": 0
+  },
+  "results/tdmpc2/_seed_sweep.log": {
+   "gpu_control_failure": 0,
+   "rapl_fallback": 0,
+   "geolocation": 0,
+   "thermal_timeout_or_nvml": 0,
+   "Locked/Reset/governor INFO": 0
+  }
+ },
+ "evidence_coverage_by_family": {
+  "baseline": {
+   "n": 40,
+   "in_sweep_log": 30
+  },
+  "batch": {
+   "n": 70,
+   "in_sweep_log": 70
+  },
+  "mbpo_rollout_length": {
+   "n": 10,
+   "in_sweep_log": 10
+  },
+  "tdmpc2_numq_horizon": {
+   "n": 40,
+   "in_sweep_log": 40
+  },
+  "utd": {
+   "n": 60,
+   "in_sweep_log": 60
+  },
+  "width": {
+   "n": 60,
+   "in_sweep_log": 60
+  }
+ },
+ "evidence_coverage_baseline_by_algo_env": {
+  "mbpo/Ant-v5": {
+   "n": 5,
+   "in_sweep_log": 5
+  },
+  "mbpo/HalfCheetah-v5": {
+   "n": 5,
+   "in_sweep_log": 5
+  },
+  "sac/Ant-v5": {
+   "n": 5,
+   "in_sweep_log": 0
+  },
+  "sac/HalfCheetah-v5": {
+   "n": 5,
+   "in_sweep_log": 0
+  },
+  "td3/Ant-v5": {
+   "n": 5,
+   "in_sweep_log": 5
+  },
+  "td3/HalfCheetah-v5": {
+   "n": 5,
+   "in_sweep_log": 5
+  },
+  "tdmpc2/Ant-v5": {
+   "n": 5,
+   "in_sweep_log": 5
+  },
+  "tdmpc2/HalfCheetah-v5": {
+   "n": 5,
+   "in_sweep_log": 5
+  }
+ },
+ "cpu_idle_head_w_corr_min_median_max": [
+  14.54027695391589,
+  15.717854773984891,
+  18.27920333884829
+ ],
+ "cpu_model": {
+  "Intel(R) Core(TM) Ultra 9 285K": 280
+ },
+ "cpu_count": {
+  "24": 280
+ },
+ "emissions_os": {
+  "Linux-7.0.0-31-generic-x86_64-with-glibc2.43": 280
+ },
+ "emissions_python": {
+  "3.14.4": 280
+ },
+ "emissions_gpu_model": {
+  "1 x NVIDIA GeForce RTX 5090": 280
+ },
+ "emissions_tracking_mode": {
+  "machine": 280
+ },
+ "emissions_ram_total_gb": {
+  "60.816": 280
+ },
+ "emissions_country": {
+  "DEU": 280
+ },
+ "gap_seconds_quantiles_p0_50_90_99_100": [
+  1.273116,
+  1.330476,
+  1.4228740000000002,
+  80028.87981827975,
+  170514.533117
+ ],
+ "gap_negative_overlap_count": 0,
+ "campaign_first_start_utc": "2026-09-07 10:13:36.036705",
+ "campaign_last_end_utc": "2026-09-19 16:10:36.823017",
+ "n_sessions_gap_gt_2h": 10,
+ "n_sessions_by_threshold_hours": {
+  "0.5": 10,
+  "1": 10,
+  "2": 10,
+  "4": 9,
+  "8": 8,
+  "12": 6
+ },
+ "sessions": [
+  {
+   "session": 0,
+   "start_utc": "2026-09-07 10:13:36.036705",
+   "end_utc": "2026-09-07 12:10:07.552010",
+   "n_runs": 8,
+   "hours": 1.94,
+   "groups": {
+    "sac/Ant/baseline": 3,
+    "sac/HalfCheetah/baseline": 5
+   }
+  },
+  {
+   "session": 1,
+   "start_utc": "2026-09-08 09:52:30.962897",
+   "end_utc": "2026-09-08 14:26:41.849828",
+   "n_runs": 12,
+   "hours": 4.57,
+   "groups": {
+    "sac/Ant/baseline": 2,
+    "sac/HalfCheetah/updates_per_env_step=2": 5,
+    "sac/HalfCheetah/updates_per_env_step=4": 5
+   }
+  },
+  {
+   "session": 2,
+   "start_utc": "2026-09-08 17:44:55.988580",
+   "end_utc": "2026-09-08 23:34:50.634745",
+   "n_runs": 10,
+   "hours": 5.83,
+   "groups": {
+    "mbpo/Ant/baseline": 5,
+    "mbpo/HalfCheetah/baseline": 5
+   }
+  },
+  {
+   "session": 3,
+   "start_utc": "2026-09-09 10:22:04.277025",
+   "end_utc": "2026-09-09 20:34:22.426063",
+   "n_runs": 40,
+   "hours": 10.21,
+   "groups": {
+    "sac/Ant/updates_per_env_step=2": 5,
+    "sac/Ant/updates_per_env_step=4": 5,
+    "td3/Ant/baseline": 5,
+    "td3/Ant/updates_per_env_step=2": 5,
+    "td3/Ant/updates_per_env_step=4": 5,
+    "td3/HalfCheetah/baseline": 5,
+    "td3/HalfCheetah/updates_per_env_step=2": 5,
+    "td3/HalfCheetah/updates_per_env_step=4": 5
+   }
+  },
+  {
+   "session": 4,
+   "start_utc": "2026-09-10 10:28:45.350490",
+   "end_utc": "2026-09-10 17:53:11.846412",
+   "n_runs": 10,
+   "hours": 7.41,
+   "groups": {
+    "tdmpc2/Ant/baseline": 5,
+    "tdmpc2/HalfCheetah/baseline": 5
+   }
+  },
+  {
+   "session": 5,
+   "start_utc": "2026-09-12 17:15:06.379529",
+   "end_utc": "2026-09-13 10:44:47.944062",
+   "n_runs": 60,
+   "hours": 17.49,
+   "groups": {
+    "mbpo/Ant/hidden_sizes=[256, 256]": 5,
+    "mbpo/Ant/hidden_sizes=[512, 512]": 5,
+    "mbpo/HalfCheetah/hidden_sizes=[256, 256]": 5,
+    "mbpo/HalfCheetah/hidden_sizes=[512, 512]": 5,
+    "sac/Ant/hidden_sizes=[256, 256]": 5,
+    "sac/Ant/hidden_sizes=[512, 512]": 5,
+    "sac/HalfCheetah/hidden_sizes=[256, 256]": 5,
+    "sac/HalfCheetah/hidden_sizes=[512, 512]": 5,
+    "td3/Ant/hidden_sizes=[256, 256]": 5,
+    "td3/Ant/hidden_sizes=[512, 512]": 5,
+    "td3/HalfCheetah/hidden_sizes=[256, 256]": 5,
+    "td3/HalfCheetah/hidden_sizes=[512, 512]": 5
+   }
+  },
+  {
+   "session": 6,
+   "start_utc": "2026-09-14 10:50:01.668273",
+   "end_utc": "2026-09-15 03:09:10.957298",
+   "n_runs": 20,
+   "hours": 16.32,
+   "groups": {
+    "mbpo/Ant/updates_per_env_step=2": 5,
+    "mbpo/Ant/updates_per_env_step=4": 5,
+    "mbpo/HalfCheetah/updates_per_env_step=2": 5,
+    "mbpo/HalfCheetah/updates_per_env_step=4": 5
+   }
+  },
+  {
+   "session": 7,
+   "start_utc": "2026-09-15 10:39:00.049413",
+   "end_utc": "2026-09-15 19:32:05.775406",
+   "n_runs": 35,
+   "hours": 8.88,
+   "groups": {
+    "mbpo/HalfCheetah/batch_size=1024": 5,
+    "mbpo/HalfCheetah/batch_size=512": 5,
+    "sac/HalfCheetah/batch_size=1024": 5,
+    "sac/HalfCheetah/batch_size=512": 5,
+    "td3/HalfCheetah/batch_size=1024": 5,
+    "td3/HalfCheetah/batch_size=256": 5,
+    "td3/HalfCheetah/batch_size=512": 5
+   }
+  },
+  {
+   "session": 8,
+   "start_utc": "2026-09-17 10:10:44.962278",
+   "end_utc": "2026-09-18 02:15:57.483474",
+   "n_runs": 45,
+   "hours": 16.09,
+   "groups": {
+    "mbpo/Ant/batch_size=1024": 5,
+    "mbpo/Ant/batch_size=512": 5,
+    "mbpo/Ant/rollout_max_length=1": 5,
+    "mbpo/Ant/rollout_max_length=15": 5,
+    "sac/Ant/batch_size=1024": 5,
+    "sac/Ant/batch_size=512": 5,
+    "td3/Ant/batch_size=1024": 5,
+    "td3/Ant/batch_size=256": 5,
+    "td3/Ant/batch_size=512": 5
+   }
+  },
+  {
+   "session": 9,
+   "start_utc": "2026-09-18 10:21:00.865381",
+   "end_utc": "2026-09-19 16:10:36.823017",
+   "n_runs": 40,
+   "hours": 29.83,
+   "groups": {
+    "tdmpc2/Ant/horizon=1": 5,
+    "tdmpc2/Ant/horizon=5": 5,
+    "tdmpc2/Ant/num_q=3": 5,
+    "tdmpc2/Ant/num_q=7": 5,
+    "tdmpc2/HalfCheetah/horizon=1": 5,
+    "tdmpc2/HalfCheetah/horizon=5": 5,
+    "tdmpc2/HalfCheetah/num_q=3": 5,
+    "tdmpc2/HalfCheetah/num_q=7": 5
+   }
+  }
+ ],
+ "n_time_ordered_blocks": 56,
+ "n_distinct_configs": 56,
+ "blocks_of_5_in_canonical_seed_order": 56,
+ "blocks_not_of_5_or_order": [],
+ "config_noncontiguous": [],
+ "log_order_classification": {
+  "results/_ant_overnight_sweep.log": {
+   "n_runs": 45,
+   "seed_changes_between_consecutive_runs": 44,
+   "n_config_blocks": 9,
+   "block_sizes": {
+    "5": 9
+   },
+   "all_5blocks_in_canonical_seed_order": true,
+   "first": "algo=sac env=Ant-v5 seed=331 batch_size=512",
+   "last": "algo=mbpo env=Ant-v5 seed=85062 rollout_max_length=15"
+  },
+  "results/_batch_size_sweep.log": {
+   "n_runs": 35,
+   "seed_changes_between_consecutive_runs": 34,
+   "n_config_blocks": 7,
+   "block_sizes": {
+    "5": 7
+   },
+   "all_5blocks_in_canonical_seed_order": true,
+   "first": "algo=sac env=HalfCheetah-v5 seed=331 batch_size=512",
+   "last": "algo=td3 env=HalfCheetah-v5 seed=85062 batch_size=1024"
+  },
+  "results/_utd_sweep.log": {
+   "n_runs": 50,
+   "seed_changes_between_consecutive_runs": 49,
+   "n_config_blocks": 10,
+   "block_sizes": {
+    "5": 10
+   },
+   "all_5blocks_in_canonical_seed_order": true,
+   "first": "algo=sac env=Ant-v5 seed=331 utd=2",
+   "last": "algo=mbpo env=Ant-v5 seed=85062 utd=4"
+  },
+  "results/_width_sweep.log": {
+   "n_runs": 60,
+   "seed_changes_between_consecutive_runs": 59,
+   "n_config_blocks": 12,
+   "block_sizes": {
+    "5": 12
+   },
+   "all_5blocks_in_canonical_seed_order": true,
+   "first": "algo=sac env=HalfCheetah-v5 seed=331 width=256x256",
+   "last": "algo=td3 env=Ant-v5 seed=85062 width=512x512"
+  },
+  "results/mbpo/_env_sweep.log": {
+   "n_runs": 10,
+   "seed_changes_between_consecutive_runs": 9,
+   "n_config_blocks": 2,
+   "block_sizes": {
+    "5": 2
+   },
+   "all_5blocks_in_canonical_seed_order": true,
+   "first": "algo=mbpo env=HalfCheetah-v5 seed=331 overrides=none",
+   "last": "algo=mbpo env=Ant-v5 seed=85062 overrides=configs/overrides/mbpo_ant.json"
+  },
+  "results/sac/HalfCheetah-v5/_utd_sweep.log": {
+   "n_runs": 10,
+   "seed_changes_between_consecutive_runs": 9,
+   "n_config_blocks": 2,
+   "block_sizes": {
+    "5": 2
+   },
+   "all_5blocks_in_canonical_seed_order": true,
+   "first": "algo=sac env=HalfCheetah-v5 seed=331 utd=2",
+   "last": "algo=sac env=HalfCheetah-v5 seed=85062 utd=4"
+  },
+  "results/td3/_env_sweep.log": {
+   "n_runs": 10,
+   "seed_changes_between_consecutive_runs": 9,
+   "n_config_blocks": 2,
+   "block_sizes": {
+    "5": 2
+   },
+   "all_5blocks_in_canonical_seed_order": true,
+   "first": "algo=td3 env=HalfCheetah-v5 seed=331 overrides=none warmup_steps=10000",
+   "last": "algo=td3 env=Ant-v5 seed=85062 overrides=none warmup_steps=10000"
+  },
+  "results/tdmpc2/_numq_horizon_sweep.log": {
+   "n_runs": 40,
+   "seed_changes_between_consecutive_runs": 39,
+   "n_config_blocks": 8,
+   "block_sizes": {
+    "5": 8
+   },
+   "all_5blocks_in_canonical_seed_order": true,
+   "first": "algo=tdmpc2 env=HalfCheetah-v5 seed=331 num_q=3",
+   "last": "algo=tdmpc2 env=Ant-v5 seed=85062 horizon=5"
+  },
+  "results/tdmpc2/_seed_sweep.log": {
+   "n_runs": 10,
+   "seed_changes_between_consecutive_runs": 9,
+   "n_config_blocks": 2,
+   "block_sizes": {
+    "5": 2
+   },
+   "all_5blocks_in_canonical_seed_order": true,
+   "first": "algo=tdmpc2 env=HalfCheetah-v5 seed=331 overrides=none",
+   "last": "algo=tdmpc2 env=Ant-v5 seed=85062 overrides=configs/overrides/tdmpc2_ant.json"
+  }
+ },
+ "git_first_commits_mentioning_seeds": {
+  "14577": [
+   "92dcee0763ed54c13fa816cc364055fa68c958af|2026-09-07T14:13:23+02:00|2026-09-07T14:13:23+02:00|Recorded runs for seeds - 331, 958, 14577, 43611, 85062",
+   "d1cebb4d7129e2467376375a297f4943e4e501d4|2026-09-08T18:58:16+02:00|2026-09-08T18:58:16+02:00|UTD sweep 2 and 4 across 5 seeds for HalfCheetah",
+   "d9cf6a70b59f9cbe5d55161579feec6657ccabf1|2026-09-09T11:10:30+02:00|2026-09-09T11:10:30+02:00|Recorded all runs for mbpo envs",
+   "1f39982c583de6e72b596f484704a570e109f48f|2026-09-09T13:37:20+02:00|2026-09-09T13:37:20+02:00|Recorded TD3 runs for both envs across 5 seeds",
+   "24f41b09827731da34c4d5f73a08fb3cbe4173ba|2026-09-10T10:57:47+02:00|2026-09-10T10:57:47+02:00|UTD sweep 2 and 4 for SAC and TD3 across all envs",
+   "b5b7e54502412299ce94a5b46e9aa18c9a877308|2026-09-10T12:27:49+02:00|2026-09-10T12:27:49+02:00|Setup new  algorithm tdmpc2 and tested recording"
+  ],
+  "43611": [
+   "4b9f11a766375db5ba0358d61b5c1f11c710565f|2026-08-21T12:49:10+02:00|2026-08-21T12:49:10+02:00|Added return logging and created a dashboard for easy analysis",
+   "2aa4ccdae16cc0fc5741beeec57a994dff5c5fa3|2026-08-24T13:43:34+02:00|2026-08-24T13:43:34+02:00|Added algorithm specific config and removed cli params. Tested new seed and config params.",
+   "ae3880860ebcce0c1e729714cdf48a08039adc46|2026-09-02T14:53:29+02:00|2026-09-02T14:53:29+02:00|Humanoid env with 256 and 512 batch sizes",
+   "92dcee0763ed54c13fa816cc364055fa68c958af|2026-09-07T14:13:23+02:00|2026-09-07T14:13:23+02:00|Recorded runs for seeds - 331, 958, 14577, 43611, 85062",
+   "ecb98bbba4e2c648a08d6e7aada30b9ba0d168c2|2026-09-08T12:20:16+02:00|2026-09-08T12:20:16+02:00|Finished remaining baseline runs for Ant/v5",
+   "d1cebb4d7129e2467376375a297f4943e4e501d4|2026-09-08T18:58:16+02:00|2026-09-08T18:58:16+02:00|UTD sweep 2 and 4 across 5 seeds for HalfCheetah"
+  ],
+  "85062": [
+   "92dcee0763ed54c13fa816cc364055fa68c958af|2026-09-07T14:13:23+02:00|2026-09-07T14:13:23+02:00|Recorded runs for seeds - 331, 958, 14577, 43611, 85062",
+   "ecb98bbba4e2c648a08d6e7aada30b9ba0d168c2|2026-09-08T12:20:16+02:00|2026-09-08T12:20:16+02:00|Finished remaining baseline runs for Ant/v5",
+   "d1cebb4d7129e2467376375a297f4943e4e501d4|2026-09-08T18:58:16+02:00|2026-09-08T18:58:16+02:00|UTD sweep 2 and 4 across 5 seeds for HalfCheetah",
+   "d9cf6a70b59f9cbe5d55161579feec6657ccabf1|2026-09-09T11:10:30+02:00|2026-09-09T11:10:30+02:00|Recorded all runs for mbpo envs",
+   "1f39982c583de6e72b596f484704a570e109f48f|2026-09-09T13:37:20+02:00|2026-09-09T13:37:20+02:00|Recorded TD3 runs for both envs across 5 seeds",
+   "24f41b09827731da34c4d5f73a08fb3cbe4173ba|2026-09-10T10:57:47+02:00|2026-09-10T10:57:47+02:00|UTD sweep 2 and 4 for SAC and TD3 across all envs"
+  ],
+  "331 958": [
+   "d1cebb4d7129e2467376375a297f4943e4e501d4|2026-09-08T18:58:16+02:00|2026-09-08T18:58:16+02:00|UTD sweep 2 and 4 across 5 seeds for HalfCheetah",
+   "d9cf6a70b59f9cbe5d55161579feec6657ccabf1|2026-09-09T11:10:30+02:00|2026-09-09T11:10:30+02:00|Recorded all runs for mbpo envs",
+   "1f39982c583de6e72b596f484704a570e109f48f|2026-09-09T13:37:20+02:00|2026-09-09T13:37:20+02:00|Recorded TD3 runs for both envs across 5 seeds",
+   "b5b7e54502412299ce94a5b46e9aa18c9a877308|2026-09-10T12:27:49+02:00|2026-09-10T12:27:49+02:00|Setup new  algorithm tdmpc2 and tested recording",
+   "7e672ef12c53bf4c201241c549527a7ef8bd4bff|2026-09-12T19:14:44+02:00|2026-09-12T19:14:44+02:00|Setting up width sweep for SAC, TD3 and MBPO",
+   "9b4b44cd2f53f78518b07ae6be3ff44eebfdfa10|2026-09-15T12:36:51+02:00|2026-09-15T12:36:51+02:00|Preparing batch size sweep for Half Cheetah"
+  ],
+  "331, 958": [
+   "d1cebb4d7129e2467376375a297f4943e4e501d4|2026-09-08T18:58:16+02:00|2026-09-08T18:58:16+02:00|UTD sweep 2 and 4 across 5 seeds for HalfCheetah",
+   "d9cf6a70b59f9cbe5d55161579feec6657ccabf1|2026-09-09T11:10:30+02:00|2026-09-09T11:10:30+02:00|Recorded all runs for mbpo envs",
+   "1f39982c583de6e72b596f484704a570e109f48f|2026-09-09T13:37:20+02:00|2026-09-09T13:37:20+02:00|Recorded TD3 runs for both envs across 5 seeds",
+   "b5b7e54502412299ce94a5b46e9aa18c9a877308|2026-09-10T12:27:49+02:00|2026-09-10T12:27:49+02:00|Setup new  algorithm tdmpc2 and tested recording",
+   "6a0f790ef8ad80c3620a68582427b3b00eef8100|2026-09-11T13:05:39+02:00|2026-09-11T13:05:39+02:00|Built a flop calculator to introduce a new metric for energy calculation",
+   "fdeed33122f5cf5ec6dca134b53866183498183a|2026-09-11T16:53:03+02:00|2026-09-11T16:53:03+02:00|Added Energy/FLOP visualizer dashboard"
+  ]
+ },
+ "earliest_canonical_run_start_utc": "2026-09-07 10:13:36.036705",
+ "earliest_canonical_run_dir": "sac/HalfCheetah-v5/seed_331/20260907_121335",
+ "git_total_commits": 61,
+ "git_first_commits": [
+  "46f74b9|2026-07-29T12:20:17+02:00|Modified code for windows",
+  "97eb7a7|2026-07-29T12:20:25+02:00|Added gitignore",
+  "fd50077|2026-08-13T12:44:10+02:00|First HalfCheetah Run",
+  "64fb0cd|2026-08-13T12:47:19+02:00|Updated reference baseline logic and added epoch level tracking",
+  "20b4d4f|2026-08-19T12:54:30+02:00|Set default TDP for CPU",
+  "4b9f11a|2026-08-21T12:49:10+02:00|Added return logging and created a dashboard for easy analysis",
+  "2aa4ccd|2026-08-24T13:43:34+02:00|Added algorithm specific config and removed cli params. Tested new seed and config params.",
+  "cf4d327|2026-08-26T13:37:53+02:00|Run with 4 updates per env",
+  "d05cbe6|2026-08-31T13:52:04+02:00|Ported all files to linux and configured to work correctly",
+  "d5880ed|2026-08-31T15:25:05+02:00|Linux runs on batch sizes - 256 and 1024",
+  "ae38808|2026-09-02T14:53:29+02:00|Humanoid env with 256 and 512 batch sizes",
+  "f109bd4|2026-09-04T14:51:27+02:00|Added new MBPO algo and recorded tests"
+ ],
+ "utd_counts_by_algo_env_config": {
+  "mbpo/Ant-v5/updates_per_env_step=2": 5,
+  "mbpo/Ant-v5/updates_per_env_step=4": 5,
+  "mbpo/HalfCheetah-v5/updates_per_env_step=2": 5,
+  "mbpo/HalfCheetah-v5/updates_per_env_step=4": 5,
+  "sac/Ant-v5/updates_per_env_step=2": 5,
+  "sac/Ant-v5/updates_per_env_step=4": 5,
+  "sac/HalfCheetah-v5/updates_per_env_step=2": 5,
+  "sac/HalfCheetah-v5/updates_per_env_step=4": 5,
+  "td3/Ant-v5/updates_per_env_step=2": 5,
+  "td3/Ant-v5/updates_per_env_step=4": 5,
+  "td3/HalfCheetah-v5/updates_per_env_step=2": 5,
+  "td3/HalfCheetah-v5/updates_per_env_step=4": 5
+ },
+ "utd_sweep_log_td3_launch_blocks": null,
+ "utd_log_blocks_total": 50,
+ "utd_log_blocks_by_algo_env": {
+  "sac/Ant-v5": 10,
+  "td3/HalfCheetah-v5": 10,
+  "td3/Ant-v5": 10,
+  "mbpo/HalfCheetah-v5": 10,
+  "mbpo/Ant-v5": 10
+ },
+ "utd_log_td3_blocks": 20,
+ "utd_log_td3_blocks_with_run_dir_and_complete": 20,
+ "utd_log_td3_blocks_ok_in_run_dirs": 20,
+ "utd_log_sessions": [
+  [
+   "2026-09-09 13:45:43",
+   1
+  ],
+  [
+   "2026-09-09 13:45:43",
+   2
+  ],
+  [
+   "2026-09-14 12:49:56",
+   1114
+  ],
+  [
+   "2026-09-14 12:50:00",
+   1115
+  ]
+ ],
+ "utd_status_file_mixed": 20,
+ "tdmpc2_false_start_blocks": [
+  {
+   "kind": "session_start",
+   "ts": "2026-09-18 12:18:33",
+   "line": 1
+  },
+  {
+   "kind": "session_start",
+   "ts": "2026-09-18 12:18:39",
+   "line": 2
+  },
+  {
+   "kind": "launch",
+   "idx": 1,
+   "desc": "algo=tdmpc2 env=HalfCheetah-v5 seed=331 num_q=3",
+   "ts": "2026-09-18 12:18:39",
+   "line": 3,
+   "run_dir": null,
+   "failed_line": "[2026-09-18 12:18:40] [1/40] FAILED (exit 1): algo=tdmpc2 env=HalfCheetah-v5 seed=331 num_q=3 -- see results/tdmpc2/_numq_horizon_sweep.log",
+   "error": [
+    "FileNotFoundError: [Errno 2] No such file or directory: 'configs/overrides/tdmpc2_num_q3.json'"
+   ],
+   "n_lines": 11,
+   "closing_line": "[2026-09-18 12:18:40] [1/40] FAILED (exit 1): algo=tdmpc2 env=HalfCheetah-v5 seed=331 num_q=3 -- see results/tdmpc2/_numq_horizon_sweep.log"
+  },
+  {
+   "kind": "launch",
+   "idx": 2,
+   "desc": "algo=tdmpc2 env=HalfCheetah-v5 seed=958 num_q=3",
+   "ts": "2026-09-18 12:18:40",
+   "line": 15,
+   "run_dir": null,
+   "failed_line": "[2026-09-18 12:18:40] [2/40] FAILED (exit 1): algo=tdmpc2 env=HalfCheetah-v5 seed=958 num_q=3 -- see results/tdmpc2/_numq_horizon_sweep.log",
+   "error": [
+    "FileNotFoundError: [Errno 2] No such file or directory: 'configs/overrides/tdmpc2_num_q3.json'"
+   ],
+   "n_lines": 11,
+   "closing_line": "[2026-09-18 12:18:40] [2/40] FAILED (exit 1): algo=tdmpc2 env=HalfCheetah-v5 seed=958 num_q=3 -- see results/tdmpc2/_numq_horizon_sweep.log"
+  },
+  {
+   "kind": "launch",
+   "idx": 3,
+   "desc": "algo=tdmpc2 env=HalfCheetah-v5 seed=14577 num_q=3",
+   "ts": "2026-09-18 12:18:40",
+   "line": 27,
+   "run_dir": null,
+   "failed_line": "[2026-09-18 12:18:41] [3/40] FAILED (exit 1): algo=tdmpc2 env=HalfCheetah-v5 seed=14577 num_q=3 -- see results/tdmpc2/_numq_horizon_sweep.log",
+   "error": [
+    "FileNotFoundError: [Errno 2] No such file or directory: 'configs/overrides/tdmpc2_num_q3.json'"
+   ],
+   "n_lines": 11,
+   "closing_line": "[2026-09-18 12:18:41] [3/40] FAILED (exit 1): algo=tdmpc2 env=HalfCheetah-v5 seed=14577 num_q=3 -- see results/tdmpc2/_numq_horizon_sweep.log"
+  },
+  {
+   "kind": "launch",
+   "idx": 4,
+   "desc": "algo=tdmpc2 env=HalfCheetah-v5 seed=43611 num_q=3",
+   "ts": "2026-09-18 12:18:41",
+   "line": 39,
+   "run_dir": null,
+   "failed_line": "[2026-09-18 12:18:42] [4/40] FAILED (exit 1): algo=tdmpc2 env=HalfCheetah-v5 seed=43611 num_q=3 -- see results/tdmpc2/_numq_horizon_sweep.log",
+   "error": [
+    "FileNotFoundError: [Errno 2] No such file or directory: 'configs/overrides/tdmpc2_num_q3.json'"
+   ],
+   "n_lines": 11,
+   "closing_line": "[2026-09-18 12:18:42] [4/40] FAILED (exit 1): algo=tdmpc2 env=HalfCheetah-v5 seed=43611 num_q=3 -- see results/tdmpc2/_numq_horizon_sweep.log"
+  },
+  {
+   "kind": "launch",
+   "idx": 5,
+   "desc": "algo=tdmpc2 env=HalfCheetah-v5 seed=85062 num_q=3",
+   "ts": "2026-09-18 12:18:42",
+   "line": 51,
+   "run_dir": null,
+   "failed_line": "[2026-09-18 12:18:42] [5/40] FAILED (exit 1): algo=tdmpc2 env=HalfCheetah-v5 seed=85062 num_q=3 -- see results/tdmpc2/_numq_horizon_sweep.log",
+   "error": [
+    "FileNotFoundError: [Errno 2] No such file or directory: 'configs/overrides/tdmpc2_num_q3.json'"
+   ],
+   "n_lines": 11,
+   "closing_line": "[2026-09-18 12:18:42] [5/40] FAILED (exit 1): algo=tdmpc2 env=HalfCheetah-v5 seed=85062 num_q=3 -- see results/tdmpc2/_numq_horizon_sweep.log"
+  },
+  {
+   "kind": "launch",
+   "idx": 6,
+   "desc": "algo=tdmpc2 env=Ant-v5 seed=331 num_q=3",
+   "ts": "2026-09-18 12:18:42",
+   "line": 63,
+   "run_dir": null,
+   "failed_line": null,
+   "error": [],
+   "n_lines": 0,
+   "closing_line": null
+  },
+  {
+   "kind": "session_start",
+   "ts": "2026-09-18 12:21:00",
+   "line": 64
+  },
+  {
+   "kind": "session_start",
+   "ts": "2026-09-18 12:21:00",
+   "line": 65
+  },
+  {
+   "kind": "launch",
+   "idx": 1,
+   "desc": "algo=tdmpc2 env=HalfCheetah-v5 seed=331 num_q=3",
+   "ts": "2026-09-18 12:21:00",
+   "line": 66,
+   "run_dir": "results/tdmpc2/HalfCheetah-v5/seed_331/20260918_122100",
+   "failed_line": null,
+   "error": [],
+   "n_lines": 39,
+   "closing_line": "[2026-09-18 12:57:09] [1/40] Finished OK: algo=tdmpc2 env=HalfCheetah-v5 seed=331 num_q=3 -> results/tdmpc2/HalfCheetah-v5/seed_331/20260918_122100"
+  },
+  {
+   "kind": "launch",
+   "idx": 2,
+   "desc": "algo=tdmpc2 env=HalfCheetah-v5 seed=958 num_q=3",
+   "ts": "2026-09-18 12:57:09",
+   "line": 106,
+   "run_dir": "results/tdmpc2/HalfCheetah-v5/seed_958/20260918_125709",
+   "failed_line": null,
+   "error": [],
+   "n_lines": 39,
+   "closing_line": "[2026-09-18 13:33:39] [2/40] Finished OK: algo=tdmpc2 env=HalfCheetah-v5 seed=958 num_q=3 -> results/tdmpc2/HalfCheetah-v5/seed_958/20260918_125709"
+  }
+ ],
+ "tdmpc2_run_dirs_created_2026_09_18_12h": [
+  "tdmpc2\\HalfCheetah-v5\\seed_331\\20260918_122100",
+  "tdmpc2\\HalfCheetah-v5\\seed_958\\20260918_125709"
+ ],
+ "tdmpc2_run_dirs_20260918_1218_to_1220": [],
+ "tdmpc2_log_lines_62_to_68": [
+  "[2026-09-18 12:18:42] [5/40] FAILED (exit 1): algo=tdmpc2 env=HalfCheetah-v5 seed=85062 num_q=3 -- see results/tdmpc2/_numq_horizon_sweep.log",
+  "[2026-09-18 12:18:42] [6/40] Starting: algo=tdmpc2 env=Ant-v5 seed=331 num_q=3",
+  "[2026-09-18 12:21:00] Priming sudo credentials (you may be prompted for your password now)...",
+  "[2026-09-18 12:21:00] sudo credential keepalive started (pid 23677, refreshes every 60s).",
+  "[2026-09-18 12:21:00] [1/40] Starting: algo=tdmpc2 env=HalfCheetah-v5 seed=331 num_q=3",
+  "2026-09-18 12:21:00,718 [INFO] === Experiment run: algo=tdmpc2 env=HalfCheetah-v5 seed=331 ===",
+  "2026-09-18 12:21:00,718 [INFO] Run directory: results/tdmpc2/HalfCheetah-v5/seed_331/20260918_122100"
+ ],
+ "tdmpc2_log_clock_lock_mentions_before_second_attempt": 0,
+ "tdmpc2_status_json_done_counts": {
+  "done": 40
+ },
+ "commits_by_group": {
+  "mbpo/Ant-v5/baseline/baseline/0bbbbb7": 5.0,
+  "mbpo/Ant-v5/baseline/baseline/788ffcd": NaN,
+  "mbpo/Ant-v5/baseline/baseline/ecb7135": NaN,
+  "mbpo/Ant-v5/baseline/baseline/7e672ef": NaN,
+  "mbpo/Ant-v5/baseline/baseline/9b4b44c": NaN,
+  "mbpo/Ant-v5/baseline/baseline/f23f448": NaN,
+  "mbpo/Ant-v5/baseline/baseline/92dcee0": NaN,
+  "mbpo/Ant-v5/baseline/baseline/aa9186b": NaN,
+  "mbpo/Ant-v5/baseline/baseline/ecb98bb": NaN,
+  "mbpo/Ant-v5/baseline/baseline/58962d2": NaN,
+  "mbpo/Ant-v5/baseline/baseline/b5b7e54": NaN,
+  "mbpo/Ant-v5/baseline/baseline/a3582b5": NaN,
+  "mbpo/Ant-v5/batch/batch_size=1024/0bbbbb7": NaN,
+  "mbpo/Ant-v5/batch/batch_size=1024/788ffcd": 5.0,
+  "mbpo/Ant-v5/batch/batch_size=1024/ecb7135": NaN,
+  "mbpo/Ant-v5/batch/batch_size=1024/7e672ef": NaN,
+  "mbpo/Ant-v5/batch/batch_size=1024/9b4b44c": NaN,
+  "mbpo/Ant-v5/batch/batch_size=1024/f23f448": NaN,
+  "mbpo/Ant-v5/batch/batch_size=1024/92dcee0": NaN,
+  "mbpo/Ant-v5/batch/batch_size=1024/aa9186b": NaN,
+  "mbpo/Ant-v5/batch/batch_size=1024/ecb98bb": NaN,
+  "mbpo/Ant-v5/batch/batch_size=1024/58962d2": NaN,
+  "mbpo/Ant-v5/batch/batch_size=1024/b5b7e54": NaN,
+  "mbpo/Ant-v5/batch/batch_size=1024/a3582b5": NaN,
+  "mbpo/Ant-v5/batch/batch_size=512/0bbbbb7": NaN,
+  "mbpo/Ant-v5/batch/batch_size=512/788ffcd": 5.0,
+  "mbpo/Ant-v5/batch/batch_size=512/ecb7135": NaN,
+  "mbpo/Ant-v5/batch/batch_size=512/7e672ef": NaN,
+  "mbpo/Ant-v5/batch/batch_size=512/9b4b44c": NaN,
+  "mbpo/Ant-v5/batch/batch_size=512/f23f448": NaN,
+  "mbpo/Ant-v5/batch/batch_size=512/92dcee0": NaN,
+  "mbpo/Ant-v5/batch/batch_size=512/aa9186b": NaN,
+  "mbpo/Ant-v5/batch/batch_size=512/ecb98bb": NaN,
+  "mbpo/Ant-v5/batch/batch_size=512/58962d2": NaN,
+  "mbpo/Ant-v5/batch/batch_size=512/b5b7e54": NaN,
+  "mbpo/Ant-v5/batch/batch_size=512/a3582b5": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=1/0bbbbb7": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=1/788ffcd": 5.0,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=1/ecb7135": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=1/7e672ef": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=1/9b4b44c": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=1/f23f448": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=1/92dcee0": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=1/aa9186b": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=1/ecb98bb": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=1/58962d2": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=1/b5b7e54": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=1/a3582b5": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=15/0bbbbb7": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=15/788ffcd": 5.0,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=15/ecb7135": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=15/7e672ef": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=15/9b4b44c": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=15/f23f448": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=15/92dcee0": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=15/aa9186b": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=15/ecb98bb": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=15/58962d2": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=15/b5b7e54": NaN,
+  "mbpo/Ant-v5/mbpo_rollout_length/rollout_max_length=15/a3582b5": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=2/0bbbbb7": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=2/788ffcd": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=2/ecb7135": 5.0,
+  "mbpo/Ant-v5/utd/updates_per_env_step=2/7e672ef": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=2/9b4b44c": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=2/f23f448": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=2/92dcee0": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=2/aa9186b": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=2/ecb98bb": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=2/58962d2": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=2/b5b7e54": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=2/a3582b5": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=4/0bbbbb7": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=4/788ffcd": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=4/ecb7135": 5.0,
+  "mbpo/Ant-v5/utd/updates_per_env_step=4/7e672ef": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=4/9b4b44c": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=4/f23f448": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=4/92dcee0": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=4/aa9186b": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=4/ecb98bb": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=4/58962d2": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=4/b5b7e54": NaN,
+  "mbpo/Ant-v5/utd/updates_per_env_step=4/a3582b5": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[256, 256]/0bbbbb7": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[256, 256]/788ffcd": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[256, 256]/ecb7135": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[256, 256]/7e672ef": 5.0,
+  "mbpo/Ant-v5/width/hidden_sizes=[256, 256]/9b4b44c": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[256, 256]/f23f448": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[256, 256]/92dcee0": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[256, 256]/aa9186b": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[256, 256]/ecb98bb": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[256, 256]/58962d2": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[256, 256]/b5b7e54": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[256, 256]/a3582b5": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[512, 512]/0bbbbb7": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[512, 512]/788ffcd": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[512, 512]/ecb7135": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[512, 512]/7e672ef": 5.0,
+  "mbpo/Ant-v5/width/hidden_sizes=[512, 512]/9b4b44c": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[512, 512]/f23f448": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[512, 512]/92dcee0": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[512, 512]/aa9186b": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[512, 512]/ecb98bb": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[512, 512]/58962d2": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[512, 512]/b5b7e54": NaN,
+  "mbpo/Ant-v5/width/hidden_sizes=[512, 512]/a3582b5": NaN,
+  "mbpo/HalfCheetah-v5/baseline/baseline/0bbbbb7": 5.0,
+  "mbpo/HalfCheetah-v5/baseline/baseline/788ffcd": NaN,
+  "mbpo/HalfCheetah-v5/baseline/baseline/ecb7135": NaN,
+  "mbpo/HalfCheetah-v5/baseline/baseline/7e672ef": NaN,
+  "mbpo/HalfCheetah-v5/baseline/baseline/9b4b44c": NaN,
+  "mbpo/HalfCheetah-v5/baseline/baseline/f23f448": NaN,
+  "mbpo/HalfCheetah-v5/baseline/baseline/92dcee0": NaN,
+  "mbpo/HalfCheetah-v5/baseline/baseline/aa9186b": NaN,
+  "mbpo/HalfCheetah-v5/baseline/baseline/ecb98bb": NaN,
+  "mbpo/HalfCheetah-v5/baseline/baseline/58962d2": NaN,
+  "mbpo/HalfCheetah-v5/baseline/baseline/b5b7e54": NaN,
+  "mbpo/HalfCheetah-v5/baseline/baseline/a3582b5": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=1024/0bbbbb7": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=1024/788ffcd": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=1024/ecb7135": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=1024/7e672ef": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=1024/9b4b44c": 5.0,
+  "mbpo/HalfCheetah-v5/batch/batch_size=1024/f23f448": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=1024/92dcee0": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=1024/aa9186b": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=1024/ecb98bb": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=1024/58962d2": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=1024/b5b7e54": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=1024/a3582b5": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=512/0bbbbb7": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=512/788ffcd": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=512/ecb7135": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=512/7e672ef": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=512/9b4b44c": 5.0,
+  "mbpo/HalfCheetah-v5/batch/batch_size=512/f23f448": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=512/92dcee0": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=512/aa9186b": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=512/ecb98bb": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=512/58962d2": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=512/b5b7e54": NaN,
+  "mbpo/HalfCheetah-v5/batch/batch_size=512/a3582b5": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=2/0bbbbb7": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=2/788ffcd": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=2/ecb7135": 5.0,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=2/7e672ef": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=2/9b4b44c": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=2/f23f448": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=2/92dcee0": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=2/aa9186b": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=2/ecb98bb": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=2/58962d2": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=2/b5b7e54": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=2/a3582b5": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=4/0bbbbb7": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=4/788ffcd": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=4/ecb7135": 5.0,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=4/7e672ef": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=4/9b4b44c": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=4/f23f448": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=4/92dcee0": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=4/aa9186b": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=4/ecb98bb": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=4/58962d2": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=4/b5b7e54": NaN,
+  "mbpo/HalfCheetah-v5/utd/updates_per_env_step=4/a3582b5": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[256, 256]/0bbbbb7": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[256, 256]/788ffcd": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[256, 256]/ecb7135": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[256, 256]/7e672ef": 5.0,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[256, 256]/9b4b44c": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[256, 256]/f23f448": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[256, 256]/92dcee0": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[256, 256]/aa9186b": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[256, 256]/ecb98bb": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[256, 256]/58962d2": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[256, 256]/b5b7e54": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[256, 256]/a3582b5": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[512, 512]/0bbbbb7": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[512, 512]/788ffcd": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[512, 512]/ecb7135": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[512, 512]/7e672ef": 5.0,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[512, 512]/9b4b44c": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[512, 512]/f23f448": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[512, 512]/92dcee0": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[512, 512]/aa9186b": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[512, 512]/ecb98bb": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[512, 512]/58962d2": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[512, 512]/b5b7e54": NaN,
+  "mbpo/HalfCheetah-v5/width/hidden_sizes=[512, 512]/a3582b5": NaN,
+  "sac/Ant-v5/baseline/baseline/0bbbbb7": NaN,
+  "sac/Ant-v5/baseline/baseline/788ffcd": NaN,
+  "sac/Ant-v5/baseline/baseline/ecb7135": NaN,
+  "sac/Ant-v5/baseline/baseline/7e672ef": NaN,
+  "sac/Ant-v5/baseline/baseline/9b4b44c": NaN,
+  "sac/Ant-v5/baseline/baseline/f23f448": 3.0,
+  "sac/Ant-v5/baseline/baseline/92dcee0": 2.0,
+  "sac/Ant-v5/baseline/baseline/aa9186b": NaN,
+  "sac/Ant-v5/baseline/baseline/ecb98bb": NaN,
+  "sac/Ant-v5/baseline/baseline/58962d2": NaN,
+  "sac/Ant-v5/baseline/baseline/b5b7e54": NaN,
+  "sac/Ant-v5/baseline/baseline/a3582b5": NaN,
+  "sac/Ant-v5/batch/batch_size=1024/0bbbbb7": NaN,
+  "sac/Ant-v5/batch/batch_size=1024/788ffcd": 5.0,
+  "sac/Ant-v5/batch/batch_size=1024/ecb7135": NaN,
+  "sac/Ant-v5/batch/batch_size=1024/7e672ef": NaN,
+  "sac/Ant-v5/batch/batch_size=1024/9b4b44c": NaN,
+  "sac/Ant-v5/batch/batch_size=1024/f23f448": NaN,
+  "sac/Ant-v5/batch/batch_size=1024/92dcee0": NaN,
+  "sac/Ant-v5/batch/batch_size=1024/aa9186b": NaN,
+  "sac/Ant-v5/batch/batch_size=1024/ecb98bb": NaN,
+  "sac/Ant-v5/batch/batch_size=1024/58962d2": NaN,
+  "sac/Ant-v5/batch/batch_size=1024/b5b7e54": NaN,
+  "sac/Ant-v5/batch/batch_size=1024/a3582b5": NaN,
+  "sac/Ant-v5/batch/batch_size=512/0bbbbb7": NaN,
+  "sac/Ant-v5/batch/batch_size=512/788ffcd": 5.0,
+  "sac/Ant-v5/batch/batch_size=512/ecb7135": NaN,
+  "sac/Ant-v5/batch/batch_size=512/7e672ef": NaN,
+  "sac/Ant-v5/batch/batch_size=512/9b4b44c": NaN,
+  "sac/Ant-v5/batch/batch_size=512/f23f448": NaN,
+  "sac/Ant-v5/batch/batch_size=512/92dcee0": NaN,
+  "sac/Ant-v5/batch/batch_size=512/aa9186b": NaN,
+  "sac/Ant-v5/batch/batch_size=512/ecb98bb": NaN,
+  "sac/Ant-v5/batch/batch_size=512/58962d2": NaN,
+  "sac/Ant-v5/batch/batch_size=512/b5b7e54": NaN,
+  "sac/Ant-v5/batch/batch_size=512/a3582b5": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=2/0bbbbb7": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=2/788ffcd": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=2/ecb7135": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=2/7e672ef": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=2/9b4b44c": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=2/f23f448": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=2/92dcee0": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=2/aa9186b": 5.0,
+  "sac/Ant-v5/utd/updates_per_env_step=2/ecb98bb": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=2/58962d2": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=2/b5b7e54": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=2/a3582b5": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=4/0bbbbb7": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=4/788ffcd": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=4/ecb7135": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=4/7e672ef": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=4/9b4b44c": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=4/f23f448": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=4/92dcee0": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=4/aa9186b": 5.0,
+  "sac/Ant-v5/utd/updates_per_env_step=4/ecb98bb": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=4/58962d2": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=4/b5b7e54": NaN,
+  "sac/Ant-v5/utd/updates_per_env_step=4/a3582b5": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[256, 256]/0bbbbb7": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[256, 256]/788ffcd": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[256, 256]/ecb7135": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[256, 256]/7e672ef": 5.0,
+  "sac/Ant-v5/width/hidden_sizes=[256, 256]/9b4b44c": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[256, 256]/f23f448": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[256, 256]/92dcee0": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[256, 256]/aa9186b": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[256, 256]/ecb98bb": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[256, 256]/58962d2": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[256, 256]/b5b7e54": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[256, 256]/a3582b5": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[512, 512]/0bbbbb7": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[512, 512]/788ffcd": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[512, 512]/ecb7135": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[512, 512]/7e672ef": 5.0,
+  "sac/Ant-v5/width/hidden_sizes=[512, 512]/9b4b44c": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[512, 512]/f23f448": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[512, 512]/92dcee0": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[512, 512]/aa9186b": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[512, 512]/ecb98bb": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[512, 512]/58962d2": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[512, 512]/b5b7e54": NaN,
+  "sac/Ant-v5/width/hidden_sizes=[512, 512]/a3582b5": NaN,
+  "sac/HalfCheetah-v5/baseline/baseline/0bbbbb7": NaN,
+  "sac/HalfCheetah-v5/baseline/baseline/788ffcd": NaN,
+  "sac/HalfCheetah-v5/baseline/baseline/ecb7135": NaN,
+  "sac/HalfCheetah-v5/baseline/baseline/7e672ef": NaN,
+  "sac/HalfCheetah-v5/baseline/baseline/9b4b44c": NaN,
+  "sac/HalfCheetah-v5/baseline/baseline/f23f448": 5.0,
+  "sac/HalfCheetah-v5/baseline/baseline/92dcee0": NaN,
+  "sac/HalfCheetah-v5/baseline/baseline/aa9186b": NaN,
+  "sac/HalfCheetah-v5/baseline/baseline/ecb98bb": NaN,
+  "sac/HalfCheetah-v5/baseline/baseline/58962d2": NaN,
+  "sac/HalfCheetah-v5/baseline/baseline/b5b7e54": NaN,
+  "sac/HalfCheetah-v5/baseline/baseline/a3582b5": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=1024/0bbbbb7": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=1024/788ffcd": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=1024/ecb7135": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=1024/7e672ef": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=1024/9b4b44c": 5.0,
+  "sac/HalfCheetah-v5/batch/batch_size=1024/f23f448": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=1024/92dcee0": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=1024/aa9186b": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=1024/ecb98bb": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=1024/58962d2": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=1024/b5b7e54": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=1024/a3582b5": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=512/0bbbbb7": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=512/788ffcd": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=512/ecb7135": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=512/7e672ef": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=512/9b4b44c": 5.0,
+  "sac/HalfCheetah-v5/batch/batch_size=512/f23f448": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=512/92dcee0": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=512/aa9186b": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=512/ecb98bb": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=512/58962d2": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=512/b5b7e54": NaN,
+  "sac/HalfCheetah-v5/batch/batch_size=512/a3582b5": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=2/0bbbbb7": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=2/788ffcd": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=2/ecb7135": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=2/7e672ef": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=2/9b4b44c": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=2/f23f448": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=2/92dcee0": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=2/aa9186b": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=2/ecb98bb": 5.0,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=2/58962d2": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=2/b5b7e54": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=2/a3582b5": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=4/0bbbbb7": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=4/788ffcd": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=4/ecb7135": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=4/7e672ef": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=4/9b4b44c": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=4/f23f448": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=4/92dcee0": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=4/aa9186b": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=4/ecb98bb": 5.0,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=4/58962d2": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=4/b5b7e54": NaN,
+  "sac/HalfCheetah-v5/utd/updates_per_env_step=4/a3582b5": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[256, 256]/0bbbbb7": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[256, 256]/788ffcd": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[256, 256]/ecb7135": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[256, 256]/7e672ef": 5.0,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[256, 256]/9b4b44c": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[256, 256]/f23f448": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[256, 256]/92dcee0": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[256, 256]/aa9186b": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[256, 256]/ecb98bb": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[256, 256]/58962d2": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[256, 256]/b5b7e54": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[256, 256]/a3582b5": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[512, 512]/0bbbbb7": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[512, 512]/788ffcd": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[512, 512]/ecb7135": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[512, 512]/7e672ef": 5.0,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[512, 512]/9b4b44c": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[512, 512]/f23f448": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[512, 512]/92dcee0": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[512, 512]/aa9186b": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[512, 512]/ecb98bb": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[512, 512]/58962d2": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[512, 512]/b5b7e54": NaN,
+  "sac/HalfCheetah-v5/width/hidden_sizes=[512, 512]/a3582b5": NaN,
+  "td3/Ant-v5/baseline/baseline/0bbbbb7": NaN,
+  "td3/Ant-v5/baseline/baseline/788ffcd": NaN,
+  "td3/Ant-v5/baseline/baseline/ecb7135": NaN,
+  "td3/Ant-v5/baseline/baseline/7e672ef": NaN,
+  "td3/Ant-v5/baseline/baseline/9b4b44c": NaN,
+  "td3/Ant-v5/baseline/baseline/f23f448": NaN,
+  "td3/Ant-v5/baseline/baseline/92dcee0": NaN,
+  "td3/Ant-v5/baseline/baseline/aa9186b": NaN,
+  "td3/Ant-v5/baseline/baseline/ecb98bb": NaN,
+  "td3/Ant-v5/baseline/baseline/58962d2": 5.0,
+  "td3/Ant-v5/baseline/baseline/b5b7e54": NaN,
+  "td3/Ant-v5/baseline/baseline/a3582b5": NaN,
+  "td3/Ant-v5/batch/batch_size=1024/0bbbbb7": NaN,
+  "td3/Ant-v5/batch/batch_size=1024/788ffcd": 5.0,
+  "td3/Ant-v5/batch/batch_size=1024/ecb7135": NaN,
+  "td3/Ant-v5/batch/batch_size=1024/7e672ef": NaN,
+  "td3/Ant-v5/batch/batch_size=1024/9b4b44c": NaN,
+  "td3/Ant-v5/batch/batch_size=1024/f23f448": NaN,
+  "td3/Ant-v5/batch/batch_size=1024/92dcee0": NaN,
+  "td3/Ant-v5/batch/batch_size=1024/aa9186b": NaN,
+  "td3/Ant-v5/batch/batch_size=1024/ecb98bb": NaN,
+  "td3/Ant-v5/batch/batch_size=1024/58962d2": NaN,
+  "td3/Ant-v5/batch/batch_size=1024/b5b7e54": NaN,
+  "td3/Ant-v5/batch/batch_size=1024/a3582b5": NaN,
+  "td3/Ant-v5/batch/batch_size=256/0bbbbb7": NaN,
+  "td3/Ant-v5/batch/batch_size=256/788ffcd": 5.0,
+  "td3/Ant-v5/batch/batch_size=256/ecb7135": NaN,
+  "td3/Ant-v5/batch/batch_size=256/7e672ef": NaN,
+  "td3/Ant-v5/batch/batch_size=256/9b4b44c": NaN,
+  "td3/Ant-v5/batch/batch_size=256/f23f448": NaN,
+  "td3/Ant-v5/batch/batch_size=256/92dcee0": NaN,
+  "td3/Ant-v5/batch/batch_size=256/aa9186b": NaN,
+  "td3/Ant-v5/batch/batch_size=256/ecb98bb": NaN,
+  "td3/Ant-v5/batch/batch_size=256/58962d2": NaN,
+  "td3/Ant-v5/batch/batch_size=256/b5b7e54": NaN,
+  "td3/Ant-v5/batch/batch_size=256/a3582b5": NaN,
+  "td3/Ant-v5/batch/batch_size=512/0bbbbb7": NaN,
+  "td3/Ant-v5/batch/batch_size=512/788ffcd": 5.0,
+  "td3/Ant-v5/batch/batch_size=512/ecb7135": NaN,
+  "td3/Ant-v5/batch/batch_size=512/7e672ef": NaN,
+  "td3/Ant-v5/batch/batch_size=512/9b4b44c": NaN,
+  "td3/Ant-v5/batch/batch_size=512/f23f448": NaN,
+  "td3/Ant-v5/batch/batch_size=512/92dcee0": NaN,
+  "td3/Ant-v5/batch/batch_size=512/aa9186b": NaN,
+  "td3/Ant-v5/batch/batch_size=512/ecb98bb": NaN,
+  "td3/Ant-v5/batch/batch_size=512/58962d2": NaN,
+  "td3/Ant-v5/batch/batch_size=512/b5b7e54": NaN,
+  "td3/Ant-v5/batch/batch_size=512/a3582b5": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=2/0bbbbb7": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=2/788ffcd": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=2/ecb7135": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=2/7e672ef": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=2/9b4b44c": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=2/f23f448": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=2/92dcee0": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=2/aa9186b": 5.0,
+  "td3/Ant-v5/utd/updates_per_env_step=2/ecb98bb": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=2/58962d2": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=2/b5b7e54": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=2/a3582b5": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=4/0bbbbb7": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=4/788ffcd": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=4/ecb7135": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=4/7e672ef": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=4/9b4b44c": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=4/f23f448": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=4/92dcee0": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=4/aa9186b": 5.0,
+  "td3/Ant-v5/utd/updates_per_env_step=4/ecb98bb": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=4/58962d2": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=4/b5b7e54": NaN,
+  "td3/Ant-v5/utd/updates_per_env_step=4/a3582b5": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[256, 256]/0bbbbb7": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[256, 256]/788ffcd": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[256, 256]/ecb7135": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[256, 256]/7e672ef": 5.0,
+  "td3/Ant-v5/width/hidden_sizes=[256, 256]/9b4b44c": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[256, 256]/f23f448": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[256, 256]/92dcee0": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[256, 256]/aa9186b": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[256, 256]/ecb98bb": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[256, 256]/58962d2": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[256, 256]/b5b7e54": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[256, 256]/a3582b5": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[512, 512]/0bbbbb7": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[512, 512]/788ffcd": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[512, 512]/ecb7135": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[512, 512]/7e672ef": 5.0,
+  "td3/Ant-v5/width/hidden_sizes=[512, 512]/9b4b44c": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[512, 512]/f23f448": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[512, 512]/92dcee0": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[512, 512]/aa9186b": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[512, 512]/ecb98bb": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[512, 512]/58962d2": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[512, 512]/b5b7e54": NaN,
+  "td3/Ant-v5/width/hidden_sizes=[512, 512]/a3582b5": NaN,
+  "td3/HalfCheetah-v5/baseline/baseline/0bbbbb7": NaN,
+  "td3/HalfCheetah-v5/baseline/baseline/788ffcd": NaN,
+  "td3/HalfCheetah-v5/baseline/baseline/ecb7135": NaN,
+  "td3/HalfCheetah-v5/baseline/baseline/7e672ef": NaN,
+  "td3/HalfCheetah-v5/baseline/baseline/9b4b44c": NaN,
+  "td3/HalfCheetah-v5/baseline/baseline/f23f448": NaN,
+  "td3/HalfCheetah-v5/baseline/baseline/92dcee0": NaN,
+  "td3/HalfCheetah-v5/baseline/baseline/aa9186b": NaN,
+  "td3/HalfCheetah-v5/baseline/baseline/ecb98bb": NaN,
+  "td3/HalfCheetah-v5/baseline/baseline/58962d2": 5.0,
+  "td3/HalfCheetah-v5/baseline/baseline/b5b7e54": NaN,
+  "td3/HalfCheetah-v5/baseline/baseline/a3582b5": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=1024/0bbbbb7": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=1024/788ffcd": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=1024/ecb7135": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=1024/7e672ef": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=1024/9b4b44c": 5.0,
+  "td3/HalfCheetah-v5/batch/batch_size=1024/f23f448": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=1024/92dcee0": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=1024/aa9186b": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=1024/ecb98bb": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=1024/58962d2": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=1024/b5b7e54": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=1024/a3582b5": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=256/0bbbbb7": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=256/788ffcd": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=256/ecb7135": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=256/7e672ef": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=256/9b4b44c": 5.0,
+  "td3/HalfCheetah-v5/batch/batch_size=256/f23f448": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=256/92dcee0": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=256/aa9186b": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=256/ecb98bb": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=256/58962d2": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=256/b5b7e54": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=256/a3582b5": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=512/0bbbbb7": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=512/788ffcd": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=512/ecb7135": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=512/7e672ef": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=512/9b4b44c": 5.0,
+  "td3/HalfCheetah-v5/batch/batch_size=512/f23f448": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=512/92dcee0": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=512/aa9186b": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=512/ecb98bb": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=512/58962d2": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=512/b5b7e54": NaN,
+  "td3/HalfCheetah-v5/batch/batch_size=512/a3582b5": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=2/0bbbbb7": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=2/788ffcd": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=2/ecb7135": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=2/7e672ef": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=2/9b4b44c": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=2/f23f448": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=2/92dcee0": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=2/aa9186b": 5.0,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=2/ecb98bb": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=2/58962d2": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=2/b5b7e54": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=2/a3582b5": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=4/0bbbbb7": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=4/788ffcd": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=4/ecb7135": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=4/7e672ef": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=4/9b4b44c": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=4/f23f448": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=4/92dcee0": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=4/aa9186b": 5.0,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=4/ecb98bb": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=4/58962d2": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=4/b5b7e54": NaN,
+  "td3/HalfCheetah-v5/utd/updates_per_env_step=4/a3582b5": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[256, 256]/0bbbbb7": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[256, 256]/788ffcd": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[256, 256]/ecb7135": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[256, 256]/7e672ef": 5.0,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[256, 256]/9b4b44c": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[256, 256]/f23f448": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[256, 256]/92dcee0": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[256, 256]/aa9186b": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[256, 256]/ecb98bb": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[256, 256]/58962d2": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[256, 256]/b5b7e54": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[256, 256]/a3582b5": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[512, 512]/0bbbbb7": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[512, 512]/788ffcd": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[512, 512]/ecb7135": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[512, 512]/7e672ef": 5.0,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[512, 512]/9b4b44c": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[512, 512]/f23f448": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[512, 512]/92dcee0": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[512, 512]/aa9186b": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[512, 512]/ecb98bb": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[512, 512]/58962d2": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[512, 512]/b5b7e54": NaN,
+  "td3/HalfCheetah-v5/width/hidden_sizes=[512, 512]/a3582b5": NaN,
+  "tdmpc2/Ant-v5/baseline/baseline/0bbbbb7": NaN,
+  "tdmpc2/Ant-v5/baseline/baseline/788ffcd": NaN,
+  "tdmpc2/Ant-v5/baseline/baseline/ecb7135": NaN,
+  "tdmpc2/Ant-v5/baseline/baseline/7e672ef": NaN,
+  "tdmpc2/Ant-v5/baseline/baseline/9b4b44c": NaN,
+  "tdmpc2/Ant-v5/baseline/baseline/f23f448": NaN,
+  "tdmpc2/Ant-v5/baseline/baseline/92dcee0": NaN,
+  "tdmpc2/Ant-v5/baseline/baseline/aa9186b": NaN,
+  "tdmpc2/Ant-v5/baseline/baseline/ecb98bb": NaN,
+  "tdmpc2/Ant-v5/baseline/baseline/58962d2": NaN,
+  "tdmpc2/Ant-v5/baseline/baseline/b5b7e54": 5.0,
+  "tdmpc2/Ant-v5/baseline/baseline/a3582b5": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=1/0bbbbb7": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=1/788ffcd": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=1/ecb7135": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=1/7e672ef": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=1/9b4b44c": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=1/f23f448": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=1/92dcee0": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=1/aa9186b": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=1/ecb98bb": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=1/58962d2": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=1/b5b7e54": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=1/a3582b5": 5.0,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=5/0bbbbb7": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=5/788ffcd": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=5/ecb7135": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=5/7e672ef": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=5/9b4b44c": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=5/f23f448": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=5/92dcee0": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=5/aa9186b": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=5/ecb98bb": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=5/58962d2": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=5/b5b7e54": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/horizon=5/a3582b5": 5.0,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=3/0bbbbb7": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=3/788ffcd": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=3/ecb7135": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=3/7e672ef": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=3/9b4b44c": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=3/f23f448": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=3/92dcee0": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=3/aa9186b": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=3/ecb98bb": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=3/58962d2": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=3/b5b7e54": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=3/a3582b5": 5.0,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=7/0bbbbb7": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=7/788ffcd": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=7/ecb7135": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=7/7e672ef": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=7/9b4b44c": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=7/f23f448": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=7/92dcee0": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=7/aa9186b": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=7/ecb98bb": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=7/58962d2": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=7/b5b7e54": NaN,
+  "tdmpc2/Ant-v5/tdmpc2_numq_horizon/num_q=7/a3582b5": 5.0,
+  "tdmpc2/HalfCheetah-v5/baseline/baseline/0bbbbb7": NaN,
+  "tdmpc2/HalfCheetah-v5/baseline/baseline/788ffcd": NaN,
+  "tdmpc2/HalfCheetah-v5/baseline/baseline/ecb7135": NaN,
+  "tdmpc2/HalfCheetah-v5/baseline/baseline/7e672ef": NaN,
+  "tdmpc2/HalfCheetah-v5/baseline/baseline/9b4b44c": NaN,
+  "tdmpc2/HalfCheetah-v5/baseline/baseline/f23f448": NaN,
+  "tdmpc2/HalfCheetah-v5/baseline/baseline/92dcee0": NaN,
+  "tdmpc2/HalfCheetah-v5/baseline/baseline/aa9186b": NaN,
+  "tdmpc2/HalfCheetah-v5/baseline/baseline/ecb98bb": NaN,
+  "tdmpc2/HalfCheetah-v5/baseline/baseline/58962d2": NaN,
+  "tdmpc2/HalfCheetah-v5/baseline/baseline/b5b7e54": 5.0,
+  "tdmpc2/HalfCheetah-v5/baseline/baseline/a3582b5": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=1/0bbbbb7": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=1/788ffcd": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=1/ecb7135": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=1/7e672ef": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=1/9b4b44c": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=1/f23f448": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=1/92dcee0": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=1/aa9186b": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=1/ecb98bb": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=1/58962d2": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=1/b5b7e54": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=1/a3582b5": 5.0,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=5/0bbbbb7": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=5/788ffcd": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=5/ecb7135": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=5/7e672ef": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=5/9b4b44c": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=5/f23f448": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=5/92dcee0": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=5/aa9186b": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=5/ecb98bb": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=5/58962d2": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=5/b5b7e54": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/horizon=5/a3582b5": 5.0,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=3/0bbbbb7": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=3/788ffcd": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=3/ecb7135": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=3/7e672ef": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=3/9b4b44c": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=3/f23f448": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=3/92dcee0": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=3/aa9186b": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=3/ecb98bb": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=3/58962d2": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=3/b5b7e54": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=3/a3582b5": 5.0,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=7/0bbbbb7": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=7/788ffcd": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=7/ecb7135": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=7/7e672ef": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=7/9b4b44c": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=7/f23f448": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=7/92dcee0": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=7/aa9186b": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=7/ecb98bb": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=7/58962d2": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=7/b5b7e54": NaN,
+  "tdmpc2/HalfCheetah-v5/tdmpc2_numq_horizon/num_q=7/a3582b5": 5.0
+ },
+ "distinct_commits": {
+  "7e672ef": 60,
+  "788ffcd": 45,
+  "a3582b5": 40,
+  "9b4b44c": 35,
+  "aa9186b": 30,
+  "ecb7135": 20,
+  "ecb98bb": 10,
+  "0bbbbb7": 10,
+  "58962d2": 10,
+  "b5b7e54": 10,
+  "f23f448": 8,
+  "92dcee0": 2
+ },
+ "commit_info": {
+  "f23f448": {
+   "exists": true,
+   "date": "2026-09-07T12:13:01+02:00",
+   "subject": "Setting baseline config for all experiments"
+  },
+  "92dcee0": {
+   "exists": true,
+   "date": "2026-09-07T14:13:23+02:00",
+   "subject": "Recorded runs for seeds - 331, 958, 14577, 43611, 85062"
+  },
+  "ecb98bb": {
+   "exists": true,
+   "date": "2026-09-08T12:20:16+02:00",
+   "subject": "Finished remaining baseline runs for Ant/v5"
+  },
+  "0bbbbb7": {
+   "exists": true,
+   "date": "2026-09-08T19:44:29+02:00",
+   "subject": "baseline config for mbpo"
+  },
+  "58962d2": {
+   "exists": true,
+   "date": "2026-09-09T12:15:13+02:00",
+   "subject": "Added and tested td3 algorithm"
+  },
+  "aa9186b": {
+   "exists": true,
+   "date": "2026-09-09T13:42:54+02:00",
+   "subject": "Setup UTD sweep run script for SAC and TD3 across both envs and 5 seeds"
+  },
+  "b5b7e54": {
+   "exists": true,
+   "date": "2026-09-10T12:27:49+02:00",
+   "subject": "Setup new  algorithm tdmpc2 and tested recording"
+  },
+  "7e672ef": {
+   "exists": true,
+   "date": "2026-09-12T19:14:44+02:00",
+   "subject": "Setting up width sweep for SAC, TD3 and MBPO"
+  },
+  "ecb7135": {
+   "exists": true,
+   "date": "2026-09-14T12:48:24+02:00",
+   "subject": "Scheduling UTD sweep for MBPO"
+  },
+  "9b4b44c": {
+   "exists": true,
+   "date": "2026-09-15T12:36:51+02:00",
+   "subject": "Preparing batch size sweep for Half Cheetah"
+  },
+  "788ffcd": {
+   "exists": true,
+   "date": "2026-09-17T12:10:20+02:00",
+   "subject": "Scheduling batch sweep for ant and new rollout sweep for MBPO"
+  },
+  "a3582b5": {
+   "exists": true,
+   "date": "2026-09-18T12:17:49+02:00",
+   "subject": "TDMPC2 sweep scripts"
+  }
+ },
+ "mbpo_ant_rollout1_commit": "788ffcd",
+ "mbpo_hc_baseline_commit": "0bbbbb7",
+ "mbpo_ant_rollout1_n_commits": 1,
+ "mbpo_hc_baseline_n_commits": 1,
+ "diff_stat_hc_baseline_to_ant_rollout1_training_code": "algorithms/td3.py    | 372 ++++++++++++++++++++++\n algorithms/tdmpc2.py | 854 +++++++++++++++++++++++++++++++++++++++++++++++++++\n configs/config.py    | 147 +++++++++\n experiment_runner.py |   8 +\n 4 files changed, 1381 insertions(+)",
+ "diff_stat_full_hc_baseline_to_ant_rollout1": ".claude/launch.json                                |    17 +\n CLAUDE.md                                          |   294 +\n README.md                                          |   132 +\n algorithms/td3.py                                  |   372 +\n algorithms/tdmpc2.py                               |   854 +\n check_utd_sweep.sh                                 |    81 -\n configs/config.py                                  |   147 +\n configs/overrides/mbpo_ant_batch1024.json          |     7 +\n configs/overrides/mbpo_ant_batch512.json           |     7 +\n configs/overrides/mbpo_ant_rollout1.json           |     6 +\n configs/overrides/mbpo_ant_rollout15.json          |     6 +\n configs/overrides/mbpo_ant_utd2.json               |     7 +\n configs/overrides/mbpo_ant_utd4.json               |     7 +\n configs/overrides/mbpo_ant_width256.json           |     7 +\n configs/overrides/mbpo_ant_width512.json           |     7 +\n configs/overrides/mbpo_batch1024.json              |     3 +\n configs/overrides/mbpo_batch512.json               |     3 +\n configs/overrides/mbpo_utd2.json                   |     3 +\n configs/overrides/mbpo_utd4.json                   |     3 +\n configs/overrides/mbpo_width256.json               |     3 +\n configs/overrides/mbpo_width512.json               |     3 +\n configs/overrides/sac_batch1024.json               |     3 +\n configs/overrides/sac_batch512.json                |     3 +\n configs/overrides/sac_width256.json                |     3 +\n configs/overrides/sac_width512.json                |     3 +\n configs/overrides/td3_batch1024.json               |     3 +\n configs/overrides/td3_batch256.json                |     3 +\n configs/overrides/td3_batch512.json                |     3 +\n configs/overrides/td3_utd2.json                    |     3 +\n configs/overrides/td3_utd4.json                    |     3 +\n configs/overrides/td3_width256.json                |     3 +\n configs/overrides/td3_width512.json                |     3 +\n configs/overrides/tdmpc2_ant.json                  |     3 +\n dashboard.py                                       |   184 +-\n experiment_runner.py                               |     8 +\n flop_analysis/compute_energy_per_flop.py           |   343 +\n flop_analysis/flop_keys.py                         |    55 +\n flop_analysis/flops_per_call.json                  |   572 +\n flop_analysis/measure_flops.py                     |   503 +\n .../output/cross_seed_energy_per_flop.csv          |   261 +\n flop_analysis/output/per_run_energy_per_flop.csv   |  2073 ++\n flop_dashboard.py                                  |   534 +\n results/_batch_size_sweep.log                      |  1319 ++\n results/_batch_size_sweep_status.json              |   427 +\n results/_thermal_reference.json                    |     2 +-\n results/_utd_sweep.log                             |  1897 ++\n results/_utd_sweep_status.json                     |   247 +\n results/_width_sweep.log                           |  2264 +++\n results/_width_sweep_status.json                   |   907 +\n .../seed_14577/20260908_234215/emissions.csv       |     2 +\n ...s_base_9c673e83-a5af-423b-9497-cac79040394e.csv |   404 +\n .../seed_14577/20260908_234215/metadata.json       |    97 +\n .../mbpo/Ant-v5/seed_14577/20260908_234215/run.log |    34 +\n .../seed_14577/20260908_234215/segment_energy.json |    19 +\n .../20260908_234215/training_metrics.json          |  3558 ++++\n .../seed_14577/20260913_051921/emissions.csv       |     2 +\n ...s_base_77a63143-32e7-49a5-8243-0b6a8807edf7.csv |   404 +\n .../seed_14577/20260913_051921/metadata.json       |    97 +\n .../mbpo/Ant-v5/seed_14577/20260913_051921/run.log |    34 +\n .../seed_14577/20260913_051921/segment_energy.json |    19 +\n .../20260913_051921/training_metrics.json          |  4414 +++++\n .../seed_14577/20260913_082936/emissions.csv       |     2 +\n ...s_base_11f776f5-d5a1-48f2-b22f-0949dba695bf.csv |   404 +\n .../seed_14577/20260913_082936/metadata.json       |    97 +\n .../mbpo/Ant-v5/seed_14577/20260913_082936/run.log |    34 +\n .../seed_14577/20260913_082936/segment_energy.json |    19 +\n .../20260913_082936/training_metrics.json          |  3934 ++++\n .../seed_14577/20260914_215846/emissions.csv       |     2 +\n ...s_base_03b23f4b-39b8-4ce1-be11-4dbe8e2dda34.csv |   404 +\n .../seed_14577/20260914_215846/metadata.json       |    97 +\n .../mbpo/Ant-v5/seed_14577/20260914_215846/run.log |    34 +\n .../seed_14577/20260914_215846/segment_energy.json |    19 +\n .../20260914_215846/training_metrics.json          |  3702 ++++\n .../seed_14577/20260915_021158/emissions.csv       |     2 +\n ...s_base_0f7786ac-fc34-44a4-ac7e-5b8583afc877.csv |   404 +\n .../seed_14577/20260915_021158/metadata.json       |    97 +\n .../mbpo/Ant-v5/seed_14577/20260915_021158/run.log |    34 +\n .../seed_14577/20260915_021158/segment_energy.json |    19 +\n .../20260915_021158/training_metrics.json          |  3934 ++++\n .../Ant-v5/seed_331/20260908_222406/emissions.csv  |     2 +\n ...s_base_a6f99806-81ac-4c2a-bda9-015dd1f0b387.csv |   404 +\n .../Ant-v5/seed_331/20260908_222406/metadata.json  |    97 +\n .../mbpo/Ant-v5/seed_331/20260908_222406/run.log   |    34 +\n .../seed_331/20260908_222406/segment_energy.json   |    19 +\n .../seed_331/20260908_222406/training_metrics.json |  4374 +++++\n .../Ant-v5/seed_331/20260913_040504/emissions.csv  |     2 +\n ...s_base_8004a681-7ea1-446a-bf6e-be68dc4e13e2.csv |   404 +\n .../Ant-v5/seed_331/20260913_040504/metadata.json  |    97 +\n .../mbpo/Ant-v5/seed_331/20260913_040504/run.log   |    34 +\n .../seed_331/20260913_040504/segment_energy.json   |    19 +\n .../seed_331/20260913_040504/training_metrics.json |  4046 ++++\n .../Ant-v5/seed_331/20260913_071254/emissions.csv  |     2 +\n ...s_base_4cac0a4b-e61b-456b-9bf4-0dc24a7fdc38.csv |   404 +\n .../Ant-v5/seed_331/20260913_071254/metadata.json  |    97 +\n .../mbpo/Ant-v5/seed_331/20260913_071254/run.log   |    34 +\n .../seed_331/20260913_071254/segment_energy.json   |    19 +\n .../seed_331/20260913_071254/training_metrics.json |  4078 ++++\n .../Ant-v5/seed_331/20260914_202527/emissions.csv  |     2 +\n ...s_base_e83e6d59-a6ee-479d-9b23-a35436150224.csv |   404 +\n .../Ant-v5/seed_331/20260914_202527/metadata.json  |    97 +\n .../mbpo/Ant-v5/seed_331/20260914_202527/run.log   |    34 +\n .../seed_331/20260914_202527/segment_energy.json   |    19 +\n .../seed_331/20260914_202527/training_metrics.json |  4326 +++++\n .../Ant-v5/seed_331/20260915_001558/emissions.csv  |     2 +\n ...s_base_0909df55-eb91-4324-ab5c-22655f793036.csv |   404 +\n .../Ant-v5/seed_331/20260915_001558/metadata.json  |    97 +\n .../mbpo/Ant-v5/seed_331/20260915_001558/run.log   |    34 +\n .../seed_331/20260915_001558/segment_energy.json   |    19 +\n .../seed_331/20260915_001558/training_metrics.json |  4710 +++++\n .../seed_43611/20260909_001653/emissions.csv       |     2 +\n ...s_base_b5b2c9ba-af6d-47be-a7ad-293bbc3377b7.csv |   404 +\n .../seed_43611/20260909_001653/metadata.json       |    97 +\n .../mbpo/Ant-v5/seed_43611/20260909_001653/run.log |    34 +\n .../seed_43611/20260909_001653/segment_energy.json |    19 +\n .../20260909_001653/training_metrics.json          |  3998 ++++\n .../seed_43611/20260913_055629/emissions.csv       |     2 +\n ...s_base_2141d6bb-5063-4c7c-8f31-bd15a32adc25.csv |   404 +\n .../seed_43611/20260913_055629/metadata.json       |    97 +\n .../mbpo/Ant-v5/seed_43611/20260913_055629/run.log |    34 +\n .../seed_43611/20260913_055629/segment_energy.json |    19 +\n .../20260913_055629/training_metrics.json          |  4494 +++++\n .../seed_43611/20260913_090138/emissions.csv       |     2 +\n ...s_base_074d573b-3a18-4280-af57-610cb6a002a8.csv |   404 +\n .../seed_43611/20260913_090138/metadata.json       |    97 +\n .../mbpo/Ant-v5/seed_43611/20260913_090138/run.log |    34 +\n .../seed_43611/20260913_090138/segment_energy.json |    19 +\n .../20260913_090138/training_metrics.json          |  4126 ++++\n .../seed_43611/20260914_224030/emissions.csv       |     2 +\n ...s_base_2e717f6b-743c-4cd7-8a48-c72313118eec.csv |   404 +\n .../seed_43611/20260914_224030/metadata.json       |    97 +\n .../mbpo/Ant-v5/seed_43611/20260914_224030/run.log |    34 +\n .../seed_43611/20260914_224030/segment_energy.json |    19 +\n .../20260914_224030/training_metrics.json          |  4446 +++++\n .../seed_43611/20260915_030734/emissions.csv       |     2 +\n ...s_base_b71580ca-964c-440d-af53-1bf538e739c8.csv |   404 +\n .../seed_43611/20260915_030734/metadata.json       |    97 +\n .../mbpo/Ant-v5/seed_43611/20260915_030734/run.log |    34 +\n .../seed_43611/20260915_030734/segment_energy.json |    19 +\n .../20260915_030734/training_metrics.json          |  5654 ++++++\n .../seed_85062/20260909_005755/emissions.csv       |     2 +\n ...s_base_5794521a-34eb-42ba-81fc-eafe2fb88d72.csv |   404 +\n .../seed_85062/20260909_005755/metadata.json       |    97 +\n .../mbpo/Ant-v5/seed_85062/20260909_005755/run.log |    34 +\n .../seed_85062/20260909_005755/segment_energy.json |    19 +\n .../20260909_005755/training_metrics.json          |  4310 +++++\n .../seed_85062/20260913_063605/emissions.csv       |     2 +\n ...s_base_c10b1da0-89de-4498-b172-506f3795848c.csv |   404 +\n .../seed_85062/20260913_063605/metadata.json       |    97 +\n .../mbpo/Ant-v5/seed_85062/20260913_063605/run.log |    34 +\n .../seed_85062/20260913_063605/segment_energy.json |    19 +\n .../20260913_063605/training_metrics.json          |  3974 ++++\n .../seed_85062/20260913_093833/emissions.csv       |     2 +\n ...s_base_31ac84bd-75b3-43a7-819b-bc880563dae6.csv |   404 +\n .../seed_85062/20260913_093833/metadata.json       |    97 +\n .../mbpo/Ant-v5/seed_85062/20260913_093833/run.log |    34 +\n .../seed_85062/20260913_093833/segment_energy.json |    19 +\n .../20260913_093833/training_metrics.json          |  3934 ++++\n .../seed_85062/20260914_232814/emissions.csv       |     2 +\n ...s_base_f6d5ca59-e94b-4811-8c51-4077e5ccc022.csv |   404 +\n .../seed_85062/20260914_232814/metadata.json       |    97 +\n .../mbpo/Ant-v5/seed_85062/20260914_232814/run.log |    34 +\n .../seed_85062/20260914_232814/segment_energy.json |    19 +\n .../20260914_232814/training_metrics.json          |  4334 +++++\n .../seed_85062/20260915_040943/emissions.csv       |     2 +\n ...s_base_0db152d4-41ed-4568-9813-89713bac8b20.csv |   404 +\n .../seed_85062/20260915_040943/metadata.json       |    97 +\n .../mbpo/Ant-v5/seed_85062/20260915_040943/run.log |    34 +\n .../seed_85062/20260915_040943/segment_energy.json |    19 +\n .../20260915_040943/training_metrics.json          |  4446 +++++\n .../Ant-v5/seed_958/20260908_230534/emissions.csv  |     2 +\n ...s_base_aa9eeceb-8059-4375-82c5-58112e7df06f.csv |   404 +\n .../Ant-v5/seed_958/20260908_230534/metadata.json  |    97 +\n .../mbpo/Ant-v5/seed_958/20260908_230534/run.log   |    34 +\n .../seed_958/20260908_230534/segment_energy.json   |    19 +\n .../seed_958/20260908_230534/training_metrics.json |  3830 ++++\n .../Ant-v5/seed_958/20260913_044324/emissions.csv  |     2 +\n ...s_base_46420a63-7389-48f7-95a6-29263ba2338c.csv |   404 +\n .../Ant-v5/seed_958/20260913_044324/metadata.json  |    97 +\n .../mbpo/Ant-v5/seed_958/20260913_044324/run.log   |    34 +\n .../seed_958/20260913_044324/segment_energy.json   |    19 +\n .../seed_958/20260913_044324/training_metrics.json |  4158 ++++\n .../Ant-v5/seed_958/20260913_075204/emissions.csv  |     2 +\n ...s_base_eacac053-7b3d-4a0b-9fb6-508cc8242309.csv |   404 +\n .../Ant-v5/seed_958/20260913_075204/metadata.json  |    97 +\n .../mbpo/Ant-v5/seed_958/20260913_075204/run.log   |    34 +\n .../seed_958/20260913_075204/segment_energy.json   |    19 +\n .../seed_958/20260913_075204/training_metrics.json |  4174 ++++\n .../Ant-v5/seed_958/20260914_211311/emissions.csv  |     2 +\n ...s_base_58de9070-b5d9-4d54-890c-2ea176bbf7b1.csv |   404 +\n .../Ant-v5/seed_958/20260914_211311/metadata.json  |    97 +\n .../mbpo/Ant-v5/seed_958/20260914_211311/run.log   |    34 +\n .../seed_958/20260914_211311/segment_energy.json   |    19 +\n .../seed_958/20260914_211311/training_metrics.json |  4158 ++++\n .../Ant-v5/seed_958/20260915_011455/emissions.csv  |     2 +\n ...s_base_e2cc5b20-063e-4b7c-8b89-5523259334c1.csv |   404 +\n .../Ant-v5/seed_958/20260915_011455/metadata.json  |    97 +\n .../mbpo/Ant-v5/seed_958/20260915_011455/run.log   |    34 +\n .../seed_958/20260915_011455/segment_energy.json   |    19 +\n .../seed_958/20260915_011455/training_metrics.json |  5310 +++++\n .../seed_14577/20260908_204851/emissions.csv       |     2 +\n ...s_base_2c49c464-be0e-4dbf-b23c-94a4f45bd547.csv |   404 +\n .../seed_14577/20260908_204851/metadata.json       |    97 +\n .../seed_14577/20260908_204851/run.log             |    34 +\n .../seed_14577/20260908_204851/segment_energy.json |    19 +\n .../20260908_204851/training_metrics.json          |  2646 +++\n .../seed_14577/20260912_235401/emissions.csv       |     2 +\n ...s_base_7761f238-9e96-4b98-904a-9805e57bb8ee.csv |   404 +\n .../seed_14577/20260912_235401/metadata.json       |    97 +\n .../seed_14577/20260912_235401/run.log             |    34 +\n .../seed_14577/20260912_235401/segment_energy.json |    19 +\n .../20260912_235401/training_metrics.json          |  2646 +++\n .../seed_14577/20260913_023034/emissions.csv       |     2 +\n ...s_base_7a362322-93d9-4e23-b0e9-245aefaabb8b.csv |   404 +\n .../seed_14577/20260913_023034/metadata.json       |    97 +\n .../seed_14577/20260913_023034/run.log             |    34 +\n .../seed_14577/20260913_023034/segment_energy.json |    19 +\n .../20260913_023034/training_metrics.json          |  2646 +++\n .../seed_14577/20260914_140908/emissions.csv       |     2 +\n ...s_base_79335761-250b-47f8-b39b-014786c93ea0.csv |   404 +\n .../seed_14577/20260914_140908/metadata.json       |    97 +\n .../seed_14577/20260914_140908/run.log             |    34 +\n .../seed_14577/20260914_140908/segment_energy.json |    19 +\n .../20260914_140908/training_metrics.json          |  2646 +++\n .../seed_14577/20260914_175239/emissions.csv       |     2 +\n ...s_base_29423945-e60c-48eb-bcf0-6401f3d8e03a.csv |   404 +\n .../seed_14577/20260914_175239/metadata.json       |    97 +\n .../seed_14577/20260914_175239/run.log             |    34 +\n .../seed_14577/20260914_175239/segment_energy.json |    19 +\n .../20260914_175239/training_metrics.json          |  2646 +++\n .../seed_14577/20260915_153027/emissions.csv       |     2 +\n ...s_base_557413ef-a0e5-4bdb-bfd9-a1aa9c8ab5be.csv |   404 +\n .../seed_14577/20260915_153027/metadata.json       |    97 +\n .../seed_14577/20260915_153027/run.log             |    34 +\n .../seed_14577/20260915_153027/segment_energy.json |    19 +\n .../20260915_153027/training_metrics.json          |  2646 +++\n .../seed_14577/20260915_180602/emissions.csv       |     2 +\n ...s_base_a119b6fe-f6c6-49e9-b7e6-5de3762aa5a4.csv |   404 +\n .../seed_14577/20260915_180602/metadata.json       |    97 +\n .../seed_14577/20260915_180602/run.log             |    34 +\n .../seed_14577/20260915_180602/segment_energy.json |    19 +\n .../20260915_180602/training_metrics.json          |  2646 +++\n .../seed_331/20260908_194455/emissions.csv         |     2 +\n ...s_base_c1545598-ab40-4262-aa5f-5be549743f8f.csv |   404 +\n .../seed_331/20260908_194455/metadata.json         |    97 +\n .../seed_331/20260908_194455/run.log               |    34 +\n .../seed_331/20260908_194455/segment_energy.json   |    19 +\n .../seed_331/20260908_194455/training_metrics.json |  2646 +++\n .../seed_331/20260912_225321/emissions.csv         |     2 +\n ...s_base_b87b9fed-a581-4589-8e41-f909e68a6a33.csv |   404 +\n .../seed_331/20260912_225321/metadata.json         |    97 +\n .../seed_331/20260912_225321/run.log               |    34 +\n .../seed_331/20260912_225321/segment_energy.json   |    19 +\n .../seed_331/20260912_225321/training_metrics.json |  2646 +++\n .../seed_331/20260913_012818/emissions.csv         |     2 +\n ...s_base_c6ccdd70-1a99-402a-a1bd-158f52b04559.csv |   404 +\n .../seed_331/20260913_012818/metadata.json         |    97 +\n .../seed_331/20260913_012818/run.log               |    34 +\n .../seed_331/20260913_012818/segment_energy.json   |    19 +\n .../seed_331/20260913_012818/training_metrics.json |  2646 +++\n .../seed_331/20260914_125001/emissions.csv         |     2 +\n ...s_base_d4377698-c525-401d-bfba-b9af60c9be9d.csv |   404 +\n .../seed_331/20260914_125001/metadata.json         |    97 +\n .../seed_331/20260914_125001/run.log               |    34 +\n .../seed_331/20260914_125001/segment_energy.json   |    19 +\n .../seed_331/20260914_125001/training_metrics.json |  2646 +++\n .../seed_331/20260914_160726/emissions.csv         |     2 +\n ...s_base_7760255a-f9a7-4ad6-b823-473472f94ed7.csv |   404 +\n .../seed_331/20260914_160726/metadata.json         |    97 +\n .../seed_331/20260914_160726/run.log               |    34 +\n .../seed_331/20260914_160726/segment_energy.json   |    19 +\n .../seed_331/20260914_160726/training_metrics.json |  2646 +++\n .../seed_331/20260915_142957/emissions.csv         |     2 +\n ...s_base_a069ecc1-8bc2-44a0-8b94-3bd54baa4d50.csv |   404 +\n .../seed_331/20260915_142957/metadata.json         |    97 +\n .../seed_331/20260915_142957/run.log               |    34 +\n .../seed_331/20260915_142957/segment_energy.json   |    19 +\n .../seed_331/20260915_142957/training_metrics.json |  2646 +++\n .../seed_331/20260915_170428/emissions.csv         |     2 +\n ...s_base_075200f0-ca79-4b22-b9c0-2358bada0ef6.csv |   404 +\n .../seed_331/20260915_170428/metadata.json         |    97 +\n .../seed_331/20260915_170428/run.log               |    34 +\n .../seed_331/20260915_170428/segment_energy.json   |    19 +\n .../seed_331/20260915_170428/training_metrics.json |  2646 +++\n .../seed_43611/20260908_211956/emissions.csv       |     2 +\n ...s_base_e52c7aa7-6bfe-4a27-a35f-6f513249b7f8.csv |   404 +\n .../seed_43611/20260908_211956/metadata.json       |    97 +\n .../seed_43611/20260908_211956/run.log             |    34 +\n .../seed_43611/20260908_211956/segment_energy.json |    19 +\n .../20260908_211956/training_metrics.json          |  2646 +++\n .../seed_43611/20260913_002507/emissions.csv       |     2 +\n ...s_base_2c338d07-f3b2-4235-ac78-fd2c41495d71.csv |   404 +\n .../seed_43611/20260913_002507/metadata.json       |    97 +\n .../seed_43611/20260913_002507/run.log             |    34 +\n .../seed_43611/20260913_002507/segment_energy.json |    19 +\n .../20260913_002507/training_metrics.json          |  2646 +++\n .../seed_43611/20260913_030008/emissions.csv       |     2 +\n ...s_base_98ba4225-a659-4644-bfc4-2d7cb88fd259.csv |   404 +\n .../seed_43611/20260913_030008/metadata.json       |    97 +\n .../seed_43611/20260913_030008/run.log             |    34 +\n .../seed_43611/20260913_030008/segment_energy.json |    19 +\n .../20260913_030008/training_metrics.json          |  2646 +++\n .../seed_43611/20260914_144702/emissions.csv       |     2 +\n ...s_base_874b137b-7c93-497c-934b-cbfb77a70525.csv |   404 +\n .../seed_43611/20260914_144702/metadata.json       |    97 +\n .../seed_43611/20260914_144702/run.log             |    34 +\n .../seed_43611/20260914_144702/segment_energy.json |    19 +\n .../20260914_144702/training_metrics.json          |  2646 +++\n .../seed_43611/20260914_184506/emissions.csv       |     2 +\n ...s_base_7546f751-0a31-4910-a393-a764789b396c.csv |   404 +\n .../seed_43611/20260914_184506/metadata.json       |    97 +\n .../seed_43611/20260914_184506/run.log             |    34 +\n .../seed_43611/20260914_184506/segment_energy.json |    19 +\n .../20260914_184506/training_metrics.json          |  2646 +++\n .../seed_43611/20260915_160117/emissions.csv       |     2 +\n ...s_base_c44e3b6a-615a-4228-a878-4ccc60841f80.csv |   404 +\n .../seed_43611/20260915_160117/metadata.json       |    97 +\n .../seed_43611/20260915_160117/run.log             |    34 +\n .../seed_43611/20260915_160117/segment_energy.json |    19 +\n .../20260915_160117/training_metrics.json          |  2646 +++\n .../seed_43611/20260915_183643/emissions.csv       |     2 +\n ...s_base_fc3fc1e1-71a4-46dc-a151-82f626b904f9.csv |   404 +\n .../seed_43611/20260915_183643/metadata.json       |    97 +\n .../seed_43611/20260915_183643/run.log             |    34 +\n .../seed_43611/20260915_183643/segment_energy.json |    19 +\n .../20260915_183643/training_metrics.json          |  2646 +++\n .../seed_85062/20260908_215222/emissions.csv       |     2 +\n ...s_base_fa377c5a-2eaf-4e8f-befa-4a793735d8d6.csv |   404 +\n .../seed_85062/20260908_215222/metadata.json       |    97 +\n .../seed_85062/20260908_215222/run.log             |    34 +\n .../seed_85062/20260908_215222/segment_energy.json |    19 +\n .../20260908_215222/training_metrics.json          |  2646 +++\n .../seed_85062/20260913_005629/emissions.csv       |     2 +\n ...s_base_9aff8bbd-d446-4995-ba2f-703ddaad62c5.csv |   404 +\n .../seed_85062/20260913_005629/metadata.json       |    97 +\n .../seed_85062/20260913_005629/run.log             |    34 +\n .../seed_85062/20260913_005629/segment_energy.json |    19 +\n .../20260913_005629/training_metrics.json          |  2646 +++\n .../seed_85062/20260913_033223/emissions.csv       |     2 +\n ...s_base_2f8cb84f-0698-45e6-9ade-d684c1682a8a.csv |   404 +\n .../seed_85062/20260913_033223/metadata.json       |    97 +\n .../seed_85062/20260913_033223/run.log             |    34 +\n .../seed_85062/20260913_033223/segment_energy.json |    19 +\n .../20260913_033223/training_metrics.json          |  2646 +++\n .../seed_85062/20260914_152729/emissions.csv       |     2 +\n ...s_base_523b5c61-1433-4889-8b45-041129d89701.csv |   404 +\n .../seed_85062/20260914_152729/metadata.json       |    97 +\n .../seed_85062/20260914_152729/run.log             |    34 +\n .../seed_85062/20260914_152729/segment_energy.json |    19 +\n .../20260914_152729/training_metrics.json          |  2646 +++\n .../seed_85062/20260914_193542/emissions.csv       |     2 +\n ...s_base_02c3ea71-214d-45c0-a7c7-4dd1cedf7acc.csv |   404 +\n .../seed_85062/20260914_193542/metadata.json       |    97 +\n .../seed_85062/20260914_193542/run.log             |    34 +\n .../seed_85062/20260914_193542/segment_energy.json |    19 +\n .../20260914_193542/training_metrics.json          |  2646 +++\n .../seed_85062/20260915_163321/emissions.csv       |     2 +\n ...s_base_ecef5757-8ec3-4d83-9eb8-ec3d2c19e368.csv |   404 +\n .../seed_85062/20260915_163321/metadata.json       |    97 +\n .../seed_85062/20260915_163321/run.log             |    34 +\n .../seed_85062/20260915_163321/segment_energy.json |    19 +\n .../20260915_163321/training_metrics.json          |  2646 +++\n .../seed_85062/20260915_190759/emissions.csv       |     2 +\n ...s_base_6e0bf186-bb5a-4d26-83a3-f37b5a137a94.csv |   404 +\n .../seed_85062/20260915_190759/metadata.json       |    97 +\n .../seed_85062/20260915_190759/run.log             |    34 +\n .../seed_85062/20260915_190759/segment_energy.json |    19 +\n .../20260915_190759/training_metrics.json          |  2646 +++\n .../seed_958/20260908_201520/emissions.csv         |     2 +\n ...s_base_fb3a3c7c-b513-4c99-9641-e852506d0719.csv |   404 +\n .../seed_958/20260908_201520/metadata.json         |    97 +\n .../seed_958/20260908_201520/run.log               |    34 +\n .../seed_958/20260908_201520/segment_energy.json   |    19 +\n .../seed_958/20260908_201520/training_metrics.json |  2646 +++\n .../seed_958/20260912_232353/emissions.csv         |     2 +\n ...s_base_3b0d467e-47b5-42cf-b93d-9e4783c8fdee.csv |   404 +\n .../seed_958/20260912_232353/metadata.json         |    97 +\n .../seed_958/20260912_232353/run.log               |    34 +\n .../seed_958/20260912_232353/segment_energy.json   |    19 +\n .../seed_958/20260912_232353/training_metrics.json |  2646 +++\n .../seed_958/20260913_020045/emissions.csv         |     2 +\n ...s_base_6bcb02ad-6fd6-4637-ad05-a05a370cbd4a.csv |   404 +\n .../seed_958/20260913_020045/metadata.json         |    97 +\n .../seed_958/20260913_020045/run.log               |    34 +\n .../seed_958/20260913_020045/segment_energy.json   |    19 +\n .../seed_958/20260913_020045/training_metrics.json |  2646 +++\n .../seed_958/20260914_132956/emissions.csv         |     2 +\n ...s_base_8aa0146f-1ae8-4177-bf49-9135e20d95e3.csv |   404 +\n .../seed_958/20260914_132956/metadata.json         |    97 +\n .../seed_958/20260914_132956/run.log               |    34 +\n .../seed_958/20260914_132956/segment_energy.json   |    19 +\n .../seed_958/20260914_132956/training_metrics.json |  2646 +++\n .../seed_958/20260914_170030/emissions.csv         |     2 +\n ...s_base_067b99a5-c228-4599-8bda-dfd6426def6c.csv |   404 +\n .../seed_958/20260914_170030/metadata.json         |    97 +\n .../seed_958/20260914_170030/run.log               |    34 +\n .../seed_958/20260914_170030/segment_energy.json   |    19 +\n .../seed_958/20260914_170030/training_metrics.json |  2646 +++\n .../seed_958/20260915_150024/emissions.csv         |     2 +\n ...s_base_d78e962e-6e5b-4361-8d38-a7efe1a9b624.csv |   404 +\n .../seed_958/20260915_150024/metadata.json         |    97 +\n .../seed_958/20260915_150024/run.log               |    34 +\n .../seed_958/20260915_150024/segment_energy.json   |    19 +\n .../seed_958/20260915_150024/training_metrics.json |  2646 +++\n .../seed_958/20260915_173600/emissions.csv         |     2 +\n ...s_base_1e25e806-0ccf-4975-b71f-5d3243c12790.csv |   404 +\n .../seed_958/20260915_173600/metadata.json         |    97 +\n .../seed_958/20260915_173600/run.log               |    34 +\n .../seed_958/20260915_173600/segment_energy.json   |    19 +\n .../seed_958/20260915_173600/training_metrics.json |  2646 +++\n results/mbpo/_env_sweep.log                        |   393 +\n results/mbpo/_env_sweep_status.json                |   117 +\n .../seed_14577/20260909_142204/emissions.csv       |     2 +\n ...s_base_727c649e-8918-4c51-bee9-c27b62975dca.csv |   204 +\n .../seed_14577/20260909_142204/metadata.json       |    68 +\n .../sac/Ant-v5/seed_14577/20260909_142204/run.log  |    32 +\n .../seed_14577/20260909_142204/segment_energy.json |    17 +\n .../20260909_142204/training_metrics.json          |  3938 ++++\n .../seed_14577/20260909_161955/emissions.csv       |     2 +\n ...s_base_a4a9904a-05e5-4d9b-be0a-d512c450f463.csv |   204 +\n .../seed_14577/20260909_161955/metadata.json       |    68 +\n .../sac/Ant-v5/seed_14577/20260909_161955/run.log  |    32 +\n .../seed_14577/20260909_161955/segment_energy.json |    17 +\n .../20260909_161955/training_metrics.json          |  4690 +++++\n .../seed_14577/20260912_212440/emissions.csv       |     2 +\n ...s_base_6bfd4cf8-d3cf-4550-bc9f-9f25a411e518.csv |   204 +\n .../seed_14577/20260912_212440/metadata.json       |    68 +\n .../sac/Ant-v5/seed_14577/20260912_212440/run.log  |    32 +\n .../seed_14577/20260912_212440/segment_energy.json |    17 +\n .../20260912_212440/training_metrics.json          |  2922 +++\n .../seed_14577/20260912_222003/emissions.csv       |     2 +\n ...s_base_a0b5b83a-7b78-418a-8d4c-0993af4e5a03.csv |   204 +\n .../seed_14577/20260912_222003/metadata.json       |    68 +\n .../sac/Ant-v5/seed_14577/20260912_222003/run.log  |    32 +\n .../seed_14577/20260912_222003/segment_energy.json |    17 +\n .../20260912_222003/training_metrics.json          |  3530 ++++\n .../Ant-v5/seed_331/20260909_134544/emissions.csv  |     2 +\n ...s_base_768efb17-5853-4357-a4fb-2beb3a968b60.csv |   204 +\n .../Ant-v5/seed_331/20260909_134544/metadata.json  |    68 +\n .../sac/Ant-v5/seed_331/20260909_134544/run.log    |    32 +\n .../seed_331/20260909_134544/segment_energy.json   |    17 +\n .../seed_331/20260909_134544/training_metrics.json |  4170 ++++\n .../Ant-v5/seed_331/20260909_151617/emissions.csv  |     2 +\n ...s_base_b95a19bb-b3fc-403b-8561-47ec83b93743.csv |   204 +\n .../Ant-v5/seed_331/20260909_151617/metadata.json  |    68 +\n .../sac/Ant-v5/seed_331/20260909_151617/run.log    |    32 +\n .../seed_331/20260909_151617/segment_energy.json   |    17 +\n .../seed_331/20260909_151617/training_metrics.json |  4618 +++++\n .../Ant-v5/seed_331/20260912_210231/emissions.csv  |     2 +\n ...s_base_d6de2617-e5e3-4377-b753-91a44630f5d2.csv |   204 +\n .../Ant-v5/seed_331/20260912_210231/metadata.json  |    68 +\n .../sac/Ant-v5/seed_331/20260912_210231/run.log    |    32 +\n .../seed_331/20260912_210231/segment_energy.json   |    17 +\n .../seed_331/20260912_210231/training_metrics.json |  3346 ++++\n .../Ant-v5/seed_331/20260912_215758/emissions.csv  |     2 +\n ...s_base_af16f9d1-7a3e-4353-9533-c8815d2ca1f9.csv |   204 +\n .../Ant-v5/seed_331/20260912_215758/metadata.json  |    68 +\n .../sac/Ant-v5/seed_331/20260912_215758/run.log    |    32 +\n .../seed_331/20260912_215758/segment_energy.json   |    17 +\n .../seed_331/20260912_215758/training_metrics.json |  3842 ++++\n .../seed_43611/20260909_144006/emissions.csv       |     2 +\n ...s_base_3b858034-6da1-4040-bc6c-9dccb2e38600.csv |   204 +\n .../seed_43611/20260909_144006/metadata.json       |    68 +\n .../sac/Ant-v5/seed_43611/20260909_144006/run.log  |    32 +\n .../seed_43611/20260909_144006/segment_energy.json |    17 +\n .../20260909_144006/training_metrics.json          |  4258 ++++\n .../seed_43611/20260909_165139/emissions.csv       |     2 +\n ...s_base_f4ec3147-d739-46ee-9593-c3b427b8505f.csv |   204 +\n .../seed_43611/20260909_165139/metadata.json       |    68 +\n .../sac/Ant-v5/seed_43611/20260909_165139/run.log  |    32 +\n .../seed_43611/20260909_165139/segment_energy.json |    17 +\n .../20260909_165139/training_metrics.json          |  5090 +++++\n .../seed_43611/20260912_213540/emissions.csv       |     2 +\n ...s_base_541bbc18-2ae8-4e08-ae96-1d6639e16987.csv |   204 +\n .../seed_43611/20260912_213540/metadata.json       |    68 +\n .../sac/Ant-v5/seed_43611/20260912_213540/run.log  |    32 +\n .../seed_43611/20260912_213540/segment_energy.json |    17 +\n .../20260912_213540/training_metrics.json          |  3218 ++++\n .../seed_43611/20260912_223103/emissions.csv       |     2 +\n ...s_base_b82b5a05-be9a-490a-88d8-9eef856b4861.csv |   204 +\n .../seed_43611/20260912_223103/metadata.json       |    68 +\n .../sac/Ant-v5/seed_43611/20260912_223103/run.log  |    32 +\n .../seed_43611/20260912_223103/segment_energy.json |    17 +\n .../20260912_223103/training_metrics.json          |  3818 ++++\n .../seed_85062/20260909_145811/emissions.csv       |     2 +\n ...s_base_e0cf2e07-8a5a-4b7f-8773-7aafe752ecf5.csv |   204 +\n .../seed_85062/20260909_145811/metadata.json       |    68 +\n .../sac/Ant-v5/seed_85062/20260909_145811/run.log  |    32 +\n .../seed_85062/20260909_145811/segment_energy.json |    17 +\n .../20260909_145811/training_metrics.json          |  4170 ++++\n .../seed_85062/20260909_172327/emissions.csv       |     2 +\n ...s_base_70ee9019-757b-4d04-8cca-aa24eda55d0b.csv |   204 +\n .../seed_85062/20260909_172327/metadata.json       |    68 +\n .../sac/Ant-v5/seed_85062/20260909_172327/run.log  |    32 +\n .../seed_85062/20260909_172327/segment_energy.json |    17 +\n .../20260909_172327/training_metrics.json          |  4826 +++++\n .../seed_85062/20260912_214655/emissions.csv       |     2 +\n ...s_base_4a5b87a5-bd62-475b-abc8-89df608da152.csv |   204 +\n .../seed_85062/20260912_214655/metadata.json       |    68 +\n .../sac/Ant-v5/seed_85062/20260912_214655/run.log  |    32 +\n .../seed_85062/20260912_214655/segment_energy.json |    17 +\n .../20260912_214655/training_metrics.json          |  3130 +++\n .../seed_85062/20260912_224212/emissions.csv       |     2 +\n ...s_base_f5baebbd-825a-427a-a642-f3bf0e8b79c1.csv |   204 +\n .../seed_85062/20260912_224212/metadata.json       |    68 +\n .../sac/Ant-v5/seed_85062/20260912_224212/run.log  |    32 +\n .../seed_85062/20260912_224212/segment_energy.json |    17 +\n .../20260912_224212/training_metrics.json          |  3706 ++++\n .../Ant-v5/seed_958/20260909_140343/emissions.csv  |     2 +\n ...s_base_24d4eba6-00eb-4109-96bc-3901e5ac320c.csv |   204 +\n .../Ant-v5/seed_958/20260909_140343/metadata.json  |    68 +\n .../sac/Ant-v5/seed_958/20260909_140343/run.log    |    32 +\n .../seed_958/20260909_140343/segment_energy.json   |    17 +\n .../seed_958/20260909_140343/training_metrics.json |  3834 ++++\n .../Ant-v5/seed_958/20260909_154755/emissions.csv  |     2 +\n ...s_base_29a334cc-46c2-4c89-b20a-fa4f4b92f233.csv |   204 +\n .../Ant-v5/seed_958/20260909_154755/metadata.json  |    68 +\n .../sac/Ant-v5/seed_958/20260909_154755/run.log    |    32 +\n .../seed_958/20260909_154755/segment_energy.json   |    17 +\n .../seed_958/20260909_154755/training_metrics.json |  4994 +++++\n .../Ant-v5/seed_958/20260912_211334/emissions.csv  |     2 +\n ...s_base_5afd0a7e-1d42-406f-bc65-fb0b4838ec4e.csv |   204 +\n .../Ant-v5/seed_958/20260912_211334/metadata.json  |    68 +\n .../sac/Ant-v5/seed_958/20260912_211334/run.log    |    32 +\n .../seed_958/20260912_211334/segment_energy.json   |    17 +\n .../seed_958/20260912_211334/training_metrics.json |  2954 +++\n .../Ant-v5/seed_958/20260912_220900/emissions.csv  |     2 +\n ...s_base_c5e2e1c3-9b56-4603-94fc-9772f6e4ee67.csv |   204 +\n .../Ant-v5/seed_958/20260912_220900/metadata.json  |    68 +\n .../sac/Ant-v5/seed_958/20260912_220900/run.log    |    32 +\n .../seed_958/20260912_220900/segment_energy.json   |    17 +\n .../seed_958/20260912_220900/training_metrics.json |  4130 ++++\n .../seed_14577/20260912_193634/emissions.csv       |     2 +\n ...s_base_b4cec979-410a-4249-b601-cd46773bc578.csv |   204 +\n .../seed_14577/20260912_193634/metadata.json       |    68 +\n .../seed_14577/20260912_193634/run.log             |    32 +\n .../seed_14577/20260912_193634/segment_energy.json |    17 +\n .../20260912_193634/training_metrics.json          |  2146 +++\n .../seed_14577/20260912_203006/emissions.csv       |     2 +\n ...s_base_90a03e74-c159-42fd-8d87-b2fff366d8a4.csv |   204 +\n .../seed_14577/20260912_203006/metadata.json       |    68 +\n .../seed_14577/20260912_203006/run.log             |    32 +\n .../seed_14577/20260912_203006/segment_energy.json |    17 +\n .../20260912_203006/training_metrics.json          |  2146 +++\n .../seed_14577/20260915_130117/emissions.csv       |     2 +\n ...s_base_1bd4f109-0b1d-46fd-abbb-6782469eb1c0.csv |   204 +\n .../seed_14577/20260915_130117/metadata.json       |    68 +\n .../seed_14577/20260915_130117/run.log             |    32 +\n .../seed_14577/20260915_130117/segment_energy.json |    17 +\n .../20260915_130117/training_metrics.json          |  2146 +++\n .../seed_14577/20260915_135641/emissions.csv       |     2 +\n ...s_base_e23b382b-076d-4c28-a68c-313ce22a1d11.csv |   204 +\n .../seed_14577/20260915_135641/metadata.json       |    68 +\n .../seed_14577/20260915_135641/run.log             |    32 +\n .../seed_14577/20260915_135641/segment_energy.json |    17 +\n .../20260915_135641/training_metrics.json          |  2146 +++\n .../seed_331/20260912_191506/emissions.csv         |     2 +\n ...s_base_8d6c4269-5e44-48e9-bc9d-ac7c8eaa69b5.csv |   204 +\n .../seed_331/20260912_191506/metadata.json         |    68 +\n .../seed_331/20260912_191506/run.log               |    32 +\n .../seed_331/20260912_191506/segment_energy.json   |    17 +\n .../seed_331/20260912_191506/training_metrics.json |  2146 +++\n .../seed_331/20260912_200837/emissions.csv         |     2 +\n ...s_base_c85273df-32ef-499e-9461-0ab387395158.csv |   204 +\n .../seed_331/20260912_200837/metadata.json         |    68 +\n .../seed_331/20260912_200837/run.log               |    32 +\n .../seed_331/20260912_200837/segment_energy.json   |    17 +\n .../seed_331/20260912_200837/training_metrics.json |  2146 +++\n .../seed_331/20260915_123859/emissions.csv         |     2 +\n ...s_base_e123435d-1b2b-4e37-b86d-a770b1678708.csv |   204 +\n .../seed_331/20260915_123859/metadata.json         |    68 +\n .../seed_331/20260915_123859/run.log               |    32 +\n .../seed_331/20260915_123859/segment_energy.json   |    17 +\n .../seed_331/20260915_123859/training_metrics.json |  2146 +++\n .../seed_331/20260915_133428/emissions.csv         |     2 +\n ...s_base_9cc22cdd-bf28-4f7f-b96d-040d33ce4127.csv |   204 +\n .../seed_331/20260915_133428/metadata.json         |    68 +\n .../seed_331/20260915_133428/run.log               |    32 +\n .../seed_331/20260915_133428/segment_energy.json   |    17 +\n .../seed_331/20260915_133428/training_metrics.json |  2146 +++\n .../seed_43611/20260912_194713/emissions.csv       |     2 +\n ...s_base_4dc29041-0558-4d42-9b49-9dc52f7e19d3.csv |   204 +\n .../seed_43611/20260912_194713/metadata.json       |    68 +\n .../seed_43611/20260912_194713/run.log             |    32 +\n .../seed_43611/20260912_194713/segment_energy.json |    17 +\n .../20260912_194713/training_metrics.json          |  2146 +++\n .../seed_43611/20260912_204101/emissions.csv       |     2 +\n ...s_base_aa8b6529-08f9-4bcf-a2f2-aa0c1d1f7fbe.csv |   204 +\n .../seed_43611/20260912_204101/metadata.json       |    68 +\n .../seed_43611/20260912_204101/run.log             |    32 +\n .../seed_43611/20260912_204101/segment_energy.json |    17 +\n .../20260912_204101/training_metrics.json          |  2146 +++\n .../seed_43611/20260915_131229/emissions.csv       |     2 +\n ...s_base_60b8af57-0f7d-48be-887d-3234908e39fb.csv |   204 +\n .../seed_43611/20260915_131229/metadata.json       |    68 +\n .../seed_43611/20260915_131229/run.log             |    32 +\n .../seed_43611/20260915_131229/segment_energy.json |    17 +\n .../20260915_131229/training_metrics.json          |  2146 +++\n .../seed_43611/20260915_140749/emissions.csv       |     2 +\n ...s_base_c3deb7a6-3a10-46b5-ae29-4d28be51b808.csv |   204 +\n .../seed_43611/20260915_140749/metadata.json       |    68 +\n .../seed_43611/20260915_140749/run.log             |    32 +\n .../seed_43611/20260915_140749/segment_energy.json |    17 +\n .../20260915_140749/training_metrics.json          |  2146 +++\n .../seed_85062/20260912_195757/emissions.csv       |     2 +\n ...s_base_1859896c-2d93-43f4-b144-f981cbea28c0.csv |   204 +\n .../seed_85062/20260912_195757/metadata.json       |    68 +\n .../seed_85062/20260912_195757/run.log             |    32 +\n .../seed_85062/20260912_195757/segment_energy.json |    17 +\n .../20260912_195757/training_metrics.json          |  2146 +++\n .../seed_85062/20260912_205145/emissions.csv       |     2 +\n ...s_base_e09f9d2e-7050-4292-b728-c672bb02405d.csv |   204 +\n .../seed_85062/20260912_205145/metadata.json       |    68 +\n .../seed_85062/20260912_205145/run.log             |    32 +\n .../seed_85062/20260912_205145/segment_energy.json |    17 +\n .../20260912_205145/training_metrics.json          |  2146 +++\n .../seed_85062/20260915_132326/emissions.csv       |     2 +\n ...s_base_9383efde-2018-40cb-8dd5-ff9e50138d11.csv |   204 +\n .../seed_85062/20260915_132326/metadata.json       |    68 +\n .../seed_85062/20260915_132326/run.log             |    32 +\n .../seed_85062/20260915_132326/segment_energy.json |    17 +\n .../20260915_132326/training_metrics.json          |  2146 +++\n .../seed_85062/20260915_141900/emissions.csv       |     2 +\n ...s_base_4557ba66-3613-41ff-bfc8-370dd9074dab.csv |   204 +\n .../seed_85062/20260915_141900/metadata.json       |    68 +\n .../seed_85062/20260915_141900/run.log             |    32 +\n .../seed_85062/20260915_141900/segment_energy.json |    17 +\n .../20260915_141900/training_metrics.json          |  2146 +++\n .../seed_958/20260912_192550/emissions.csv         |     2 +\n ...s_base_9e72d049-9e14-46f5-97f6-7b5abe4f5498.csv |   204 +\n .../seed_958/20260912_192550/metadata.json         |    68 +\n .../seed_958/20260912_192550/run.log               |    32 +\n .../seed_958/20260912_192550/segment_energy.json   |    17 +\n .../seed_958/20260912_192550/training_metrics.json |  2146 +++\n .../seed_958/20260912_201926/emissions.csv         |     2 +\n ...s_base_9776d315-5aa3-4dc8-b9cb-e2f10ea07acf.csv |   204 +\n .../seed_958/20260912_201926/metadata.json         |    68 +\n .../seed_958/20260912_201926/run.log               |    32 +\n .../seed_958/20260912_201926/segment_energy.json   |    17 +\n .../seed_958/20260912_201926/training_metrics.json |  2146 +++\n .../seed_958/20260915_125002/emissions.csv         |     2 +\n ...s_base_f5a92440-7567-446b-a701-2f670d3e0d4c.csv |   204 +\n .../seed_958/20260915_125002/metadata.json         |    68 +\n .../seed_958/20260915_125002/run.log               |    32 +\n .../seed_958/20260915_125002/segment_energy.json   |    17 +\n .../seed_958/20260915_125002/training_metrics.json |  2146 +++\n .../seed_958/20260915_134531/emissions.csv         |     2 +\n ...s_base_33033ef1-3adf-46f2-a794-716815e18d23.csv |   204 +\n .../seed_958/20260915_134531/metadata.json         |    68 +\n .../seed_958/20260915_134531/run.log               |    32 +\n .../seed_958/20260915_134531/segment_energy.json   |    17 +\n .../seed_958/20260915_134531/training_metrics.json |  2146 +++\n .../seed_14577/20260909_131319/emissions.csv       |     2 +\n ...s_base_807004ee-8237-43fd-899b-d00788a97dbf.csv |   204 +\n .../seed_14577/20260909_131319/metadata.json       |    67 +\n .../td3/Ant-v5/seed_14577/20260909_131319/run.log  |    32 +\n .../seed_14577/20260909_131319/segment_energy.json |    17 +\n .../20260909_131319/training_metrics.json          |  3582 ++++\n .../seed_14577/20260909_203412/emissions.csv       |     2 +\n ...s_base_8e3afa10-aaeb-459d-8c25-3babc65536d4.csv |   204 +\n .../seed_14577/20260909_203412/metadata.json       |    67 +\n .../td3/Ant-v5/seed_14577/20260909_203412/run.log  |    32 +\n .../seed_14577/20260909_203412/segment_energy.json |    17 +\n .../20260909_203412/training_metrics.json          |  3510 ++++\n .../seed_14577/20260909_214136/emissions.csv       |     2 +\n ...s_base_f03a9ee3-3d82-4f62-908e-4607cd5696eb.csv |   204 +\n .../seed_14577/20260909_214136/metadata.json       |    67 +\n .../td3/Ant-v5/seed_14577/20260909_214136/run.log  |    32 +\n .../seed_14577/20260909_214136/segment_energy.json |    17 +\n .../20260909_214136/training_metrics.json          |  4126 ++++\n .../seed_14577/20260913_114359/emissions.csv       |     2 +\n ...s_base_2635b4a8-de33-4611-a530-bbb495312d1d.csv |   204 +\n .../seed_14577/20260913_114359/metadata.json       |    67 +\n .../td3/Ant-v5/seed_14577/20260913_114359/run.log  |    32 +\n .../seed_14577/20260913_114359/segment_energy.json |    17 +\n .../20260913_114359/training_metrics.json          |  2966 +++\n .../seed_14577/20260913_122156/emissions.csv       |     2 +\n ...s_base_b12b76e9-64f9-497e-827e-200d519e8f69.csv |   204 +\n .../seed_14577/20260913_122156/metadata.json       |    67 +\n .../td3/Ant-v5/seed_14577/20260913_122156/run.log  |    32 +\n .../seed_14577/20260913_122156/segment_energy.json |    17 +\n .../20260913_122156/training_metrics.json          |  3350 ++++\n .../Ant-v5/seed_331/20260909_125815/emissions.csv  |     2 +\n ...s_base_4e86c76c-b840-459b-bc75-86698d765b99.csv |   204 +\n .../Ant-v5/seed_331/20260909_125815/metadata.json  |    67 +\n .../td3/Ant-v5/seed_331/20260909_125815/run.log    |    32 +\n .../seed_331/20260909_125815/segment_energy.json   |    17 +\n .../seed_331/20260909_125815/training_metrics.json |  3830 ++++\n .../Ant-v5/seed_331/20260909_201243/emissions.csv  |     2 +\n ...s_base_fcb62e2f-a25e-40c1-9b66-a9ed14b1c847.csv |   204 +\n .../Ant-v5/seed_331/20260909_201243/metadata.json  |    67 +\n .../td3/Ant-v5/seed_331/20260909_201243/run.log    |    32 +\n .../seed_331/20260909_201243/segment_energy.json   |    17 +\n .../seed_331/20260909_201243/training_metrics.json |  3686 ++++\n .../Ant-v5/seed_331/20260909_210632/emissions.csv  |     2 +\n ...s_base_90e54235-b5b1-41d7-8391-bd67e3b6fbbd.csv |   204 +\n .../Ant-v5/seed_331/20260909_210632/metadata.json  |    67 +\n .../td3/Ant-v5/seed_331/20260909_210632/run.log    |    32 +\n .../seed_331/20260909_210632/segment_energy.json   |    17 +\n .../seed_331/20260909_210632/training_metrics.json |  3942 ++++\n .../Ant-v5/seed_331/20260913_112902/emissions.csv  |     2 +\n ...s_base_2a627bc3-6c6f-4750-9cc4-cc7d991a4b14.csv |   204 +\n .../Ant-v5/seed_331/20260913_112902/metadata.json  |    67 +\n .../td3/Ant-v5/seed_331/20260913_112902/run.log    |    32 +\n .../seed_331/20260913_112902/segment_energy.json   |    17 +\n .../seed_331/20260913_112902/training_metrics.json |  3366 ++++\n .../Ant-v5/seed_331/20260913_120625/emissions.csv  |     2 +\n ...s_base_92805404-b78c-4b50-b7d8-27c8bebfdf91.csv |   204 +\n .../Ant-v5/seed_331/20260913_120625/metadata.json  |    67 +\n .../td3/Ant-v5/seed_331/20260913_120625/run.log    |    32 +\n .../seed_331/20260913_120625/segment_energy.json   |    17 +\n .../seed_331/20260913_120625/training_metrics.json |  3838 ++++\n .../seed_43611/20260909_132052/emissions.csv       |     2 +\n ...s_base_d04fcd3c-a869-4d7b-a16b-8b5ff9091b18.csv |   204 +\n .../seed_43611/20260909_132052/metadata.json       |    67 +\n .../td3/Ant-v5/seed_43611/20260909_132052/run.log  |    32 +\n .../seed_43611/20260909_132052/segment_energy.json |    17 +\n .../20260909_132052/training_metrics.json          |  3606 ++++\n .../seed_43611/20260909_204504/emissions.csv       |     2 +\n ...s_base_7b176feb-69ce-4fdd-a9f0-7fae72965b78.csv |   204 +\n .../seed_43611/20260909_204504/metadata.json       |    67 +\n .../td3/Ant-v5/seed_43611/20260909_204504/run.log  |    32 +\n .../seed_43611/20260909_204504/segment_energy.json |    17 +\n .../20260909_204504/training_metrics.json          |  4238 ++++\n .../seed_43611/20260909_215938/emissions.csv       |     2 +\n ...s_base_f0c67b85-0302-4a9a-8591-e24f5c5041a1.csv |   204 +\n .../seed_43611/20260909_215938/metadata.json       |    67 +\n .../td3/Ant-v5/seed_43611/20260909_215938/run.log  |    32 +\n .../seed_43611/20260909_215938/segment_energy.json |    17 +\n .../20260909_215938/training_metrics.json          |  4550 +++++\n .../seed_43611/20260913_115120/emissions.csv       |     2 +\n ...s_base_26d4824e-07a1-4179-846a-aab272513185.csv |   204 +\n .../seed_43611/20260913_115120/metadata.json       |    67 +\n .../td3/Ant-v5/seed_43611/20260913_115120/run.log  |    32 +\n .../seed_43611/20260913_115120/segment_energy.json |    17 +\n .../20260913_115120/training_metrics.json          |  3366 ++++\n .../seed_43611/20260913_122930/emissions.csv       |     2 +\n ...s_base_d679b068-9e3a-45b9-bf04-05e2be81b3bd.csv |   204 +\n .../seed_43611/20260913_122930/metadata.json       |    67 +\n .../td3/Ant-v5/seed_43611/20260913_122930/run.log  |    32 +\n .../seed_43611/20260913_122930/segment_energy.json |    17 +\n .../20260913_122930/training_metrics.json          |  3526 ++++\n .../seed_85062/20260909_132826/emissions.csv       |     2 +\n ...s_base_0a2bc523-1079-4770-906a-7cccef4e084e.csv |   204 +\n .../seed_85062/20260909_132826/metadata.json       |    67 +\n .../td3/Ant-v5/seed_85062/20260909_132826/run.log  |    32 +\n .../seed_85062/20260909_132826/segment_energy.json |    17 +\n .../20260909_132826/training_metrics.json          |  3286 ++++\n .../seed_85062/20260909_205545/emissions.csv       |     2 +\n ...s_base_ab2dfa5c-4c35-41cd-be45-2a89ac48995c.csv |   204 +\n .../seed_85062/20260909_205545/metadata.json       |    67 +\n .../td3/Ant-v5/seed_85062/20260909_205545/run.log  |    32 +\n .../seed_85062/20260909_205545/segment_energy.json |    17 +\n .../20260909_205545/training_metrics.json          |  4174 ++++\n .../seed_85062/20260909_221700/emissions.csv       |     2 +\n ...s_base_00849b3d-9ed9-4b64-928c-4787b4eda454.csv |   204 +\n .../seed_85062/20260909_221700/metadata.json       |    67 +\n .../td3/Ant-v5/seed_85062/20260909_221700/run.log  |    32 +\n .../seed_85062/20260909_221700/segment_energy.json |    17 +\n .../20260909_221700/training_metrics.json          |  4238 ++++\n .../seed_85062/20260913_115846/emissions.csv       |     2 +\n ...s_base_36849f8e-7dbb-4a24-ad2d-4c10403abc6e.csv |   204 +\n .../seed_85062/20260913_115846/metadata.json       |    67 +\n .../td3/Ant-v5/seed_85062/20260913_115846/run.log  |    32 +\n .../seed_85062/20260913_115846/segment_energy.json |    17 +\n .../20260913_115846/training_metrics.json          |  3462 ++++\n .../seed_85062/20260913_123711/emissions.csv       |     2 +\n ...s_base_85951639-8850-475e-bf55-ee354ee3b9e8.csv |   204 +\n .../seed_85062/20260913_123711/metadata.json       |    67 +\n .../td3/Ant-v5/seed_85062/20260913_123711/run.log  |    32 +\n .../seed_85062/20260913_123711/segment_energy.json |    17 +\n .../20260913_123711/training_metrics.json          |  3590 ++++\n .../Ant-v5/seed_958/20260909_130550/emissions.csv  |     2 +\n ...s_base_5c498480-8837-4df5-a7ae-36cc1ec238e8.csv |   204 +\n .../Ant-v5/seed_958/20260909_130550/metadata.json  |    67 +\n .../td3/Ant-v5/seed_958/20260909_130550/run.log    |    32 +\n .../seed_958/20260909_130550/segment_energy.json   |    17 +\n .../seed_958/20260909_130550/training_metrics.json |  3974 ++++\n .../Ant-v5/seed_958/20260909_202328/emissions.csv  |     2 +\n ...s_base_3660b53a-d07f-4404-bd38-9f9a9cf72123.csv |   204 +\n .../Ant-v5/seed_958/20260909_202328/metadata.json  |    67 +\n .../td3/Ant-v5/seed_958/20260909_202328/run.log    |    32 +\n .../seed_958/20260909_202328/segment_energy.json   |    17 +\n .../seed_958/20260909_202328/training_metrics.json |  3750 ++++\n .../Ant-v5/seed_958/20260909_212359/emissions.csv  |     2 +\n ...s_base_ceae386b-4396-48c8-9b1f-c1959ca2d5ce.csv |   204 +\n .../Ant-v5/seed_958/20260909_212359/metadata.json  |    67 +\n .../td3/Ant-v5/seed_958/20260909_212359/run.log    |    32 +\n .../seed_958/20260909_212359/segment_energy.json   |    17 +\n .../seed_958/20260909_212359/training_metrics.json |  4374 +++++\n .../Ant-v5/seed_958/20260913_113629/emissions.csv  |     2 +\n ...s_base_f58cd899-6176-4762-9212-abc6fad041ef.csv |   204 +\n .../Ant-v5/seed_958/20260913_113629/metadata.json  |    67 +\n .../td3/Ant-v5/seed_958/20260913_113629/run.log    |    32 +\n .../seed_958/20260913_113629/segment_energy.json   |    17 +\n .../seed_958/20260913_113629/training_metrics.json |  3182 +++\n .../Ant-v5/seed_958/20260913_121400/emissions.csv  |     2 +\n ...s_base_ac074f49-7f9d-40ff-b232-0657da03ddd8.csv |   204 +\n .../Ant-v5/seed_958/20260913_121400/metadata.json  |    67 +\n .../td3/Ant-v5/seed_958/20260913_121400/run.log    |    32 +\n .../seed_958/20260913_121400/segment_energy.json   |    17 +\n .../seed_958/20260913_121400/training_metrics.json |  3326 ++++\n .../seed_0/20260909_113627/emissions.csv           |     2 +\n ...s_base_8599d607-48a6-42da-9982-244b448d315c.csv |   204 +\n .../seed_0/20260909_113627/metadata.json           |    67 +\n .../HalfCheetah-v5/seed_0/20260909_113627/run.log  |    32 +\n .../seed_0/20260909_113627/segment_energy.json     |    17 +\n .../seed_0/20260909_113627/training_metrics.json   |  2086 ++\n .../seed_14577/20260909_123631/emissions.csv       |     2 +\n ...s_base_39fbe670-adae-4439-9e35-1a80df6f449c.csv |   204 +\n .../seed_14577/20260909_123631/metadata.json       |    67 +\n .../seed_14577/20260909_123631/run.log             |    32 +\n .../seed_14577/20260909_123631/segment_energy.json |    17 +\n .../20260909_123631/training_metrics.json          |  2086 ++\n .../seed_14577/20260909_181612/emissions.csv       |     2 +\n ...s_base_95c0b6a7-a538-48e8-95e8-f4a2dfa7f584.csv |   204 +\n .../seed_14577/20260909_181612/metadata.json       |    67 +\n .../seed_14577/20260909_181612/run.log             |    32 +\n .../seed_14577/20260909_181612/segment_energy.json |    17 +\n .../20260909_181612/training_metrics.json          |  2086 ++\n .../seed_14577/20260909_192142/emissions.csv       |     2 +\n ...s_base_e2fd30f4-759d-480c-b728-5f314c8bd964.csv |   204 +\n .../seed_14577/20260909_192142/metadata.json       |    67 +\n .../seed_14577/20260909_192142/run.log             |    32 +\n .../seed_14577/20260909_192142/segment_energy.json |    17 +\n .../20260909_192142/training_metrics.json          |  2086 ++\n .../seed_14577/20260913_103115/emissions.csv       |     2 +\n ...s_base_ed3408a6-3cfa-4db8-b461-cdec5026adb4.csv |   204 +\n .../seed_14577/20260913_103115/metadata.json       |    67 +\n .../seed_14577/20260913_103115/run.log             |    32 +\n .../seed_14577/20260913_103115/segment_energy.json |    17 +\n .../20260913_103115/training_metrics.json          |  2086 ++\n .../seed_14577/20260913_110716/emissions.csv       |     2 +\n ...s_base_ca6b4395-b98b-4426-98dd-a65314bb773e.csv |   204 +\n .../seed_14577/20260913_110716/metadata.json       |    67 +\n .../seed_14577/20260913_110716/run.log             |    32 +\n .../seed_14577/20260913_110716/segment_energy.json |    17 +\n .../20260913_110716/training_metrics.json          |  2086 ++\n .../seed_14577/20260915_195419/emissions.csv       |     2 +\n ...s_base_a0274504-731a-4d71-a643-35d7bbce6bb0.csv |   204 +\n .../seed_14577/20260915_195419/metadata.json       |    67 +\n .../seed_14577/20260915_195419/run.log             |    32 +\n .../seed_14577/20260915_195419/segment_energy.json |    17 +\n .../20260915_195419/training_metrics.json          |  2086 ++\n .../seed_14577/20260915_203052/emissions.csv       |     2 +\n ...s_base_7328e228-ebc5-426e-a937-22b0e422ae66.csv |   204 +\n .../seed_14577/20260915_203052/metadata.json       |    67 +\n .../seed_14577/20260915_203052/run.log             |    32 +\n .../seed_14577/20260915_203052/segment_energy.json |    17 +\n .../20260915_203052/training_metrics.json          |  2086 ++\n .../seed_14577/20260915_210914/emissions.csv       |     2 +\n ...s_base_d97648aa-8771-448d-8aa3-dbbe2d5939ca.csv |   204 +\n .../seed_14577/20260915_210914/metadata.json       |    67 +\n .../seed_14577/20260915_210914/run.log             |    32 +\n .../seed_14577/20260915_210914/segment_energy.json |    17 +\n .../20260915_210914/training_metrics.json          |  2086 ++\n .../seed_331/20260909_122204/emissions.csv         |     2 +\n ...s_base_8e58595e-d863-4c9a-b3f3-b205a87595a0.csv |   204 +\n .../seed_331/20260909_122204/metadata.json         |    67 +\n .../seed_331/20260909_122204/run.log               |    32 +\n .../seed_331/20260909_122204/segment_energy.json   |    17 +\n .../seed_331/20260909_122204/training_metrics.json |  2086 ++\n .../seed_331/20260909_175506/emissions.csv         |     2 +\n ...s_base_37650504-041d-4ad7-9c00-341261c7acf9.csv |   204 +\n .../seed_331/20260909_175506/metadata.json         |    67 +\n .../seed_331/20260909_175506/run.log               |    32 +\n .../seed_331/20260909_175506/segment_energy.json   |    17 +\n .../seed_331/20260909_175506/training_metrics.json |  2086 ++\n .../seed_331/20260909_184749/emissions.csv         |     2 +\n ...s_base_d4a5a788-6547-460f-b920-fd3dede0cd8b.csv |   204 +\n .../seed_331/20260909_184749/metadata.json         |    67 +\n .../seed_331/20260909_184749/run.log               |    32 +\n .../seed_331/20260909_184749/segment_energy.json   |    17 +\n .../seed_331/20260909_184749/training_metrics.json |  2086 ++\n .../seed_331/20260913_101702/emissions.csv         |     2 +\n ...s_base_408a3527-2964-4483-a938-415b092cbf04.csv |   204 +\n .../seed_331/20260913_101702/metadata.json         |    67 +\n .../seed_331/20260913_101702/run.log               |    32 +\n .../seed_331/20260913_101702/segment_energy.json   |    17 +\n .../seed_331/20260913_101702/training_metrics.json |  2086 ++\n .../seed_331/20260913_105243/emissions.csv         |     2 +\n ...s_base_a99cf7ab-3bda-4377-812a-ddd52737ca98.csv |   204 +\n .../seed_331/20260913_105243/metadata.json         |    67 +\n .../seed_331/20260913_105243/run.log               |    32 +\n .../seed_331/20260913_105243/segment_energy.json   |    17 +\n .../seed_331/20260913_105243/training_metrics.json |  2086 ++\n .../seed_331/20260915_193942/emissions.csv         |     2 +\n ...s_base_060640bc-f6d9-4e06-9339-2e41590b9181.csv |   204 +\n .../seed_331/20260915_193942/metadata.json         |    67 +\n .../seed_331/20260915_193942/run.log               |    32 +\n .../seed_331/20260915_193942/segment_energy.json   |    17 +\n .../seed_331/20260915_193942/training_metrics.json |  2086 ++\n .../seed_331/20260915_201612/emissions.csv         |     2 +\n ...s_base_2aeb2e78-7e3c-4e62-8d3c-6ba5bfb5e78f.csv |   204 +\n .../seed_331/20260915_201612/metadata.json         |    67 +\n .../seed_331/20260915_201612/run.log               |    32 +\n .../seed_331/20260915_201612/segment_energy.json   |    17 +\n .../seed_331/20260915_201612/training_metrics.json |  2086 ++\n .../seed_331/20260915_205340/emissions.csv         |     2 +\n ...s_base_6bb30b05-42b8-4ff1-ad88-36414a4bcffe.csv |   204 +\n .../seed_331/20260915_205340/metadata.json         |    67 +\n .../seed_331/20260915_205340/run.log               |    32 +\n .../seed_331/20260915_205340/segment_energy.json   |    17 +\n .../seed_331/20260915_205340/training_metrics.json |  2086 ++\n .../seed_43611/20260909_124343/emissions.csv       |     2 +\n ...s_base_2f61d06a-8864-4352-a5c8-5fb7a4777a64.csv |   204 +\n .../seed_43611/20260909_124343/metadata.json       |    67 +\n .../seed_43611/20260909_124343/run.log             |    32 +\n .../seed_43611/20260909_124343/segment_energy.json |    17 +\n .../20260909_124343/training_metrics.json          |  2086 ++\n .../seed_43611/20260909_182653/emissions.csv       |     2 +\n ...s_base_4e4f59da-5003-4269-9d8b-5449e7a8f01e.csv |   204 +\n .../seed_43611/20260909_182653/metadata.json       |    67 +\n .../seed_43611/20260909_182653/run.log             |    32 +\n .../seed_43611/20260909_182653/segment_energy.json |    17 +\n .../20260909_182653/training_metrics.json          |  2086 ++\n .../seed_43611/20260909_193855/emissions.csv       |     2 +\n ...s_base_36dc83d2-d945-4954-870f-3c8bb4d56157.csv |   204 +\n .../seed_43611/20260909_193855/metadata.json       |    67 +\n .../seed_43611/20260909_193855/run.log             |    32 +\n .../seed_43611/20260909_193855/segment_energy.json |    17 +\n .../20260909_193855/training_metrics.json          |  2086 ++\n .../seed_43611/20260913_103828/emissions.csv       |     2 +\n ...s_base_9e2012c5-c807-4719-9b70-ee0c20372763.csv |   204 +\n .../seed_43611/20260913_103828/metadata.json       |    67 +\n .../seed_43611/20260913_103828/run.log             |    32 +\n .../seed_43611/20260913_103828/segment_energy.json |    17 +\n .../20260913_103828/training_metrics.json          |  2086 ++\n .../seed_43611/20260913_111439/emissions.csv       |     2 +\n ...s_base_430d2e0c-10d9-4c44-a5d9-c01f3ba25ff2.csv |   204 +\n .../seed_43611/20260913_111439/metadata.json       |    67 +\n .../seed_43611/20260913_111439/run.log             |    32 +\n .../seed_43611/20260913_111439/segment_energy.json |    17 +\n .../20260913_111439/training_metrics.json          |  2086 ++\n .../seed_43611/20260915_200140/emissions.csv       |     2 +\n ...s_base_90949ab1-483b-4408-bce9-96c203bc912b.csv |   204 +\n .../seed_43611/20260915_200140/metadata.json       |    67 +\n .../seed_43611/20260915_200140/run.log             |    32 +\n .../seed_43611/20260915_200140/segment_energy.json |    17 +\n .../20260915_200140/training_metrics.json          |  2086 ++\n .../seed_43611/20260915_203836/emissions.csv       |     2 +\n ...s_base_72414b39-6820-4744-8ba6-2078515e06ef.csv |   204 +\n .../seed_43611/20260915_203836/metadata.json       |    67 +\n .../seed_43611/20260915_203836/run.log             |    32 +\n .../seed_43611/20260915_203836/segment_energy.json |    17 +\n .../20260915_203836/training_metrics.json          |  2086 ++\n .../seed_43611/20260915_211657/emissions.csv       |     2 +\n ...s_base_a378af1b-69b1-4546-9289-3ef9d1b766d6.csv |   204 +\n .../seed_43611/20260915_211657/metadata.json       |    67 +\n .../seed_43611/20260915_211657/run.log             |    32 +\n .../seed_43611/20260915_211657/segment_energy.json |    17 +\n .../20260915_211657/training_metrics.json          |  2086 ++\n .../seed_85062/20260909_125105/emissions.csv       |     2 +\n ...s_base_09b7de14-3fad-407c-a72d-39b18e2e3ca0.csv |   204 +\n .../seed_85062/20260909_125105/metadata.json       |    67 +\n .../seed_85062/20260909_125105/run.log             |    32 +\n .../seed_85062/20260909_125105/segment_energy.json |    17 +\n .../20260909_125105/training_metrics.json          |  2086 ++\n .../seed_85062/20260909_183716/emissions.csv       |     2 +\n ...s_base_6a048f61-90db-4609-9362-3076a332e072.csv |   204 +\n .../seed_85062/20260909_183716/metadata.json       |    67 +\n .../seed_85062/20260909_183716/run.log             |    32 +\n .../seed_85062/20260909_183716/segment_energy.json |    17 +\n .../20260909_183716/training_metrics.json          |  2086 ++\n .../seed_85062/20260909_195543/emissions.csv       |     2 +\n ...s_base_97d74d95-6b56-4c52-b527-037e3cfac03c.csv |   204 +\n .../seed_85062/20260909_195543/metadata.json       |    67 +\n .../seed_85062/20260909_195543/run.log             |    32 +\n .../seed_85062/20260909_195543/segment_energy.json |    17 +\n .../20260909_195543/training_metrics.json          |  2086 ++\n .../seed_85062/20260913_104535/emissions.csv       |     2 +\n ...s_base_4de6f459-8414-4859-8113-b7c5ed91d0bc.csv |   204 +\n .../seed_85062/20260913_104535/metadata.json       |    67 +\n .../seed_85062/20260913_104535/run.log             |    32 +\n .../seed_85062/20260913_104535/segment_energy.json |    17 +\n .../20260913_104535/training_metrics.json          |  2086 ++\n .../seed_85062/20260913_112151/emissions.csv       |     2 +\n ...s_base_40771de6-0570-41de-981c-f9c4da6f3643.csv |   204 +\n .../seed_85062/20260913_112151/metadata.json       |    67 +\n .../seed_85062/20260913_112151/run.log             |    32 +\n .../seed_85062/20260913_112151/segment_energy.json |    17 +\n .../20260913_112151/training_metrics.json          |  2086 ++\n .../seed_85062/20260915_200901/emissions.csv       |     2 +\n ...s_base_abe49eba-f2e6-40b2-bd09-ab2580af2d0c.csv |   204 +\n .../seed_85062/20260915_200901/metadata.json       |    67 +\n .../seed_85062/20260915_200901/run.log             |    32 +\n .../seed_85062/20260915_200901/segment_energy.json |    17 +\n .../20260915_200901/training_metrics.json          |  2086 ++\n .../seed_85062/20260915_204604/emissions.csv       |     2 +\n ...s_base_e544f833-ac81-4abb-ba83-e7993e24db3c.csv |   204 +\n .../seed_85062/20260915_204604/metadata.json       |    67 +\n .../seed_85062/20260915_204604/run.log             |    32 +\n .../seed_85062/20260915_204604/segment_energy.json |    17 +\n .../20260915_204604/training_metrics.json          |  2086 ++\n .../seed_85062/20260915_212443/emissions.csv       |     2 +\n ...s_base_f7696932-47d9-4d06-be78-0ed0378af669.csv |   204 +\n .../seed_85062/20260915_212443/metadata.json       |    67 +\n .../seed_85062/20260915_212443/run.log             |    32 +\n .../seed_85062/20260915_212443/segment_energy.json |    17 +\n .../20260915_212443/training_metrics.json          |  2086 ++\n .../seed_958/20260909_122916/emissions.csv         |     2 +\n ...s_base_65fdd4cc-aec9-40e3-9173-20ba9ea24a02.csv |   204 +\n .../seed_958/20260909_122916/metadata.json         |    67 +\n .../seed_958/20260909_122916/run.log               |    32 +\n .../seed_958/20260909_122916/segment_energy.json   |    17 +\n .../seed_958/20260909_122916/training_metrics.json |  2086 ++\n .../seed_958/20260909_180540/emissions.csv         |     2 +\n ...s_base_969d65c3-9ad8-4256-b24b-231d10a12e64.csv |   204 +\n .../seed_958/20260909_180540/metadata.json         |    67 +\n .../seed_958/20260909_180540/run.log               |    32 +\n .../seed_958/20260909_180540/segment_energy.json   |    17 +\n .../seed_958/20260909_180540/training_metrics.json |  2086 ++\n .../seed_958/20260909_190446/emissions.csv         |     2 +\n ...s_base_f0c9edb7-ffa8-4303-b749-12df97aaf5dd.csv |   204 +\n .../seed_958/20260909_190446/metadata.json         |    67 +\n .../seed_958/20260909_190446/run.log               |    32 +\n .../seed_958/20260909_190446/segment_energy.json   |    17 +\n .../seed_958/20260909_190446/training_metrics.json |  2086 ++\n .../seed_958/20260913_102409/emissions.csv         |     2 +\n ...s_base_799dedb5-3025-4153-b766-0565b50e36f6.csv |   204 +\n .../seed_958/20260913_102409/metadata.json         |    67 +\n .../seed_958/20260913_102409/run.log               |    32 +\n .../seed_958/20260913_102409/segment_energy.json   |    17 +\n .../seed_958/20260913_102409/training_metrics.json |  2086 ++\n .../seed_958/20260913_110004/emissions.csv         |     2 +\n ...s_base_b0f669a7-2378-457c-bc7f-62e27fc4b7a0.csv |   204 +\n .../seed_958/20260913_110004/metadata.json         |    67 +\n .../seed_958/20260913_110004/run.log               |    32 +\n .../seed_958/20260913_110004/segment_energy.json   |    17 +\n .../seed_958/20260913_110004/training_metrics.json |  2086 ++\n .../seed_958/20260915_194700/emissions.csv         |     2 +\n ...s_base_ee5e8b6c-1c5a-415d-87c1-65467756e63a.csv |   204 +\n .../seed_958/20260915_194700/metadata.json         |    67 +\n .../seed_958/20260915_194700/run.log               |    32 +\n .../seed_958/20260915_194700/segment_energy.json   |    17 +\n .../seed_958/20260915_194700/training_metrics.json |  2086 ++\n .../seed_958/20260915_202331/emissions.csv         |     2 +\n ...s_base_038f32af-bd63-4c2a-a582-1bd4aff78694.csv |   204 +\n .../seed_958/20260915_202331/metadata.json         |    67 +\n .../seed_958/20260915_202331/run.log               |    32 +\n .../seed_958/20260915_202331/segment_energy.json   |    17 +\n .../seed_958/20260915_202331/training_metrics.json |  2086 ++\n .../seed_958/20260915_210134/emissions.csv         |     2 +\n ...s_base_b2b8e77f-9dd4-419c-af18-63815fe500cb.csv |   204 +\n .../seed_958/20260915_210134/metadata.json         |    67 +\n .../seed_958/20260915_210134/run.log               |    32 +\n .../seed_958/20260915_210134/segment_energy.json   |    17 +\n .../seed_958/20260915_210134/training_metrics.json |  2086 ++\n results/td3/_env_sweep.log                         |   373 +\n results/td3/_env_sweep_status.json                 |   117 +\n .../seed_14577/20260910_173623/emissions.csv       |     2 +\n ...s_base_f2b5775e-e2b7-4c78-8e91-1794da40bb3c.csv |   205 +\n .../seed_14577/20260910_173623/metadata.json       |    90 +\n .../Ant-v5/seed_14577/20260910_173623/run.log      |    35 +\n .../seed_14577/20260910_173623/segment_energy.json |    18 +\n .../20260910_173623/training_metrics.json          | 19298 +++++++++++++++++++\n .../Ant-v5/seed_331/20260910_160427/emissions.csv  |     2 +\n ...s_base_4d6ea987-113e-4a40-87b3-d4c6e39edf3d.csv |   205 +\n .../Ant-v5/seed_331/20260910_160427/metadata.json  |    90 +\n .../tdmpc2/Ant-v5/seed_331/20260910_160427/run.log |    35 +\n .../seed_331/20260910_160427/segment_energy.json   |    18 +\n .../seed_331/20260910_160427/training_metrics.json |  8890 +++++++++\n .../seed_43611/20260910_182237/emissions.csv       |     2 +\n ...s_base_99acf11e-9224-4008-a79e-6b3c597ef5f8.csv |   205 +\n .../seed_43611/20260910_182237/metadata.json       |    90 +\n .../Ant-v5/seed_43611/20260910_182237/run.log      |    35 +\n .../seed_43611/20260910_182237/segment_energy.json |    18 +\n .../20260910_182237/training_metrics.json          | 17586 +++++++++++++++++\n .../seed_85062/20260910_190756/emissions.csv       |     2 +\n ...s_base_bb7c5ea8-01a7-4f05-956d-4eb5d480cfce.csv |   205 +\n .../seed_85062/20260910_190756/metadata.json       |    90 +\n .../Ant-v5/seed_85062/20260910_190756/run.log      |    35 +\n .../seed_85062/20260910_190756/segment_energy.json |    18 +\n .../20260910_190756/training_metrics.json          | 16418 ++++++++++++++++\n .../Ant-v5/seed_958/20260910_165024/emissions.csv  |     2 +\n ...s_base_9ebc3d30-c95a-4442-ad1c-889a68e5fffc.csv |   205 +\n .../Ant-v5/seed_958/20260910_165024/metadata.json  |    90 +\n .../tdmpc2/Ant-v5/seed_958/20260910_165024/run.log |    35 +\n .../seed_958/20260910_165024/segment_energy.json   |    18 +\n .../seed_958/20260910_165024/training_metrics.json | 10562 ++++++++++\n .../seed_0/20260910_113313/emissions.csv           |     2 +\n ...s_base_ac9ffd70-56a3-4faa-8b1a-9f0e54752b55.csv |   205 +\n .../seed_0/20260910_113313/metadata.json           |    90 +\n .../HalfCheetah-v5/seed_0/20260910_113313/run.log  |    35 +\n .../seed_0/20260910_113313/segment_energy.json     |    18 +\n .../seed_0/20260910_113313/training_metrics.json   |  2346 +++\n .../seed_14577/20260910_135524/emissions.csv       |     2 +\n ...s_base_b3b7cc5b-d050-47ab-b356-ffc9c0baa06d.csv |   205 +\n .../seed_14577/20260910_135524/metadata.json       |    90 +\n .../seed_14577/20260910_135524/run.log             |    35 +\n .../seed_14577/20260910_135524/segment_energy.json |    18 +\n .../20260910_135524/training_metrics.json          |  2346 +++\n .../seed_331/20260910_122845/emissions.csv         |     2 +\n ...s_base_1fb82cf1-7a1c-4a64-80a4-3393f1a249c2.csv |   205 +\n .../seed_331/20260910_122845/metadata.json         |    90 +\n .../seed_331/20260910_122845/run.log               |    35 +\n .../seed_331/20260910_122845/segment_energy.json   |    18 +\n .../seed_331/20260910_122845/training_metrics.json |  2346 +++\n .../seed_43611/20260910_143905/emissions.csv       |     2 +\n ...s_base_f2b47954-99a7-413d-a4d2-0012c38a340c.csv |   205 +\n .../seed_43611/20260910_143905/metadata.json       |    90 +\n .../seed_43611/20260910_143905/run.log             |    35 +\n .../seed_43611/20260910_143905/segment_energy.json |    18 +\n .../20260910_143905/training_metrics.json          |  2346 +++\n .../seed_85062/20260910_152122/emissions.csv       |     2 +\n ...s_base_4ed7ea80-ca7e-40ee-bde3-7d210b78be73.csv |   205 +\n .../seed_85062/20260910_152122/metadata.json       |    90 +\n .../seed_85062/20260910_152122/run.log             |    35 +\n .../seed_85062/20260910_152122/segment_energy.json |    18 +\n .../20260910_152122/training_metrics.json          |  2346 +++\n .../seed_958/20260910_131242/emissions.csv         |     2 +\n ...s_base_0f760081-b41d-4353-a206-ba374e659a62.csv |   205 +\n .../seed_958/20260910_131242/metadata.json         |    90 +\n .../seed_958/20260910_131242/run.log               |    35 +\n .../seed_958/20260910_131242/segment_energy.json   |    18 +\n .../seed_958/20260910_131242/training_metrics.json |  2346 +++\n results/tdmpc2/_seed_sweep.log                     |   403 +\n results/tdmpc2/_seed_sweep_status.json             |   117 +\n run_ant_overnight_sweep.sh                         |   304 +\n run_batch_size_sweep.sh                            |   215 +\n run_batch_size_sweep_ant.sh                        |   232 +\n run_mbpo_env_sweep.sh                              |   178 +\n run_mbpo_rollout_length_sweep.sh                   |   184 +\n run_td3_env_sweep.sh                               |   182 +\n run_tdmpc2_seed_sweep.sh                           |   175 +\n run_utd_sweep.sh                                   |   163 +-\n run_width_sweep.sh                                 |   229 +\n 1126 files changed, 674521 insertions(+), 174 deletions(-)",
+ "commits_between_hc_baseline_and_ant_rollout1_training_code": [
+  "b5b7e54|2026-09-10T12:27:49+02:00|Setup new  algorithm tdmpc2 and tested recording",
+  "58962d2|2026-09-09T12:15:13+02:00|Added and tested td3 algorithm"
+ ],
+ "distinct_commits_in_time_order": [
+  "f23f448",
+  "92dcee0",
+  "ecb98bb",
+  "0bbbbb7",
+  "58962d2",
+  "aa9186b",
+  "b5b7e54",
+  "7e672ef",
+  "ecb7135",
+  "9b4b44c",
+  "788ffcd",
+  "a3582b5"
+ ],
+ "training_code_diff_between_consecutive_distinct_commits": {
+  "f23f448..92dcee0": "experiment_runner.py                           |  20 +++++++++++++++++---\n utils/__pycache__/gpu_control.cpython-314.pyc  | Bin 9484 -> 9489 bytes\n utils/__pycache__/thermal_gate.cpython-314.pyc | Bin 9649 -> 10314 bytes\n utils/thermal_gate.py                          |  10 ++++++++++\n 4 files changed, 27 insertions(+), 3 deletions(-)",
+  "92dcee0..ecb98bb": "",
+  "ecb98bb..0bbbbb7": "algorithms/__pycache__/replay_buffer.cpython-314.pyc | Bin 4758 -> 0 bytes\n algorithms/__pycache__/sac.cpython-314.pyc           | Bin 25182 -> 0 bytes\n configs/config.py                                    |   2 +-\n utils/__pycache__/gpu_control.cpython-314.pyc        | Bin 9489 -> 0 bytes\n utils/__pycache__/thermal_gate.cpython-314.pyc       | Bin 10314 -> 0 bytes\n 5 files changed, 1 insertion(+), 1 deletion(-)",
+  "0bbbbb7..58962d2": "algorithms/td3.py    | 372 +++++++++++++++++++++++++++++++++++++++++++++++++++\n configs/config.py    |  49 +++++++\n experiment_runner.py |   4 +\n 3 files changed, 425 insertions(+)",
+  "58962d2..aa9186b": "",
+  "aa9186b..b5b7e54": "algorithms/tdmpc2.py | 854 +++++++++++++++++++++++++++++++++++++++++++++++++++\n configs/config.py    |  98 ++++++\n experiment_runner.py |   4 +\n 3 files changed, 956 insertions(+)",
+  "b5b7e54..7e672ef": "",
+  "7e672ef..ecb7135": "",
+  "ecb7135..9b4b44c": "",
+  "9b4b44c..788ffcd": "",
+  "788ffcd..a3582b5": ""
+ },
+ "training_code_diff_first_to_last_commit": ".../__pycache__/replay_buffer.cpython-314.pyc      | Bin 4758 -> 0 bytes\n algorithms/__pycache__/sac.cpython-314.pyc         | Bin 25182 -> 0 bytes\n algorithms/td3.py                                  | 372 +++++++++\n algorithms/tdmpc2.py                               | 854 +++++++++++++++++++++\n configs/config.py                                  | 149 +++-\n experiment_runner.py                               |  28 +-\n utils/__pycache__/gpu_control.cpython-314.pyc      | Bin 9484 -> 0 bytes\n utils/__pycache__/thermal_gate.cpython-314.pyc     | Bin 9649 -> 0 bytes\n utils/thermal_gate.py                              |  10 +\n 9 files changed, 1409 insertions(+), 4 deletions(-)"
+}

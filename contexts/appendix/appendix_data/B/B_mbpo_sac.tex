@@ -1,0 +1,30 @@
+{\footnotesize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}lrrrrrr@{}}
+    \caption[MBPO compared with SAC at the same settings (full precision)]{MBPO compared with SAC at the same settings (full precision). $\Delta$GU and $\Delta$buffer are the relative differences of the mean energy of the gradient updates and of the allocated buffer sample (MBPO relative to SAC, in percent). The total ratio is the mean total energy of MBPO divided by that of SAC.}
+    \label{tab:app-mbpo-sac} \\
+    \toprule
+    & \multicolumn{3}{c}{HalfCheetah-v5} & \multicolumn{3}{c}{Ant-v5} \\
+    \cmidrule(lr){2-4}\cmidrule(lr){5-7}
+    Config. & $\Delta$GU [\%] & $\Delta$buffer [\%] & Total ratio & $\Delta$GU [\%] & $\Delta$buffer [\%] & Total ratio \\
+    \midrule
+    \endfirsthead
+    \toprule
+    & \multicolumn{3}{c}{HalfCheetah-v5} & \multicolumn{3}{c}{Ant-v5} \\
+    \cmidrule(lr){2-4}\cmidrule(lr){5-7}
+    Config. & $\Delta$GU [\%] & $\Delta$buffer [\%] & Total ratio & $\Delta$GU [\%] & $\Delta$buffer [\%] & Total ratio \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{7}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    baseline & \num{0.484385} & \num{8.18822} & \num{3.40488} & \num{-0.506214} & \num{18.1067} & \num{3.93177} \\
+    UTD 2 & \num{0.707183} & \num{9.03619} & \num{2.27792} & \num{-0.143865} & \num{16.5545} & \num{2.57177} \\
+    UTD 4 & \num{-0.247724} & \num{8.62763} & \num{1.59009} & \num{-0.495511} & \num{16.4182} & \num{1.75883} \\
+    width 256 & \num{-1.28391} & \num{7.00045} & \num{3.96375} & \num{-2.34666} & \num{17.7573} & \num{4.6912} \\
+    width 512 & \num{-0.928538} & \num{7.23376} & \num{3.89009} & \num{-1.53033} & \num{16.3207} & \num{4.43753} \\
+    batch 512 & \num{-1.43218} & \num{3.99267} & \num{2.86346} & \num{-0.547216} & \num{22.1231} & \num{3.23394} \\
+    batch 1024 & \num{-1.96002} & \num{-0.685816} & \num{2.65482} & \num{0.119505} & \num{23.5945} & \num{3.00587} \\
+  \end{longtable}
+}

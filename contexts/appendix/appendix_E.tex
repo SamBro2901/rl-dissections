@@ -1,0 +1,264 @@
+\chapter{Reproducibility details}
+\label{app:reproducibility}
+
+This appendix documents what is needed to trace and repeat the experiments.
+\Zcref{sec:app-repro-env} lists the software and hardware of the canonical runs, \zcref{sec:app-repro-sessions} the ten execution sessions, and \zcref{sec:app-repro-notes} two irregularities of the execution that did not change the data.
+\Zcref{sec:app-repro-code} identifies the code state of the runs, \zcref{sec:app-repro-scripts} the scripts that produced the numbers of the thesis, and \zcref{sec:app-repro-run} how the experiments are started.
+\Zcref{sec:app-repro-repo} states the open points of the repository.
+
+%-------------------------------------------------------------------------------
+\section{Software and Hardware}\label{sec:app-repro-env}
+
+\begin{table}[tb]
+  \centering
+  \caption{Software and hardware of the canonical runs: items recorded identically in all \num{280} runs, one item stated by the author that is not in the run files, and items that were not recorded.}
+  \label{tab:thr-provenance}
+  \small
+  \begin{tabular}{lp{7.8cm}}
+    \toprule
+    Item                                     & Value                                                                                                       \\
+    \midrule
+    \multicolumn{2}{l}{\emph{Recorded in the run files (all \num{280} runs)}}                                                                              \\
+    Operating system string                  & Linux-7.0.0-31-generic-x86\_\allowbreak 64, glibc 2.43                                                                  \\
+    Python                                   & 3.14.4                                                                                                      \\
+    PyTorch                                  & 2.13.0+cu130 (build tag, not measured runtime)                                                              \\
+    CodeCarbon                               & 3.3.0 (\texttt{machine} tracking mode)                                                                      \\
+    CPU                                      & Intel Core Ultra 9 285K, \num{24} threads                                                                   \\
+    GPU                                      & NVIDIA GeForce RTX 5090; lock to \SI{2000}{\mega\hertz} requested (metadata), no record that it took effect \\
+    RAM                                      & \SI{60.8}{\giga\byte}                                                                                       \\
+    \midrule
+    \multicolumn{2}{l}{\emph{Stated by the author, not in the run files}}                                                                                  \\
+    Distribution                             & Ubuntu 26.04 LTS (point release to be confirmed)                                                            \\
+    \midrule
+    \multicolumn{2}{l}{\emph{Not recorded}}                                                                                                                \\
+    Gymnasium, MuJoCo, \texttt{nvidia-ml-py} & \todo{\texttt{pip freeze} in \texttt{rl-exp}}                                                               \\
+    Driver, kernel modules, VBIOS            & \todo{\texttt{nvidia-smi}}                                                                                  \\
+    Power limits, supported clocks           & \todo{\texttt{nvidia-smi -q -d POWER,CLOCK,SUPPORTED\_\allowbreak CLOCKS}}                                              \\
+    SM count, compute capability, peak FP32  & \todo{\texttt{torch.cuda.get\_\allowbreak device\_\allowbreak properties(0)}}                                                       \\
+    RAM type/speed, mainboard, storage       & \todo{\texttt{lscpu}, \texttt{lsblk}, \texttt{dmidecode}}                                                   \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The analysis scripts were run in a separate environment on a Windows machine (\zcref{sec:app-repro-scripts}).
+The experiments themselves were run on the research PC only.
+
+%-------------------------------------------------------------------------------
+\section{Execution Sessions}\label{sec:app-repro-sessions}
+
+The \num{280} canonical runs were launched in ten sessions (\zcref{tab:sessions}) from \num{12} git commits (\zcref{sec:app-repro-code}).
+A session is a maximal sequence of runs in which the next run starts less than \SI{30}{\minute} after the end of the previous one.
+The largest gap between two runs inside a session is \SI{9.6}{\minute}, and the smallest gap between two sessions is \SI{3.3}{\hour}, so every threshold between \SI{10}{\minute} and \SI{3}{\hour} gives the same ten sessions (checked for \SI{30}{\minute}, \SI{1}{\hour} and \SI{2}{\hour}).
+The \num{280} runs last \SI{117.7}{\hour} in total (sum of the run durations) and the ten session spans add up to \SI{118.6}{\hour}.
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Execution sessions of the \num{280} canonical runs (times in UTC, taken from the start and end times in the metadata of the runs).
+    Span is the time from the first start to the last end, gap the time since the end of the previous session.
+    In the runs column, HC is HalfCheetah-v5 and Ant is Ant-v5.}
+  \label{tab:sessions}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}rllrrrp{4.4cm}p{4.6cm}p{2.2cm}@{}}
+      \toprule
+      No. & First start & Last end & Span [h] & Gap [h] & Runs & Algorithm, environment (runs) & Content & Commits \\
+      \midrule
+      0 & 2026-09-07~10:13 & 2026-09-07~12:10 & 1.9 & --- & \num{8} & SAC HC 5, Ant 3 & SAC baselines & \texttt{f23f448} \\
+      1 & 2026-09-08~09:52 & 2026-09-08~14:26 & 4.6 & 21.7 & \num{12} & SAC HC 10, Ant 2 & SAC baseline (last two Ant-v5 runs); SAC UTD 2, 4 on HalfCheetah-v5 & \texttt{92dcee0}, \texttt{ecb98bb} \\
+      2 & 2026-09-08~17:44 & 2026-09-08~23:34 & 5.8 & 3.3 & \num{10} & MBPO HC 5, Ant 5 & MBPO baselines & \texttt{0bbbbb7} \\
+      3 & 2026-09-09~10:22 & 2026-09-09~20:34 & 10.2 & 10.8 & \num{40} & SAC Ant 10; TD3 HC 15, Ant 15 & TD3 baselines; UTD 2, 4 of TD3 and of SAC on Ant-v5 & \texttt{58962d2}, \texttt{aa9186b} \\
+      4 & 2026-09-10~10:28 & 2026-09-10~17:53 & 7.4 & 13.9 & \num{10} & TD-MPC2 HC 5, Ant 5 & TD-MPC2 baselines & \texttt{b5b7e54} \\
+      5 & 2026-09-12~17:15 & 2026-09-13~10:44 & 17.5 & 47.4 & \num{60} & MBPO HC 10, Ant 10; SAC HC 10, Ant 10; TD3 HC 10, Ant 10 & Width sweeps of SAC, TD3, MBPO & \texttt{7e672ef} \\
+      6 & 2026-09-14~10:50 & 2026-09-15~03:09 & 16.3 & 24.1 & \num{20} & MBPO HC 10, Ant 10 & UTD sweeps of MBPO & \texttt{ecb7135} \\
+      7 & 2026-09-15~10:39 & 2026-09-15~19:32 & 8.9 & 7.5 & \num{35} & MBPO HC 10; SAC HC 10; TD3 HC 15 & Batch-size sweeps on HalfCheetah-v5 & \texttt{9b4b44c} \\
+      8 & 2026-09-17~10:10 & 2026-09-18~02:15 & 16.1 & 38.6 & \num{45} & MBPO Ant 20; SAC Ant 10; TD3 Ant 15 & Batch-size sweeps and MBPO rollout length on Ant-v5 & \texttt{788ffcd} \\
+      9 & 2026-09-18~10:21 & 2026-09-19~16:10 & 29.8 & 8.1 & \num{40} & TD-MPC2 HC 20, Ant 20 & TD-MPC2 \texttt{num\_\allowbreak q} and horizon sweeps & \texttt{a3582b5} \\
+      \midrule
+       & Total &  & 118.6 &  & \num{280} &  &  &  \\
+      \bottomrule
+    \end{tabular}}
+\end{table}
+
+%-------------------------------------------------------------------------------
+\section{Notes on the Execution}\label{sec:app-repro-notes}
+
+\paragraph{False start of the TD-MPC2 sweep.} On 18 September 2026 the script of the \texttt{num\_\allowbreak q}/horizon sweep was started with an override file that did not exist (\texttt{configs/\allowbreak overrides/\allowbreak tdmpc2\_\allowbreak num\_\allowbreak q3.json}; the files are named \texttt{tdmpc2\_\allowbreak numq3.json}).
+The first five launches (HalfCheetah-v5, seeds \num{331}, \num{958}, \num{14577}, \num{43611} and \num{85062}, \texttt{num\_\allowbreak q} $=3$) each ended after about one second, between 12:18:39 and 12:18:42 local time, with a \texttt{FileNotFoundError} raised while the configuration was built, before the experiment runner, the clock control, the thermal gate or the tracker was started.
+The sixth launch (Ant-v5, seed \num{331}, \texttt{num\_\allowbreak q} $=3$) has a start line and no further output; the script was stopped during it.
+The sweep was relaunched at 12:21:00 local time, and all \num{40} runs analysed come from the relaunch.
+None of the six launches created a run directory, so nothing was excluded; the first run directory of the sweep is the one of the relaunch (\texttt{20260918\_\allowbreak 122100}).
+Whether the sixth launch changed the clock lock cannot be read from the log, because the messages of the control module are not logged.
+The run header, which the runner writes before it acquires the clock lock, is missing for this launch, so the process had presumably not reached that point (inferred from the order of the code), and every later run sets the lock itself at its start.
+The repository documentation mentions only the five failed launches.
+
+\paragraph{Status files of the UTD sweep.} The script \texttt{scripts/\allowbreak run\_\allowbreak utd\_\allowbreak sweep.sh} was first used for the UTD sweeps of SAC (Ant-v5) and TD3 and was then reused, with different settings, for the UTD sweep of MBPO.
+Its status file \texttt{results/\allowbreak \_\allowbreak utd\_\allowbreak sweep\_\allowbreak status.json} therefore describes only the MBPO sweep (\num{20} runs, all done).
+The log \texttt{results/\allowbreak \_\allowbreak utd\_\allowbreak sweep.log} was appended to, not overwritten, and holds \num{50} launch blocks: SAC on Ant-v5 (\num{10}), TD3 on both environments (\num{20}), which end with the completion line ``\num{30}/\num{30} runs succeeded'', and MBPO (\num{20}, ``\num{20}/\num{20} runs succeeded'').
+Every block of the first \num{30} has a run directory.
+The SAC UTD runs on HalfCheetah-v5 have their own log (\texttt{results/\allowbreak sac/\allowbreak HalfCheetah-v5/\allowbreak \_\allowbreak utd\_\allowbreak sweep.log}, \num{10} blocks, ``\num{10}/\num{10} runs succeeded'').
+All \num{12} UTD configurations have five run directories.
+
+%-------------------------------------------------------------------------------
+\section{Code Provenance}\label{sec:app-repro-code}
+
+The commit stored in the metadata of a run is the \texttt{HEAD} at its start; uncommitted changes are not captured, and no flag marks a dirty working tree.
+The \num{280} runs record \num{12} commits (\zcref{tab:app-repro-commits}).
+Between them, the training and measurement code (\texttt{algorithms/\allowbreak }, \texttt{configs/\allowbreak config.py}, \texttt{experiment\_\allowbreak runner.py}, \texttt{run\_\allowbreak experiment.py}, \texttt{utils/\allowbreak }) changes in three ways only: the TD3 and TD-MPC2 modules are added together with their configuration classes and \num{8} lines of dispatch in the runner; the start and end temperature and power were added to the metadata and the thermal-gate file name was removed from the logged configuration (logging only); and the default hidden size of MBPO was set to \num{1024} before the MBPO baselines, all of which record \num{1024}.
+The SAC and MBPO implementations, the dynamics model, the buffers and the clock-control utilities are identical at all \num{12} commits (checked with \texttt{git diff} between the first and the last recorded commit).
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Commits recorded in the metadata of the \num{280} canonical runs, in the order of their first use.
+    The last column lists the changes of the training and measurement code relative to the previous row.}
+  \label{tab:app-repro-commits}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}llp{4.6cm}rp{3.2cm}p{5.6cm}@{}}
+      \toprule
+      Commit & Date (UTC+2) & Subject & Runs & Algorithm, environment & Change of the code relative to the previous row \\
+      \midrule
+      \texttt{f23f448} & 2026-09-07 12:13 & Setting baseline config for all experiments & \num{8} & SAC HC 5, Ant 3 & first recorded commit \\
+      \texttt{92dcee0} & 2026-09-07 14:13 & Recorded runs for seeds - 331, 958, 14577, 43611, 85062 & \num{2} & SAC Ant 2 & runner and thermal gate: start and end temperature and power added to the metadata; thermal-gate file name no longer written to the logged configuration (logging only) \\
+      \texttt{ecb98bb} & 2026-09-08 12:20 & Finished remaining baseline runs for Ant/v5 & \num{10} & SAC HC 10 & none \\
+      \texttt{0bbbbb7} & 2026-09-08 19:44 & baseline config for mbpo & \num{10} & MBPO HC 5, Ant 5 & default hidden size of MBPO $(256,256)\to(1024,1024)$ (one line of the configuration) \\
+      \texttt{58962d2} & 2026-09-09 12:15 & Added and tested td3 algorithm & \num{10} & TD3 HC 5, Ant 5 & TD3 module (\texttt{algorithms/\allowbreak td3.py}), \texttt{TD3Config}, four lines of dispatch in the runner \\
+      \texttt{aa9186b} & 2026-09-09 13:42 & Setup UTD sweep run script for SAC and TD3 across both envs and 5 seeds & \num{30} & SAC Ant 10; TD3 HC 10, Ant 10 & none \\
+      \texttt{b5b7e54} & 2026-09-10 12:27 & Setup new  algorithm tdmpc2 and tested recording & \num{10} & TD-MPC2 HC 5, Ant 5 & TD-MPC2 module (\texttt{algorithms/\allowbreak tdmpc2.py}), \texttt{TDMPC2Config}, four lines of dispatch in the runner \\
+      \texttt{7e672ef} & 2026-09-12 19:14 & Setting up width sweep for SAC, TD3 and MBPO & \num{60} & SAC HC 10, Ant 10; TD3 HC 10, Ant 10; MBPO HC 10, Ant 10 & none \\
+      \texttt{ecb7135} & 2026-09-14 12:48 & Scheduling UTD sweep for MBPO & \num{20} & MBPO HC 10, Ant 10 & none \\
+      \texttt{9b4b44c} & 2026-09-15 12:36 & Preparing batch size sweep for Half Cheetah & \num{35} & SAC HC 10; TD3 HC 15; MBPO HC 10 & none \\
+      \texttt{788ffcd} & 2026-09-17 12:10 & Scheduling batch sweep for ant and new rollout sweep for MBPO & \num{45} & SAC Ant 10; TD3 Ant 15; MBPO Ant 20 & none \\
+      \texttt{a3582b5} & 2026-09-18 12:17 & TDMPC2 sweep scripts & \num{40} & TD-MPC2 HC 20, Ant 20 & none \\
+      \bottomrule
+    \end{tabular}}
+\end{table}
+
+\paragraph{Working tree of the first group of SAC runs.} The exception to the rule that the recorded commit describes the code is the first group of SAC baseline runs.
+The eight runs that record \texttt{f23f448} differ in the fields of the thermal-gate entry of their metadata: the first three have neither the thermal reference nor the start and end values, the fourth has the thermal reference fields (\texttt{reference\_\allowbreak temp\_\allowbreak c}, \texttt{reference\_\allowbreak power\_\allowbreak w}), and the fifth to eighth have the start and end temperature and power.
+The first three runs also record the name of the thermal reference file in the experiment configuration, which the later runs do not.
+The working tree was therefore edited between the third and fourth and between the fourth and fifth run; as far as the difference to the next recorded commit (\texttt{92dcee0}) shows, the edits concern logging only.
+
+\paragraph{Override files.} The override files \texttt{sac\_\allowbreak utd2.json} and \texttt{sac\_\allowbreak utd4.json} first appear in the repository in \texttt{0bbbbb7}, after the ten SAC UTD runs on HalfCheetah-v5 that record \texttt{ecb98bb}; the configuration logged by these runs equals the default with the files applied (\zcref{sec:app-hp-check}).
+
+%-------------------------------------------------------------------------------
+\section{Analysis Scripts and Versions}\label{sec:app-repro-scripts}
+
+\Zcref{tab:app-repro-scripts} lists the scripts that produced the numbers of the thesis.
+The scripts of the FLOP pipeline and the context scripts are in the repository \texttt{rl-dissections}.
+``Tracked'' means that the file is under version control at the commit given; the others were written during the writing of the thesis and are not yet committed.
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Scripts behind the numbers of the thesis. Paths relative to the repository root.}
+  \label{tab:app-repro-scripts}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}p{4.4cm}p{5.2cm}p{4.2cm}p{3.2cm}p{2.6cm}@{}}
+      \toprule
+      Script & Purpose & Input & Output & Version control \\
+      \midrule
+      \texttt{flop\_\allowbreak analysis/\allowbreak measure\_\allowbreak flops.py} & per-call FLOPs with \texttt{FlopCounterMode} on the real network classes & signatures found in the \texttt{metadata.json} files & \texttt{flops\_\allowbreak per\_\allowbreak call.json} & tracked, first in \texttt{6a0f790} \\
+      \texttt{flop\_\allowbreak analysis/\allowbreak compute\_\allowbreak energy\_\allowbreak per\_\allowbreak flop.py} & call counts, FLOPs, energy per FLOP per run and across the canonical seeds & run files, \texttt{flops\_\allowbreak per\_\allowbreak call.json} & \texttt{per\_\allowbreak run\_\allowbreak energy\_\allowbreak per\_\allowbreak flop.csv}, \texttt{cross\_\allowbreak seed\_\allowbreak energy\_\allowbreak per\_\allowbreak flop.csv} & tracked, first in \texttt{6a0f790} \\
+      \texttt{flop\_\allowbreak analysis/\allowbreak check\_\allowbreak totals.py} & consistency checks of the training totals & run files, per-run table & console & tracked, first in \texttt{03e806e} \\
+      \texttt{flop\_\allowbreak analysis/\allowbreak verify\_\allowbreak mbpo\_\allowbreak fit\_\allowbreak flops.py} & MBPO fit formula against \texttt{FlopCounterMode} & MBPO model code, PyTorch & console, \texttt{verify\_\allowbreak mbpo\_\allowbreak fit\_\allowbreak flops.log} & tracked, first in \texttt{7d2e698} \\
+      \texttt{flop\_\allowbreak analysis/\allowbreak verify\_\allowbreak analytic\_\allowbreak flops.py} & analytic dense-layer counts against the counted per-call FLOPs & \texttt{flops\_\allowbreak per\_\allowbreak call.json} & console & not committed \\
+      \texttt{flop\_\allowbreak analysis/\allowbreak correlation\_\allowbreak analysis.py} & Spearman correlations of energy and return with FLOPs & run files, per-run table & \texttt{output/\allowbreak correlation/\allowbreak } (\texttt{config\_\allowbreak means.csv}, \texttt{correlation\_\allowbreak summary.csv}) & tracked, first in \texttt{4247c30} \\
+      \texttt{flop\_\allowbreak analysis/\allowbreak section\_\allowbreak 5\_\allowbreak 2\_\allowbreak analysis.py} & FLOP predictability of energy (Spearman, log-log and linear fits, adjacent-pair costs) & per-run table (canonical seeds) & \texttt{contexts/\allowbreak section\_\allowbreak 5.2\_\allowbreak data/\allowbreak } & tracked, first in \texttt{050b3c3} \\
+      \texttt{flop\_\allowbreak analysis/\allowbreak section\_\allowbreak 5\_\allowbreak 2\_\allowbreak render.py} & renders the context file of Section 5.2 & files above & \texttt{contexts/\allowbreak section\_\allowbreak 5.2.md} & tracked, first in \texttt{050b3c3} \\
+      \texttt{flop\_\allowbreak analysis/\allowbreak section\_\allowbreak 5\_\allowbreak 3\_\allowbreak analysis.py} & orderings and swaps across the sweeps, seed-level orderings, TD-MPC2 ranges & per-run table (canonical seeds) & \texttt{contexts/\allowbreak section\_\allowbreak 5.3\_\allowbreak data/\allowbreak } & tracked, first in \texttt{050b3c3} \\
+      \texttt{flop\_\allowbreak analysis/\allowbreak section\_\allowbreak 5\_\allowbreak 3\_\allowbreak render.py} & renders the context file of Section 5.3 & files above & \texttt{contexts/\allowbreak section\_\allowbreak 5.3.md} & tracked, first in \texttt{050b3c3} \\
+      \texttt{flop\_\allowbreak analysis/\allowbreak section\_\allowbreak 5\_\allowbreak checks.py} & read-only checks of the numbers of Chapter 5 & context CSVs, run files & console & not committed \\
+      \texttt{flop\_\allowbreak analysis/\allowbreak section\_\allowbreak 6\_\allowbreak checks.py} & read-only checks of the numbers of Chapter 6 (the two clock runs) & run files & console & not committed \\
+      \texttt{flop\_\allowbreak analysis/\allowbreak section\_\allowbreak 7\_\allowbreak checks.py} & read-only checks of the numbers of Chapter 7 & run files, per-run table & console & not committed \\
+      \texttt{flop\_\allowbreak analysis/\allowbreak section\_\allowbreak 8\_\allowbreak checks.py} & read-only checks of the numbers of Chapter 8 & run files, per-run table & console & not committed \\
+      \texttt{flop\_\allowbreak analysis/\allowbreak appendix\_\allowbreak tables.py} & LaTeX tables of \zcref{app:full-results} & per-run table, context CSVs & \texttt{contexts/\allowbreak appendix/\allowbreak appendix\_\allowbreak data/\allowbreak } & not committed \\
+      \texttt{contexts/\allowbreak step1/\allowbreak scripts/\allowbreak } & idle drift, task durations, data-quality checks and execution timeline & run files & \texttt{contexts/\allowbreak step1/\allowbreak } & not committed \\
+      \bottomrule
+    \end{tabular}}
+\end{table}
+
+\paragraph{Versions of the analysis environment.} The scripts above were run on a Windows machine with Python 3.13.9, SciPy 1.16.2, pandas 2.3.3 and NumPy 2.3.4.
+The packages of the experiment environment on the research PC are not recorded in the run files.
+\todo{NOT RUN: \texttt{pip freeze} in \texttt{rl-exp} on the research PC (Python 3.14.4 recorded in the metadata; Gymnasium, MuJoCo, \texttt{nvidia-ml-py} and the other package versions).}
+
+%-------------------------------------------------------------------------------
+\section{How to Run}\label{sec:app-repro-run}
+
+\paragraph{Environment.} The experiments run on Linux in a plain virtual environment (\texttt{rl-exp}, no conda) created from \texttt{requirements.txt}.
+The clock lock, the persistence mode and the CPU governor need root, so each run is started with \texttt{sudo} and the interpreter of the environment, for example
+\begin{center}
+  \texttt{sudo rl-exp/\allowbreak bin/\allowbreak python run\_\allowbreak experiment.py --algo sac --env HalfCheetah-v5 --seed 331}
+\end{center}
+Without root, these controls fail with a warning and the run proceeds unlocked.
+Hyperparameters are not set by command-line flags but by the configuration classes; deviations are passed as a JSON override file (\texttt{--algo-config-overrides}, \zcref{sec:app-hp-sweeps}).
+
+\Zcref{tab:app-repro-cli} lists the options of the entry point.
+All baselines use the defaults except TD3, which is started with \texttt{--warmup-steps 10000}.
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Options of \texttt{run\_\allowbreak experiment.py}.}
+  \label{tab:app-repro-cli}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Option                                                          & Default            & Meaning                                                 \\
+    \midrule
+    \texttt{--algo}                                                 & \texttt{sac}       & \texttt{sac}, \texttt{td3}, \texttt{mbpo} or \texttt{tdmpc2} \\
+    \texttt{--env}                                                  & \texttt{HalfCheetah-v5} & Gymnasium environment                              \\
+    \texttt{--seed}                                                 & \num{0}            & seed of the run                                         \\
+    \texttt{--device}                                               & \texttt{cuda}      & device (falls back to the CPU)                          \\
+    \texttt{--train-steps}, \texttt{--steps-per-epoch}              & \num{100000}, \num{1000} & measured environment steps, steps per epoch       \\
+    \texttt{--warmup-steps}                                         & \num{5000}         & random-action steps before training                     \\
+    \texttt{--settle-seconds}                                       & \num{30}           & unmeasured settle time                                  \\
+    \texttt{--idle-baseline-seconds}, \texttt{--idle-tail-seconds}  & \num{90}, \num{90} & idle windows                                            \\
+    \texttt{--no-gpu-lock}, \texttt{--no-thermal-gate}              & off                & disable the clock lock, the thermal gate                \\
+    \texttt{--tracking-mode}                                        & \texttt{machine}   & CodeCarbon tracking mode                                \\
+    \texttt{--output-dir}                                           & \texttt{results}   & output directory                                        \\
+    \texttt{--country-iso-code}                                     & \texttt{DEU}       & grid region (CO$_2$ conversion only)                    \\
+    \texttt{--algo-config-overrides}                                & none               & JSON file with hyperparameter overrides                 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Thermal gate.} At the start of each process, the runner captures a stable reading of the GPU temperature and power as the reference of that process, polls every \SI{5}{\second} until both are within \SI{2}{\celsius} and \SI{5}{\watt} of it, for at most \SI{600}{\second} (\zcref{tab:app-hp-protocol}), and then settles for \SI{30}{\second} before the idle window of the head.
+
+\paragraph{Output of a run.} A run writes six files to \texttt{results/\{algo\}/\{env\}/seed\_\allowbreak \{seed\}/\{timestamp\}/}: \texttt{metadata.json} (commit, versions, GPU, full configuration, thermal-gate information), \texttt{segment\_\allowbreak energy.json} (energy per segment in kWh and the timer totals of the allocated sub-segments), \texttt{training\_\allowbreak metrics.json} (episodes and per-epoch diagnostics), \texttt{emissions.csv} (CodeCarbon whole-run row), \texttt{emissions\_\allowbreak base\_\allowbreak \{id\}.csv} (CodeCarbon task rows: one row per task, i.e.\ the idle windows, the warm-up and the rollout and gradient-update task of every epoch) and \texttt{run.log}.
+
+\paragraph{Sweep scripts.} The runs were started by shell scripts in \texttt{scripts/\allowbreak } (\zcref{tab:app-repro-sweeps}).
+Each script loops over the configurations and the five seeds, writes a status file in JSON and a log, primes the \texttt{sudo} credential once at the start and refreshes it in the background every \SI{60}{\second} for the life of the sweep, and, except for the three baseline scripts, powers the machine off after the last run.
+The ten SAC baseline runs were started by hand and have neither script nor status file.
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Sweep scripts of the canonical runs and the files they left in \texttt{results/\allowbreak }.}
+  \label{tab:app-repro-sweeps}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}p{4.6cm}rp{5.2cm}p{5.6cm}c@{}}
+      \toprule
+      Script & Runs & Content & Status file and log & Power-off \\
+      \midrule
+      (by hand) & \num{10} & SAC baselines, both environments & --- & --- \\
+      \texttt{scripts/\allowbreak run\_\allowbreak td3\_\allowbreak env\_\allowbreak sweep.sh} & \num{10} & TD3 baselines (warmup \num{10000}) & \texttt{results/\allowbreak td3/\allowbreak \_\allowbreak env\_\allowbreak sweep\_\allowbreak status.json}, \texttt{results/\allowbreak td3/\allowbreak \_\allowbreak env\_\allowbreak sweep.log} & no \\
+      \texttt{scripts/\allowbreak run\_\allowbreak mbpo\_\allowbreak env\_\allowbreak sweep.sh} & \num{10} & MBPO baselines & \texttt{results/\allowbreak mbpo/\allowbreak \_\allowbreak env\_\allowbreak sweep\_\allowbreak status.json}, \texttt{results/\allowbreak mbpo/\allowbreak \_\allowbreak env\_\allowbreak sweep.log} & no \\
+      \texttt{scripts/\allowbreak run\_\allowbreak tdmpc2\_\allowbreak seed\_\allowbreak sweep.sh} & \num{10} & TD-MPC2 baselines & \texttt{results/\allowbreak tdmpc2/\allowbreak \_\allowbreak seed\_\allowbreak sweep\_\allowbreak status.json}, \texttt{results/\allowbreak tdmpc2/\allowbreak \_\allowbreak seed\_\allowbreak sweep.log} & no \\
+      \texttt{scripts/\allowbreak run\_\allowbreak utd\_\allowbreak sweep.sh} (earlier version) & \num{10} & SAC UTD 2, 4 on HalfCheetah-v5 & \texttt{results/\allowbreak sac/\allowbreak HalfCheetah-v5/\allowbreak \_\allowbreak utd\_\allowbreak sweep.log} & yes \\
+      \texttt{scripts/\allowbreak run\_\allowbreak utd\_\allowbreak sweep.sh} (earlier version) & \num{30} & UTD 2, 4 of SAC on Ant-v5 and of TD3 on both environments & \texttt{results/\allowbreak \_\allowbreak utd\_\allowbreak sweep.log} (first \num{30} blocks; status file overwritten) & yes \\
+      \texttt{scripts/\allowbreak run\_\allowbreak utd\_\allowbreak sweep.sh} & \num{20} & UTD 2, 4 of MBPO on both environments & \texttt{results/\allowbreak \_\allowbreak utd\_\allowbreak sweep\_\allowbreak status.json}, \texttt{results/\allowbreak \_\allowbreak utd\_\allowbreak sweep.log} & yes \\
+      \texttt{scripts/\allowbreak run\_\allowbreak width\_\allowbreak sweep.sh} & \num{60} & width \num{256}, \num{512} of SAC, TD3, MBPO on both environments & \texttt{results/\allowbreak \_\allowbreak width\_\allowbreak sweep\_\allowbreak status.json}, \texttt{results/\allowbreak \_\allowbreak width\_\allowbreak sweep.log} & yes \\
+      \texttt{scripts/\allowbreak run\_\allowbreak batch\_\allowbreak size\_\allowbreak sweep.sh} & \num{35} & batch sizes of SAC, MBPO, TD3 on HalfCheetah-v5 & \texttt{results/\allowbreak \_\allowbreak batch\_\allowbreak size\_\allowbreak sweep\_\allowbreak status.json}, \texttt{results/\allowbreak \_\allowbreak batch\_\allowbreak size\_\allowbreak sweep.log} & yes \\
+      \texttt{scripts/\allowbreak run\_\allowbreak ant\_\allowbreak overnight\_\allowbreak sweep.sh} & \num{45} & batch sizes of SAC, MBPO, TD3 and MBPO rollout length on Ant-v5 & \texttt{results/\allowbreak \_\allowbreak ant\_\allowbreak overnight\_\allowbreak sweep\_\allowbreak status.json}, \texttt{results/\allowbreak \_\allowbreak ant\_\allowbreak overnight\_\allowbreak sweep.log} & yes \\
+      \texttt{scripts/\allowbreak run\_\allowbreak tdmpc2\_\allowbreak numq\_\allowbreak horizon\_\allowbreak sweep.sh} & \num{40} & TD-MPC2 \texttt{num\_\allowbreak q} and horizon on both environments & \texttt{results/\allowbreak tdmpc2/\allowbreak \_\allowbreak numq\_\allowbreak horizon\_\allowbreak sweep\_\allowbreak status.json}, \texttt{results/\allowbreak tdmpc2/\allowbreak \_\allowbreak numq\_\allowbreak horizon\_\allowbreak sweep.log} & yes \\
+      \bottomrule
+    \end{tabular}}
+\end{table}
+
+\paragraph{Analysis.} The FLOP pipeline is run from the repository root: \texttt{python flop\_\allowbreak analysis/\allowbreak measure\_\allowbreak flops.py} (per-call FLOPs, needs PyTorch), \texttt{python flop\_\allowbreak analysis/\allowbreak compute\_\allowbreak energy\_\allowbreak per\_\allowbreak flop.py} (per-run and cross-seed tables, canonical seeds by default), \texttt{python flop\_\allowbreak analysis/\allowbreak check\_\allowbreak totals.py} and \texttt{python flop\_\allowbreak analysis/\allowbreak verify\_\allowbreak analytic\_\allowbreak flops.py} (checks of \zcref{app:flop-details}).
+The correlation analysis is \texttt{python flop\_\allowbreak analysis/\allowbreak correlation\_\allowbreak analysis.py}, and the tables of \zcref{app:full-results} are written by \texttt{python flop\_\allowbreak analysis/\allowbreak appendix\_\allowbreak tables.py}.
+
+%-------------------------------------------------------------------------------
+\section{Repository State}\label{sec:app-repro-repo}
+
+The thesis cites the repository \texttt{rl-dissections} and the \num{12} commits of \zcref{tab:app-repro-commits}.
+\todo{AUTHOR (contribution 5): add a \texttt{LICENSE} file; commit the untracked scripts of \zcref{tab:app-repro-scripts}; tag the commit that is cited in the thesis and cite the tag here and in the contribution list of the conclusion.}

@@ -1,0 +1,60 @@
+{\scriptsize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}lllrrrr@{}}
+    \caption[TD-MPC2: composition of the energy of the measured tasks by hardware term (CPU, GPU, RAM) and idle-floor fraction (mean $\pm$ sd of the per-run percentages over the five seeds)]{TD-MPC2: composition of the energy of the measured tasks by hardware term (CPU, GPU, RAM) and idle-floor fraction (mean $\pm$ sd of the per-run percentages over the five seeds). The RAM term is the constant capacity heuristic of CodeCarbon. The idle-floor fraction is a diagnostic: the mean of the head and tail idle power of the run (as recorded) times the duration of the task, divided by the gross energy of the task; it is not subtracted anywhere. Segment abbreviations: buffer = \texttt{buffer\_sample}, critic = \texttt{critic\_update} (TD-MPC2: world-model step), actor = \texttt{actor\_update} (TD-MPC2: policy-prior step), target = \texttt{target\_update}, GU = \texttt{gradient\_updates}, fit = \texttt{dynamics\_model\_update}, synth = \texttt{synthetic\_rollout\_generation}, pretrain = \texttt{world\_model\_pretrain}. Buffer, critic, actor and target are allocated from the GU energy by timed share; the other segments are measured. HC is HalfCheetah-v5, Ant is Ant-v5.}
+    \label{tab:app-tdmpc2-comp} \\
+    \toprule
+    Env. & Config. & Task & CPU [\%] & GPU [\%] & RAM [\%] & Idle floor [\%] \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Env. & Config. & Task & CPU [\%] & GPU [\%] & RAM [\%] & Idle floor [\%] \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{7}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    HC & baseline & rollout & \num{16.1063+-0.04904} & \num{74.4068+-0.05975} & \num{9.48688+-0.01845} & \num{32.3962+-0.2506} \\
+     &  & pretrain & \num{15.792+-0.8287} & \num{72.3968+-0.4183} & \num{11.8112+-0.5532} & \num{40.3342+-1.961} \\
+     &  & GU & \num{16.0554+-0.1643} & \num{72.4271+-0.1385} & \num{11.5175+-0.1612} & \num{39.3313+-0.6871} \\
+    \addlinespace[2pt]
+     & \texttt{num\_q} 3 & rollout & \num{16.3364+-0.1515} & \num{73.9226+-0.1152} & \num{9.74097+-0.03807} & \num{32.4685+-0.1687} \\
+     &  & pretrain & \num{15.7406+-0.6881} & \num{71.6547+-0.5375} & \num{12.6047+-0.383} & \num{42.0145+-1.373} \\
+     &  & GU & \num{16.7568+-0.1069} & \num{71.0152+-0.06687} & \num{12.228+-0.1334} & \num{40.7571+-0.3208} \\
+    \addlinespace[2pt]
+     & \texttt{num\_q} 7 & rollout & \num{16.1782+-0.06035} & \num{74.4193+-0.07425} & \num{9.40253+-0.01718} & \num{31.5745+-0.3771} \\
+     &  & pretrain & \num{15.696+-0.4291} & \num{73.3729+-0.3635} & \num{10.9311+-0.08354} & \num{36.7067+-0.5537} \\
+     &  & GU & \num{15.7276+-0.09475} & \num{73.1834+-0.09775} & \num{11.089+-0.1463} & \num{37.2332+-0.1026} \\
+    \addlinespace[2pt]
+     & horizon 1 & rollout & \num{16.4398+-0.03334} & \num{73.7258+-0.0304} & \num{9.83441+-0.01592} & \num{32.6369+-0.3261} \\
+     &  & pretrain & \num{19.0006+-1.15} & \num{66.8342+-0.74} & \num{14.1652+-0.4121} & \num{47.0066+-1.417} \\
+     &  & GU & \num{19.2625+-0.2005} & \num{66.5268+-0.1283} & \num{14.2107+-0.1476} & \num{47.1584+-0.4841} \\
+    \addlinespace[2pt]
+     & horizon 5 & rollout & \num{16.1512+-0.03156} & \num{74.4416+-0.02561} & \num{9.40728+-0.01982} & \num{32.0431+-0.1045} \\
+     &  & pretrain & \num{15.1972+-0.1952} & \num{73.4314+-0.2696} & \num{11.3713+-0.3329} & \num{38.7298+-1.032} \\
+     &  & GU & \num{15.8551+-0.2012} & \num{72.8981+-0.01807} & \num{11.2469+-0.194} & \num{38.3086+-0.6091} \\
+    \addlinespace[2pt]
+    \midrule
+    Ant & baseline & rollout & \num{16.1563+-0.06653} & \num{74.4579+-0.08447} & \num{9.38583+-0.02172} & \num{32.5058+-0.3591} \\
+     &  & pretrain & \num{16.2271+-0.7967} & \num{72.5349+-0.555} & \num{11.238+-0.2563} & \num{38.9192+-0.9648} \\
+     &  & GU & \num{16.4391+-0.09076} & \num{72.5011+-0.06622} & \num{11.0599+-0.1543} & \num{38.2995+-0.2209} \\
+    \addlinespace[2pt]
+     & \texttt{num\_q} 3 & rollout & \num{16.3472+-0.04358} & \num{74.0474+-0.03733} & \num{9.60541+-0.01161} & \num{32.3035+-0.1895} \\
+     &  & pretrain & \num{16.5665+-0.5723} & \num{71.5159+-0.4864} & \num{11.9177+-0.08856} & \num{40.0782+-0.3468} \\
+     &  & GU & \num{16.7037+-0.1304} & \num{71.2369+-0.03597} & \num{12.0595+-0.1294} & \num{40.5579+-0.5876} \\
+    \addlinespace[2pt]
+     & \texttt{num\_q} 7 & rollout & \num{16.0166+-0.05293} & \num{74.5641+-0.03965} & \num{9.41932+-0.01781} & \num{31.6183+-0.2149} \\
+     &  & pretrain & \num{15.1887+-0.5959} & \num{73.5894+-0.235} & \num{11.222+-0.4893} & \num{37.6709+-1.73} \\
+     &  & GU & \num{15.5901+-0.06758} & \num{73.1691+-0.03831} & \num{11.2409+-0.0794} & \num{37.7338+-0.4644} \\
+    \addlinespace[2pt]
+     & horizon 1 & rollout & \num{16.5632+-0.09739} & \num{73.5792+-0.09888} & \num{9.85761+-0.02018} & \num{32.9134+-0.328} \\
+     &  & pretrain & \num{19.0954+-0.6683} & \num{66.7089+-0.539} & \num{14.1957+-0.339} & \num{47.3954+-1.219} \\
+     &  & GU & \num{19.6543+-0.0728} & \num{66.2108+-0.08755} & \num{14.1349+-0.09319} & \num{47.1962+-0.6722} \\
+    \addlinespace[2pt]
+     & horizon 5 & rollout & \num{16.0256+-0.07825} & \num{74.6332+-0.07099} & \num{9.34122+-0.01157} & \num{31.7064+-0.4021} \\
+     &  & pretrain & \num{15.9178+-0.6637} & \num{72.9936+-0.5175} & \num{11.0887+-0.1759} & \num{37.6352+-0.6542} \\
+     &  & GU & \num{15.9348+-0.1915} & \num{72.9303+-0.1289} & \num{11.1349+-0.1443} & \num{37.7972+-0.825} \\
+    \addlinespace[2pt]
+  \end{longtable}
+}

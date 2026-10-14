@@ -1,0 +1,364 @@
+\chapter{Learning check details}
+\label{app:learning}
+
+This appendix documents the returns of the training runs, which the thesis uses as a sanity check only and never in a comparison (\zcref{sec:metric}).
+\Zcref{sec:app-learn-def} defines the quantities, \zcref{sec:app-learn-curves} shows the return curves of all configurations, \zcref{sec:app-learn-hc} and \zcref{sec:app-learn-ant} give the learning check of HalfCheetah-v5 and Ant-v5, and \zcref{sec:app-learn-means} the means of all \num{56} configurations.
+\Zcref{sec:app-learn-spearman} holds an optional extension of the rank-correlation analysis of \zcref{tab:spearman}, and \zcref{sec:app-learn-random} the placeholder for the return of a random policy.
+All values were recomputed from the \texttt{training\_\allowbreak metrics.json} files of the \num{280} canonical runs.
+
+%-------------------------------------------------------------------------------
+\section{Definitions}\label{sec:app-learn-def}
+
+The returns are those of the training episodes, which run under the behaviour policy of the algorithm (a stochastic sample for SAC and MBPO, Gaussian action noise for TD3, noisy planning for TD-MPC2).
+There are no separate evaluation episodes.
+
+For a run with $n$ completed training episodes, the \emph{first \SI{10}{\percent}} and the \emph{last \SI{10}{\percent}} are its first and last $k=\max(1,\lfloor n/10\rfloor)$ training episodes.
+The warm-up episodes (random actions) and the incomplete episode at the end of the run are not counted.
+On HalfCheetah-v5, every episode ends after \num{1000} steps, so $n=\num{100}$ and $k=\num{10}$ in all \num{135} runs.
+On Ant-v5, episodes end early when the robot leaves its healthy state; $n$ lies between \num{154} and \num{2556} per run, and $k$ between \num{15} and \num{255}.
+The \emph{return} of the first (last) tenth of a run is the unweighted mean of the returns of its $k$ episodes.
+The \emph{return per step} is the sum of the returns divided by the sum of the lengths of the same episodes, i.e.\ a ratio of sums and not a mean of per-episode ratios.
+Values of a configuration are means over the five seeds, and the spread is the sample standard deviation ($n-1$) over the seeds.
+
+%-------------------------------------------------------------------------------
+\section{Return Curves}\label{sec:app-learn-curves}
+
+\Zcref{fig:app-return-sac-hc} to \zcref{fig:app-return-tdmpc2-ant} show the return of the training episodes against the number of training steps, one figure per algorithm and environment.
+The \num{100000} training steps are divided into ten windows of \num{10000} steps; a point is the mean return of the episodes that ended within the window, and the bars are the sample standard deviation over the five seeds.
+The warm-up is not shown.
+Each panel varies one parameter around the baseline; the baseline (black) is the same data in every panel of a figure.
+The returns are those of the training policy.
+
+\begin{figure}[tbp]
+  \centering
+  \input{figures/app-return-sac-hc.tex}
+  \caption{SAC on HalfCheetah-v5: mean return of the training episodes in ten windows of \num{10000} steps (mean and standard deviation over five seeds). Panels: update-to-data ratio, hidden width, batch size.}
+  \label{fig:app-return-sac-hc}
+\end{figure}
+
+\begin{figure}[tbp]
+  \centering
+  \input{figures/app-return-sac-ant.tex}
+  \caption{SAC on Ant-v5: mean return of the training episodes in ten windows of \num{10000} steps (mean and standard deviation over five seeds). Panels: update-to-data ratio, hidden width, batch size.}
+  \label{fig:app-return-sac-ant}
+\end{figure}
+
+\begin{figure}[tbp]
+  \centering
+  \input{figures/app-return-td3-hc.tex}
+  \caption{TD3 on HalfCheetah-v5: mean return of the training episodes in ten windows of \num{10000} steps (mean and standard deviation over five seeds). Panels: update-to-data ratio, hidden width, batch size.}
+  \label{fig:app-return-td3-hc}
+\end{figure}
+
+\begin{figure}[tbp]
+  \centering
+  \input{figures/app-return-td3-ant.tex}
+  \caption{TD3 on Ant-v5: mean return of the training episodes in ten windows of \num{10000} steps (mean and standard deviation over five seeds). Panels: update-to-data ratio, hidden width, batch size.}
+  \label{fig:app-return-td3-ant}
+\end{figure}
+
+\begin{figure}[tbp]
+  \centering
+  \input{figures/app-return-mbpo-hc.tex}
+  \caption{MBPO on HalfCheetah-v5: mean return of the training episodes in ten windows of \num{10000} steps (mean and standard deviation over five seeds). Panels: update-to-data ratio, hidden width, batch size.}
+  \label{fig:app-return-mbpo-hc}
+\end{figure}
+
+\begin{figure}[tbp]
+  \centering
+  \input{figures/app-return-mbpo-ant.tex}
+  \caption{MBPO on Ant-v5: mean return of the training episodes in ten windows of \num{10000} steps (mean and standard deviation over five seeds). Panels: update-to-data ratio, hidden width, batch size, maximum rollout length.}
+  \label{fig:app-return-mbpo-ant}
+\end{figure}
+
+\begin{figure}[tbp]
+  \centering
+  \input{figures/app-return-tdmpc2-hc.tex}
+  \caption{TD-MPC2 on HalfCheetah-v5: mean return of the training episodes in ten windows of \num{10000} steps (mean and standard deviation over five seeds). Panels: size of the Q-ensemble, planning horizon.}
+  \label{fig:app-return-tdmpc2-hc}
+\end{figure}
+
+\begin{figure}[tbp]
+  \centering
+  \input{figures/app-return-tdmpc2-ant.tex}
+  \caption{TD-MPC2 on Ant-v5: mean return of the training episodes in ten windows of \num{10000} steps (mean and standard deviation over five seeds). Panels: size of the Q-ensemble, planning horizon.}
+  \label{fig:app-return-tdmpc2-ant}
+\end{figure}
+
+%-------------------------------------------------------------------------------
+\section{HalfCheetah-v5}\label{sec:app-learn-hc}
+
+\Zcref{tab:app-learning-hc} lists the \num{27} HalfCheetah-v5 configurations.
+In all \num{27} configurations the mean return of the last tenth is above that of the first tenth, and this holds in each of the five seeds of every configuration (\num{135} of \num{135} runs).
+The mean return of the last tenth lies between \num{2921} (SAC, batch size \num{1024}) and \num{7756} (TD-MPC2, \texttt{num\_\allowbreak q} \num{7}).
+
+{\footnotesize
+  \begin{longtable}{@{}llrrr@{}}
+    \caption{Learning check of the \num{27} configurations on HalfCheetah-v5: mean $\pm$ standard deviation over five seeds of the mean return of the first and the last \SI{10}{\percent} of the training episodes (\num{10} episodes each), and the number of seeds in which the last tenth is above the first.}
+    \label{tab:app-learning-hc}                                                                                         \\
+    \toprule
+    Algorithm & Configuration & First \SI{10}{\percent} & Last \SI{10}{\percent} & Seeds improving                    \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Algorithm & Configuration & First \SI{10}{\percent} & Last \SI{10}{\percent} & Seeds improving                    \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{5}{r@{}}{\emph{continued on the next page}}                                                             \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    SAC & baseline & \num{-128.0+-37.2} & \num{4696.2+-356.1} & \num{5}/\num{5} \\
+     & UTD 2 & \num{-71.0+-116.0} & \num{4481.4+-251.7} & \num{5}/\num{5} \\
+     & UTD 4 & \num{-112.0+-86.1} & \num{4107.7+-698.8} & \num{5}/\num{5} \\
+     & width 256 & \num{-185.8+-37.2} & \num{4884.7+-502.7} & \num{5}/\num{5} \\
+     & width 512 & \num{-166.3+-46.7} & \num{4363.5+-397.5} & \num{5}/\num{5} \\
+     & batch 512 & \num{-126.8+-44.8} & \num{3818.9+-487.7} & \num{5}/\num{5} \\
+     & batch 1024 & \num{-161.0+-31.6} & \num{2920.6+-337.7} & \num{5}/\num{5} \\
+    \midrule
+    TD3 & baseline & \num{-417.5+-121.7} & \num{3990.0+-952.9} & \num{5}/\num{5} \\
+     & UTD 2 & \num{-77.0+-392.1} & \num{4552.6+-1461.5} & \num{5}/\num{5} \\
+     & UTD 4 & \num{26.7+-183.3} & \num{5267.2+-1148.6} & \num{5}/\num{5} \\
+     & width 256 & \num{-299.3+-81.6} & \num{5134.7+-492.0} & \num{5}/\num{5} \\
+     & width 512 & \num{-278.9+-48.8} & \num{5539.5+-614.9} & \num{5}/\num{5} \\
+     & batch 256 & \num{-308.2+-154.9} & \num{4989.0+-1107.4} & \num{5}/\num{5} \\
+     & batch 512 & \num{-216.6+-174.0} & \num{4353.1+-813.7} & \num{5}/\num{5} \\
+     & batch 1024 & \num{-245.0+-180.2} & \num{3684.6+-1585.3} & \num{5}/\num{5} \\
+    \midrule
+    MBPO & baseline & \num{-248.5+-42.6} & \num{5146.4+-642.8} & \num{5}/\num{5} \\
+     & UTD 2 & \num{-33.7+-181.4} & \num{5285.4+-499.8} & \num{5}/\num{5} \\
+     & UTD 4 & \num{-50.5+-214.5} & \num{5903.7+-333.9} & \num{5}/\num{5} \\
+     & width 256 & \num{-231.2+-56.8} & \num{4534.8+-1027.8} & \num{5}/\num{5} \\
+     & width 512 & \num{-263.8+-50.0} & \num{5133.8+-451.4} & \num{5}/\num{5} \\
+     & batch 512 & \num{-134.6+-85.7} & \num{5055.1+-468.3} & \num{5}/\num{5} \\
+     & batch 1024 & \num{-181.5+-36.5} & \num{5181.5+-566.1} & \num{5}/\num{5} \\
+    \midrule
+    TD-MPC2 & baseline & \num{452.0+-201.7} & \num{6458.2+-2418.9} & \num{5}/\num{5} \\
+     & \texttt{num\_\allowbreak q} 3 & \num{433.6+-125.6} & \num{7543.9+-1579.2} & \num{5}/\num{5} \\
+     & \texttt{num\_\allowbreak q} 7 & \num{513.6+-233.9} & \num{7755.7+-1710.3} & \num{5}/\num{5} \\
+     & horizon 1 & \num{456.3+-349.1} & \num{5790.9+-781.6} & \num{5}/\num{5} \\
+     & horizon 5 & \num{709.3+-189.4} & \num{7443.1+-2990.0} & \num{5}/\num{5} \\
+  \end{longtable}
+}
+
+%-------------------------------------------------------------------------------
+\section{Ant-v5}\label{sec:app-learn-ant}
+
+\Zcref{tab:app-learning} lists the \num{14} of the \num{29} Ant-v5 configurations whose mean return of the last tenth is not above that of the first tenth.
+The returns of the other \num{15} configurations rise; all \num{29} are in \zcref{tab:app-config-means}.
+
+\begin{table}[tb]
+  \centering
+  \caption{Ant-v5 configurations whose mean return of the last 10\,\% of training episodes is not above that of the first 10\,\% (mean over 5 seeds).
+    $^\ast$: also non-improving when return is normalised per step.}
+  \label{tab:app-learning}
+  \small
+  \begin{tabular}{llrrrr}
+    \toprule
+              &                   & \multicolumn{2}{c}{Return} & \multicolumn{2}{c}{Mean episode length}                              \\
+    \cmidrule(lr){3-4}\cmidrule(lr){5-6}
+    Algorithm & Config.           & first 10\,\%               & last 10\,\%                             & first 10\,\% & last 10\,\% \\
+    \midrule
+    MBPO      & base              & $-108.2$                   & $-325.5$                                & 235.0        & 958.0       \\
+    MBPO      & batch 512         & $-77.0$                    & $-244.6$                                & 167.5        & 855.5       \\
+    MBPO      & batch 1024        & $-89.4$                    & $-348.5$                                & 218.7        & 924.7       \\
+    MBPO      & rollout 1$^\ast$  & $-113.4$                   & $-756.7$                                & 225.3        & 653.4       \\
+    MBPO      & rollout 15        & $-98.8$                    & $-407.7$                                & 225.0        & 896.1       \\
+    MBPO      & UTD 2             & $-115.1$                   & $-459.1$                                & 223.7        & 869.5       \\
+    MBPO      & UTD 4             & $-104.4$                   & $-599.2$                                & 150.6        & 868.5       \\
+    MBPO      & width 256$^\ast$  & $-92.8$                    & $-695.5$                                & 193.6        & 768.9       \\
+    MBPO      & width 512         & $-74.3$                    & $-413.4$                                & 145.8        & 868.4       \\
+    SAC       & batch 512         & $-52.2$                    & $-54.0$                                 & 293.5        & 441.6       \\
+    SAC       & batch 1024$^\ast$ & $-56.5$                    & $-104.5$                                & 241.0        & 284.3       \\
+    SAC       & UTD 2             & $-102.1$                   & $-122.4$                                & 266.4        & 399.7       \\
+    SAC       & UTD 4             & $-152.7$                   & $-220.1$                                & 194.3        & 315.2       \\
+    TD3       & batch 1024$^\ast$ & 31.4                       & $-30.3$                                 & 317.9        & 194.4       \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+In \num{13} of the \num{14} configurations the episodes of the last tenth are longer than those of the first tenth; only TD3 with batch size \num{1024} has shorter ones (\num{318} to \num{194} steps).
+For MBPO the episodes become much longer (e.g.\ \num{235} to \num{958} steps for the baseline), and the return per step rises in seven of the nine configurations (baseline: from $-0.48$ to $-0.34$) and falls in two (rollout length \num{1} and width \num{256}); in most of them the episode return therefore falls although the return per step rises.
+For SAC and TD3 on Ant-v5, late episodes are mostly terminated early (fraction of terminated late episodes \num{0.67} to \num{0.88} in the five flagged configurations).
+
+\Zcref{tab:app-learning-perstep} adds the return per step of the \num{14} configurations (definition in \zcref{sec:app-learn-def}).
+The return per step rises in \num{10} of the \num{14} configurations and does not rise in the four that are marked with an asterisk in \zcref{tab:app-learning}: MBPO with maximum rollout length \num{1}, MBPO with width \num{256}, SAC with batch size \num{1024} and TD3 with batch size \num{1024}.
+
+\begin{table}[tb]
+  \centering
+  \caption{Return per step (sum of returns divided by sum of lengths) of the first and last \SI{10}{\percent} of the training episodes for the \num{14} configurations of \zcref{tab:app-learning} (mean over five seeds), and the number of seeds in which it rises.
+    $^\ast$: not above the first tenth in the mean.}
+  \label{tab:app-learning-perstep}
+  \small
+  \begin{tabular}{llrrr}
+    \toprule
+    Algorithm & Configuration & First \SI{10}{\percent} & Last \SI{10}{\percent} & Seeds rising \\
+    \midrule
+    SAC & UTD 2 & \num{-0.387} & \num{-0.305} & \num{4}/\num{5} \\
+    SAC & UTD 4 & \num{-0.807} & \num{-0.673} & \num{4}/\num{5} \\
+    SAC & batch 512 & \num{-0.178} & \num{-0.120} & \num{5}/\num{5} \\
+    SAC & batch 1024$^\ast$ & \num{-0.238} & \num{-0.369} & \num{0}/\num{5} \\
+    TD3 & batch 1024$^\ast$ & \num{0.100} & \num{-0.147} & \num{1}/\num{5} \\
+    MBPO & baseline & \num{-0.481} & \num{-0.341} & \num{4}/\num{5} \\
+    MBPO & UTD 2 & \num{-0.561} & \num{-0.520} & \num{4}/\num{5} \\
+    MBPO & UTD 4 & \num{-0.758} & \num{-0.710} & \num{3}/\num{5} \\
+    MBPO & width 256$^\ast$ & \num{-0.486} & \num{-0.893} & \num{0}/\num{5} \\
+    MBPO & width 512 & \num{-0.525} & \num{-0.478} & \num{2}/\num{5} \\
+    MBPO & batch 512 & \num{-0.471} & \num{-0.277} & \num{5}/\num{5} \\
+    MBPO & batch 1024 & \num{-0.433} & \num{-0.374} & \num{4}/\num{5} \\
+    MBPO & rollout 1$^\ast$ & \num{-0.516} & \num{-1.065} & \num{0}/\num{5} \\
+    MBPO & rollout 15 & \num{-0.468} & \num{-0.446} & \num{4}/\num{5} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+%-------------------------------------------------------------------------------
+\section{Means of All Configurations}\label{sec:app-learn-means}
+
+\Zcref{tab:app-config-means} lists the means of the \num{56} configurations that enter \zcref{tab:spearman}.
+Each row is the mean over the five canonical seeds.
+FLOPs and energy are those of \texttt{TOTAL\_\allowbreak MEASURED\_\allowbreak TRAINING} (gross energy), and the return is the mean return of the last tenth of the training episodes.
+The baseline rows are the baselines of \zcref{tab:baseline-config}; TD3 has batch size \num{100} in its baseline, update-to-data and width rows.
+
+  {\footnotesize
+    \begin{longtable}{@{}lllrrr@{}}
+      \caption{Means of the \num{56} configurations over the five canonical seeds: matmul FLOPs and energy of the training total, and mean return of the last \SI{10}{\percent} of the training episodes.
+        \texttt{num\_\allowbreak q} is the size of the TD-MPC2 Q-ensemble.}
+      \label{tab:app-config-means}                                                                 \\
+      \toprule
+      Environment    & Algorithm & Configuration     & FLOPs          & Energy [kJ] & Return       \\
+      \midrule
+      \endfirsthead
+      \toprule
+      Environment    & Algorithm & Configuration     & FLOPs          & Energy [kJ] & Return       \\
+      \midrule
+      \endhead
+      \midrule
+      \multicolumn{6}{r@{}}{\emph{continued on the next page}}                                     \\
+      \endfoot
+      \bottomrule
+      \endlastfoot
+      HalfCheetah-v5 & SAC       & baseline          & \num{8.771e14} & \num{60.9}  & \num{4696.2} \\
+                     &           & UTD 2             & \num{1.754e15} & \num{118.0} & \num{4481.4} \\
+                     &           & UTD 4             & \num{3.508e15} & \num{235.0} & \num{4107.7} \\
+                     &           & width 256         & \num{5.817e13} & \num{47.4}  & \num{4884.7} \\
+                     &           & width 512         & \num{2.237e14} & \num{49.6}  & \num{4363.5} \\
+                     &           & batch 512         & \num{1.754e15} & \num{73.0}  & \num{3818.9} \\
+                     &           & batch 1024        & \num{3.508e15} & \num{82.4}  & \num{2920.6} \\
+      \cmidrule(lr){2-6}
+                     & TD3       & baseline          & \num{2.459e14} & \num{28.1}  & \num{3990.0} \\
+                     &           & UTD 2             & \num{4.915e14} & \num{55.4}  & \num{4552.6} \\
+                     &           & UTD 4             & \num{9.828e14} & \num{107.3} & \num{5267.2} \\
+                     &           & width 256         & \num{1.621e13} & \num{23.0}  & \num{5134.7} \\
+                     &           & width 512         & \num{6.259e13} & \num{25.4}  & \num{5539.5} \\
+                     &           & batch 256         & \num{6.291e14} & \num{33.5}  & \num{4989.0} \\
+                     &           & batch 512         & \num{1.258e15} & \num{41.7}  & \num{4353.1} \\
+                     &           & batch 1024        & \num{2.516e15} & \num{48.1}  & \num{3684.6} \\
+      \cmidrule(lr){2-6}
+                     & MBPO      & baseline          & \num{1.133e15} & \num{207.4} & \num{5146.4} \\
+                     &           & UTD 2             & \num{2.020e15} & \num{268.9} & \num{5285.4} \\
+                     &           & UTD 4             & \num{3.758e15} & \num{373.6} & \num{5903.7} \\
+                     &           & width 256         & \num{3.067e14} & \num{187.9} & \num{4534.8} \\
+                     &           & width 512         & \num{4.773e14} & \num{192.8} & \num{5133.8} \\
+                     &           & batch 512         & \num{2.000e15} & \num{209.1} & \num{5055.1} \\
+                     &           & batch 1024        & \num{3.753e15} & \num{218.7} & \num{5181.5} \\
+      \cmidrule(lr){2-6}
+                     & TD-MPC2   & baseline          & \num{8.833e15} & \num{447.1} & \num{6458.2} \\
+                     &           & \texttt{num\_\allowbreak q} 3 & \num{6.876e15} & \num{358.8} & \num{7543.9} \\
+                     &           & \texttt{num\_\allowbreak q} 7 & \num{1.079e16} & \num{526.6} & \num{7755.7} \\
+                     &           & horizon 1         & \num{4.615e15} & \num{280.7} & \num{5790.9} \\
+                     &           & horizon 5         & \num{1.305e16} & \num{571.3} & \num{7443.1} \\
+      \midrule
+      Ant-v5         & SAC       & baseline          & \num{9.390e14} & \num{64.4}  & \num{158.3}  \\
+                     &           & UTD 2             & \num{1.878e15} & \num{123.2} & \num{-122.4} \\
+                     &           & UTD 4             & \num{3.755e15} & \num{241.3} & \num{-220.1} \\
+                     &           & width 256         & \num{7.364e13} & \num{50.0}  & \num{408.6}  \\
+                     &           & width 512         & \num{2.547e14} & \num{52.2}  & \num{246.5}  \\
+                     &           & batch 512         & \num{1.878e15} & \num{76.5}  & \num{-54.0}  \\
+                     &           & batch 1024        & \num{3.755e15} & \num{89.1}  & \num{-104.5} \\
+      \cmidrule(lr){2-6}
+                     & TD3       & baseline          & \num{2.625e14} & \num{30.5}  & \num{452.2}  \\
+                     &           & UTD 2             & \num{5.248e14} & \num{57.5}  & \num{336.7}  \\
+                     &           & UTD 4             & \num{1.049e15} & \num{111.9} & \num{251.7}  \\
+                     &           & width 256         & \num{2.037e13} & \num{25.1}  & \num{575.9}  \\
+                     &           & width 512         & \num{7.090e13} & \num{27.5}  & \num{489.9}  \\
+                     &           & batch 256         & \num{6.716e14} & \num{35.5}  & \num{317.9}  \\
+                     &           & batch 512         & \num{1.343e15} & \num{44.4}  & \num{166.8}  \\
+                     &           & batch 1024        & \num{2.686e15} & \num{53.2}  & \num{-30.3}  \\
+      \cmidrule(lr){2-6}
+                     & MBPO      & baseline          & \num{1.416e15} & \num{253.1} & \num{-325.5} \\
+                     &           & UTD 2             & \num{2.380e15} & \num{316.8} & \num{-459.1} \\
+                     &           & UTD 4             & \num{4.238e15} & \num{424.5} & \num{-599.2} \\
+                     &           & width 256         & \num{5.436e14} & \num{234.5} & \num{-695.5} \\
+                     &           & width 512         & \num{7.171e14} & \num{231.6} & \num{-413.4} \\
+                     &           & batch 512         & \num{2.339e15} & \num{247.4} & \num{-244.6} \\
+                     &           & batch 1024        & \num{4.240e15} & \num{267.7} & \num{-348.5} \\
+                     &           & rollout 1         & \num{1.372e15} & \num{240.7} & \num{-756.7} \\
+                     &           & rollout 15        & \num{1.406e15} & \num{245.9} & \num{-407.7} \\
+      \cmidrule(lr){2-6}
+                     & TD-MPC2   & baseline          & \num{1.008e16} & \num{493.2} & \num{149.6}  \\
+                     &           & \texttt{num\_\allowbreak q} 3 & \num{8.116e15} & \num{411.4} & \num{125.8}  \\
+                     &           & \texttt{num\_\allowbreak q} 7 & \num{1.204e16} & \num{576.9} & \num{356.2}  \\
+                     &           & horizon 1         & \num{5.034e15} & \num{303.2} & \num{438.5}  \\
+                     &           & horizon 5         & \num{1.512e16} & \num{650.3} & \num{147.1}  \\
+    \end{longtable}
+  }
+
+%-------------------------------------------------------------------------------
+\section{Rank Correlation of Return and Energy with FLOPs}\label{sec:app-learn-spearman}
+
+% --- OPTIONAL BLOCK (Spearman analysis per environment and per algorithm): begin ---
+\todo{AUTHOR: keep or delete this optional block. Per-algorithm correlations of the return are stated as not computed in the thesis (\zcref{sec:metric}); the block would change that statement.}
+
+\Zcref{tab:app-spearman} extends \zcref{tab:spearman} by the correlations within each algorithm.
+The pooled rows reproduce \zcref{tab:spearman}.
+The per-algorithm rows use the configurations of one algorithm in one environment ($n=5$ to $9$), which are not independent samples; the $p$-values are those of the $t$ approximation of \texttt{scipy.stats.spearmanr} and are descriptive.
+For $|\rho|=1$ the approximation is not defined and no value is given.
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Spearman rank correlation $\rho$ of the FLOPs of the training phase with the return and with the energy (means over five seeds per configuration).}
+  \label{tab:app-spearman}
+  \begin{tabular}{@{}llrrrrrr@{}}
+    \toprule
+                   &           & \multicolumn{3}{c}{Return vs.\ FLOPs} & \multicolumn{3}{c}{Energy vs.\ FLOPs}                                        \\
+    \cmidrule(lr){3-5}\cmidrule(lr){6-8}
+    Environment    & Scope     & $n$                                   & $\rho$                                & $p$       & $n$ & $\rho$   & $p$       \\
+    \midrule
+    HalfCheetah-v5 & all algorithms & \num{27} & \num{0.417} & \num{0.0303} & \num{27} & \num{0.836} & \num{5.78e-08} \\
+     & SAC & \num{7} & \num{-0.782} & \num{0.0378} & \num{7} & \num{0.909} & \num{0.00454} \\
+     & TD3 & \num{8} & \num{-0.524} & \num{0.183} & \num{8} & \num{0.738} & \num{0.0366} \\
+     & MBPO & \num{7} & \num{0.857} & \num{0.0137} & \num{7} & \num{0.964} & \num{0.000454} \\
+     & TD-MPC2 & \num{5} & \num{0.500} & \num{0.391} & \num{5} & \num{1.000} & --- \\
+    \midrule
+    Ant-v5 & all algorithms & \num{29} & \num{-0.326} & \num{0.0842} & \num{29} & \num{0.846} & \num{7.33e-09} \\
+     & SAC & \num{7} & \num{-0.909} & \num{0.00454} & \num{7} & \num{0.909} & \num{0.00454} \\
+     & TD3 & \num{8} & \num{-1.000} & --- & \num{8} & \num{0.738} & \num{0.0366} \\
+     & MBPO & \num{9} & \num{0.383} & \num{0.308} & \num{9} & \num{0.917} & \num{0.000507} \\
+     & TD-MPC2 & \num{5} & \num{-0.300} & \num{0.624} & \num{5} & \num{1.000} & --- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+% --- OPTIONAL BLOCK (Spearman analysis per environment and per algorithm): end ---
+
+%-------------------------------------------------------------------------------
+\section{Return of a Random Policy}\label{sec:app-learn-random}
+
+\Zcref{tab:app-random} is the reference for the returns of this appendix.
+\todo{NOT RUN: random-policy return (command F3 of \texttt{todo-changes-step4.md}).}
+
+\begin{table}[tbp]
+  \centering
+  \caption{Return of a random policy (uniform random actions), mean $\pm$ standard deviation over $100$ episodes ($20$ per canonical seed).}
+  \label{tab:app-random}
+  \begin{tabular}{lrrr}
+    \toprule
+    Environment    & Return & Episode length & Episodes \\
+    \midrule
+    HalfCheetah-v5 & ---    & ---            & ---      \\
+    Ant-v5         & ---    & ---            & ---      \\
+    \bottomrule
+  \end{tabular}
+\end{table}

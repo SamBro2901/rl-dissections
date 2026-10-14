@@ -1,0 +1,30 @@
+{\scriptsize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}llrrrrr@{}}
+    \caption[TD-MPC2: measurement diagnostics of all configurations]{TD-MPC2: measurement diagnostics of all configurations. Task durations are medians over the 500 tasks of a configuration (five seeds of 100 epochs). Coverage is the mean over the seeds of the sum of the four sub-segment timers over the measured GU duration (mean $\pm$ sd). CV is the coefficient of variation of the total energy over the seeds. Idle difference is $|P_{\mathrm{tail}}-P_{\mathrm{head}}|/P_{\mathrm{head}}$ (mean $\pm$ sd over seeds, as recorded). HC is HalfCheetah-v5, Ant is Ant-v5.}
+    \label{tab:app-tdmpc2-quality} \\
+    \toprule
+    Env. & Config. & Rollout task [s] & GU task [s] & Coverage [\%] & CV total [\%] & Idle diff. [\%] \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Env. & Config. & Rollout task [s] & GU task [s] & Coverage [\%] & CV total [\%] & Idle diff. [\%] \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{7}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    HC & baseline & \num{10.1329} & \num{13.4125} & \num{98.4963+-0.03805} & \num{0.712248} & \num{11.8655+-2.785} \\
+     & \texttt{num\_q} 3 & \num{8.85148} & \num{10.8011} & \num{98.0512+-0.1035} & \num{0.608184} & \num{8.25782+-2.093} \\
+     & \texttt{num\_q} 7 & \num{11.3808} & \num{15.6314} & \num{98.4615+-0.03377} & \num{0.374926} & \num{10.3952+-1.406} \\
+     & horizon 1 & \num{6.64058} & \num{10.2544} & \num{98.1671+-0.04378} & \num{0.635015} & \num{5.86371+-1.185} \\
+     & horizon 5 & \num{13.5547} & \num{14.8439} & \num{98.6577+-0.04097} & \num{0.706997} & \num{11.4105+-1.401} \\
+    \midrule
+    Ant & baseline & \num{11.9453} & \num{12.1471} & \num{98.0101+-0.04792} & \num{0.361316} & \num{12.4796+-2.973} \\
+     & \texttt{num\_q} 3 & \num{10.7075} & \num{11.4275} & \num{97.7331+-0.08095} & \num{0.496507} & \num{7.85785+-1.576} \\
+     & \texttt{num\_q} 7 & \num{13.2245} & \num{16.7037} & \num{98.1877+-0.02907} & \num{0.489445} & \num{11.7555+-1.733} \\
+     & horizon 1 & \num{7.35793} & \num{10.8236} & \num{97.6849+-0.03546} & \num{0.851363} & \num{5.28643+-1.576} \\
+     & horizon 5 & \num{16.5341} & \num{14.9414} & \num{98.3442+-0.0445} & \num{0.709632} & \num{12.0094+-1.627} \\
+  \end{longtable}
+}

@@ -1,0 +1,78 @@
+{\scriptsize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}lllrrrrr@{}}
+    \caption[The cross-seed table of all 56 configurations: training total (\texttt{TOTAL\_MEASURED\_TRAINING}) over the five canonical seeds (mean $\pm$ sd; J/FLOP is the ratio of the mean energy to the mean FLOPs with the sd of the per-seed ratios; gross energy)]{The cross-seed table of all 56 configurations: training total (\texttt{TOTAL\_MEASURED\_TRAINING}) over the five canonical seeds (mean $\pm$ sd; J/FLOP is the ratio of the mean energy to the mean FLOPs with the sd of the per-seed ratios; gross energy). HC is HalfCheetah-v5, Ant is Ant-v5.}
+    \label{tab:app-cross-seed} \\
+    \toprule
+    Env. & Algorithm & Config. & Energy [J] & Duration [s] & $\bar P$ [W] & FLOPs & J/FLOP [pJ] \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Env. & Algorithm & Config. & Energy [J] & Duration [s] & $\bar P$ [W] & FLOPs & J/FLOP [pJ] \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{8}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    HC & SAC & baseline & \num{60911+-254} & \num{425.34+-2.27} & \num{143.21+-0.195} & \num{8.7709e14} & \num{69.447+-0.29} \\
+    HC & SAC & UTD 2 & \num{118020+-624} & \num{825.56+-5.18} & \num{142.96+-0.473} & \num{1.754e15} & \num{67.29+-0.356} \\
+    HC & SAC & UTD 4 & \num{234960+-1110} & \num{1641.2+-10} & \num{143.17+-0.645} & \num{3.5077e15} & \num{66.984+-0.316} \\
+    HC & SAC & width 256 & \num{47408+-459} & \num{415.19+-2.47} & \num{114.18+-0.577} & \num{5.8171e13} & \num{814.97+-7.88} \\
+    HC & SAC & width 512 & \num{49554+-511} & \num{416.95+-5.76} & \num{118.85+-0.501} & \num{2.2374e14} & \num{221.48+-2.28} \\
+    HC & SAC & batch 512 & \num{73024+-518} & \num{437.66+-5.93} & \num{166.86+-1.11} & \num{1.754e15} & \num{41.634+-0.295} \\
+    HC & SAC & batch 1024 & \num{82366+-590} & \num{439+-5.9} & \num{187.63+-1.21} & \num{3.5077e15} & \num{23.481+-0.168} \\
+    Ant & SAC & baseline & \num{64383+-588} & \num{449.11+-2.95} & \num{143.36+-0.71} & \num{9.3897e14} & \num{68.567+-0.627} \\
+    Ant & SAC & UTD 2 & \num{123180+-727} & \num{857.12+-7.27} & \num{143.72+-0.506} & \num{1.8777e15} & \num{65.603+-0.387} \\
+    Ant & SAC & UTD 4 & \num{241330+-1070} & \num{1678.4+-9.02} & \num{143.79+-0.2} & \num{3.7552e15} & \num{64.265+-0.284} \\
+    Ant & SAC & width 256 & \num{49985+-726} & \num{437.78+-5.83} & \num{114.18+-0.41} & \num{7.3642e13} & \num{678.76+-9.85} \\
+    Ant & SAC & width 512 & \num{52200+-479} & \num{437.34+-4.43} & \num{119.36+-0.555} & \num{2.5469e14} & \num{204.96+-1.88} \\
+    Ant & SAC & batch 512 & \num{76499+-400} & \num{458.46+-4} & \num{166.86+-0.584} & \num{1.8777e15} & \num{40.741+-0.213} \\
+    Ant & SAC & batch 1024 & \num{89057+-411} & \num{471.12+-4.93} & \num{189.04+-1.15} & \num{3.7552e15} & \num{23.716+-0.109} \\
+    \midrule
+    HC & TD3 & baseline & \num{28111+-311} & \num{207.1+-4.65} & \num{135.77+-2.09} & \num{2.4587e14} & \num{114.33+-1.26} \\
+    HC & TD3 & UTD 2 & \num{55361+-397} & \num{403.49+-4.08} & \num{137.21+-0.461} & \num{4.9153e14} & \num{112.63+-0.809} \\
+    HC & TD3 & UTD 4 & \num{107340+-1040} & \num{791.72+-9.31} & \num{135.59+-0.587} & \num{9.8284e14} & \num{109.22+-1.06} \\
+    HC & TD3 & width 256 & \num{23037+-618} & \num{201.06+-2.75} & \num{114.57+-2.11} & \num{1.6209e13} & \num{1421.3+-38.2} \\
+    HC & TD3 & width 512 & \num{25370+-399} & \num{208.86+-5.54} & \num{121.5+-2.1} & \num{6.259e13} & \num{405.33+-6.38} \\
+    HC & TD3 & batch 256 & \num{33454+-435} & \num{211.02+-4.19} & \num{158.55+-1.28} & \num{6.291e14} & \num{53.177+-0.692} \\
+    HC & TD3 & batch 512 & \num{41683+-778} & \num{217.5+-9.53} & \num{191.81+-4.81} & \num{1.258e15} & \num{33.135+-0.619} \\
+    HC & TD3 & batch 1024 & \num{48068+-808} & \num{228.2+-9} & \num{210.8+-4.87} & \num{2.5157e15} & \num{19.107+-0.321} \\
+    Ant & TD3 & baseline & \num{30520+-432} & \num{224.13+-3.54} & \num{136.18+-1.74} & \num{2.625e14} & \num{116.27+-1.65} \\
+    Ant & TD3 & UTD 2 & \num{57543+-361} & \num{417.75+-3.78} & \num{137.75+-0.394} & \num{5.2477e14} & \num{109.65+-0.688} \\
+    Ant & TD3 & UTD 4 & \num{111900+-1590} & \num{820.05+-15.1} & \num{136.46+-0.635} & \num{1.0493e15} & \num{106.64+-1.52} \\
+    Ant & TD3 & width 256 & \num{25100+-811} & \num{220.48+-6.78} & \num{113.85+-2} & \num{2.0366e13} & \num{1232.5+-39.8} \\
+    Ant & TD3 & width 512 & \num{27473+-265} & \num{229.55+-5.89} & \num{119.73+-2.6} & \num{7.0904e13} & \num{387.47+-3.73} \\
+    Ant & TD3 & batch 256 & \num{35521+-358} & \num{227.48+-3.81} & \num{156.16+-1.06} & \num{6.7164e14} & \num{52.887+-0.533} \\
+    Ant & TD3 & batch 512 & \num{44361+-592} & \num{233.17+-6.46} & \num{190.31+-2.8} & \num{1.343e15} & \num{33.03+-0.441} \\
+    Ant & TD3 & batch 1024 & \num{53235+-708} & \num{252.11+-7.13} & \num{211.23+-3.15} & \num{2.6858e15} & \num{19.821+-0.264} \\
+    \midrule
+    HC & MBPO & baseline & \num{207390+-7450} & \num{1678.7+-72.2} & \num{123.58+-0.913} & \num{1.1329e15} & \num{183.07+-5.44} \\
+    HC & MBPO & UTD 2 & \num{268850+-6930} & \num{2140.5+-60.1} & \num{125.61+-0.545} & \num{2.0201e15} & \num{133.09+-2.5} \\
+    HC & MBPO & UTD 4 & \num{373610+-8540} & \num{2868.6+-82.7} & \num{130.26+-0.83} & \num{3.7579e15} & \num{99.419+-1.83} \\
+    HC & MBPO & width 256 & \num{187910+-4850} & \num{1631.8+-40} & \num{115.15+-0.976} & \num{3.0675e14} & \num{612.6+-9.02} \\
+    HC & MBPO & width 512 & \num{192770+-8810} & \num{1653.9+-91.6} & \num{116.61+-1.27} & \num{4.7726e14} & \num{403.91+-8.71} \\
+    HC & MBPO & batch 512 & \num{209100+-4910} & \num{1626.6+-46} & \num{128.57+-0.856} & \num{1.9999e15} & \num{104.55+-2.08} \\
+    HC & MBPO & batch 1024 & \num{218670+-5010} & \num{1635.3+-41.1} & \num{133.72+-0.318} & \num{3.7533e15} & \num{58.26+-1.2} \\
+    Ant & MBPO & baseline & \num{253140+-20100} & \num{2058+-178} & \num{123.06+-0.93} & \num{1.416e15} & \num{178.77+-8.47} \\
+    Ant & MBPO & UTD 2 & \num{316800+-17100} & \num{2537+-156} & \num{124.92+-1.12} & \num{2.3797e15} & \num{133.13+-5.19} \\
+    Ant & MBPO & UTD 4 & \num{424450+-16400} & \num{3289.7+-150} & \num{129.06+-0.93} & \num{4.2381e15} & \num{100.15+-3} \\
+    Ant & MBPO & width 256 & \num{234490+-9870} & \num{2024.8+-83.7} & \num{115.81+-0.278} & \num{5.436e14} & \num{431.36+-2.82} \\
+    Ant & MBPO & width 512 & \num{231640+-18600} & \num{1980.7+-168} & \num{116.99+-1.15} & \num{7.1705e14} & \num{323.04+-8.56} \\
+    Ant & MBPO & batch 512 & \num{247390+-21200} & \num{1937.8+-185} & \num{127.77+-1.54} & \num{2.3388e15} & \num{105.78+-6.71} \\
+    Ant & MBPO & batch 1024 & \num{267690+-15100} & \num{1994.7+-137} & \num{134.29+-1.61} & \num{4.2398e15} & \num{63.138+-3.06} \\
+    Ant & MBPO & rollout 1 & \num{240750+-3280} & \num{1948.9+-32.6} & \num{123.54+-0.804} & \num{1.3721e15} & \num{175.46+-1.64} \\
+    Ant & MBPO & rollout 15 & \num{245860+-12700} & \num{1992.7+-119} & \num{123.43+-1.06} & \num{1.406e15} & \num{174.86+-5.75} \\
+    \midrule
+    HC & TD-MPC2 & baseline & \num{447090+-3180} & \num{2359.5+-39.5} & \num{189.51+-1.85} & \num{8.8327e15} & \num{50.617+-0.361} \\
+    HC & TD-MPC2 & \texttt{num\_q} 3 & \num{358790+-2180} & \num{1969.1+-26} & \num{182.22+-1.36} & \num{6.8759e15} & \num{52.18+-0.317} \\
+    HC & TD-MPC2 & \texttt{num\_q} 7 & \num{526560+-1970} & \num{2714.5+-31.7} & \num{194+-1.64} & \num{1.0789e16} & \num{48.803+-0.183} \\
+    HC & TD-MPC2 & horizon 1 & \num{280690+-1780} & \num{1698.6+-24.2} & \num{165.26+-1.37} & \num{4.6145e15} & \num{60.827+-0.386} \\
+    HC & TD-MPC2 & horizon 5 & \num{571280+-4040} & \num{2948.6+-50.2} & \num{193.77+-2.06} & \num{1.3051e16} & \num{43.773+-0.309} \\
+    Ant & TD-MPC2 & baseline & \num{493190+-1780} & \num{2515.4+-28.7} & \num{196.08+-1.66} & \num{1.0076e16} & \num{48.945+-0.177} \\
+    Ant & TD-MPC2 & \texttt{num\_q} 3 & \num{411360+-2040} & \num{2206.3+-23.4} & \num{186.45+-1.1} & \num{8.1161e15} & \num{50.684+-0.252} \\
+    Ant & TD-MPC2 & \texttt{num\_q} 7 & \num{576920+-2820} & \num{2986.8+-25.9} & \num{193.16+-0.897} & \num{1.2037e16} & \num{47.931+-0.235} \\
+    Ant & TD-MPC2 & horizon 1 & \num{303230+-2580} & \num{1823.9+-24.4} & \num{166.26+-0.933} & \num{5.0342e15} & \num{60.234+-0.513} \\
+    Ant & TD-MPC2 & horizon 5 & \num{650270+-4610} & \num{3302.7+-46.8} & \num{196.91+-1.43} & \num{1.5118e16} & \num{43.012+-0.305} \\
+  \end{longtable}
+}

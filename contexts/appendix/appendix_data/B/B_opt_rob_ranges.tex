@@ -1,0 +1,22 @@
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Range of the configuration values (seed means) of each algorithm over all its configurations, and whether it overlaps the range of TD-MPC2 over its five configurations (full precision). \#cfg is the number of configurations of the algorithm on the environment.}
+  \label{tab:app-rob-ranges}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}llrrcrc@{}}
+      \toprule
+      Environment & Algorithm & \#cfg & Energy range [J] & Overlap with TD-MPC2 & J/FLOP range [pJ] & Overlap with TD-MPC2 \\
+      \midrule
+      HalfCheetah-v5 & SAC & \num{7} & \num{47407.9}--\num{234959} & no & \num{23.4815}--\num{814.972} & yes \\
+       & TD3 & \num{8} & \num{23037}--\num{107345} & no & \num{19.107}--\num{1421.26} & yes \\
+       & MBPO & \num{7} & \num{187913}--\num{373606} & yes & \num{58.2597}--\num{612.601} & yes \\
+       & TD-MPC2 & \num{5} & \num{280686}--\num{571281} & -- & \num{43.7734}--\num{60.827} & -- \\
+      \midrule
+      Ant-v5 & SAC & \num{7} & \num{49985.2}--\num{241327} & no & \num{23.7158}--\num{678.756} & yes \\
+       & TD3 & \num{8} & \num{25100.4}--\num{111900} & no & \num{19.8206}--\num{1232.48} & yes \\
+       & MBPO & \num{9} & \num{231638}--\num{424454} & yes & \num{63.1381}--\num{431.364} & no \\
+       & TD-MPC2 & \num{5} & \num{303231}--\num{650272} & -- & \num{43.0117}--\num{60.2342} & -- \\
+      \bottomrule
+    \end{tabular}}
+\end{table}

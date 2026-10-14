@@ -1,0 +1,57 @@
+algo,env,config,seeds,algo_diff_vs_baseline,single_factor
+sac,HalfCheetah-v5,baseline,5,{},True
+sac,Ant-v5,baseline,5,{},True
+sac,HalfCheetah-v5,updates_per_env_step=2,5,"{""updates_per_env_step"": [1, 2]}",True
+sac,HalfCheetah-v5,updates_per_env_step=4,5,"{""updates_per_env_step"": [1, 4]}",True
+mbpo,HalfCheetah-v5,baseline,5,{},True
+mbpo,Ant-v5,baseline,5,{},True
+td3,HalfCheetah-v5,baseline,5,{},True
+td3,Ant-v5,baseline,5,{},True
+sac,Ant-v5,updates_per_env_step=2,5,"{""updates_per_env_step"": [1, 2]}",True
+sac,Ant-v5,updates_per_env_step=4,5,"{""updates_per_env_step"": [1, 4]}",True
+td3,HalfCheetah-v5,updates_per_env_step=2,5,"{""updates_per_env_step"": [1, 2]}",True
+td3,HalfCheetah-v5,updates_per_env_step=4,5,"{""updates_per_env_step"": [1, 4]}",True
+td3,Ant-v5,updates_per_env_step=2,5,"{""updates_per_env_step"": [1, 2]}",True
+td3,Ant-v5,updates_per_env_step=4,5,"{""updates_per_env_step"": [1, 4]}",True
+tdmpc2,HalfCheetah-v5,baseline,5,{},True
+tdmpc2,Ant-v5,baseline,5,{},True
+sac,HalfCheetah-v5,"hidden_sizes=[256, 256]",5,"{""hidden_sizes"": [[1024, 1024], [256, 256]]}",True
+sac,HalfCheetah-v5,"hidden_sizes=[512, 512]",5,"{""hidden_sizes"": [[1024, 1024], [512, 512]]}",True
+sac,Ant-v5,"hidden_sizes=[256, 256]",5,"{""hidden_sizes"": [[1024, 1024], [256, 256]]}",True
+sac,Ant-v5,"hidden_sizes=[512, 512]",5,"{""hidden_sizes"": [[1024, 1024], [512, 512]]}",True
+mbpo,HalfCheetah-v5,"hidden_sizes=[256, 256]",5,"{""hidden_sizes"": [[1024, 1024], [256, 256]]}",True
+mbpo,HalfCheetah-v5,"hidden_sizes=[512, 512]",5,"{""hidden_sizes"": [[1024, 1024], [512, 512]]}",True
+mbpo,Ant-v5,"hidden_sizes=[256, 256]",5,"{""hidden_sizes"": [[1024, 1024], [256, 256]]}",True
+mbpo,Ant-v5,"hidden_sizes=[512, 512]",5,"{""hidden_sizes"": [[1024, 1024], [512, 512]]}",True
+td3,HalfCheetah-v5,"hidden_sizes=[256, 256]",5,"{""hidden_sizes"": [[1024, 1024], [256, 256]]}",True
+td3,HalfCheetah-v5,"hidden_sizes=[512, 512]",5,"{""hidden_sizes"": [[1024, 1024], [512, 512]]}",True
+td3,Ant-v5,"hidden_sizes=[256, 256]",5,"{""hidden_sizes"": [[1024, 1024], [256, 256]]}",True
+td3,Ant-v5,"hidden_sizes=[512, 512]",5,"{""hidden_sizes"": [[1024, 1024], [512, 512]]}",True
+mbpo,HalfCheetah-v5,updates_per_env_step=2,5,"{""updates_per_env_step"": [1, 2]}",True
+mbpo,HalfCheetah-v5,updates_per_env_step=4,5,"{""updates_per_env_step"": [1, 4]}",True
+mbpo,Ant-v5,updates_per_env_step=2,5,"{""updates_per_env_step"": [1, 2]}",True
+mbpo,Ant-v5,updates_per_env_step=4,5,"{""updates_per_env_step"": [1, 4]}",True
+sac,HalfCheetah-v5,batch_size=512,5,"{""batch_size"": [256, 512]}",True
+sac,HalfCheetah-v5,batch_size=1024,5,"{""batch_size"": [256, 1024]}",True
+mbpo,HalfCheetah-v5,batch_size=512,5,"{""batch_size"": [256, 512]}",True
+mbpo,HalfCheetah-v5,batch_size=1024,5,"{""batch_size"": [256, 1024]}",True
+td3,HalfCheetah-v5,batch_size=256,5,"{""batch_size"": [100, 256]}",True
+td3,HalfCheetah-v5,batch_size=512,5,"{""batch_size"": [100, 512]}",True
+td3,HalfCheetah-v5,batch_size=1024,5,"{""batch_size"": [100, 1024]}",True
+sac,Ant-v5,batch_size=512,5,"{""batch_size"": [256, 512]}",True
+sac,Ant-v5,batch_size=1024,5,"{""batch_size"": [256, 1024]}",True
+mbpo,Ant-v5,batch_size=512,5,"{""batch_size"": [256, 512]}",True
+mbpo,Ant-v5,batch_size=1024,5,"{""batch_size"": [256, 1024]}",True
+td3,Ant-v5,batch_size=256,5,"{""batch_size"": [100, 256]}",True
+td3,Ant-v5,batch_size=512,5,"{""batch_size"": [100, 512]}",True
+td3,Ant-v5,batch_size=1024,5,"{""batch_size"": [100, 1024]}",True
+mbpo,Ant-v5,rollout_max_length=1,5,"{""rollout_max_length"": [25, 1]}",True
+mbpo,Ant-v5,rollout_max_length=15,5,"{""rollout_max_length"": [25, 15]}",True
+tdmpc2,HalfCheetah-v5,num_q=3,5,"{""num_q"": [5, 3]}",True
+tdmpc2,Ant-v5,num_q=3,5,"{""num_q"": [5, 3]}",True
+tdmpc2,HalfCheetah-v5,num_q=7,5,"{""num_q"": [5, 7]}",True
+tdmpc2,Ant-v5,num_q=7,5,"{""num_q"": [5, 7]}",True
+tdmpc2,HalfCheetah-v5,horizon=1,5,"{""horizon"": [3, 1]}",True
+tdmpc2,Ant-v5,horizon=1,5,"{""horizon"": [3, 1]}",True
+tdmpc2,HalfCheetah-v5,horizon=5,5,"{""horizon"": [3, 5]}",True
+tdmpc2,Ant-v5,horizon=5,5,"{""horizon"": [3, 5]}",True

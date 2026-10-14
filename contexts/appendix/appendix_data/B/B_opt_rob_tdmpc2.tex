@@ -1,0 +1,23 @@
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{TD-MPC2: total energy, J/FLOP of the training total and share of the \texttt{rollout} in the training energy for the five configurations (mean $\pm$ sd over five seeds, gross; full precision). The baseline is \texttt{base}; the \texttt{num\_\allowbreak q} sweep varies the first, the horizon sweep the second parameter.}
+  \label{tab:app-rob-tdmpc2}
+  \begin{tabular}{@{}llrrrrr@{}}
+    \toprule
+    Environment & Config. & \texttt{num\_\allowbreak q} & Horizon & Energy [J] & J/FLOP [pJ] & Rollout share [\%] \\
+    \midrule
+    HalfCheetah-v5 & \texttt{numq3} & \num{3} & \num{3} & \num{358787+-2182} & \num{52.1805+-0.3174} & \num{50.7244+-0.2962} \\
+     & \texttt{base} & \num{5} & \num{3} & \num{447087+-3184} & \num{50.6173+-0.3605} & \num{47.825+-0.3413} \\
+     & \texttt{numq7} & \num{7} & \num{3} & \num{526562+-1974} & \num{48.8032+-0.183} & \num{45.996+-0.2268} \\
+     & \texttt{horizon1} & \num{5} & \num{1} & \num{280686+-1782} & \num{60.827+-0.3863} & \num{48.1611+-0.3071} \\
+     & \texttt{horizon5} & \num{5} & \num{5} & \num{571281+-4039} & \num{43.7734+-0.3095} & \num{50.4618+-0.3819} \\
+    \midrule
+    Ant-v5 & \texttt{numq3} & \num{3} & \num{3} & \num{411357+-2042} & \num{50.6841+-0.2517} & \num{54.2155+-0.2805} \\
+     & \texttt{base} & \num{5} & \num{3} & \num{493191+-1782} & \num{48.9454+-0.1768} & \num{51.6187+-0.2272} \\
+     & \texttt{numq7} & \num{7} & \num{3} & \num{576921+-2824} & \num{47.9306+-0.2346} & \num{48.6886+-0.1874} \\
+     & \texttt{horizon1} & \num{5} & \num{1} & \num{303231+-2582} & \num{60.2342+-0.5128} & \num{49.2851+-0.3119} \\
+     & \texttt{horizon5} & \num{5} & \num{5} & \num{650272+-4615} & \num{43.0117+-0.3052} & \num{54.4753+-0.3243} \\
+    \bottomrule
+  \end{tabular}
+\end{table}

@@ -1,0 +1,36 @@
+{\scriptsize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}llrrrrr@{}}
+    \caption[TD3: measurement diagnostics of all configurations]{TD3: measurement diagnostics of all configurations. Task durations are medians over the 500 tasks of a configuration (five seeds of 100 epochs). Coverage is the mean over the seeds of the sum of the four sub-segment timers over the measured GU duration (mean $\pm$ sd). CV is the coefficient of variation of the total energy over the seeds. Idle difference is $|P_{\mathrm{tail}}-P_{\mathrm{head}}|/P_{\mathrm{head}}$ (mean $\pm$ sd over seeds, as recorded). HC is HalfCheetah-v5, Ant is Ant-v5.}
+    \label{tab:app-td3-quality} \\
+    \toprule
+    Env. & Config. & Rollout task [s] & GU task [s] & Coverage [\%] & CV total [\%] & Idle diff. [\%] \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Env. & Config. & Rollout task [s] & GU task [s] & Coverage [\%] & CV total [\%] & Idle diff. [\%] \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{7}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    HC & baseline & \num{0.10953} & \num{1.90569} & \num{93.4174+-0.2433} & \num{1.10527} & \num{10.1643+-5.795} \\
+     & UTD 2 & \num{0.110257} & \num{3.81892} & \num{93.3094+-0.04946} & \num{0.717974} & \num{7.78681+-1.771} \\
+     & UTD 4 & \num{0.109658} & \num{7.65747} & \num{93.2111+-0.09091} & \num{0.973354} & \num{3.44403+-1.719} \\
+     & width 256 & \num{0.103212} & \num{1.8532} & \num{95.4312+-0.1109} & \num{2.68462} & \num{10.7376+-2.202} \\
+     & width 512 & \num{0.10478} & \num{1.91113} & \num{94.2511+-0.2366} & \num{1.57296} & \num{9.25371+-3.378} \\
+     & batch 256 & \num{0.108065} & \num{1.92338} & \num{93.686+-0.195} & \num{1.30145} & \num{7.91755+-1.488} \\
+     & batch 512 & \num{0.107788} & \num{1.97489} & \num{93.4505+-0.6001} & \num{1.86669} & \num{10.4255+-1.169} \\
+     & batch 1024 & \num{0.107074} & \num{2.25011} & \num{91.9633+-1.477} & \num{1.6812} & \num{13.7341+-2.227} \\
+    \midrule
+    Ant & baseline & \num{0.245326} & \num{1.93918} & \num{92.0747+-0.1425} & \num{1.41519} & \num{11.4325+-7.011} \\
+     & UTD 2 & \num{0.245994} & \num{3.85041} & \num{92.023+-0.08307} & \num{0.627403} & \num{9.03744+-1.867} \\
+     & UTD 4 & \num{0.246518} & \num{7.77178} & \num{92.0994+-0.1049} & \num{1.42134} & \num{4.17053+-1.61} \\
+     & width 256 & \num{0.241577} & \num{1.87865} & \num{96.029+-0.1707} & \num{3.23231} & \num{9.01491+-4.801} \\
+     & width 512 & \num{0.241992} & \num{1.94229} & \num{93.7923+-0.234} & \num{0.96296} & \num{10.6478+-3.527} \\
+     & batch 256 & \num{0.243027} & \num{1.98595} & \num{92.1846+-0.3085} & \num{1.00715} & \num{7.08984+-1.653} \\
+     & batch 512 & \num{0.241992} & \num{2.02676} & \num{91.634+-0.627} & \num{1.33403} & \num{8.82069+-1.111} \\
+     & batch 1024 & \num{0.241594} & \num{2.23064} & \num{88.4683+-1.954} & \num{1.32949} & \num{13.3184+-1.903} \\
+  \end{longtable}
+}

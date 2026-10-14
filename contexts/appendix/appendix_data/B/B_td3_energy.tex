@@ -1,0 +1,36 @@
+{\footnotesize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}lllrrr@{}}
+    \caption[TD3: energy per segment, share of the total and share of the gradient updates (mean $\pm$ sd over the five seeds, gross energy)]{TD3: energy per segment, share of the total and share of the gradient updates (mean $\pm$ sd over the five seeds, gross energy). Segment abbreviations: buffer = \texttt{buffer\_sample}, critic = \texttt{critic\_update} (TD-MPC2: world-model step), actor = \texttt{actor\_update} (TD-MPC2: policy-prior step), target = \texttt{target\_update}, GU = \texttt{gradient\_updates}, fit = \texttt{dynamics\_model\_update}, synth = \texttt{synthetic\_rollout\_generation}, pretrain = \texttt{world\_model\_pretrain}. Buffer, critic, actor and target are allocated from the GU energy by timed share; the other segments are measured. HC is HalfCheetah-v5, Ant is Ant-v5.}
+    \label{tab:app-td3-energy} \\
+    \toprule
+    Env. & Config. & Segment & Energy [J] & Share of total [\%] & Share of GU [\%] \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Env. & Config. & Segment & Energy [J] & Share of total [\%] & Share of GU [\%] \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{6}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    HC & baseline & rollout & \num{1410.91+-18.43} & \num{5.01916+-0.05886} & --- \\
+     &  & buffer & \num{1295.43+-26.27} & \num{4.60894+-0.1206} & \num{4.85251+-0.1278} \\
+     &  & critic & \num{18530.1+-279.9} & \num{65.9143+-0.3143} & \num{69.3974+-0.3118} \\
+     &  & actor & \num{5182.75+-53.58} & \num{18.4366+-0.03847} & \num{19.4108+-0.04792} \\
+     &  & target & \num{1692.28+-24.73} & \num{6.02101+-0.1404} & \num{6.33921+-0.1492} \\
+     &  & GU & \num{26700.5+-301.1} & \num{94.9808+-0.05886} & 100 \\
+     &  & total & \num{28111.5+-310.7} & \num{100} & --- \\
+    \addlinespace[2pt]
+    \midrule
+    Ant & baseline & rollout & \num{3071.46+-52.53} & \num{10.0645+-0.1618} & --- \\
+     &  & buffer & \num{1473.47+-26.19} & \num{4.82836+-0.08874} & \num{5.36883+-0.1077} \\
+     &  & critic & \num{18957.5+-337.5} & \num{62.1133+-0.3481} & \num{69.064+-0.2688} \\
+     &  & actor & \num{5284.1+-73.81} & \num{17.3137+-0.009987} & \num{19.2513+-0.03566} \\
+     &  & target & \num{1733.25+-20.84} & \num{5.68012+-0.1123} & \num{6.31594+-0.1346} \\
+     &  & GU & \num{27448.4+-408.8} & \num{89.9355+-0.1618} & 100 \\
+     &  & total & \num{30519.8+-431.9} & \num{100} & --- \\
+    \addlinespace[2pt]
+  \end{longtable}
+}

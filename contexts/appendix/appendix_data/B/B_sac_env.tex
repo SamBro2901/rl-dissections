@@ -1,0 +1,26 @@
+{\footnotesize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}lrrrrrr@{}}
+    \caption[Environment comparison of all SAC configurations (Ant-v5 relative to HalfCheetah-v5, runs paired by seed; full precision)]{Environment comparison of all SAC configurations (Ant-v5 relative to HalfCheetah-v5, runs paired by seed; full precision). Energy ratios are ratios of means. $\Delta$share is the difference of the mean shares in percentage points; the segment that attains the maximum absolute difference is given in brackets. $\bar P_r/\bar P_{\mathrm{GU}}$ is the ratio of the mean power of the rollout to that of the GU; the column gives the ratio of this quantity on Ant-v5 to that on HalfCheetah-v5. }
+    \label{tab:app-sac-env} \\
+    \toprule
+    Config. & $E_{\mathrm{total}}$ ratio & $E_{\mathrm{rollout}}$ ratio & max $|\Delta$share$|$ [pp] & $\bar P_{\mathrm{total}}$ ratio & $\bar P_r/\bar P_{\mathrm{GU}}$ ratio & J/FLOP total ratio \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Config. & $E_{\mathrm{total}}$ ratio & $E_{\mathrm{rollout}}$ ratio & max $|\Delta$share$|$ [pp] & $\bar P_{\mathrm{total}}$ ratio & $\bar P_r/\bar P_{\mathrm{GU}}$ ratio & J/FLOP total ratio \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{7}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    baseline & \num{1.05699} & \num{1.73583} & \num{2.63134} (rollout) & \num{1.00105} & \num{0.980337} & \num{0.987332} \\
+    UTD 2 & \num{1.0437} & \num{1.71425} & \num{1.36799} (rollout) & \num{1.00528} & \num{0.955716} & \num{0.974918} \\
+    UTD 4 & \num{1.0271} & \num{1.68184} & \num{0.93644} (critic) & \num{1.00432} & \num{0.938765} & \num{0.959412} \\
+    width 256 & \num{1.05436} & \num{1.7998} & \num{3.39855} (rollout) & \num{0.999949} & \num{1.00421} & \num{0.832858} \\
+    width 512 & \num{1.05339} & \num{1.78541} & \num{3.26315} (rollout) & \num{1.00424} & \num{0.993107} & \num{0.925413} \\
+    batch 512 & \num{1.04759} & \num{1.64988} & \num{2.08365} (rollout) & \num{0.999997} & \num{0.937562} & \num{0.978545} \\
+    batch 1024 & \num{1.08124} & \num{1.65236} & \num{2.06766} (actor) & \num{1.00752} & \num{0.927874} & \num{1.00998} \\
+  \end{longtable}
+}

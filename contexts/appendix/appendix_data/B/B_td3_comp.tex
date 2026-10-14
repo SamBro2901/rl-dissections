@@ -1,0 +1,26 @@
+{\scriptsize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}lllrrrr@{}}
+    \caption[TD3: composition of the energy of the measured tasks by hardware term (CPU, GPU, RAM) and idle-floor fraction (mean $\pm$ sd of the per-run percentages over the five seeds)]{TD3: composition of the energy of the measured tasks by hardware term (CPU, GPU, RAM) and idle-floor fraction (mean $\pm$ sd of the per-run percentages over the five seeds). The RAM term is the constant capacity heuristic of CodeCarbon. The idle-floor fraction is a diagnostic: the mean of the head and tail idle power of the run (as recorded) times the duration of the task, divided by the gross energy of the task; it is not subtracted anywhere. Segment abbreviations: buffer = \texttt{buffer\_sample}, critic = \texttt{critic\_update} (TD-MPC2: world-model step), actor = \texttt{actor\_update} (TD-MPC2: policy-prior step), target = \texttt{target\_update}, GU = \texttt{gradient\_updates}, fit = \texttt{dynamics\_model\_update}, synth = \texttt{synthetic\_rollout\_generation}, pretrain = \texttt{world\_model\_pretrain}. Buffer, critic, actor and target are allocated from the GU energy by timed share; the other segments are measured. HC is HalfCheetah-v5, Ant is Ant-v5.}
+    \label{tab:app-td3-comp} \\
+    \toprule
+    Env. & Config. & Task & CPU [\%] & GPU [\%] & RAM [\%] & Idle floor [\%] \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Env. & Config. & Task & CPU [\%] & GPU [\%] & RAM [\%] & Idle floor [\%] \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{7}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    HC & baseline & rollout & \num{25.5248+-0.3095} & \num{58.7534+-0.5004} & \num{15.7217+-0.1951} & \num{56.4211+-1.038} \\
+     &  & GU & \num{20.0463+-0.1753} & \num{65.2771+-0.4086} & \num{14.6766+-0.2374} & \num{52.5691+-0.6224} \\
+    \addlinespace[2pt]
+    \midrule
+    Ant & baseline & rollout & \num{27.5657+-0.4364} & \num{56.3345+-0.6965} & \num{16.0998+-0.2681} & \num{59.1376+-1.44} \\
+     &  & GU & \num{20.1816+-0.1232} & \num{65.2934+-0.2719} & \num{14.5251+-0.1853} & \num{53.3031+-1.046} \\
+    \addlinespace[2pt]
+  \end{longtable}
+}

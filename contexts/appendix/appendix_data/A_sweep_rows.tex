@@ -1,0 +1,37 @@
+    \texttt{sac\_utd2.json} & SAC & HalfCheetah-v5 and Ant-v5 & \texttt{updates\_per\_env\_step} & 2 & --- & \num{10} \\
+    \texttt{sac\_utd4.json} & SAC & HalfCheetah-v5 and Ant-v5 & \texttt{updates\_per\_env\_step} & 4 & --- & \num{10} \\
+    \texttt{sac\_width256.json} & SAC & HalfCheetah-v5 and Ant-v5 & \texttt{hidden\_sizes} & $(256,256)$ & --- & \num{10} \\
+    \texttt{sac\_width512.json} & SAC & HalfCheetah-v5 and Ant-v5 & \texttt{hidden\_sizes} & $(512,512)$ & --- & \num{10} \\
+    \texttt{sac\_batch1024.json} & SAC & HalfCheetah-v5 and Ant-v5 & \texttt{batch\_size} & 1024 & --- & \num{10} \\
+    \texttt{sac\_batch512.json} & SAC & HalfCheetah-v5 and Ant-v5 & \texttt{batch\_size} & 512 & --- & \num{10} \\
+    \texttt{td3\_utd2.json} & TD3 & HalfCheetah-v5 and Ant-v5 & \texttt{updates\_per\_env\_step} & 2 & --- & \num{10} \\
+    \texttt{td3\_utd4.json} & TD3 & HalfCheetah-v5 and Ant-v5 & \texttt{updates\_per\_env\_step} & 4 & --- & \num{10} \\
+    \texttt{td3\_width256.json} & TD3 & HalfCheetah-v5 and Ant-v5 & \texttt{hidden\_sizes} & $(256,256)$ & --- & \num{10} \\
+    \texttt{td3\_width512.json} & TD3 & HalfCheetah-v5 and Ant-v5 & \texttt{hidden\_sizes} & $(512,512)$ & --- & \num{10} \\
+    \texttt{td3\_batch1024.json} & TD3 & HalfCheetah-v5 and Ant-v5 & \texttt{batch\_size} & 1024 & --- & \num{10} \\
+    \texttt{td3\_batch256.json} & TD3 & HalfCheetah-v5 and Ant-v5 & \texttt{batch\_size} & 256 & --- & \num{10} \\
+    \texttt{td3\_batch512.json} & TD3 & HalfCheetah-v5 and Ant-v5 & \texttt{batch\_size} & 512 & --- & \num{10} \\
+    \texttt{mbpo\_ant.json} & MBPO & Ant-v5 & --- & --- & Ant schedule$^{a}$ & \num{5} \\
+    \texttt{mbpo\_utd2.json} & MBPO & HalfCheetah-v5 & \texttt{updates\_per\_env\_step} & 2 & --- & \num{5} \\
+    \texttt{mbpo\_utd4.json} & MBPO & HalfCheetah-v5 & \texttt{updates\_per\_env\_step} & 4 & --- & \num{5} \\
+    \texttt{mbpo\_ant\_utd2.json} & MBPO & Ant-v5 & \texttt{updates\_per\_env\_step} & 2 & Ant schedule$^{a}$ & \num{5} \\
+    \texttt{mbpo\_ant\_utd4.json} & MBPO & Ant-v5 & \texttt{updates\_per\_env\_step} & 4 & Ant schedule$^{a}$ & \num{5} \\
+    \texttt{mbpo\_width256.json} & MBPO & HalfCheetah-v5 & \texttt{hidden\_sizes} & $(256,256)$ & --- & \num{5} \\
+    \texttt{mbpo\_width512.json} & MBPO & HalfCheetah-v5 & \texttt{hidden\_sizes} & $(512,512)$ & --- & \num{5} \\
+    \texttt{mbpo\_ant\_width256.json} & MBPO & Ant-v5 & \texttt{hidden\_sizes} & $(256,256)$ & Ant schedule$^{a}$ & \num{5} \\
+    \texttt{mbpo\_ant\_width512.json} & MBPO & Ant-v5 & \texttt{hidden\_sizes} & $(512,512)$ & Ant schedule$^{a}$ & \num{5} \\
+    \texttt{mbpo\_batch1024.json} & MBPO & HalfCheetah-v5 & \texttt{batch\_size} & 1024 & --- & \num{5} \\
+    \texttt{mbpo\_batch512.json} & MBPO & HalfCheetah-v5 & \texttt{batch\_size} & 512 & --- & \num{5} \\
+    \texttt{mbpo\_ant\_batch1024.json} & MBPO & Ant-v5 & \texttt{batch\_size} & 1024 & Ant schedule$^{a}$ & \num{5} \\
+    \texttt{mbpo\_ant\_batch512.json} & MBPO & Ant-v5 & \texttt{batch\_size} & 512 & Ant schedule$^{a}$ & \num{5} \\
+    \texttt{mbpo\_ant\_rollout1.json} & MBPO & Ant-v5 & \texttt{rollout\_max\_length} & 1 & Ant schedule$^{a}$ with the maximum length above & \num{5} \\
+    \texttt{mbpo\_ant\_rollout15.json} & MBPO & Ant-v5 & \texttt{rollout\_max\_length} & 15 & Ant schedule$^{a}$ with the maximum length above & \num{5} \\
+    \texttt{tdmpc2\_ant.json} & TD-MPC2 & Ant-v5 & --- & --- & \texttt{episodic} true & \num{5} \\
+    \texttt{tdmpc2\_numq3.json} & TD-MPC2 & HalfCheetah-v5 & \texttt{num\_q} & 3 & --- & \num{5} \\
+    \texttt{tdmpc2\_numq7.json} & TD-MPC2 & HalfCheetah-v5 & \texttt{num\_q} & 7 & --- & \num{5} \\
+    \texttt{tdmpc2\_ant\_numq3.json} & TD-MPC2 & Ant-v5 & \texttt{num\_q} & 3 & \texttt{episodic} true & \num{5} \\
+    \texttt{tdmpc2\_ant\_numq7.json} & TD-MPC2 & Ant-v5 & \texttt{num\_q} & 7 & \texttt{episodic} true & \num{5} \\
+    \texttt{tdmpc2\_horizon1.json} & TD-MPC2 & HalfCheetah-v5 & \texttt{horizon} & 1 & --- & \num{5} \\
+    \texttt{tdmpc2\_horizon5.json} & TD-MPC2 & HalfCheetah-v5 & \texttt{horizon} & 5 & --- & \num{5} \\
+    \texttt{tdmpc2\_ant\_horizon1.json} & TD-MPC2 & Ant-v5 & \texttt{horizon} & 1 & \texttt{episodic} true & \num{5} \\
+    \texttt{tdmpc2\_ant\_horizon5.json} & TD-MPC2 & Ant-v5 & \texttt{horizon} & 5 & \texttt{episodic} true & \num{5} \\

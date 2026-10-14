@@ -1,0 +1,107 @@
+\chapter{Clock Experiment Details}
+\label{app:clock-details}
+
+This appendix documents the two runs of \zcref{ch:clock}.
+\Zcref{app:clock-provenance} lists what the repository shows about their origin, \zcref{app:clock-suballoc} gives the energy of the sub-segments allocated within the gradient updates, \zcref{app:clock-idle} the idle windows, and \zcref{app:clock-full} all segments of both runs.
+R2000 is the run \texttt{results/\allowbreak mbpo/\allowbreak HalfCheetah-v5/\allowbreak seed\_\allowbreak 0/\allowbreak 20260904\_\allowbreak 122958} and R200 the run \texttt{results/\allowbreak mbpo/\allowbreak HalfCheetah-v5/\allowbreak seed\_\allowbreak 0/\allowbreak 20260904\_\allowbreak 130915}.
+All values were recomputed from the run files (\texttt{segment\_\allowbreak energy.json} and the per-task CodeCarbon file).
+
+\section{Provenance of the Two Runs}
+\label{app:clock-provenance}
+
+\begin{itemize}
+  \item Both runs record the commit \texttt{ae38808}, which dates from 2026-09-02 (14:53 UTC+2) and predates the MBPO implementation (first committed in \texttt{f109bd4} on 2026-09-04, which also contains both run directories). Only \texttt{git rev-parse HEAD} is stored, so both runs executed uncommitted working-tree code.
+  \item Both runs record the same software (PyTorch 2.13.0+cu130, CodeCarbon 3.3.0), the hidden sizes $(256,256)$ and the clock request of their column (\num{2000}/\num{2000}\,MHz and \num{200}/\num{200}\,MHz); \texttt{lock\_\allowbreak gpu\_\allowbreak clocks} is true in both.
+  \item At \texttt{ae38808} and \texttt{f109bd4} the committed default of the two clock fields is \texttt{None}, whereas both runs record explicit values. The explicit values therefore come from a working-tree edit; its form is not recorded. No command-line flag for the clock values exists.
+  \item Later commits set the default to $2000/2000$\,MHz (commit \texttt{f23f448}, 2026-09-07); all canonical and sweep runs record this value.
+  \item Not found in the repository: reason for trying \SI{200}{\mega\hertz}, exact command line, GPU power limit, supported and maximum clocks, driver and CUDA versions, and temperatures before and after the idle windows.
+\end{itemize}
+
+\paragraph{Unset clock fields in development runs.}
+Of the \num{300} run directories in the repository, \num{280} are the canonical runs; the other \num{20} are development runs.
+Fifteen of them, all SAC runs of 13 August to 2 September 2026, record \texttt{None} for both clock fields; the other five (the two runs of this chapter and one development run each of MBPO, TD3 and TD-MPC2) record \num{2000}/\num{2000}\,MHz or, for R200, \num{200}/\num{200}\,MHz.
+The fifteen runs record the commits \texttt{97eb7a7}, \texttt{64fb0cd}, \texttt{20b4d4f}, \texttt{4b9f11a}, \texttt{2aa4ccd}, \texttt{cf4d327}, \texttt{d05cbe6} and \texttt{d5880ed}.
+In the source of all eight commits, and of \texttt{ae38808}, an unset field means that the clock-control function queries the supported graphics clocks with \texttt{nvidia-smi} and sets any unset bound to the \emph{lowest} supported clock (comment in the code: ``lock to a single fixed low clock by default''); the value of that clock was not recorded.
+The constant \texttt{DEFAULT\_\allowbreak LOCK\_\allowbreak MHZ} first appears in \texttt{f109bd4} (2026-09-04) with the value \num{200}, applied to unset bounds after clamping to the supported range, and has the value \num{2000} from \texttt{f23f448} (2026-09-07), together with the configuration defaults of \num{2000}.
+The repository documentation (\texttt{README.md} and \texttt{CLAUDE.md}) describes the fifteen runs as equivalent to \SI{2000}{\mega\hertz}; the commit history shows no code that gives an unset field the value \num{2000} before \texttt{f23f448}.
+\todo{AUTHOR: decide how the unset clock fields of the fifteen development runs are described (they are not part of the 280 canonical runs), and correct the statement in \texttt{README.md} and \texttt{CLAUDE.md}.}
+
+\section{Allocated Sub-Segments}
+\label{app:clock-suballoc}
+
+\begin{table}[tbp]
+  \centering
+  \caption{Allocated sub-segments of gradient updates (energy only; allocated by timed share, see text).}
+  \label{tab:app-clock-suballoc}
+  \begin{tabular}{lrrr}
+    \toprule
+    Sub-segment                 & R2000 (kJ) & R200 (kJ) & Ratio \\
+    \midrule
+    \texttt{buffer\_\allowbreak sample} & 1.33 & 3.68 & 2.77 \\
+    \texttt{critic\_\allowbreak update} & 18.96 & 34.66 & 1.83 \\
+    \texttt{actor\_\allowbreak update} & 22.76 & 40.77 & 1.79 \\
+    \texttt{target\_\allowbreak update} & 1.96 & 2.66 & 1.36 \\
+    \midrule
+    Gradient updates (measured) & 45.00 & 81.76 & 1.82 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Allocated power.}
+The allocated powers (\SI{113.6}{\watt} and \SI{156.0}{\watt}) are energy divided by the timed sub-segment duration and are not comparable to the measured power of gradient updates (\SI{110.9}{\watt} and \SI{95.8}{\watt}).
+All four sub-segments of a run share the same allocated power, because the allocation splits the measured energy in proportion to the timed durations (\zcref{eq:allocation}).
+
+\section{Idle Windows}
+\label{app:clock-idle}
+
+\begin{table}[tbp]
+  \centering
+  \caption{Idle power of the head and tail windows (total, W). Window-corrected: energy divided by the integration window of the task instead of its recorded duration (\zcref{sec:units}).}
+  \label{tab:app-clock-idle}
+  \begin{tabular}{lrrrrrr}
+    \toprule
+          & \multicolumn{3}{c}{Window-corrected} & \multicolumn{2}{c}{As recorded} &                  \\
+    \cmidrule(lr){2-4}\cmidrule(lr){5-6}
+          & Head                                 & Tail                            & Mean            & Head  & Tail \\
+    \midrule
+    R2000 & 63.40 & 66.27 & 64.84 & 65.62 & 66.27 \\
+    R200 & 57.33 & 63.09 & 60.21 & 59.26 & 63.08 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Full Segment Table}
+\label{app:clock-full}
+
+\Zcref{tab:app-clock-full} lists all segments of both runs: the directly measured segments, the allocated sub-segments, the training total, and the warm-up and idle tasks, which are not part of the training total.
+Energy per FLOP is given for segments with a matmul FLOP count; for \texttt{target\_\allowbreak update} it is joules per Polyak operation.
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{All segments of the two runs (gross energy, seed~\num{0}, $n=1$ each). ``Alloc.'' marks sub-segments allocated within the gradient updates. Share is the share of the training total.}
+  \label{tab:app-clock-full}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}llrrrrrrrrr@{}}
+      \toprule
+      Segment & Kind & \multicolumn{2}{c}{Energy [J]} & \multicolumn{2}{c}{Duration [s]} & \multicolumn{2}{c}{Mean power [W]} & \multicolumn{2}{c}{J/FLOP} & Share R2000 [\%] \\
+      \cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}\cmidrule(lr){9-10}
+              &      & R2000 & R200 & R2000 & R200 & R2000 & R200 & R2000 & R200 & \\
+      \midrule
+      \texttt{rollout} & measured & \num{2285.74} & \num{3469.40} & \num{19.824} & \num{35.117} & \num{115.30} & \num{98.794} & \num{1.566e-07} & \num{2.378e-07} & \num{1.21} \\
+      \texttt{dynamics\_\allowbreak model\_\allowbreak update} & measured & \num{142180} & \num{482757} & \num{1211.9} & \num{4841.4} & \num{117.32} & \num{99.714} & \num{5.571e-10} & \num{1.892e-09} & \num{75.0} \\
+      \texttt{synthetic\_\allowbreak rollout\_\allowbreak generation} & measured & \num{46.0949} & \num{219.089} & \num{0.58990} & \num{2.0660} & \num{78.141} & \num{106.04} & \num{2.338e-11} & \num{1.111e-10} & \num{0.0243} \\
+      \texttt{gradient\_\allowbreak updates} & measured & \num{44999.0} & \num{81764.8} & \num{405.75} & \num{853.37} & \num{110.90} & \num{95.814} & --- & --- & \num{23.7} \\
+      \texttt{buffer\_\allowbreak sample} & alloc. & \num{1326.18} & \num{3676.50} & \num{11.672} & \num{23.561} & \num{113.62} & \num{156.04} & --- & --- & \num{0.700} \\
+      \texttt{critic\_\allowbreak update} & alloc. & \num{18956.6} & \num{34662.8} & \num{166.84} & \num{222.14} & \num{113.62} & \num{156.04} & \num{5.834e-10} & \num{1.067e-09} & \num{10.0} \\
+      \texttt{actor\_\allowbreak update} & alloc. & \num{22755.6} & \num{40765.4} & \num{200.28} & \num{261.25} & \num{113.62} & \num{156.04} & \num{8.867e-10} & \num{1.588e-09} & \num{12.0} \\
+      \texttt{target\_\allowbreak update} & alloc. & \num{1960.63} & \num{2660.07} & \num{17.256} & \num{17.047} & \num{113.62} & \num{156.04} & \num{6.790e-08} & \num{9.212e-08} & \num{1.03} \\
+      \midrule
+      Training total & total & \num{189511} & \num{568210} & \num{1638.1} & \num{5732.0} & \num{115.69} & \num{99.130} & \num{6.010e-10} & \num{1.802e-09} & \num{100} \\
+      \midrule
+      \texttt{warmup} & other & \num{13.5430} & \num{17.0718} & \num{0.15098} & \num{0.15808} & \num{89.702} & \num{108.00} & --- & --- & --- \\
+      \texttt{idle\_\allowbreak baseline\_\allowbreak head} & other & \num{5906.02} & \num{5334.26} & \num{90.004} & \num{90.009} & \num{65.620} & \num{59.264} & --- & --- & --- \\
+      \texttt{idle\_\allowbreak baseline\_\allowbreak tail} & other & \num{5964.83} & \num{5677.95} & \num{90.004} & \num{90.010} & \num{66.273} & \num{63.081} & --- & --- & --- \\
+      \bottomrule
+    \end{tabular}}
+\end{table}

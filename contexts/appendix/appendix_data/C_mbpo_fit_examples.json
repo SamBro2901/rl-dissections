@@ -1,0 +1,40 @@
+[
+ {
+  "env": "HalfCheetah-v5",
+  "run": "mbpo/HalfCheetah-v5/seed_331/20260908_194455",
+  "fit_epochs_total": 1155,
+  "n_fits": 100,
+  "optimiser_steps": 161913,
+  "train_flops": 226100622720000,
+  "holdout_flops": 19063499280000,
+  "formula_total": 245164122000000,
+  "logged_total": 245164122000000,
+  "logged_steps": 161913,
+  "holdout_share": 7.775811209439528,
+  "synthetic_samples": 990000,
+  "synth_formula": 3961726560000,
+  "synth_logged": 3961726560000,
+  "exact": true,
+  "per_member_sample": 781600,
+  "ens_fwd": 1845200
+ },
+ {
+  "env": "Ant-v5",
+  "run": "mbpo/Ant-v5/seed_331/20260908_222406",
+  "fit_epochs_total": 1535,
+  "n_fits": 100,
+  "optimiser_steps": 234243,
+  "train_flops": 445629873920000,
+  "holdout_flops": 38712212000000,
+  "formula_total": 484342085920000,
+  "logged_total": 484342085920000,
+  "logged_steps": 234243,
+  "holdout_share": 7.992741726432213,
+  "synthetic_samples": 9318677,
+  "synth_formula": 45987298247920,
+  "synth_logged": 45987298247920,
+  "exact": true,
+  "per_member_sample": 1064800,
+  "ens_fwd": 2590000
+ }
+]

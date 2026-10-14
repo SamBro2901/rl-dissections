@@ -1,0 +1,28 @@
+{
+ "runs": 280,
+ "configurations": 56,
+ "configs_not_single_factor": [],
+ "within_config_deviations": 0,
+ "varying_experiment_fields": {
+  "warmup_steps": {
+   "5000": 200,
+   "10000": 80
+  },
+  "thermal_gate_reference_file": {
+   "\"results/_thermal_reference.json\"": 3
+  }
+ },
+ "thermal_gate_reference_file_runs": 3,
+ "mbpo_fits": [
+  [
+   [
+    100,
+    100
+   ],
+   80
+  ]
+ ],
+ "thermal_gate_reasons": {
+  "reached_reference": 280
+ }
+}

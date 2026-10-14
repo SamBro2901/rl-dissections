@@ -1,0 +1,118 @@
+{\scriptsize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}llrlrrrl@{}}
+    \caption[Algorithms ordered by total energy (J) and by total J/FLOP (pJ) at every sweep value that the algorithms share, with the standard deviation over the five seeds and the coefficient of variation (CV, in percent)]{Algorithms ordered by total energy (J) and by total J/FLOP (pJ) at every sweep value that the algorithms share, with the standard deviation over the five seeds and the coefficient of variation (CV, in percent). TD3 is at its baseline batch size \num{100} in the baseline, update-to-data and width rows (batch-size rows: TD3 at the swept size). Ratio is the value divided by that of the previous rank. The ordering is given with S = SAC, T = TD3, M = MBPO, from the lowest to the highest value. The first block (energy) and the second block (J/FLOP) belong to \texttt{tab:rob-energy} and \texttt{tab:rob-jpf}. HC is HalfCheetah-v5, Ant is Ant-v5.}
+    \label{tab:app-rob-sd} \\
+    \toprule
+    Env. & Sweep value & Rank & Algorithm & Mean $\pm$ sd & CV [\%] & Ratio to previous & Ordering \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Env. & Sweep value & Rank & Algorithm & Mean $\pm$ sd & CV [\%] & Ratio to previous & Ordering \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{8}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    HC & base & \num{1} & TD3 & \num{28111.5+-310.7} & \num{1.10527} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{60911+-254.1} & \num{0.417185} & \num{2.16677} &  \\
+     &  & \num{3} & MBPO & \num{207395+-7451} & \num{3.59287} & \num{3.40488} &  \\
+    HC & UTD 2 & \num{1} & TD3 & \num{55361+-397.5} & \num{0.717974} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{118024+-623.7} & \num{0.528432} & \num{2.13191} &  \\
+     &  & \num{3} & MBPO & \num{268851+-6929} & \num{2.57712} & \num{2.27792} &  \\
+    HC & UTD 4 & \num{1} & TD3 & \num{107345+-1045} & \num{0.973354} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{234959+-1107} & \num{0.471083} & \num{2.18882} &  \\
+     &  & \num{3} & MBPO & \num{373606+-8545} & \num{2.28715} & \num{1.59009} &  \\
+    HC & width 256 & \num{1} & TD3 & \num{23037+-618.5} & \num{2.68462} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{47407.9+-458.5} & \num{0.967208} & \num{2.05791} &  \\
+     &  & \num{3} & MBPO & \num{187913+-4850} & \num{2.58078} & \num{3.96375} &  \\
+    HC & width 512 & \num{1} & TD3 & \num{25369.7+-399.1} & \num{1.57296} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{49554+-510.5} & \num{1.03023} & \num{1.95328} &  \\
+     &  & \num{3} & MBPO & \num{192769+-8814} & \num{4.5725} & \num{3.89009} &  \\
+    HC & batch 256 & \num{1} & TD3 & \num{33453.7+-435.4} & \num{1.30145} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{60911+-254.1} & \num{0.417185} & \num{1.82075} &  \\
+     &  & \num{3} & MBPO & \num{207395+-7451} & \num{3.59287} & \num{3.40488} &  \\
+    HC & batch 512 & \num{1} & TD3 & \num{41683.2+-778.1} & \num{1.86669} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{73024+-517.6} & \num{0.708767} & \num{1.75188} &  \\
+     &  & \num{3} & MBPO & \num{209101+-4906} & \num{2.34636} & \num{2.86346} &  \\
+    HC & batch 1024 & \num{1} & TD3 & \num{48068.4+-808.1} & \num{1.6812} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{82366+-589.8} & \num{0.716026} & \num{1.71351} &  \\
+     &  & \num{3} & MBPO & \num{218667+-5010} & \num{2.29103} & \num{2.65482} &  \\
+    \midrule
+    Ant & base & \num{1} & TD3 & \num{30519.8+-431.9} & \num{1.41519} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{64382.6+-588.3} & \num{0.913709} & \num{2.10953} &  \\
+     &  & \num{3} & MBPO & \num{253138+-20140} & \num{7.95614} & \num{3.93177} &  \\
+    Ant & UTD 2 & \num{1} & TD3 & \num{57542.6+-361} & \num{0.627403} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{123182+-726.7} & \num{0.589904} & \num{2.14072} &  \\
+     &  & \num{3} & MBPO & \num{316797+-17140} & \num{5.40989} & \num{2.57177} &  \\
+    Ant & UTD 4 & \num{1} & TD3 & \num{111900+-1590} & \num{1.42134} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{241327+-1066} & \num{0.441596} & \num{2.15664} &  \\
+     &  & \num{3} & MBPO & \num{424454+-16390} & \num{3.86261} & \num{1.75883} &  \\
+    Ant & width 256 & \num{1} & TD3 & \num{25100.4+-811.3} & \num{3.23231} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{49985.2+-725.5} & \num{1.45151} & \num{1.99141} &  \\
+     &  & \num{3} & MBPO & \num{234491+-9869} & \num{4.20888} & \num{4.6912} &  \\
+    Ant & width 512 & \num{1} & TD3 & \num{27473.2+-264.6} & \num{0.96296} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{52199.8+-479.3} & \num{0.918157} & \num{1.90003} &  \\
+     &  & \num{3} & MBPO & \num{231638+-18560} & \num{8.01407} & \num{4.43753} &  \\
+    Ant & batch 256 & \num{1} & TD3 & \num{35520.5+-357.7} & \num{1.00715} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{64382.6+-588.3} & \num{0.913709} & \num{1.81255} &  \\
+     &  & \num{3} & MBPO & \num{253138+-20140} & \num{7.95614} & \num{3.93177} &  \\
+    Ant & batch 512 & \num{1} & TD3 & \num{44361.2+-591.8} & \num{1.33403} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{76498.9+-399.8} & \num{0.52263} & \num{1.72446} &  \\
+     &  & \num{3} & MBPO & \num{247393+-21200} & \num{8.56907} & \num{3.23394} &  \\
+    Ant & batch 1024 & \num{1} & TD3 & \num{53235+-707.8} & \num{1.32949} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{89057.4+-410.8} & \num{0.461254} & \num{1.67291} &  \\
+     &  & \num{3} & MBPO & \num{267695+-15140} & \num{5.65589} & \num{3.00587} &  \\
+    \midrule
+    HC & base & \num{1} & SAC & \num{69.4469+-0.2897} & \num{0.417185} & --- & S<T<M \\
+     &  & \num{2} & TD3 & \num{114.334+-1.264} & \num{1.10527} & \num{1.64635} &  \\
+     &  & \num{3} & MBPO & \num{183.073+-5.442} & \num{2.97284} & \num{1.60122} &  \\
+    HC & UTD 2 & \num{1} & SAC & \num{67.2903+-0.3556} & \num{0.528432} & --- & S<T<M \\
+     &  & \num{2} & TD3 & \num{112.63+-0.8087} & \num{0.717974} & \num{1.67379} &  \\
+     &  & \num{3} & MBPO & \num{133.089+-2.498} & \num{1.87665} & \num{1.18164} &  \\
+    HC & UTD 4 & \num{1} & SAC & \num{66.9838+-0.3155} & \num{0.471083} & --- & S<M<T \\
+     &  & \num{2} & MBPO & \num{99.4189+-1.825} & \num{1.83603} & \num{1.48422} &  \\
+     &  & \num{3} & TD3 & \num{109.219+-1.063} & \num{0.973354} & \num{1.09857} &  \\
+    HC & width 256 & \num{1} & MBPO & \num{612.601+-9.023} & \num{1.47285} & --- & M<S<T \\
+     &  & \num{2} & SAC & \num{814.972+-7.882} & \num{0.967208} & \num{1.33035} &  \\
+     &  & \num{3} & TD3 & \num{1421.26+-38.16} & \num{2.68462} & \num{1.74394} &  \\
+    HC & width 512 & \num{1} & SAC & \num{221.477+-2.282} & \num{1.03023} & --- & S<M<T \\
+     &  & \num{2} & MBPO & \num{403.908+-8.707} & \num{2.15565} & \num{1.8237} &  \\
+     &  & \num{3} & TD3 & \num{405.328+-6.376} & \num{1.57296} & \num{1.00352} &  \\
+    HC & batch 256 & \num{1} & TD3 & \num{53.1773+-0.6921} & \num{1.30145} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{69.4469+-0.2897} & \num{0.417185} & \num{1.30595} &  \\
+     &  & \num{3} & MBPO & \num{183.073+-5.442} & \num{2.97284} & \num{2.63615} &  \\
+    HC & batch 512 & \num{1} & TD3 & \num{33.135+-0.6185} & \num{1.86669} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{41.6338+-0.2951} & \num{0.708767} & \num{1.25649} &  \\
+     &  & \num{3} & MBPO & \num{104.554+-2.077} & \num{1.98613} & \num{2.51128} &  \\
+    HC & batch 1024 & \num{1} & TD3 & \num{19.107+-0.3212} & \num{1.6812} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{23.4815+-0.1681} & \num{0.716026} & \num{1.22894} &  \\
+     &  & \num{3} & MBPO & \num{58.2597+-1.199} & \num{2.0578} & \num{2.48109} &  \\
+    \midrule
+    Ant & base & \num{1} & SAC & \num{68.5671+-0.6265} & \num{0.913709} & --- & S<T<M \\
+     &  & \num{2} & TD3 & \num{116.266+-1.645} & \num{1.41519} & \num{1.69565} &  \\
+     &  & \num{3} & MBPO & \num{178.766+-8.471} & \num{4.73887} & \num{1.53756} &  \\
+    Ant & UTD 2 & \num{1} & SAC & \num{65.6025+-0.387} & \num{0.589904} & --- & S<T<M \\
+     &  & \num{2} & TD3 & \num{109.654+-0.688} & \num{0.627403} & \num{1.67149} &  \\
+     &  & \num{3} & MBPO & \num{133.126+-5.193} & \num{3.90099} & \num{1.21406} &  \\
+    Ant & UTD 4 & \num{1} & SAC & \num{64.265+-0.2838} & \num{0.441596} & --- & S<M<T \\
+     &  & \num{2} & MBPO & \num{100.151+-3.003} & \num{2.99857} & \num{1.55841} &  \\
+     &  & \num{3} & TD3 & \num{106.642+-1.516} & \num{1.42134} & \num{1.06481} &  \\
+    Ant & width 256 & \num{1} & MBPO & \num{431.364+-2.818} & \num{0.653252} & --- & M<S<T \\
+     &  & \num{2} & SAC & \num{678.756+-9.852} & \num{1.45151} & \num{1.57351} &  \\
+     &  & \num{3} & TD3 & \num{1232.48+-39.84} & \num{3.23231} & \num{1.81579} &  \\
+    Ant & width 512 & \num{1} & SAC & \num{204.958+-1.882} & \num{0.918157} & --- & S<M<T \\
+     &  & \num{2} & MBPO & \num{323.041+-8.561} & \num{2.65017} & \num{1.57613} &  \\
+     &  & \num{3} & TD3 & \num{387.469+-3.731} & \num{0.96296} & \num{1.19944} &  \\
+    Ant & batch 256 & \num{1} & TD3 & \num{52.8866+-0.5326} & \num{1.00715} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{68.5671+-0.6265} & \num{0.913709} & \num{1.29649} &  \\
+     &  & \num{3} & MBPO & \num{178.766+-8.471} & \num{4.73887} & \num{2.60717} &  \\
+    Ant & batch 512 & \num{1} & TD3 & \num{33.0304+-0.4406} & \num{1.33403} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{40.7405+-0.2129} & \num{0.52263} & \num{1.23342} &  \\
+     &  & \num{3} & MBPO & \num{105.777+-6.709} & \num{6.34248} & \num{2.59636} &  \\
+    Ant & batch 1024 & \num{1} & TD3 & \num{19.8206+-0.2635} & \num{1.32949} & --- & T<S<M \\
+     &  & \num{2} & SAC & \num{23.7158+-0.1094} & \num{0.461254} & \num{1.19653} &  \\
+     &  & \num{3} & MBPO & \num{63.1381+-3.059} & \num{4.84492} & \num{2.66227} &  \\
+  \end{longtable}
+}

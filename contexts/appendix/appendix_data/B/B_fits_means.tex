@@ -1,0 +1,94 @@
+{\scriptsize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}llllrrrrr@{}}
+    \caption[Fixed and marginal cost of every segment along every sweep: least-squares fit $E=a+bF$ to configuration means (one point per sweep value)]{Fixed and marginal cost of every segment along every sweep: least-squares fit $E=a+bF$ to configuration means (one point per sweep value). $a$ is the intercept in kJ, $b$ the slope in pJ/FLOP, RSE the residual standard error in kJ. A sweep has $n=3$ points (TD3 batch size: $n=4$), so the fit has one (two) residual degrees of freedom; fits with $n=3$ are marked with $^{\dagger}$ and $R^2$ is high by construction. Segments: GU = \texttt{gradient\_updates}, fit = \texttt{dynamics\_model\_update}, synth = \texttt{synthetic\_rollout\_generation}, pretrain = \texttt{world\_model\_pretrain}. HC is HalfCheetah-v5, Ant is Ant-v5.}
+    \label{tab:app-fits-means} \\
+    \toprule
+    Algorithm & Env. & Sweep & Segment & $n$ & $a$ [kJ] & $b$ [pJ/FLOP] & $R^2$ & RSE [kJ] \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Algorithm & Env. & Sweep & Segment & $n$ & $a$ [kJ] & $b$ [pJ/FLOP] & $R^2$ & RSE [kJ] \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{9}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    SAC & HC & UTD & total & \num{3}$^{\dagger}$ & \num{2.4294} & \num{66.236} & \num{0.999967} & \num{0.723722} \\
+     &  & UTD & rollout & \num{3}$^{\dagger}$ & --- & --- & --- & --- \\
+     &  & UTD & GU & \num{3}$^{\dagger}$ & \num{-0.0322806} & \num{66.2142} & \num{0.999967} & \num{0.722622} \\
+     &  & width & total & \num{3}$^{\dagger}$ & \num{46.1562} & \num{16.7422} & \num{0.998069} & \num{0.450957} \\
+     &  & width & rollout & \num{3}$^{\dagger}$ & \num{2.26478} & \num{1073.16} & \num{0.999593} & \num{0.00325408} \\
+     &  & width & GU & \num{3}$^{\dagger}$ & \num{43.891} & \num{16.4829} & \num{0.997977} & \num{0.454337} \\
+     &  & batch & total & \num{3}$^{\dagger}$ & \num{56.2384} & \num{7.75172} & \num{0.931629} & \num{3.97789} \\
+     &  & batch & rollout & \num{3}$^{\dagger}$ & --- & --- & --- & --- \\
+     &  & batch & GU & \num{3}$^{\dagger}$ & \num{53.7949} & \num{7.66122} & \num{0.931868} & \num{3.92406} \\
+    SAC & Ant & UTD & total & \num{3}$^{\dagger}$ & \num{5.29567} & \num{62.8444} & \num{0.999999} & \num{0.145598} \\
+     &  & UTD & rollout & \num{3}$^{\dagger}$ & --- & --- & --- & --- \\
+     &  & UTD & GU & \num{3}$^{\dagger}$ & \num{0.970775} & \num{62.8573} & \num{0.999999} & \num{0.137031} \\
+     &  & width & total & \num{3}$^{\dagger}$ & \num{48.3584} & \num{16.9592} & \num{0.996829} & \num{0.617396} \\
+     &  & width & rollout & \num{3}$^{\dagger}$ & \num{4.08226} & \num{1067.92} & \num{0.999583} & \num{0.00349912} \\
+     &  & width & GU & \num{3}$^{\dagger}$ & \num{44.2749} & \num{16.698} & \num{0.996686} & \num{0.621297} \\
+     &  & batch & total & \num{3}$^{\dagger}$ & \num{58.1014} & \num{8.46559} & \num{0.968026} & \num{3.12002} \\
+     &  & batch & rollout & \num{3}$^{\dagger}$ & --- & --- & --- & --- \\
+     &  & batch & GU & \num{3}$^{\dagger}$ & \num{53.8582} & \num{8.3888} & \num{0.966897} & \num{3.1477} \\
+    \midrule
+    TD3 & HC & UTD & total & \num{3}$^{\dagger}$ & \num{2.09651} & \num{107.268} & \num{0.999861} & \num{0.672214} \\
+     &  & UTD & rollout & \num{3}$^{\dagger}$ & --- & --- & --- & --- \\
+     &  & UTD & GU & \num{3}$^{\dagger}$ & \num{0.683033} & \num{107.319} & \num{0.999871} & \num{0.647488} \\
+     &  & width & total & \num{3}$^{\dagger}$ & \num{23.3338} & \num{20.072} & \num{0.920978} & \num{1.00977} \\
+     &  & width & rollout & \num{3}$^{\dagger}$ & \num{1.24162} & \num{804.797} & \num{0.970481} & \num{0.0210042} \\
+     &  & width & GU & \num{3}$^{\dagger}$ & \num{22.092} & \num{19.3877} & \num{0.918843} & \num{0.988718} \\
+     &  & batch & total & \num{4} & \num{27.848} & \num{8.5884} & \num{0.937561} & \num{2.69865} \\
+     &  & batch & rollout & \num{4} & --- & --- & --- & --- \\
+     &  & batch & GU & \num{4} & \num{26.4286} & \num{8.44281} & \num{0.938554} & \num{2.63032} \\
+    TD3 & Ant & UTD & total & \num{3}$^{\dagger}$ & \num{3.31719} & \num{103.46} & \num{0.999998} & \num{0.0832646} \\
+     &  & UTD & rollout & \num{3}$^{\dagger}$ & --- & --- & --- & --- \\
+     &  & UTD & GU & \num{3}$^{\dagger}$ & \num{0.261673} & \num{103.526} & \num{0.999999} & \num{0.0661095} \\
+     &  & width & total & \num{3}$^{\dagger}$ & \num{25.2695} & \num{20.5927} & \num{0.937445} & \num{0.960913} \\
+     &  & width & rollout & \num{3}$^{\dagger}$ & \num{2.82222} & \num{1076.44} & \num{0.99745} & \num{0.00868119} \\
+     &  & width & GU & \num{3}$^{\dagger}$ & \num{22.446} & \num{19.6597} & \num{0.932864} & \num{0.951865} \\
+     &  & batch & total & \num{4} & \num{29.3831} & \num{9.28954} & \num{0.969514} & \num{2.14135} \\
+     &  & batch & rollout & \num{4} & --- & --- & --- & --- \\
+     &  & batch & GU & \num{4} & \num{26.3475} & \num{9.14856} & \num{0.970056} & \num{2.08942} \\
+    \midrule
+    MBPO & HC & UTD & total & \num{3}$^{\dagger}$ & \num{138.391} & \num{62.8979} & \num{0.99873} & \num{4.23631} \\
+     &  & UTD & rollout & \num{3}$^{\dagger}$ & --- & --- & --- & --- \\
+     &  & UTD & GU & \num{3}$^{\dagger}$ & \num{0.946974} & \num{65.821} & \num{1} & \num{0.0650424} \\
+     &  & UTD & fit & \num{3}$^{\dagger}$ & \num{-15.636} & \num{634.644} & \num{0.892823} & \num{2.51448} \\
+     &  & width & total & \num{3}$^{\dagger}$ & \num{181.185} & \num{23.2272} & \num{0.997973} & \num{0.645613} \\
+     &  & width & rollout & \num{3}$^{\dagger}$ & \num{2.30408} & \num{575.646} & \num{0.999992} & \num{0.000246368} \\
+     &  & width & GU & \num{3}$^{\dagger}$ & \num{43.2336} & \num{17.5507} & \num{0.998007} & \num{0.480171} \\
+     &  & width & fit & \num{3}$^{\dagger}$ & \num{-66.7036} & \num{841.678} & \num{0.841106} & \num{1.46436} \\
+     &  & batch & total & \num{3}$^{\dagger}$ & \num{201.462} & \num{4.4694} & \num{0.964399} & \num{1.62123} \\
+     &  & batch & rollout & \num{3}$^{\dagger}$ & --- & --- & --- & --- \\
+     &  & batch & GU & \num{3}$^{\dagger}$ & \num{54.3542} & \num{7.01554} & \num{0.939182} & \num{3.38175} \\
+     &  & batch & fit & \num{3}$^{\dagger}$ & \num{-66.924} & \num{846.274} & \num{0.985257} & \num{0.842959} \\
+    MBPO & Ant & UTD & total & \num{3}$^{\dagger}$ & \num{169.9} & \num{60.3312} & \num{0.998855} & \num{4.14475} \\
+     &  & UTD & rollout & \num{3}$^{\dagger}$ & --- & --- & --- & --- \\
+     &  & UTD & GU & \num{3}$^{\dagger}$ & \num{1.16854} & \num{62.516} & \num{0.999997} & \num{0.20224} \\
+     &  & UTD & fit & \num{3}$^{\dagger}$ & \num{79.3217} & \num{246.772} & \num{0.465843} & \num{4.87089} \\
+     &  & width & total & \num{3}$^{\dagger}$ & \num{218.281} & \num{24.0679} & \num{0.906147} & \num{5.05906} \\
+     &  & width & rollout & \num{3}$^{\dagger}$ & \num{4.0484} & \num{1034.39} & \num{0.99718} & \num{0.00882232} \\
+     &  & width & GU & \num{3}$^{\dagger}$ & \num{43.2229} & \num{17.5189} & \num{0.998185} & \num{0.482109} \\
+     &  & width & fit & \num{3}$^{\dagger}$ & \num{165.267} & \num{43.7467} & \num{0.00530297} & \num{6.25759} \\
+     &  & batch & total & \num{3}$^{\dagger}$ & \num{240.137} & \num{5.98093} & \num{0.677206} & \num{8.40829} \\
+     &  & batch & rollout & \num{3}$^{\dagger}$ & --- & --- & --- & --- \\
+     &  & batch & GU & \num{3}$^{\dagger}$ & \num{53.3063} & \num{8.54978} & \num{0.971555} & \num{2.96671} \\
+     &  & batch & fit & \num{3}$^{\dagger}$ & \num{2.31602} & \num{412.716} & \num{0.330409} & \num{10.1955} \\
+    \midrule
+    TD-MPC2 & HC & \texttt{num\_q} & total & \num{3}$^{\dagger}$ & \num{65.4903} & \num{42.8697} & \num{0.999079} & \num{3.60246} \\
+     &  & \texttt{num\_q} & rollout & \num{3}$^{\dagger}$ & \num{16.2545} & \num{42.3059} & \num{0.998913} & \num{1.40413} \\
+     &  & \texttt{num\_q} & GU & \num{3}$^{\dagger}$ & \num{47.3748} & \num{43.4729} & \num{0.999316} & \num{1.9069} \\
+     &  & horizon & total & \num{3}$^{\dagger}$ & \num{128.772} & \num{34.4454} & \num{0.993017} & \num{17.2306} \\
+     &  & horizon & rollout & \num{3}$^{\dagger}$ & \num{2.6852} & \num{45.1757} & \num{0.999752} & \num{1.70548} \\
+     &  & horizon & GU & \num{3}$^{\dagger}$ & \num{101.407} & \num{27.3338} & \num{0.975872} & \num{14.6098} \\
+    TD-MPC2 & Ant & \texttt{num\_q} & total & \num{3}$^{\dagger}$ & \num{68.2967} & \num{42.2302} & \num{0.999956} & \num{0.774058} \\
+     &  & \texttt{num\_q} & rollout & \num{3}$^{\dagger}$ & \num{24.75} & \num{40.5965} & \num{0.997269} & \num{2.1418} \\
+     &  & \texttt{num\_q} & GU & \num{3}$^{\dagger}$ & \num{46.5022} & \num{43.25} & \num{0.998387} & \num{2.92069} \\
+     &  & horizon & total & \num{3}$^{\dagger}$ & \num{135.464} & \num{34.414} & \num{0.997017} & \num{13.4229} \\
+     &  & horizon & rollout & \num{3}$^{\dagger}$ & \num{7.10136} & \num{43.7238} & \num{0.999761} & \num{2.2391} \\
+     &  & horizon & GU & \num{3}$^{\dagger}$ & \num{106.645} & \num{26.4709} & \num{0.987858} & \num{10.6738} \\
+  \end{longtable}
+}

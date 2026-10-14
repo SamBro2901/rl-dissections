@@ -1,0 +1,64 @@
+{\scriptsize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}lllrrrrrrr@{}}
+    \caption[Rank correlation and log-log fit of energy on FLOPs for every algorithm--segment combination (one point per configuration: the seed mean)]{Rank correlation and log-log fit of energy on FLOPs for every algorithm--segment combination (one point per configuration: the seed mean). Pooled rows combine the algorithms of an environment, the other rows use the configurations of one algorithm. $p$ is the two-sided asymptotic $p$-value of the rank correlation, $p_{\mathrm{exact}}$ the exact permutation $p$-value (given for the per-algorithm rows). The slope is that of $\log_{10}E$ on $\log_{10}F$ (with its standard error), span the range of the FLOPs in orders of magnitude. Segments: GU = \texttt{gradient\_updates}, fit = \texttt{dynamics\_model\_update}, synth = \texttt{synthetic\_rollout\_generation}, pretrain = \texttt{world\_model\_pretrain}. HC is HalfCheetah-v5, Ant is Ant-v5.}
+    \label{tab:app-segment-stats} \\
+    \toprule
+    Env. & Scope & Segment & $n$ & $\rho$ & $p$ & $p_{\mathrm{exact}}$ & Slope & $R^2$ & Span \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Env. & Scope & Segment & $n$ & $\rho$ & $p$ & $p_{\mathrm{exact}}$ & Slope & $R^2$ & Span \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{10}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    HC & pooled & total & \num{27} & \num{0.83573} & \num{5.78e-8} & --- & \num{0.47153+-0.0752} & \num{0.61101} & \num{2.906} \\
+    HC & pooled & rollout & \num{27} & \num{0.8836} & \num{1.02e-9} & --- & \num{0.42314+-0.02} & \num{0.94712} & \num{5.647} \\
+    HC & pooled & GU & \num{27} & \num{0.84209} & \num{3.66e-8} & --- & \num{0.3771+-0.0591} & \num{0.61923} & \num{2.596} \\
+    HC & pooled & fit & \num{7} & \num{0.96429} & \num{0.000454} & \num{0.00278} & \num{1.1175+-0.12} & \num{0.94577} & \num{0.03539} \\
+    HC & pooled & synth & \num{7} & \num{0.80178} & \num{0.0301} & \num{0.0476} & \num{0.39185+-0.104} & \num{0.738} & \num{0.3032} \\
+    HC & pooled & pretrain & \num{5} & \num{1} & \num{1.4e-24} & \num{0.0167} & \num{0.50944+-0.0534} & \num{0.9681} & \num{0.6052} \\
+    \midrule
+    HC & SAC & total & \num{7} & \num{0.90924} & \num{0.00454} & \num{0.00794} & \num{0.27174+-0.111} & \num{0.54635} & \num{1.78} \\
+    HC & SAC & rollout & \num{7} & \num{0.80178} & \num{0.0301} & \num{0.0476} & \num{0.052456+-0.0153} & \num{0.70291} & \num{1.17} \\
+    HC & SAC & GU & \num{7} & \num{0.90924} & \num{0.00454} & \num{0.00794} & \num{0.27881+-0.113} & \num{0.54777} & \num{1.78} \\
+    HC & TD3 & total & \num{8} & \num{0.7381} & \num{0.0366} & \num{0.0458} & \num{0.20653+-0.0899} & \num{0.46819} & \num{2.191} \\
+    HC & TD3 & rollout & \num{8} & \num{0.76376} & \num{0.0274} & \num{0.0357} & \num{0.082148+-0.0346} & \num{0.48511} & \num{1.176} \\
+    HC & TD3 & GU & \num{8} & \num{0.7381} & \num{0.0366} & \num{0.0458} & \num{0.21191+-0.0926} & \num{0.46601} & \num{2.191} \\
+    HC & MBPO & total & \num{7} & \num{0.96429} & \num{0.000454} & \num{0.00278} & \num{0.16997+-0.0813} & \num{0.46635} & \num{1.088} \\
+    HC & MBPO & rollout & \num{7} & \num{0.80178} & \num{0.0301} & \num{0.0476} & \num{0.013477+-0.00385} & \num{0.70981} & \num{1.17} \\
+    HC & MBPO & GU & \num{7} & \num{0.90924} & \num{0.00454} & \num{0.00794} & \num{0.27969+-0.114} & \num{0.54454} & \num{1.78} \\
+    HC & MBPO & fit & \num{7} & \num{0.96429} & \num{0.000454} & \num{0.00278} & \num{1.1175+-0.12} & \num{0.94577} & \num{0.03539} \\
+    HC & MBPO & synth & \num{7} & \num{0.80178} & \num{0.0301} & \num{0.0476} & \num{0.39185+-0.104} & \num{0.738} & \num{0.3032} \\
+    HC & TD-MPC2 & total & \num{5} & \num{1} & \num{1.4e-24} & \num{0.0167} & \num{0.7127+-0.0365} & \num{0.99218} & \num{0.4515} \\
+    HC & TD-MPC2 & rollout & \num{5} & \num{1} & \num{1.4e-24} & \num{0.0167} & \num{0.98195+-0.015} & \num{0.9993} & \num{0.3323} \\
+    HC & TD-MPC2 & GU & \num{5} & \num{0.9} & \num{0.0374} & \num{0.0833} & \num{0.52904+-0.0633} & \num{0.95877} & \num{0.6052} \\
+    HC & TD-MPC2 & pretrain & \num{5} & \num{1} & \num{1.4e-24} & \num{0.0167} & \num{0.50944+-0.0534} & \num{0.9681} & \num{0.6052} \\
+    \midrule
+    Ant & pooled & total & \num{29} & \num{0.84627} & \num{7.33e-9} & --- & \num{0.50709+-0.0755} & \num{0.62532} & \num{2.871} \\
+    Ant & pooled & rollout & \num{29} & \num{0.88341} & \num{2.21e-10} & --- & \num{0.38154+-0.0155} & \num{0.9574} & \num{5.625} \\
+    Ant & pooled & GU & \num{29} & \num{0.86895} & \num{9.78e-10} & --- & \num{0.39839+-0.0579} & \num{0.63686} & \num{2.525} \\
+    Ant & pooled & fit & \num{9} & \num{0.65} & \num{0.0581} & \num{0.0666} & \num{1.1485+-0.298} & \num{0.67915} & \num{0.04124} \\
+    Ant & pooled & synth & \num{9} & \num{0.93333} & \num{0.000236} & \num{0.00075} & \num{0.79348+-0.058} & \num{0.964} & \num{0.9748} \\
+    Ant & pooled & pretrain & \num{5} & \num{0.9} & \num{0.0374} & \num{0.0833} & \num{0.48814+-0.0727} & \num{0.93768} & \num{0.6098} \\
+    \midrule
+    Ant & SAC & total & \num{7} & \num{0.90924} & \num{0.00454} & \num{0.00794} & \num{0.2837+-0.111} & \num{0.56864} & \num{1.708} \\
+    Ant & SAC & rollout & \num{7} & \num{0.80178} & \num{0.0301} & \num{0.0476} & \num{0.027493+-0.00886} & \num{0.65796} & \num{1.085} \\
+    Ant & SAC & GU & \num{7} & \num{0.90924} & \num{0.00454} & \num{0.00794} & \num{0.29764+-0.115} & \num{0.57446} & \num{1.708} \\
+    Ant & TD3 & total & \num{8} & \num{0.7381} & \num{0.0366} & \num{0.0458} & \num{0.2103+-0.0891} & \num{0.48119} & \num{2.12} \\
+    Ant & TD3 & rollout & \num{8} & \num{0.76376} & \num{0.0274} & \num{0.0357} & \num{0.045009+-0.0185} & \num{0.49531} & \num{1.091} \\
+    Ant & TD3 & GU & \num{8} & \num{0.7381} & \num{0.0366} & \num{0.0458} & \num{0.22474+-0.0944} & \num{0.48589} & \num{2.121} \\
+    Ant & MBPO & total & \num{9} & \num{0.91667} & \num{0.000507} & \num{0.00131} & \num{0.19236+-0.0746} & \num{0.48727} & \num{0.8921} \\
+    Ant & MBPO & rollout & \num{9} & \num{0.7303} & \num{0.0255} & \num{0.0278} & \num{0.013722+-0.00512} & \num{0.50635} & \num{1.085} \\
+    Ant & MBPO & GU & \num{9} & \num{0.94048} & \num{0.00016} & \num{0.000529} & \num{0.30475+-0.103} & \num{0.55515} & \num{1.708} \\
+    Ant & MBPO & fit & \num{9} & \num{0.65} & \num{0.0581} & \num{0.0666} & \num{1.1485+-0.298} & \num{0.67915} & \num{0.04124} \\
+    Ant & MBPO & synth & \num{9} & \num{0.93333} & \num{0.000236} & \num{0.00075} & \num{0.79348+-0.058} & \num{0.964} & \num{0.9748} \\
+    Ant & TD-MPC2 & total & \num{5} & \num{1} & \num{1.4e-24} & \num{0.0167} & \num{0.71318+-0.0298} & \num{0.99478} & \num{0.4776} \\
+    Ant & TD-MPC2 & rollout & \num{5} & \num{1} & \num{1.4e-24} & \num{0.0167} & \num{0.96785+-0.0125} & \num{0.9995} & \num{0.3855} \\
+    Ant & TD-MPC2 & GU & \num{5} & \num{1} & \num{1.4e-24} & \num{0.0167} & \num{0.51363+-0.0632} & \num{0.95652} & \num{0.6098} \\
+    Ant & TD-MPC2 & pretrain & \num{5} & \num{0.9} & \num{0.0374} & \num{0.0833} & \num{0.48814+-0.0727} & \num{0.93768} & \num{0.6098} \\
+  \end{longtable}
+}

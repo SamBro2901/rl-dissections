@@ -1,0 +1,94 @@
+{\scriptsize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}llllrrrrr@{}}
+    \caption[Fixed and marginal cost of every segment along every sweep: least-squares fit $E=a+bF$ to the individual runs (five points per sweep value)]{Fixed and marginal cost of every segment along every sweep: least-squares fit $E=a+bF$ to the individual runs (five points per sweep value). $a$ is the intercept in kJ, $b$ the slope in pJ/FLOP, RSE the residual standard error in kJ. Segments: GU = \texttt{gradient\_updates}, fit = \texttt{dynamics\_model\_update}, synth = \texttt{synthetic\_rollout\_generation}, pretrain = \texttt{world\_model\_pretrain}. HC is HalfCheetah-v5, Ant is Ant-v5.}
+    \label{tab:app-fits-runs} \\
+    \toprule
+    Algorithm & Env. & Sweep & Segment & $n$ & $a$ [kJ] & $b$ [pJ/FLOP] & $R^2$ & RSE [kJ] \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Algorithm & Env. & Sweep & Segment & $n$ & $a$ [kJ] & $b$ [pJ/FLOP] & $R^2$ & RSE [kJ] \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{9}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    SAC & HC & UTD & total & \num{15} & \num{2.4294} & \num{66.236} & \num{0.999881} & \num{0.847328} \\
+     &  & UTD & rollout & \num{15} & --- & --- & --- & --- \\
+     &  & UTD & GU & \num{15} & \num{-0.0322806} & \num{66.2142} & \num{0.999885} & \num{0.833291} \\
+     &  & width & total & \num{15} & \num{46.1562} & \num{16.7422} & \num{0.994025} & \num{0.492921} \\
+     &  & width & rollout & \num{15} & \num{2.26478} & \num{1073.16} & \num{0.95228} & \num{0.0223931} \\
+     &  & width & GU & \num{15} & \num{43.891} & \num{16.4829} & \num{0.993793} & \num{0.49459} \\
+     &  & batch & total & \num{15} & \num{56.2384} & \num{7.75172} & \num{0.929443} & \num{2.50905} \\
+     &  & batch & rollout & \num{15} & --- & --- & --- & --- \\
+     &  & batch & GU & \num{15} & \num{53.7949} & \num{7.66122} & \num{0.929583} & \num{2.47711} \\
+    SAC & Ant & UTD & total & \num{15} & \num{5.29567} & \num{62.8444} & \num{0.9999} & \num{0.791549} \\
+     &  & UTD & rollout & \num{15} & --- & --- & --- & --- \\
+     &  & UTD & GU & \num{15} & \num{0.970775} & \num{62.8573} & \num{0.99991} & \num{0.749996} \\
+     &  & width & total & \num{15} & \num{48.3584} & \num{16.9592} & \num{0.98957} & \num{0.696949} \\
+     &  & width & rollout & \num{15} & \num{4.08226} & \num{1067.92} & \num{0.853402} & \num{0.0440253} \\
+     &  & width & GU & \num{15} & \num{44.2749} & \num{16.698} & \num{0.989557} & \num{0.686489} \\
+     &  & batch & total & \num{15} & \num{58.1014} & \num{8.46559} & \num{0.966313} & \num{1.98787} \\
+     &  & batch & rollout & \num{15} & --- & --- & --- & --- \\
+     &  & batch & GU & \num{15} & \num{53.8582} & \num{8.3888} & \num{0.965319} & \num{1.99974} \\
+    \midrule
+    TD3 & HC & UTD & total & \num{15} & \num{2.09651} & \num{107.268} & \num{0.999528} & \num{0.766826} \\
+     &  & UTD & rollout & \num{15} & --- & --- & --- & --- \\
+     &  & UTD & GU & \num{15} & \num{0.683033} & \num{107.319} & \num{0.999537} & \num{0.760206} \\
+     &  & width & total & \num{15} & \num{23.3338} & \num{20.072} & \num{0.885919} & \num{0.767176} \\
+     &  & width & rollout & \num{15} & \num{1.24162} & \num{804.797} & \num{0.907404} & \num{0.0238595} \\
+     &  & width & GU & \num{15} & \num{22.092} & \num{19.3877} & \num{0.882707} & \num{0.752093} \\
+     &  & batch & total & \num{20} & \num{27.848} & \num{8.5884} & \num{0.932621} & \num{2.09504} \\
+     &  & batch & rollout & \num{20} & --- & --- & --- & --- \\
+     &  & batch & GU & \num{20} & \num{26.4286} & \num{8.44281} & \num{0.933195} & \num{2.05009} \\
+    TD3 & Ant & UTD & total & \num{15} & \num{3.31719} & \num{103.46} & \num{0.999336} & \num{0.937291} \\
+     &  & UTD & rollout & \num{15} & --- & --- & --- & --- \\
+     &  & UTD & GU & \num{15} & \num{0.261673} & \num{103.526} & \num{0.999334} & \num{0.939091} \\
+     &  & width & total & \num{15} & \num{25.2695} & \num{20.5927} & \num{0.893163} & \num{0.797878} \\
+     &  & width & rollout & \num{15} & \num{2.82222} & \num{1076.44} & \num{0.754589} & \num{0.0607263} \\
+     &  & width & GU & \num{15} & \num{22.446} & \num{19.6597} & \num{0.890271} & \num{0.772534} \\
+     &  & batch & total & \num{20} & \num{29.3831} & \num{9.28954} & \num{0.966518} & \num{1.67525} \\
+     &  & batch & rollout & \num{20} & --- & --- & --- & --- \\
+     &  & batch & GU & \num{20} & \num{26.3475} & \num{9.14856} & \num{0.966865} & \num{1.64095} \\
+    \midrule
+    MBPO & HC & UTD & total & \num{15} & \num{138.255} & \num{62.9571} & \num{0.990838} & \num{7.09056} \\
+     &  & UTD & rollout & \num{15} & --- & --- & --- & --- \\
+     &  & UTD & GU & \num{15} & \num{0.946974} & \num{65.821} & \num{0.99992} & \num{0.690014} \\
+     &  & UTD & fit & \num{15} & \num{11.0624} & \num{529.285} & \num{0.8642} & \num{3.22964} \\
+     &  & width & total & \num{15} & \num{180.941} & \num{23.608} & \num{0.640828} & \num{6.76261} \\
+     &  & width & rollout & \num{15} & \num{2.30408} & \num{575.646} & \num{0.703386} & \num{0.0348447} \\
+     &  & width & GU & \num{15} & \num{43.2336} & \num{17.5507} & \num{0.993553} & \num{0.536752} \\
+     &  & width & fit & \num{15} & \num{-43.3141} & \num{748.064} & \num{0.858334} & \num{2.80558} \\
+     &  & batch & total & \num{15} & \num{201.394} & \num{4.49907} & \num{0.457865} & \num{5.73219} \\
+     &  & batch & rollout & \num{15} & --- & --- & --- & --- \\
+     &  & batch & GU & \num{15} & \num{54.3542} & \num{7.01554} & \num{0.938186} & \num{2.11549} \\
+     &  & batch & fit & \num{15} & \num{-31.7081} & \num{702.628} & \num{0.860283} & \num{2.65418} \\
+    MBPO & Ant & UTD & total & \num{15} & \num{168.931} & \num{60.6927} & \num{0.962119} & \num{15.1587} \\
+     &  & UTD & rollout & \num{15} & --- & --- & --- & --- \\
+     &  & UTD & GU & \num{15} & \num{1.16854} & \num{62.516} & \num{0.999843} & \num{0.984068} \\
+     &  & UTD & fit & \num{15} & \num{-4.30716} & \num{435.971} & \num{0.945622} & \num{4.25785} \\
+     &  & width & total & \num{15} & \num{215.248} & \num{27.468} & \num{0.341398} & \num{15.5193} \\
+     &  & width & rollout & \num{15} & \num{4.0484} & \num{1034.39} & \num{0.887619} & \num{0.0366094} \\
+     &  & width & GU & \num{15} & \num{43.2229} & \num{17.5189} & \num{0.996331} & \num{0.425425} \\
+     &  & width & fit & \num{15} & \num{3.80732} & \num{414.324} & \num{0.897506} & \num{5.36759} \\
+     &  & batch & total & \num{15} & \num{238.856} & \num{6.46159} & \num{0.159534} & \num{18.7402} \\
+     &  & batch & rollout & \num{15} & --- & --- & --- & --- \\
+     &  & batch & GU & \num{15} & \num{53.3063} & \num{8.54978} & \num{0.970795} & \num{1.865} \\
+     &  & batch & fit & \num{15} & \num{0.580432} & \num{416.768} & \num{0.87987} & \num{6.91429} \\
+    \midrule
+    TD-MPC2 & HC & \texttt{num\_q} & total & \num{15} & \num{65.4903} & \num{42.8697} & \num{0.998013} & \num{3.28265} \\
+     &  & \texttt{num\_q} & rollout & \num{15} & \num{16.2545} & \num{42.3059} & \num{0.998714} & \num{0.947603} \\
+     &  & \texttt{num\_q} & GU & \num{15} & \num{47.3748} & \num{43.4729} & \num{0.996697} & \num{2.60295} \\
+     &  & horizon & total & \num{15} & \num{128.772} & \num{34.4454} & \num{0.992464} & \num{11.1044} \\
+     &  & horizon & rollout & \num{15} & \num{2.6852} & \num{45.1757} & \num{0.999716} & \num{1.13095} \\
+     &  & horizon & GU & \num{15} & \num{101.407} & \num{27.3338} & \num{0.973611} & \num{9.48664} \\
+    TD-MPC2 & Ant & \texttt{num\_q} & total & \num{15} & \num{68.2967} & \num{42.2302} & \num{0.999063} & \num{2.22359} \\
+     &  & \texttt{num\_q} & rollout & \num{15} & \num{24.75} & \num{40.5965} & \num{0.996967} & \num{1.39989} \\
+     &  & \texttt{num\_q} & GU & \num{15} & \num{46.5022} & \num{43.25} & \num{0.996497} & \num{2.67191} \\
+     &  & horizon & total & \num{15} & \num{135.464} & \num{34.414} & \num{0.996606} & \num{8.88129} \\
+     &  & horizon & rollout & \num{15} & \num{7.10136} & \num{43.7238} & \num{0.999732} & \num{1.47169} \\
+     &  & horizon & GU & \num{15} & \num{106.645} & \num{26.4709} & \num{0.985752} & \num{7.17837} \\
+  \end{longtable}
+}

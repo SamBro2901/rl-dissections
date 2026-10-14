@@ -1,0 +1,370 @@
+\chapter{FLOP-Counting Details}
+\label{app:flop-details}
+
+This appendix gives the derivations and the numbers behind the FLOP accounting of \zcref{sec:flop-accounting}.
+\Zcref{sec:app-flop-rules} states the counting rules and derives the per-call FLOPs of the learners of SAC, TD3 and MBPO.
+\Zcref{sec:app-flop-mbpo} derives the FLOPs of the MBPO model fit and of the synthetic rollouts and shows that the formula reproduces the logged FLOPs of two baseline runs exactly.
+\Zcref{sec:app-flop-tdmpc2} does the same for the three counted regions of TD-MPC2, including the termination classifier.
+\Zcref{sec:app-flop-table} tabulates the per-call FLOPs of all architecture signatures, and \zcref{sec:app-flop-checks} reports the cross-checks and the consistency checks of the totals.
+Counts are matmul FLOPs, a multiply--add counts as two FLOPs, and no other operation is counted (\zcref{sec:flop-principle}).
+The per-call constants were counted with \texttt{FlopCounterMode} on the real network classes; the measurement device recorded in \texttt{flops\_\allowbreak per\_\allowbreak call.json} is the CPU, and the counts depend only on the tensor shapes.
+
+%-------------------------------------------------------------------------------
+\section{Counting Rules and Per-Call FLOPs of the Learners}\label{sec:app-flop-rules}
+
+\paragraph{Notation.} A stack of dense layers is a list $L=((n_0,n_1),\dots,(n_{k-1},n_k))$.
+Applied to $R$ rows, its forward pass costs
+\begin{equation}
+  F(R;L) = \sum_{i=1}^{k} 2\,R\,n_{i-1}n_i ,
+  \label{eq:app-fwd}
+\end{equation}
+and $F(R;L_{2:})$ denotes the same sum without the first layer.
+$|S|$ and $|A|$ are the observation and action dimension, $B$ is the batch size, and $n(L)=\sum_i (n_{i-1}n_i+n_i)$ is the number of parameters of $L$.
+
+\paragraph{Backward pass.} Autograd runs the backward pass only where a gradient is needed.
+A layer with trainable parameters costs one further $2Rn_{i-1}n_i$ for the weight gradient, and each layer whose input needs a gradient costs another $2Rn_{i-1}n_i$ for the input gradient.
+The input of the first layer needs no gradient when it is data (a state, or a state--action pair taken from the buffer), so its input gradient is not computed.
+When the first-layer input is itself the output of a network that is being trained (the action fed to the critic in the actor update), the input gradient of the first layer is computed in full, with respect to the whole concatenated input.
+When a network is frozen (the critics in the actor update), its backward pass computes input gradients only and no weight gradients.
+Hence, for a stack that is trained and whose first-layer input is data, the backward pass costs $F(R;L)+F(R;L_{2:})$, for a stack that is trained and whose input needs a gradient $2F(R;L)$, and for a frozen stack $F(R;L)$.
+
+\paragraph{Networks.} SAC has a Gaussian policy with a shared trunk $T=((|S|,h_1),(h_1,h_2))$ and two heads $H=((h_2,|A|))$ for the mean and the log standard deviation, and twin critics $Q=((|S|+|A|,h_1),(h_1,h_2),(h_2,1))$.
+The policy forward pass for $R$ rows is $F_\pi(R)=F(R;T)+2F(R;H)$.
+TD3 has a deterministic policy $P=((|S|,h_1),(h_1,h_2),(h_2,|A|))$ with $F_P(R)=F(R;P)$ and the same twin critics.
+The hidden sizes $h_1=h_2$ are $1024$ at the baseline.
+
+\paragraph{Rollout.} One call of \texttt{rollout} is a policy forward pass for one observation: $F_\pi(1)$ for SAC and MBPO, $F_P(1)$ for TD3.
+
+\paragraph{Critic update.} The counted region contains the target action from the policy (no gradient), the forward passes of both target critics and of both online critics, and the backward pass of both online critics (weights; the first-layer input is data):
+\begin{align}
+  f_{\texttt{critic\_\allowbreak update}}^{\mathrm{SAC}} &= F_\pi(B) + 4F(B;Q) + 2\bigl[F(B;Q)+F(B;Q_{2:})\bigr] ,\label{eq:app-critic-sac}\\
+  f_{\texttt{critic\_\allowbreak update}}^{\mathrm{TD3}} &= F_P(B) + 4F(B;Q) + 2\bigl[F(B;Q)+F(B;Q_{2:})\bigr] .\label{eq:app-critic-td3}
+\end{align}
+
+\paragraph{Actor update.} The region contains the policy forward pass, the forward passes of the critics with frozen parameters, the input-gradient passes through the critics, and the backward pass of the policy.
+SAC evaluates two critics, TD3 one:
+\begin{align}
+  f_{\texttt{actor\_\allowbreak update}}^{\mathrm{SAC}} &= F_\pi(B) + 2F(B;Q) + 2F(B;Q) + \bigl[4F(B;H)+F(B;T)+F(B;T_{2:})\bigr] ,\label{eq:app-actor-sac}\\
+  f_{\texttt{actor\_\allowbreak update}}^{\mathrm{TD3}} &= F_P(B) + F(B;Q) + F(B;Q) + \bigl[F(B;P)+F(B;P_{2:})\bigr] .\label{eq:app-actor-td3}
+\end{align}
+In the policy backward pass of SAC, each of the two heads has weight and input gradients ($2F(B;H)$ each), and the trunk has weight gradients and input gradients except for the first layer.
+
+\paragraph{Polyak average.} The elementwise count of \texttt{target\_\allowbreak update} is two operations per parameter of every averaged network: $4\,n(Q)$ for SAC (both critics) and $2\,[\,n(P)+2n(Q)\,]$ for TD3 (policy and both critics).
+The call count of \texttt{target\_\allowbreak update} is $N_{\mathrm{env}}U$ for SAC and MBPO and $\lceil N_{\mathrm{env}}U/d\rceil$ for TD3 with $d=2$, because TD3 updates the targets together with the actor (\zcref{eq:call-counts}).
+
+\paragraph{Worked example.} For SAC on Ant-v5 at the baseline ($|S|=105$, $|A|=8$, $B=256$, $h_1=h_2=1024$), the terms of \zcref{eq:app-critic-sac} and \zcref{eq:app-actor-sac} are $F_\pi(B)=\num{600309760}$, $F(B;Q)=\num{596639744}$ and $F(B;Q)+F(B;Q_{2:})=\num{1134034944}$.
+Therefore $f_{\texttt{critic\_\allowbreak update}}=\num{600309760}+4\cdot\num{596639744}+2\cdot\num{1134034944}=\num{5254938624}$.
+The policy backward term is $4F(B;H)+F(B;T)+F(B;T_{2:})=\num{1145569280}$, so $f_{\texttt{actor\_\allowbreak update}}=\num{600309760}+4\cdot\num{596639744}+\num{1145569280}=\num{4132438016}$.
+Both equal the counted values.
+The Polyak count is $4\,n(Q)=4\cdot\num{1167361}=\num{4669444}$ operations.
+
+\paragraph{Reconciliation with the textbook estimate.} A textbook estimate of the critic update takes three times the forward cost of both critics, $3\cdot2F(B;Q)=\num{3579838464}$.
+The counted region is larger by the target computation, $F_\pi(B)+2F(B;Q)=\num{1793589248}$, and smaller by the input gradient of the first layer of both critics, which autograd does not compute, $2\cdot2B(|S|+|A|)h_1=\num{118489088}$: $\num{3579838464}+\num{1793589248}-\num{118489088}=\num{5254938624}$.
+
+%-------------------------------------------------------------------------------
+\section{MBPO: Model Fit and Synthetic Rollouts}\label{sec:app-flop-mbpo}
+
+\paragraph{Ensemble members.} A member has a trunk and two heads (mean and log variance),
+\begin{equation*}
+  T_M=\bigl((|S|+|A|,200),(200,200),(200,200),(200,200)\bigr),\qquad H_M=\bigl((200,|S|+1)\bigr),
+\end{equation*}
+so $m_f(R)=F(R;T_M)+2F(R;H_M)$.
+The training step of one member at batch size $b$ costs
+\begin{equation}
+  m_{fb}(b) = m_f(b) + \bigl[F(b;T_M)+F(b;T_{M,2:})\bigr] + 2\cdot2F(b;H_M) ,
+  \label{eq:app-member}
+\end{equation}
+and one forward pass of the whole ensemble for one input row costs $\varepsilon=E\,m_f(1)$ with $E=7$ members.
+Matmul FLOPs are exactly linear in the number of rows, so the per-sample cost of the training step is $\mu=m_{fb}(b)/b$.
+On HalfCheetah-v5, $\mu=\num{781600}$ and $\varepsilon=\num{1845200}$; on Ant-v5, $\mu=\num{1064800}$ and $\varepsilon=\num{2590000}$.
+
+\paragraph{One call of \texttt{fit()}.} The routine is called once per epoch (\zcref{sec:app-hp-refit}) with the whole real buffer.
+Let $n$ be the buffer size at the call.
+The buffer holds the warmup transitions and the transitions of the preceding epochs, so $n=\min(w+k\cdot\num{1000},\,\num{e6})$ for the fit of epoch $k$ with $w$ warmup steps.
+The routine first splits off the holdout set,
+\begin{equation}
+  n_h=\max\bigl(1,\lfloor \rho\,n\rfloor\bigr),\qquad n_t=n-n_h ,
+  \label{eq:app-split}
+\end{equation}
+with the holdout ratio $\rho=0.2$.
+Each member draws its own bootstrap sample of $n_t$ rows from the training split.
+In every fit epoch, each member is trained on its sample in minibatches of $b=256$ rows, the last minibatch being smaller, and then the full ensemble is evaluated on the $n_h$ holdout rows (for the early-stopping criterion and the selection of the elites).
+Because the FLOPs are linear in the rows, the last minibatch costs exactly its number of rows times $\mu$.
+Let $e$ be the number of fit epochs that the call ran (it stops early after \num{5} epochs without improvement of the holdout error, and at most after \num{200}).
+Then
+\begin{align}
+  F_{\mathrm{train}} &= e\,E\,n_t\,\mu , &
+  F_{\mathrm{holdout}} &= e\,n_h\,\varepsilon , &
+  c_{\mathrm{steps}} &= e\Bigl\lceil \frac{n_t}{b}\Bigr\rceil ,
+  \label{eq:app-fit}
+\end{align}
+and the FLOPs of the call are $F_{\mathrm{train}}+F_{\mathrm{holdout}}$.
+The optimiser steps of one fit epoch update all members together, so $c_{\mathrm{steps}}$ is the number of optimiser steps, which is the call count of \texttt{dynamics\_\allowbreak model\_\allowbreak update}.
+For a run, \zcref{eq:app-fit} is summed over the \num{100} fits, with $e$ taken from the logged field \texttt{model\_\allowbreak train\_\allowbreak epochs} of each epoch in \texttt{training\_\allowbreak metrics.json}.
+Neither the normaliser fit nor the optimiser arithmetic is counted.
+The share of the holdout evaluation, $F_{\mathrm{holdout}}/(F_{\mathrm{train}}+F_{\mathrm{holdout}})$, is \SI{7.776}{\percent} on HalfCheetah-v5 and \SI{7.993}{\percent} on Ant-v5, the same in all \num{35} and \num{45} MBPO runs to the displayed digits, because $n_h/n_t$ is the same at every fit.
+
+\paragraph{Synthetic rollouts.} In \texttt{synthetic\_\allowbreak rollout\_\allowbreak generation}, every synthetic transition requires one policy forward pass and one forward pass of all ensemble members (the member is chosen after all members were evaluated), so the cost per synthetic sample is $F_\pi(1)+\varepsilon$.
+The call count is the number of synthetic samples, read from the logged field \texttt{synthetic\_\allowbreak transitions\_\allowbreak generated}.
+
+\paragraph{Worked example.} \Zcref{tab:app-flop-mbpo-example} applies \zcref{eq:app-fit} to the baseline run with seed \num{331} of each environment.
+The sum of the formula over the \num{100} fits reproduces the logged FLOPs, the logged number of optimiser steps and the logged FLOPs of the synthetic rollouts exactly, as integers.
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{MBPO baseline, seed \num{331}: FLOPs of the model fit and of the synthetic rollouts from the formula of this section and from the run file.}
+  \label{tab:app-flop-mbpo-example}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}lrrrrrrrr@{}}
+      \toprule
+      Environment    & Fits       & Fit epochs  & Optimiser steps & $F_{\mathrm{train}}$ & $F_{\mathrm{holdout}}$ & Formula total        & Logged total         & Match \\
+      \midrule
+      HalfCheetah-v5 & \num{100} & \num{1155} & \num{161913} & \num{226100622720000} & \num{19063499280000} & \num{245164122000000} & \num{245164122000000} & yes \\
+      Ant-v5 & \num{100} & \num{1535} & \num{234243} & \num{445629873920000} & \num{38712212000000} & \num{484342085920000} & \num{484342085920000} & yes \\
+      \bottomrule
+    \end{tabular}}
+\end{table}
+
+The synthetic rollouts of the HalfCheetah-v5 run consist of \num{990000} samples with \num{3961726560000} FLOPs, and those of the Ant-v5 run of \num{9318677} samples with \num{45987298247920} FLOPs; both equal the logged values.
+
+%-------------------------------------------------------------------------------
+\section{TD-MPC2: Counted Regions and Termination Classifier}\label{sec:app-flop-tdmpc2}
+
+TD-MPC2 has an encoder, a latent dynamics model, a reward head, a termination head (only if \texttt{episodic} is true), a policy prior and $K$ Q-networks.
+With MLPs of two hidden layers of $m=512$ units and a latent dimension $z=512$, their stacks of dense layers are
+\begingroup\small
+\begin{align*}
+  E_\mathrm{n} &= \bigl((|S|,256),(256,512)\bigr), & D &= \bigl((z+|A|,m),(m,m),(m,z)\bigr), & R_\mathrm{w} &= \bigl((z+|A|,m),(m,m),(m,101)\bigr), \\
+  T_\mathrm{c} &= \bigl((z,m),(m,m),(m,1)\bigr), & \pi &= \bigl((z,m),(m,m),(m,2|A|)\bigr), & Q &= \bigl((z+|A|,m),(m,m),(m,101)\bigr),
+\end{align*}
+\endgroup
+where $Q$ is one of the $K$ Q-networks.
+$H$ is the planning horizon, $S=512$ the number of candidate sequences, $P=24$ the number of sequences seeded by the policy prior, $I=6$ the number of MPPI iterations and $B=256$ the batch size.
+
+\paragraph{Planning call (\texttt{rollout}).} One call encodes the observation, unrolls the $P$ policy-seeded sequences, and evaluates the $S$ candidates in each iteration:
+\begingroup\small
+\begin{equation}
+  f_{\texttt{rollout}} = F(1;E_\mathrm{n}) + H\,F(P;\pi) + (H-1)F(P;D) + I\Bigl[H\bigl(F(S;R_\mathrm{w})+F(S;D)+\mathbb{1}_{\mathrm{ep}}F(S;T_\mathrm{c})\bigr)+F(S;\pi)+K\,F(S;Q)\Bigr] ,
+  \label{eq:app-plan}
+\end{equation}
+\endgroup
+where $\mathbb{1}_{\mathrm{ep}}$ is one if the termination classifier is active.
+
+\paragraph{World-model step (\texttt{critic\_\allowbreak update}).} With $HB$ rows for the stacked time steps,
+\begingroup\small
+\begin{align}
+  f_{\texttt{critic\_\allowbreak update}} &= F(HB;E_\mathrm{n}) + F(HB;\pi) + K\,F(HB;Q) && \text{targets, no gradient}\notag\\
+  &\quad + F(B;E_\mathrm{n}) + H\,F(B;D) + K\,F(HB;Q) + F(HB;R_\mathrm{w}) + \mathbb{1}_{\mathrm{ep}}F(HB;T_\mathrm{c}) && \text{forward}\notag\\
+  &\quad + \bigl[F(B;E_\mathrm{n})+F(B;E_{\mathrm{n},2:})\bigr] + 2H\,F(B;D) + 2K\,F(HB;Q) + 2F(HB;R_\mathrm{w}) + 2\,\mathbb{1}_{\mathrm{ep}}F(HB;T_\mathrm{c}) && \text{backward.}
+  \label{eq:app-wm}
+\end{align}
+\endgroup
+
+\paragraph{Policy-prior step (\texttt{actor\_\allowbreak update}).} With $(H+1)B$ rows $G$ in the latent space, the Q-networks are frozen, so their backward pass computes input gradients only; the loss uses two randomly chosen networks, but the backward pass of every network is executed:
+\begingroup\small
+\begin{equation}
+  f_{\texttt{actor\_\allowbreak update}} = F(G;\pi) + K\,F(G;Q) + K\,F(G;Q) + \bigl[F(G;\pi)+F(G;\pi_{2:})\bigr] .
+  \label{eq:app-prior}
+\end{equation}
+\endgroup
+
+\paragraph{Polyak average.} The elementwise count is $2K\,[\,n(Q)+4m\,]$ operations per update, where $n(Q)$ counts the dense layers and the term $4m$ is the weight and bias of the two layer normalisations of each Q-network.
+
+\paragraph{Full update and warm-up burst.} The full update is the sum of the three regions; \texttt{world\_\allowbreak model\_\allowbreak pretrain} counts \texttt{warmup\_\allowbreak steps} full updates, i.e.\ \num{5000} calls.
+
+\paragraph{Termination classifier.} In the Ant-v5 configurations, the classifier is evaluated in the planning call (term $I\,H\,F(S;T_\mathrm{c})$ of \zcref{eq:app-plan}) and trained in the world-model step (forward pass and backward pass, $3F(HB;T_\mathrm{c})$).
+At the baseline ($H=3$) the classifier costs \num{9673113600} FLOPs per planning call, \SI{17.22}{\percent} of the call, and \num{2418278400} FLOPs per world-model step, \SI{8.685}{\percent} of the step.
+Over a baseline run it accounts for $\num{100000}\cdot\num{9673113600}+(\num{100000}+\num{5000})\cdot\num{2418278400}=\num{1221230592000000}$ FLOPs (\num{1.221e15}, \SI{12.12}{\percent} of the run total of \num{1.008e16}), the second term counting the world-model steps of the warm-up burst as well.
+The classifier values of all five Ant-v5 signatures are in \zcref{tab:app-flop-tdmpc2}; the five HalfCheetah-v5 signatures have no classifier.
+
+%-------------------------------------------------------------------------------
+\section{Per-Call FLOPs of All Signatures}\label{sec:app-flop-table}
+
+\Zcref{tab:app-flop-learners} lists the per-call constants of the \num{32} signatures of SAC, TD3 and MBPO's policy learner, \zcref{tab:app-flop-mbpo-model} those of the MBPO dynamics ensemble, and \zcref{tab:app-flop-tdmpc2} those of the \num{10} signatures of TD-MPC2.
+They are the entries of \texttt{flops\_\allowbreak per\_\allowbreak call.json} that the \num{280} canonical runs use (\num{42} signatures).
+The signatures are defined in \zcref{sec:flop-signatures}; for MBPO, the learner constants are those of SAC at the same hidden sizes and batch size.
+
+{\scriptsize
+  \begin{longtable}{@{}llrrrrrr@{}}
+    \caption{Per-call FLOPs of SAC, TD3 and the policy learner of MBPO (matmul FLOPs; the last column is the number of elementwise Polyak operations, not FLOPs).}
+    \label{tab:app-flop-learners}                                                                                                   \\
+    \toprule
+    Algorithm & Environment & Batch & Hidden & Rollout call & Critic update & Actor update & Polyak ops                              \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Algorithm & Environment & Batch & Hidden & Rollout call & Critic update & Actor update & Polyak ops                              \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{8}{r@{}}{\emph{continued on the next page}}                                                                         \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+      SAC & HalfCheetah-v5 & \num{256} & $(256,256)$ & \num{145920} & \num{324927488} & \num{256638976} & \num{288772} \\
+       &  & \num{256} & $(512,512)$ & \num{553984} & \num{1253834752} & \num{983040000} & \num{1101828} \\
+       &  & \num{256} & $(1024,1024)$ & \num{2156544} & \num{4923588608} & \num{3845128192} & \num{4300804} \\
+       &  & \num{512} & $(1024,1024)$ & \num{2156544} & \num{9847177216} & \num{7690256384} & \num{4300804} \\
+       &  & \num{1024} & $(1024,1024)$ & \num{2156544} & \num{19694354432} & \num{15380512768} & \num{4300804} \\
+       & Ant-v5 & \num{256} & $(1024,1024)$ & \num{2344960} & \num{5254938624} & \num{4132438016} & \num{4669444} \\
+       &  & \num{256} & $(256,256)$ & \num{193024} & \num{407764992} & \num{328466432} & \num{380932} \\
+       &  & \num{256} & $(512,512)$ & \num{648192} & \num{1419509760} & \num{1126694912} & \num{1286148} \\
+       &  & \num{512} & $(1024,1024)$ & \num{2344960} & \num{10509877248} & \num{8264876032} & \num{4669444} \\
+       &  & \num{1024} & $(1024,1024)$ & \num{2344960} & \num{21019754496} & \num{16529752064} & \num{4669444} \\
+      \midrule
+      TD3 & HalfCheetah-v5 & \num{100} & $(1024,1024)$ & \num{2144256} & \num{1922048000} & \num{1069056000} & \num{6449168} \\
+       &  & \num{100} & $(256,256)$ & \num{142848} & \num{126617600} & \num{70656000} & \num{432656} \\
+       &  & \num{100} & $(512,512)$ & \num{547840} & \num{489164800} & \num{272384000} & \num{1651728} \\
+       &  & \num{256} & $(1024,1024)$ & \num{2144256} & \num{4920442880} & \num{2736783360} & \num{6449168} \\
+       &  & \num{512} & $(1024,1024)$ & \num{2144256} & \num{9840885760} & \num{5473566720} & \num{6449168} \\
+       &  & \num{1024} & $(1024,1024)$ & \num{2144256} & \num{19681771520} & \num{10947133440} & \num{6449168} \\
+       & Ant-v5 & \num{100} & $(1024,1024)$ & \num{2328576} & \num{2051072000} & \num{1143193600} & \num{7002132} \\
+       &  & \num{100} & $(256,256)$ & \num{188928} & \num{158873600} & \num{89190400} & \num{570900} \\
+       &  & \num{100} & $(512,512)$ & \num{640000} & \num{553676800} & \num{309452800} & \num{1928212} \\
+       &  & \num{256} & $(1024,1024)$ & \num{2328576} & \num{5250744320} & \num{2926575616} & \num{7002132} \\
+       &  & \num{512} & $(1024,1024)$ & \num{2328576} & \num{10501488640} & \num{5853151232} & \num{7002132} \\
+       &  & \num{1024} & $(1024,1024)$ & \num{2328576} & \num{21002977280} & \num{11706302464} & \num{7002132} \\
+      \midrule
+      MBPO & HalfCheetah-v5 & \num{256} & $(256,256)$ & \num{145920} & \num{324927488} & \num{256638976} & \num{288772} \\
+       &  & \num{256} & $(1024,1024)$ & \num{2156544} & \num{4923588608} & \num{3845128192} & \num{4300804} \\
+       &  & \num{256} & $(512,512)$ & \num{553984} & \num{1253834752} & \num{983040000} & \num{1101828} \\
+       &  & \num{512} & $(1024,1024)$ & \num{2156544} & \num{9847177216} & \num{7690256384} & \num{4300804} \\
+       &  & \num{1024} & $(1024,1024)$ & \num{2156544} & \num{19694354432} & \num{15380512768} & \num{4300804} \\
+       & Ant-v5 & \num{256} & $(1024,1024)$ & \num{2344960} & \num{5254938624} & \num{4132438016} & \num{4669444} \\
+       &  & \num{256} & $(256,256)$ & \num{193024} & \num{407764992} & \num{328466432} & \num{380932} \\
+       &  & \num{256} & $(512,512)$ & \num{648192} & \num{1419509760} & \num{1126694912} & \num{1286148} \\
+       &  & \num{512} & $(1024,1024)$ & \num{2344960} & \num{10509877248} & \num{8264876032} & \num{4669444} \\
+       &  & \num{1024} & $(1024,1024)$ & \num{2344960} & \num{21019754496} & \num{16529752064} & \num{4669444} \\
+  \end{longtable}
+}
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Per-call FLOPs of the MBPO dynamics ensemble (seven members of four hidden layers of \num{200} units, model batch size \num{256}).
+    The last column is the cost of one synthetic sample: policy forward pass plus forward pass of the whole ensemble.}
+  \label{tab:app-flop-mbpo-model}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}lrrrrrr@{}}
+      \toprule
+      Environment & Batch (learner) & Hidden (learner) & Member fwd+bwd, batch \num{256} & Per sample ($\mu$) & Ensemble forward ($\varepsilon$) & Per synthetic sample \\
+      \midrule
+      HalfCheetah-v5 & \num{256} & $(256,256)$ & \num{200089600} & \num{781600} & \num{1845200} & \num{1991120} \\
+      HalfCheetah-v5 & \num{256} & $(1024,1024)$ & \num{200089600} & \num{781600} & \num{1845200} & \num{4001744} \\
+      HalfCheetah-v5 & \num{256} & $(512,512)$ & \num{200089600} & \num{781600} & \num{1845200} & \num{2399184} \\
+      HalfCheetah-v5 & \num{512} & $(1024,1024)$ & \num{200089600} & \num{781600} & \num{1845200} & \num{4001744} \\
+      HalfCheetah-v5 & \num{1024} & $(1024,1024)$ & \num{200089600} & \num{781600} & \num{1845200} & \num{4001744} \\
+      Ant-v5 & \num{256} & $(1024,1024)$ & \num{272588800} & \num{1064800} & \num{2590000} & \num{4934960} \\
+      Ant-v5 & \num{256} & $(256,256)$ & \num{272588800} & \num{1064800} & \num{2590000} & \num{2783024} \\
+      Ant-v5 & \num{256} & $(512,512)$ & \num{272588800} & \num{1064800} & \num{2590000} & \num{3238192} \\
+      Ant-v5 & \num{512} & $(1024,1024)$ & \num{272588800} & \num{1064800} & \num{2590000} & \num{4934960} \\
+      Ant-v5 & \num{1024} & $(1024,1024)$ & \num{272588800} & \num{1064800} & \num{2590000} & \num{4934960} \\
+      \bottomrule
+    \end{tabular}}
+\end{table}
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Per-call FLOPs of TD-MPC2 (matmul FLOPs; Polyak operations are elementwise).
+    The last column gives the FLOPs of the termination classifier per planning call and per world-model step (Ant-v5 only), which are part of the previous columns.}
+  \label{tab:app-flop-tdmpc2}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}lrrcrrrrrr@{}}
+      \toprule
+      Environment & $H$ & $K$ & Classifier & Planning call & World-model step & Policy-prior step & Full update & Polyak ops & Classifier (call / step) \\
+      \midrule
+      HalfCheetah-v5 & \num{3} & \num{5} & no & \num{46426104320} & \num{25324027904} & \num{14581497856} & \num{39905525760} & \num{5822450} & --- \\
+       & \num{3} & \num{3} & no & \num{39310467584} & \num{18208391168} & \num{9837740032} & \num{28046131200} & \num{3493470} & --- \\
+       & \num{3} & \num{7} & no & \num{53541741056} & \num{32439664640} & \num{19325255680} & \num{51764920320} & \num{8151430} & --- \\
+       & \num{1} & \num{5} & no & \num{29482328576} & \num{8578531328} & \num{7290748928} & \num{15869280256} & \num{5822450} & --- \\
+       & \num{5} & \num{5} & no & \num{63369880064} & \num{42069524480} & \num{21872246784} & \num{63941771264} & \num{5822450} & --- \\
+      \midrule
+      Ant-v5 & \num{3} & \num{5} & yes & \num{56181445120} & \num{27844018176} & \num{14615052288} & \num{42459070464} & \num{5832690} & \num{9673113600} / \num{2418278400} \\
+       & \num{3} & \num{3} & yes & \num{49053225472} & \num{20715798528} & \num{9862905856} & \num{30578704384} & \num{3499614} & \num{9673113600} / \num{2418278400} \\
+       & \num{3} & \num{7} & yes & \num{63309664768} & \num{34972237824} & \num{19367198720} & \num{54339436544} & \num{8165766} & \num{9673113600} / \num{2418278400} \\
+       & \num{1} & \num{5} & yes & \num{32763466240} & \num{9433907200} & \num{7307526144} & \num{16741433344} & \num{5832690} & \num{3224371200} / \num{806092800} \\
+       & \num{5} & \num{5} & yes & \num{79599424000} & \num{46254129152} & \num{21922578432} & \num{68176707584} & \num{5832690} & \num{16121856000} / \num{4030464000} \\
+      \bottomrule
+    \end{tabular}}
+\end{table}
+
+%-------------------------------------------------------------------------------
+\section{Cross-Checks and Consistency Checks}\label{sec:app-flop-checks}
+
+\paragraph{Analytic versus counted FLOPs.} The script \texttt{flop\_\allowbreak analysis/\allowbreak verify\_\allowbreak analytic\_\allowbreak flops.py} derives the constants of \zcref{tab:app-flop-learners} to \zcref{tab:app-flop-tdmpc2} from the layer dimensions with the formulas of this appendix and compares them with the counted values.
+It needs neither a GPU nor PyTorch.
+\Zcref{tab:app-flop-crosscheck} gives the result for the \num{42} canonical signatures: all \num{188} comparisons are exact.
+\todo{AUTHOR: \texttt{verify\_\allowbreak analytic\_\allowbreak flops.py} is not committed. Commit it and cite the commit hash here.}
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Analytic versus counted per-call FLOPs of the canonical signatures.
+    Compared quantities: actor forward pass, critic update, actor update and Polyak operations (SAC, TD3, MBPO learner); member forward--backward and ensemble forward (MBPO model); planning call, world-model step, policy-prior step and Polyak operations (TD-MPC2).}
+  \label{tab:app-flop-crosscheck}
+  \begin{tabular}{@{}lrrrr@{}}
+    \toprule
+    Algorithm & Signatures & Comparisons & Inexact & Max.\ relative deviation \\
+    \midrule
+    SAC & \num{10} & \num{40} & \num{0} & 0 \\
+    TD3 & \num{12} & \num{48} & \num{0} & 0 \\
+    MBPO & \num{10} & \num{60} & \num{0} & 0 \\
+    TD-MPC2 & \num{10} & \num{40} & \num{0} & 0 \\
+    \midrule
+    Total & \num{42} & \num{188} & \num{0} & 0 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Linearity in the batch size.} The count of one member's training step at batch size \num{256} equals \num{256}/\num{100} times its count at batch size \num{100}, exactly: \num{200089600} against \num{78160000} on HalfCheetah-v5 and \num{272588800} against \num{106480000} on Ant-v5 (\texttt{verify\_\allowbreak mbpo\_\allowbreak fit\_\allowbreak flops.py}).
+
+\paragraph{MBPO fit formula.} The script \texttt{verify\_\allowbreak mbpo\_\allowbreak fit\_\allowbreak flops.py} wraps \texttt{FlopCounterMode} around the unmodified fit routine and compares the count with \zcref{eq:app-fit}.
+For buffer sizes of \num{5000}, \num{12345} and \num{30000} (three fit epochs each) the formula matches the counted FLOPs exactly on both environments (\zcref{tab:app-flop-fitcheck}).
+
+\begin{table}[tbp]
+  \centering
+  \scriptsize
+  \caption{Counted and predicted FLOPs of one MBPO fit (three fit epochs) at three buffer sizes.}
+  \label{tab:app-flop-fitcheck}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{@{}lrrrrr@{}}
+    \toprule
+    Environment    & Buffer size & Optimiser steps & Counted FLOPs  & Predicted FLOPs & Relative difference \\
+    \midrule
+    HalfCheetah-v5 & \num{5000}  & \num{48}        & \num{71190000000}  & \num{71190000000}  & \num{0} \\
+                   & \num{12345} & \num{117}       & \num{175768110000} & \num{175768110000} & \num{0} \\
+                   & \num{30000} & \num{282}       & \num{427140000000} & \num{427140000000} & \num{0} \\
+    Ant-v5         & \num{5000}  & \num{48}        & \num{97213200000}  & \num{97213200000}  & \num{0} \\
+                   & \num{12345} & \num{117}       & \num{240019390800} & \num{240019390800} & \num{0} \\
+                   & \num{30000} & \num{282}       & \num{583279200000} & \num{583279200000} & \num{0} \\
+    \bottomrule
+  \end{tabular}}
+\end{table}
+\todo{NOT RUN: \texttt{verify\_\allowbreak mbpo\_\allowbreak fit\_\allowbreak flops.py} needs PyTorch, which is not installed on the analysis machine; the values above are from its saved log (\texttt{flop\_\allowbreak analysis/\allowbreak output/\allowbreak verify\_\allowbreak mbpo\_\allowbreak fit\_\allowbreak flops.log}). Rerun with \texttt{python flop\_\allowbreak analysis/\allowbreak verify\_\allowbreak mbpo\_\allowbreak fit\_\allowbreak flops.py} and compare.}
+
+\paragraph{TD-MPC2: regions against the unmodified update.} For each of the \num{10} signatures, the sum of the counted regions of the gradient update (world-model step, policy-prior step, Polyak average, whose matmul count is zero) equals the count of one call of the unmodified \texttt{update()} exactly (relative difference \num{0}).
+
+\paragraph{Consistency of the totals.} The script \texttt{flop\_\allowbreak analysis/\allowbreak check\_\allowbreak totals.py} recomputes the training totals of every run from the raw run files.
+\Zcref{tab:app-flop-totals} reports its checks restricted to the \num{280} canonical runs (the script itself passes on all run directories).
+The third check compares the sum of the four allocated sub-segments in \texttt{segment\_\allowbreak energy.json} with the sum of the \num{100} \texttt{gradient\_\allowbreak updates} rows of the per-task CodeCarbon file.
+Its result depends on how the per-task file is parsed: with exact parsing of the decimal numbers (as in \texttt{check\_\allowbreak totals.py}) the maximum relative deviation is \num{2.2e-16}, whereas the default fast float parser of \texttt{pandas} gives \num{4.8e-13}, and with \texttt{float\_\allowbreak precision='round\_\allowbreak trip'} it is \num{3.6e-16}; the deviation is therefore at the level of the parsing precision and the summation order.
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Consistency checks of the training totals on the \num{280} canonical runs.}
+  \label{tab:app-flop-totals}
+  \begin{tabular}{@{}p{6.4cm}rp{4.2cm}@{}}
+    \toprule
+    Check & Runs & Result \\
+    \midrule
+    Total energy equals the sum of the training segments of \texttt{segment\_\allowbreak energy.json} (tolerance \num{e-12}) & \num{280} & max.\ relative error \num{0} \\
+    Total FLOPs equal the sum of the \texttt{matmul} rows (exact integer equality) & \num{280} & \num{280} exact \\
+    Sum of the four allocated sub-segments equals the measured \texttt{gradient\_\allowbreak updates} energy (tolerance \num{e-9}) & \num{280} & \num{2.2e-16} (exact parsing), \num{4.8e-13} (\texttt{pandas} default parser) \\
+    Exactly one total row per run, with \texttt{flop\_\allowbreak type} \texttt{mixed\_\allowbreak total} & \num{280} & \num{280} \\
+    No unexpected segment key in \texttt{segment\_\allowbreak energy.json} & \num{280} & none \\
+    \bottomrule
+  \end{tabular}
+\end{table}

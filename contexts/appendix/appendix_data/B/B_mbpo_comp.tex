@@ -1,0 +1,100 @@
+{\scriptsize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}lllrrrr@{}}
+    \caption[MBPO: composition of the energy of the measured tasks by hardware term (CPU, GPU, RAM) and idle-floor fraction (mean $\pm$ sd of the per-run percentages over the five seeds)]{MBPO: composition of the energy of the measured tasks by hardware term (CPU, GPU, RAM) and idle-floor fraction (mean $\pm$ sd of the per-run percentages over the five seeds). The RAM term is the constant capacity heuristic of CodeCarbon. The idle-floor fraction is a diagnostic: the mean of the head and tail idle power of the run (as recorded) times the duration of the task, divided by the gross energy of the task; it is not subtracted anywhere. Segment abbreviations: buffer = \texttt{buffer\_sample}, critic = \texttt{critic\_update} (TD-MPC2: world-model step), actor = \texttt{actor\_update} (TD-MPC2: policy-prior step), target = \texttt{target\_update}, GU = \texttt{gradient\_updates}, fit = \texttt{dynamics\_model\_update}, synth = \texttt{synthetic\_rollout\_generation}, pretrain = \texttt{world\_model\_pretrain}. Buffer, critic, actor and target are allocated from the GU energy by timed share; the other segments are measured. HC is HalfCheetah-v5, Ant is Ant-v5.}
+    \label{tab:app-mbpo-comp} \\
+    \toprule
+    Env. & Config. & Task & CPU [\%] & GPU [\%] & RAM [\%] & Idle floor [\%] \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Env. & Config. & Task & CPU [\%] & GPU [\%] & RAM [\%] & Idle floor [\%] \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{7}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    HC & baseline & rollout & \num{25.791+-0.402} & \num{57.4494+-0.4498} & \num{16.7596+-0.07984} & \num{55.3099+-0.04648} \\
+     &  & fit & \num{21.4036+-0.3163} & \num{61.5003+-0.2032} & \num{17.0961+-0.1393} & \num{56.3406+-0.6091} \\
+     &  & synth & \num{26.1498+-6.921} & \num{57.2526+-11.3} & \num{16.5975+-4.376} & \num{57.9021+-15.06} \\
+     &  & GU & \num{18.0568+-0.1188} & \num{68.0574+-0.1454} & \num{13.8857+-0.04518} & \num{45.7635+-0.1677} \\
+    \addlinespace[2pt]
+     & UTD 2 & rollout & \num{25.6456+-0.5067} & \num{57.2555+-0.653} & \num{17.0989+-0.1769} & \num{55.9896+-1.004} \\
+     &  & fit & \num{21.5297+-0.3008} & \num{61.1484+-0.218} & \num{17.3219+-0.1036} & \num{56.6452+-1.433} \\
+     &  & synth & \num{26.726+-4.004} & \num{56.2784+-6.677} & \num{16.9956+-2.678} & \num{59.1561+-10.09} \\
+     &  & GU & \num{18.0535+-0.1297} & \num{67.8533+-0.1307} & \num{14.0932+-0.06804} & \num{46.0885+-1.191} \\
+    \addlinespace[2pt]
+     & UTD 4 & rollout & \num{25.8077+-0.4557} & \num{57.0124+-0.4891} & \num{17.1798+-0.06818} & \num{56.3688+-0.8227} \\
+     &  & fit & \num{21.66+-0.2531} & \num{61.0385+-0.2508} & \num{17.3016+-0.04861} & \num{56.6817+-0.7222} \\
+     &  & synth & \num{26.0667+-4.712} & \num{57.4038+-7.891} & \num{16.5296+-3.179} & \num{57.3112+-10.26} \\
+     &  & GU & \num{18.1222+-0.08178} & \num{67.7115+-0.08671} & \num{14.1663+-0.07865} & \num{46.4077+-0.4161} \\
+    \addlinespace[2pt]
+     & width 256 & rollout & \num{26.1516+-0.2006} & \num{56.6782+-0.1566} & \num{17.1702+-0.1525} & \num{54.71+-0.4375} \\
+     &  & fit & \num{21.4861+-0.4663} & \num{61.3355+-0.2894} & \num{17.1784+-0.1904} & \num{54.6819+-0.5154} \\
+     &  & synth & \num{33.9304+-9.409} & \num{43.6542+-15.73} & \num{22.4154+-6.329} & \num{74.4651+-20.84} \\
+     &  & GU & \num{23.0337+-0.1083} & \num{58.9949+-0.1241} & \num{17.9715+-0.04483} & \num{57.2124+-0.3246} \\
+    \addlinespace[2pt]
+     & width 512 & rollout & \num{26.2085+-0.3683} & \num{56.6665+-0.4532} & \num{17.125+-0.141} & \num{54.8508+-0.5679} \\
+     &  & fit & \num{21.7142+-0.3489} & \num{61.1641+-0.1566} & \num{17.1217+-0.2346} & \num{54.7743+-0.5107} \\
+     &  & synth & \num{28.5317+-8.46} & \num{53.0785+-13.83} & \num{18.3898+-5.371} & \num{62.2955+-17.75} \\
+     &  & GU & \num{22.1376+-0.1112} & \num{60.6272+-0.1198} & \num{17.2352+-0.08584} & \num{55.1445+-0.3446} \\
+    \addlinespace[2pt]
+     & batch 512 & rollout & \num{26.4265+-0.2607} & \num{56.5343+-0.3275} & \num{17.0392+-0.07358} & \num{54.585+-0.4468} \\
+     &  & fit & \num{22.0041+-0.3347} & \num{60.68+-0.2388} & \num{17.3159+-0.1302} & \num{55.4028+-0.4057} \\
+     &  & synth & \num{29.0377+-3.616} & \num{52.5716+-5.984} & \num{18.3908+-2.374} & \num{61.9859+-8.057} \\
+     &  & GU & \num{15.898+-0.1062} & \num{72.0842+-0.1495} & \num{12.0177+-0.05561} & \num{38.4544+-0.3393} \\
+    \addlinespace[2pt]
+     & batch 1024 & rollout & \num{26.8266+-0.278} & \num{56.0332+-0.3162} & \num{17.1402+-0.09259} & \num{54.7645+-0.3245} \\
+     &  & fit & \num{21.9189+-0.1195} & \num{60.8047+-0.1187} & \num{17.2764+-0.03778} & \num{55.1365+-0.2987} \\
+     &  & synth & \num{25.0853+-6.224} & \num{59.1384+-10.23} & \num{15.7764+-4.002} & \num{53.4211+-13.29} \\
+     &  & GU & \num{14.3406+-0.07324} & \num{74.876+-0.1015} & \num{10.7834+-0.03493} & \num{34.4165+-0.126} \\
+    \addlinespace[2pt]
+    \midrule
+    Ant & baseline & rollout & \num{27.6475+-0.3225} & \num{55.2805+-0.4392} & \num{17.072+-0.1391} & \num{56.0243+-0.228} \\
+     &  & fit & \num{21.4284+-0.2172} & \num{61.5356+-0.1556} & \num{17.036+-0.09499} & \num{55.8464+-0.5197} \\
+     &  & synth & \num{24.0129+-0.9398} & \num{62.3211+-1.437} & \num{13.666+-0.4984} & \num{45.3015+-1.713} \\
+     &  & GU & \num{18.2631+-0.06023} & \num{67.9766+-0.06641} & \num{13.7603+-0.04485} & \num{45.1088+-0.1769} \\
+    \addlinespace[2pt]
+     & UTD 2 & rollout & \num{27.8162+-0.2323} & \num{54.6755+-0.3251} & \num{17.5083+-0.11} & \num{56.6956+-0.4403} \\
+     &  & fit & \num{21.8476+-0.42} & \num{60.9652+-0.2855} & \num{17.1872+-0.1608} & \num{55.5901+-0.6051} \\
+     &  & synth & \num{23.5364+-1.138} & \num{63.1308+-1.766} & \num{13.3328+-0.6287} & \num{43.6689+-2.23} \\
+     &  & GU & \num{18.3446+-0.09557} & \num{67.5993+-0.1645} & \num{14.0561+-0.082} & \num{45.4627+-0.1529} \\
+    \addlinespace[2pt]
+     & UTD 4 & rollout & \num{27.3432+-0.3916} & \num{55.1123+-0.5017} & \num{17.5445+-0.1739} & \num{57.0818+-0.4333} \\
+     &  & fit & \num{21.6415+-0.3309} & \num{61.1125+-0.2199} & \num{17.2461+-0.1209} & \num{56.0489+-0.4437} \\
+     &  & synth & \num{24.1385+-1.037} & \num{62.1177+-1.629} & \num{13.7438+-0.5918} & \num{45.1919+-2.062} \\
+     &  & GU & \num{18.1475+-0.06552} & \num{67.7482+-0.08542} & \num{14.1043+-0.02663} & \num{45.8377+-0.1473} \\
+    \addlinespace[2pt]
+     & width 256 & rollout & \num{27.8583+-0.4223} & \num{54.5056+-0.5375} & \num{17.6362+-0.1184} & \num{55.8985+-0.5585} \\
+     &  & fit & \num{21.8192+-0.1802} & \num{61.0978+-0.1473} & \num{17.083+-0.04751} & \num{54.1017+-0.3567} \\
+     &  & synth & \num{27.4583+-1.409} & \num{57.0052+-2.2} & \num{15.5365+-0.7914} & \num{49.8551+-2.535} \\
+     &  & GU & \num{23.3367+-0.08999} & \num{58.641+-0.06937} & \num{18.0223+-0.03664} & \num{57.0791+-0.2972} \\
+    \addlinespace[2pt]
+     & width 512 & rollout & \num{27.7415+-0.3277} & \num{54.6651+-0.4086} & \num{17.5934+-0.1471} & \num{55.7166+-0.5321} \\
+     &  & fit & \num{21.9286+-0.4225} & \num{61.0094+-0.2325} & \num{17.062+-0.2099} & \num{53.9909+-0.8996} \\
+     &  & synth & \num{25.2763+-0.7319} & \num{60.4228+-1.152} & \num{14.3009+-0.4215} & \num{45.8052+-1.324} \\
+     &  & GU & \num{22.307+-0.09831} & \num{60.4882+-0.05166} & \num{17.2048+-0.0561} & \num{54.444+-0.464} \\
+    \addlinespace[2pt]
+     & batch 512 & rollout & \num{28.2272+-0.5153} & \num{54.0068+-0.6254} & \num{17.7659+-0.1223} & \num{56.0257+-0.448} \\
+     &  & fit & \num{22.3017+-0.4187} & \num{60.4734+-0.2498} & \num{17.2249+-0.176} & \num{54.2629+-0.4859} \\
+     &  & synth & \num{24.5555+-1.046} & \num{61.6178+-1.628} & \num{13.8267+-0.5843} & \num{44.066+-1.796} \\
+     &  & GU & \num{15.8661+-0.06239} & \num{72.2968+-0.06134} & \num{11.8371+-0.06749} & \num{37.2927+-0.2763} \\
+    \addlinespace[2pt]
+     & batch 1024 & rollout & \num{27.8576+-0.3434} & \num{54.5701+-0.4241} & \num{17.5722+-0.1508} & \num{56.0928+-0.3776} \\
+     &  & fit & \num{22.706+-0.2157} & \num{60.3721+-0.117} & \num{16.9219+-0.1205} & \num{53.969+-0.542} \\
+     &  & synth & \num{24.2713+-1.037} & \num{62.1172+-1.653} & \num{13.6116+-0.6177} & \num{43.9195+-1.803} \\
+     &  & GU & \num{14.2904+-0.06038} & \num{75.1984+-0.06181} & \num{10.5112+-0.04942} & \num{33.5252+-0.2117} \\
+    \addlinespace[2pt]
+     & rollout 1 & rollout & \num{27.7662+-0.2552} & \num{54.8387+-0.2825} & \num{17.3951+-0.06915} & \num{55.1835+-0.465} \\
+     &  & fit & \num{22.3641+-0.447} & \num{60.7574+-0.2896} & \num{16.8785+-0.1581} & \num{53.5039+-1.053} \\
+     &  & synth & \num{24.5251+-3.641} & \num{60.6124+-5.895} & \num{14.8626+-2.255} & \num{49.3873+-6.982} \\
+     &  & GU & \num{18.6557+-0.1184} & \num{67.2726+-0.1745} & \num{14.0716+-0.09526} & \num{44.6043+-0.2915} \\
+    \addlinespace[2pt]
+     & rollout 15 & rollout & \num{27.5943+-0.2959} & \num{55.0289+-0.3909} & \num{17.3768+-0.1261} & \num{55.384+-0.2837} \\
+     &  & fit & \num{22.1455+-0.2039} & \num{60.932+-0.121} & \num{16.9225+-0.1324} & \num{53.8897+-0.4428} \\
+     &  & synth & \num{26.6484+-2.554} & \num{58.1586+-4.026} & \num{15.193+-1.473} & \num{49.1891+-4.877} \\
+     &  & GU & \num{18.4135+-0.07268} & \num{67.6377+-0.1047} & \num{13.9489+-0.0366} & \num{44.4229+-0.1838} \\
+    \addlinespace[2pt]
+  \end{longtable}
+}

@@ -1,0 +1,36 @@
+{\footnotesize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}lllrr@{}}
+    \caption[TD3: matmul FLOPs per run and energy per FLOP (ratio of the mean energy to the mean FLOPs, with the sd of the five per-seed ratios; gross energy)]{TD3: matmul FLOPs per run and energy per FLOP (ratio of the mean energy to the mean FLOPs, with the sd of the five per-seed ratios; gross energy). The FLOPs of \texttt{target\_update} are Polyak operations and its ratio is in nJ per operation. Segment abbreviations: buffer = \texttt{buffer\_sample}, critic = \texttt{critic\_update} (TD-MPC2: world-model step), actor = \texttt{actor\_update} (TD-MPC2: policy-prior step), target = \texttt{target\_update}, GU = \texttt{gradient\_updates}, fit = \texttt{dynamics\_model\_update}, synth = \texttt{synthetic\_rollout\_generation}, pretrain = \texttt{world\_model\_pretrain}. Buffer, critic, actor and target are allocated from the GU energy by timed share; the other segments are measured. HC is HalfCheetah-v5, Ant is Ant-v5.}
+    \label{tab:app-td3-jpf} \\
+    \toprule
+    Env. & Config. & Segment & FLOPs & J/FLOP [pJ] \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Env. & Config. & Segment & FLOPs & J/FLOP [pJ] \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{5}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    HC & baseline & rollout & \num{2.14426e11} & \num{6579.95+-85.93} \\
+     &  & buffer & \num{0} & --- \\
+     &  & critic & \num{1.92205e14} & \num{96.408+-1.456} \\
+     &  & actor & \num{5.34528e13} & \num{96.9593+-1.002} \\
+     &  & target & \num{3.22458e11} & \num{5.24807+-0.0767}\,nJ/op \\
+     &  & GU & \num{2.45658e14} & \num{108.69+-1.226} \\
+     &  & total & \num{2.45872e14} & \num{114.334+-1.264} \\
+    \addlinespace[2pt]
+    \midrule
+    Ant & baseline & rollout & \num{2.32858e11} & \num{13190.3+-225.6} \\
+     &  & buffer & \num{0} & --- \\
+     &  & critic & \num{2.05107e14} & \num{92.4275+-1.645} \\
+     &  & actor & \num{5.71597e13} & \num{92.4445+-1.291} \\
+     &  & target & \num{3.50107e11} & \num{4.95065+-0.05954}\,nJ/op \\
+     &  & GU & \num{2.62267e14} & \num{104.658+-1.559} \\
+     &  & total & \num{2.625e14} & \num{116.266+-1.645} \\
+    \addlinespace[2pt]
+  \end{longtable}
+}

@@ -1,0 +1,172 @@
+{\scriptsize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}lllllrrr@{}}
+    \caption[Marginal cost $\Delta E/\Delta F$ between adjacent sweep values for every algorithm, sweep and segment (configuration means, in pJ/FLOP)]{Marginal cost $\Delta E/\Delta F$ between adjacent sweep values for every algorithm, sweep and segment (configuration means, in pJ/FLOP). Pairs whose FLOPs differ by less than \SI{1}{\percent} of the reference FLOPs are dropped. $^{\dagger}$: the pairs of the MBPO totals are not reliable, because they include the energy of the dynamics model, which does not follow the swept factor; some are negative on Ant-v5. Segments: GU = \texttt{gradient\_updates}, fit = \texttt{dynamics\_model\_update}, synth = \texttt{synthetic\_rollout\_generation}, pretrain = \texttt{world\_model\_pretrain}. HC is HalfCheetah-v5, Ant is Ant-v5.}
+    \label{tab:app-pairs} \\
+    \toprule
+    Algorithm & Sweep & Segment & Env. & Interval & $\Delta E$ [J] & $\Delta F$ & $\Delta E/\Delta F$ [pJ/FLOP] \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Algorithm & Sweep & Segment & Env. & Interval & $\Delta E$ [J] & $\Delta F$ & $\Delta E/\Delta F$ [pJ/FLOP] \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{8}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    SAC & UTD & total & HC & $1 \to 2$ & \num{57113.4} & \num{8.76872e14} & \num{65.1331} \\
+     & UTD & total & HC & $2 \to 4$ & \num{116935} & \num{1.75374e15} & \num{66.6772} \\
+     & UTD & total & Ant & $1 \to 2$ & \num{58799.8} & \num{9.38738e14} & \num{62.6371} \\
+     & UTD & total & Ant & $2 \to 4$ & \num{118144} & \num{1.87748e15} & \num{62.9273} \\
+     & UTD & rollout & HC & $1 \to 2$ & \num{17.6845} & \num{0} & dropped \\
+     & UTD & rollout & HC & $2 \to 4$ & \num{39.4863} & \num{0} & dropped \\
+     & UTD & rollout & Ant & $1 \to 2$ & \num{-23.5445} & \num{0} & dropped \\
+     & UTD & rollout & Ant & $2 \to 4$ & \num{-15.0376} & \num{0} & dropped \\
+     & UTD & GU & HC & $1 \to 2$ & \num{57095.7} & \num{8.76872e14} & \num{65.1129} \\
+     & UTD & GU & HC & $2 \to 4$ & \num{116895} & \num{1.75374e15} & \num{66.6547} \\
+     & UTD & GU & Ant & $1 \to 2$ & \num{58823.4} & \num{9.38738e14} & \num{62.6622} \\
+     & UTD & GU & Ant & $2 \to 4$ & \num{118160} & \num{1.87748e15} & \num{62.9353} \\
+     & width & total & HC & $256 \to 512$ & \num{2146.06} & \num{1.65572e14} & \num{12.9615} \\
+     & width & total & HC & $512 \to 1024$ & \num{11357} & \num{6.53344e14} & \num{17.3829} \\
+     & width & total & Ant & $256 \to 512$ & \num{2214.56} & \num{1.81043e14} & \num{12.2323} \\
+     & width & total & Ant & $512 \to 1024$ & \num{12182.8} & \num{6.84287e14} & \num{17.8037} \\
+     & width & rollout & HC & $256 \to 512$ & \num{48.3083} & \num{4.08064e10} & \num{1183.84} \\
+     & width & rollout & HC & $512 \to 1024$ & \num{168.958} & \num{1.60256e11} & \num{1054.3} \\
+     & width & rollout & Ant & $256 \to 512$ & \num{53.4561} & \num{4.55168e10} & \num{1174.42} \\
+     & width & rollout & Ant & $512 \to 1024$ & \num{177.917} & \num{1.69677e11} & \num{1048.56} \\
+     & width & GU & HC & $256 \to 512$ & \num{2097.75} & \num{1.65531e14} & \num{12.6729} \\
+     & width & GU & HC & $512 \to 1024$ & \num{11188.1} & \num{6.53184e14} & \num{17.1285} \\
+     & width & GU & Ant & $256 \to 512$ & \num{2161.11} & \num{1.80997e14} & \num{11.94} \\
+     & width & GU & Ant & $512 \to 1024$ & \num{12004.9} & \num{6.84117e14} & \num{17.548} \\
+     & batch & total & HC & $256 \to 512$ & \num{12112.9} & \num{8.76872e14} & \num{13.8138} \\
+     & batch & total & HC & $512 \to 1024$ & \num{9341.99} & \num{1.75374e15} & \num{5.32689} \\
+     & batch & total & Ant & $256 \to 512$ & \num{12116.3} & \num{9.38738e14} & \num{12.907} \\
+     & batch & total & Ant & $512 \to 1024$ & \num{12558.5} & \num{1.87748e15} & \num{6.68903} \\
+     & batch & rollout & HC & $256 \to 512$ & \num{151.29} & \num{0} & dropped \\
+     & batch & rollout & HC & $512 \to 1024$ & \num{101.177} & \num{0} & dropped \\
+     & batch & rollout & Ant & $256 \to 512$ & \num{35.1084} & \num{0} & dropped \\
+     & batch & rollout & Ant & $512 \to 1024$ & \num{173.758} & \num{0} & dropped \\
+     & batch & GU & HC & $256 \to 512$ & \num{11961.7} & \num{8.76872e14} & \num{13.6413} \\
+     & batch & GU & HC & $512 \to 1024$ & \num{9240.81} & \num{1.75374e15} & \num{5.26919} \\
+     & batch & GU & Ant & $256 \to 512$ & \num{12081.2} & \num{9.38738e14} & \num{12.8696} \\
+     & batch & GU & Ant & $512 \to 1024$ & \num{12384.7} & \num{1.87748e15} & \num{6.59648} \\
+    \midrule
+    TD3 & UTD & total & HC & $1 \to 2$ & \num{27249.5} & \num{2.45658e14} & \num{110.925} \\
+     & UTD & total & HC & $2 \to 4$ & \num{51983.9} & \num{4.91315e14} & \num{105.806} \\
+     & UTD & total & Ant & $1 \to 2$ & \num{27022.8} & \num{2.62267e14} & \num{103.035} \\
+     & UTD & total & Ant & $2 \to 4$ & \num{54357.1} & \num{5.24534e14} & \num{103.629} \\
+     & UTD & rollout & HC & $1 \to 2$ & \num{20.6869} & \num{0} & dropped \\
+     & UTD & rollout & HC & $2 \to 4$ & \num{-51.1436} & \num{0} & dropped \\
+     & UTD & rollout & Ant & $1 \to 2$ & \num{-40.2438} & \num{0} & dropped \\
+     & UTD & rollout & Ant & $2 \to 4$ & \num{-16.2992} & \num{0} & dropped \\
+     & UTD & GU & HC & $1 \to 2$ & \num{27228.9} & \num{2.45658e14} & \num{110.841} \\
+     & UTD & GU & HC & $2 \to 4$ & \num{52035} & \num{4.91315e14} & \num{105.91} \\
+     & UTD & GU & Ant & $1 \to 2$ & \num{27063} & \num{2.62267e14} & \num{103.189} \\
+     & UTD & GU & Ant & $2 \to 4$ & \num{54373.4} & \num{5.24534e14} & \num{103.66} \\
+     & width & total & HC & $256 \to 512$ & \num{2332.72} & \num{4.63816e13} & \num{50.2941} \\
+     & width & total & HC & $512 \to 1024$ & \num{2741.78} & \num{1.83282e14} & \num{14.9594} \\
+     & width & total & Ant & $256 \to 512$ & \num{2372.81} & \num{5.05385e13} & \num{46.9504} \\
+     & width & total & Ant & $512 \to 1024$ & \num{3046.61} & \num{1.91595e14} & \num{15.9013} \\
+     & width & rollout & HC & $256 \to 512$ & \num{61.7491} & \num{4.04992e10} & \num{1524.7} \\
+     & width & rollout & HC & $512 \to 1024$ & \num{108.978} & \num{1.59642e11} & \num{682.644} \\
+     & width & rollout & Ant & $256 \to 512$ & \num{60.5842} & \num{4.51072e10} & \num{1343.12} \\
+     & width & rollout & Ant & $512 \to 1024$ & \num{173.624} & \num{1.68858e11} & \num{1028.23} \\
+     & width & GU & HC & $256 \to 512$ & \num{2270.97} & \num{4.63411e13} & \num{49.0056} \\
+     & width & GU & HC & $512 \to 1024$ & \num{2632.8} & \num{1.83122e14} & \num{14.3773} \\
+     & width & GU & Ant & $256 \to 512$ & \num{2312.22} & \num{5.04934e13} & \num{45.7925} \\
+     & width & GU & Ant & $512 \to 1024$ & \num{2872.99} & \num{1.91427e14} & \num{15.0083} \\
+     & batch & total & HC & $100 \to 256$ & \num{5342.27} & \num{3.83226e14} & \num{13.9403} \\
+     & batch & total & HC & $256 \to 512$ & \num{8229.49} & \num{6.28883e14} & \num{13.0859} \\
+     & batch & total & HC & $512 \to 1024$ & \num{6385.22} & \num{1.25777e15} & \num{5.07663} \\
+     & batch & total & Ant & $100 \to 256$ & \num{5000.71} & \num{4.09136e14} & \num{12.2226} \\
+     & batch & total & Ant & $256 \to 512$ & \num{8840.64} & \num{6.71403e14} & \num{13.1674} \\
+     & batch & total & Ant & $512 \to 1024$ & \num{8873.81} & \num{1.34281e15} & \num{6.6084} \\
+     & batch & rollout & HC & $100 \to 256$ & \num{105.912} & \num{0} & dropped \\
+     & batch & rollout & HC & $256 \to 512$ & \num{164.786} & \num{0} & dropped \\
+     & batch & rollout & HC & $512 \to 1024$ & \num{70.7841} & \num{0} & dropped \\
+     & batch & rollout & Ant & $100 \to 256$ & \num{15.1154} & \num{0} & dropped \\
+     & batch & rollout & Ant & $256 \to 512$ & \num{215.192} & \num{0} & dropped \\
+     & batch & rollout & Ant & $512 \to 1024$ & \num{89.067} & \num{0} & dropped \\
+     & batch & GU & HC & $100 \to 256$ & \num{5236.36} & \num{3.83226e14} & \num{13.6639} \\
+     & batch & GU & HC & $256 \to 512$ & \num{8064.7} & \num{6.28883e14} & \num{12.8238} \\
+     & batch & GU & HC & $512 \to 1024$ & \num{6314.43} & \num{1.25777e15} & \num{5.02035} \\
+     & batch & GU & Ant & $100 \to 256$ & \num{4985.59} & \num{4.09136e14} & \num{12.1857} \\
+     & batch & GU & Ant & $256 \to 512$ & \num{8625.45} & \num{6.71403e14} & \num{12.8469} \\
+     & batch & GU & Ant & $512 \to 1024$ & \num{8784.74} & \num{1.34281e15} & \num{6.54207} \\
+    \midrule
+    MBPO & UTD & total & HC & $1 \to 2$ & \num{61456.1} & \num{8.87236e14} & \num{69.2669}$^{\dagger}$ \\
+     & UTD & total & HC & $2 \to 4$ & \num{104756} & \num{1.73781e15} & \num{60.2802}$^{\dagger}$ \\
+     & UTD & total & Ant & $1 \to 2$ & \num{63658.6} & \num{9.6364e14} & \num{66.0605}$^{\dagger}$ \\
+     & UTD & total & Ant & $2 \to 4$ & \num{107657} & \num{1.85846e15} & \num{57.9284}$^{\dagger}$ \\
+     & UTD & rollout & HC & $1 \to 2$ & \num{-18.5847} & \num{0} & dropped \\
+     & UTD & rollout & HC & $2 \to 4$ & \num{-28.5827} & \num{0} & dropped \\
+     & UTD & rollout & Ant & $1 \to 2$ & \num{-77.8582} & \num{0} & dropped \\
+     & UTD & rollout & Ant & $2 \to 4$ & \num{-35.5887} & \num{0} & dropped \\
+     & UTD & GU & HC & $1 \to 2$ & \num{57629.6} & \num{8.76872e14} & \num{65.7218} \\
+     & UTD & GU & HC & $2 \to 4$ & \num{115503} & \num{1.75374e15} & \num{65.8606} \\
+     & UTD & GU & Ant & $1 \to 2$ & \num{58956.4} & \num{9.38738e14} & \num{62.8039} \\
+     & UTD & GU & Ant & $2 \to 4$ & \num{117156} & \num{1.87748e15} & \num{62.4008} \\
+     & UTD & fit & HC & $1 \to 2$ & \num{3847.92} & \num{1.03643e13} & \num{371.266} \\
+     & UTD & fit & HC & $2 \to 4$ & \num{-10720.7} & \num{-1.59333e13} & \num{672.852} \\
+     & UTD & fit & Ant & $1 \to 2$ & \num{4765.49} & \num{2.54336e13} & \num{187.37} \\
+     & UTD & fit & Ant & $2 \to 4$ & \num{-9424.96} & \num{-1.76682e13} & \num{533.443} \\
+     & width & total & HC & $256 \to 512$ & \num{4855.98} & \num{1.70514e14} & \num{28.4785}$^{\dagger}$ \\
+     & width & total & HC & $512 \to 1024$ & \num{14625.3} & \num{6.55593e14} & \num{22.3085}$^{\dagger}$ \\
+     & width & total & Ant & $256 \to 512$ & \num{-2852.69} & \num{1.73452e14} & \num{-16.4466}$^{\dagger}$ \\
+     & width & total & Ant & $512 \to 1024$ & \num{21500} & \num{6.98973e14} & \num{30.7594}$^{\dagger}$ \\
+     & width & rollout & HC & $256 \to 512$ & \num{23.1481} & \num{4.08064e10} & \num{567.267} \\
+     & width & rollout & HC & $512 \to 1024$ & \num{92.4796} & \num{1.60256e11} & \num{577.074} \\
+     & width & rollout & Ant & $256 \to 512$ & \num{34.8591} & \num{4.55168e10} & \num{765.852} \\
+     & width & rollout & Ant & $512 \to 1024$ & \num{183.791} & \num{1.69677e11} & \num{1083.18} \\
+     & width & GU & HC & $256 \to 512$ & \num{2238.65} & \num{1.65531e14} & \num{13.5241} \\
+     & width & GU & HC & $512 \to 1024$ & \num{11909.6} & \num{6.53184e14} & \num{18.2331} \\
+     & width & GU & Ant & $256 \to 512$ & \num{2502.61} & \num{1.80997e14} & \num{13.8268} \\
+     & width & GU & Ant & $512 \to 1024$ & \num{12436.2} & \num{6.84117e14} & \num{18.1785} \\
+     & width & fit & HC & $256 \to 512$ & \num{2581.67} & \num{4.53813e12} & \num{568.886} \\
+     & width & fit & HC & $512 \to 1024$ & \num{2613.58} & \num{6.61592e11} & dropped \\
+     & width & fit & Ant & $256 \to 512$ & \num{-5464.71} & \num{-1.22683e13} & \num{445.433} \\
+     & width & fit & Ant & $512 \to 1024$ & \num{8786.44} & \num{-9.88982e11} & dropped \\
+     & batch & total & HC & $256 \to 512$ & \num{1706.86} & \num{8.67085e14} & \num{1.96851}$^{\dagger}$ \\
+     & batch & total & HC & $512 \to 1024$ & \num{9565.64} & \num{1.75338e15} & \num{5.45554}$^{\dagger}$ \\
+     & batch & total & Ant & $256 \to 512$ & \num{-5744.93} & \num{9.22791e14} & \num{-6.2256}$^{\dagger}$ \\
+     & batch & total & Ant & $512 \to 1024$ & \num{20301.8} & \num{1.90101e15} & \num{10.6795}$^{\dagger}$ \\
+     & batch & rollout & HC & $256 \to 512$ & \num{-44.8684} & \num{0} & dropped \\
+     & batch & rollout & HC & $512 \to 1024$ & \num{-20.5882} & \num{0} & dropped \\
+     & batch & rollout & Ant & $256 \to 512$ & \num{-178.952} & \num{0} & dropped \\
+     & batch & rollout & Ant & $512 \to 1024$ & \num{64.6492} & \num{0} & dropped \\
+     & batch & GU & HC & $256 \to 512$ & \num{10670.8} & \num{8.76872e14} & \num{12.1691} \\
+     & batch & GU & HC & $512 \to 1024$ & \num{8688.22} & \num{1.75374e15} & \num{4.9541} \\
+     & batch & GU & Ant & $256 \to 512$ & \num{11990.4} & \num{9.38738e14} & \num{12.7729} \\
+     & batch & GU & Ant & $512 \to 1024$ & \num{12880.4} & \num{1.87748e15} & \num{6.86051} \\
+     & batch & fit & HC & $256 \to 512$ & \num{-8910.21} & \num{-9.78625e12} & \num{910.482} \\
+     & batch & fit & HC & $512 \to 1024$ & \num{883.873} & \num{-3.63544e11} & dropped \\
+     & batch & fit & Ant & $256 \to 512$ & \num{-17544.7} & \num{-1.5908e13} & \num{1102.88} \\
+     & batch & fit & Ant & $512 \to 1024$ & \num{7357.25} & \num{2.41374e13} & \num{304.807} \\
+    \midrule
+    TD-MPC2 & \texttt{num\_q} & total & HC & $3 \to 5$ & \num{88299.6} & \num{1.9568e15} & \num{45.1245} \\
+     & \texttt{num\_q} & total & HC & $5 \to 7$ & \num{79475.4} & \num{1.9568e15} & \num{40.615} \\
+     & \texttt{num\_q} & total & Ant & $3 \to 5$ & \num{81834.2} & \num{1.96026e15} & \num{41.7466} \\
+     & \texttt{num\_q} & total & Ant & $5 \to 7$ & \num{83730.3} & \num{1.96026e15} & \num{42.7139} \\
+     & \texttt{num\_q} & rollout & HC & $3 \to 5$ & \num{31823.1} & \num{7.11564e14} & \num{44.7227} \\
+     & \texttt{num\_q} & rollout & HC & $5 \to 7$ & \num{28383.6} & \num{7.11564e14} & \num{39.8891} \\
+     & \texttt{num\_q} & rollout & Ant & $3 \to 5$ & \num{31561.3} & \num{7.12822e14} & \num{44.2765} \\
+     & \texttt{num\_q} & rollout & Ant & $5 \to 7$ & \num{26314.9} & \num{7.12822e14} & \num{36.9166} \\
+     & \texttt{num\_q} & GU & HC & $3 \to 5$ & \num{53891.7} & \num{1.18594e15} & \num{45.4422} \\
+     & \texttt{num\_q} & GU & HC & $5 \to 7$ & \num{49220.7} & \num{1.18594e15} & \num{41.5036} \\
+     & \texttt{num\_q} & GU & Ant & $3 \to 5$ & \num{47805.5} & \num{1.18804e15} & \num{40.2391} \\
+     & \texttt{num\_q} & GU & Ant & $5 \to 7$ & \num{54959.7} & \num{1.18804e15} & \num{46.2609} \\
+     & horizon & total & HC & $1 \to 3$ & \num{166400} & \num{4.21818e15} & \num{39.4483} \\
+     & horizon & total & HC & $3 \to 5$ & \num{124194} & \num{4.21818e15} & \num{29.4425} \\
+     & horizon & total & Ant & $1 \to 3$ & \num{189960} & \num{5.04215e15} & \num{37.6744} \\
+     & horizon & total & Ant & $3 \to 5$ & \num{157081} & \num{5.04215e15} & \num{31.1536} \\
+     & horizon & rollout & HC & $1 \to 3$ & \num{78633.4} & \num{1.69438e15} & \num{46.4084} \\
+     & horizon & rollout & HC & $3 \to 5$ & \num{74455.9} & \num{1.69438e15} & \num{43.9429} \\
+     & horizon & rollout & Ant & $1 \to 3$ & \num{105135} & \num{2.3418e15} & \num{44.8948} \\
+     & horizon & rollout & Ant & $3 \to 5$ & \num{99649.9} & \num{2.3418e15} & \num{42.5527} \\
+     & horizon & GU & HC & $1 \to 3$ & \num{83593.5} & \num{2.40362e15} & \num{34.7781} \\
+     & horizon & GU & HC & $3 \to 5$ & \num{47806.9} & \num{2.40362e15} & \num{19.8895} \\
+     & horizon & GU & Ant & $1 \to 3$ & \num{81149.7} & \num{2.57176e15} & \num{31.5541} \\
+     & horizon & GU & Ant & $3 \to 5$ & \num{55004.4} & \num{2.57176e15} & \num{21.3878} \\
+  \end{longtable}
+}

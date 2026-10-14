@@ -1,0 +1,30 @@
+\begin{table}[tb]
+  \centering
+  \caption{Software and hardware of the canonical runs: items recorded identically in all \num{280} runs, one item stated by the author that is not in the run files, and items that were not recorded.}
+  \label{tab:thr-provenance}
+  \small
+  \begin{tabular}{lp{7.8cm}}
+    \toprule
+    Item                                     & Value                                                                                                       \\
+    \midrule
+    \multicolumn{2}{l}{\emph{Recorded in the run files (all \num{280} runs)}}                                                                              \\
+    Operating system string                  & Linux-7.0.0-31-generic-x86\_64, glibc 2.43                                                                  \\
+    Python                                   & 3.14.4                                                                                                      \\
+    PyTorch                                  & 2.13.0+cu130 (build tag, not measured runtime)                                                              \\
+    CodeCarbon                               & 3.3.0 (\texttt{machine} tracking mode)                                                                      \\
+    CPU                                      & Intel Core Ultra 9 285K, \num{24} threads                                                                   \\
+    GPU                                      & NVIDIA GeForce RTX 5090; lock to \SI{2000}{\mega\hertz} requested (metadata), no record that it took effect \\
+    RAM                                      & \SI{60.8}{\giga\byte}                                                                                       \\
+    \midrule
+    \multicolumn{2}{l}{\emph{Stated by the author, not in the run files}}                                                                                  \\
+    Distribution                             & Ubuntu 26.04 LTS (point release to be confirmed)                                                            \\
+    \midrule
+    \multicolumn{2}{l}{\emph{Not recorded}}                                                                                                                \\
+    Gymnasium, MuJoCo, \texttt{nvidia-ml-py} & \todo{\texttt{pip freeze} in \texttt{rl-exp}}                                                               \\
+    Driver, kernel modules, VBIOS            & \todo{\texttt{nvidia-smi}}                                                                                  \\
+    Power limits, supported clocks           & \todo{\texttt{nvidia-smi -q -d POWER,CLOCK,SUPPORTED\_CLOCKS}}                                              \\
+    SM count, compute capability, peak FP32  & \todo{\texttt{torch.cuda.get\_device\_properties(0)}}                                                       \\
+    RAM type/speed, mainboard, storage       & \todo{\texttt{lscpu}, \texttt{lsblk}, \texttt{dmidecode}}                                                   \\
+    \bottomrule
+  \end{tabular}
+\end{table}

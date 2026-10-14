@@ -1,0 +1,188 @@
+\chapter{Reproducibility details}
+\label{app:reproducibility}
+
+This appendix documents what is needed to trace and repeat the experiments.
+\Zcref{sec:app-repro-env} lists the software and hardware of the canonical runs, \zcref{sec:app-repro-sessions} the ten execution sessions, and \zcref{sec:app-repro-notes} two irregularities of the execution that did not change the data.
+\Zcref{sec:app-repro-code} identifies the code state of the runs, \zcref{sec:app-repro-scripts} the scripts that produced the numbers of the thesis, and \zcref{sec:app-repro-run} how the experiments are started.
+\Zcref{sec:app-repro-repo} states the open points of the repository.
+
+%-------------------------------------------------------------------------------
+\section{Software and Hardware}\label{sec:app-repro-env}
+
+%%E_THR_PROVENANCE%%
+
+The analysis scripts were run in a separate environment on a Windows machine (\zcref{sec:app-repro-scripts}).
+The experiments themselves were run on the research PC only.
+
+%-------------------------------------------------------------------------------
+\section{Execution Sessions}\label{sec:app-repro-sessions}
+
+The \num{280} canonical runs were launched in ten sessions (\zcref{tab:sessions}) from \num{12} git commits (\zcref{sec:app-repro-code}).
+A session is a maximal sequence of runs in which the next run starts less than \SI{30}{\minute} after the end of the previous one.
+The largest gap between two runs inside a session is \SI{9.6}{\minute}, and the smallest gap between two sessions is \SI{3.3}{\hour}, so every threshold between \SI{10}{\minute} and \SI{3}{\hour} gives the same ten sessions (checked for \SI{30}{\minute}, \SI{1}{\hour} and \SI{2}{\hour}).
+The \num{280} runs last \SI{117.7}{\hour} in total (sum of the run durations) and the ten session spans add up to \SI{118.6}{\hour}.
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Execution sessions of the \num{280} canonical runs (times in UTC, taken from the start and end times in the metadata of the runs).
+    Span is the time from the first start to the last end, gap the time since the end of the previous session.
+    In the runs column, HC is HalfCheetah-v5 and Ant is Ant-v5.}
+  \label{tab:sessions}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}rllrrrp{4.4cm}p{4.6cm}p{2.2cm}@{}}
+      \toprule
+      No. & First start & Last end & Span [h] & Gap [h] & Runs & Algorithm, environment (runs) & Content & Commits \\
+      \midrule
+%%E_SESSION_ROWS%%
+      \bottomrule
+    \end{tabular}}
+\end{table}
+
+%-------------------------------------------------------------------------------
+\section{Notes on the Execution}\label{sec:app-repro-notes}
+
+\paragraph{False start of the TD-MPC2 sweep.} On 18 September 2026 the script of the \texttt{num\_q}/horizon sweep was started with an override file that did not exist (\texttt{configs/overrides/tdmpc2\_num\_q3.json}; the files are named \texttt{tdmpc2\_numq3.json}).
+The first five launches (HalfCheetah-v5, seeds \num{331}, \num{958}, \num{14577}, \num{43611} and \num{85062}, \texttt{num\_q} $=3$) each ended after about one second, between 12:18:39 and 12:18:42 local time, with a \texttt{FileNotFoundError} raised while the configuration was built, before the experiment runner, the clock control, the thermal gate or the tracker was started.
+The sixth launch (Ant-v5, seed \num{331}, \texttt{num\_q} $=3$) has a start line and no further output; the script was stopped during it.
+The sweep was relaunched at 12:21:00 local time, and all \num{40} runs analysed come from the relaunch.
+None of the six launches created a run directory, so nothing was excluded; the first run directory of the sweep is the one of the relaunch (\texttt{20260918\_122100}).
+Whether the sixth launch changed the clock lock cannot be read from the log, because the messages of the control module are not logged.
+The run header, which the runner writes before it acquires the clock lock, is missing for this launch, so the process had presumably not reached that point (inferred from the order of the code), and every later run sets the lock itself at its start.
+The repository documentation mentions only the five failed launches.
+
+\paragraph{Status files of the UTD sweep.} The script \texttt{scripts/run\_utd\_sweep.sh} was first used for the UTD sweeps of SAC (Ant-v5) and TD3 and was then reused, with different settings, for the UTD sweep of MBPO.
+Its status file \texttt{results/\_utd\_sweep\_status.json} therefore describes only the MBPO sweep (\num{20} runs, all done).
+The log \texttt{results/\_utd\_sweep.log} was appended to, not overwritten, and holds \num{50} launch blocks: SAC on Ant-v5 (\num{10}), TD3 on both environments (\num{20}), which end with the completion line ``\num{30}/\num{30} runs succeeded'', and MBPO (\num{20}, ``\num{20}/\num{20} runs succeeded'').
+Every block of the first \num{30} has a run directory.
+The SAC UTD runs on HalfCheetah-v5 have their own log (\texttt{results/sac/HalfCheetah-v5/\_utd\_sweep.log}, \num{10} blocks, ``\num{10}/\num{10} runs succeeded'').
+All \num{12} UTD configurations have five run directories.
+
+%-------------------------------------------------------------------------------
+\section{Code Provenance}\label{sec:app-repro-code}
+
+The commit stored in the metadata of a run is the \texttt{HEAD} at its start; uncommitted changes are not captured, and no flag marks a dirty working tree.
+The \num{280} runs record \num{12} commits (\zcref{tab:app-repro-commits}).
+Between them, the training and measurement code (\texttt{algorithms/}, \texttt{configs/config.py}, \texttt{experiment\_runner.py}, \texttt{run\_experiment.py}, \texttt{utils/}) changes in three ways only: the TD3 and TD-MPC2 modules are added together with their configuration classes and \num{8} lines of dispatch in the runner; the start and end temperature and power were added to the metadata and the thermal-gate file name was removed from the logged configuration (logging only); and the default hidden size of MBPO was set to \num{1024} before the MBPO baselines, all of which record \num{1024}.
+The SAC and MBPO implementations, the dynamics model, the buffers and the clock-control utilities are identical at all \num{12} commits (checked with \texttt{git diff} between the first and the last recorded commit).
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Commits recorded in the metadata of the \num{280} canonical runs, in the order of their first use.
+    The last column lists the changes of the training and measurement code relative to the previous row.}
+  \label{tab:app-repro-commits}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}llp{4.6cm}rp{3.2cm}p{5.6cm}@{}}
+      \toprule
+      Commit & Date (UTC+2) & Subject & Runs & Algorithm, environment & Change of the code relative to the previous row \\
+      \midrule
+%%E_COMMIT_ROWS%%
+      \bottomrule
+    \end{tabular}}
+\end{table}
+
+\paragraph{Working tree of the first group of SAC runs.} The exception to the rule that the recorded commit describes the code is the first group of SAC baseline runs.
+The eight runs that record \texttt{f23f448} differ in the fields of the thermal-gate entry of their metadata: the first three have neither the thermal reference nor the start and end values, the fourth has the thermal reference fields (\texttt{reference\_temp\_c}, \texttt{reference\_power\_w}), and the fifth to eighth have the start and end temperature and power.
+The first three runs also record the name of the thermal reference file in the experiment configuration, which the later runs do not.
+The working tree was therefore edited between the third and fourth and between the fourth and fifth run; as far as the difference to the next recorded commit (\texttt{92dcee0}) shows, the edits concern logging only.
+
+\paragraph{Override files.} The override files \texttt{sac\_utd2.json} and \texttt{sac\_utd4.json} first appear in the repository in \texttt{0bbbbb7}, after the ten SAC UTD runs on HalfCheetah-v5 that record \texttt{ecb98bb}; the configuration logged by these runs equals the default with the files applied (\zcref{sec:app-hp-check}).
+
+%-------------------------------------------------------------------------------
+\section{Analysis Scripts and Versions}\label{sec:app-repro-scripts}
+
+\Zcref{tab:app-repro-scripts} lists the scripts that produced the numbers of the thesis.
+The scripts of the FLOP pipeline and the context scripts are in the repository \texttt{rl-dissections}.
+``Tracked'' means that the file is under version control at the commit given; the others were written during the writing of the thesis and are not yet committed.
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Scripts behind the numbers of the thesis. Paths relative to the repository root.}
+  \label{tab:app-repro-scripts}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}p{4.4cm}p{5.2cm}p{4.2cm}p{3.2cm}p{2.6cm}@{}}
+      \toprule
+      Script & Purpose & Input & Output & Version control \\
+      \midrule
+%%E_SCRIPT_ROWS%%
+      \bottomrule
+    \end{tabular}}
+\end{table}
+
+\paragraph{Versions of the analysis environment.} The scripts above were run on a Windows machine with Python 3.13.9, SciPy 1.16.2, pandas 2.3.3 and NumPy 2.3.4.
+The packages of the experiment environment on the research PC are not recorded in the run files.
+\todo{NOT RUN: \texttt{pip freeze} in \texttt{rl-exp} on the research PC (Python 3.14.4 recorded in the metadata; Gymnasium, MuJoCo, \texttt{nvidia-ml-py} and the other package versions).}
+
+%-------------------------------------------------------------------------------
+\section{How to Run}\label{sec:app-repro-run}
+
+\paragraph{Environment.} The experiments run on Linux in a plain virtual environment (\texttt{rl-exp}, no conda) created from \texttt{requirements.txt}.
+The clock lock, the persistence mode and the CPU governor need root, so each run is started with \texttt{sudo} and the interpreter of the environment, for example
+\begin{center}
+  \texttt{sudo rl-exp/bin/python run\_experiment.py --algo sac --env HalfCheetah-v5 --seed 331}
+\end{center}
+Without root, these controls fail with a warning and the run proceeds unlocked.
+Hyperparameters are not set by command-line flags but by the configuration classes; deviations are passed as a JSON override file (\texttt{--algo-config-overrides}, \zcref{sec:app-hp-sweeps}).
+
+\Zcref{tab:app-repro-cli} lists the options of the entry point.
+All baselines use the defaults except TD3, which is started with \texttt{--warmup-steps 10000}.
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Options of \texttt{run\_experiment.py}.}
+  \label{tab:app-repro-cli}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Option                                                          & Default            & Meaning                                                 \\
+    \midrule
+    \texttt{--algo}                                                 & \texttt{sac}       & \texttt{sac}, \texttt{td3}, \texttt{mbpo} or \texttt{tdmpc2} \\
+    \texttt{--env}                                                  & \texttt{HalfCheetah-v5} & Gymnasium environment                              \\
+    \texttt{--seed}                                                 & \num{0}            & seed of the run                                         \\
+    \texttt{--device}                                               & \texttt{cuda}      & device (falls back to the CPU)                          \\
+    \texttt{--train-steps}, \texttt{--steps-per-epoch}              & \num{100000}, \num{1000} & measured environment steps, steps per epoch       \\
+    \texttt{--warmup-steps}                                         & \num{5000}         & random-action steps before training                     \\
+    \texttt{--settle-seconds}                                       & \num{30}           & unmeasured settle time                                  \\
+    \texttt{--idle-baseline-seconds}, \texttt{--idle-tail-seconds}  & \num{90}, \num{90} & idle windows                                            \\
+    \texttt{--no-gpu-lock}, \texttt{--no-thermal-gate}              & off                & disable the clock lock, the thermal gate                \\
+    \texttt{--tracking-mode}                                        & \texttt{machine}   & CodeCarbon tracking mode                                \\
+    \texttt{--output-dir}                                           & \texttt{results}   & output directory                                        \\
+    \texttt{--country-iso-code}                                     & \texttt{DEU}       & grid region (CO$_2$ conversion only)                    \\
+    \texttt{--algo-config-overrides}                                & none               & JSON file with hyperparameter overrides                 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Thermal gate.} At the start of each process, the runner captures a stable reading of the GPU temperature and power as the reference of that process, polls every \SI{5}{\second} until both are within \SI{2}{\celsius} and \SI{5}{\watt} of it, for at most \SI{600}{\second} (\zcref{tab:app-hp-protocol}), and then settles for \SI{30}{\second} before the idle window of the head.
+
+\paragraph{Output of a run.} A run writes six files to \texttt{results/\{algo\}/\{env\}/seed\_\{seed\}/\{timestamp\}/}: \texttt{metadata.json} (commit, versions, GPU, full configuration, thermal-gate information), \texttt{segment\_energy.json} (energy per segment in kWh and the timer totals of the allocated sub-segments), \texttt{training\_metrics.json} (episodes and per-epoch diagnostics), \texttt{emissions.csv} (CodeCarbon whole-run row), \texttt{emissions\_base\_\{id\}.csv} (CodeCarbon task rows: one row per task, i.e.\ the idle windows, the warm-up and the rollout and gradient-update task of every epoch) and \texttt{run.log}.
+
+\paragraph{Sweep scripts.} The runs were started by shell scripts in \texttt{scripts/} (\zcref{tab:app-repro-sweeps}).
+Each script loops over the configurations and the five seeds, writes a status file in JSON and a log, primes the \texttt{sudo} credential once at the start and refreshes it in the background every \SI{60}{\second} for the life of the sweep, and, except for the three baseline scripts, powers the machine off after the last run.
+The ten SAC baseline runs were started by hand and have neither script nor status file.
+
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{Sweep scripts of the canonical runs and the files they left in \texttt{results/}.}
+  \label{tab:app-repro-sweeps}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{@{}p{4.6cm}rp{5.2cm}p{5.6cm}c@{}}
+      \toprule
+      Script & Runs & Content & Status file and log & Power-off \\
+      \midrule
+%%E_SWEEP_ROWS%%
+      \bottomrule
+    \end{tabular}}
+\end{table}
+
+\paragraph{Analysis.} The FLOP pipeline is run from the repository root: \texttt{python flop\_analysis/measure\_flops.py} (per-call FLOPs, needs PyTorch), \texttt{python flop\_analysis/compute\_energy\_per\_flop.py} (per-run and cross-seed tables, canonical seeds by default), \texttt{python flop\_analysis/check\_totals.py} and \texttt{python flop\_analysis/verify\_analytic\_flops.py} (checks of \zcref{app:flop-details}).
+The correlation analysis is \texttt{python flop\_analysis/correlation\_analysis.py}, and the tables of \zcref{app:full-results} are written by \texttt{python flop\_analysis/appendix\_tables.py}.
+
+%-------------------------------------------------------------------------------
+\section{Repository State}\label{sec:app-repro-repo}
+
+The thesis cites the repository \texttt{rl-dissections} and the \num{12} commits of \zcref{tab:app-repro-commits}.
+\todo{AUTHOR (contribution 5): add a \texttt{LICENSE} file; commit the untracked scripts of \zcref{tab:app-repro-scripts}; tag the commit that is cited in the thesis and cite the tag here and in the contribution list of the conclusion.}

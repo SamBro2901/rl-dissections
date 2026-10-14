@@ -1,0 +1,847 @@
+table,cell,printed,recomputed,agrees,rel_dev
+tab:sac-base-energy,HalfCheetah-v5/rollout/E mean,2496,2495.7037170914186,True,0.00011871718046990753
+tab:sac-base-energy,HalfCheetah-v5/rollout/E sd,33.35,33.35137080943111,True,4.110204162045469e-05
+tab:sac-base-energy,HalfCheetah-v5/rollout/share total mean,4.097,4.097304740487375,True,7.43758413581265e-05
+tab:sac-base-energy,HalfCheetah-v5/rollout/share total sd,0.05304,0.05304337701955403,True,6.366524425445134e-05
+tab:sac-base-energy,Ant-v5/rollout/E mean,4332,4332.112638046851,True,2.600071980171306e-05
+tab:sac-base-energy,Ant-v5/rollout/E sd,50.19,50.193718687377235,True,7.408670794842297e-05
+tab:sac-base-energy,Ant-v5/rollout/share total mean,6.729,6.728649338448831,True,5.211470141053777e-05
+tab:sac-base-energy,Ant-v5/rollout/share total sd,0.03840,0.03839698105009205,True,7.862466853854901e-05
+tab:sac-base-energy,HalfCheetah-v5/buffer_sample/E mean,1550,1550.1735414330801,True,0.00011194968075618479
+tab:sac-base-energy,HalfCheetah-v5/buffer_sample/E sd,20.91,20.90565742165082,True,0.00020772263993400732
+tab:sac-base-energy,HalfCheetah-v5/buffer_sample/share total mean,2.545,2.5449433020100822,True,2.2278684901512667e-05
+tab:sac-base-energy,HalfCheetah-v5/buffer_sample/share total sd,0.02884,0.028835114736918587,True,0.00016942062225121422
+tab:sac-base-energy,HalfCheetah-v5/buffer_sample/share GU mean,2.654,2.653681266075785,True,0.00012011010074548765
+tab:sac-base-energy,HalfCheetah-v5/buffer_sample/share GU sd,0.03101,0.03101242496919871,True,7.819347249111285e-05
+tab:sac-base-energy,Ant-v5/buffer_sample/E mean,1923,1922.9165413952455,True,4.3402094140764115e-05
+tab:sac-base-energy,Ant-v5/buffer_sample/E sd,50.68,50.68123435121216,True,2.435519236978159e-05
+tab:sac-base-energy,Ant-v5/buffer_sample/share total mean,2.987,2.9865314658842097,True,0.00015688236375292327
+tab:sac-base-energy,Ant-v5/buffer_sample/share total sd,0.06432,0.06431916871580268,True,1.2924361647119739e-05
+tab:sac-base-energy,Ant-v5/buffer_sample/share GU mean,3.202,3.202003556172567,True,1.110608562639506e-06
+tab:sac-base-energy,Ant-v5/buffer_sample/share GU sd,0.07023,0.07022715722944563,True,4.04796472835335e-05
+tab:sac-base-energy,HalfCheetah-v5/critic_update/E mean,24580,24575.089400671415,True,0.00019982020201524199
+tab:sac-base-energy,HalfCheetah-v5/critic_update/E sd,234.9,234.91472503411066,True,6.268246534360942e-05
+tab:sac-base-energy,HalfCheetah-v5/critic_update/share total mean,40.35,40.345570112351524,True,0.00010979861323415093
+tab:sac-base-energy,HalfCheetah-v5/critic_update/share total sd,0.2984,0.2983751645874048,True,8.323552206338502e-05
+tab:sac-base-energy,HalfCheetah-v5/critic_update/share GU mean,42.07,42.06916048206315,True,1.9955661753967773e-05
+tab:sac-base-energy,HalfCheetah-v5/critic_update/share GU sd,0.2901,0.2900661041458426,True,0.00011685561902253475
+tab:sac-base-energy,Ant-v5/critic_update/E mean,25130,25133.148080304756,True,0.0001252561077783606
+tab:sac-base-energy,Ant-v5/critic_update/E sd,295.7,295.65905392882865,True,0.0001384908414852407
+tab:sac-base-energy,Ant-v5/critic_update/share total mean,39.04,39.03690039876999,True,7.940182745938119e-05
+tab:sac-base-energy,Ant-v5/critic_update/share total sd,0.2427,0.24270607039723843,True,2.501131194822629e-05
+tab:sac-base-energy,Ant-v5/critic_update/share GU mean,41.85,41.85297198214984,True,7.101006234646984e-05
+tab:sac-base-energy,Ant-v5/critic_update/share GU sd,0.2445,0.2444602527468572,True,0.00016259188435000971
+tab:sac-base-energy,HalfCheetah-v5/actor_update/E mean,29740,29743.432029756008,True,0.00011538781915195587
+tab:sac-base-energy,HalfCheetah-v5/actor_update/E sd,127.1,127.12367912284402,True,0.00018626838844986278
+tab:sac-base-energy,HalfCheetah-v5/actor_update/share total mean,48.83,48.83129525403851,True,2.6525080520016108e-05
+tab:sac-base-energy,HalfCheetah-v5/actor_update/share total sd,0.2100,0.21004952859985604,True,0.0002357948631743837
+tab:sac-base-energy,HalfCheetah-v5/actor_update/share GU mean,50.92,50.917639910252134,True,4.635112216566188e-05
+tab:sac-base-energy,HalfCheetah-v5/actor_update/share GU sd,0.2443,0.2442730561374261,True,0.00011030222898895687
+tab:sac-base-energy,Ant-v5/actor_update/E mean,30440,30436.925713934623,True,0.00010100514402378583
+tab:sac-base-energy,Ant-v5/actor_update/E sd,252.2,252.22360081558276,True,9.357100408705891e-05
+tab:sac-base-energy,Ant-v5/actor_update/share total mean,47.28,47.27550901494006,True,9.499601703958221e-05
+tab:sac-base-energy,Ant-v5/actor_update/share total sd,0.1424,0.14243757233101756,True,0.0002637810403721571
+tab:sac-base-energy,Ant-v5/actor_update/share GU mean,50.69,50.68603884519944,True,7.815080623393134e-05
+tab:sac-base-energy,Ant-v5/actor_update/share GU sd,0.1699,0.1698695384381141,True,0.00017932327459055234
+tab:sac-base-energy,HalfCheetah-v5/target_update/E mean,2547,2546.626511255743,True,0.00014666019638380612
+tab:sac-base-energy,HalfCheetah-v5/target_update/E sd,28.80,28.80061004627725,True,2.1181713729968487e-05
+tab:sac-base-energy,HalfCheetah-v5/target_update/share total mean,4.181,4.180886591112515,True,2.712555937932723e-05
+tab:sac-base-energy,HalfCheetah-v5/target_update/share total sd,0.04275,0.04275084620761816,True,1.9793938441545398e-05
+tab:sac-base-energy,HalfCheetah-v5/target_update/share GU mean,4.360,4.359518341608928,True,0.00011048431347906617
+tab:sac-base-energy,HalfCheetah-v5/target_update/share GU sd,0.04565,0.04564548189457728,True,9.898253310494427e-05
+tab:sac-base-energy,Ant-v5/target_update/E mean,2558,2557.5367259669993,True,0.00018114071571174827
+tab:sac-base-energy,Ant-v5/target_update/E sd,32.29,32.2932183470837,True,9.966015307338512e-05
+tab:sac-base-energy,Ant-v5/target_update/share total mean,3.972,3.9724097819569137,True,0.00010315702039981862
+tab:sac-base-energy,Ant-v5/target_update/share total sd,0.03581,0.03581360687078742,True,0.0001007123019033216
+tab:sac-base-energy,Ant-v5/target_update/share GU mean,4.259,4.258985616478162,True,3.3772177541097313e-06
+tab:sac-base-energy,Ant-v5/target_update/share GU sd,0.03889,0.038886088935613614,True,0.00010057746853542423
+tab:sac-base-energy,HalfCheetah-v5/gradient_updates/E mean,58420,58415.32148311623,True,8.009057837880926e-05
+tab:sac-base-energy,HalfCheetah-v5/gradient_updates/E sd,247.8,247.8293234231202,True,0.00011832103931513099
+tab:sac-base-energy,HalfCheetah-v5/gradient_updates/share total mean,95.90,95.90269525951263,True,2.8104105993340705e-05
+tab:sac-base-energy,HalfCheetah-v5/gradient_updates/share total sd,0.05304,0.0530433770195554,True,6.366524428035115e-05
+tab:sac-base-energy,Ant-v5/gradient_updates/E mean,60050,60050.52706160162,True,8.776968786299597e-06
+tab:sac-base-energy,Ant-v5/gradient_updates/E sd,545.0,545.0391401189034,True,7.181157466032287e-05
+tab:sac-base-energy,Ant-v5/gradient_updates/share total mean,93.27,93.27135066155117,True,1.4480990589196654e-05
+tab:sac-base-energy,Ant-v5/gradient_updates/share total sd,0.03840,0.03839698105009339,True,7.862466850366835e-05
+tab:sac-base-energy,HalfCheetah-v5/TOTAL/E mean,60910,60911.02520020766,True,1.683111069448908e-05
+tab:sac-base-energy,HalfCheetah-v5/TOTAL/E sd,254.1,254.11146787148368,True,4.512929534328727e-05
+tab:sac-base-energy,Ant-v5/TOTAL/E mean,64380,64382.639699648484,True,4.100017738940376e-05
+tab:sac-base-energy,Ant-v5/TOTAL/E sd,588.3,588.2699754235268,True,5.103877084923144e-05
+tab:sac-base-jpf,HalfCheetah-v5/rollout/FLOPs,2.157e11,215654400000.0,True,0.0002114494301994302
+tab:sac-base-jpf,HalfCheetah-v5/rollout/J/FLOP mean,11570,11572.700195736412,True,0.00023332460797754377
+tab:sac-base-jpf,HalfCheetah-v5/rollout/J/FLOP sd,154.7,154.65193758824856,True,0.0003107779475702029
+tab:sac-base-jpf,Ant-v5/rollout/FLOPs,2.345e11,234496000000.0,True,1.7057860262008733e-05
+tab:sac-base-jpf,Ant-v5/rollout/J/FLOP mean,18470,18474.143004771304,True,0.00022425964604874018
+tab:sac-base-jpf,Ant-v5/rollout/J/FLOP sd,214.0,214.0493598499651,True,0.0002306003157388469
+tab:sac-base-jpf,HalfCheetah-v5/critic_update/FLOPs,4.924e14,492358860800000.0,True,8.355531559471835e-05
+tab:sac-base-jpf,HalfCheetah-v5/critic_update/J/FLOP mean,49.91,49.91296259143391,True,5.9355151048917545e-05
+tab:sac-base-jpf,HalfCheetah-v5/critic_update/J/FLOP sd,0.4771,0.4771209451829798,True,4.389910606787503e-05
+tab:sac-base-jpf,Ant-v5/critic_update/FLOPs,5.255e14,525493862400000.0,True,1.1679679705427516e-05
+tab:sac-base-jpf,Ant-v5/critic_update/J/FLOP mean,47.83,47.82767198368092,True,4.867509168898145e-05
+tab:sac-base-jpf,Ant-v5/critic_update/J/FLOP sd,0.5626,0.562630841354674,True,5.481632432334815e-05
+tab:sac-base-jpf,HalfCheetah-v5/actor_update/FLOPs,3.845e14,384512819200000.0,True,3.333881046325334e-05
+tab:sac-base-jpf,HalfCheetah-v5/actor_update/J/FLOP mean,77.35,77.35355115504042,True,4.590810618776851e-05
+tab:sac-base-jpf,HalfCheetah-v5/actor_update/J/FLOP sd,0.3306,0.33060972944239025,True,2.9428784224406216e-05
+tab:sac-base-jpf,Ant-v5/actor_update/FLOPs,4.132e14,413243801600000.0,True,0.00010599457228495306
+tab:sac-base-jpf,Ant-v5/actor_update/J/FLOP mean,73.65,73.65367755327179,True,4.993034148397477e-05
+tab:sac-base-jpf,Ant-v5/actor_update/J/FLOP sd,0.6104,0.6103505965220112,True,8.094278644174713e-05
+tab:sac-base-jpf,HalfCheetah-v5/gradient_updates/FLOPs,8.769e14,876871680000000.0,True,3.229662976457399e-05
+tab:sac-base-jpf,HalfCheetah-v5/gradient_updates/J/FLOP mean,66.62,66.61786760306393,True,3.2009384460970056e-05
+tab:sac-base-jpf,HalfCheetah-v5/gradient_updates/J/FLOP sd,0.2826,0.28262895139129335,True,0.00010243604255972988
+tab:sac-base-jpf,Ant-v5/gradient_updates/FLOPs,9.387e14,938737664000000.0,True,4.0121965320441215e-05
+tab:sac-base-jpf,Ant-v5/gradient_updates/J/FLOP mean,63.97,63.96944467501586,True,8.68109746711818e-06
+tab:sac-base-jpf,Ant-v5/gradient_updates/J/FLOP sd,0.5806,0.5806085779028697,True,1.4773985773101211e-05
+tab:sac-base-jpf,HalfCheetah-v5/TOTAL/FLOPs,8.771e14,877087334400000.0,True,1.4440523199054418e-05
+tab:sac-base-jpf,HalfCheetah-v5/TOTAL/J/FLOP mean,69.45,69.44693283237959,True,4.4165631156354965e-05
+tab:sac-base-jpf,HalfCheetah-v5/TOTAL/J/FLOP sd,0.2897,0.28972196713491094,True,7.582143365987242e-05
+tab:sac-base-jpf,Ant-v5/TOTAL/FLOPs,9.390e14,938972160000000.0,True,2.9649441363628927e-05
+tab:sac-base-jpf,Ant-v5/TOTAL/J/FLOP mean,68.57,68.56714441847613,True,4.16464991808961e-05
+tab:sac-base-jpf,Ant-v5/TOTAL/J/FLOP sd,0.6265,0.6265041717781357,True,6.658819403994549e-06
+tab:sac-base-jpf,HalfCheetah-v5/target_update/FLOPs,4.301e11,430080400000.0,True,4.5572874281180916e-05
+tab:sac-base-jpf,HalfCheetah-v5/target_update/J/FLOP mean,5.921,5.9212800938051195,True,4.730291434994297e-05
+tab:sac-base-jpf,HalfCheetah-v5/target_update/J/FLOP sd,0.06697,0.06696564188062787,True,6.507993128628381e-05
+tab:sac-base-jpf,Ant-v5/target_update/FLOPs,4.669e11,466944400000.0,True,9.508626723010277e-05
+tab:sac-base-jpf,Ant-v5/target_update/J/FLOP mean,5.477,5.477176139101356,True,3.215874327986145e-05
+tab:sac-base-jpf,Ant-v5/target_update/J/FLOP sd,0.06916,0.06915859435745202,True,2.032491494430686e-05
+tab:sac-base-time,HalfCheetah-v5/rollout/T mean,20.48,20.477446562599834,True,0.00012469510748621247
+tab:sac-base-time,HalfCheetah-v5/rollout/T sd,0.2653,0.26526288690509237,True,0.00013991061976526486
+tab:sac-base-time,HalfCheetah-v5/rollout/P mean,121.9,121.87601002848575,True,0.000196839160624368
+tab:sac-base-time,HalfCheetah-v5/rollout/P sd,0.4881,0.488145468554025,True,9.314550058147028e-05
+tab:sac-base-time,HalfCheetah-v5/rollout/GFLOP/s mean,10.53,10.532710003354023,True,0.00025729402529456346
+tab:sac-base-time,HalfCheetah-v5/rollout/GFLOP/s sd,0.1348,0.1348066677552906,True,4.946161344704065e-05
+tab:sac-base-time,Ant-v5/rollout/T mean,35.99,35.989817446198415,True,5.072373647334981e-06
+tab:sac-base-time,Ant-v5/rollout/T sd,0.2880,0.28803120441124874,True,0.0001083369120111401
+tab:sac-base-time,Ant-v5/rollout/P mean,120.4,120.3688243719018,True,0.00025900085226294203
+tab:sac-base-time,Ant-v5/rollout/P sd,0.7125,0.7124660663976642,True,4.762837689576891e-05
+tab:sac-base-time,Ant-v5/rollout/GFLOP/s mean,6.516,6.515954529853369,True,6.978278688518684e-06
+tab:sac-base-time,Ant-v5/rollout/GFLOP/s sd,0.05214,0.05213939693002056,True,1.1566493188444882e-05
+tab:sac-base-time,HalfCheetah-v5/gradient_updates/T mean,404.9,404.86536264679955,True,8.555276987387256e-05
+tab:sac-base-time,HalfCheetah-v5/gradient_updates/T sd,2.235,2.234746800043015,True,0.00011330140711249922
+tab:sac-base-time,HalfCheetah-v5/gradient_updates/P mean,144.3,144.28418272856194,True,0.0001096258171820781
+tab:sac-base-time,HalfCheetah-v5/gradient_updates/P sd,0.2193,0.21933989193161066,True,0.00018187266921377892
+tab:sac-base-time,HalfCheetah-v5/gradient_updates/GFLOP/s mean,2166,2165.888289971909,True,5.157700358231878e-05
+tab:sac-base-time,HalfCheetah-v5/gradient_updates/GFLOP/s sd,12.01,12.008141879727651,True,0.00015473836759755433
+tab:sac-base-time,Ant-v5/gradient_updates/T mean,413.1,413.1196011057997,True,4.7446564498995636e-05
+tab:sac-base-time,Ant-v5/gradient_updates/T sd,2.852,2.8518401924838486,True,5.603663086468869e-05
+tab:sac-base-time,Ant-v5/gradient_updates/P mean,145.4,145.35811706447413,True,0.00028813620024603913
+tab:sac-base-time,Ant-v5/gradient_updates/P sd,0.7271,0.7271400358602119,True,5.5059353408574645e-05
+tab:sac-base-time,Ant-v5/gradient_updates/GFLOP/s mean,2272,2272.4015936003684,True,0.00017672650886154946
+tab:sac-base-time,Ant-v5/gradient_updates/GFLOP/s sd,15.77,15.76895650245183,True,6.617416618574391e-05
+tab:sac-base-time,HalfCheetah-v5/TOTAL/T mean,425.3,425.3428092093994,True,0.00010064636916969769
+tab:sac-base-time,HalfCheetah-v5/TOTAL/T sd,2.266,2.265652122143261,True,0.0001535442503899798
+tab:sac-base-time,HalfCheetah-v5/TOTAL/P mean,143.2,143.20528615623945,True,3.691313624901141e-05
+tab:sac-base-time,HalfCheetah-v5/TOTAL/P sd,0.1949,0.19490668884339765,True,3.4318182907700344e-05
+tab:sac-base-time,HalfCheetah-v5/TOTAL/GFLOP/s mean,2062,2062.1186546608737,True,5.754017141814655e-05
+tab:sac-base-time,HalfCheetah-v5/TOTAL/GFLOP/s sd,11.04,11.03833777894358,True,0.00015058617426890174
+tab:sac-base-time,Ant-v5/TOTAL/T mean,449.1,449.10941855199815,True,2.097161985266474e-05
+tab:sac-base-time,Ant-v5/TOTAL/T sd,2.955,2.95474840123724,True,8.515065535018536e-05
+tab:sac-base-time,Ant-v5/TOTAL/P mean,143.4,143.35533189891459,True,0.00031159009221169286
+tab:sac-base-time,Ant-v5/TOTAL/P sd,0.7101,0.7100818456144218,True,2.5566609948271902e-05
+tab:sac-base-time,Ant-v5/TOTAL/GFLOP/s mean,2091,2090.8153795452804,True,8.830069671658848e-05
+tab:sac-base-time,Ant-v5/TOTAL/GFLOP/s sd,13.84,13.842016606629656,True,0.00014568734361221792
+tab:sac-base-time,HalfCheetah-v5/buffer_sample/T mean,10.45,10.449852958206066,True,1.4071183060838902e-05
+tab:sac-base-time,HalfCheetah-v5/buffer_sample/T sd,0.1429,0.14290688168345514,True,4.815501796745644e-05
+tab:sac-base-time,Ant-v5/buffer_sample/T mean,12.77,12.769973189264647,True,2.099513832593667e-06
+tab:sac-base-time,Ant-v5/buffer_sample/T sd,0.2667,0.26671205507825835,True,4.519885032874824e-05
+tab:sac-base-time,HalfCheetah-v5/critic_update/T mean,165.7,165.66446918999708,True,0.0002144745350444521
+tab:sac-base-time,HalfCheetah-v5/critic_update/T sd,1.831,1.830604758937442,True,0.00021590737193727969
+tab:sac-base-time,HalfCheetah-v5/critic_update/GFLOP/s mean,2972,2972.316021098453,True,0.00010632150020713609
+tab:sac-base-time,HalfCheetah-v5/critic_update/GFLOP/s sd,32.98,32.97758073652957,True,7.336085353736577e-05
+tab:sac-base-time,Ant-v5/critic_update/T mean,166.9,166.92517959465636,True,0.00015084359781726125
+tab:sac-base-time,Ant-v5/critic_update/T sd,2.033,2.032914693207609,True,4.1962799853808724e-05
+tab:sac-base-time,Ant-v5/critic_update/GFLOP/s mean,3148,3148.452446477738,True,0.00014370440253717629
+tab:sac-base-time,Ant-v5/critic_update/GFLOP/s sd,38.20,38.20281043933621,True,7.356629797358269e-05
+tab:sac-base-time,HalfCheetah-v5/actor_update/T mean,200.5,200.50247887203813,True,1.2363298708677197e-05
+tab:sac-base-time,HalfCheetah-v5/actor_update/T sd,0.8227,0.8226746471295809,True,3.0817614846292064e-05
+tab:sac-base-time,HalfCheetah-v5/actor_update/GFLOP/s mean,1918,1917.7718140430193,True,0.00011898493622120009
+tab:sac-base-time,HalfCheetah-v5/actor_update/GFLOP/s sd,7.876,7.875936856002188,True,8.017331647928024e-06
+tab:sac-base-time,Ant-v5/actor_update/T mean,202.1,202.14642373659564,True,0.00022965400889868824
+tab:sac-base-time,Ant-v5/actor_update/T sd,0.9564,0.9563584045525255,True,4.349357654672313e-05
+tab:sac-base-time,Ant-v5/actor_update/GFLOP/s mean,2044,2044.316350340428,True,0.00015474627514246335
+tab:sac-base-time,Ant-v5/actor_update/GFLOP/s sd,9.721,9.7212966447153,True,3.05149329499778e-05
+tab:sac-base-time,HalfCheetah-v5/target_update/T mean,17.17,17.16697405005168,True,0.00017626577284369762
+tab:sac-base-time,HalfCheetah-v5/target_update/T sd,0.1924,0.19243661824584843,True,0.00019028730697012738
+tab:sac-base-time,Ant-v5/target_update/T mean,16.99,16.985932152521535,True,0.00023948332313688086
+tab:sac-base-time,Ant-v5/target_update/T sd,0.1912,0.19116784993436417,True,0.0001681771576490352
+tab:sac-base-comp,HalfCheetah-v5/rollout/CPU mean,25.24,25.23801490720795,True,7.865487041456427e-05
+tab:sac-base-comp,HalfCheetah-v5/rollout/CPU sd,0.2565,0.2565414016868346,True,0.00016138403611408333
+tab:sac-base-comp,HalfCheetah-v5/rollout/GPU mean,58.37,58.368360886408155,True,2.8082227545030035e-05
+tab:sac-base-comp,HalfCheetah-v5/rollout/GPU sd,0.2958,0.2957854535610599,True,4.9179020688749946e-05
+tab:sac-base-comp,HalfCheetah-v5/rollout/RAM mean,16.39,16.393624206383898,True,0.00022107414067022583
+tab:sac-base-comp,HalfCheetah-v5/rollout/RAM sd,0.06402,0.06402028976652692,True,4.526167063325448e-06
+tab:sac-base-comp,HalfCheetah-v5/rollout/idle floor mean,56.02,56.021173075903974,True,2.0939866831801895e-05
+tab:sac-base-comp,HalfCheetah-v5/rollout/idle floor sd,0.5541,0.5541422406671143,True,7.622712006825489e-05
+tab:sac-base-comp,HalfCheetah-v5/gradient_updates/CPU mean,17.58,17.580628366897656,True,3.574200446902273e-05
+tab:sac-base-comp,HalfCheetah-v5/gradient_updates/CPU sd,0.1808,0.1807899204205312,True,5.5752994665459316e-05
+tab:sac-base-comp,HalfCheetah-v5/gradient_updates/GPU mean,68.56,68.55909885084466,True,1.3144121939233325e-05
+tab:sac-base-comp,HalfCheetah-v5/gradient_updates/GPU sd,0.1734,0.17338958794658485,True,6.005004993930891e-05
+tab:sac-base-comp,HalfCheetah-v5/gradient_updates/RAM mean,13.86,13.86027278225769,True,1.968087222927067e-05
+tab:sac-base-comp,HalfCheetah-v5/gradient_updates/RAM sd,0.02103,0.02102660031168985,True,0.00016168511598422963
+tab:sac-base-comp,HalfCheetah-v5/gradient_updates/idle floor mean,47.32,47.31928599260263,True,1.508914140170613e-05
+tab:sac-base-comp,HalfCheetah-v5/gradient_updates/idle floor sd,0.2745,0.27450273661160746,True,9.969341804073032e-06
+tab:sac-base-comp,Ant-v5/rollout/CPU mean,26.47,26.473531674429733,True,0.000133403977722594
+tab:sac-base-comp,Ant-v5/rollout/CPU sd,0.2781,0.2780651056333692,True,0.00012548991557681202
+tab:sac-base-comp,Ant-v5/rollout/GPU mean,56.93,56.92608957811105,True,6.869296517514387e-05
+tab:sac-base-comp,Ant-v5/rollout/GPU sd,0.3051,0.3050937303367539,True,2.054995767743928e-05
+tab:sac-base-comp,Ant-v5/rollout/RAM mean,16.60,16.60037874745921,True,2.281559143743686e-05
+tab:sac-base-comp,Ant-v5/rollout/RAM sd,0.1000,0.10000772940490357,True,7.728807512740116e-05
+tab:sac-base-comp,Ant-v5/rollout/idle floor mean,57.61,57.61243901693083,True,4.233490149778724e-05
+tab:sac-base-comp,Ant-v5/rollout/idle floor sd,1.066,1.0659149357822901,True,7.980394575060475e-05
+tab:sac-base-comp,Ant-v5/gradient_updates/CPU mean,17.82,17.82349878782602,True,0.00019630196448342554
+tab:sac-base-comp,Ant-v5/gradient_updates/CPU sd,0.2578,0.25775554131206346,True,0.00017248392686419338
+tab:sac-base-comp,Ant-v5/gradient_updates/GPU mean,68.42,68.41848545243649,True,2.213652572840764e-05
+tab:sac-base-comp,Ant-v5/gradient_updates/GPU sd,0.2113,0.21128085940257088,True,9.059314451498348e-05
+tab:sac-base-comp,Ant-v5/gradient_updates/RAM mean,13.76,13.7580157597375,True,0.00014422430509977407
+tab:sac-base-comp,Ant-v5/gradient_updates/RAM sd,0.06853,0.06852875154272652,True,1.8218006973320383e-05
+tab:sac-base-comp,Ant-v5/gradient_updates/idle floor mean,47.71,47.7078401643049,True,4.5272133210489246e-05
+tab:sac-base-comp,Ant-v5/gradient_updates/idle floor sd,0.8856,0.8855756795917767,True,2.74628230921174e-05
+tab:td3-base-energy,HalfCheetah-v5/rollout/E mean,1411,1410.9091213109987,True,6.441144055889693e-05
+tab:td3-base-energy,HalfCheetah-v5/rollout/E sd,18.43,18.425429279866993,True,0.00024806586937982806
+tab:td3-base-energy,HalfCheetah-v5/rollout/share total mean,5.019,5.019158063678088,True,3.1492070200264136e-05
+tab:td3-base-energy,HalfCheetah-v5/rollout/share total sd,0.05886,0.05886479594087938,True,8.14738385263932e-05
+tab:td3-base-energy,Ant-v5/rollout/E mean,3071,3071.4611336321695,True,0.0001501349397263033
+tab:td3-base-energy,Ant-v5/rollout/E sd,52.53,52.533948374295235,True,7.515852924479849e-05
+tab:td3-base-energy,Ant-v5/rollout/share total mean,10.06,10.064495177355946,True,0.0004466371414295152
+tab:td3-base-energy,Ant-v5/rollout/share total sd,0.1618,0.1617513884350304,True,0.0003005325978337943
+tab:td3-base-energy,HalfCheetah-v5/buffer_sample/E mean,1295,1295.429513456213,True,0.0003315606536299301
+tab:td3-base-energy,HalfCheetah-v5/buffer_sample/E sd,26.27,26.267146707606443,True,0.00010862589779232533
+tab:td3-base-energy,HalfCheetah-v5/buffer_sample/share total mean,4.609,4.608937009405016,True,1.366705486646141e-05
+tab:td3-base-energy,HalfCheetah-v5/buffer_sample/share total sd,0.1206,0.12056304281858857,True,0.000306538227199866
+tab:td3-base-energy,HalfCheetah-v5/buffer_sample/share GU mean,4.853,4.852509551007891,True,0.00010107120593026229
+tab:td3-base-energy,HalfCheetah-v5/buffer_sample/share GU sd,0.1278,0.12778810803212923,True,9.306005115733993e-05
+tab:td3-base-energy,Ant-v5/buffer_sample/E mean,1473,1473.474590163005,True,0.00032208913962500206
+tab:td3-base-energy,Ant-v5/buffer_sample/E sd,26.19,26.194466724286382,True,0.00017052167289359618
+tab:td3-base-energy,Ant-v5/buffer_sample/share total mean,4.828,4.828355874778014,True,7.370516739920848e-05
+tab:td3-base-energy,Ant-v5/buffer_sample/share total sd,0.08874,0.0887408631028684,True,9.726104054200728e-06
+tab:td3-base-energy,Ant-v5/buffer_sample/share GU mean,5.369,5.368832126387366,True,3.1268180617709157e-05
+tab:td3-base-energy,Ant-v5/buffer_sample/share GU sd,0.1077,0.10765357408104148,True,0.00043125292731640967
+tab:td3-base-energy,HalfCheetah-v5/critic_update/E mean,18530,18530.087252275327,True,4.7086812997241636e-06
+tab:td3-base-energy,HalfCheetah-v5/critic_update/E sd,279.9,279.87198692973703,True,0.00010009244072711114
+tab:td3-base-energy,HalfCheetah-v5/critic_update/share total mean,65.91,65.91432390933936,True,6.559893332607905e-05
+tab:td3-base-energy,HalfCheetah-v5/critic_update/share total sd,0.3143,0.31429381720733995,True,1.9672014915874533e-05
+tab:td3-base-energy,HalfCheetah-v5/critic_update/share GU mean,69.40,69.39743330378057,True,3.698546325476778e-05
+tab:td3-base-energy,HalfCheetah-v5/critic_update/share GU sd,0.3118,0.3117883152887433,True,3.74764244962513e-05
+tab:td3-base-energy,Ant-v5/critic_update/E mean,18960,18957.54382982118,True,0.00012956162469502958
+tab:td3-base-energy,Ant-v5/critic_update/E sd,337.5,337.4848075926693,True,4.501656663912381e-05
+tab:td3-base-energy,Ant-v5/critic_update/share total mean,62.11,62.11334195884285,True,5.380420272777079e-05
+tab:td3-base-energy,Ant-v5/critic_update/share total sd,0.3481,0.3480884973335002,True,3.304523587510498e-05
+tab:td3-base-energy,Ant-v5/critic_update/share GU mean,69.06,69.06395662857639,True,5.7289341206851056e-05
+tab:td3-base-energy,Ant-v5/critic_update/share GU sd,0.2688,0.268809187850959,True,3.417982485065111e-05
+tab:td3-base-energy,HalfCheetah-v5/actor_update/E mean,5183,5182.748690878354,True,4.848954418499004e-05
+tab:td3-base-energy,HalfCheetah-v5/actor_update/E sd,53.58,53.58119249226682,True,2.225579930861715e-05
+tab:td3-base-energy,HalfCheetah-v5/actor_update/share total mean,18.44,18.436571268366745,True,0.000185974473417387
+tab:td3-base-energy,HalfCheetah-v5/actor_update/share total sd,0.03847,0.038472548676425605,True,6.624662293740224e-05
+tab:td3-base-energy,HalfCheetah-v5/actor_update/share GU mean,19.41,19.410848055093794,True,4.368974974132491e-05
+tab:td3-base-energy,HalfCheetah-v5/actor_update/share GU sd,0.04792,0.047921648781893096,True,3.440578392039356e-05
+tab:td3-base-energy,Ant-v5/actor_update/E mean,5284,5284.096660282803,True,1.8292678771287485e-05
+tab:td3-base-energy,Ant-v5/actor_update/E sd,73.81,73.81019266390226,True,2.6102614733923822e-06
+tab:td3-base-energy,Ant-v5/actor_update/share total mean,17.31,17.313687451326135,True,0.00021297897033795897
+tab:td3-base-energy,Ant-v5/actor_update/share total sd,0.009987,0.009986544495320153,True,4.5611841018670776e-05
+tab:td3-base-energy,Ant-v5/actor_update/share GU mean,19.25,19.251274938033433,True,6.622616099642814e-05
+tab:td3-base-energy,Ant-v5/actor_update/share GU sd,0.03566,0.035657654427611485,True,6.578033317570419e-05
+tab:td3-base-energy,HalfCheetah-v5/target_update/E mean,1692,1692.2831828987273,True,0.0001673377727729066
+tab:td3-base-energy,HalfCheetah-v5/target_update/E sd,24.73,24.733330774590694,True,0.0001346674502132026
+tab:td3-base-energy,HalfCheetah-v5/target_update/share total mean,6.021,6.021009749210802,True,1.6191986408077529e-06
+tab:td3-base-energy,HalfCheetah-v5/target_update/share total sd,0.1404,0.1403848251182073,True,0.00010809488689339104
+tab:td3-base-energy,HalfCheetah-v5/target_update/share GU mean,6.339,6.339209090117746,True,3.2983628520965246e-05
+tab:td3-base-energy,HalfCheetah-v5/target_update/share GU sd,0.1492,0.14915437116678687,True,0.0003059168353980486
+tab:td3-base-energy,Ant-v5/target_update/E mean,1733,1733.2540947934983,True,0.00014659985184030286
+tab:td3-base-energy,Ant-v5/target_update/E sd,20.84,20.84478549156448,True,0.00022957739557533138
+tab:td3-base-energy,Ant-v5/target_update/share total mean,5.680,5.680119537697049,True,2.1044926300578437e-05
+tab:td3-base-energy,Ant-v5/target_update/share total sd,0.1123,0.11231596495465256,True,0.00014214323546082235
+tab:td3-base-energy,Ant-v5/target_update/share GU mean,6.316,6.315936307002799,True,1.0084490106441044e-05
+tab:td3-base-energy,Ant-v5/target_update/share GU sd,0.1346,0.13460968227274295,True,7.192850157191666e-05
+tab:td3-base-energy,HalfCheetah-v5/gradient_updates/E mean,26700,26700.548639508615,True,2.0547873979025044e-05
+tab:td3-base-energy,HalfCheetah-v5/gradient_updates/E sd,301.1,301.0742275124884,True,8.560177244185387e-05
+tab:td3-base-energy,HalfCheetah-v5/gradient_updates/share total mean,94.98,94.98084193632192,True,8.86427520281868e-06
+tab:td3-base-energy,HalfCheetah-v5/gradient_updates/share total sd,0.05886,0.0588647959408787,True,8.147383851484204e-05
+tab:td3-base-energy,Ant-v5/gradient_updates/E mean,27450,27448.36917506049,True,5.941427445508404e-05
+tab:td3-base-energy,Ant-v5/gradient_updates/E sd,408.8,408.7602002074849,True,9.736709321237604e-05
+tab:td3-base-energy,Ant-v5/gradient_updates/share total mean,89.94,89.93550482264405,True,4.9982232988112984e-05
+tab:td3-base-energy,Ant-v5/gradient_updates/share total sd,0.1618,0.1617513884350312,True,0.00030053259782881656
+tab:td3-base-energy,HalfCheetah-v5/TOTAL/E mean,28110,28111.45776081962,True,5.185646479178094e-05
+tab:td3-base-energy,HalfCheetah-v5/TOTAL/E sd,310.7,310.7079539123129,True,2.559931991690402e-05
+tab:td3-base-energy,Ant-v5/TOTAL/E mean,30520,30519.830308692657,True,5.5600344309431406e-06
+tab:td3-base-energy,Ant-v5/TOTAL/E sd,431.9,431.9146241921528,True,3.385898817431814e-05
+tab:td3-base-jpf,HalfCheetah-v5/rollout/FLOPs,2.144e11,214425600000.0,True,0.00011938872970391595
+tab:td3-base-jpf,HalfCheetah-v5/rollout/J/FLOP mean,6580,6579.947176601108,True,8.027936619229635e-06
+tab:td3-base-jpf,HalfCheetah-v5/rollout/J/FLOP sd,85.93,85.92924203018224,True,8.820860045560374e-06
+tab:td3-base-jpf,Ant-v5/rollout/FLOPs,2.329e11,232857600000.0,True,0.00018208553210202286
+tab:td3-base-jpf,Ant-v5/rollout/J/FLOP mean,13190,13190.297991700376,True,2.259173375486763e-05
+tab:td3-base-jpf,Ant-v5/rollout/J/FLOP sd,225.6,225.60547035739953,True,2.424745016539333e-05
+tab:td3-base-jpf,HalfCheetah-v5/critic_update/FLOPs,1.922e14,192204800000000.0,True,2.4973361747469365e-05
+tab:td3-base-jpf,HalfCheetah-v5/critic_update/J/FLOP mean,96.41,96.40803586734216,True,2.037312180630882e-05
+tab:td3-base-jpf,HalfCheetah-v5/critic_update/J/FLOP sd,1.456,1.4561134109540328,True,7.788607204608281e-05
+tab:td3-base-jpf,Ant-v5/critic_update/FLOPs,2.051e14,205107200000000.0,True,3.510359460808787e-05
+tab:td3-base-jpf,Ant-v5/critic_update/J/FLOP mean,92.43,92.42749074543059,True,2.7148357584747204e-05
+tab:td3-base-jpf,Ant-v5/critic_update/J/FLOP sd,1.645,1.6454069266835607,True,0.0002473106664142183
+tab:td3-base-jpf,HalfCheetah-v5/actor_update/FLOPs,5.345e13,53452800000000.0,True,5.2382662835249044e-05
+tab:td3-base-jpf,HalfCheetah-v5/actor_update/J/FLOP mean,96.96,96.95934901218185,True,6.7140283508478615e-06
+tab:td3-base-jpf,HalfCheetah-v5/actor_update/J/FLOP sd,1.002,1.002401978797498,True,0.00040101556660957426
+tab:td3-base-jpf,Ant-v5/actor_update/FLOPs,5.716e13,57159680000000.0,True,5.598351845216768e-06
+tab:td3-base-jpf,Ant-v5/actor_update/J/FLOP mean,92.44,92.44447590124372,True,4.8417184478432734e-05
+tab:td3-base-jpf,Ant-v5/actor_update/J/FLOP sd,1.291,1.2912982134242605,True,0.00023094078591638165
+tab:td3-base-jpf,HalfCheetah-v5/gradient_updates/FLOPs,2.457e14,245657600000000.0,True,0.0001725979574822843
+tab:td3-base-jpf,HalfCheetah-v5/gradient_updates/J/FLOP mean,108.7,108.69009808574461,True,9.110226625780288e-05
+tab:td3-base-jpf,HalfCheetah-v5/gradient_updates/J/FLOP sd,1.226,1.2255848282833002,True,0.0003387539622870017
+tab:td3-base-jpf,Ant-v5/gradient_updates/FLOPs,2.623e14,262266880000000.0,True,0.00012628357801030768
+tab:td3-base-jpf,Ant-v5/gradient_updates/J/FLOP mean,104.7,104.65816032531629,True,0.0003997746048054107
+tab:td3-base-jpf,Ant-v5/gradient_updates/J/FLOP sd,1.559,1.5585658402901785,True,0.000278563599046018
+tab:td3-base-jpf,HalfCheetah-v5/TOTAL/FLOPs,2.459e14,245872025600000.0,True,0.00011377626198724414
+tab:td3-base-jpf,HalfCheetah-v5/TOTAL/J/FLOP mean,114.3,114.33369734608645,True,0.00029472803616639986
+tab:td3-base-jpf,HalfCheetah-v5/TOTAL/J/FLOP sd,1.264,1.263697865400081,True,0.00023908768716908324
+tab:td3-base-jpf,Ant-v5/TOTAL/FLOPs,2.625e14,262499737600000.0,True,9.996200468582868e-07
+tab:td3-base-jpf,Ant-v5/TOTAL/J/FLOP mean,116.3,116.26613644543566,True,0.0002912589649887142
+tab:td3-base-jpf,Ant-v5/TOTAL/J/FLOP sd,1.645,1.6453906893054102,True,0.0002374447041359663
+tab:td3-base-jpf,HalfCheetah-v5/target_update/FLOPs,3.225e11,322458400000.0,True,0.0001290088892086545
+tab:td3-base-jpf,HalfCheetah-v5/target_update/J/FLOP mean,5.248,5.24806667433296,True,1.2704551427610736e-05
+tab:td3-base-jpf,HalfCheetah-v5/target_update/J/FLOP sd,0.07670,0.0767023925399083,True,3.1192506896804034e-05
+tab:td3-base-jpf,Ant-v5/target_update/FLOPs,3.501e11,350106600000.0,True,1.885140125893085e-05
+tab:td3-base-jpf,Ant-v5/target_update/J/FLOP mean,4.951,4.950646731005637,True,7.135815047150971e-05
+tab:td3-base-jpf,Ant-v5/target_update/J/FLOP sd,0.05954,0.059538396281488076,True,2.693587016257946e-05
+tab:td3-base-time,HalfCheetah-v5/rollout/T mean,11.11,11.111863098209142,True,0.0001676674912816907
+tab:td3-base-time,HalfCheetah-v5/rollout/T sd,0.05962,0.05961866341627683,True,2.2418881044667504e-05
+tab:td3-base-time,HalfCheetah-v5/rollout/P mean,127.0,126.9740216608058,True,0.0002045957027618944
+tab:td3-base-time,HalfCheetah-v5/rollout/P sd,1.589,1.5892718301259698,True,0.00017104067461406406
+tab:td3-base-time,HalfCheetah-v5/rollout/GFLOP/s mean,19.30,19.297441059260215,True,0.00013260518490130533
+tab:td3-base-time,HalfCheetah-v5/rollout/GFLOP/s sd,0.1032,0.1032231407578267,True,0.0002241818806984955
+tab:td3-base-time,Ant-v5/rollout/T mean,24.75,24.747307032940444,True,0.00010881859007815078
+tab:td3-base-time,Ant-v5/rollout/T sd,0.1781,0.1781413260924039,True,0.00023198487016124476
+tab:td3-base-time,Ant-v5/rollout/P mean,124.1,124.11476733369996,True,0.00011898127851507369
+tab:td3-base-time,Ant-v5/rollout/P sd,2.067,2.066701911145181,True,0.00014423408291803117
+tab:td3-base-time,Ant-v5/rollout/GFLOP/s mean,9.410,9.409801002731259,True,2.114787216900201e-05
+tab:td3-base-time,Ant-v5/rollout/GFLOP/s sd,0.06760,0.06760473717012443,True,7.007157076156072e-05
+tab:td3-base-time,HalfCheetah-v5/gradient_updates/T mean,196.0,195.98745455260797,True,6.401148186074864e-05
+tab:td3-base-time,HalfCheetah-v5/gradient_updates/T sd,4.596,4.595639092291998,True,7.853264818099392e-05
+tab:td3-base-time,HalfCheetah-v5/gradient_updates/P mean,136.3,136.27282096061222,True,0.00019944578233722072
+tab:td3-base-time,HalfCheetah-v5/gradient_updates/P sd,2.187,2.187379396505955,True,0.00017344796543358892
+tab:td3-base-time,HalfCheetah-v5/gradient_updates/GFLOP/s mean,1254,1253.9771901891356,True,1.8189972706706995e-05
+tab:td3-base-time,HalfCheetah-v5/gradient_updates/GFLOP/s sd,28.89,28.89058148965326,True,2.012730873792898e-05
+tab:td3-base-time,Ant-v5/gradient_updates/T mean,199.4,199.37997044397633,True,0.0001004592185417171
+tab:td3-base-time,Ant-v5/gradient_updates/T sd,3.548,3.5482044892030484,True,5.763174125691823e-05
+tab:td3-base-time,Ant-v5/gradient_updates/P mean,137.7,137.68280547524554,True,0.00012488505514608893
+tab:td3-base-time,Ant-v5/gradient_updates/P sd,1.754,1.7544416528566331,True,0.0002517341377035824
+tab:td3-base-time,Ant-v5/gradient_updates/GFLOP/s mean,1316,1315.747642899093,True,0.00019179749419948137
+tab:td3-base-time,Ant-v5/gradient_updates/GFLOP/s sd,23.55,23.549853054486032,True,6.23976351905266e-06
+tab:td3-base-time,HalfCheetah-v5/TOTAL/T mean,207.1,207.0993176508171,True,3.2947920380481923e-06
+tab:td3-base-time,HalfCheetah-v5/TOTAL/T sd,4.649,4.649138884278349,True,2.9873118830374272e-05
+tab:td3-base-time,HalfCheetah-v5/TOTAL/P mean,135.8,135.77242648724297,True,0.00020308624858844226
+tab:td3-base-time,HalfCheetah-v5/TOTAL/P sd,2.094,2.0939172593207576,True,3.951477971442827e-05
+tab:td3-base-time,HalfCheetah-v5/TOTAL/GFLOP/s mean,1188,1187.6886325351873,True,0.00026216253678214974
+tab:td3-base-time,HalfCheetah-v5/TOTAL/GFLOP/s sd,26.21,26.2133202038727,True,0.00012666094363010028
+tab:td3-base-time,Ant-v5/TOTAL/T mean,224.1,224.1272774769168,True,0.00012170529720374255
+tab:td3-base-time,Ant-v5/TOTAL/T sd,3.535,3.5352623891670882,True,7.422056362552322e-05
+tab:td3-base-time,Ant-v5/TOTAL/P mean,136.2,136.18336640328408,True,0.00012214117740817263
+tab:td3-base-time,Ant-v5/TOTAL/P sd,1.735,1.7352374574280027,True,0.00013684434195801253
+tab:td3-base-time,Ant-v5/TOTAL/GFLOP/s mean,1171,1171.4428484147945,True,0.00037803672231538345
+tab:td3-base-time,Ant-v5/TOTAL/GFLOP/s sd,18.58,18.584105806601507,True,0.00022093108187372671
+tab:td3-base-time,HalfCheetah-v5/buffer_sample/T mean,8.880,8.879907553986413,True,1.0410695497148043e-05
+tab:td3-base-time,HalfCheetah-v5/buffer_sample/T sd,0.04412,0.044116725743856985,True,7.421802248028342e-05
+tab:td3-base-time,Ant-v5/buffer_sample/T mean,9.853,9.853329807185219,True,3.347164782593697e-05
+tab:td3-base-time,Ant-v5/buffer_sample/T sd,0.06158,0.06158249765080319,True,4.055780292233214e-05
+tab:td3-base-time,HalfCheetah-v5/critic_update/T mean,127.1,127.07515213047736,True,0.0001955368072045898
+tab:td3-base-time,HalfCheetah-v5/critic_update/T sd,3.892,3.891597760770947,True,0.00010336094678323521
+tab:td3-base-time,HalfCheetah-v5/critic_update/GFLOP/s mean,1514,1513.6381529530465,True,0.00023905782650068808
+tab:td3-base-time,HalfCheetah-v5/critic_update/GFLOP/s sd,45.30,45.30336504295171,True,7.427799123803357e-05
+tab:td3-base-time,Ant-v5/critic_update/T mean,126.8,126.79687894938107,True,2.4614569733815035e-05
+tab:td3-base-time,Ant-v5/critic_update/T sd,2.934,2.9341294290454707,True,4.4111566514172574e-05
+tab:td3-base-time,Ant-v5/critic_update/GFLOP/s mean,1618,1618.3028277547623,True,0.0001871267537624534
+tab:td3-base-time,Ant-v5/critic_update/GFLOP/s sd,37.72,37.7247379420664,True,0.00012559244476859408
+tab:td3-base-time,HalfCheetah-v5/actor_update/T mean,35.54,35.53878649560211,True,3.414591542226317e-05
+tab:td3-base-time,HalfCheetah-v5/actor_update/T sd,0.8536,0.8535850084833662,True,1.756300366673871e-05
+tab:td3-base-time,HalfCheetah-v5/actor_update/GFLOP/s mean,1505,1504.749720032698,True,0.00016632664154714747
+tab:td3-base-time,HalfCheetah-v5/actor_update/GFLOP/s sd,35.41,35.4138280185392,True,0.00010809389307472172
+tab:td3-base-time,Ant-v5/actor_update/T mean,35.34,35.34100343253813,True,2.8392870622431372e-05
+tab:td3-base-time,Ant-v5/actor_update/T sd,0.6203,0.620328792947559,True,4.6415623273383244e-05
+tab:td3-base-time,Ant-v5/actor_update/GFLOP/s mean,1618,1617.776688311522,True,0.0001380361641327503
+tab:td3-base-time,Ant-v5/actor_update/GFLOP/s sd,28.56,28.55730857585814,True,9.424642153194235e-05
+tab:td3-base-time,HalfCheetah-v5/target_update/T mean,11.60,11.60136352655536,True,0.00011753157740808284
+tab:td3-base-time,HalfCheetah-v5/target_update/T sd,0.09381,0.0938117284728855,True,1.842491246710825e-05
+tab:td3-base-time,Ant-v5/target_update/T mean,11.59,11.591220801646704,True,0.00010532123126591976
+tab:td3-base-time,Ant-v5/target_update/T sd,0.05271,0.05270517698472895,True,9.150932691956958e-05
+tab:td3-base-comp,HalfCheetah-v5/rollout/CPU mean,25.52,25.524849886002166,True,0.00019000644563342323
+tab:td3-base-comp,HalfCheetah-v5/rollout/CPU sd,0.3095,0.3095485203735641,True,0.0001567456161818053
+tab:td3-base-comp,HalfCheetah-v5/rollout/GPU mean,58.75,58.753423810051785,True,5.827422181989709e-05
+tab:td3-base-comp,HalfCheetah-v5/rollout/GPU sd,0.5004,0.5003851465722267,True,2.9683990172466376e-05
+tab:td3-base-comp,HalfCheetah-v5/rollout/RAM mean,15.72,15.721726303946047,True,0.00010980371446953503
+tab:td3-base-comp,HalfCheetah-v5/rollout/RAM sd,0.1951,0.19513122421086446,True,0.00016001647604444564
+tab:td3-base-comp,HalfCheetah-v5/rollout/idle floor mean,56.42,56.42111403085869,True,1.9744928433673606e-05
+tab:td3-base-comp,HalfCheetah-v5/rollout/idle floor sd,1.038,1.0377397874120744,True,0.00025074936037150047
+tab:td3-base-comp,HalfCheetah-v5/gradient_updates/CPU mean,20.05,20.046329199037206,True,0.00018311586756595202
+tab:td3-base-comp,HalfCheetah-v5/gradient_updates/CPU sd,0.1753,0.1753439327881989,True,0.00025055208640699747
+tab:td3-base-comp,HalfCheetah-v5/gradient_updates/GPU mean,65.28,65.27705968644511,True,4.5043596770614244e-05
+tab:td3-base-comp,HalfCheetah-v5/gradient_updates/GPU sd,0.4086,0.40861069254896953,True,2.6168059633519962e-05
+tab:td3-base-comp,HalfCheetah-v5/gradient_updates/RAM mean,14.68,14.676611114517678,True,0.0002309038139580619
+tab:td3-base-comp,HalfCheetah-v5/gradient_updates/RAM sd,0.2374,0.2374380866204575,True,0.00016040653376049366
+tab:td3-base-comp,HalfCheetah-v5/gradient_updates/idle floor mean,52.57,52.56909099982797,True,1.7291533004299525e-05
+tab:td3-base-comp,HalfCheetah-v5/gradient_updates/idle floor sd,0.6224,0.6223836418689831,True,2.628303495852747e-05
+tab:td3-base-comp,Ant-v5/rollout/CPU mean,27.57,27.56568243458234,True,0.00015662827967012025
+tab:td3-base-comp,Ant-v5/rollout/CPU sd,0.4364,0.43637597933038985,True,5.504581083270857e-05
+tab:td3-base-comp,Ant-v5/rollout/GPU mean,56.33,56.33450007471147,True,7.988132859091113e-05
+tab:td3-base-comp,Ant-v5/rollout/GPU sd,0.6965,0.6964559349958716,True,6.327034046844411e-05
+tab:td3-base-comp,Ant-v5/rollout/RAM mean,16.10,16.099817490706187,True,1.1336109488207483e-05
+tab:td3-base-comp,Ant-v5/rollout/RAM sd,0.2681,0.2680803370910083,True,7.334707649601285e-05
+tab:td3-base-comp,Ant-v5/rollout/idle floor mean,59.14,59.13760829432016,True,4.044305728324066e-05
+tab:td3-base-comp,Ant-v5/rollout/idle floor sd,1.440,1.4395195040626205,True,0.00033378911228598365
+tab:td3-base-comp,Ant-v5/gradient_updates/CPU mean,20.18,20.181578829679413,True,7.823122723637542e-05
+tab:td3-base-comp,Ant-v5/gradient_updates/CPU sd,0.1232,0.12317029319157956,True,0.0002411848478288507
+tab:td3-base-comp,Ant-v5/gradient_updates/GPU mean,65.29,65.29336398322964,True,5.152105856419155e-05
+tab:td3-base-comp,Ant-v5/gradient_updates/GPU sd,0.2719,0.2719192382367133,True,7.0749818358202e-05
+tab:td3-base-comp,Ant-v5/gradient_updates/RAM mean,14.53,14.525057187090937,True,0.00034029559026145577
+tab:td3-base-comp,Ant-v5/gradient_updates/RAM sd,0.1853,0.18532523794096506,True,0.00013618188890768694
+tab:td3-base-comp,Ant-v5/gradient_updates/idle floor mean,53.30,53.30310512543904,True,5.825411918751478e-05
+tab:td3-base-comp,Ant-v5/gradient_updates/idle floor sd,1.046,1.04566714109423,True,0.00031832204789541724
+tab:mbpo-base-energy,HalfCheetah-v5/dynamics_model_update/E mean,146200,146192.64223238468,True,5.0329260781989575e-05
+tab:mbpo-base-energy,HalfCheetah-v5/dynamics_model_update/E sd,7439,7439.231255654629,True,3.10859612616078e-05
+tab:mbpo-base-energy,HalfCheetah-v5/dynamics_model_update/share total mean,70.46,70.4601104024829,True,1.5668792210605443e-06
+tab:mbpo-base-energy,HalfCheetah-v5/dynamics_model_update/share total sd,1.049,1.04907255253249,True,6.915873674791295e-05
+tab:mbpo-base-energy,Ant-v5/dynamics_model_update/E mean,188400,188363.3063927341,True,0.0001948023103256686
+tab:mbpo-base-energy,Ant-v5/dynamics_model_update/E sd,20300,20295.492980683346,True,0.0002220699601110229
+tab:mbpo-base-energy,Ant-v5/dynamics_model_update/share total mean,74.28,74.27847823629621,True,2.0487276259901608e-05
+tab:mbpo-base-energy,Ant-v5/dynamics_model_update/share total sd,2.093,2.093200616924052,True,9.584218656815965e-05
+tab:mbpo-base-energy,HalfCheetah-v5/rollout/E mean,2428,2428.260658508988,True,0.0001073437104351043
+tab:mbpo-base-energy,HalfCheetah-v5/rollout/E sd,47.75,47.75260088545941,True,5.44658387434587e-05
+tab:mbpo-base-energy,HalfCheetah-v5/rollout/share total mean,1.171,1.171468037944688,True,0.0003995311263541875
+tab:mbpo-base-energy,HalfCheetah-v5/rollout/share total sd,0.02455,0.024545547981675502,True,0.0001813778338874474
+tab:mbpo-base-energy,Ant-v5/rollout/E mean,4292,4292.41005635849,True,9.553056513842442e-05
+tab:mbpo-base-energy,Ant-v5/rollout/E sd,29.86,29.86410637650583,True,0.0001375020720212013
+tab:mbpo-base-energy,Ant-v5/rollout/share total mean,1.704,1.7035721238032884,True,0.00025116412198406695
+tab:mbpo-base-energy,Ant-v5/rollout/share total sd,0.1243,0.12425107444737,True,0.00039376361812237234
+tab:mbpo-base-energy,HalfCheetah-v5/synthetic_rollout_generation/E mean,75.40,75.39901881602466,True,1.3013219412512431e-05
+tab:mbpo-base-energy,HalfCheetah-v5/synthetic_rollout_generation/E sd,16.37,16.36981925067512,True,1.104162007606256e-05
+tab:mbpo-base-energy,HalfCheetah-v5/synthetic_rollout_generation/share total mean,0.03654,0.0365411951694557,True,3.2707453879177004e-05
+tab:mbpo-base-energy,HalfCheetah-v5/synthetic_rollout_generation/share total sd,0.008622,0.008622271874442092,True,3.153164804497472e-05
+tab:mbpo-base-energy,Ant-v5/synthetic_rollout_generation/E mean,735.7,735.6512845183753,True,6.622088841542299e-05
+tab:mbpo-base-energy,Ant-v5/synthetic_rollout_generation/E sd,37.32,37.317939089434475,True,5.522573367693996e-05
+tab:mbpo-base-energy,Ant-v5/synthetic_rollout_generation/share total mean,0.2927,0.2927409291331208,True,0.00013981349735399466
+tab:mbpo-base-energy,Ant-v5/synthetic_rollout_generation/share total sd,0.03580,0.03579711463066945,True,8.060340505975675e-05
+tab:mbpo-base-energy,HalfCheetah-v5/buffer_sample/E mean,1677,1677.1050918165802,True,6.266263044156567e-05
+tab:mbpo-base-energy,HalfCheetah-v5/buffer_sample/E sd,15.29,15.291472856746058,True,9.631882813753348e-05
+tab:mbpo-base-energy,HalfCheetah-v5/buffer_sample/share total mean,0.8094,0.8093951598037524,True,5.980016298532427e-06
+tab:mbpo-base-energy,HalfCheetah-v5/buffer_sample/share total sd,0.02674,0.026740078388128283,True,2.9314846106945133e-06
+tab:mbpo-base-energy,HalfCheetah-v5/buffer_sample/share GU mean,2.857,2.8572125866331275,True,7.440350575306493e-05
+tab:mbpo-base-energy,HalfCheetah-v5/buffer_sample/share GU sd,0.03050,0.030496931665535864,True,0.00010061125157724817
+tab:mbpo-base-energy,Ant-v5/buffer_sample/E mean,2271,2271.0934986041525,True,4.11689805857691e-05
+tab:mbpo-base-energy,Ant-v5/buffer_sample/E sd,12.20,12.19500130227916,True,0.0004098972683098941
+tab:mbpo-base-energy,Ant-v5/buffer_sample/share total mean,0.9015,0.9015304905734768,True,3.3820901007374936e-05
+tab:mbpo-base-energy,Ant-v5/buffer_sample/share total sd,0.06850,0.06849532790325476,True,6.821044424879561e-05
+tab:mbpo-base-energy,Ant-v5/buffer_sample/share GU mean,3.801,3.801283038608851,True,7.445870406808736e-05
+tab:mbpo-base-energy,Ant-v5/buffer_sample/share GU sd,0.03001,0.030012741865902876,True,9.135672825656521e-05
+tab:mbpo-base-energy,HalfCheetah-v5/critic_update/E mean,24590,24588.462529179633,True,6.252813971359996e-05
+tab:mbpo-base-energy,HalfCheetah-v5/critic_update/E sd,267.4,267.3760528086048,True,8.956371052537066e-05
+tab:mbpo-base-energy,HalfCheetah-v5/critic_update/share total mean,11.87,11.869763616752103,True,1.9914739292957828e-05
+tab:mbpo-base-energy,HalfCheetah-v5/critic_update/share total sd,0.4959,0.49588820249993554,True,2.3790644756206766e-05
+tab:mbpo-base-energy,HalfCheetah-v5/critic_update/share GU mean,41.89,41.888891488837245,True,2.6463129563849233e-05
+tab:mbpo-base-energy,HalfCheetah-v5/critic_update/share GU sd,0.3344,0.3343979299391174,True,6.1904117737042e-06
+tab:mbpo-base-energy,Ant-v5/critic_update/E mean,24560,24559.979261352404,True,8.444081884261687e-07
+tab:mbpo-base-energy,Ant-v5/critic_update/E sd,218.7,218.65203245677668,True,0.00021937844658631402
+tab:mbpo-base-energy,Ant-v5/critic_update/share total mean,9.755,9.75478701465829,True,2.1833930499108773e-05
+tab:mbpo-base-energy,Ant-v5/critic_update/share total sd,0.8325,0.832491227568114,True,1.0537566758082645e-05
+tab:mbpo-base-energy,Ant-v5/critic_update/share GU mean,41.11,41.10642627698458,True,8.693830476384806e-05
+tab:mbpo-base-energy,Ant-v5/critic_update/share GU sd,0.2432,0.2432468190409101,True,0.00019247544981148526
+tab:mbpo-base-energy,HalfCheetah-v5/actor_update/E mean,29880,29882.61049074076,True,8.735818919065302e-05
+tab:mbpo-base-energy,HalfCheetah-v5/actor_update/E sd,104.8,104.81817628738655,True,0.0001734077812679858
+tab:mbpo-base-energy,HalfCheetah-v5/actor_update/share total mean,14.42,14.422123125928923,True,0.0001472131329336877
+tab:mbpo-base-energy,HalfCheetah-v5/actor_update/share total sd,0.4729,0.4729094505575772,True,1.998386280097812e-05
+tab:mbpo-base-energy,HalfCheetah-v5/actor_update/share GU mean,50.91,50.90937765692071,True,1.2224527345035564e-05
+tab:mbpo-base-energy,HalfCheetah-v5/actor_update/share GU sd,0.2581,0.2581292445984181,True,0.00011329440204876313
+tab:mbpo-base-energy,Ant-v5/actor_update/E mean,30340,30339.956687040547,True,1.4275880450262335e-06
+tab:mbpo-base-energy,Ant-v5/actor_update/E sd,62.31,62.30962692305762,True,5.9874687236015696e-06
+tab:mbpo-base-energy,Ant-v5/actor_update/share total mean,12.05,12.046249502943423,True,0.00031134147235294796
+tab:mbpo-base-energy,Ant-v5/actor_update/share total sd,0.9546,0.9546169150301723,True,1.771918128203364e-05
+tab:mbpo-base-energy,Ant-v5/actor_update/share GU mean,50.78,50.78152287579835,True,2.9988777651970167e-05
+tab:mbpo-base-energy,Ant-v5/actor_update/share GU sd,0.1789,0.17892892118962417,True,0.00016163507515654706
+tab:mbpo-base-energy,HalfCheetah-v5/target_update/E mean,2550,2550.0982104716268,True,3.8512427177699884e-05
+tab:mbpo-base-energy,HalfCheetah-v5/target_update/E sd,26.87,26.865711103521924,True,0.00015964202330435474
+tab:mbpo-base-energy,HalfCheetah-v5/target_update/share total mean,1.231,1.2305984619181793,True,0.0003262949648050585
+tab:mbpo-base-energy,HalfCheetah-v5/target_update/share total sd,0.03659,0.03658602472956808,True,0.00010865543500011694
+tab:mbpo-base-energy,HalfCheetah-v5/target_update/share GU mean,4.345,4.344518267608917,True,0.00011088280941853496
+tab:mbpo-base-energy,HalfCheetah-v5/target_update/share GU sd,0.05418,0.05418462493528578,True,8.535512225663189e-05
+tab:mbpo-base-energy,Ant-v5/target_update/E mean,2576,2575.513600843483,True,0.00018885520789244247
+tab:mbpo-base-energy,Ant-v5/target_update/E sd,25.80,25.802176545789685,True,8.435512352306697e-05
+tab:mbpo-base-energy,Ant-v5/target_update/share total mean,1.023,1.0226417025921795,True,0.000350364557706031
+tab:mbpo-base-energy,Ant-v5/target_update/share total sd,0.08227,0.08226930850681201,True,8.405238849555917e-06
+tab:mbpo-base-energy,Ant-v5/target_update/share GU mean,4.311,4.310767808608212,True,5.386311722114575e-05
+tab:mbpo-base-energy,Ant-v5/target_update/share GU sd,0.04491,0.04491334024851356,True,7.437096628928537e-05
+tab:mbpo-base-energy,HalfCheetah-v5/gradient_updates/E mean,58700,58698.2763222086,True,2.9365049527838493e-05
+tab:mbpo-base-energy,HalfCheetah-v5/gradient_updates/E sd,211.9,211.88848729636854,True,5.4333785560348436e-05
+tab:mbpo-base-energy,HalfCheetah-v5/gradient_updates/share total mean,28.33,28.331880364402963,True,6.636920595383853e-05
+tab:mbpo-base-energy,HalfCheetah-v5/gradient_updates/share total sd,1.021,1.0211023074913155,True,0.00010019318393954135
+tab:mbpo-base-energy,Ant-v5/gradient_updates/E mean,59750,59746.54304784059,True,5.7860287525612e-05
+tab:mbpo-base-energy,Ant-v5/gradient_updates/E sd,208.8,208.80062588402316,True,2.997519861356378e-06
+tab:mbpo-base-energy,Ant-v5/gradient_updates/share total mean,23.73,23.725208710767372,True,0.00020194929751887058
+tab:mbpo-base-energy,Ant-v5/gradient_updates/share total sd,1.935,1.9347689073058771,True,0.00011944201359153821
+tab:mbpo-base-energy,HalfCheetah-v5/TOTAL/E mean,207400,207394.57823191828,True,2.6142284566671935e-05
+tab:mbpo-base-energy,HalfCheetah-v5/TOTAL/E sd,7451,7451.413638114266,True,5.55113612469992e-05
+tab:mbpo-base-energy,Ant-v5/TOTAL/E mean,253100,253137.91078145156,True,0.00014976334968763215
+tab:mbpo-base-energy,Ant-v5/TOTAL/E sd,20140,20140.01874821968,True,9.308938544677802e-07
+tab:mbpo-base-jpf,HalfCheetah-v5/dynamics_model_update/FLOPs,2.518e14,251803776000000.0,True,1.4995803716620993e-05
+tab:mbpo-base-jpf,HalfCheetah-v5/dynamics_model_update/J/FLOP mean,580.6,580.5816122169061,True,3.167131494859631e-05
+tab:mbpo-base-jpf,HalfCheetah-v5/dynamics_model_update/J/FLOP sd,14.82,14.81817824886371,True,0.00012294029034441318
+tab:mbpo-base-jpf,Ant-v5/dynamics_model_update/FLOPs,4.309e14,430948707952000.0,True,0.00011302494032636756
+tab:mbpo-base-jpf,Ant-v5/dynamics_model_update/J/FLOP mean,437.1,437.08985064114506,True,2.3220303194120324e-05
+tab:mbpo-base-jpf,Ant-v5/dynamics_model_update/J/FLOP sd,3.900,3.9001037733406294,True,2.6607840883323815e-05
+tab:mbpo-base-jpf,HalfCheetah-v5/rollout/FLOPs,2.157e11,215654400000.0,True,0.0002114494301994302
+tab:mbpo-base-jpf,HalfCheetah-v5/rollout/J/FLOP mean,11260,11259.963434592513,True,3.247382435929597e-06
+tab:mbpo-base-jpf,HalfCheetah-v5/rollout/J/FLOP sd,221.4,221.43114578445588,True,0.00014065674612094028
+tab:mbpo-base-jpf,Ant-v5/rollout/FLOPs,2.345e11,234496000000.0,True,1.7057860262008733e-05
+tab:mbpo-base-jpf,Ant-v5/rollout/J/FLOP mean,18300,18304.832732151037,True,0.00026401400229943557
+tab:mbpo-base-jpf,Ant-v5/rollout/J/FLOP sd,127.4,127.35443835504988,True,0.0003577546690842892
+tab:mbpo-base-jpf,HalfCheetah-v5/synthetic_rollout_generation/FLOPs,3.962e12,3961726560000.0,True,6.90204121508073e-05
+tab:mbpo-base-jpf,HalfCheetah-v5/synthetic_rollout_generation/J/FLOP mean,19.03,19.031858376420775,True,9.764555746570857e-05
+tab:mbpo-base-jpf,HalfCheetah-v5/synthetic_rollout_generation/J/FLOP sd,4.132,4.131991191909802,True,2.1316817458129306e-06
+tab:mbpo-base-jpf,Ant-v5/synthetic_rollout_generation/FLOPs,4.611e13,46106122214800.0,True,8.410564614248206e-05
+tab:mbpo-base-jpf,Ant-v5/synthetic_rollout_generation/J/FLOP mean,15.96,15.95560956289298,True,0.00027516573965510936
+tab:mbpo-base-jpf,Ant-v5/synthetic_rollout_generation/J/FLOP sd,0.5986,0.5985979202186834,True,3.474421220593093e-06
+tab:mbpo-base-jpf,HalfCheetah-v5/critic_update/FLOPs,4.924e14,492358860800000.0,True,8.355531559471835e-05
+tab:mbpo-base-jpf,HalfCheetah-v5/critic_update/J/FLOP mean,49.94,49.94012393567475,True,2.481685366061099e-06
+tab:mbpo-base-jpf,HalfCheetah-v5/critic_update/J/FLOP sd,0.5431,0.543051164701627,True,8.992761925095087e-05
+tab:mbpo-base-jpf,Ant-v5/critic_update/FLOPs,5.255e14,525493862400000.0,True,1.1679679705427516e-05
+tab:mbpo-base-jpf,Ant-v5/critic_update/J/FLOP mean,46.74,46.736947885906275,True,6.530409519204229e-05
+tab:mbpo-base-jpf,Ant-v5/critic_update/J/FLOP sd,0.4161,0.41608865127018513,True,2.727478814972071e-05
+tab:mbpo-base-jpf,HalfCheetah-v5/actor_update/FLOPs,3.845e14,384512819200000.0,True,3.333881046325334e-05
+tab:mbpo-base-jpf,HalfCheetah-v5/actor_update/J/FLOP mean,77.72,77.7155116776423,True,5.7753236912585626e-05
+tab:mbpo-base-jpf,HalfCheetah-v5/actor_update/J/FLOP sd,0.2726,0.2725999525983719,True,1.7388714734116418e-07
+tab:mbpo-base-jpf,Ant-v5/actor_update/FLOPs,4.132e14,413243801600000.0,True,0.00010599457228495306
+tab:mbpo-base-jpf,Ant-v5/actor_update/J/FLOP mean,73.42,73.41902424082372,True,1.3290277096087278e-05
+tab:mbpo-base-jpf,Ant-v5/actor_update/J/FLOP sd,0.1508,0.15078175808519467,True,0.00012098223974156054
+tab:mbpo-base-jpf,HalfCheetah-v5/gradient_updates/FLOPs,8.769e14,876871680000000.0,True,3.229662976457399e-05
+tab:mbpo-base-jpf,HalfCheetah-v5/gradient_updates/J/FLOP mean,66.94,66.9405543148669,True,8.280703268396364e-06
+tab:mbpo-base-jpf,HalfCheetah-v5/gradient_updates/J/FLOP sd,0.2416,0.2416413850842659,True,0.00017126654133125838
+tab:mbpo-base-jpf,Ant-v5/gradient_updates/FLOPs,9.387e14,938737664000000.0,True,4.0121965320441215e-05
+tab:mbpo-base-jpf,Ant-v5/gradient_updates/J/FLOP mean,63.65,63.645622562173656,True,6.877830163521375e-05
+tab:mbpo-base-jpf,Ant-v5/gradient_updates/J/FLOP sd,0.2224,0.2224270250266918,True,0.00012150064358662552
+tab:mbpo-base-jpf,HalfCheetah-v5/TOTAL/FLOPs,1.133e15,1132852836960000.0,True,0.00012990481658227616
+tab:mbpo-base-jpf,HalfCheetah-v5/TOTAL/J/FLOP mean,183.1,183.07283299784967,True,0.00014839450346322162
+tab:mbpo-base-jpf,HalfCheetah-v5/TOTAL/J/FLOP sd,5.442,5.442468575014646,True,8.609604413655145e-05
+tab:mbpo-base-jpf,Ant-v5/TOTAL/FLOPs,1.416e15,1416026990166800.0,True,1.9060488950723114e-05
+tab:mbpo-base-jpf,Ant-v5/TOTAL/J/FLOP mean,178.8,178.76630356574867,True,0.00018849432795340243
+tab:mbpo-base-jpf,Ant-v5/TOTAL/J/FLOP sd,8.471,8.471493936088088,True,5.830566507088265e-05
+tab:mbpo-base-jpf,HalfCheetah-v5/target_update/FLOPs,4.301e11,430080400000.0,True,4.5572874281180916e-05
+tab:mbpo-base-jpf,HalfCheetah-v5/target_update/J/FLOP mean,5.929,5.92935230359632,True,5.941687696754155e-05
+tab:mbpo-base-jpf,HalfCheetah-v5/target_update/J/FLOP sd,0.06247,0.06246671809159847,True,5.253851173541684e-05
+tab:mbpo-base-jpf,Ant-v5/target_update/FLOPs,4.669e11,466944400000.0,True,9.508626723010277e-05
+tab:mbpo-base-jpf,Ant-v5/target_update/J/FLOP mean,5.516,5.515675101454227,True,5.8904583717635687e-05
+tab:mbpo-base-jpf,Ant-v5/target_update/J/FLOP sd,0.05526,0.05525749221061358,True,4.538369886309238e-05
+tab:mbpo-base-time,HalfCheetah-v5/dynamics_model_update/T mean,1250,1250.0701086386296,True,5.6083765338500594e-05
+tab:mbpo-base-time,HalfCheetah-v5/dynamics_model_update/T sd,72.83,72.83362039870421,True,4.970779544385628e-05
+tab:mbpo-base-time,HalfCheetah-v5/dynamics_model_update/P mean,117.0,116.98779002183592,True,0.00010436967962041904
+tab:mbpo-base-time,HalfCheetah-v5/dynamics_model_update/P sd,0.9535,0.9535393743687121,True,4.1292860861786116e-05
+tab:mbpo-base-time,HalfCheetah-v5/dynamics_model_update/GFLOP/s mean,201.7,201.71874233331226,True,9.291319733347356e-05
+tab:mbpo-base-time,HalfCheetah-v5/dynamics_model_update/GFLOP/s sd,6.744,6.743599743316743,True,5.9353564637863164e-05
+tab:mbpo-base-time,Ant-v5/dynamics_model_update/T mean,1605,1605.1703693171598,True,0.00010613784082764623
+tab:mbpo-base-time,Ant-v5/dynamics_model_update/T sd,180.1,180.13553244131134,True,0.00019725392780529317
+tab:mbpo-base-time,Ant-v5/dynamics_model_update/P mean,117.4,117.39688722993392,True,2.6514928457899502e-05
+tab:mbpo-base-time,Ant-v5/dynamics_model_update/P sd,0.6555,0.6554633831798019,True,5.586402099294842e-05
+tab:mbpo-base-time,Ant-v5/dynamics_model_update/GFLOP/s mean,268.6,268.6267951992119,True,9.974879532040954e-05
+tab:mbpo-base-time,Ant-v5/dynamics_model_update/GFLOP/s sd,3.333,3.3329499779151823,True,1.500835150521747e-05
+tab:mbpo-base-time,HalfCheetah-v5/rollout/T mean,20.38,20.378508483185577,True,7.319067613082256e-05
+tab:mbpo-base-time,HalfCheetah-v5/rollout/T sd,0.4152,0.41523810052451654,True,9.175584915834847e-05
+tab:mbpo-base-time,HalfCheetah-v5/rollout/P mean,119.2,119.16019256351012,True,0.00033406656731159424
+tab:mbpo-base-time,HalfCheetah-v5/rollout/P sd,0.5507,0.5506542240972219,True,8.313003110645006e-05
+tab:mbpo-base-time,HalfCheetah-v5/rollout/GFLOP/s mean,10.59,10.585868382727725,True,0.00039029554523996074
+tab:mbpo-base-time,HalfCheetah-v5/rollout/GFLOP/s sd,0.2101,0.2101492978920635,True,0.0002345850904950567
+tab:mbpo-base-time,Ant-v5/rollout/T mean,36.68,36.68057483741577,True,1.5671439673913345e-05
+tab:mbpo-base-time,Ant-v5/rollout/T sd,0.08731,0.08731446557069267,True,5.114353805502443e-05
+tab:mbpo-base-time,Ant-v5/rollout/P mean,117.0,117.02245207148704,True,0.00019186122910262035
+tab:mbpo-base-time,Ant-v5/rollout/P sd,0.9537,0.9536877527612062,True,1.2841979734272519e-05
+tab:mbpo-base-time,Ant-v5/rollout/GFLOP/s mean,6.393,6.392949540418913,True,7.893004749657624e-06
+tab:mbpo-base-time,Ant-v5/rollout/GFLOP/s sd,0.01523,0.015233047463252766,True,0.00020005604657351677
+tab:mbpo-base-time,HalfCheetah-v5/synthetic_rollout_generation/T mean,0.6331,0.6330540955983451,True,7.25126051218008e-05
+tab:mbpo-base-time,HalfCheetah-v5/synthetic_rollout_generation/T sd,0.007748,0.007748433960653009,True,5.6006240127137804e-05
+tab:mbpo-base-time,HalfCheetah-v5/synthetic_rollout_generation/P mean,119.1,119.13744347717724,True,0.0003142880700173948
+tab:mbpo-base-time,HalfCheetah-v5/synthetic_rollout_generation/P sd,25.87,25.867724643606177,True,8.796121132309259e-05
+tab:mbpo-base-time,HalfCheetah-v5/synthetic_rollout_generation/GFLOP/s mean,6259,6258.876236372741,True,1.977409723166551e-05
+tab:mbpo-base-time,HalfCheetah-v5/synthetic_rollout_generation/GFLOP/s sd,77.55,77.54622660255397,True,4.8659974976795997e-05
+tab:mbpo-base-time,Ant-v5/synthetic_rollout_generation/T mean,5.076,5.0758229310129535,True,3.488478409368642e-05
+tab:mbpo-base-time,Ant-v5/synthetic_rollout_generation/T sd,0.07498,0.07497967065338307,True,4.392478842156438e-06
+tab:mbpo-base-time,Ant-v5/synthetic_rollout_generation/P mean,144.9,144.88190190624775,True,0.0001249161801034946
+tab:mbpo-base-time,Ant-v5/synthetic_rollout_generation/P sd,5.454,5.454321661318703,True,5.897366137837961e-05
+tab:mbpo-base-time,Ant-v5/synthetic_rollout_generation/GFLOP/s mean,9083,9083.34252045495,True,3.770863579988094e-05
+tab:mbpo-base-time,Ant-v5/synthetic_rollout_generation/GFLOP/s sd,23.70,23.698193421069245,True,7.623277009580115e-05
+tab:mbpo-base-time,HalfCheetah-v5/gradient_updates/T mean,407.6,407.5837570928197,True,3.985170384648068e-05
+tab:mbpo-base-time,HalfCheetah-v5/gradient_updates/T sd,2.705,2.7047506783142032,True,9.217917488506857e-05
+tab:mbpo-base-time,HalfCheetah-v5/gradient_updates/P mean,144.0,144.01764284137772,True,0.00012250472254398464
+tab:mbpo-base-time,HalfCheetah-v5/gradient_updates/P sd,0.4680,0.4679913925491058,True,1.83923273616651e-05
+tab:mbpo-base-time,HalfCheetah-v5/gradient_updates/GFLOP/s mean,2151,2151.4659034151155,True,0.00021655161458794864
+tab:mbpo-base-time,HalfCheetah-v5/gradient_updates/GFLOP/s sd,14.27,14.26947687330975,True,3.6660537375919246e-05
+tab:mbpo-base-time,Ant-v5/gradient_updates/T mean,411.1,411.0971635009977,True,6.899826255636688e-06
+tab:mbpo-base-time,Ant-v5/gradient_updates/T sd,2.430,2.429500881073462,True,0.00020544093250850974
+tab:mbpo-base-time,Ant-v5/gradient_updates/P mean,145.3,145.3362935500701,True,0.00024972117551349914
+tab:mbpo-base-time,Ant-v5/gradient_updates/P sd,0.4734,0.4733848459690301,True,3.2012074528684715e-05
+tab:mbpo-base-time,Ant-v5/gradient_updates/GFLOP/s mean,2284,2283.55699116059,True,0.00019399946711423503
+tab:mbpo-base-time,Ant-v5/gradient_updates/GFLOP/s sd,13.45,13.448305713168205,True,0.00012598515143326955
+tab:mbpo-base-time,HalfCheetah-v5/TOTAL/T mean,1679,1678.6654283102332,True,0.00019930814331690512
+tab:mbpo-base-time,HalfCheetah-v5/TOTAL/T sd,72.21,72.21017741327726,True,2.4569012793800817e-06
+tab:mbpo-base-time,HalfCheetah-v5/TOTAL/P mean,123.6,123.57728021493986,True,0.0001838508261438993
+tab:mbpo-base-time,HalfCheetah-v5/TOTAL/P sd,0.9135,0.9134555464836059,True,4.866522138396837e-05
+tab:mbpo-base-time,HalfCheetah-v5/TOTAL/GFLOP/s mean,675.7,675.6992049586412,True,1.1766202372617272e-06
+tab:mbpo-base-time,HalfCheetah-v5/TOTAL/GFLOP/s sd,24.66,24.656571989809024,True,0.00013903028338218905
+tab:mbpo-base-time,Ant-v5/TOTAL/T mean,2058,2058.023930586586,True,1.1627943791379727e-05
+tab:mbpo-base-time,Ant-v5/TOTAL/T sd,178.1,178.14044611975683,True,0.00022704624714842307
+tab:mbpo-base-time,Ant-v5/TOTAL/P mean,123.1,123.06085831560729,True,0.00031806770185462856
+tab:mbpo-base-time,Ant-v5/TOTAL/P sd,0.9303,0.9303223306562561,True,2.4003139041462806e-05
+tab:mbpo-base-time,Ant-v5/TOTAL/GFLOP/s mean,690.6,690.6493489665935,True,7.14529980623457e-05
+tab:mbpo-base-time,Ant-v5/TOTAL/GFLOP/s sd,37.72,37.7184602555246,True,4.082203952575132e-05
+tab:mbpo-base-time,HalfCheetah-v5/buffer_sample/T mean,11.29,11.291719665141864,True,0.00015229435310667698
+tab:mbpo-base-time,HalfCheetah-v5/buffer_sample/T sd,0.09731,0.09731437393317342,True,4.49464246302709e-05
+tab:mbpo-base-time,Ant-v5/buffer_sample/T mean,15.16,15.157988093337917,True,0.00013272913593116427
+tab:mbpo-base-time,Ant-v5/buffer_sample/T sd,0.03119,0.031185512037899755,True,0.0001439117656554729
+tab:mbpo-base-time,HalfCheetah-v5/critic_update/T mean,165.6,165.55653601727028,True,0.0002625325690867617
+tab:mbpo-base-time,HalfCheetah-v5/critic_update/T sd,2.324,2.3243034122095527,True,0.00013053898555543796
+tab:mbpo-base-time,HalfCheetah-v5/critic_update/GFLOP/s mean,2974,2974.428569262779,True,0.00014408457046434113
+tab:mbpo-base-time,HalfCheetah-v5/critic_update/GFLOP/s sd,41.53,41.53395526002791,True,9.522955382278629e-05
+tab:mbpo-base-time,Ant-v5/critic_update/T mean,163.9,163.92693168569676,True,0.00016429079358594483
+tab:mbpo-base-time,Ant-v5/critic_update/T sd,1.980,1.9795083326477196,True,0.00024837852115666936
+tab:mbpo-base-time,Ant-v5/critic_update/GFLOP/s mean,3206,3206.0294964107657,True,9.200293009993103e-06
+tab:mbpo-base-time,Ant-v5/critic_update/GFLOP/s sd,38.34,38.34173425386682,True,4.523149253843888e-05
+tab:mbpo-base-time,HalfCheetah-v5/actor_update/T mean,201.2,201.1966375669821,True,1.6712173019116397e-05
+tab:mbpo-base-time,HalfCheetah-v5/actor_update/T sd,0.8362,0.8361742619744488,True,3.0780695749359445e-05
+tab:mbpo-base-time,HalfCheetah-v5/actor_update/GFLOP/s mean,1911,1911.155865905741,True,8.155583148477017e-05
+tab:mbpo-base-time,HalfCheetah-v5/actor_update/GFLOP/s sd,7.945,7.945271610261748,True,3.418514496051852e-05
+tab:mbpo-base-time,Ant-v5/actor_update/T mean,202.5,202.5009857240584,True,4.867749432849189e-06
+tab:mbpo-base-time,Ant-v5/actor_update/T sd,0.7030,0.7029730818249194,True,3.829190018303964e-05
+tab:mbpo-base-time,Ant-v5/actor_update/GFLOP/s mean,2041,2040.719906787403,True,0.0001372521587432851
+tab:mbpo-base-time,Ant-v5/actor_update/GFLOP/s sd,7.097,7.096885377624618,True,1.6151081676431763e-05
+tab:mbpo-base-time,HalfCheetah-v5/target_update/T mean,17.17,17.16932047670998,True,3.9577762611090736e-05
+tab:mbpo-base-time,HalfCheetah-v5/target_update/T sd,0.1551,0.15505867632254502,True,0.00026650348393922595
+tab:mbpo-base-time,Ant-v5/target_update/T mean,17.19,17.189854032885343,True,8.491469117723375e-06
+tab:mbpo-base-time,Ant-v5/target_update/T sd,0.1590,0.15904491082753344,True,0.00028237827478894053
+tab:tdmpc2-base-energy,HalfCheetah-v5/world_model_pretrain/E mean,10860,10863.409812760965,True,0.00031388052367863154
+tab:tdmpc2-base-energy,HalfCheetah-v5/world_model_pretrain/E sd,469.2,469.2158460154906,True,3.3771270994361885e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/world_model_pretrain/share total mean,2.429,2.4293512817241067,True,0.00014459898276119955
+tab:tdmpc2-base-energy,HalfCheetah-v5/world_model_pretrain/share total sd,0.08895,0.08894818514586807,True,2.04034981597251e-05
+tab:tdmpc2-base-energy,Ant-v5/world_model_pretrain/E mean,10860,10862.242371122584,True,0.00020643722041639986
+tab:tdmpc2-base-energy,Ant-v5/world_model_pretrain/E sd,103.4,103.36305511901186,True,0.00035742829916943285
+tab:tdmpc2-base-energy,Ant-v5/world_model_pretrain/share total mean,2.202,2.2024235472558606,True,0.00019230962926654799
+tab:tdmpc2-base-energy,Ant-v5/world_model_pretrain/share total sd,0.01670,0.016696241741256276,True,0.00022509609060326888
+tab:tdmpc2-base-energy,HalfCheetah-v5/rollout/E mean,213800,213810.79566480982,True,5.049167314611727e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/rollout/E sd,333.6,333.5912213151135,True,2.6315695155028326e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/rollout/share total mean,47.83,47.825009219887356,True,0.00010435502667016668
+tab:tdmpc2-base-energy,HalfCheetah-v5/rollout/share total sd,0.3413,0.3413281634558646,True,8.25113743309244e-05
+tab:tdmpc2-base-energy,Ant-v5/rollout/E mean,254600,254575.98786657094,True,9.432206717644188e-05
+tab:tdmpc2-base-energy,Ant-v5/rollout/E sd,533.6,533.6129953187196,True,2.4353452471403876e-05
+tab:tdmpc2-base-energy,Ant-v5/rollout/share total mean,51.62,51.618698570676074,True,2.521236218580426e-05
+tab:tdmpc2-base-energy,Ant-v5/rollout/share total sd,0.2272,0.22719856997524016,True,6.2941626789877354e-06
+tab:tdmpc2-base-energy,HalfCheetah-v5/buffer_sample/E mean,9884,9884.035707507082,True,3.6126444844069357e-06
+tab:tdmpc2-base-energy,HalfCheetah-v5/buffer_sample/E sd,126.9,126.91635357162014,True,0.00012885314744644815
+tab:tdmpc2-base-energy,HalfCheetah-v5/buffer_sample/share total mean,2.211,2.210993910955403,True,2.7539852402164737e-06
+tab:tdmpc2-base-energy,HalfCheetah-v5/buffer_sample/share total sd,0.04273,0.042731754731706206,True,4.106388135068032e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/buffer_sample/share GU mean,4.445,4.44502772572307,True,6.237469095854963e-06
+tab:tdmpc2-base-energy,HalfCheetah-v5/buffer_sample/share GU sd,0.1075,0.10749802569142623,True,1.8365998455011965e-05
+tab:tdmpc2-base-energy,Ant-v5/buffer_sample/E mean,12030,12025.320529918366,True,0.0003891347486323776
+tab:tdmpc2-base-energy,Ant-v5/buffer_sample/E sd,365.3,365.26898608920266,True,8.490704652866848e-05
+tab:tdmpc2-base-energy,Ant-v5/buffer_sample/share total mean,2.438,2.438406250863836,True,0.00016660507808816254
+tab:tdmpc2-base-energy,Ant-v5/buffer_sample/share total sd,0.07913,0.07912938699048241,True,7.746926153557974e-06
+tab:tdmpc2-base-energy,Ant-v5/buffer_sample/share GU mean,5.281,5.280971174503714,True,5.458370313604347e-06
+tab:tdmpc2-base-energy,Ant-v5/buffer_sample/share GU sd,0.1924,0.19242209438265936,True,0.00011482248299116207
+tab:tdmpc2-base-energy,HalfCheetah-v5/critic_update/E mean,146400,146372.26946344238,True,0.00018945211862376375
+tab:tdmpc2-base-energy,HalfCheetah-v5/critic_update/E sd,2470,2470.4808876672846,True,0.00019465346592447292
+tab:tdmpc2-base-energy,HalfCheetah-v5/critic_update/share total mean,32.74,32.73733134049836,True,8.151731959724468e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/critic_update/share total sd,0.3238,0.32377730184043885,True,7.010423347191787e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/critic_update/share GU mean,65.81,65.80819934639895,True,2.736214664640086e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/critic_update/share GU sd,0.3011,0.3010848626595123,True,5.027599313357163e-05
+tab:tdmpc2-base-energy,Ant-v5/critic_update/E mean,149800,149765.79779208498,True,0.00022837128649694149
+tab:tdmpc2-base-energy,Ant-v5/critic_update/E sd,1894,1894.1313599636273,True,6.935103150917108e-05
+tab:tdmpc2-base-energy,Ant-v5/critic_update/share total mean,30.37,30.365992945694536,True,0.00013195861280185163
+tab:tdmpc2-base-energy,Ant-v5/critic_update/share total sd,0.2883,0.28828985403338103,True,3.5193630566664666e-05
+tab:tdmpc2-base-energy,Ant-v5/critic_update/share GU mean,65.76,65.75618184700714,True,5.806530862371489e-05
+tab:tdmpc2-base-energy,Ant-v5/critic_update/share GU sd,0.3224,0.3224052306924993,True,1.6223969096493164e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/actor_update/E mean,56140,56140.86096190483,True,1.533574459097675e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/actor_update/E sd,469.4,469.4363023412717,True,7.733177236329289e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/actor_update/share total mean,12.56,12.55699246933134,True,0.00023951043022496686
+tab:tdmpc2-base-energy,HalfCheetah-v5/actor_update/share total sd,0.03919,0.0391886265308861,True,3.504764610254907e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/actor_update/share GU mean,25.24,25.242816703686525,True,0.00011158436554806577
+tab:tdmpc2-base-energy,HalfCheetah-v5/actor_update/share GU sd,0.1180,0.11804927495578434,True,0.00041741006713339455
+tab:tdmpc2-base-energy,Ant-v5/actor_update/E mean,55460,55457.12901979835,True,5.1769362251477315e-05
+tab:tdmpc2-base-energy,Ant-v5/actor_update/E sd,325.2,325.15453585748463,True,0.00013982318406065156
+tab:tdmpc2-base-energy,Ant-v5/actor_update/share total mean,11.24,11.244491241953396,True,0.00039941708848852873
+tab:tdmpc2-base-energy,Ant-v5/actor_update/share total sd,0.03181,0.0318135161778282,True,0.00011052465274646884
+tab:tdmpc2-base-energy,Ant-v5/actor_update/share GU mean,24.35,24.350076652273266,True,3.1479273909202645e-06
+tab:tdmpc2-base-energy,Ant-v5/actor_update/share GU sd,0.06638,0.06638196317808105,True,2.9573968395465203e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/target_update/E mean,10020,10015.397089784397,True,0.00045958339687774606
+tab:tdmpc2-base-energy,HalfCheetah-v5/target_update/E sd,109.8,109.74976348010684,False,0.00045773693081595744
+tab:tdmpc2-base-energy,HalfCheetah-v5/target_update/share total mean,2.240,2.2403217776034396,True,0.00014363008325690195
+tab:tdmpc2-base-energy,HalfCheetah-v5/target_update/share total sd,0.03644,0.036438137529283376,True,5.111322484929264e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/target_update/share GU mean,4.504,4.503956224191448,True,9.719412528099074e-06
+tab:tdmpc2-base-energy,HalfCheetah-v5/target_update/share GU sd,0.09632,0.0963212888486524,True,1.3380724737036701e-05
+tab:tdmpc2-base-energy,Ant-v5/target_update/E mean,10500,10504.647583254457,True,0.00044243114465499053
+tab:tdmpc2-base-energy,Ant-v5/target_update/E sd,162.7,162.67447816552368,True,0.0001568889893738532
+tab:tdmpc2-base-energy,Ant-v5/target_update/share total mean,2.130,2.1299874435562947,True,5.895078744817144e-06
+tab:tdmpc2-base-energy,Ant-v5/target_update/share total sd,0.03622,0.03622180513353114,True,4.9835548628332976e-05
+tab:tdmpc2-base-energy,Ant-v5/target_update/share GU mean,4.613,4.6127703262158795,True,4.979085622704107e-05
+tab:tdmpc2-base-energy,Ant-v5/target_update/share GU sd,0.09556,0.09556395848728128,True,4.14223871000078e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/gradient_updates/E mean,222400,222412.56322263865,True,5.648611956364849e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/gradient_updates/E sd,2741,2740.990329167172,True,3.528225811285287e-06
+tab:tdmpc2-base-energy,HalfCheetah-v5/gradient_updates/share total mean,49.75,49.745639498388535,True,8.765595649055129e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/gradient_updates/share total sd,0.2695,0.2695366725725861,True,0.00013605782187664687
+tab:tdmpc2-base-energy,Ant-v5/gradient_updates/E mean,227800,227752.8949250561,True,0.00020682536201960285
+tab:tdmpc2-base-energy,Ant-v5/gradient_updates/E sd,1856,1855.5431865939518,True,0.0002461885066047806
+tab:tdmpc2-base-energy,Ant-v5/gradient_updates/share total mean,46.18,46.178877882068065,True,2.4299376325267673e-05
+tab:tdmpc2-base-energy,Ant-v5/gradient_updates/share total sd,0.2214,0.2213842565714288,True,7.111358691461079e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/TOTAL/E mean,447100,447086.76870020945,True,2.959447855954309e-05
+tab:tdmpc2-base-energy,HalfCheetah-v5/TOTAL/E sd,3184,3184.366372272222,True,0.00011505342959665543
+tab:tdmpc2-base-energy,Ant-v5/TOTAL/E mean,493200,493191.12516274955,True,1.7994722122220125e-05
+tab:tdmpc2-base-energy,Ant-v5/TOTAL/E sd,1782,1781.9779167848476,True,1.2392530201637e-05
+tab:tdmpc2-base-jpf,HalfCheetah-v5/world_model_pretrain/FLOPs,1.995e14,199527628800000.0,True,0.0001384710486771444
+tab:tdmpc2-base-jpf,HalfCheetah-v5/world_model_pretrain/J/FLOP mean,54.45,54.445641829634,True,8.004626669001342e-05
+tab:tdmpc2-base-jpf,HalfCheetah-v5/world_model_pretrain/J/FLOP sd,2.352,2.3516334496503126,True,0.00015587052894733684
+tab:tdmpc2-base-jpf,Ant-v5/world_model_pretrain/FLOPs,2.123e14,212295352320000.0,True,2.1892518838539592e-05
+tab:tdmpc2-base-jpf,Ant-v5/world_model_pretrain/J/FLOP mean,51.17,51.16570971723185,True,8.385074284835174e-05
+tab:tdmpc2-base-jpf,Ant-v5/world_model_pretrain/J/FLOP sd,0.4869,0.4868832689432091,True,3.4363589505165165e-05
+tab:tdmpc2-base-jpf,HalfCheetah-v5/rollout/FLOPs,4.643e15,4642610432000000.0,True,8.39114127075653e-05
+tab:tdmpc2-base-jpf,HalfCheetah-v5/rollout/J/FLOP mean,46.05,46.05400319421197,True,8.692391397754729e-05
+tab:tdmpc2-base-jpf,HalfCheetah-v5/rollout/J/FLOP sd,0.07185,0.07185423506908171,True,5.893972815445216e-05
+tab:tdmpc2-base-jpf,Ant-v5/rollout/FLOPs,5.618e15,5618144512000000.0,True,2.5722371450455137e-05
+tab:tdmpc2-base-jpf,Ant-v5/rollout/J/FLOP mean,45.31,45.313178990467904,True,7.015597975525691e-05
+tab:tdmpc2-base-jpf,Ant-v5/rollout/J/FLOP sd,0.09498,0.0949802900546568,True,3.053840503539814e-06
+tab:tdmpc2-base-jpf,HalfCheetah-v5/critic_update/FLOPs,2.532e15,2532402790400000.0,True,0.00015905463440765605
+tab:tdmpc2-base-jpf,HalfCheetah-v5/critic_update/J/FLOP mean,57.80,57.799758402699624,True,4.179901561011672e-06
+tab:tdmpc2-base-jpf,HalfCheetah-v5/critic_update/J/FLOP sd,0.9755,0.975548162019306,True,4.936918665945512e-05
+tab:tdmpc2-base-jpf,Ant-v5/critic_update/FLOPs,2.784e15,2784401817600000.0,True,0.00014431020604143425
+tab:tdmpc2-base-jpf,Ant-v5/critic_update/J/FLOP mean,53.79,53.78742279416223,True,4.79146555809065e-05
+tab:tdmpc2-base-jpf,Ant-v5/critic_update/J/FLOP sd,0.6803,0.680265092484484,True,5.131457706959056e-05
+tab:tdmpc2-base-jpf,HalfCheetah-v5/actor_update/FLOPs,1.458e15,1458149785600000.0,True,0.00010272305457176758
+tab:tdmpc2-base-jpf,HalfCheetah-v5/actor_update/J/FLOP mean,38.50,38.501436214801465,True,3.730288900010849e-05
+tab:tdmpc2-base-jpf,HalfCheetah-v5/actor_update/J/FLOP sd,0.3219,0.32193969849819365,True,0.00012331035401604148
+tab:tdmpc2-base-jpf,Ant-v5/actor_update/FLOPs,1.462e15,1461505228800000.0,True,0.00033853536083907303
+tab:tdmpc2-base-jpf,Ant-v5/actor_update/J/FLOP mean,37.95,37.94521424006988,True,0.0001261228860072872
+tab:tdmpc2-base-jpf,Ant-v5/actor_update/J/FLOP sd,0.2225,0.2224792148875555,True,9.342496311396402e-05
+tab:tdmpc2-base-jpf,HalfCheetah-v5/gradient_updates/FLOPs,3.991e15,3990552576000000.0,True,0.00011212081321541771
+tab:tdmpc2-base-jpf,HalfCheetah-v5/gradient_updates/J/FLOP mean,55.73,55.73477832625821,True,8.573329618789036e-05
+tab:tdmpc2-base-jpf,HalfCheetah-v5/gradient_updates/J/FLOP sd,0.6869,0.6868698700155099,True,4.3865637153882654e-05
+tab:tdmpc2-base-jpf,Ant-v5/gradient_updates/FLOPs,4.246e15,4245907046400000.0,True,2.1892518838539592e-05
+tab:tdmpc2-base-jpf,Ant-v5/gradient_updates/J/FLOP mean,53.64,53.640574896278565,True,1.0717563703897521e-05
+tab:tdmpc2-base-jpf,Ant-v5/gradient_updates/J/FLOP sd,0.4370,0.43701926733587465,True,4.4088069599555755e-05
+tab:tdmpc2-base-jpf,HalfCheetah-v5/TOTAL/FLOPs,8.833e15,8832690636800000.0,True,3.502479739424898e-05
+tab:tdmpc2-base-jpf,HalfCheetah-v5/TOTAL/J/FLOP mean,50.62,50.617279273599095,True,5.3750941179511895e-05
+tab:tdmpc2-base-jpf,HalfCheetah-v5/TOTAL/J/FLOP sd,0.3605,0.36052053708357684,True,5.696508649129699e-05
+tab:tdmpc2-base-jpf,Ant-v5/TOTAL/FLOPs,1.008e16,1.007634691072e+16,True,0.00036254103916505295
+tab:tdmpc2-base-jpf,Ant-v5/TOTAL/J/FLOP mean,48.95,48.94542928430288,True,9.33839127361843e-05
+tab:tdmpc2-base-jpf,Ant-v5/TOTAL/J/FLOP sd,0.1768,0.17684761477287608,True,0.00026924181554397174
+tab:tdmpc2-base-jpf,HalfCheetah-v5/target_update/FLOPs,5.822e11,582245000000.0,True,7.72870527011825e-05
+tab:tdmpc2-base-jpf,HalfCheetah-v5/target_update/J/FLOP mean,17.20,17.20134494892081,True,7.818859076448677e-05
+tab:tdmpc2-base-jpf,HalfCheetah-v5/target_update/J/FLOP sd,0.1885,0.18849412786731848,True,3.115286798565919e-05
+tab:tdmpc2-base-jpf,Ant-v5/target_update/FLOPs,5.833e11,583269000000.0,True,5.3148718687260935e-05
+tab:tdmpc2-base-jpf,Ant-v5/target_update/J/FLOP mean,18.01,18.009953526167955,True,2.580452635770296e-06
+tab:tdmpc2-base-jpf,Ant-v5/target_update/J/FLOP sd,0.2789,0.27890129282633697,True,4.635426117547298e-06
+tab:tdmpc2-base-time,HalfCheetah-v5/world_model_pretrain/T mean,64.26,64.25564448820042,True,6.77841119528068e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/world_model_pretrain/T sd,5.675,5.675479574528398,True,8.449938407863618e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/world_model_pretrain/P mean,169.6,169.62930250821267,True,0.0001727443771765885
+tab:tdmpc2-base-time,HalfCheetah-v5/world_model_pretrain/P sd,8.028,8.027680353727385,True,3.981801199480275e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/world_model_pretrain/GFLOP/s mean,3125,3125.326826865296,True,0.00010457366010062313
+tab:tdmpc2-base-time,HalfCheetah-v5/world_model_pretrain/GFLOP/s sd,284.7,284.6812967936316,True,6.569875358534076e-05
+tab:tdmpc2-base-time,Ant-v5/world_model_pretrain/T mean,61.05,61.04567126180045,True,7.090983046091356e-05
+tab:tdmpc2-base-time,Ant-v5/world_model_pretrain/T sd,1.972,1.9720835365391693,True,4.235953377308253e-05
+tab:tdmpc2-base-time,Ant-v5/world_model_pretrain/P mean,178.0,178.03787276452482,True,0.00021272307929061517
+tab:tdmpc2-base-time,Ant-v5/world_model_pretrain/P sd,3.947,3.9465462479642763,True,0.00011497446304038308
+tab:tdmpc2-base-time,Ant-v5/world_model_pretrain/GFLOP/s mean,3480,3480.4353163773535,True,0.0001250752672532369
+tab:tdmpc2-base-time,Ant-v5/world_model_pretrain/GFLOP/s sd,107.9,107.856261048772,True,0.00040553001562171006
+tab:tdmpc2-base-time,HalfCheetah-v5/rollout/T mean,1014,1014.2405198376015,True,0.000237142800841751
+tab:tdmpc2-base-time,HalfCheetah-v5/rollout/T sd,2.517,2.5168755143161747,True,4.946040561683995e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/rollout/P mean,210.8,210.80940135438368,True,4.459646639698603e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/rollout/P sd,0.4092,0.4092319105269606,True,7.797663412787025e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/rollout/GFLOP/s mean,4577,4577.448047365304,True,9.788147471422472e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/rollout/GFLOP/s sd,11.35,11.350926567852584,True,8.162927026666178e-05
+tab:tdmpc2-base-time,Ant-v5/rollout/T mean,1195,1194.7408563364013,True,0.00021690365925323298
+tab:tdmpc2-base-time,Ant-v5/rollout/T sd,0.5090,0.509041959624263,True,8.24286160889015e-05
+tab:tdmpc2-base-time,Ant-v5/rollout/P mean,213.1,213.08060391483497,True,9.102698607321274e-05
+tab:tdmpc2-base-time,Ant-v5/rollout/P sd,0.4926,0.4926256391875729,True,5.20459869186e-05
+tab:tdmpc2-base-time,Ant-v5/rollout/GFLOP/s mean,4702,4702.396589262367,True,8.433768926953753e-05
+tab:tdmpc2-base-time,Ant-v5/rollout/GFLOP/s sd,2.003,2.003490846397559,True,0.0002449955778142888
+tab:tdmpc2-base-time,HalfCheetah-v5/gradient_updates/T mean,1281,1281.0397913257978,True,3.106174067908468e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/gradient_updates/T sd,33.41,33.411507646075655,True,4.512355717764139e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/gradient_updates/P mean,173.7,173.66889857183236,True,0.0001790846168968283
+tab:tdmpc2-base-time,HalfCheetah-v5/gradient_updates/P sd,2.422,2.421597733935946,True,0.00016611597311016302
+tab:tdmpc2-base-time,HalfCheetah-v5/gradient_updates/GFLOP/s mean,3117,3116.778185905908,True,7.116775107553974e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/gradient_updates/GFLOP/s sd,80.99,80.98570431834824,True,5.3042468271542817e-05
+tab:tdmpc2-base-time,Ant-v5/gradient_updates/T mean,1260,1259.617812444202,True,0.00030341549001791743
+tab:tdmpc2-base-time,Ant-v5/gradient_updates/T sd,27.23,27.226533722904172,True,0.00012731246405092277
+tab:tdmpc2-base-time,Ant-v5/gradient_updates/P mean,180.9,180.85443621907058,True,0.000251936208378298
+tab:tdmpc2-base-time,Ant-v5/gradient_updates/P sd,2.534,2.5344370184249234,True,0.00017243215031447157
+tab:tdmpc2-base-time,Ant-v5/gradient_updates/GFLOP/s mean,3372,3372.059881201534,True,1.7758048090420255e-05
+tab:tdmpc2-base-time,Ant-v5/gradient_updates/GFLOP/s sd,73.44,73.44429533643893,True,5.848427599792075e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/TOTAL/T mean,2360,2359.5359556515996,True,0.00019666763173874682
+tab:tdmpc2-base-time,HalfCheetah-v5/TOTAL/T sd,39.45,39.45434818550002,True,0.0001102080176200155
+tab:tdmpc2-base-time,HalfCheetah-v5/TOTAL/P mean,189.5,189.5053925404323,True,2.845586798352569e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/TOTAL/P sd,1.852,1.8520806823427733,True,4.356308207436967e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/TOTAL/GFLOP/s mean,3744,3744.2387325082063,True,6.375995903616347e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/TOTAL/GFLOP/s sd,62.59,62.58604377960528,True,6.321250163457495e-05
+tab:tdmpc2-base-time,Ant-v5/TOTAL/T mean,2515,2515.404340042404,True,0.00016074554534522965
+tab:tdmpc2-base-time,Ant-v5/TOTAL/T sd,28.71,28.70945571389457,True,1.895842647992588e-05
+tab:tdmpc2-base-time,Ant-v5/TOTAL/P mean,196.1,196.0831417877995,True,8.597481683941668e-05
+tab:tdmpc2-base-time,Ant-v5/TOTAL/P sd,1.658,1.6578174140417605,True,0.00011013634957196212
+tab:tdmpc2-base-time,Ant-v5/TOTAL/GFLOP/s mean,4006,4006.2745438239845,True,6.852845979007897e-05
+tab:tdmpc2-base-time,Ant-v5/TOTAL/GFLOP/s sd,45.87,45.86820925211828,True,3.904115532127589e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/buffer_sample/T mean,56.06,56.05954985838216,True,8.02970446564609e-06
+tab:tdmpc2-base-time,HalfCheetah-v5/buffer_sample/T sd,0.4677,0.4676562234531328,True,9.360839153164977e-05
+tab:tdmpc2-base-time,Ant-v5/buffer_sample/T mean,65.16,65.15980909834543,True,2.929745455121788e-06
+tab:tdmpc2-base-time,Ant-v5/buffer_sample/T sd,1.284,1.2839209358727504,True,6.158021498101724e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/critic_update/T mean,830.4,830.4373959118509,True,4.5031584602304496e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/critic_update/T sd,25.69,25.687250883373803,True,0.00010702260972494818
+tab:tdmpc2-base-time,HalfCheetah-v5/critic_update/GFLOP/s mean,3052,3051.8071542589287,True,6.319067074805136e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/critic_update/GFLOP/s sd,94.04,94.03935752722059,True,6.831956282052893e-06
+tab:tdmpc2-base-time,Ant-v5/critic_update/T mean,811.9,811.8685871522182,True,3.869203499049865e-05
+tab:tdmpc2-base-time,Ant-v5/critic_update/T sd,21.71,21.711512339972714,True,6.965613214924258e-05
+tab:tdmpc2-base-time,Ant-v5/critic_update/GFLOP/s mean,3432,3431.6052298740374,True,0.0001150394930413116
+tab:tdmpc2-base-time,Ant-v5/critic_update/GFLOP/s sd,92.73,92.73489854132391,True,5.282306230947156e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/actor_update/T mean,318.5,318.484267078885,True,4.9399366754564726e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/actor_update/T sd,7.232,7.231545838137833,True,6.280287400965615e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/actor_update/GFLOP/s mean,4580,4580.283191034767,True,6.182828068820988e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/actor_update/GFLOP/s sd,103.4,103.43558499992203,True,0.00034403053767278834
+tab:tdmpc2-base-time,Ant-v5/actor_update/T mean,300.6,300.6054380243651,True,1.8090239487499057e-05
+tab:tdmpc2-base-time,Ant-v5/actor_update/T sd,6.001,6.001299613039386,True,4.992469276730317e-05
+tab:tdmpc2-base-time,Ant-v5/actor_update/GFLOP/s mean,4863,4863.434725950412,True,8.938661150162267e-05
+tab:tdmpc2-base-time,Ant-v5/actor_update/GFLOP/s sd,97.83,97.83376932625062,True,3.852786493434391e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/target_update/T mean,56.81,56.80539756375074,True,8.102110796952579e-05
+tab:tdmpc2-base-time,HalfCheetah-v5/target_update/T sd,0.4420,0.4420095291598606,True,2.155872041647987e-05
+tab:tdmpc2-base-time,Ant-v5/target_update/T mean,56.93,56.929674084590076,True,5.724877494287527e-06
+tab:tdmpc2-base-time,Ant-v5/target_update/T sd,0.6602,0.6601507385924127,True,7.46214534158609e-05
+tab:tdmpc2-base-comp,HalfCheetah-v5/world_model_pretrain/CPU mean,15.79,15.792000392860874,True,0.00012667127729932737
+tab:tdmpc2-base-comp,HalfCheetah-v5/world_model_pretrain/CPU sd,0.8287,0.828654193067582,True,5.52787070905727e-05
+tab:tdmpc2-base-comp,HalfCheetah-v5/world_model_pretrain/GPU mean,72.40,72.3967550656037,True,4.4821544741419924e-05
+tab:tdmpc2-base-comp,HalfCheetah-v5/world_model_pretrain/GPU sd,0.4183,0.41827087185196304,True,6.963943701838784e-05
+tab:tdmpc2-base-comp,HalfCheetah-v5/world_model_pretrain/RAM mean,11.81,11.811244541535414,True,0.0001053692124514984
+tab:tdmpc2-base-comp,HalfCheetah-v5/world_model_pretrain/RAM sd,0.5532,0.553186555406717,True,2.4303904626030885e-05
+tab:tdmpc2-base-comp,HalfCheetah-v5/world_model_pretrain/idle floor mean,40.33,40.334230076706376,True,0.00010487560313741565
+tab:tdmpc2-base-comp,HalfCheetah-v5/world_model_pretrain/idle floor sd,1.961,1.961367950099025,True,0.00018759871089279255
+tab:tdmpc2-base-comp,HalfCheetah-v5/rollout/CPU mean,16.11,16.106267502291622,True,0.00023174194193943196
+tab:tdmpc2-base-comp,HalfCheetah-v5/rollout/CPU sd,0.04904,0.04904077812284117,True,1.5866853483005112e-05
+tab:tdmpc2-base-comp,HalfCheetah-v5/rollout/GPU mean,74.41,74.40684959871007,True,4.234020532947905e-05
+tab:tdmpc2-base-comp,HalfCheetah-v5/rollout/GPU sd,0.05975,0.05975459959569712,True,7.697475555431133e-05
+tab:tdmpc2-base-comp,HalfCheetah-v5/rollout/RAM mean,9.487,9.486882898998319,True,1.2343464436936158e-05
+tab:tdmpc2-base-comp,HalfCheetah-v5/rollout/RAM sd,0.01845,0.01844929934839203,True,3.797713911736269e-05
+tab:tdmpc2-base-comp,HalfCheetah-v5/rollout/idle floor mean,32.40,32.39622237190489,True,0.00011660705534556188
+tab:tdmpc2-base-comp,HalfCheetah-v5/rollout/idle floor sd,0.2506,0.2506112023410282,True,4.470008093632475e-05
+tab:tdmpc2-base-comp,HalfCheetah-v5/gradient_updates/CPU mean,16.06,16.055414713394292,True,0.000285591290387628
+tab:tdmpc2-base-comp,HalfCheetah-v5/gradient_updates/CPU sd,0.1643,0.16431796850594796,True,0.00010935204537479948
+tab:tdmpc2-base-comp,HalfCheetah-v5/gradient_updates/GPU mean,72.43,72.42712062887048,True,3.975542731124223e-05
+tab:tdmpc2-base-comp,HalfCheetah-v5/gradient_updates/GPU sd,0.1385,0.13852164283905005,True,0.000156241570677783
+tab:tdmpc2-base-comp,HalfCheetah-v5/gradient_updates/RAM mean,11.52,11.517464657735228,True,0.00022013024047513684
+tab:tdmpc2-base-comp,HalfCheetah-v5/gradient_updates/RAM sd,0.1613,0.16124990401666797,False,0.0003106729497764453
+tab:tdmpc2-base-comp,HalfCheetah-v5/gradient_updates/idle floor mean,39.33,39.331301135971025,True,3.308143726362105e-05
+tab:tdmpc2-base-comp,HalfCheetah-v5/gradient_updates/idle floor sd,0.6871,0.6870722791246142,True,4.034637435983719e-05
+tab:tdmpc2-base-comp,Ant-v5/world_model_pretrain/CPU mean,16.23,16.227145355383026,True,0.00017591785581850262
+tab:tdmpc2-base-comp,Ant-v5/world_model_pretrain/CPU sd,0.7967,0.7967143037392799,True,1.7953410918789242e-05
+tab:tdmpc2-base-comp,Ant-v5/world_model_pretrain/GPU mean,72.53,72.53485369211532,True,6.691530854836776e-05
+tab:tdmpc2-base-comp,Ant-v5/world_model_pretrain/GPU sd,0.5550,0.5550247456066977,True,4.458469085117968e-05
+tab:tdmpc2-base-comp,Ant-v5/world_model_pretrain/RAM mean,11.24,11.23800095250165,True,0.00017788283759708894
+tab:tdmpc2-base-comp,Ant-v5/world_model_pretrain/RAM sd,0.2563,0.25629056976380193,True,3.679509631091381e-05
+tab:tdmpc2-base-comp,Ant-v5/world_model_pretrain/idle floor mean,38.92,38.91918736135081,True,2.0880154604687034e-05
+tab:tdmpc2-base-comp,Ant-v5/world_model_pretrain/idle floor sd,0.9648,0.9648062040295473,True,6.430337534530086e-06
+tab:tdmpc2-base-comp,Ant-v5/rollout/CPU mean,16.16,16.1562560915541,True,0.00023173118974381977
+tab:tdmpc2-base-comp,Ant-v5/rollout/CPU sd,0.06653,0.06653486171235734,True,7.307015047769652e-05
+tab:tdmpc2-base-comp,Ant-v5/rollout/GPU mean,74.46,74.45791696502359,True,2.797600391354987e-05
+tab:tdmpc2-base-comp,Ant-v5/rollout/GPU sd,0.08447,0.08446520651455419,True,5.675100604869202e-05
+tab:tdmpc2-base-comp,Ant-v5/rollout/RAM mean,9.386,9.38582694342232,True,1.8438074633467526e-05
+tab:tdmpc2-base-comp,Ant-v5/rollout/RAM sd,0.02172,0.021720159111940335,True,7.3255421157379995e-06
+tab:tdmpc2-base-comp,Ant-v5/rollout/idle floor mean,32.51,32.505820988134175,True,0.0001285619540988734
+tab:tdmpc2-base-comp,Ant-v5/rollout/idle floor sd,0.3591,0.3591480780144838,True,0.0001338668293858198
+tab:tdmpc2-base-comp,Ant-v5/gradient_updates/CPU mean,16.44,16.439094757288423,True,5.506645742625073e-05
+tab:tdmpc2-base-comp,Ant-v5/gradient_updates/CPU sd,0.09076,0.0907561857161879,True,4.202781090886415e-05
+tab:tdmpc2-base-comp,Ant-v5/gradient_updates/GPU mean,72.50,72.50105487528474,True,1.4549792227873148e-05
+tab:tdmpc2-base-comp,Ant-v5/gradient_updates/GPU sd,0.06622,0.06622378521246794,True,5.7157899624644834e-05
+tab:tdmpc2-base-comp,Ant-v5/gradient_updates/RAM mean,11.06,11.059850367426833,True,1.3529348788322973e-05
+tab:tdmpc2-base-comp,Ant-v5/gradient_updates/RAM sd,0.1543,0.1542716139880074,True,0.00018400022699444475
+tab:tdmpc2-base-comp,Ant-v5/gradient_updates/idle floor mean,38.30,38.29953696160395,True,1.2089921518192043e-05
+tab:tdmpc2-base-comp,Ant-v5/gradient_updates/idle floor sd,0.2209,0.2209409874958246,True,0.00018551331868818828

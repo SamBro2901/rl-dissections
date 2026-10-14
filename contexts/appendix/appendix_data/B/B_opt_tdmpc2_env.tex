@@ -1,0 +1,24 @@
+{\footnotesize\setlength{\tabcolsep}{4pt}
+  \begin{longtable}{@{}lrrrrrr@{}}
+    \caption[Environment comparison of all TD-MPC2 configurations (Ant-v5 relative to HalfCheetah-v5, runs paired by seed; full precision)]{Environment comparison of all TD-MPC2 configurations (Ant-v5 relative to HalfCheetah-v5, runs paired by seed; full precision). Energy ratios are ratios of means. $\Delta$share is the difference of the mean shares in percentage points; the segment that attains the maximum absolute difference is given in brackets. $\bar P_r/\bar P_{\mathrm{GU}}$ is the ratio of the mean power of the rollout to that of the GU; the column gives the ratio of this quantity on Ant-v5 to that on HalfCheetah-v5. TD-MPC2 and the environment are confounded through the termination classifier (active on Ant-v5 only).}
+    \label{tab:app-tdmpc2-env} \\
+    \toprule
+    Config. & $E_{\mathrm{total}}$ ratio & $E_{\mathrm{rollout}}$ ratio & max $|\Delta$share$|$ [pp] & $\bar P_{\mathrm{total}}$ ratio & $\bar P_r/\bar P_{\mathrm{GU}}$ ratio & J/FLOP total ratio \\
+    \midrule
+    \endfirsthead
+    \toprule
+    Config. & $E_{\mathrm{total}}$ ratio & $E_{\mathrm{rollout}}$ ratio & max $|\Delta$share$|$ [pp] & $\bar P_{\mathrm{total}}$ ratio & $\bar P_r/\bar P_{\mathrm{GU}}$ ratio & J/FLOP total ratio \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{7}{r@{}}{\emph{continued on the next page}} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    baseline & \num{1.10312} & \num{1.19066} & \num{3.79369} (rollout) & \num{1.03471} & \num{0.970615} & \num{0.966971} \\
+    \texttt{num\_q} 3 & \num{1.14652} & \num{1.22544} & \num{3.4911} (rollout) & \num{1.02323} & \num{1.00013} & \num{0.971324} \\
+    \texttt{num\_q} 7 & \num{1.09564} & \num{1.15977} & \num{2.69254} (rollout) & \num{0.995691} & \num{1.01199} & \num{0.982118} \\
+    horizon 1 & \num{1.08032} & \num{1.10552} & \num{1.15095} (actor) & \num{1.0061} & \num{0.992383} & \num{0.990255} \\
+    horizon 5 & \num{1.13827} & \num{1.22881} & \num{4.01352} (rollout) & \num{1.01618} & \num{0.997156} & \num{0.982599} \\
+  \end{longtable}
+}
