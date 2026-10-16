@@ -1,0 +1,9 @@
+Fri Oct 16 09:12:32 AM UTC 2026
+samanth-research-pc
+== A7
+float32_matmul_precision: highest
+matmul.allow_tf32: False cudnn.allow_tf32: True
+_CudaDeviceProperties(name='NVIDIA GeForce RTX 5090', major=12, minor=0, total_memory=32199MB, multi_processor_count=170, uuid=7ea6e1bd-cc42-13d3-1b07-d7348fb78416, pci_bus_id=2, pci_device_id=0, pci_domain_id=0, L2_cache_size=96MB)
+SMs: 170 capability: 12 0 total_memory: 33763426304
+-- grep
+grep exit/none above

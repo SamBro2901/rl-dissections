@@ -1,0 +1,11 @@
+length pool: results/tdmpc2/Ant-v5/seed_331/20260910_160427/training_metrics.json n=923 mean=113.8 median=50.0 max=1000
+Ant-like pool lengths        episodes=  105 transitions=   14938  mean=0.4247 ms  sd=0.0123 ms (n=200 calls)
+Ant-like pool lengths        episodes=  478 transitions=   59088  mean=0.4669 ms  sd=0.0121 ms (n=200 calls)
+Ant-like pool lengths        episodes=  923 transitions=  104187  mean=0.4995 ms  sd=0.0118 ms (n=200 calls)
+Ant-like pool lengths        episodes= 2587 transitions=  288880  mean=0.6093 ms  sd=0.0115 ms (n=200 calls)
+Ant-like fixed length 100    episodes=  105 transitions=   10500  mean=0.4042 ms  sd=0.0076 ms (n=200 calls)
+Ant-like fixed length 100    episodes=  478 transitions=   47800  mean=0.4408 ms  sd=0.0073 ms (n=200 calls)
+Ant-like fixed length 100    episodes= 2587 transitions=  258700  mean=0.5742 ms  sd=0.0127 ms (n=200 calls)
+HalfCheetah-like 105x1000    episodes=  105 transitions=  105000  mean=0.4182 ms  sd=0.0117 ms (n=200 calls)
+linear fit Ant-like pool lengths        time_ms = 0.4267 + 0.000072 * episodes  (R^2=0.9904, points=4)
+linear fit Ant-like fixed length 100    time_ms = 0.4025 + 0.000067 * episodes  (R^2=0.9957, points=3)

@@ -1,0 +1,68 @@
+Fri Oct 16 09:13:00 AM UTC 2026
+samanth-research-pc
+== A10
+788eb49
+788eb49 2026-10-14 20:37:56 +0200 Context for latex builds
+tags:
+?? contexts/step9/
+2b4882f: commit
+050b3c3: commit
+94e1de2: commit
+-- ls-tree 2b4882f
+-- ls-tree 050b3c3
+flop_analysis/section_5_2_analysis.py
+flop_analysis/section_5_2_render.py
+flop_analysis/section_5_3_analysis.py
+flop_analysis/section_5_3_render.py
+-- log grep
+050b3c3 Section 5 context and data
+2b4882f Section 4.2, 4.3 and 4.4 context and data
+788ffcd Scheduling batch sweep for ant and new rollout sweep for MBPO
+0bbbbb7 baseline config for mbpo
+f23f448 Setting baseline config for all experiments
+f109bd4 Added new MBPO algo and recorded tests
+ae38808 Humanoid env with 256 and 512 batch sizes
+-- LICENSE
+ls: cannot access 'LICENSE*': No such file or directory
+origin	https://github.com/SamBro2901/rl-dissections.git (fetch)
+origin	https://github.com/SamBro2901/rl-dissections.git (push)
+-- flop_analysis
+__pycache__
+appendix_tables.py
+appendix_tables_verify.py
+check_totals.py
+compute_energy_per_flop.py
+correlation_analysis.py
+flop_keys.py
+flops_per_call.json
+make_fix_report.py
+measure_flops.py
+output
+section_5_2_analysis.py
+section_5_2_render.py
+section_5_3_analysis.py
+section_5_3_render.py
+section_5_checks.py
+section_6_checks.py
+section_7_checks.py
+section_8_checks.py
+verify_analytic_flops.py
+verify_mbpo_fit_flops.py
+-- untracked scripts
+flop_analysis/section_5_checks.py
+flop_analysis/section_6_checks.py
+flop_analysis/section_7_checks.py
+flop_analysis/section_8_checks.py
+flop_analysis/verify_analytic_flops.py
+contexts/step1
+canonical_data_quality.py
+common.py
+idle_drift.py
+machine_fact_sheet.sh
+make_02_md.py
+make_04_md.py
+nvml_poll.py
+sync_timing_run.py
+task_durations.py
+ls: cannot access 'contexts/section_*_checks_windows.txt': No such file or directory
+ls: cannot access 'contexts/*windows*': No such file or directory

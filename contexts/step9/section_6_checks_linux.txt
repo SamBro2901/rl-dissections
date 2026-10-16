@@ -1,0 +1,162 @@
+
+====================================================================================================
+0. Environment
+====================================================================================================
+python 3.14.4 | scipy 1.18.1 | pandas 3.0.5 | numpy 2.5.2
+root: /home/samanth/rl-dissection-linux
+run order by start_time_utc: R200 started after R2000 = True
+
+====================================================================================================
+1. Metadata diff (all keys, nested) between R2000 and R200
+====================================================================================================
+  DIFF end_time_utc: R2000='2026-09-04T11:01:08.461191'  R200='2026-09-04T12:48:34.409574'
+  DIFF experiment_config.gpu_max_clock_mhz: R2000=2000  R200=200
+  DIFF experiment_config.gpu_min_clock_mhz: R2000=2000  R200=200
+  DIFF start_time_utc: R2000='2026-09-04T10:29:59.128368'  R200='2026-09-04T11:09:15.306557'
+  DIFF thermal_gate.final_power_w: R2000=26.467  R200=21.006
+  DIFF thermal_gate.final_temp_c: R2000=45.0  R200=44.0
+  DIFF thermal_gate.waited_seconds: R2000=1.1682510375976562e-05  R200=1.0728836059570312e-05
+differing keys: 7 of 72
+  algo_name: R2000='mbpo' R200='mbpo' identical=True
+  env_id: R2000='HalfCheetah-v5' R200='HalfCheetah-v5' identical=True
+  seed: R2000=0 R200=0 identical=True
+  git_commit: R2000='ae3880860ebcce0c1e729714cdf48a08039adc46' R200='ae3880860ebcce0c1e729714cdf48a08039adc46' identical=True
+  torch_version: R2000='2.13.0+cu130' R200='2.13.0+cu130' identical=True
+  codecarbon_version: R2000='3.3.0' R200='3.3.0' identical=True
+  algo_config.hidden_sizes: R2000=[256, 256] R200=[256, 256] identical=True
+  algo_config.batch_size: R2000=256 R200=256 identical=True
+  algo_config.updates_per_env_step: R2000=1 R200=1 identical=True
+  algo_config.model_hidden_sizes: R2000=[200, 200, 200, 200] R200=[200, 200, 200, 200] identical=True
+  algo_config.rollout_min_length: R2000=1 R200=1 identical=True
+  algo_config.rollout_max_length: R2000=1 R200=1 identical=True
+  experiment_config.train_steps: R2000=100000 R200=100000 identical=True
+  experiment_config.warmup_steps: R2000=5000 R200=5000 identical=True
+  experiment_config.steps_per_epoch: R2000=1000 R200=1000 identical=True
+
+====================================================================================================
+2. Completeness and run.log
+====================================================================================================
+R2000 rows: 403 {'rollout': 100, 'dynamics_model_update': 100, 'synthetic_rollout_generation': 100, 'gradient_updates': 100, 'warmup': 1, 'idle_baseline_head': 1, 'idle_baseline_tail': 1}
+   run.log lines: 34 | WARNING/ERROR: 0 | thermal gate: 45.0 C, reason reached_reference
+   run.log mentions of clock/lock/RAPL/geoloc: 0
+R200 rows: 403 {'rollout': 100, 'dynamics_model_update': 100, 'synthetic_rollout_generation': 100, 'gradient_updates': 100, 'warmup': 1, 'idle_baseline_head': 1, 'idle_baseline_tail': 1}
+   run.log lines: 34 | WARNING/ERROR: 0 | thermal gate: 44.0 C, reason reached_reference
+   run.log mentions of clock/lock/RAPL/geoloc: 0
+
+====================================================================================================
+3. Training totals (full precision)
+====================================================================================================
+R2000: energy 189511.2211 J = 189.511 kJ = 0.05264 kWh | duration 1638.110 s = 27.302 min | mean power 115.6890 W
+     per_run CSV: energy 189511.2211 J | duration 1638.110 s | power 115.6890 W | FLOPs 3.153349e+14 | J/FLOP 6.0098e-10
+R200: energy 568209.9519 J = 568.210 kJ = 0.15784 kWh | duration 5731.985 s = 95.533 min | mean power 99.1297 W
+     per_run CSV: energy 568209.9519 J | duration 5731.985 s | power 99.1297 W | FLOPs 3.153349e+14 | J/FLOP 1.8019e-09
+ratios R200/R2000: energy 2.99829 | duration 3.49915 | power 0.85686 | rP*rD = 2.99829 | 1/rD = 0.28578 | power fall = 14.31%
+duration growth = 249.9%; clock ratio 2000/200 = 10.0
+R2000: sum of the four task durations 1638.1096 s
+R200: sum of the four task durations 5731.9846 s
+
+====================================================================================================
+4. Segments (tab:clock-segments)
+====================================================================================================
+segment        rollout  dynamics_model_update  synthetic_rollout_generation  gradient_updates
+E_R2000      2285.7405            142180.3445                       46.0949        44999.0411
+t_R2000        19.8238              1211.9471                        0.5899          405.7488
+P_R2000       115.3029               117.3156                       78.1407          110.9037
+share_R2000     1.2061                75.0248                        0.0243           23.7448
+E_R200       3469.4004            482756.6355                      219.0889        81764.8271
+t_R200         35.1174              4841.4347                        2.0660          853.3665
+P_R200         98.7943                99.7135                      106.0444           95.8144
+share_R200      0.6106                84.9610                        0.0386           14.3899
+E_ratio         1.5178                 3.3954                        4.7530            1.8170
+t_ratio         1.7715                 3.9948                        3.5023            2.1032
+P_ratio         0.8568                 0.8500                        1.3571            0.8639
+sum of shares R2000 / R200: 100.0 99.99999999999999
+rollout + synthetic rollout gen. share of training energy: {'R2000': np.float64(1.23), 'R200': np.float64(0.649)}
+
+====================================================================================================
+5. Per-epoch task durations of rollout and synthetic rollout generation (polling interval 1 s)
+====================================================================================================
+rollout                        R2000: n=100 max=0.2259 s median=0.1977 s n(<1 s)=100
+rollout                        R200: n=100 max=0.4573 s median=0.3473 s n(<1 s)=100
+synthetic_rollout_generation   R2000: n=100 max=0.0180 s median=0.0056 s n(<1 s)=100
+synthetic_rollout_generation   R200: n=100 max=0.0288 s median=0.0203 s n(<1 s)=100
+
+====================================================================================================
+6. Allocation coverage (sum of timed sub-segments / measured gradient-update duration)
+====================================================================================================
+R2000: sum of sub-segment timers 396.05 s of 405.75 s -> 97.61%
+    allocated energies (kJ): {'buffer_sample': 1.326, 'critic_update': 18.957, 'actor_update': 22.756, 'target_update': 1.961} sum 44.999 | measured GU energy (kJ): 44.999
+    allocated powers (W) = energy / timed sub-segment duration: {'buffer_sample': 113.6, 'critic_update': 113.6, 'actor_update': 113.6, 'target_update': 113.6} | pooled: 113.6 | measured GU power: 110.9
+R200: sum of sub-segment timers 524.00 s of 853.37 s -> 61.40%
+    allocated energies (kJ): {'buffer_sample': 3.677, 'critic_update': 34.663, 'actor_update': 40.765, 'target_update': 2.66} sum 81.765 | measured GU energy (kJ): 81.765
+    allocated powers (W) = energy / timed sub-segment duration: {'buffer_sample': 156.0, 'critic_update': 156.0, 'actor_update': 156.0, 'target_update': 156.0} | pooled: 156.0 | measured GU power: 95.8
+
+====================================================================================================
+7. Idle windows and above-idle energy
+====================================================================================================
+R2000: head corr 63.4004 W (as recorded 65.6199; window 93.15 s of 90.00 s) | tail corr 66.2741 W (as recorded 66.2733; window 90.00 s) | floor mean 64.8372 W | tail-head 2.874 W (4.53%)
+R200: head corr 57.3265 W (as recorded 59.2638; window 93.05 s of 90.01 s) | tail corr 63.0850 W (as recorded 63.0811; window 90.00 s) | floor mean 60.2058 W | tail-head 5.759 W (10.05%)
+floor ratio R200/R2000 (mean): 0.9286 -> fall 7.14%
+R2000: floor share (mean) 56.04% | above-idle energy (mean floor) 83.301 kJ, power 50.852 W | floor energy 106.210 kJ
+R200: floor share (mean) 60.73% | above-idle energy (mean floor) 223.111 kJ, power 38.924 W | floor energy 345.099 kJ
+above-idle ratio R200/R2000 with mean floor: 2.6784
+above-idle ratio R200/R2000 with head floor: 2.7975
+above-idle ratio R200/R2000 with tail floor: 2.5524
+S-6.1: idle floor alone accumulated over the R200 duration: 60.21 W x 5732.0 s = 345.10 kJ vs. R2000 training energy 189.51 kJ
+
+====================================================================================================
+8. Component split (tab:clock-components)
+====================================================================================================
+R2000: CPU 42.093 kJ (25.696 W, 22.21%) | GPU 114.659 kJ (69.995 W, 60.50%) | RAM 32.759 kJ (19.998 W, 17.29%) | sum 189.511 kJ vs total 189.511 kJ
+R200: CPU 186.202 kJ (32.485 W, 32.77%) | GPU 267.372 kJ (46.646 W, 47.06%) | RAM 114.636 kJ (19.999 W, 20.17%) | sum 568.210 kJ vs total 568.210 kJ
+component ratios R200/R2000: {'cpu': np.float64(4.4236), 'gpu': np.float64(2.3319), 'ram': np.float64(3.4993)}
+R2000: ram_power column unique (rounded 6): [20.0] | RAM energy / duration over measured tasks: 19.99829 W | RAM total size 60.82 GB
+R200: ram_power column unique (rounded 6): [20.0] | RAM energy / duration over measured tasks: 19.99934 W | RAM total size 60.82 GB
+
+====================================================================================================
+9. Work done (identical-work claim)
+====================================================================================================
+R2000 {'n_epochs': 100, 'n_train_episodes': 100, 'fit_epochs': 1196, 'n_fits': 100, 'synth': 990000, 'last10': 5936.559047246978, 'n10': 10} | optimiser steps (dynamics call_count): 168525
+    total FLOPs: 3.1533e+14
+R200 {'n_epochs': 100, 'n_train_episodes': 100, 'fit_epochs': 1196, 'n_fits': 100, 'synth': 990000, 'last10': 5936.559047246978, 'n10': 10} | optimiser steps (dynamics call_count): 168525
+    total FLOPs: 3.1533e+14
+per-epoch (fit epochs, synthetic transitions, mean return, holdout MSE) identical: True
+episode returns identical: True
+epoch rows total identical (full dict): True
+
+====================================================================================================
+10. Canonical comparator: MBPO / HalfCheetah-v5 / hidden [256,256]
+====================================================================================================
+candidates (metadata-based): 5
+per_run CSV rows (hidden 256x256, canonical seeds): 5 | included_in_cross_seed_avg: [True, True, True, True, True]
+canonical runs used: ['results/mbpo/HalfCheetah-v5/seed_14577/20260912_235401', 'results/mbpo/HalfCheetah-v5/seed_331/20260912_225321', 'results/mbpo/HalfCheetah-v5/seed_43611/20260913_002507', 'results/mbpo/HalfCheetah-v5/seed_85062/20260913_005629', 'results/mbpo/HalfCheetah-v5/seed_958/20260912_232353']
+same set as metadata-based candidates: True
+              energy     duration       power         flops     fit     steps       last10     synth     csv_energy
+14577  190324.503948  1638.946351  116.126134  3.143952e+14  1169.0  167919.0  4306.940233  990000.0  190324.503948
+331    186297.353035  1604.083796  116.139415  3.093407e+14  1156.0  164537.0  3951.205837  990000.0  186297.353035
+43611  190426.590118  1654.505437  115.095778  3.082111e+14  1153.0  163808.0  5507.526373  990000.0  190426.590118
+85062  192336.098100  1681.104329  114.410566  3.080640e+14  1188.0  163715.0  5652.745051  990000.0  192336.098100
+958    180182.004080  1580.576551  113.997645  2.937216e+14  1084.0  154251.0  3255.354758  990000.0  180182.004080
+canonical energy: mean 187.9133 kJ | sample sd (ddof=1) 4.8496 kJ | population sd 4.3376 kJ | min 180.182 max 192.336
+R2000 z = 0.3295 | R200 / canonical mean = 3.0238 | R2000 / mean = 1.0085
+canonical duration: mean 1631.8433 sd 39.9673 min 1580.5766 max 1681.1043 | R2000 1638.1096
+canonical power: mean 115.1539 sd 0.9759 min 113.9976 max 116.1394 | R2000 115.6890
+R2000 vs canonical: FLOPs 3.1533e+14 (canonical min 2.9372e+14, max 3.1440e+14)
+fit epochs R2000 1196 (canonical [1169, 1156, 1153, 1188, 1084]) | optimiser steps R2000 168525 (canonical [167919, 164537, 163808, 163715, 154251])
+last-10% return R2000 5936.56 | canonical [4306.9, 3951.2, 5507.5, 5652.7, 3255.4] min 3255.4 max 5652.7
+R2000 outside canonical range? FLOPs: True | fit epochs: True | return: True
+
+metadata diff of R2000 against each canonical run (keys ignored: start/end time, thermal_gate.*):
+  seed 14577: experiment_config.seed: R2000=0 canon=14577; experiment_config.thermal_gate_reference_file: R2000='results/_thermal_reference.json' canon='<absent>'; git_commit: R2000='ae3880860ebcce0c1e729714cdf48a08039adc46' canon='7e672ef12c53bf4c201241c549527a7ef8bd4bff'; seed: R2000=0 canon=14577
+  seed 331: experiment_config.seed: R2000=0 canon=331; experiment_config.thermal_gate_reference_file: R2000='results/_thermal_reference.json' canon='<absent>'; git_commit: R2000='ae3880860ebcce0c1e729714cdf48a08039adc46' canon='7e672ef12c53bf4c201241c549527a7ef8bd4bff'; seed: R2000=0 canon=331
+  seed 43611: experiment_config.seed: R2000=0 canon=43611; experiment_config.thermal_gate_reference_file: R2000='results/_thermal_reference.json' canon='<absent>'; git_commit: R2000='ae3880860ebcce0c1e729714cdf48a08039adc46' canon='7e672ef12c53bf4c201241c549527a7ef8bd4bff'; seed: R2000=0 canon=43611
+  seed 85062: experiment_config.seed: R2000=0 canon=85062; experiment_config.thermal_gate_reference_file: R2000='results/_thermal_reference.json' canon='<absent>'; git_commit: R2000='ae3880860ebcce0c1e729714cdf48a08039adc46' canon='7e672ef12c53bf4c201241c549527a7ef8bd4bff'; seed: R2000=0 canon=85062
+  seed 958: experiment_config.seed: R2000=0 canon=958; experiment_config.thermal_gate_reference_file: R2000='results/_thermal_reference.json' canon='<absent>'; git_commit: R2000='ae3880860ebcce0c1e729714cdf48a08039adc46' canon='7e672ef12c53bf4c201241c549527a7ef8bd4bff'; seed: R2000=0 canon=958
+canonical clock request (min/max): {14577: (2000, 2000), 331: (2000, 2000), 43611: (2000, 2000), 85062: (2000, 2000), 958: (2000, 2000)}
+canonical lock_gpu_clocks: {14577: True, 331: True, 43611: True, 85062: True, 958: True}
+
+====================================================================================================
+11. CodeCarbon utilisation fields (is a CPU or GPU utilisation record usable?)
+====================================================================================================
+R2000: per-task rows: cpu_utilization_percent max 0.000, gpu_utilization_percent max 0.000, ram_used_gb max 0.000 | whole-run row: cpu 0.340 %, gpu 0.000 %
+R200: per-task rows: cpu_utilization_percent max 0.000, gpu_utilization_percent max 0.000, ram_used_gb max 0.000 | whole-run row: cpu 0.499 %, gpu 0.303 %

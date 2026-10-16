@@ -1,0 +1,285 @@
+
+====================================================================================================
+0. Environment
+====================================================================================================
+python 3.14.4 | scipy 1.18.1 | pandas 3.0.5 | numpy 2.5.2
+root: /home/samanth/rl-dissection-linux
+canonical runs: 280 | configurations: 56 | per environment: {'Ant-v5': 29, 'HalfCheetah-v5': 27}
+
+====================================================================================================
+1. RQ1: segment shares (mean of per-run shares), seed spread, rollout share
+====================================================================================================
+max rel. diff task-sum vs pipeline TOTAL_MEASURED_TRAINING: 4.58e-13
+-- baselines: mean of per-run shares [%] / sample sd (ddof=1) [pp] / population sd (ddof=0) [pp]
+mbpo    Ant-v5          | rollout   1.704 sd 0.124/0.111 | gradient_updat  23.725 sd 1.935/1.731 | dynamics_model  74.278 sd 2.093/1.872 | synthetic_roll   0.293 sd 0.036/0.032
+mbpo    HalfCheetah-v5  | rollout   1.171 sd 0.025/0.022 | gradient_updat  28.332 sd 1.021/0.913 | dynamics_model  70.460 sd 1.049/0.938 | synthetic_roll   0.037 sd 0.009/0.008
+sac     Ant-v5          | rollout   6.729 sd 0.038/0.034 | gradient_updat  93.271 sd 0.038/0.034
+sac     HalfCheetah-v5  | rollout   4.097 sd 0.053/0.047 | gradient_updat  95.903 sd 0.053/0.047
+td3     Ant-v5          | rollout  10.064 sd 0.162/0.145 | gradient_updat  89.936 sd 0.162/0.145
+td3     HalfCheetah-v5  | rollout   5.019 sd 0.059/0.053 | gradient_updat  94.981 sd 0.059/0.053
+tdmpc2  Ant-v5          | rollout  51.619 sd 0.227/0.203 | gradient_updat  46.179 sd 0.221/0.198 | world_model_pr   2.202 sd 0.017/0.015
+tdmpc2  HalfCheetah-v5  | rollout  47.825 sd 0.341/0.305 | gradient_updat  49.746 sd 0.270/0.241 | world_model_pr   2.429 sd 0.089/0.080
+max sample sd of the quoted shares, SAC/TD3/TD-MPC2 (GU; TD-MPC2 GU and rollout): 0.3413 pp
+max sample sd of the quoted shares, MBPO (fit and GU): 2.0932 pp
+max sample sd over ALL segments: SAC/TD3/TD-MPC2 0.3413 pp ; MBPO 2.0932 pp
+max population sd of the quoted shares: SAC/TD3/TD-MPC2 0.3053, MBPO 1.8722
+
+rollout share at the baselines [%]: {('mbpo', 'Ant-v5'): 1.704, ('mbpo', 'HalfCheetah-v5'): 1.171, ('sac', 'Ant-v5'): 6.729, ('sac', 'HalfCheetah-v5'): 4.097, ('td3', 'Ant-v5'): 10.064, ('td3', 'HalfCheetah-v5'): 5.019, ('tdmpc2', 'Ant-v5'): 51.619, ('tdmpc2', 'HalfCheetah-v5'): 47.825}
+(a) baselines of SAC/TD3/MBPO: min 1.171 (('mbpo', 'HalfCheetah-v5')) max 10.064 (('td3', 'Ant-v5'))
+(b) all 46 configurations of SAC/TD3/MBPO: min 0.637 (('mbpo', 'HalfCheetah-v5', 'utd4')) max 11.307 (('td3', 'Ant-v5', 'w256'))
+    same as ratio of sums: min 0.637 max 11.304
+    all configs (config means) with rollout share > 10 %: {('td3', 'Ant-v5', 'base'): 10.064, ('td3', 'Ant-v5', 'w256'): 11.307, ('td3', 'Ant-v5', 'w512'): 10.549}
+
+TD-MPC2, all configurations: shares [%] (mean of per-run shares)
+                         sh_rollout  sh_gradient_updates  sh_dynamics_model_update  sh_synthetic_rollout_generation  sh_world_model_pretrain  roll_gt_GU  GU_gt_roll
+env            config                                                                                                                                               
+Ant-v5         base          51.619               46.179                       0.0                              0.0                    2.202        True       False
+               horizon1      49.285               48.345                       0.0                              0.0                    2.370        True       False
+               horizon5      54.475               43.481                       0.0                              0.0                    2.044        True       False
+               numq3         54.216               43.744                       0.0                              0.0                    2.041        True       False
+               numq7         48.689               49.003                       0.0                              0.0                    2.308       False        True
+HalfCheetah-v5 base          47.825               49.746                       0.0                              0.0                    2.429       False        True
+               horizon1      48.161               49.455                       0.0                              0.0                    2.383       False        True
+               horizon5      50.462               47.299                       0.0                              0.0                    2.239        True       False
+               numq3         50.724               46.968                       0.0                              0.0                    2.308        True       False
+               numq7         45.996               51.586                       0.0                              0.0                    2.418       False        True
+TD-MPC2: configurations 10 | rollout is the largest single segment: 6 | gradient_updates share larger than rollout share in: 4 of 10
+
+TD-MPC2: is the rollout larger than every single allocated sub-segment of the gradient updates (segment_energy.json, per run)?
+                         runs  roll_larger    largest_sub
+env            config                                    
+Ant-v5         base         5            5  critic_update
+               horizon1     5            5  critic_update
+               horizon5     5            5  critic_update
+               numq3        5            5  critic_update
+               numq7        5            5  critic_update
+HalfCheetah-v5 base         5            5  critic_update
+               horizon1     5            5  critic_update
+               horizon5     5            5  critic_update
+               numq3        5            5  critic_update
+               numq7        5            5  critic_update
+runs in which the rollout exceeds every allocated sub-segment: 50 of 50 | configurations in which it does so in all five seeds: 10 of 10
+
+====================================================================================================
+2. RQ2: configuration means, pooled statistics, discordant pairs
+====================================================================================================
+configurations: 56 | max rel. diff energy vs d1_config_table 4.16e-13, FLOPs 0.00e+00
+HalfCheetah-v5  n=27 rho=0.8357 slope=0.4715 R2=0.6110 | J/FLOP min 19.11 pJ ('td3', 'b1024') max 1421.26 pJ ('td3', 'w256') factor 74.38
+   baselines J/FLOP [pJ]: {'sac': np.float64(69.45), 'td3': np.float64(114.33), 'mbpo': np.float64(183.07), 'tdmpc2': np.float64(50.62)}
+Ant-v5          n=29 rho=0.8463 slope=0.5071 R2=0.6253 | J/FLOP min 19.82 pJ ('td3', 'b1024') max 1232.48 pJ ('td3', 'w256') factor 62.18
+   baselines J/FLOP [pJ]: {'sac': np.float64(68.57), 'td3': np.float64(116.27), 'mbpo': np.float64(178.77), 'tdmpc2': np.float64(48.95)}
+
+Discordant pairs (pooled, ties in FLOPs excluded; gross config means)
+HalfCheetah-v5  pairs 349 discordant 52 (14.90 %) concordant 297 (85.10 %) FLOP ties 2
+Ant-v5          pairs 404 discordant 60 (14.85 %) concordant 344 (85.15 %) FLOP ties 2
+
+====================================================================================================
+3. Net analysis (definitions of 7.1.3 / section_7_checks.py) and RQ3 statistics
+====================================================================================================
+check gross total vs pipeline: max rel diff 4.58e-13
+run-segments with negative net (mean): 1 of 770 | negative run totals: 0
+
+-- reproduction of tab:thr-gross-net (baselines; expected from Step 7, not evidence)
+     algo             env  gross_kJ   net_kJ  ratio  jpf_gross  jpf_net
+0     sac  HalfCheetah-v5    60.911   32.368  0.531     69.447   36.904
+1     sac          Ant-v5    64.383   33.726  0.524     68.567   35.918
+2     td3  HalfCheetah-v5    28.111   13.518  0.481    114.334   54.979
+3     td3          Ant-v5    30.520   14.333  0.470    116.266   54.601
+4    mbpo  HalfCheetah-v5   207.395   98.546  0.475    183.073   86.990
+5    mbpo          Ant-v5   253.138  120.343  0.475    178.766   84.986
+6  tdmpc2  HalfCheetah-v5   447.087  288.455  0.645     50.617   32.658
+7  tdmpc2          Ant-v5   493.191  321.711  0.652     48.945   31.927
+net/gross range 0.470 - 0.652
+
+-- RQ3 orderings per convention (tab:rob-energy, tab:rob-jpf)
+gross     energy: distinct orderings 1 ['TSM'] | non-baseline values differing from the baseline ordering {'HalfCheetah-v5': 0, 'Ant-v5': 0} (of 7 per environment), keeping it: {'HalfCheetah-v5': ['UTD 2', 'UTD 4', 'Width 256', 'Width 512', 'Batch 256', 'Batch 512', 'Batch 1024'], 'Ant-v5': ['UTD 2', 'UTD 4', 'Width 256', 'Width 512', 'Batch 256', 'Batch 512', 'Batch 1024']} | seed-level orderings equal to the order of the means: 80 of 80 | smallest neighbour ratio 1.5901
+gross     jpf   : distinct orderings 4 ['MST', 'SMT', 'STM', 'TSM'] | non-baseline values differing from the baseline ordering {'HalfCheetah-v5': 6, 'Ant-v5': 6} (of 7 per environment), keeping it: {'HalfCheetah-v5': ['UTD 2'], 'Ant-v5': ['UTD 2']} | seed-level orderings equal to the order of the means: 78 of 80 | smallest neighbour ratio 1.0035
+net_mean  energy: distinct orderings 1 ['TSM'] | non-baseline values differing from the baseline ordering {'HalfCheetah-v5': 0, 'Ant-v5': 0} (of 7 per environment), keeping it: {'HalfCheetah-v5': ['UTD 2', 'UTD 4', 'Width 256', 'Width 512', 'Batch 256', 'Batch 512', 'Batch 1024'], 'Ant-v5': ['UTD 2', 'UTD 4', 'Width 256', 'Width 512', 'Batch 256', 'Batch 512', 'Batch 1024']} | seed-level orderings equal to the order of the means: 80 of 80 | smallest neighbour ratio 1.4849
+net_mean  jpf   : distinct orderings 4 ['MST', 'SMT', 'STM', 'TSM'] | non-baseline values differing from the baseline ordering {'HalfCheetah-v5': 5, 'Ant-v5': 6} (of 7 per environment), keeping it: {'HalfCheetah-v5': ['UTD 2', 'Width 512'], 'Ant-v5': ['UTD 2']} | seed-level orderings equal to the order of the means: 80 of 80 | smallest neighbour ratio 1.0728
+net_head  energy: distinct orderings 1 ['TSM'] | non-baseline values differing from the baseline ordering {'HalfCheetah-v5': 0, 'Ant-v5': 0} (of 7 per environment), keeping it: {'HalfCheetah-v5': ['UTD 2', 'UTD 4', 'Width 256', 'Width 512', 'Batch 256', 'Batch 512', 'Batch 1024'], 'Ant-v5': ['UTD 2', 'UTD 4', 'Width 256', 'Width 512', 'Batch 256', 'Batch 512', 'Batch 1024']} | seed-level orderings equal to the order of the means: 80 of 80 | smallest neighbour ratio 1.4842
+net_head  jpf   : distinct orderings 4 ['MST', 'SMT', 'STM', 'TSM'] | non-baseline values differing from the baseline ordering {'HalfCheetah-v5': 5, 'Ant-v5': 6} (of 7 per environment), keeping it: {'HalfCheetah-v5': ['UTD 2', 'Width 512'], 'Ant-v5': ['UTD 2']} | seed-level orderings equal to the order of the means: 79 of 80 | smallest neighbour ratio 1.0684
+net_tail  energy: distinct orderings 1 ['TSM'] | non-baseline values differing from the baseline ordering {'HalfCheetah-v5': 0, 'Ant-v5': 0} (of 7 per environment), keeping it: {'HalfCheetah-v5': ['UTD 2', 'UTD 4', 'Width 256', 'Width 512', 'Batch 256', 'Batch 512', 'Batch 1024'], 'Ant-v5': ['UTD 2', 'UTD 4', 'Width 256', 'Width 512', 'Batch 256', 'Batch 512', 'Batch 1024']} | seed-level orderings equal to the order of the means: 80 of 80 | smallest neighbour ratio 1.4857
+net_tail  jpf   : distinct orderings 4 ['MST', 'SMT', 'STM', 'TSM'] | non-baseline values differing from the baseline ordering {'HalfCheetah-v5': 5, 'Ant-v5': 6} (of 7 per environment), keeping it: {'HalfCheetah-v5': ['UTD 2', 'Width 512'], 'Ant-v5': ['UTD 2']} | seed-level orderings equal to the order of the means: 76 of 80 | smallest neighbour ratio 1.0291
+
+-- detail per row (order, seeds equal, min ratio)
+energy HalfCheetah-v5  Baseline    gross: TSM 5/5 2.1668 | net_mean: TSM 5/5 2.3945 | net_head: TSM 5/5 2.3527 | net_tail: TSM 5/5 2.4407
+energy HalfCheetah-v5  UTD 2       gross: TSM 5/5 2.1319 | net_mean: TSM 5/5 2.0802 | net_head: TSM 5/5 2.1051 | net_tail: TSM 5/5 2.0544
+energy HalfCheetah-v5  UTD 4       gross: TSM 5/5 1.5901 | net_mean: TSM 5/5 1.4849 | net_head: TSM 5/5 1.4842 | net_tail: TSM 5/5 1.4857
+energy HalfCheetah-v5  Width 256   gross: TSM 5/5 2.0579 | net_mean: TSM 5/5 2.0360 | net_head: TSM 5/5 2.0333 | net_tail: TSM 5/5 2.0392
+energy HalfCheetah-v5  Width 512   gross: TSM 5/5 1.9533 | net_mean: TSM 5/5 1.9353 | net_head: TSM 5/5 1.9034 | net_tail: TSM 5/5 1.9702
+energy HalfCheetah-v5  Batch 256   gross: TSM 5/5 1.8208 | net_mean: TSM 5/5 1.6386 | net_head: TSM 5/5 1.6301 | net_tail: TSM 5/5 1.6478
+energy HalfCheetah-v5  Batch 512   gross: TSM 5/5 1.7519 | net_mean: TSM 5/5 1.6332 | net_head: TSM 5/5 1.6241 | net_tail: TSM 5/5 1.6429
+energy HalfCheetah-v5  Batch 1024  gross: TSM 5/5 1.7135 | net_mean: TSM 5/5 1.6157 | net_head: TSM 5/5 1.6211 | net_tail: TSM 5/5 1.6100
+energy Ant-v5          Baseline    gross: TSM 5/5 2.1095 | net_mean: TSM 5/5 2.3531 | net_head: TSM 5/5 2.3530 | net_tail: TSM 5/5 2.3532
+energy Ant-v5          UTD 2       gross: TSM 5/5 2.1407 | net_mean: TSM 5/5 2.2146 | net_head: TSM 5/5 2.1547 | net_tail: TSM 5/5 2.2822
+energy Ant-v5          UTD 4       gross: TSM 5/5 1.7588 | net_mean: TSM 5/5 1.6978 | net_head: TSM 5/5 1.7053 | net_tail: TSM 5/5 1.6898
+energy Ant-v5          Width 256   gross: TSM 5/5 1.9914 | net_mean: TSM 5/5 2.0047 | net_head: TSM 5/5 1.9888 | net_tail: TSM 5/5 2.0238
+energy Ant-v5          Width 512   gross: TSM 5/5 1.9000 | net_mean: TSM 5/5 1.8744 | net_head: TSM 5/5 1.7831 | net_tail: TSM 5/5 1.9817
+energy Ant-v5          Batch 256   gross: TSM 5/5 1.8125 | net_mean: TSM 5/5 1.6308 | net_head: TSM 5/5 1.6605 | net_tail: TSM 5/5 1.5989
+energy Ant-v5          Batch 512   gross: TSM 5/5 1.7245 | net_mean: TSM 5/5 1.6108 | net_head: TSM 5/5 1.6009 | net_tail: TSM 5/5 1.6212
+energy Ant-v5          Batch 1024  gross: TSM 5/5 1.6729 | net_mean: TSM 5/5 1.5959 | net_head: TSM 5/5 1.5971 | net_tail: TSM 5/5 1.5945
+jpf    HalfCheetah-v5  Baseline    gross: STM 5/5 1.6012 | net_mean: STM 5/5 1.4898 | net_head: STM 5/5 1.5162 | net_tail: STM 5/5 1.4616
+jpf    HalfCheetah-v5  UTD 2       gross: STM 5/5 1.1816 | net_mean: STM 5/5 1.1772 | net_head: STM 5/5 1.1471 | net_tail: STM 5/5 1.2109
+jpf    HalfCheetah-v5  UTD 4       gross: SMT 5/5 1.0986 | net_mean: SMT 5/5 1.0773 | net_head: SMT 5/5 1.0684 | net_tail: SMT 5/5 1.0870
+jpf    HalfCheetah-v5  Width 256   gross: MST 5/5 1.3303 | net_mean: MST 5/5 1.1209 | net_head: MST 5/5 1.1625 | net_tail: MST 2/5 1.0759
+jpf    HalfCheetah-v5  Width 512   gross: SMT 3/5 1.0035 | net_mean: STM 5/5 1.1018 | net_head: STM 4/5 1.0963 | net_tail: STM 5/5 1.1078
+jpf    HalfCheetah-v5  Batch 256   gross: TSM 5/5 1.3060 | net_mean: TSM 5/5 1.1753 | net_head: TSM 5/5 1.1692 | net_tail: TSM 5/5 1.1819
+jpf    HalfCheetah-v5  Batch 512   gross: TSM 5/5 1.2565 | net_mean: TSM 5/5 1.1713 | net_head: TSM 5/5 1.1648 | net_tail: TSM 5/5 1.1783
+jpf    HalfCheetah-v5  Batch 1024  gross: TSM 5/5 1.2289 | net_mean: TSM 5/5 1.1588 | net_head: TSM 5/5 1.1627 | net_tail: TSM 5/5 1.1547
+jpf    Ant-v5          Baseline    gross: STM 5/5 1.5376 | net_mean: STM 5/5 1.5202 | net_head: STM 5/5 1.5202 | net_tail: STM 5/5 1.5201
+jpf    Ant-v5          UTD 2       gross: STM 5/5 1.2141 | net_mean: STM 5/5 1.1852 | net_head: STM 5/5 1.1616 | net_tail: STM 5/5 1.2119
+jpf    Ant-v5          UTD 4       gross: SMT 5/5 1.0648 | net_mean: SMT 5/5 1.0771 | net_head: SMT 5/5 1.0752 | net_tail: SMT 5/5 1.0790
+jpf    Ant-v5          Width 256   gross: MST 5/5 1.5735 | net_mean: MST 5/5 1.3219 | net_head: MST 5/5 1.3801 | net_tail: MST 5/5 1.2593
+jpf    Ant-v5          Width 512   gross: SMT 5/5 1.1994 | net_mean: SMT 5/5 1.0728 | net_head: SMT 5/5 1.1130 | net_tail: SMT 4/5 1.0291
+jpf    Ant-v5          Batch 256   gross: TSM 5/5 1.2965 | net_mean: TSM 5/5 1.1665 | net_head: TSM 5/5 1.1877 | net_tail: TSM 5/5 1.1437
+jpf    Ant-v5          Batch 512   gross: TSM 5/5 1.2334 | net_mean: TSM 5/5 1.1521 | net_head: TSM 5/5 1.1451 | net_tail: TSM 5/5 1.1596
+jpf    Ant-v5          Batch 1024  gross: TSM 5/5 1.1965 | net_mean: TSM 5/5 1.1414 | net_head: TSM 5/5 1.1423 | net_tail: TSM 5/5 1.1404
+
+-- gross values
+energy HalfCheetah-v5  Baseline    sac=60911  td3=28111  mbpo=2.0739e+05
+energy HalfCheetah-v5  UTD 2       sac=1.1802e+05  td3=55361  mbpo=2.6885e+05
+energy HalfCheetah-v5  UTD 4       sac=2.3496e+05  td3=1.0734e+05  mbpo=3.7361e+05
+energy HalfCheetah-v5  Width 256   sac=47408  td3=23037  mbpo=1.8791e+05
+energy HalfCheetah-v5  Width 512   sac=49554  td3=25370  mbpo=1.9277e+05
+energy HalfCheetah-v5  Batch 256   sac=60911  td3=33454  mbpo=2.0739e+05
+energy HalfCheetah-v5  Batch 512   sac=73024  td3=41683  mbpo=2.091e+05
+energy HalfCheetah-v5  Batch 1024  sac=82366  td3=48068  mbpo=2.1867e+05
+energy Ant-v5          Baseline    sac=64383  td3=30520  mbpo=2.5314e+05
+energy Ant-v5          UTD 2       sac=1.2318e+05  td3=57543  mbpo=3.168e+05
+energy Ant-v5          UTD 4       sac=2.4133e+05  td3=1.119e+05  mbpo=4.2445e+05
+energy Ant-v5          Width 256   sac=49985  td3=25100  mbpo=2.3449e+05
+energy Ant-v5          Width 512   sac=52200  td3=27473  mbpo=2.3164e+05
+energy Ant-v5          Batch 256   sac=64383  td3=35521  mbpo=2.5314e+05
+energy Ant-v5          Batch 512   sac=76499  td3=44361  mbpo=2.4739e+05
+energy Ant-v5          Batch 1024  sac=89057  td3=53235  mbpo=2.6769e+05
+jpf    HalfCheetah-v5  Baseline    sac=69.447  td3=114.33  mbpo=183.07
+jpf    HalfCheetah-v5  UTD 2       sac=67.29  td3=112.63  mbpo=133.09
+jpf    HalfCheetah-v5  UTD 4       sac=66.984  td3=109.22  mbpo=99.419
+jpf    HalfCheetah-v5  Width 256   sac=814.97  td3=1421.3  mbpo=612.6
+jpf    HalfCheetah-v5  Width 512   sac=221.48  td3=405.33  mbpo=403.91
+jpf    HalfCheetah-v5  Batch 256   sac=69.447  td3=53.177  mbpo=183.07
+jpf    HalfCheetah-v5  Batch 512   sac=41.634  td3=33.135  mbpo=104.55
+jpf    HalfCheetah-v5  Batch 1024  sac=23.481  td3=19.107  mbpo=58.26
+jpf    Ant-v5          Baseline    sac=68.567  td3=116.27  mbpo=178.77
+jpf    Ant-v5          UTD 2       sac=65.603  td3=109.65  mbpo=133.13
+jpf    Ant-v5          UTD 4       sac=64.265  td3=106.64  mbpo=100.15
+jpf    Ant-v5          Width 256   sac=678.76  td3=1232.5  mbpo=431.36
+jpf    Ant-v5          Width 512   sac=204.96  td3=387.47  mbpo=323.04
+jpf    Ant-v5          Batch 256   sac=68.567  td3=52.887  mbpo=178.77
+jpf    Ant-v5          Batch 512   sac=40.741  td3=33.03  mbpo=105.78
+jpf    Ant-v5          Batch 1024  sac=23.716  td3=19.821  mbpo=63.138
+
+-- pair TD3--MBPO (ratio MBPO/TD3 of the J/FLOP, seeds of 5 with MBPO > TD3) and SAC--TD3 at the batch-256 row
+jpf HalfCheetah-v5  Width 512  mbpo/td3: gross=0.9965 (2/5)  net_mean=1.1018 (5/5)  net_head=1.0963 (4/5)  net_tail=1.1078 (5/5)  
+jpf Ant-v5          Width 512  mbpo/td3: gross=0.8337 (0/5)  net_mean=0.9321 (0/5)  net_head=0.8984 (0/5)  net_tail=0.9717 (1/5)  
+jpf HalfCheetah-v5  Batch 256  sac/td3: gross=1.3060 (5/5)  net_mean=1.1753 (5/5)  net_head=1.1692 (5/5)  net_tail=1.1819 (5/5)  
+jpf Ant-v5          Batch 256  sac/td3: gross=1.2965 (5/5)  net_mean=1.1665 (5/5)  net_head=1.1877 (5/5)  net_tail=1.1437 (5/5)  
+jpf HalfCheetah-v5  Baseline   sac/td3: gross=0.6074 (0/5)  net_mean=0.6712 (0/5)  net_head=0.6595 (0/5)  net_tail=0.6842 (0/5)  
+jpf Ant-v5          Baseline   sac/td3: gross=0.5897 (0/5)  net_mean=0.6578 (0/5)  net_head=0.6578 (0/5)  net_tail=0.6579 (0/5)  
+
+-- ranges and overlap with TD-MPC2 (J/FLOP)
+gross     HalfCheetah-v5  sac:[23.48,814.97] overlap=True  td3:[19.11,1421.26] overlap=True  mbpo:[58.26,612.60] overlap=True  tdmpc2:[43.77,60.83]
+gross     Ant-v5          sac:[23.72,678.76] overlap=True  td3:[19.82,1232.48] overlap=True  mbpo:[63.14,431.36] overlap=False  tdmpc2:[43.01,60.23]
+net_mean  HalfCheetah-v5  sac:[15.22,313.16] overlap=True  td3:[13.13,552.00] overlap=True  mbpo:[30.90,279.39] overlap=True  tdmpc2:[28.63,36.79]
+net_mean  Ant-v5          sac:[15.53,263.39] overlap=True  td3:[13.61,475.10] overlap=True  mbpo:[33.61,199.25] overlap=True  tdmpc2:[28.41,36.43]
+net_head  HalfCheetah-v5  sac:[15.83,337.49] overlap=True  td3:[13.62,595.67] overlap=True  mbpo:[32.10,290.32] overlap=True  tdmpc2:[29.70,37.87]
+net_head  Ant-v5          sac:[16.10,285.25] overlap=True  td3:[14.10,518.65] overlap=True  mbpo:[34.88,206.69] overlap=True  tdmpc2:[29.48,37.44]
+net_tail  HalfCheetah-v5  sac:[14.61,288.84] overlap=True  td3:[12.65,508.33] overlap=True  mbpo:[29.69,268.47] overlap=True  tdmpc2:[27.55,35.70]
+net_tail  Ant-v5          sac:[14.96,241.54] overlap=True  td3:[13.12,431.55] overlap=True  mbpo:[32.35,191.81] overlap=True  tdmpc2:[27.34,35.42]
+
+-- pooled over all configurations of an environment
+gross     HalfCheetah-v5  n=27 rho=0.8357 slope=0.4715 R2=0.6110 J/FLOP spread 74.384 (min 19.11 pJ ('td3', 'b1024'), max 1421.26 pJ ('td3', 'w256'))
+gross     Ant-v5          n=29 rho=0.8463 slope=0.5071 R2=0.6253 J/FLOP spread 62.182 (min 19.82 pJ ('td3', 'b1024'), max 1232.48 pJ ('td3', 'w256'))
+net_mean  HalfCheetah-v5  n=27 rho=0.8812 slope=0.5586 R2=0.7351 J/FLOP spread 42.027 (min 13.13 pJ ('td3', 'b1024'), max 552.00 pJ ('td3', 'w256'))
+net_mean  Ant-v5          n=29 rho=0.8904 slope=0.5945 R2=0.7465 J/FLOP spread 34.918 (min 13.61 pJ ('td3', 'b1024'), max 475.10 pJ ('td3', 'w256'))
+net_head  HalfCheetah-v5  n=27 rho=0.8782 slope=0.5537 R2=0.7301 J/FLOP spread 43.746 (min 13.62 pJ ('td3', 'b1024'), max 595.67 pJ ('td3', 'w256'))
+net_head  Ant-v5          n=29 rho=0.8874 slope=0.5869 R2=0.7397 J/FLOP spread 36.792 (min 14.10 pJ ('td3', 'b1024'), max 518.65 pJ ('td3', 'w256'))
+net_tail  HalfCheetah-v5  n=27 rho=0.8760 slope=0.5641 R2=0.7406 J/FLOP spread 40.178 (min 12.65 pJ ('td3', 'b1024'), max 508.33 pJ ('td3', 'w256'))
+net_tail  Ant-v5          n=29 rho=0.8894 slope=0.6032 R2=0.7537 J/FLOP spread 32.903 (min 13.12 pJ ('td3', 'b1024'), max 431.55 pJ ('td3', 'w256'))
+
+-- TD-MPC2: energy factor horizon 5 / horizon 1 and rollout-share deviation along its sweeps
+HalfCheetah-v5  | gross 2.0353 | net_mean 2.2006 | net_head 2.2176 | net_tail 2.1827 | max |rollout share - baseline| = 2.899 pp (numq3); all: {'base': 0.0, 'horizon1': 0.336, 'horizon5': 2.637, 'numq3': 2.899, 'numq7': 1.829}
+Ant-v5          | gross 2.1445 | net_mean 2.3423 | net_head 2.3648 | net_tail 2.3185 | max |rollout share - baseline| = 2.930 pp (numq7); all: {'base': 0.0, 'horizon1': 2.334, 'horizon5': 2.857, 'numq3': 2.597, 'numq7': 2.93}
+
+-- environment effect: Ant over HalfCheetah
+gross     pairs 27 seed-pairs 135 | total ratio 1.0271 - 1.2479 | configs > 1: 27/27 | seed pairs > 1: 135/135 | rollout ratio 1.1055 - 2.2878 (>1 in 27) | rollout-share rise positive in 27/27 (min 0.347 pp)
+     configurations with ratio <= 1.05: {('sac', 'b512'): 1.0476, ('sac', 'utd2'): 1.0437, ('sac', 'utd4'): 1.0271, ('td3', 'utd2'): 1.0394, ('td3', 'utd4'): 1.0424} | seed pairs < 1 by configuration: {}
+net_mean  pairs 27 seed-pairs 135 | total ratio 0.9922 - 1.2638 | configs > 1: 26/27 | seed pairs > 1: 129/135 | rollout ratio 1.1011 - 2.2458 (>1 in 27) | rollout-share rise positive in 27/27 (min 0.294 pp)
+     configurations with ratio <= 1.05: {('sac', 'b512'): 1.0463, ('sac', 'base'): 1.0419, ('sac', 'utd2'): 1.015, ('sac', 'utd4'): 0.9922, ('td3', 'b256'): 1.0469} | seed pairs < 1 by configuration: {('sac', 'utd2'): 2, ('sac', 'utd4'): 4}
+net_head  pairs 27 seed-pairs 135 | total ratio 0.9845 - 1.2617 | configs > 1: 26/27 | seed pairs > 1: 128/135 | rollout ratio 1.1000 - 2.2754 (>1 in 27) | rollout-share rise positive in 27/27 (min 0.297 pp)
+     configurations with ratio <= 1.05: {('sac', 'b512'): 1.0421, ('sac', 'utd2'): 1.0285, ('sac', 'utd4'): 0.9845, ('td3', 'b256'): 1.0455} | seed pairs < 1 by configuration: {('sac', 'utd2'): 1, ('sac', 'utd4'): 4, ('td3', 'base'): 2}
+net_tail  pairs 27 seed-pairs 135 | total ratio 1.0006 - 1.2661 | configs > 1: 27/27 | seed pairs > 1: 126/135 | rollout ratio 1.1023 - 2.2146 (>1 in 27) | rollout-share rise positive in 27/27 (min 0.290 pp)
+     configurations with ratio <= 1.05: {('sac', 'base'): 1.0173, ('sac', 'utd2'): 1.0011, ('sac', 'utd4'): 1.0006, ('td3', 'b256'): 1.0484, ('td3', 'w512'): 1.0488} | seed pairs < 1 by configuration: {('sac', 'base'): 1, ('sac', 'utd2'): 1, ('sac', 'utd4'): 2, ('td3', 'base'): 2, ('td3', 'w256'): 1, ('td3', 'w512'): 2}
+
+====================================================================================================
+4. RQ4: the two clock runs and the five canonical width-256 runs
+====================================================================================================
+R2000: energy 189.5112 kJ | duration 1638.110 s | power 115.6890 W | FLOPs 3.1533e+14 | {'fit_epochs': 1196, 'opt_steps': 168525, 'last10': 5936.559047246978} | floor head/tail/mean 63.400/66.274/64.837 W | hidden [256, 256] | commit ae38808
+R200: energy 568.2100 kJ | duration 5731.985 s | power 99.1297 W | FLOPs 3.1533e+14 | {'fit_epochs': 1196, 'opt_steps': 168525, 'last10': 5936.559047246978} | floor head/tail/mean 57.327/63.085/60.206 W | hidden [256, 256] | commit ae38808
+ratios R200/R2000: energy 2.99829 | duration 3.49915 | power 0.85686
+above-idle factor with mean floor: 2.6784
+above-idle factor with head floor: 2.7975
+above-idle factor with tail floor: 2.5524
+above-idle factor range over the three idle choices: 2.552 - 2.797
+                                                      run   seed         energy         flops  fit_epochs  opt_steps       last10
+0  results/mbpo/HalfCheetah-v5/seed_14577/20260912_235401  14577  190324.503948  3.143952e+14        1169     167919  4306.940233
+1    results/mbpo/HalfCheetah-v5/seed_331/20260912_225321    331  186297.353035  3.093407e+14        1156     164537  3951.205837
+2  results/mbpo/HalfCheetah-v5/seed_43611/20260913_002507  43611  190426.590118  3.082111e+14        1153     163808  5507.526373
+3  results/mbpo/HalfCheetah-v5/seed_85062/20260913_005629  85062  192336.098100  3.080640e+14        1188     163715  5652.745051
+4    results/mbpo/HalfCheetah-v5/seed_958/20260912_232353    958  180182.004080  2.937216e+14        1084     154251  3255.354758
+canonical width-256 runs: n=5 energy mean 187.9133 kJ sample sd 4.8496 kJ population sd 4.3376 | FLOPs 2.9372e+14 - 3.1440e+14 | fit epochs 1084 - 1188 | optimiser steps 154251 - 167919 | return 3255.4 - 5652.7
+R2000: FLOPs 3.1533e+14 fit epochs 1196 optimiser steps 168525 return 5936.6
+R2000 seeds: R2000/R200 seed 0 0 | canonical seeds [331, 958, 14577, 43611, 85062]
+
+====================================================================================================
+5. Repository facts (read-only)
+====================================================================================================
+algorithms/*.py -> ['dynamics_model.py', 'mbpo.py', 'replay_buffer.py', 'sac.py', 'td3.py', 'tdmpc2.py', 'termination_fns.py', 'tracker_utils.py']
+configs/overrides/*.json -> ['mbpo_ant.json', 'mbpo_ant_batch1024.json', 'mbpo_ant_batch512.json', 'mbpo_ant_rollout1.json', 'mbpo_ant_rollout15.json', 'mbpo_ant_utd2.json', 'mbpo_ant_utd4.json', 'mbpo_ant_width256.json', 'mbpo_ant_width512.json', 'mbpo_batch1024.json', 'mbpo_batch512.json', 'mbpo_hopper.json', 'mbpo_humanoid.json', 'mbpo_utd2.json', 'mbpo_utd4.json', 'mbpo_walker2d.json', 'mbpo_width256.json', 'mbpo_width512.json', 'sac_batch1024.json', 'sac_batch512.json', 'sac_utd2.json', 'sac_utd4.json', 'sac_width256.json', 'sac_width512.json', 'td3_batch1024.json', 'td3_batch256.json', 'td3_batch512.json', 'td3_utd2.json', 'td3_utd4.json', 'td3_width256.json', 'td3_width512.json', 'tdmpc2_ant.json', 'tdmpc2_ant_horizon1.json', 'tdmpc2_ant_horizon5.json', 'tdmpc2_ant_numq3.json', 'tdmpc2_ant_numq7.json', 'tdmpc2_horizon1.json', 'tdmpc2_horizon5.json', 'tdmpc2_numq3.json', 'tdmpc2_numq7.json']
+flop_analysis/*.py -> ['appendix_tables.py', 'appendix_tables_verify.py', 'check_totals.py', 'compute_energy_per_flop.py', 'correlation_analysis.py', 'flop_keys.py', 'make_fix_report.py', 'measure_flops.py', 'section_5_2_analysis.py', 'section_5_2_render.py', 'section_5_3_analysis.py', 'section_5_3_render.py', 'section_5_checks.py', 'section_6_checks.py', 'section_7_checks.py', 'section_8_checks.py', 'verify_analytic_flops.py', 'verify_mbpo_fit_flops.py']
+top-level files: ['.gitignore', 'CLAUDE.md', 'README.md', 'aggregate_results.py', 'cli_commands.txt', 'dashboard.py', 'experiment_runner.py', 'flop_dashboard.py', 'idle_power.csv', 'idle_power_analysis.py', 'idle_power_report.html', 'requirements.txt', 'run_experiment.py', 'summary.csv']
+LICENSE* in repository root: []
+run_experiment.py exists: True | experiment_runner.py exists: True | flop_analysis/flop_keys.py exists: True | verify_analytic_flops.py exists: True
+occurrences of ALGO_CONFIGS in top-level *.py: [('run_experiment.py', 14), ('run_experiment.py', 26), ('run_experiment.py', 32), ('run_experiment.py', 54), ('run_experiment.py', 65)]
+occurrences of _dispatch_train in top-level *.py: [('experiment_runner.py', 177), ('experiment_runner.py', 245)]
+git remote: https://github.com/SamBro2901/rl-dissections.git | tags: '' | HEAD: 788eb49
+git status --short: ['?? contexts/step9/']
+git log -1: 788eb49 2026-10-14 Context for latex builds
+distinct git_commit values over the 280 canonical metadata.json: 12 ['0bbbbb7', '58962d2', '788ffcd', '7e672ef', '92dcee0', '9b4b44c', 'a3582b5', 'aa9186b', 'b5b7e54', 'ecb7135', 'ecb98bb', 'f23f448']
+metadata.json files in results/: 300 | distinct commits over all: 24
+PPO or PETS in algorithms/ (file names): []
+python files mentioning PPO/PETS: ['experiment_runner.py', 'algorithms/dynamics_model.py', 'algorithms/mbpo.py', 'flop_analysis/section_8_checks.py', 'configs/config.py']
+
+parameter counts (analytic, dense layers with bias; SAC policy outputs mean and log-std):
+  HalfCheetah-v5  width 1024: SAC policy  1080332  critic  1075201
+  HalfCheetah-v5  width  512: SAC policy   278028  critic   275457
+  HalfCheetah-v5  width  256: SAC policy    73484  critic    72193
+  Ant-v5          width 1024: SAC policy  1174544  critic  1167361
+  Ant-v5          width  512: SAC policy   325136  critic   321537
+  Ant-v5          width  256: SAC policy    97040  critic    95233
+hidden sizes recorded (canonical):  {('mbpo', (256, 256)): 10, ('mbpo', (512, 512)): 10, ('mbpo', (1024, 1024)): 60, ('sac', (256, 256)): 10, ('sac', (512, 512)): 10, ('sac', (1024, 1024)): 50, ('td3', (256, 256)): 10, ('td3', (512, 512)): 10, ('td3', (1024, 1024)): 60, ('tdmpc2', ()): 50}
+README.md names: {'run_experiment.py': True, 'experiment_runner.py': True, 'configs/overrides': True, 'algorithms/sac.py': True, 'algorithms/td3.py': True, 'algorithms/mbpo.py': True, 'algorithms/tdmpc2.py': True, 'flop_keys.py': True, 'Extending to PPO': True}
+ALGO_CONFIGS defined in configs/config.py: True | keys: ['sac', 'mbpo', 'td3', 'tdmpc2']
+
+====================================================================================================
+5b. Further checks for the limitation and Outlook statements
+====================================================================================================
+MBPO synthetic_rollout_generation share of the training total [%], config means: min 0.0201 max 0.2954 (('Ant-v5', 'b512')) over 16 configurations
+   per-run maximum: 0.3537
+Ant-v5 configurations with last-tenth return <= first-tenth return: 14 of 29 | by algorithm: {'mbpo': 9, 'sac': 4, 'td3': 1} | HalfCheetah-v5 flagged: 0
+MBPO Ant-v5 last-tenth return negative in 9 of 9 | TD-MPC2 Ant-v5 last-tenth return range 125.8 - 438.5
+R2000 against each canonical width-256 MBPO run: differing keys of metadata.algo_config / experiment_config (the two blocks only):
+   seed 14577: ['experiment_config.seed', 'experiment_config.thermal_gate_reference_file']
+   seed 331: ['experiment_config.seed', 'experiment_config.thermal_gate_reference_file']
+   seed 43611: ['experiment_config.seed', 'experiment_config.thermal_gate_reference_file']
+   seed 85062: ['experiment_config.seed', 'experiment_config.thermal_gate_reference_file']
+   seed 958: ['experiment_config.seed', 'experiment_config.thermal_gate_reference_file']
+commit of R2000 ae38808 | in the 12 canonical commits: False
+canonical width-256 commits: ['7e672ef']
+
+====================================================================================================
+6. Counts for the ripple edits
+====================================================================================================
+runs with run_start_temp_c (temperature before the head window): 276 of 280
+r(head idle power corrected, run_start_temp_c) = 0.8831 (n=276)
+done

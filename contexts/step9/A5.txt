@@ -1,0 +1,30 @@
+Fri Oct 16 09:12:23 AM UTC 2026
+samanth-research-pc
+== A5
+/sys/class/powercap/intel-rapl
+/sys/class/powercap/intel-rapl-mmio
+/sys/class/powercap/intel-rapl-mmio:0
+/sys/class/powercap/intel-rapl:0
+/sys/class/powercap/intel-rapl:0:0
+/sys/class/powercap/intel-rapl:0:1
+-r-------- 1 root root 4096 Oct 16 11:12 /sys/class/powercap/intel-rapl-mmio:0/energy_uj
+-r-------- 1 root root 4096 Oct 16 11:06 /sys/class/powercap/intel-rapl:0/energy_uj
+-r-------- 1 root root 4096 Oct 16 11:12 /sys/class/powercap/intel-rapl:0:0/energy_uj
+-r-------- 1 root root 4096 Oct 16 11:12 /sys/class/powercap/intel-rapl:0:1/energy_uj
+/sys/class/powercap/intel-rapl
+cat: /sys/class/powercap/intel-rapl/name: No such file or directory
+/sys/class/powercap/intel-rapl:0
+package-0
+/sys/class/powercap/intel-rapl:0:0
+core
+/sys/class/powercap/intel-rapl:0:1
+uncore
+/sys/class/powercap/intel-rapl-mmio
+cat: /sys/class/powercap/intel-rapl-mmio/name: No such file or directory
+/sys/class/powercap/intel-rapl-mmio:0
+package-0
+-- read energy_uj
+cat: /sys/class/powercap/intel-rapl:0/energy_uj: Permission denied
+sudo: The "no new privileges" flag is set, which prevents sudo from running as root.
+sudo: If sudo is running in a container, you may need to adjust the container configuration to disable the flag.
+uid=1000(samanth) gid=1000(samanth) groups=1000(samanth),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),100(users),111(lpadmin),114(lxd),972(docker)

@@ -1,0 +1,41 @@
+['env', 'algo', 'config_id', 'n_seeds', 'flops', 'flops_std', 'return_mean', 'return_std', 'energy_mean', 'energy_std']
+['return_mean', 'return_std']
+HalfCheetah-v5 random mean -272.4 | config means below it:
+  none
+ per algo min/max of config-mean return:
+            min      max  count
+algo                           
+mbpo    4534.75  5903.65      7
+sac     2920.60  4884.74      7
+td3     3684.62  5539.51      8
+tdmpc2  5790.94  7755.66      5
+Ant-v5 random mean -48.6 | config means below it:
+       env  algo  return_mean
+0   Ant-v5  mbpo  -348.458956
+1   Ant-v5  mbpo  -407.715818
+2   Ant-v5  mbpo  -756.747586
+3   Ant-v5  mbpo  -325.478214
+4   Ant-v5  mbpo  -459.138082
+5   Ant-v5  mbpo  -599.210060
+6   Ant-v5  mbpo  -695.464090
+7   Ant-v5  mbpo  -413.373578
+8   Ant-v5  mbpo  -244.572432
+9   Ant-v5   sac  -104.547187
+11  Ant-v5   sac  -122.444637
+12  Ant-v5   sac  -220.093825
+15  Ant-v5   sac   -54.023200
+ per algo min/max of config-mean return:
+           min     max  count
+algo                         
+mbpo   -756.75 -244.57      9
+sac    -220.09  408.55      7
+td3     -30.31  575.92      8
+tdmpc2  125.79  438.53      5
+                     config_id  return_mean
+9   sac|bs1024_h1024x1024|utd1       -104.5
+10   sac|bs256_h1024x1024|utd1        158.3
+11   sac|bs256_h1024x1024|utd2       -122.4
+12   sac|bs256_h1024x1024|utd4       -220.1
+13     sac|bs256_h256x256|utd1        408.6
+14     sac|bs256_h512x512|utd1        246.5
+15   sac|bs512_h1024x1024|utd1        -54.0

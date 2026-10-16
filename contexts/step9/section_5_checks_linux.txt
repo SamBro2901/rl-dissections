@@ -1,0 +1,668 @@
+
+====================================================================================================
+0. Environment
+====================================================================================================
+python 3.14.4 | scipy 1.18.1 | pandas 3.0.5 | numpy 2.5.2
+configs per env: {'Ant-v5': 29, 'HalfCheetah-v5': 27} | per algo/env: {('Ant-v5', 'mbpo'): 9, ('Ant-v5', 'sac'): 7, ('Ant-v5', 'td3'): 8, ('Ant-v5', 'tdmpc2'): 5, ('HalfCheetah-v5', 'mbpo'): 7, ('HalfCheetah-v5', 'sac'): 7, ('HalfCheetah-v5', 'td3'): 8, ('HalfCheetah-v5', 'tdmpc2'): 5}
+
+====================================================================================================
+1. Predictability: pooled Spearman and log-log fits (with and without TD-MPC2), discordant pairs
+====================================================================================================
+HalfCheetah-v5  with TD-MPC2     total    n=27 rho=0.8357 p=5.78e-08 slope=0.4715+-0.0752 R2=0.6110 Fspan=2.91 Efactor=24.8 Ffactor=805.2
+HalfCheetah-v5  with TD-MPC2     rollout  n=27 rho=0.8836 p=1.02e-09 slope=0.4231+-0.0200 R2=0.9471 Fspan=5.65 Efactor=232.4 Ffactor=443617.6
+HalfCheetah-v5  with TD-MPC2     GU       n=27 rho=0.8421 p=3.66e-08 slope=0.3771+-0.0591 R2=0.6192 Fspan=2.60 Efactor=12.5 Ffactor=394.8
+HalfCheetah-v5  without TD-MPC2  total    n=22 rho=0.6994 p=0.000292 slope=0.3772+-0.0977 R2=0.4271 Fspan=2.37 Efactor=16.2 Ffactor=231.8
+HalfCheetah-v5  without TD-MPC2  rollout  n=22 rho=0.7793 p=1.92e-05 slope=0.0418+-0.0594 R2=0.0241 Fspan=1.18 Efactor=2.2 Ffactor=15.1
+HalfCheetah-v5  without TD-MPC2  GU       n=22 rho=0.7741 p=2.36e-05 slope=0.2951+-0.0617 R2=0.5332 Fspan=2.34 Efactor=10.7 Ffactor=216.6
+Ant-v5          with TD-MPC2     total    n=29 rho=0.8463 p=7.33e-09 slope=0.5071+-0.0755 R2=0.6253 Fspan=2.87 Efactor=25.9 Ffactor=742.3
+Ant-v5          with TD-MPC2     rollout  n=29 rho=0.8834 p=2.21e-10 slope=0.3815+-0.0155 R2=0.9574 Fspan=5.62 Efactor=124.8 Ffactor=421321.5
+Ant-v5          with TD-MPC2     GU       n=29 rho=0.8689 p=9.78e-10 slope=0.3984+-0.0579 R2=0.6369 Fspan=2.53 Efactor=12.7 Ffactor=335.1
+Ant-v5          without TD-MPC2  total    n=24 rho=0.7381 p=3.83e-05 slope=0.4372+-0.1006 R2=0.4618 Fspan=2.32 Efactor=16.9 Ffactor=208.2
+Ant-v5          without TD-MPC2  rollout  n=24 rho=0.7883 p=4.77e-06 slope=0.0287+-0.0374 R2=0.0261 Fspan=1.09 Efactor=1.6 Ffactor=12.4
+Ant-v5          without TD-MPC2  GU       n=24 rho=0.8188 p=1.01e-06 slope=0.3126+-0.0592 R2=0.5593 Fspan=2.27 Efactor=10.6 Ffactor=184.5
+
+per algorithm (total):
+HalfCheetah-v5  sac     n=7 rho=0.9092 slope=0.2717 R2=0.5464 Fspan=1.780
+HalfCheetah-v5  td3     n=8 rho=0.7381 slope=0.2065 R2=0.4682 Fspan=2.191
+HalfCheetah-v5  mbpo    n=7 rho=0.9643 slope=0.1700 R2=0.4664 Fspan=1.088
+HalfCheetah-v5  tdmpc2  n=5 rho=1.0000 slope=0.7127 R2=0.9922 Fspan=0.452
+Ant-v5          sac     n=7 rho=0.9092 slope=0.2837 R2=0.5686 Fspan=1.708
+Ant-v5          td3     n=8 rho=0.7381 slope=0.2103 R2=0.4812 Fspan=2.120
+Ant-v5          mbpo    n=9 rho=0.9167 slope=0.1924 R2=0.4873 Fspan=0.892
+Ant-v5          tdmpc2  n=5 rho=1.0000 slope=0.7132 R2=0.9948 Fspan=0.478
+
+Extreme pair (FLOPs min/max) and energy factors:
+HalfCheetah-v5 Fmin ['td3', 'w256'] Fmax ['tdmpc2', 'horizon5'] F factor 805.2 E factor 24.80
+Ant-v5 Fmin ['td3', 'w256'] Fmax ['tdmpc2', 'horizon5'] F factor 742.3 E factor 25.91
+
+Discordant pairs (more FLOPs, lower energy). Ties in FLOPs (rel. diff < 1e-6) are excluded and counted.
+HalfCheetah-v5  pooled  pairs= 349 discordant= 52 frac=0.1490 ties=2 max E(lowF)/E(highF)=5.762 ('mbpo', 'w512', 'td3', 'b256')
+HalfCheetah-v5  sac     pairs=  19 discordant=  1 frac=0.0526 ties=2 max E(lowF)/E(highF)=1.433 ('sac', 'utd2', 'sac', 'b1024')
+HalfCheetah-v5  td3     pairs=  28 discordant=  5 frac=0.1786 ties=0 max E(lowF)/E(highF)=2.575 ('td3', 'utd4', 'td3', 'b512')
+HalfCheetah-v5  mbpo    pairs=  21 discordant=  1 frac=0.0476 ties=0 max E(lowF)/E(highF)=1.229 ('mbpo', 'utd2', 'mbpo', 'b1024')
+HalfCheetah-v5  tdmpc2  pairs=  10 discordant=  0 frac=0.0000 ties=0 max E(lowF)/E(highF)=0.000 None
+Ant-v5          pooled  pairs= 404 discordant= 60 frac=0.1485 ties=2 max E(lowF)/E(highF)=6.602 ('mbpo', 'w256', 'td3', 'b256')
+Ant-v5          sac     pairs=  19 discordant=  1 frac=0.0526 ties=2 max E(lowF)/E(highF)=1.383 ('sac', 'utd2', 'sac', 'b1024')
+Ant-v5          td3     pairs=  28 discordant=  5 frac=0.1786 ties=0 max E(lowF)/E(highF)=2.522 ('td3', 'utd4', 'td3', 'b512')
+Ant-v5          mbpo    pairs=  36 discordant=  4 frac=0.1111 ties=0 max E(lowF)/E(highF)=1.586 ('mbpo', 'utd4', 'mbpo', 'b1024')
+Ant-v5          tdmpc2  pairs=  10 discordant=  0 frac=0.0000 ties=0 max E(lowF)/E(highF)=0.000 None
+
+Discordant pairs listed (pooled):
+  HalfCheetah-v5 more FLOPs: sac:b1024 (F=3.508e+15, E=82366) < sac:utd2 (F=1.754e+15, E=118024) ratio=1.433
+  HalfCheetah-v5 more FLOPs: sac:b1024 (F=3.508e+15, E=82366) < td3:utd4 (F=9.828e+14, E=107345) ratio=1.303
+  HalfCheetah-v5 more FLOPs: sac:b1024 (F=3.508e+15, E=82366) < mbpo:b512 (F=2.000e+15, E=209101) ratio=2.539
+  HalfCheetah-v5 more FLOPs: sac:b1024 (F=3.508e+15, E=82366) < mbpo:base (F=1.133e+15, E=207395) ratio=2.518
+  HalfCheetah-v5 more FLOPs: sac:b1024 (F=3.508e+15, E=82366) < mbpo:utd2 (F=2.020e+15, E=268851) ratio=3.264
+  HalfCheetah-v5 more FLOPs: sac:b1024 (F=3.508e+15, E=82366) < mbpo:w256 (F=3.067e+14, E=187913) ratio=2.281
+  HalfCheetah-v5 more FLOPs: sac:b1024 (F=3.508e+15, E=82366) < mbpo:w512 (F=4.773e+14, E=192769) ratio=2.340
+  HalfCheetah-v5 more FLOPs: td3:b1024 (F=2.516e+15, E=48068) < sac:b512 (F=1.754e+15, E=73024) ratio=1.519
+  HalfCheetah-v5 more FLOPs: sac:b512 (F=1.754e+15, E=73024) < td3:utd4 (F=9.828e+14, E=107345) ratio=1.470
+  HalfCheetah-v5 more FLOPs: sac:b512 (F=1.754e+15, E=73024) < mbpo:base (F=1.133e+15, E=207395) ratio=2.840
+  HalfCheetah-v5 more FLOPs: sac:b512 (F=1.754e+15, E=73024) < mbpo:w256 (F=3.067e+14, E=187913) ratio=2.573
+  HalfCheetah-v5 more FLOPs: sac:b512 (F=1.754e+15, E=73024) < mbpo:w512 (F=4.773e+14, E=192769) ratio=2.640
+  HalfCheetah-v5 more FLOPs: td3:b1024 (F=2.516e+15, E=48068) < sac:base (F=8.771e+14, E=60911) ratio=1.267
+  HalfCheetah-v5 more FLOPs: td3:b512 (F=1.258e+15, E=41683) < sac:base (F=8.771e+14, E=60911) ratio=1.461
+  HalfCheetah-v5 more FLOPs: sac:base (F=8.771e+14, E=60911) < mbpo:w256 (F=3.067e+14, E=187913) ratio=3.085
+  HalfCheetah-v5 more FLOPs: sac:base (F=8.771e+14, E=60911) < mbpo:w512 (F=4.773e+14, E=192769) ratio=3.165
+  HalfCheetah-v5 more FLOPs: td3:b1024 (F=2.516e+15, E=48068) < sac:utd2 (F=1.754e+15, E=118024) ratio=2.455
+  HalfCheetah-v5 more FLOPs: sac:utd2 (F=1.754e+15, E=118024) < mbpo:base (F=1.133e+15, E=207395) ratio=1.757
+  HalfCheetah-v5 more FLOPs: sac:utd2 (F=1.754e+15, E=118024) < mbpo:w256 (F=3.067e+14, E=187913) ratio=1.592
+  HalfCheetah-v5 more FLOPs: sac:utd2 (F=1.754e+15, E=118024) < mbpo:w512 (F=4.773e+14, E=192769) ratio=1.633
+  HalfCheetah-v5 more FLOPs: mbpo:b1024 (F=3.753e+15, E=218667) < sac:utd4 (F=3.508e+15, E=234959) ratio=1.075
+  HalfCheetah-v5 more FLOPs: sac:utd4 (F=3.508e+15, E=234959) < mbpo:utd2 (F=2.020e+15, E=268851) ratio=1.144
+  HalfCheetah-v5 more FLOPs: td3:b256 (F=6.291e+14, E=33454) < sac:w256 (F=5.817e+13, E=47408) ratio=1.417
+  HalfCheetah-v5 more FLOPs: td3:b512 (F=1.258e+15, E=41683) < sac:w256 (F=5.817e+13, E=47408) ratio=1.137
+  HalfCheetah-v5 more FLOPs: td3:base (F=2.459e+14, E=28111) < sac:w256 (F=5.817e+13, E=47408) ratio=1.686
+  HalfCheetah-v5 more FLOPs: td3:w512 (F=6.259e+13, E=25370) < sac:w256 (F=5.817e+13, E=47408) ratio=1.869
+  HalfCheetah-v5 more FLOPs: td3:b1024 (F=2.516e+15, E=48068) < sac:w512 (F=2.237e+14, E=49554) ratio=1.031
+  HalfCheetah-v5 more FLOPs: td3:b256 (F=6.291e+14, E=33454) < sac:w512 (F=2.237e+14, E=49554) ratio=1.481
+  HalfCheetah-v5 more FLOPs: td3:b512 (F=1.258e+15, E=41683) < sac:w512 (F=2.237e+14, E=49554) ratio=1.189
+  HalfCheetah-v5 more FLOPs: td3:base (F=2.459e+14, E=28111) < sac:w512 (F=2.237e+14, E=49554) ratio=1.763
+  HalfCheetah-v5 more FLOPs: td3:b1024 (F=2.516e+15, E=48068) < td3:utd2 (F=4.915e+14, E=55361) ratio=1.152
+  HalfCheetah-v5 more FLOPs: td3:b1024 (F=2.516e+15, E=48068) < td3:utd4 (F=9.828e+14, E=107345) ratio=2.233
+  HalfCheetah-v5 more FLOPs: td3:b1024 (F=2.516e+15, E=48068) < mbpo:b512 (F=2.000e+15, E=209101) ratio=4.350
+  HalfCheetah-v5 more FLOPs: td3:b1024 (F=2.516e+15, E=48068) < mbpo:base (F=1.133e+15, E=207395) ratio=4.315
+  HalfCheetah-v5 more FLOPs: td3:b1024 (F=2.516e+15, E=48068) < mbpo:utd2 (F=2.020e+15, E=268851) ratio=5.593
+  HalfCheetah-v5 more FLOPs: td3:b1024 (F=2.516e+15, E=48068) < mbpo:w256 (F=3.067e+14, E=187913) ratio=3.909
+  HalfCheetah-v5 more FLOPs: td3:b1024 (F=2.516e+15, E=48068) < mbpo:w512 (F=4.773e+14, E=192769) ratio=4.010
+  HalfCheetah-v5 more FLOPs: td3:b256 (F=6.291e+14, E=33454) < td3:utd2 (F=4.915e+14, E=55361) ratio=1.655
+  HalfCheetah-v5 more FLOPs: td3:b256 (F=6.291e+14, E=33454) < mbpo:w256 (F=3.067e+14, E=187913) ratio=5.617
+  HalfCheetah-v5 more FLOPs: td3:b256 (F=6.291e+14, E=33454) < mbpo:w512 (F=4.773e+14, E=192769) ratio=5.762
+  HalfCheetah-v5 more FLOPs: td3:b512 (F=1.258e+15, E=41683) < td3:utd2 (F=4.915e+14, E=55361) ratio=1.328
+  HalfCheetah-v5 more FLOPs: td3:b512 (F=1.258e+15, E=41683) < td3:utd4 (F=9.828e+14, E=107345) ratio=2.575
+  HalfCheetah-v5 more FLOPs: td3:b512 (F=1.258e+15, E=41683) < mbpo:base (F=1.133e+15, E=207395) ratio=4.975
+  HalfCheetah-v5 more FLOPs: td3:b512 (F=1.258e+15, E=41683) < mbpo:w256 (F=3.067e+14, E=187913) ratio=4.508
+  HalfCheetah-v5 more FLOPs: td3:b512 (F=1.258e+15, E=41683) < mbpo:w512 (F=4.773e+14, E=192769) ratio=4.625
+  HalfCheetah-v5 more FLOPs: td3:utd2 (F=4.915e+14, E=55361) < mbpo:w256 (F=3.067e+14, E=187913) ratio=3.394
+  HalfCheetah-v5 more FLOPs: td3:utd2 (F=4.915e+14, E=55361) < mbpo:w512 (F=4.773e+14, E=192769) ratio=3.482
+  HalfCheetah-v5 more FLOPs: td3:utd4 (F=9.828e+14, E=107345) < mbpo:w256 (F=3.067e+14, E=187913) ratio=1.751
+  HalfCheetah-v5 more FLOPs: td3:utd4 (F=9.828e+14, E=107345) < mbpo:w512 (F=4.773e+14, E=192769) ratio=1.796
+  HalfCheetah-v5 more FLOPs: mbpo:b1024 (F=3.753e+15, E=218667) < mbpo:utd2 (F=2.020e+15, E=268851) ratio=1.229
+  HalfCheetah-v5 more FLOPs: tdmpc2:horizon1 (F=4.615e+15, E=280686) < mbpo:utd4 (F=3.758e+15, E=373606) ratio=1.331
+  HalfCheetah-v5 more FLOPs: tdmpc2:numq3 (F=6.876e+15, E=358787) < mbpo:utd4 (F=3.758e+15, E=373606) ratio=1.041
+  Ant-v5 more FLOPs: sac:b1024 (F=3.755e+15, E=89057) < sac:utd2 (F=1.878e+15, E=123182) ratio=1.383
+  Ant-v5 more FLOPs: sac:b1024 (F=3.755e+15, E=89057) < td3:utd4 (F=1.049e+15, E=111900) ratio=1.256
+  Ant-v5 more FLOPs: sac:b1024 (F=3.755e+15, E=89057) < mbpo:b512 (F=2.339e+15, E=247393) ratio=2.778
+  Ant-v5 more FLOPs: sac:b1024 (F=3.755e+15, E=89057) < mbpo:base (F=1.416e+15, E=253138) ratio=2.842
+  Ant-v5 more FLOPs: sac:b1024 (F=3.755e+15, E=89057) < mbpo:rollout1 (F=1.372e+15, E=240749) ratio=2.703
+  Ant-v5 more FLOPs: sac:b1024 (F=3.755e+15, E=89057) < mbpo:rollout15 (F=1.406e+15, E=245862) ratio=2.761
+  Ant-v5 more FLOPs: sac:b1024 (F=3.755e+15, E=89057) < mbpo:utd2 (F=2.380e+15, E=316797) ratio=3.557
+  Ant-v5 more FLOPs: sac:b1024 (F=3.755e+15, E=89057) < mbpo:w256 (F=5.436e+14, E=234491) ratio=2.633
+  Ant-v5 more FLOPs: sac:b1024 (F=3.755e+15, E=89057) < mbpo:w512 (F=7.171e+14, E=231638) ratio=2.601
+  Ant-v5 more FLOPs: td3:b1024 (F=2.686e+15, E=53235) < sac:b512 (F=1.878e+15, E=76499) ratio=1.437
+  Ant-v5 more FLOPs: sac:b512 (F=1.878e+15, E=76499) < td3:utd4 (F=1.049e+15, E=111900) ratio=1.463
+  Ant-v5 more FLOPs: sac:b512 (F=1.878e+15, E=76499) < mbpo:base (F=1.416e+15, E=253138) ratio=3.309
+  Ant-v5 more FLOPs: sac:b512 (F=1.878e+15, E=76499) < mbpo:rollout1 (F=1.372e+15, E=240749) ratio=3.147
+  Ant-v5 more FLOPs: sac:b512 (F=1.878e+15, E=76499) < mbpo:rollout15 (F=1.406e+15, E=245862) ratio=3.214
+  Ant-v5 more FLOPs: sac:b512 (F=1.878e+15, E=76499) < mbpo:w256 (F=5.436e+14, E=234491) ratio=3.065
+  Ant-v5 more FLOPs: sac:b512 (F=1.878e+15, E=76499) < mbpo:w512 (F=7.171e+14, E=231638) ratio=3.028
+  Ant-v5 more FLOPs: td3:b1024 (F=2.686e+15, E=53235) < sac:base (F=9.390e+14, E=64383) ratio=1.209
+  Ant-v5 more FLOPs: td3:b512 (F=1.343e+15, E=44361) < sac:base (F=9.390e+14, E=64383) ratio=1.451
+  Ant-v5 more FLOPs: sac:base (F=9.390e+14, E=64383) < mbpo:w256 (F=5.436e+14, E=234491) ratio=3.642
+  Ant-v5 more FLOPs: sac:base (F=9.390e+14, E=64383) < mbpo:w512 (F=7.171e+14, E=231638) ratio=3.598
+  Ant-v5 more FLOPs: td3:b1024 (F=2.686e+15, E=53235) < sac:utd2 (F=1.878e+15, E=123182) ratio=2.314
+  Ant-v5 more FLOPs: sac:utd2 (F=1.878e+15, E=123182) < mbpo:base (F=1.416e+15, E=253138) ratio=2.055
+  Ant-v5 more FLOPs: sac:utd2 (F=1.878e+15, E=123182) < mbpo:rollout1 (F=1.372e+15, E=240749) ratio=1.954
+  Ant-v5 more FLOPs: sac:utd2 (F=1.878e+15, E=123182) < mbpo:rollout15 (F=1.406e+15, E=245862) ratio=1.996
+  Ant-v5 more FLOPs: sac:utd2 (F=1.878e+15, E=123182) < mbpo:w256 (F=5.436e+14, E=234491) ratio=1.904
+  Ant-v5 more FLOPs: sac:utd2 (F=1.878e+15, E=123182) < mbpo:w512 (F=7.171e+14, E=231638) ratio=1.880
+  Ant-v5 more FLOPs: sac:utd4 (F=3.755e+15, E=241327) < mbpo:b512 (F=2.339e+15, E=247393) ratio=1.025
+  Ant-v5 more FLOPs: sac:utd4 (F=3.755e+15, E=241327) < mbpo:base (F=1.416e+15, E=253138) ratio=1.049
+  Ant-v5 more FLOPs: sac:utd4 (F=3.755e+15, E=241327) < mbpo:rollout15 (F=1.406e+15, E=245862) ratio=1.019
+  Ant-v5 more FLOPs: sac:utd4 (F=3.755e+15, E=241327) < mbpo:utd2 (F=2.380e+15, E=316797) ratio=1.313
+  Ant-v5 more FLOPs: td3:b256 (F=6.716e+14, E=35521) < sac:w256 (F=7.364e+13, E=49985) ratio=1.407
+  Ant-v5 more FLOPs: td3:b512 (F=1.343e+15, E=44361) < sac:w256 (F=7.364e+13, E=49985) ratio=1.127
+  Ant-v5 more FLOPs: td3:base (F=2.625e+14, E=30520) < sac:w256 (F=7.364e+13, E=49985) ratio=1.638
+  Ant-v5 more FLOPs: td3:b256 (F=6.716e+14, E=35521) < sac:w512 (F=2.547e+14, E=52200) ratio=1.470
+  Ant-v5 more FLOPs: td3:b512 (F=1.343e+15, E=44361) < sac:w512 (F=2.547e+14, E=52200) ratio=1.177
+  Ant-v5 more FLOPs: td3:base (F=2.625e+14, E=30520) < sac:w512 (F=2.547e+14, E=52200) ratio=1.710
+  Ant-v5 more FLOPs: td3:b1024 (F=2.686e+15, E=53235) < td3:utd2 (F=5.248e+14, E=57543) ratio=1.081
+  Ant-v5 more FLOPs: td3:b1024 (F=2.686e+15, E=53235) < td3:utd4 (F=1.049e+15, E=111900) ratio=2.102
+  Ant-v5 more FLOPs: td3:b1024 (F=2.686e+15, E=53235) < mbpo:b512 (F=2.339e+15, E=247393) ratio=4.647
+  Ant-v5 more FLOPs: td3:b1024 (F=2.686e+15, E=53235) < mbpo:base (F=1.416e+15, E=253138) ratio=4.755
+  Ant-v5 more FLOPs: td3:b1024 (F=2.686e+15, E=53235) < mbpo:rollout1 (F=1.372e+15, E=240749) ratio=4.522
+  Ant-v5 more FLOPs: td3:b1024 (F=2.686e+15, E=53235) < mbpo:rollout15 (F=1.406e+15, E=245862) ratio=4.618
+  Ant-v5 more FLOPs: td3:b1024 (F=2.686e+15, E=53235) < mbpo:utd2 (F=2.380e+15, E=316797) ratio=5.951
+  Ant-v5 more FLOPs: td3:b1024 (F=2.686e+15, E=53235) < mbpo:w256 (F=5.436e+14, E=234491) ratio=4.405
+  Ant-v5 more FLOPs: td3:b1024 (F=2.686e+15, E=53235) < mbpo:w512 (F=7.171e+14, E=231638) ratio=4.351
+  Ant-v5 more FLOPs: td3:b256 (F=6.716e+14, E=35521) < td3:utd2 (F=5.248e+14, E=57543) ratio=1.620
+  Ant-v5 more FLOPs: td3:b256 (F=6.716e+14, E=35521) < mbpo:w256 (F=5.436e+14, E=234491) ratio=6.602
+  Ant-v5 more FLOPs: td3:b512 (F=1.343e+15, E=44361) < td3:utd2 (F=5.248e+14, E=57543) ratio=1.297
+  Ant-v5 more FLOPs: td3:b512 (F=1.343e+15, E=44361) < td3:utd4 (F=1.049e+15, E=111900) ratio=2.522
+  Ant-v5 more FLOPs: td3:b512 (F=1.343e+15, E=44361) < mbpo:w256 (F=5.436e+14, E=234491) ratio=5.286
+  Ant-v5 more FLOPs: td3:b512 (F=1.343e+15, E=44361) < mbpo:w512 (F=7.171e+14, E=231638) ratio=5.222
+  Ant-v5 more FLOPs: td3:utd4 (F=1.049e+15, E=111900) < mbpo:w256 (F=5.436e+14, E=234491) ratio=2.096
+  Ant-v5 more FLOPs: td3:utd4 (F=1.049e+15, E=111900) < mbpo:w512 (F=7.171e+14, E=231638) ratio=2.070
+  Ant-v5 more FLOPs: mbpo:b1024 (F=4.240e+15, E=267695) < mbpo:utd2 (F=2.380e+15, E=316797) ratio=1.183
+  Ant-v5 more FLOPs: mbpo:b1024 (F=4.240e+15, E=267695) < mbpo:utd4 (F=4.238e+15, E=424454) ratio=1.586
+  Ant-v5 more FLOPs: mbpo:b512 (F=2.339e+15, E=247393) < mbpo:base (F=1.416e+15, E=253138) ratio=1.023
+  Ant-v5 more FLOPs: tdmpc2:horizon1 (F=5.034e+15, E=303231) < mbpo:utd2 (F=2.380e+15, E=316797) ratio=1.045
+  Ant-v5 more FLOPs: tdmpc2:horizon1 (F=5.034e+15, E=303231) < mbpo:utd4 (F=4.238e+15, E=424454) ratio=1.400
+  Ant-v5 more FLOPs: tdmpc2:numq3 (F=8.116e+15, E=411357) < mbpo:utd4 (F=4.238e+15, E=424454) ratio=1.032
+  Ant-v5 more FLOPs: mbpo:w512 (F=7.171e+14, E=231638) < mbpo:w256 (F=5.436e+14, E=234491) ratio=1.012
+
+====================================================================================================
+2. Rollout groups: FLOPs and energy of the rollout segment per algorithm
+====================================================================================================
+HalfCheetah-v5  sac     rollout F 1.459e+10..2.157e+11  E 2278..2748 J
+HalfCheetah-v5  td3     rollout F 1.428e+10..2.144e+11  E 1240..1752 J
+HalfCheetah-v5  mbpo    rollout F 1.459e+10..2.157e+11  E 2313..2428 J
+HalfCheetah-v5  tdmpc2  rollout F 2.948e+15..6.337e+15  E 135177..288267 J
+Ant-v5          sac     rollout F 1.930e+10..2.345e+11  E 4101..4541 J
+Ant-v5          td3     rollout F 1.889e+10..2.329e+11  E 2837..3391 J
+Ant-v5          mbpo    rollout F 1.930e+10..2.345e+11  E 4074..4292 J
+Ant-v5          tdmpc2  rollout F 3.276e+15..7.960e+15  E 149441..354226 J
+
+====================================================================================================
+3. Baseline-calibrated estimate (SAC): J/FLOP(base) / J/FLOP(config)
+====================================================================================================
+HalfCheetah-v5 {'utd2': np.float64(1.032), 'utd4': np.float64(1.0368), 'w256': np.float64(0.0852), 'w512': np.float64(0.3136), 'b512': np.float64(1.668), 'b1024': np.float64(2.9575)}
+Ant-v5 {'utd2': np.float64(1.0452), 'utd4': np.float64(1.0669), 'w256': np.float64(0.101), 'w512': np.float64(0.3345), 'b512': np.float64(1.683), 'b1024': np.float64(2.8912)}
+
+====================================================================================================
+4. Fits E = a + bF along each sweep (configuration means), intercept share of baseline energy
+====================================================================================================
+HalfCheetah-v5  sac     UTD         n=3 a=    2.43 kJ b=  66.236 pJ/F R2=1.0000 rse=0.72 kJ  a/E_base=  4.0%  J/F_base/b=1.05
+HalfCheetah-v5  sac     Width       n=3 a=   46.16 kJ b=  16.742 pJ/F R2=0.9981 rse=0.45 kJ  a/E_base= 75.8%  J/F_base/b=4.15
+HalfCheetah-v5  sac     Batch size  n=3 a=   56.24 kJ b=   7.752 pJ/F R2=0.9316 rse=3.98 kJ  a/E_base= 92.3%  J/F_base/b=8.96
+HalfCheetah-v5  td3     UTD         n=3 a=    2.10 kJ b= 107.268 pJ/F R2=0.9999 rse=0.67 kJ  a/E_base=  7.5%  J/F_base/b=1.07
+HalfCheetah-v5  td3     Width       n=3 a=   23.33 kJ b=  20.072 pJ/F R2=0.9210 rse=1.01 kJ  a/E_base= 83.0%  J/F_base/b=5.70
+HalfCheetah-v5  td3     Batch size  n=4 a=   27.85 kJ b=   8.588 pJ/F R2=0.9376 rse=2.70 kJ  a/E_base= 99.1%  J/F_base/b=13.31
+HalfCheetah-v5  mbpo    UTD         n=3 a=  138.39 kJ b=  62.898 pJ/F R2=0.9987 rse=4.24 kJ  a/E_base= 66.7%  J/F_base/b=2.91
+HalfCheetah-v5  mbpo    Width       n=3 a=  181.18 kJ b=  23.227 pJ/F R2=0.9980 rse=0.65 kJ  a/E_base= 87.4%  J/F_base/b=7.88
+HalfCheetah-v5  mbpo    Batch size  n=3 a=  201.46 kJ b=   4.469 pJ/F R2=0.9644 rse=1.62 kJ  a/E_base= 97.1%  J/F_base/b=40.96
+HalfCheetah-v5  tdmpc2  num_q       n=3 a=   65.49 kJ b=  42.870 pJ/F R2=0.9991 rse=3.60 kJ  a/E_base= 14.6%  J/F_base/b=1.18
+HalfCheetah-v5  tdmpc2  Horizon     n=3 a=  128.77 kJ b=  34.445 pJ/F R2=0.9930 rse=17.23 kJ  a/E_base= 28.8%  J/F_base/b=1.47
+Ant-v5          sac     UTD         n=3 a=    5.30 kJ b=  62.844 pJ/F R2=1.0000 rse=0.15 kJ  a/E_base=  8.2%  J/F_base/b=1.09
+Ant-v5          sac     Width       n=3 a=   48.36 kJ b=  16.959 pJ/F R2=0.9968 rse=0.62 kJ  a/E_base= 75.1%  J/F_base/b=4.04
+Ant-v5          sac     Batch size  n=3 a=   58.10 kJ b=   8.466 pJ/F R2=0.9680 rse=3.12 kJ  a/E_base= 90.2%  J/F_base/b=8.10
+Ant-v5          td3     UTD         n=3 a=    3.32 kJ b= 103.460 pJ/F R2=1.0000 rse=0.08 kJ  a/E_base= 10.9%  J/F_base/b=1.12
+Ant-v5          td3     Width       n=3 a=   25.27 kJ b=  20.593 pJ/F R2=0.9374 rse=0.96 kJ  a/E_base= 82.8%  J/F_base/b=5.65
+Ant-v5          td3     Batch size  n=4 a=   29.38 kJ b=   9.290 pJ/F R2=0.9695 rse=2.14 kJ  a/E_base= 96.3%  J/F_base/b=12.52
+Ant-v5          mbpo    UTD         n=3 a=  169.90 kJ b=  60.331 pJ/F R2=0.9989 rse=4.14 kJ  a/E_base= 67.1%  J/F_base/b=2.96
+Ant-v5          mbpo    Width       n=3 a=  218.28 kJ b=  24.068 pJ/F R2=0.9061 rse=5.06 kJ  a/E_base= 86.2%  J/F_base/b=7.43
+Ant-v5          mbpo    Batch size  n=3 a=  240.14 kJ b=   5.981 pJ/F R2=0.6772 rse=8.41 kJ  a/E_base= 94.9%  J/F_base/b=29.89
+Ant-v5          tdmpc2  num_q       n=3 a=   68.30 kJ b=  42.230 pJ/F R2=1.0000 rse=0.77 kJ  a/E_base= 13.8%  J/F_base/b=1.16
+Ant-v5          tdmpc2  Horizon     n=3 a=  135.46 kJ b=  34.414 pJ/F R2=0.9970 rse=13.42 kJ  a/E_base= 27.5%  J/F_base/b=1.42
+
+Max/min ratio of the three slopes per algorithm/env, and baseline J/FLOP over slope (E-5.7):
+HalfCheetah-v5  sac   slopes pJ: UTD=66.24, Width=16.74, Batch size=7.75 | Jbase/slope: UTD=1.05, Width=4.15, Batch size=8.96 | UTD/width=3.96 UTD/batch=8.54 max/min=8.54
+HalfCheetah-v5  td3   slopes pJ: UTD=107.27, Width=20.07, Batch size=8.59 | Jbase/slope: UTD=1.07, Width=5.70, Batch size=13.31 | UTD/width=5.34 UTD/batch=12.49 max/min=12.49
+HalfCheetah-v5  mbpo  slopes pJ: UTD=62.90, Width=23.23, Batch size=4.47 | Jbase/slope: UTD=2.91, Width=7.88, Batch size=40.96 | UTD/width=2.71 UTD/batch=14.07 max/min=14.07
+Ant-v5          sac   slopes pJ: UTD=62.84, Width=16.96, Batch size=8.47 | Jbase/slope: UTD=1.09, Width=4.04, Batch size=8.10 | UTD/width=3.71 UTD/batch=7.42 max/min=7.42
+Ant-v5          td3   slopes pJ: UTD=103.46, Width=20.59, Batch size=9.29 | Jbase/slope: UTD=1.12, Width=5.65, Batch size=12.52 | UTD/width=5.02 UTD/batch=11.14 max/min=11.14
+Ant-v5          mbpo  slopes pJ: UTD=60.33, Width=24.07, Batch size=5.98 | Jbase/slope: UTD=2.96, Width=7.43, Batch size=29.89 | UTD/width=2.51 UTD/batch=10.09 max/min=10.09
+
+====================================================================================================
+5. Fits quoted in the prose of 5.2 that are not in tab:ec-fits
+====================================================================================================
+5a GU fits (SAC width; MBPO UTD/width/batch); fit of dynamics_model_update (MBPO), rollout fits
+GU    HalfCheetah-v5  sac     UTD         a=    -0.03 kJ b=   66.214 pJ/F R2= 1.0000 rse=   0.72 kJ a/E_base=  -0.1%
+GU    HalfCheetah-v5  sac     Width       a=    43.89 kJ b=   16.483 pJ/F R2= 0.9980 rse=   0.45 kJ a/E_base=  75.1%
+GU    HalfCheetah-v5  sac     Batch size  a=    53.79 kJ b=    7.661 pJ/F R2= 0.9319 rse=   3.92 kJ a/E_base=  92.1%
+GU    HalfCheetah-v5  td3     UTD         a=     0.68 kJ b=  107.319 pJ/F R2= 0.9999 rse=   0.65 kJ a/E_base=   2.6%
+GU    HalfCheetah-v5  td3     Width       a=    22.09 kJ b=   19.388 pJ/F R2= 0.9188 rse=   0.99 kJ a/E_base=  82.7%
+GU    HalfCheetah-v5  td3     Batch size  a=    26.43 kJ b=    8.443 pJ/F R2= 0.9386 rse=   2.63 kJ a/E_base=  99.0%
+GU    HalfCheetah-v5  mbpo    UTD         a=     0.95 kJ b=   65.821 pJ/F R2= 1.0000 rse=   0.07 kJ a/E_base=   1.6%
+GU    HalfCheetah-v5  mbpo    Width       a=    43.23 kJ b=   17.551 pJ/F R2= 0.9980 rse=   0.48 kJ a/E_base=  73.7%
+GU    HalfCheetah-v5  mbpo    Batch size  a=    54.35 kJ b=    7.016 pJ/F R2= 0.9392 rse=   3.38 kJ a/E_base=  92.6%
+GU    Ant-v5          sac     UTD         a=     0.97 kJ b=   62.857 pJ/F R2= 1.0000 rse=   0.14 kJ a/E_base=   1.6%
+GU    Ant-v5          sac     Width       a=    44.27 kJ b=   16.698 pJ/F R2= 0.9967 rse=   0.62 kJ a/E_base=  73.7%
+GU    Ant-v5          sac     Batch size  a=    53.86 kJ b=    8.389 pJ/F R2= 0.9669 rse=   3.15 kJ a/E_base=  89.7%
+GU    Ant-v5          td3     UTD         a=     0.26 kJ b=  103.526 pJ/F R2= 1.0000 rse=   0.07 kJ a/E_base=   1.0%
+GU    Ant-v5          td3     Width       a=    22.45 kJ b=   19.660 pJ/F R2= 0.9329 rse=   0.95 kJ a/E_base=  81.8%
+GU    Ant-v5          td3     Batch size  a=    26.35 kJ b=    9.149 pJ/F R2= 0.9701 rse=   2.09 kJ a/E_base=  96.0%
+GU    Ant-v5          mbpo    UTD         a=     1.17 kJ b=   62.516 pJ/F R2= 1.0000 rse=   0.20 kJ a/E_base=   2.0%
+GU    Ant-v5          mbpo    Width       a=    43.22 kJ b=   17.519 pJ/F R2= 0.9982 rse=   0.48 kJ a/E_base=  72.3%
+GU    Ant-v5          mbpo    Batch size  a=    53.31 kJ b=    8.550 pJ/F R2= 0.9716 rse=   2.97 kJ a/E_base=  89.2%
+dyn   HalfCheetah-v5  mbpo    UTD         a=   -15.64 kJ b=  634.644 pJ/F R2= 0.8928 rse=   2.51 kJ a/E_base= -10.7%
+dyn   HalfCheetah-v5  mbpo    Width       a=   -66.70 kJ b=  841.678 pJ/F R2= 0.8411 rse=   1.46 kJ a/E_base= -45.6%
+dyn   HalfCheetah-v5  mbpo    Batch size  a=   -66.92 kJ b=  846.274 pJ/F R2= 0.9853 rse=   0.84 kJ a/E_base= -45.8%
+dyn   Ant-v5          mbpo    UTD         a=    79.32 kJ b=  246.772 pJ/F R2= 0.4658 rse=   4.87 kJ a/E_base=  42.1%
+dyn   Ant-v5          mbpo    Width       a=   165.27 kJ b=   43.747 pJ/F R2= 0.0053 rse=   6.26 kJ a/E_base=  87.7%
+dyn   Ant-v5          mbpo    Batch size  a=     2.32 kJ b=  412.716 pJ/F R2= 0.3304 rse=  10.20 kJ a/E_base=   1.2%
+roll  HalfCheetah-v5  sac     Width       a=     2.26 kJ b= 1073.164 pJ/F R2= 0.9996 rse=   0.00 kJ a/E_base=  90.7%
+roll  HalfCheetah-v5  td3     Width       a=     1.24 kJ b=  804.797 pJ/F R2= 0.9705 rse=   0.02 kJ a/E_base=  88.0%
+roll  HalfCheetah-v5  mbpo    Width       a=     2.30 kJ b=  575.646 pJ/F R2= 1.0000 rse=   0.00 kJ a/E_base=  94.9%
+roll  HalfCheetah-v5  tdmpc2  num_q       a=    16.25 kJ b=   42.306 pJ/F R2= 0.9989 rse=   1.40 kJ a/E_base=   7.6%
+roll  HalfCheetah-v5  tdmpc2  Horizon     a=     2.69 kJ b=   45.176 pJ/F R2= 0.9998 rse=   1.71 kJ a/E_base=   1.3%
+roll  Ant-v5          sac     Width       a=     4.08 kJ b= 1067.918 pJ/F R2= 0.9996 rse=   0.00 kJ a/E_base=  94.2%
+roll  Ant-v5          td3     Width       a=     2.82 kJ b= 1076.439 pJ/F R2= 0.9975 rse=   0.01 kJ a/E_base=  91.9%
+roll  Ant-v5          mbpo    Width       a=     4.05 kJ b= 1034.387 pJ/F R2= 0.9972 rse=   0.01 kJ a/E_base=  94.3%
+roll  Ant-v5          tdmpc2  num_q       a=    24.75 kJ b=   40.597 pJ/F R2= 0.9973 rse=   2.14 kJ a/E_base=   9.7%
+roll  Ant-v5          tdmpc2  Horizon     a=     7.10 kJ b=   43.724 pJ/F R2= 0.9998 rse=   2.24 kJ a/E_base=   2.8%
+
+5b Per-seed versus mean fits for MBPO (slope difference), from per_run_segments_5_2.csv
+  HalfCheetah-v5  UTD         total mean-fit   62.898 per-run   62.957 rel.diff    0.1%
+  HalfCheetah-v5  UTD         GU    mean-fit   65.821 per-run   65.821 rel.diff    0.0%
+  HalfCheetah-v5  UTD         dyn   mean-fit  634.644 per-run  529.285 rel.diff   16.6%
+  HalfCheetah-v5  Width       total mean-fit   23.227 per-run   23.608 rel.diff    1.6%
+  HalfCheetah-v5  Width       GU    mean-fit   17.551 per-run   17.551 rel.diff    0.0%
+  HalfCheetah-v5  Width       dyn   mean-fit  841.678 per-run  748.064 rel.diff   11.1%
+  HalfCheetah-v5  Width       roll  mean-fit  575.646 per-run  575.646 rel.diff    0.0%
+  HalfCheetah-v5  Batch size  total mean-fit    4.469 per-run    4.499 rel.diff    0.7%
+  HalfCheetah-v5  Batch size  GU    mean-fit    7.016 per-run    7.016 rel.diff    0.0%
+  HalfCheetah-v5  Batch size  dyn   mean-fit  846.274 per-run  702.628 rel.diff   17.0%
+  Ant-v5          UTD         total mean-fit   60.331 per-run   60.693 rel.diff    0.6%
+  Ant-v5          UTD         GU    mean-fit   62.516 per-run   62.516 rel.diff    0.0%
+  Ant-v5          UTD         dyn   mean-fit  246.772 per-run  435.971 rel.diff   76.7%
+  Ant-v5          Width       total mean-fit   24.068 per-run   27.468 rel.diff   14.1%
+  Ant-v5          Width       GU    mean-fit   17.519 per-run   17.519 rel.diff    0.0%
+  Ant-v5          Width       dyn   mean-fit   43.747 per-run  414.324 rel.diff  847.1%
+  Ant-v5          Width       roll  mean-fit 1034.387 per-run 1034.387 rel.diff    0.0%
+  Ant-v5          Batch size  total mean-fit    5.981 per-run    6.462 rel.diff    8.0%
+  Ant-v5          Batch size  GU    mean-fit    8.550 per-run    8.550 rel.diff    0.0%
+  Ant-v5          Batch size  dyn   mean-fit  412.716 per-run  416.768 rel.diff    1.0%
+  max relative slope difference: 847.1% ('Ant-v5', 'Width', 'dyn')
+
+5c Adjacent-value marginal costs (total), pairs with |dF| < 1% of baseline FLOPs dropped
+  HalfCheetah-v5  sac     UTD            base->utd2    dE/dF=   65.133 pJ  ok
+  HalfCheetah-v5  sac     UTD            utd2->utd4    dE/dF=   66.677 pJ  ok
+  HalfCheetah-v5  sac     Width          w256->w512    dE/dF=   12.961 pJ  ok
+  HalfCheetah-v5  sac     Width          w512->base    dE/dF=   17.383 pJ  ok
+  HalfCheetah-v5  sac     Batch size     base->b512    dE/dF=   13.814 pJ  ok
+  HalfCheetah-v5  sac     Batch size     b512->b1024   dE/dF=    5.327 pJ  ok
+  HalfCheetah-v5  td3     UTD            base->utd2    dE/dF=  110.925 pJ  ok
+  HalfCheetah-v5  td3     UTD            utd2->utd4    dE/dF=  105.806 pJ  ok
+  HalfCheetah-v5  td3     Width          w256->w512    dE/dF=   50.294 pJ  ok
+  HalfCheetah-v5  td3     Width          w512->base    dE/dF=   14.959 pJ  ok
+  HalfCheetah-v5  td3     Batch size     base->b256    dE/dF=   13.940 pJ  ok
+  HalfCheetah-v5  td3     Batch size     b256->b512    dE/dF=   13.086 pJ  ok
+  HalfCheetah-v5  td3     Batch size     b512->b1024   dE/dF=    5.077 pJ  ok
+  HalfCheetah-v5  mbpo    UTD            base->utd2    dE/dF=   69.267 pJ  ok
+  HalfCheetah-v5  mbpo    UTD            utd2->utd4    dE/dF=   60.280 pJ  ok
+  HalfCheetah-v5  mbpo    Width          w256->w512    dE/dF=   28.478 pJ  ok
+  HalfCheetah-v5  mbpo    Width          w512->base    dE/dF=   22.309 pJ  ok
+  HalfCheetah-v5  mbpo    Batch size     base->b512    dE/dF=    1.969 pJ  ok
+  HalfCheetah-v5  mbpo    Batch size     b512->b1024   dE/dF=    5.456 pJ  ok
+  HalfCheetah-v5  tdmpc2  num_q         numq3->base    dE/dF=   45.124 pJ  ok
+  HalfCheetah-v5  tdmpc2  num_q          base->numq7   dE/dF=   40.615 pJ  ok
+  HalfCheetah-v5  tdmpc2  Horizon     horizon1->base    dE/dF=   39.448 pJ  ok
+  HalfCheetah-v5  tdmpc2  Horizon        base->horizon5 dE/dF=   29.443 pJ  ok
+  Ant-v5          sac     UTD            base->utd2    dE/dF=   62.637 pJ  ok
+  Ant-v5          sac     UTD            utd2->utd4    dE/dF=   62.927 pJ  ok
+  Ant-v5          sac     Width          w256->w512    dE/dF=   12.232 pJ  ok
+  Ant-v5          sac     Width          w512->base    dE/dF=   17.804 pJ  ok
+  Ant-v5          sac     Batch size     base->b512    dE/dF=   12.907 pJ  ok
+  Ant-v5          sac     Batch size     b512->b1024   dE/dF=    6.689 pJ  ok
+  Ant-v5          td3     UTD            base->utd2    dE/dF=  103.035 pJ  ok
+  Ant-v5          td3     UTD            utd2->utd4    dE/dF=  103.629 pJ  ok
+  Ant-v5          td3     Width          w256->w512    dE/dF=   46.950 pJ  ok
+  Ant-v5          td3     Width          w512->base    dE/dF=   15.901 pJ  ok
+  Ant-v5          td3     Batch size     base->b256    dE/dF=   12.223 pJ  ok
+  Ant-v5          td3     Batch size     b256->b512    dE/dF=   13.167 pJ  ok
+  Ant-v5          td3     Batch size     b512->b1024   dE/dF=    6.608 pJ  ok
+  Ant-v5          mbpo    UTD            base->utd2    dE/dF=   66.061 pJ  ok
+  Ant-v5          mbpo    UTD            utd2->utd4    dE/dF=   57.928 pJ  ok
+  Ant-v5          mbpo    Width          w256->w512    dE/dF=  -16.447 pJ  ok
+  Ant-v5          mbpo    Width          w512->base    dE/dF=   30.759 pJ  ok
+  Ant-v5          mbpo    Batch size     base->b512    dE/dF=   -6.226 pJ  ok
+  Ant-v5          mbpo    Batch size     b512->b1024   dE/dF=   10.679 pJ  ok
+  Ant-v5          tdmpc2  num_q         numq3->base    dE/dF=   41.747 pJ  ok
+  Ant-v5          tdmpc2  num_q          base->numq7   dE/dF=   42.714 pJ  ok
+  Ant-v5          tdmpc2  Horizon     horizon1->base    dE/dF=   37.674 pJ  ok
+  Ant-v5          tdmpc2  Horizon        base->horizon5 dE/dF=   31.154 pJ  ok
+
+====================================================================================================
+6. Ranges per algorithm and environment (energy, J/FLOP), TD-MPC2 overlap
+====================================================================================================
+HalfCheetah-v5  sac     n=7 E 47408(w256)..234959(utd4) ratio 4.956 | J/F 23.48(b1024)..814.97(w256) ratio 34.707
+HalfCheetah-v5  td3     n=8 E 23037(w256)..107345(utd4) ratio 4.660 | J/F 19.11(b1024)..1421.26(w256) ratio 74.384
+HalfCheetah-v5  mbpo    n=7 E 187913(w256)..373606(utd4) ratio 1.988 | J/F 58.26(b1024)..612.60(w256) ratio 10.515
+HalfCheetah-v5  tdmpc2  n=5 E 280686(horizon1)..571281(horizon5) ratio 2.035 | J/F 43.77(horizon5)..60.83(horizon1) ratio 1.390
+   overlap sac vs tdmpc2 (HalfCheetah-v5): energy False  jpf True
+   overlap td3 vs tdmpc2 (HalfCheetah-v5): energy False  jpf True
+   overlap mbpo vs tdmpc2 (HalfCheetah-v5): energy True  jpf True
+Ant-v5          sac     n=7 E 49985(w256)..241327(utd4) ratio 4.828 | J/F 23.72(b1024)..678.76(w256) ratio 28.620
+Ant-v5          td3     n=8 E 25100(w256)..111900(utd4) ratio 4.458 | J/F 19.82(b1024)..1232.48(w256) ratio 62.182
+Ant-v5          mbpo    n=9 E 231638(w512)..424454(utd4) ratio 1.832 | J/F 63.14(b1024)..431.36(w256) ratio 6.832
+Ant-v5          tdmpc2  n=5 E 303231(horizon1)..650272(horizon5) ratio 2.144 | J/F 43.01(horizon5)..60.23(horizon1) ratio 1.400
+   overlap sac vs tdmpc2 (Ant-v5): energy False  jpf True
+   overlap td3 vs tdmpc2 (Ant-v5): energy False  jpf True
+   overlap mbpo vs tdmpc2 (Ant-v5): energy True  jpf False
+
+Maximum factor of constant J/FLOP: max over configurations of max(Jbase/Jcfg, Jcfg/Jbase) with the algorithm's own baseline
+HalfCheetah-v5  sac     max factor 11.74 at w256 (J/F 814.97 vs base 69.45)
+HalfCheetah-v5  td3     max factor 12.43 at w256 (J/F 1421.26 vs base 114.33)
+HalfCheetah-v5  mbpo    max factor 3.35 at w256 (J/F 612.60 vs base 183.07)
+HalfCheetah-v5  tdmpc2  max factor 1.20 at horizon1 (J/F 60.83 vs base 50.62)
+Ant-v5          sac     max factor 9.90 at w256 (J/F 678.76 vs base 68.57)
+Ant-v5          td3     max factor 10.60 at w256 (J/F 1232.48 vs base 116.27)
+Ant-v5          mbpo    max factor 2.83 at b1024 (J/F 63.14 vs base 178.77)
+Ant-v5          tdmpc2  max factor 1.23 at horizon1 (J/F 60.23 vs base 48.95)
+
+====================================================================================================
+7. Ratios of 5.1 and 5.3 from full-precision means
+====================================================================================================
+HalfCheetah-v5 totals kJ: {'sac': np.float64(60.911), 'td3': np.float64(28.111), 'mbpo': np.float64(207.395), 'tdmpc2': np.float64(447.087)} ratio to SAC: {'sac': np.float64(1.0), 'td3': np.float64(0.4615), 'mbpo': np.float64(3.4049), 'tdmpc2': np.float64(7.34)} TD-MPC2 rollout/total: 47.823
+Ant-v5 totals kJ: {'sac': np.float64(64.383), 'td3': np.float64(30.52), 'mbpo': np.float64(253.138), 'tdmpc2': np.float64(493.191)} ratio to SAC: {'sac': np.float64(1.0), 'td3': np.float64(0.474), 'mbpo': np.float64(3.9318), 'tdmpc2': np.float64(7.6603)} TD-MPC2 rollout/total: 51.618
+
+Energy distances and J/FLOP ratios along the sweep rows (batch rows use TD3 b256/b512/b1024):
+HalfCheetah-v5
+  Baseline   E: 28111/60911/207395  SAC/TD3=2.167 MBPO/SAC=3.405 (td3 < sac < mbpo) | J/F: S=69.45 T=114.33 M=183.07 (sac < td3 < mbpo) TD3/MBPO=0.625 MBPO/TD3=1.601 SAC/MBPO=0.379 TD3/SAC=1.646 SAC/TD3=0.607 MBPO/SAC=2.636
+  UTD 2      E: 55361/118024/268851  SAC/TD3=2.132 MBPO/SAC=2.278 (td3 < sac < mbpo) | J/F: S=67.29 T=112.63 M=133.09 (sac < td3 < mbpo) TD3/MBPO=0.846 MBPO/TD3=1.182 SAC/MBPO=0.506 TD3/SAC=1.674 SAC/TD3=0.597 MBPO/SAC=1.978
+  UTD 4      E: 107345/234959/373606  SAC/TD3=2.189 MBPO/SAC=1.590 (td3 < sac < mbpo) | J/F: S=66.98 T=109.22 M=99.42 (sac < mbpo < td3) TD3/MBPO=1.099 MBPO/TD3=0.910 SAC/MBPO=0.674 TD3/SAC=1.631 SAC/TD3=0.613 MBPO/SAC=1.484
+  Width 256  E: 23037/47408/187913  SAC/TD3=2.058 MBPO/SAC=3.964 (td3 < sac < mbpo) | J/F: S=814.97 T=1421.26 M=612.60 (mbpo < sac < td3) TD3/MBPO=2.320 MBPO/TD3=0.431 SAC/MBPO=1.330 TD3/SAC=1.744 SAC/TD3=0.573 MBPO/SAC=0.752
+  Width 512  E: 25370/49554/192769  SAC/TD3=1.953 MBPO/SAC=3.890 (td3 < sac < mbpo) | J/F: S=221.48 T=405.33 M=403.91 (sac < mbpo < td3) TD3/MBPO=1.004 MBPO/TD3=0.996 SAC/MBPO=0.548 TD3/SAC=1.830 SAC/TD3=0.546 MBPO/SAC=1.824
+  Batch 256  E: 33454/60911/207395  SAC/TD3=1.821 MBPO/SAC=3.405 (td3 < sac < mbpo) | J/F: S=69.45 T=53.18 M=183.07 (td3 < sac < mbpo) TD3/MBPO=0.290 MBPO/TD3=3.443 SAC/MBPO=0.379 TD3/SAC=0.766 SAC/TD3=1.306 MBPO/SAC=2.636
+  Batch 512  E: 41683/73024/209101  SAC/TD3=1.752 MBPO/SAC=2.863 (td3 < sac < mbpo) | J/F: S=41.63 T=33.14 M=104.55 (td3 < sac < mbpo) TD3/MBPO=0.317 MBPO/TD3=3.155 SAC/MBPO=0.398 TD3/SAC=0.796 SAC/TD3=1.256 MBPO/SAC=2.511
+  Batch 1024 E: 48068/82366/218667  SAC/TD3=1.714 MBPO/SAC=2.655 (td3 < sac < mbpo) | J/F: S=23.48 T=19.11 M=58.26 (td3 < sac < mbpo) TD3/MBPO=0.328 MBPO/TD3=3.049 SAC/MBPO=0.403 TD3/SAC=0.814 SAC/TD3=1.229 MBPO/SAC=2.481
+   J/F rise width 1024->256: {'sac': np.float64(11.735), 'td3': np.float64(12.431), 'mbpo': np.float64(3.346)}
+   TD3 batch 100->256: E x1.190, F x2.559, J/F x0.465 (J/F falls by 2.150)
+   MBPO J/F UTD1->UTD4: -45.7% ; SAC -3.5% ; TD3 -4.5%
+   MBPO J/F ratio to TD3 at base, utd2: 1.6012150157594467 1.1816432889124389
+   MBPO: minimal MBPO/SAC distance: 1.5900903968809315
+   max over rows of MBPO/SAC: 3.9637528881425643  SAC/TD3 min/max: 1.7135146556160257 2.1888243462932393
+Ant-v5
+  Baseline   E: 30520/64383/253138  SAC/TD3=2.110 MBPO/SAC=3.932 (td3 < sac < mbpo) | J/F: S=68.57 T=116.27 M=178.77 (sac < td3 < mbpo) TD3/MBPO=0.650 MBPO/TD3=1.538 SAC/MBPO=0.384 TD3/SAC=1.696 SAC/TD3=0.590 MBPO/SAC=2.607
+  UTD 2      E: 57543/123182/316797  SAC/TD3=2.141 MBPO/SAC=2.572 (td3 < sac < mbpo) | J/F: S=65.60 T=109.65 M=133.13 (sac < td3 < mbpo) TD3/MBPO=0.824 MBPO/TD3=1.214 SAC/MBPO=0.493 TD3/SAC=1.671 SAC/TD3=0.598 MBPO/SAC=2.029
+  UTD 4      E: 111900/241327/424454  SAC/TD3=2.157 MBPO/SAC=1.759 (td3 < sac < mbpo) | J/F: S=64.26 T=106.64 M=100.15 (sac < mbpo < td3) TD3/MBPO=1.065 MBPO/TD3=0.939 SAC/MBPO=0.642 TD3/SAC=1.659 SAC/TD3=0.603 MBPO/SAC=1.558
+  Width 256  E: 25100/49985/234491  SAC/TD3=1.991 MBPO/SAC=4.691 (td3 < sac < mbpo) | J/F: S=678.76 T=1232.48 M=431.36 (mbpo < sac < td3) TD3/MBPO=2.857 MBPO/TD3=0.350 SAC/MBPO=1.574 TD3/SAC=1.816 SAC/TD3=0.551 MBPO/SAC=0.636
+  Width 512  E: 27473/52200/231638  SAC/TD3=1.900 MBPO/SAC=4.438 (td3 < sac < mbpo) | J/F: S=204.96 T=387.47 M=323.04 (sac < mbpo < td3) TD3/MBPO=1.199 MBPO/TD3=0.834 SAC/MBPO=0.634 TD3/SAC=1.890 SAC/TD3=0.529 MBPO/SAC=1.576
+  Batch 256  E: 35521/64383/253138  SAC/TD3=1.813 MBPO/SAC=3.932 (td3 < sac < mbpo) | J/F: S=68.57 T=52.89 M=178.77 (td3 < sac < mbpo) TD3/MBPO=0.296 MBPO/TD3=3.380 SAC/MBPO=0.384 TD3/SAC=0.771 SAC/TD3=1.296 MBPO/SAC=2.607
+  Batch 512  E: 44361/76499/247393  SAC/TD3=1.724 MBPO/SAC=3.234 (td3 < sac < mbpo) | J/F: S=40.74 T=33.03 M=105.78 (td3 < sac < mbpo) TD3/MBPO=0.312 MBPO/TD3=3.202 SAC/MBPO=0.385 TD3/SAC=0.811 SAC/TD3=1.233 MBPO/SAC=2.596
+  Batch 1024 E: 53235/89057/267695  SAC/TD3=1.673 MBPO/SAC=3.006 (td3 < sac < mbpo) | J/F: S=23.72 T=19.82 M=63.14 (td3 < sac < mbpo) TD3/MBPO=0.314 MBPO/TD3=3.185 SAC/MBPO=0.376 TD3/SAC=0.836 SAC/TD3=1.197 MBPO/SAC=2.662
+   J/F rise width 1024->256: {'sac': np.float64(9.899), 'td3': np.float64(10.601), 'mbpo': np.float64(2.413)}
+   TD3 batch 100->256: E x1.164, F x2.559, J/F x0.455 (J/F falls by 2.198)
+   MBPO J/F UTD1->UTD4: -44.0% ; SAC -6.3% ; TD3 -8.3%
+   MBPO J/F ratio to TD3 at base, utd2: 1.5375612283258822 1.2140619767275387
+   MBPO: minimal MBPO/SAC distance: 1.7588335000925057
+   max over rows of MBPO/SAC: 4.69119757088544  SAC/TD3 min/max: 1.6729109052914106 2.156636324664588
+
+Seed-level orderings recomputed from per_run_segments_5_2.csv (energy and J/FLOP by seed):
+seeds whose ordering equals the ordering of the means (of 80): {'energy': 80, 'jpf': 78}
+  not 5/5: HalfCheetah-v5 Width 512 jpf 3
+  HalfCheetah-v5 Baseline   jpf seeds with baseline ordering: 5/5 (mean ordering ('sac', 'td3', 'mbpo'))
+  HalfCheetah-v5 UTD 2      jpf seeds with baseline ordering: 5/5 (mean ordering ('sac', 'td3', 'mbpo'))
+  HalfCheetah-v5 UTD 4      jpf seeds with baseline ordering: 0/5 (mean ordering ('sac', 'mbpo', 'td3'))
+  HalfCheetah-v5 Width 256  jpf seeds with baseline ordering: 0/5 (mean ordering ('mbpo', 'sac', 'td3'))
+  HalfCheetah-v5 Width 512  jpf seeds with baseline ordering: 2/5 (mean ordering ('sac', 'mbpo', 'td3'))
+  HalfCheetah-v5 Batch 256  jpf seeds with baseline ordering: 0/5 (mean ordering ('td3', 'sac', 'mbpo'))
+  HalfCheetah-v5 Batch 512  jpf seeds with baseline ordering: 0/5 (mean ordering ('td3', 'sac', 'mbpo'))
+  HalfCheetah-v5 Batch 1024 jpf seeds with baseline ordering: 0/5 (mean ordering ('td3', 'sac', 'mbpo'))
+  Ant-v5 Baseline   jpf seeds with baseline ordering: 5/5 (mean ordering ('sac', 'td3', 'mbpo'))
+  Ant-v5 UTD 2      jpf seeds with baseline ordering: 5/5 (mean ordering ('sac', 'td3', 'mbpo'))
+  Ant-v5 UTD 4      jpf seeds with baseline ordering: 0/5 (mean ordering ('sac', 'mbpo', 'td3'))
+  Ant-v5 Width 256  jpf seeds with baseline ordering: 0/5 (mean ordering ('mbpo', 'sac', 'td3'))
+  Ant-v5 Width 512  jpf seeds with baseline ordering: 0/5 (mean ordering ('sac', 'mbpo', 'td3'))
+  Ant-v5 Batch 256  jpf seeds with baseline ordering: 0/5 (mean ordering ('td3', 'sac', 'mbpo'))
+  Ant-v5 Batch 512  jpf seeds with baseline ordering: 0/5 (mean ordering ('td3', 'sac', 'mbpo'))
+  Ant-v5 Batch 1024 jpf seeds with baseline ordering: 0/5 (mean ordering ('td3', 'sac', 'mbpo'))
+per-seed TD3/MBPO J/F ratio, width 512 HC: [np.float64(1.0072), np.float64(1.0221), np.float64(1.0312), np.float64(0.9836), np.float64(0.977)] min/max 0.9770214895187923 1.0312446806256732  mean-ratio 1.0035157561669197
+
+MBPO rollout-length table (Ant-v5):
+  rollout1  E=240749 F=1.3721e+15 J/F=175.46 x SAC E 3.739 x TD3 E 7.888 x SAC J/F 2.559 x TD3 J/F 1.509
+  rollout15 E=245862 F=1.4060e+15 J/F=174.86 x SAC E 3.819 x TD3 E 8.056 x SAC J/F 2.550 x TD3 J/F 1.504
+  base      E=253138 F=1.4160e+15 J/F=178.77 x SAC E 3.932 x TD3 E 8.294 x SAC J/F 2.607 x TD3 J/F 1.538
+  L1->L25 energy +5.15% FLOPs +3.20% J/F +1.89%
+  MBPO/SAC range 3.739350843360025 3.931772787856564
+
+TD-MPC2 ranges (tab:rob-tdmpc2):
+HalfCheetah-v5 E factor 2.035 J/F factor 1.390
+   base      E=447087+-3184 J/F=50.617 rollout share=47.82%
+   horizon1  E=280686+-1782 J/F=60.827 rollout share=48.16%
+   horizon5  E=571281+-4039 J/F=43.773 rollout share=50.46%
+   numq3     E=358787+-2182 J/F=52.180 rollout share=50.72%
+   numq7     E=526562+-1974 J/F=48.803 rollout share=46.00%
+Ant-v5 E factor 2.144 J/F factor 1.400
+   base      E=493191+-1782 J/F=48.945 rollout share=51.62%
+   horizon1  E=303231+-2582 J/F=60.234 rollout share=49.28%
+   horizon5  E=650272+-4615 J/F=43.012 rollout share=54.47%
+   numq3     E=411357+-2042 J/F=50.684 rollout share=54.21%
+   numq7     E=576921+-2824 J/F=47.931 rollout share=48.69%
+
+====================================================================================================
+8. FLOP and energy factors along the sweeps (vs baseline of the algorithm; MBPO fit shares)
+====================================================================================================
+HalfCheetah-v5  sac   w256: F x0.0663 E x0.7783 | w512: F x0.2551 E x0.8135 | utd2: F x1.9998 E x1.9377 | utd4: F x3.9993 E x3.8574 | b512: F x1.9998 E x1.1989 | b1024: F x3.9993 E x1.3522
+HalfCheetah-v5  td3   w256: F x0.0659 E x0.8195 | w512: F x0.2546 E x0.9025 | utd2: F x1.9991 E x1.9693 | utd4: F x3.9974 E x3.8185 | b256: F x2.5586 E x1.1900 | b512: F x5.1164 E x1.4828 | b1024: F x10.2319 E x1.7099
+HalfCheetah-v5  mbpo  w256: F x0.2708 E x0.9061 | w512: F x0.4213 E x0.9295 | utd2: F x1.7832 E x1.2963 | utd4: F x3.3172 E x1.8014 | b512: F x1.7654 E x1.0082 | b1024: F x3.3132 E x1.0544
+   MBPO w256: fit FLOP share 80.4%  GU FLOP share 19.0% GU pJ/F 766.0 dyn E 141.0 kJ  dyn pJ/F 571.8
+   MBPO w512: fit FLOP share 52.6%  GU FLOP share 46.9% GU pJ/F 209.2 dyn E 143.6 kJ  dyn pJ/F 571.7
+   MBPO utd4: fit FLOP share 6.6%  GU FLOP share 93.3% GU pJ/F 66.1 dyn E 139.3 kJ  dyn pJ/F 565.8
+   MBPO base: fit FLOP share 22.2%  GU FLOP share 77.4% GU pJ/F 66.9 dyn E 146.2 kJ  dyn pJ/F 580.6
+   TD3 batch 100->256: F x2.559
+Ant-v5          sac   w256: F x0.0784 E x0.7764 | w512: F x0.2712 E x0.8108 | utd2: F x1.9998 E x1.9133 | utd4: F x3.9993 E x3.7483 | b512: F x1.9998 E x1.1882 | b1024: F x3.9993 E x1.3833
+Ant-v5          td3   w256: F x0.0776 E x0.8224 | w512: F x0.2701 E x0.9002 | utd2: F x1.9991 E x1.8854 | utd4: F x3.9973 E x3.6665 | b256: F x2.5586 E x1.1639 | b512: F x5.1163 E x1.4535 | b1024: F x10.2318 E x1.7443
+Ant-v5          mbpo  w256: F x0.3839 E x0.9263 | w512: F x0.5064 E x0.9151 | utd2: F x1.6805 E x1.2515 | utd4: F x2.9930 E x1.6768 | b512: F x1.6517 E x0.9773 | b1024: F x2.9942 E x1.0575
+   MBPO w256: fit FLOP share 81.7%  GU FLOP share 13.5% GU pJ/F 608.6 dyn E 185.0 kJ  dyn pJ/F 416.6
+   MBPO w512: fit FLOP share 60.2%  GU FLOP share 35.5% GU pJ/F 185.8 dyn E 179.6 kJ  dyn pJ/F 415.7
+   MBPO utd4: fit FLOP share 10.4%  GU FLOP share 88.6% GU pJ/F 62.8 dyn E 183.7 kJ  dyn pJ/F 418.7
+   MBPO base: fit FLOP share 30.4%  GU FLOP share 66.3% GU pJ/F 63.6 dyn E 188.4 kJ  dyn pJ/F 437.1
+   TD3 batch 100->256: F x2.559
+
+====================================================================================================
+9. Section 5.4: paired environment table and derived quantities
+====================================================================================================
+      algo      config  E_total_ratio_of_means  E_rollout_ratio_of_means  max_abs_dshare_pp max_abs_dshare_segment  P_total_ratio_of_means  jpf_total_ratio_Ant_over_HC  flops_total_ratio_Ant_over_HC  dshare_rollout_mean_pp  dshare_dynamics_model_update_mean_pp  dshare_gradient_updates_mean_pp  dshare_world_model_pretrain_mean_pp
+0      sac    baseline                1.056995                  1.735828           2.631345                rollout                1.001048                     0.987332                       1.070557                2.631345                                   NaN                        -2.631345                                  NaN
+1      sac       UTD 2                1.043703                  1.714247           1.367989                rollout                1.005280                     0.974918                       1.070555                1.367989                                   NaN                        -1.367989                                  NaN
+2      sac       UTD 4                1.027102                  1.681842           0.936440          critic_update                1.004317                     0.959412                       1.070554                0.692624                                   NaN                        -0.692624                                  NaN
+3      sac   width 256                1.054365                  1.799803           3.398547                rollout                0.999949                     0.832858                       1.265960                3.398547                                   NaN                        -3.398547                                  NaN
+4      sac   width 512                1.053393                  1.785410           3.263154                rollout                1.004245                     0.925413                       1.138295                3.263154                                   NaN                        -3.263154                                  NaN
+5      sac   batch 512                1.047586                  1.649880           2.083645                rollout                0.999997                     0.978545                       1.070555                2.083645                                   NaN                        -2.083645                                  NaN
+6      sac  batch 1024                1.081240                  1.652364           2.067656           actor_update                1.007518                     1.009982                       1.070554                1.762454                                   NaN                        -1.762454                                  NaN
+7      td3    baseline                1.085672                  2.176938           5.045337                rollout                1.003027                     1.016902                       1.067628                5.045337                                   NaN                        -5.045337                                  NaN
+8      td3       UTD 2                1.039407                  2.117369           2.681640                rollout                1.003926                     0.973574                       1.067620                2.681640                                   NaN                        -2.681640                                  NaN
+9      td3       UTD 4                1.042432                  2.184007           1.408760                rollout                1.006455                     0.976411                       1.067616                1.408760                                   NaN                        -1.408760                                  NaN
+10     td3   width 256                1.089572                  2.287772           5.921588                rollout                0.993753                     0.867175                       1.256460                5.921588                                   NaN                        -5.921588                                  NaN
+11     td3   width 512                1.082915                  2.225800           5.415687                rollout                0.985437                     0.955939                       1.132829                5.415687                                   NaN                        -5.415687                                  NaN
+12     td3   batch 256                1.061781                  2.034899           4.155520                rollout                0.984926                     0.994533                       1.067618                4.155520                                   NaN                        -4.155520                                  NaN
+13     td3   batch 512                1.064246                  1.963460           4.199228          critic_update                0.992165                     0.996845                       1.067615                3.407814                                   NaN                        -3.407814                                  NaN
+14     td3  batch 1024                1.107483                  1.934976           5.373079          critic_update                1.002055                     1.037345                       1.067613                2.724055                                   NaN                        -2.724055                                  NaN
+15    mbpo    baseline                1.220562                  1.767689           3.818368  dynamics_model_update                0.995821                     0.976476                       1.249966                0.532104                              3.818368                        -4.606672                                  NaN
+16    mbpo       UTD 2                1.178336                  1.749012           5.060201  dynamics_model_update                0.994520                     1.000285                       1.178001                0.437436                              5.060201                        -5.708633                                  NaN
+17    mbpo       UTD 4                1.136100                  1.755061           5.948382  dynamics_model_update                0.990780                     1.007367                       1.127791                0.348038                              5.948382                        -6.444350                                  NaN
+18    mbpo   width 256                1.247866                  1.761525           3.858696  dynamics_model_update                1.005672                     0.704152                       1.772155                0.508495                              3.858696                        -4.581196                                  NaN
+19    mbpo   width 512                1.201633                  1.758991           2.962010  dynamics_model_update                1.003323                     0.799789                       1.502438                0.570510                              2.962010                        -3.777593                                  NaN
+20    mbpo   batch 512                1.183124                  1.725884           3.227704  dynamics_model_update                0.993772                     1.011697                       1.169445                0.531702                              3.227704                        -4.022949                                  NaN
+21    mbpo  batch 1024                1.224212                  1.768283           3.298704  dynamics_model_update                1.004261                     1.083735                       1.129622                0.483718                              3.298704                        -4.016191                                  NaN
+22  tdmpc2    baseline                1.103122                  1.190660           3.793689                rollout                1.034710                     0.966971                       1.140802                3.793689                                   NaN                        -3.566762                            -0.226928
+23  tdmpc2     num_q 3                1.146521                  1.225438           3.491101                rollout                1.023234                     0.971324                       1.180369                3.491101                                   NaN                        -3.224274                            -0.266828
+24  tdmpc2     num_q 7                1.095638                  1.159774           2.692537                rollout                0.995691                     0.982118                       1.115586                2.692537                                   NaN                        -2.582397                            -0.110140
+25  tdmpc2   horizon 1                1.080319                  1.105521           1.150952           actor_update                1.006097                     0.990255                       1.090950                1.123979                                   NaN                        -1.110147                            -0.013832
+26  tdmpc2   horizon 5                1.138270                  1.228813           4.013519                rollout                1.016182                     0.982599                       1.158428                4.013519                                   NaN                        -3.817699                            -0.195820
+sac     n=7 Etot 1.0271-1.0812 Eroll 1.6499-1.7998 maxshare 0.9364-3.3985 P 0.9999-1.0075 J/F 0.8329-1.0100 rollout-share shift 0.6926-3.3985 GU shift -3.399..-0.693
+td3     n=8 Etot 1.0394-1.1075 Eroll 1.9350-2.2878 maxshare 1.4088-5.9216 P 0.9849-1.0065 J/F 0.8672-1.0373 rollout-share shift 1.4088-5.9216 GU shift -5.922..-1.409
+mbpo    n=7 Etot 1.1361-1.2479 Eroll 1.7259-1.7683 maxshare 2.9620-5.9484 P 0.9908-1.0057 J/F 0.7042-1.0837 rollout-share shift 0.3480-0.5705 GU shift -6.444..-3.778
+tdmpc2  n=5 Etot 1.0803-1.1465 Eroll 1.1055-1.2288 maxshare 1.1510-4.0135 P 0.9957-1.0347 J/F 0.9670-0.9903 rollout-share shift 1.1240-4.0135 GU shift -3.818..-1.110
+pairs: 27 {'mbpo': 7, 'sac': 7, 'td3': 8, 'tdmpc2': 5}
+All: Etot 1.0271019577649505 1.2478660277981917 Eroll 1.1055212539570245 2.2877719315151097 P 0.9849256009663726 1.03471009008867 J/F 0.7041517991292936 1.08373539775117
+
+configs with J/FLOP ratio > 1:
+    algo      config  jpf_total_ratio_Ant_over_HC
+6    sac  batch 1024                     1.009982
+7    td3    baseline                     1.016902
+14   td3  batch 1024                     1.037345
+16  mbpo       UTD 2                     1.000285
+17  mbpo       UTD 4                     1.007367
+20  mbpo   batch 512                     1.011697
+21  mbpo  batch 1024                     1.083735
+count: 7 of 27 | closest to 1: [{'algo': 'mbpo', 'config': 'UTD 2', 'jpf_total_ratio_Ant_over_HC': 1.000284532884604}, {'algo': 'td3', 'config': 'batch 512', 'jpf_total_ratio_Ant_over_HC': 0.9968445081813856}, {'algo': 'td3', 'config': 'batch 256', 'jpf_total_ratio_Ant_over_HC': 0.994533125670596}, {'algo': 'mbpo', 'config': 'UTD 4', 'jpf_total_ratio_Ant_over_HC': 1.0073672157504097}]
+
+sign-flip p total energy / rollout share all equal 0.0625? True True
+rollout-share shift positive in all pairs: True  same sign in 5/5: True
+
+rollout share shift (rollout) per algorithm: min/max {'mbpo': {'min': 0.3480383793063819, 'max': 0.5705095346094395}, 'sac': {'min': 0.6926241020481472, 'max': 3.398547060437307}, 'td3': {'min': 1.4087600677683791, 'max': 5.921588234671344}, 'tdmpc2': {'min': 1.1239789689848734, 'max': 4.0135185491929}}
+tdmpc2 world_model_pretrain share shifts: [-0.2269, -0.2668, -0.1101, -0.0138, -0.1958]
+mbpo GU shifts: [-4.607, -5.709, -6.444, -4.581, -3.778, -4.023, -4.016]  fit shifts: [3.818, 5.06, 5.948, 3.859, 2.962, 3.228, 3.299]
+
+rollout energies base (J): HC/Ant and difference
+  sac     HC 2.496 kJ  Ant 4.332 kJ  diff 1.836 kJ  ratio 1.7358
+  td3     HC 1.411 kJ  Ant 3.071 kJ  diff 1.661 kJ  ratio 2.1769
+  mbpo    HC 2.428 kJ  Ant 4.292 kJ  diff 1.864 kJ  ratio 1.7677
+  tdmpc2  HC 213.811 kJ  Ant 254.576 kJ  diff 40.765 kJ  ratio 1.1907
+  TD-MPC2 diff / SAC diff = 22.2
+  GU energy ratios per pair would be in the CSV via E_total; GU ratio (base):  {'sac': np.float64(1.028), 'td3': np.float64(1.028), 'mbpo': np.float64(1.0179), 'tdmpc2': np.float64(1.024)}
+  GU energy ratio ranges over all configs: {'sac': (np.float64(1.0167), np.float64(1.0615)), 'td3': (np.float64(1.0108), np.float64(1.0762)), 'mbpo': (np.float64(1.0058), np.float64(1.084)), 'tdmpc2': (np.float64(1.024), np.float64(1.0678))}
+  MBPO fit energy/FLOP ratio (base): E 1.288 F 1.711
+  sac FLOP ratio GU (base) 1.0706
+  td3 FLOP ratio GU (base) 1.0676
+  mbpo FLOP ratio GU (base) 1.0706
+  tdmpc2 FLOP ratio GU (base) 1.0640
+
+Time ratios per paired configuration (c5_rollout_wallclock_per_1000_steps.csv):
+['algo', 'env', 'config', 'n_runs', 'rollout_steps', 'rollout_s_per_1000_steps_mean', 'rollout_s_per_1000_steps_sd', 'rollout_s_per_1000_steps_pipeline_csv_mean']
+  algo             env config  n_runs  rollout_steps  rollout_s_per_1000_steps_mean  rollout_s_per_1000_steps_sd  rollout_s_per_1000_steps_pipeline_csv_mean
+0  sac  HalfCheetah-v5   base       5         100000                       0.204774                     0.002653                                    0.204774
+1  sac  HalfCheetah-v5   utd2       5         100000                       0.203940                     0.003523                                    0.203940
+2  sac  HalfCheetah-v5   utd4       5         100000                       0.204937                     0.003876                                    0.204937
+
+====================================================================================================
+10. Matched MBPO pairing: Ant-v5 rollout1 vs HalfCheetah-v5 base (paired by seed)
+====================================================================================================
+seeds paired: [331, 958, 14577, 43611, 85062]
+per-seed total ratios [1.224  1.1164 1.1713 1.1272 1.1709] mean 1.1620 sd 0.04271
+ratio of means 1.1608
+sign-flip p (two-sided, mean difference) = 0.0625 over 32 patterns
+baseline pairing (L25): per-seed ratios [1.3865 1.1096 1.139  1.29   1.1864] mean 1.2223 sd 0.11454 (CSV E_total_paired_sd = 0.11454)
+
+====================================================================================================
+11. Run counts (B3) and metadata for the commit claims (B4)
+====================================================================================================
+algo    env             canon
+mbpo    Ant-v5          True     45
+        HalfCheetah-v5  False     3
+                        True     35
+sac     Ant-v5          True     35
+        HalfCheetah-v5  False    13
+                        True     35
+        Humanoid-v5     False     2
+td3     Ant-v5          True     40
+        HalfCheetah-v5  False     1
+                        True     40
+tdmpc2  Ant-v5          True     25
+        HalfCheetah-v5  False     1
+                        True     25
+canonical total: 280  all: 300
+non-canonical runs:                                               dir  seed                       start
+0    tdmpc2/HalfCheetah-v5/seed_0/20260910_113313     0  2026-09-10T09:33:13.187514
+51     mbpo/HalfCheetah-v5/seed_0/20260904_130915     0  2026-09-04T11:09:15.306557
+52     mbpo/HalfCheetah-v5/seed_0/20260904_122958     0  2026-09-04T10:29:59.128368
+67    mbpo/HalfCheetah-v5/seed_42/20260908_191242    42  2026-09-08T17:12:42.782230
+134     td3/HalfCheetah-v5/seed_0/20260909_113627     0  2026-09-09T09:36:27.541658
+215     sac/HalfCheetah-v5/seed_0/20260813_121500     0  2026-08-13T10:15:00.191596
+216     sac/HalfCheetah-v5/seed_0/20260821_105506     0  2026-08-21T08:55:06.350958
+217     sac/HalfCheetah-v5/seed_0/20260824_115117     0  2026-08-24T09:51:17.348739
+218     sac/HalfCheetah-v5/seed_0/20260824_110200     0  2026-08-24T09:02:00.698886
+219     sac/HalfCheetah-v5/seed_0/20260819_115112     0  2026-08-19T09:51:12.702145
+220     sac/HalfCheetah-v5/seed_0/20260819_104727     0  2026-08-19T08:47:28.042475
+221     sac/HalfCheetah-v5/seed_0/20260813_112621     0  2026-08-13T09:26:21.068548
+222    sac/HalfCheetah-v5/seed_56/20260831_143605    56  2026-08-31T12:36:05.384720
+223    sac/HalfCheetah-v5/seed_56/20260831_135517    56  2026-08-31T11:55:17.829020
+224    sac/HalfCheetah-v5/seed_56/20260831_131353    56  2026-08-31T11:13:53.718014
+239    sac/HalfCheetah-v5/seed_42/20260824_122611    42  2026-08-24T10:26:11.126006
+240    sac/HalfCheetah-v5/seed_42/20260824_130005    42  2026-08-24T11:00:05.962944
+241    sac/HalfCheetah-v5/seed_42/20260826_111906    42  2026-08-26T09:19:06.312877
+263       sac/Humanoid-v5/seed_56/20260902_131059    56  2026-09-02T11:10:59.490307
+264       sac/Humanoid-v5/seed_56/20260902_135248    56  2026-09-02T11:52:48.216682
+env             canon  episodic
+Ant-v5          True   True        25
+HalfCheetah-v5  False  False        1
+                True   False       25
+
+MBPO HalfCheetah-v5 baseline runs (canonical): commits and start dates
+            env_id   seed mbpo_rollout_regime                                    commit                       start
+16          Ant-v5    331      rl1-1_re20-100  788ffcd841101338cccd395b9afe6773eb381bfb  2026-09-17T20:09:20.845516
+43          Ant-v5    958      rl1-1_re20-100  788ffcd841101338cccd395b9afe6773eb381bfb  2026-09-17T20:46:13.812959
+7           Ant-v5  14577      rl1-1_re20-100  788ffcd841101338cccd395b9afe6773eb381bfb  2026-09-17T21:22:44.316068
+25          Ant-v5  43611      rl1-1_re20-100  788ffcd841101338cccd395b9afe6773eb381bfb  2026-09-17T21:58:11.036293
+34          Ant-v5  85062      rl1-1_re20-100  788ffcd841101338cccd395b9afe6773eb381bfb  2026-09-17T22:34:13.007588
+52  HalfCheetah-v5    331      rl1-1_re20-150  0bbbbb74a6542fff643e5cd3ba7603af8de1fcc0  2026-09-08T17:44:55.988580
+73  HalfCheetah-v5    958      rl1-1_re20-150  0bbbbb74a6542fff643e5cd3ba7603af8de1fcc0  2026-09-08T18:15:20.802055
+45  HalfCheetah-v5  14577      rl1-1_re20-150  0bbbbb74a6542fff643e5cd3ba7603af8de1fcc0  2026-09-08T18:48:51.208567
+59  HalfCheetah-v5  43611      rl1-1_re20-150  0bbbbb74a6542fff643e5cd3ba7603af8de1fcc0  2026-09-08T19:19:56.931724
+66  HalfCheetah-v5  85062      rl1-1_re20-150  0bbbbb74a6542fff643e5cd3ba7603af8de1fcc0  2026-09-08T19:52:22.366682
+
+====================================================================================================
+12. Episode statistics at the baselines (B5)
+====================================================================================================
+HalfCheetah-v5  sac     runs=5 train episodes min/median/max=100/100/100 | length pooled median=1000.0 mean=1000.0 | median over seeds of per-seed median=1000.0 (range 1000-1000) of per-seed mean=1000.0
+HalfCheetah-v5  td3     runs=5 train episodes min/median/max=100/100/100 | length pooled median=1000.0 mean=1000.0 | median over seeds of per-seed median=1000.0 (range 1000-1000) of per-seed mean=1000.0
+HalfCheetah-v5  mbpo    runs=5 train episodes min/median/max=100/100/100 | length pooled median=1000.0 mean=1000.0 | median over seeds of per-seed median=1000.0 (range 1000-1000) of per-seed mean=1000.0
+HalfCheetah-v5  tdmpc2  runs=5 train episodes min/median/max=100/100/100 | length pooled median=1000.0 mean=1000.0 | median over seeds of per-seed median=1000.0 (range 1000-1000) of per-seed mean=1000.0
+Ant-v5          sac     runs=5 train episodes min/median/max=234/269/271 | length pooled median=192.0 mean=387.6 | median over seeds of per-seed median=185.0 (range 173-244) of per-seed mean=371.6
+Ant-v5          td3     runs=5 train episodes min/median/max=194/248/277 | length pooled median=188.0 mean=415.6 | median over seeds of per-seed median=168.5 (range 146-298) of per-seed mean=402.9
+Ant-v5          mbpo    runs=5 train episodes min/median/max=196/225/282 | length pooled median=142.0 mean=412.0 | median over seeds of per-seed median=155.0 (range 107-272) of per-seed mean=440.1
+Ant-v5          tdmpc2  runs=5 train episodes min/median/max=884/1833/2201 | length pooled median=22.0 mean=62.8 | median over seeds of per-seed median=21.0 (range 18-49) of per-seed mean=54.7
+
+====================================================================================================
+13. Returns (B6): mean return of the last 10% of the training episodes per configuration
+====================================================================================================
+HalfCheetah-v5  sac     n=7 min    2920.6 (bs1024_h1024x1024|utd1) max    4884.7 (bs256_h256x256|utd1) negative: 0
+HalfCheetah-v5  td3     n=8 min    3684.6 (bs1024_h1024x1024|utd1) max    5539.5 (bs100_h512x512|utd1) negative: 0
+HalfCheetah-v5  mbpo    n=7 min    4534.8 (bs256_h256x256_ens7_mh200x200x200x200_mb256|utd1|rl1-1_re20-150) max    5903.7 (bs256_h1024x1024_ens7_mh200x200x200x200_mb256|utd4|rl1-1_re20-150) negative: 0
+HalfCheetah-v5  tdmpc2  n=5 min    5790.9 (bs256_h1_ns512_it6_pit24_ne64_nq5_enc2x256_mlp512_lat512_epFalse|utd1) max    7755.7 (bs256_h3_ns512_it6_pit24_ne64_nq7_enc2x256_mlp512_lat512_epFalse|utd1) negative: 0
+Ant-v5          sac     n=7 min    -220.1 (bs256_h1024x1024|utd4) max     408.6 (bs256_h256x256|utd1) negative: 4
+      negative configs: ['bs1024_h1024x1024|utd1', 'bs256_h1024x1024|utd2', 'bs256_h1024x1024|utd4', 'bs512_h1024x1024|utd1']
+Ant-v5          td3     n=8 min     -30.3 (bs1024_h1024x1024|utd1) max     575.9 (bs100_h256x256|utd1) negative: 1
+      negative configs: ['bs1024_h1024x1024|utd1']
+Ant-v5          mbpo    n=9 min    -756.7 (bs256_h1024x1024_ens7_mh200x200x200x200_mb256|utd1|rl1-1_re20-100) max    -244.6 (bs512_h1024x1024_ens7_mh200x200x200x200_mb256|utd1|rl1-25_re20-100) negative: 9
+      negative configs: ['bs1024_h1024x1024_ens7_mh200x200x200x200_mb256|utd1|rl1-25_re20-100', 'bs256_h1024x1024_ens7_mh200x200x200x200_mb256|utd1|rl1-15_re20-100', 'bs256_h1024x1024_ens7_mh200x200x200x200_mb256|utd1|rl1-1_re20-100', 'bs256_h1024x1024_ens7_mh200x200x200x200_mb256|utd1|rl1-25_re20-100', 'bs256_h1024x1024_ens7_mh200x200x200x200_mb256|utd2|rl1-25_re20-100', 'bs256_h1024x1024_ens7_mh200x200x200x200_mb256|utd4|rl1-25_re20-100', 'bs256_h256x256_ens7_mh200x200x200x200_mb256|utd1|rl1-25_re20-100', 'bs256_h512x512_ens7_mh200x200x200x200_mb256|utd1|rl1-25_re20-100', 'bs512_h1024x1024_ens7_mh200x200x200x200_mb256|utd1|rl1-25_re20-100']
+Ant-v5          tdmpc2  n=5 min     125.8 (bs256_h3_ns512_it6_pit24_ne64_nq3_enc2x256_mlp512_lat512_epTrue|utd1) max     438.5 (bs256_h1_ns512_it6_pit24_ne64_nq5_enc2x256_mlp512_lat512_epTrue|utd1) negative: 0
+negative on Ant-v5 total: 14 of 29
+per algo: {'mbpo': 9, 'sac': 4, 'td3': 1}
+
+====================================================================================================
+14. Further point checks (rounding, TD-MPC2 segments, time ratios, per-call FLOP ratios)
+====================================================================================================
+SAC Ant UTD 4 J/FLOP [pJ] 64.26499 ; TD3 width 256 / baseline J/FLOP: HC 12.43079 Ant 10.60051 ; TD3 batch 100->256 J/FLOP fall: HC 2.15005 Ant 2.19840
+MBPO HalfCheetah-v5 batch 512 FLOPs 1.999938e+15, UTD 2 FLOPs 2.020089e+15
+MBPO Ant-v5 J/FLOP change between rollout lengths: 15->25 2.231%, 1->25 1.885%
+MBPO baseline Pr/PGU ratio of ratios 0.973150 (paired mean 0.973159)
+Pr/PGU ratio Ant/HC below 1 in 24 of 27
+TD-MPC2: gradient-update block vs rollout (energy)
+  HalfCheetah-v5  numq3     rollout 50.72% GU 46.97% GU larger: False
+  HalfCheetah-v5  base      rollout 47.82% GU 49.75% GU larger: True
+  HalfCheetah-v5  numq7     rollout 46.00% GU 51.59% GU larger: True
+  HalfCheetah-v5  horizon1  rollout 48.16% GU 49.46% GU larger: True
+  HalfCheetah-v5  horizon5  rollout 50.46% GU 47.30% GU larger: False
+  Ant-v5          numq3     rollout 54.21% GU 43.74% GU larger: False
+  Ant-v5          base      rollout 51.62% GU 46.18% GU larger: False
+  Ant-v5          numq7     rollout 48.69% GU 49.00% GU larger: True
+  Ant-v5          horizon1  rollout 49.28% GU 48.35% GU larger: False
+  Ant-v5          horizon5  rollout 54.47% GU 43.48% GU larger: False
+GU FLOP ratio (Ant/HC) ranges over paired configurations:
+  sac     1.0706-1.2659
+  td3     1.0676-1.2564
+  mbpo    1.0706-1.2659
+  tdmpc2  1.0497-1.0903
+rollout time ratios (Ant/HC) per algorithm: {'mbpo': {'min': 1.7906, 'max': 1.8124, 'count': 7}, 'sac': {'min': 1.7402, 'max': 1.7938, 'count': 7}, 'td3': {'min': 2.2234, 'max': 2.3202, 'count': 8}, 'tdmpc2': {'min': 1.1081, 'max': 1.2202, 'count': 5}}
+      algo                                                                              quantity  ratio_Ant_over_HC
+0      sac                                                                     actor_forward_bs1             1.0874
+1      sac                                                                         critic_fwdbwd             1.0673
+2      sac                                                                          actor_fwdbwd             1.0747
+3      sac                                                         target_update_elementwise_ops             1.0857
+8     mbpo                                                                     actor_forward_bs1             1.0874
+9     mbpo                                                                         critic_fwdbwd             1.0673
+10    mbpo                                                                          actor_fwdbwd             1.0747
+11    mbpo                                                         target_update_elementwise_ops             1.0857
+12    mbpo                                                                dynamics_member_fwdbwd             1.3623
+13    mbpo                                                     dynamics_ensemble_forward_all_bs1             1.4036
+14    mbpo          synthetic_per_sample (actor_forward_bs1 + dynamics_ensemble_forward_all_bs1)             1.2332
+15    mbpo  dynamics_fit_per_sample_per_member (dynamics_member_fwdbwd / model_train_batch_size)             1.3623
+16  tdmpc2                                                                  rollout_per_env_step             1.2101
+17  tdmpc2                                                                gradient_update_critic             1.0995
+18  tdmpc2                                                                 gradient_update_actor             1.0023
+19  tdmpc2                                                                 gradient_update_total             1.0640
+20  tdmpc2                                                gradient_update_target_elementwise_ops             1.0018

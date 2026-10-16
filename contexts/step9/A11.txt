@@ -1,0 +1,43 @@
+Fri Oct 16 09:13:10 AM UTC 2026
+samanth-research-pc
+== A11
+total metadata.json: 300
+per (algo,env) all / canonical-seed:
+  ('mbpo', 'Ant-v5') 45 45
+  ('mbpo', 'HalfCheetah-v5') 38 35
+  ('sac', 'Ant-v5') 35 35
+  ('sac', 'HalfCheetah-v5') 48 35
+  ('sac', 'Humanoid-v5') 2 0
+  ('td3', 'Ant-v5') 40 40
+  ('td3', 'HalfCheetah-v5') 41 40
+  ('tdmpc2', 'Ant-v5') 25 25
+  ('tdmpc2', 'HalfCheetah-v5') 26 25
+canonical-seed totals by algo: {'mbpo': 80, 'sac': 70, 'td3': 80, 'tdmpc2': 50} sum 280
+non-canonical-seed runs: 20
+{('mbpo', 'HalfCheetah-v5'): 3, ('sac', 'HalfCheetah-v5'): 13, ('sac', 'Humanoid-v5'): 2, ('td3', 'HalfCheetah-v5'): 1, ('tdmpc2', 'HalfCheetah-v5'): 1}
+   ('mbpo', 'HalfCheetah-v5', 0, '2026-09-04T10:29:59.128368', 'ae38808', 2000, 2000)
+   ('mbpo', 'HalfCheetah-v5', 0, '2026-09-04T11:09:15.306557', 'ae38808', 200, 200)
+   ('mbpo', 'HalfCheetah-v5', 42, '2026-09-08T17:12:42.782230', 'cf0f09f', 2000, 2000)
+   ('sac', 'HalfCheetah-v5', 0, '2026-08-13T09:26:21.068548', '97eb7a7', None, None)
+   ('sac', 'HalfCheetah-v5', 0, '2026-08-13T10:15:00.191596', '97eb7a7', None, None)
+   ('sac', 'HalfCheetah-v5', 0, '2026-08-19T08:47:28.042475', '64fb0cd', None, None)
+   ('sac', 'HalfCheetah-v5', 0, '2026-08-19T09:51:12.702145', '64fb0cd', None, None)
+   ('sac', 'HalfCheetah-v5', 0, '2026-08-21T08:55:06.350958', '20b4d4f', None, None)
+   ('sac', 'HalfCheetah-v5', 0, '2026-08-24T09:02:00.698886', '4b9f11a', None, None)
+   ('sac', 'HalfCheetah-v5', 0, '2026-08-24T09:51:17.348739', '4b9f11a', None, None)
+   ('sac', 'HalfCheetah-v5', 42, '2026-08-24T10:26:11.126006', '4b9f11a', None, None)
+   ('sac', 'HalfCheetah-v5', 42, '2026-08-24T11:00:05.962944', '4b9f11a', None, None)
+   ('sac', 'HalfCheetah-v5', 42, '2026-08-26T09:19:06.312877', '2aa4ccd', None, None)
+   ('sac', 'HalfCheetah-v5', 56, '2026-08-31T11:13:53.718014', 'cf4d327', None, None)
+   ('sac', 'HalfCheetah-v5', 56, '2026-08-31T11:55:17.829020', 'd05cbe6', None, None)
+   ('sac', 'HalfCheetah-v5', 56, '2026-08-31T12:36:05.384720', 'd05cbe6', None, None)
+   ('sac', 'Humanoid-v5', 56, '2026-09-02T11:10:59.490307', 'd5880ed', None, None)
+   ('sac', 'Humanoid-v5', 56, '2026-09-02T11:52:48.216682', 'd5880ed', None, None)
+   ('td3', 'HalfCheetah-v5', 0, '2026-09-09T09:36:27.541658', 'd9cf6a7', 2000, 2000)
+   ('tdmpc2', 'HalfCheetah-v5', 0, '2026-09-10T09:33:13.187514', '24f41b0', 2000, 2000)
+non-canonical with unset clock fields: 15
+  date range: 2026-08-13T09:26:21.068548 to 2026-09-02T11:52:48.216682
+ALL runs (any seed) with unset clock fields: 15
+  range: 2026-08-13T09:26:21.068548 to 2026-09-02T11:52:48.216682
+  by algo/env/seed: {('sac', 'HalfCheetah-v5', 0): 7, ('sac', 'HalfCheetah-v5', 42): 3, ('sac', 'HalfCheetah-v5', 56): 3, ('sac', 'Humanoid-v5', 56): 2}
+clock value distribution: {(2000, 2000): 284, (200, 200): 1, (None, None): 15}
