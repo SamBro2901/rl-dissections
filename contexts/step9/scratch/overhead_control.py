@@ -18,7 +18,7 @@ ap.add_argument("--durations", type=float, nargs="+", default=[4.0, 0.2])
 ap.add_argument("--settle-seconds", type=float, default=30.0)
 a = ap.parse_args()
 os.makedirs(a.output_dir, exist_ok=True)
-cfg = ExperimentConfig()            # same defaults the harness uses (measure_power_secs, tracking_mode, force_cpu_power_w)
+cfg = ExperimentConfig(algo_name="overhead_control", env_id="none")   # required positional fields, unused here; tracker fields keep the harness defaults
 tracker = EmissionsTracker(
     project_name="overhead_control", measure_power_secs=cfg.measure_power_secs, tracking_mode=cfg.tracking_mode,
     output_dir=a.output_dir, output_file="emissions.csv", save_to_file=True, log_level="warning",

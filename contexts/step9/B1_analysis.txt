@@ -1,0 +1,38 @@
+rows 1500 t range 0.060-149.952 s
+distinct counter values 1500 | distinct delta values (mJ): 264
+monotonic counter: True | total energy over window 11235.2 J, mean power 74.95 W (counter span / (t_last-t_first))
+first row (partial interval, excluded below): delta 5140 mJ in 0.0597 s
+
+ALL intervals n=1499
+spacing s: min 0.0836 p5 0.0992 Q1 0.0998 median 0.1000 Q3 0.1002 p95 0.1008 max 0.1168 IQR 0.0003
+step J: min 6.989 p5 7.429 Q1 7.439 median 7.464 mean 7.495 Q3 7.553 p95 7.634 max 8.502
+implied power W (step/spacing): min 65.0 median 74.7 max 100.8
+
+rolling-median power quantiles: {0.05: 74.3, 0.25: 74.4, 0.5: 74.6, 0.75: 75.5, 0.95: 76.3}
+low  (<80 W)     n=1499 time 149.9 s | step J median 7.464 IQR 7.439-7.553 min 6.989 max 8.502 | spacing median 0.1000 s | power median 74.7 W
+
+corr(step J, spacing s)=-0.167 | corr(step J, rolling power W)=0.880 | corr(spacing, rolling power)=-0.006
+step J / spacing s (= implied power) vs step J: energy per step scales with power: slope J per W = 0.1017 (nominal period 0.1 s)
+
+per 10 s bin: n, mean power W (sum step J / sum spacing s)
+    0- 10 s  n= 99  P=75.5 W  step median 7.579 J
+   10- 20 s  n=100  P=74.5 W  step median 7.442 J
+   20- 30 s  n=100  P=74.5 W  step median 7.444 J
+   30- 40 s  n=100  P=74.4 W  step median 7.438 J
+   40- 50 s  n=100  P=74.5 W  step median 7.440 J
+   50- 60 s  n=100  P=74.5 W  step median 7.463 J
+   60- 70 s  n=100  P=74.3 W  step median 7.435 J
+   70- 80 s  n=100  P=75.0 W  step median 7.525 J
+   80- 90 s  n=100  P=75.5 W  step median 7.553 J
+   90-100 s  n=100  P=75.1 W  step median 7.474 J
+  100-110 s  n=100  P=74.4 W  step median 7.441 J
+  110-120 s  n=100  P=75.3 W  step median 7.457 J
+  120-130 s  n=100  P=76.2 W  step median 7.619 J
+  130-140 s  n=100  P=75.5 W  step median 7.510 J
+  140-150 s  n=100  P=75.2 W  step median 7.500 J
+
+delta mJ granularity: gcd-like check, smallest differences between sorted distinct deltas: [1 1 1 1 1]
+histogram of step J (bins 0.5 J):
+  [ 6.0, 7.0) J: 1
+  [ 7.0, 8.0) J: 1496
+  [ 8.0, 9.0) J: 2

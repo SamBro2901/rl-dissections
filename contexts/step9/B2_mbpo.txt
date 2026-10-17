@@ -1,0 +1,58 @@
+2026-10-17 13:02:20,493 [INFO] === Experiment run: algo=mbpo env=HalfCheetah-v5 seed=331 ===
+2026-10-17 13:02:20,493 [INFO] Run directory: /tmp/results_sync_check/mbpo/HalfCheetah-v5/seed_331/20261017_130220
+2026-10-17 13:02:20,647 [INFO] Using device: cuda
+2026-10-17 13:02:20,740 [INFO] Waiting for thermal baseline before starting...
+2026-10-17 13:02:30,750 [INFO] Thermal gate result: {'gated': True, 'reason': 'reached_reference', 'waited_seconds': 1.0013580322265625e-05, 'final_temp_c': 43.0, 'final_power_w': 25.514}
+2026-10-17 13:02:30,751 [INFO] Settling for 30s (unmeasured)...
+2026-10-17 13:03:01,982 [INFO] Recording idle baseline for 90s...
+2026-10-17 13:04:35,540 [INFO] Starting warmup: 5000 steps
+2026-10-17 13:04:35,691 [INFO] Starting measured training: 100 epochs x 1000 steps = 100000 env steps
+2026-10-17 13:06:04,814 [INFO] Epoch 10/100 done (real_buffer=15000, model_buffer=10000, rollout_len=1, cumulative_reward=-1948.02, mean_episode_return=-241.53771777389298)
+2026-10-17 13:07:14,723 [INFO] Epoch 20/100 done (real_buffer=25000, model_buffer=10000, rollout_len=1, cumulative_reward=-481.86, mean_episode_return=480.46172965967753)
+2026-10-17 13:08:44,635 [INFO] Epoch 30/100 done (real_buffer=35000, model_buffer=10000, rollout_len=1, cumulative_reward=11885.57, mean_episode_return=2424.891740228517)
+2026-10-17 13:12:06,475 [INFO] Epoch 40/100 done (real_buffer=45000, model_buffer=10000, rollout_len=1, cumulative_reward=34058.00, mean_episode_return=2549.6583945103994)
+2026-10-17 13:15:21,365 [INFO] Epoch 50/100 done (real_buffer=55000, model_buffer=10000, rollout_len=1, cumulative_reward=59300.17, mean_episode_return=3019.0006296917536)
+2026-10-17 13:18:11,523 [INFO] Epoch 60/100 done (real_buffer=65000, model_buffer=10000, rollout_len=1, cumulative_reward=88633.26, mean_episode_return=2992.171977372965)
+2026-10-17 13:21:19,623 [INFO] Epoch 70/100 done (real_buffer=75000, model_buffer=10000, rollout_len=1, cumulative_reward=124558.25, mean_episode_return=3760.708153003991)
+2026-10-17 13:24:47,143 [INFO] Epoch 80/100 done (real_buffer=85000, model_buffer=10000, rollout_len=1, cumulative_reward=164102.03, mean_episode_return=4433.519933095441)
+2026-10-17 13:28:09,341 [INFO] Epoch 90/100 done (real_buffer=95000, model_buffer=10000, rollout_len=1, cumulative_reward=205774.37, mean_episode_return=4304.794054787785)
+2026-10-17 13:31:14,113 [INFO] Epoch 100/100 done (real_buffer=105000, model_buffer=10000, rollout_len=1, cumulative_reward=249487.11, mean_episode_return=4384.154997920638)
+2026-10-17 13:31:14,113 [INFO] Recording idle tail for 90s...
+2026-10-17 13:32:44,173 [INFO] Run complete. Segment energy summary (kWh unless noted):
+2026-10-17 13:32:44,173 [INFO]   idle_baseline_head: 0.0015486859305204027
+2026-10-17 13:32:44,173 [INFO]   warmup: 5.23306954681676e-06
+2026-10-17 13:32:44,173 [INFO]   dynamics_model_update: 0.037085399027122136
+2026-10-17 13:32:44,173 [INFO]   rollout: 0.000625630826539097
+2026-10-17 13:32:44,173 [INFO]   synthetic_rollout_generation: 2.5641744069984738e-05
+2026-10-17 13:32:44,173 [INFO]   buffer_sample: 0.0004628683871923571
+2026-10-17 13:32:44,173 [INFO]   critic_update: 0.006654112025911975
+2026-10-17 13:32:44,173 [INFO]   actor_update: 0.007845156499088407
+2026-10-17 13:32:44,173 [INFO]   target_update: 0.0006822180302635155
+2026-10-17 13:32:44,173 [INFO]   _sub_segment_wall_time_seconds: {'buffer_sample': 11.674286771996321, 'critic_update': 167.82743033000224, 'actor_update': 197.86749165802837, 'target_update': 17.206638315986197}
+2026-10-17 13:32:44,173 [INFO]   idle_baseline_tail: 0.0016024426521453888
+2026-10-17 13:32:44,173 [INFO]   _total_kg_co2eq: 0.02153792908809122
+2026-10-17 13:32:44,173 [INFO] Training summary: 100 epochs, final cumulative_reward=249487.11, final mean_episode_return=4384.154997920638, episodes completed=105
+
+Run artifacts written to: /tmp/results_sync_check/mbpo/HalfCheetah-v5/seed_331/20261017_130220
+SYNC RUN /tmp/results_sync_check/mbpo/HalfCheetah-v5/seed_331/20261017_130220 {
+ "sum_sub_phase_s": 394.57584707601313,
+ "measured_gradient_updates_s": 403.93732661300055,
+ "ratio": 0.9768244256714697,
+ "sub": {
+  "buffer_sample": 11.674286771996321,
+  "critic_update": 167.82743033000224,
+  "actor_update": 197.86749165802837,
+  "target_update": 17.206638315986197
+ }
+}
+CANONICAL results/mbpo/HalfCheetah-v5/seed_331/20260908_194455 {
+ "sum_sub_phase_s": 397.9773011612815,
+ "measured_gradient_updates_s": 410.4221669590188,
+ "ratio": 0.9696778907193384,
+ "sub": {
+  "buffer_sample": 11.295133400140912,
+  "critic_update": 167.77424840338062,
+  "actor_update": 201.8150122784391,
+  "target_update": 17.092907079320867
+ }
+}

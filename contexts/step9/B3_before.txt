@@ -1,7 +1,8 @@
+Sat Oct 17 12:32:37 PM UTC 2026
 
 ==============NVSMI LOG==============
 
-Timestamp                                              : Fri Oct 16 11:51:28 2026
+Timestamp                                              : Sat Oct 17 14:32:37 2026
 Driver Version                                         : 615.71.09 [Deprecated; will be removed in CUDA 14.0. Use KMD Version instead]
 CUDA Version                                           : 13.4 [Deprecated; will be removed in CUDA 14.0. Use CUDA UMD Version instead]
 KMD Version                                            : 615.71.09
@@ -48,3 +49,5 @@ GPU 00000000:02:00.0
         Engine                                         : N/A
         Max Engine                                     : N/A
 
+persistence_mode, clocks.current.sm [MHz], clocks.current.graphics [MHz], pstate, power.draw [W]
+Enabled, 195 MHz, 195 MHz, P8, 24.05 W
